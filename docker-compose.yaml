@@ -1,0 +1,28 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: BUSL-1.1
+
+services:
+  dev-portal:
+    image: 'hashicorp/dev-portal:latest'
+    container_name: dev-portal
+    ports:
+      - ${DEV_PORTAL_PORT}:${DEV_PORTAL_PORT}
+    depends_on:
+      - unified-docs-api
+    environment:
+      - MKTG_CONTENT_DOCS_API=https://content.hashicorp.com
+      - UNIFIED_DOCS_PORT=${UNIFIED_DOCS_PORT}
+      - UNIFIED_DOCS_API=http://unified-docs-api:${UNIFIED_DOCS_PORT}
+      - HASHI_ENV=unified-docs-sandbox
+      - NODE_ENV=development
+    profiles: [unified-docs]
+
+  unified-docs-api:
+    build: .
+    container_name: unified-docs-api
+    ports:
+      - ${UNIFIED_DOCS_PORT}:${UNIFIED_DOCS_PORT}
+    environment:
+      - DEV_PORTAL_URL=http://dev-portal:${DEV_PORTAL_PORT}
+    volumes:
+      - ./content:/server/content
