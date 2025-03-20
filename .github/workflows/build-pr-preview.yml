@@ -74,8 +74,6 @@ jobs:
     name: Deploy Unified Docs API Preview
     runs-on: ubuntu-latest
     needs: [security-check]
-    # Don't rerun this job if the PR is from a forked repo, as pull_request_target will trigger the job first
-    # if: github.event.pull_request.head.repo.full_name == github.repository
     outputs:
       preview_url: ${{ steps.unified_docs_preview_url.outputs.preview_url }}
       preview_url_to_fetch_deployment: ${{ steps.unified_docs_preview_url.outputs.preview_url_to_fetch_deployment }}
@@ -213,9 +211,11 @@ jobs:
           cd unified-docs-frontend-preview
           echo "HASHI_ENV=unified-docs-sandbox" >> .env
           echo "UNIFIED_DOCS_API=${{ needs.deploy-unified-docs-api-preview.outputs.preview_url }}" >> .env
-          echo "IS_CONTENT_PREVIEW=true" >> .env
 
       - name: Build dev-portal
+        env:
+          # Used to read docs from private repos, once all docs are in UDR we can remove this
+          GITHUB_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
         run: |
           cd unified-docs-frontend-preview
           vercel build --token=${{ secrets.VERCEL_TOKEN }}
@@ -263,7 +263,7 @@ jobs:
             | Unified Docs API | ✅ Ready ([Inspect](${{ needs.deploy-unified-docs-api-preview.outputs.inspector_url }} )) | [Visit Preview](${{ needs.deploy-unified-docs-api-preview.outputs.preview_url }}) | ${{ needs.deploy-unified-docs-api-preview.outputs.created_utc }} |
 
   check-links:
-    name: Check Links
+    name: Run Link Checker
     needs: [get-changed-files, deploy-dev-portal-preview]
     if: needs.get-changed-files.outputs.changed_content_files_count > 0
     runs-on: ubuntu-latest
