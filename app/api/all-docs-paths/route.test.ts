@@ -4,7 +4,7 @@
  */
 
 import { expect, test, vi, afterEach } from 'vitest'
-import docsPathsMock from '../../../__fixtures__/docsPathsAllVersionsMock.json'
+import docsPathsMock from '__fixtures__/docsPathsAllVersionsMock.json'
 import { GET } from './route'
 import * as getDocsPaths from '@utils/allDocsPaths'
 

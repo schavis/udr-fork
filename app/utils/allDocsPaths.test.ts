@@ -5,7 +5,7 @@
 
 import { expect, test, vi } from 'vitest'
 import { getDocsPaths } from './allDocsPaths'
-import docsPathsMock from '../../__fixtures__/docsPathsAllVersionsMock.json'
+import docsPathsMock from '__fixtures__/docsPathsAllVersionsMock.json'
 import { getProductVersion } from '@utils/contentVersions'
 import { Ok } from '@utils/result'
 
