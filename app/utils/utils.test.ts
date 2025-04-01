@@ -9,8 +9,8 @@ import {
 	getProductVersion,
 } from '@utils/contentVersions'
 import { findDocVersions } from './findDocVersions'
-import versionMetadata from '../../__fixtures__/versionMetadata.json'
-import docsPathsMock from '../../__fixtures__/docsPathsAllVersionsMock.json'
+import versionMetadata from '__fixtures__/versionMetadata.json'
+import docsPathsMock from '__fixtures__/docsPathsAllVersionsMock.json'
 
 afterEach(() => {
 	// Reset all mocks after each test
