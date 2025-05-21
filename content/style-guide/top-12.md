@@ -1,4 +1,9 @@
-# Write in active voice
+# Top 12 guidelines
+
+The following guidelines cover most writing style issues.
+
+
+## Write in active voice
 
 > keywords: writing, grammar, active voice, passive voice  
 content sets: docs, WAF, tutorials, certifications
@@ -19,7 +24,7 @@ The subject of the sentence always performs the action, embodies a description, 
 - `It is recommended to configure VCS access when first setting up an organization.`
 - `By default, Vault expects that the configuration directory and files that run Vault are owned by the user.`
 
-# Use simple present tense to describe immediate actions
+## Use simple present tense to describe immediate actions
 
 > keywords: writing, grammar, tense  
 content sets: docs, WAF, tutorials
@@ -30,7 +35,7 @@ Do not describe events or actions that will happen in the future. For example, d
 
 Use "when" to describe a sequence of actions, not "if".  
 
-## Examples
+### Examples
 
 **Do:**
 
@@ -44,7 +49,7 @@ Use "when" to describe a sequence of actions, not "if".
 - `The service's state will change to unhealthy in the web UI.`
 - `Click **Next**. The server configuration screen will appear.`
 
-# Describe features and functionality as they currently exist 
+## Describe features and functionality as they currently exist 
 
 > keywords: writing  
 content sets: docs, WAF, tutorials
@@ -57,7 +62,7 @@ Do not use words that reference points in time, such as "new", "old", "now", or 
 
 Reference specific versions only when necessary in dedicated areas, such as the Requirements block on a usage page or in a beta callout.
 
-## Examples
+### Examples
 
 **Do:**
 
@@ -65,18 +70,18 @@ Reference specific versions only when necessary in dedicated areas, such as the 
 The `terraform providers schema` command prints detailed schemas for the providers used in the configuration.
 ```
 
-## Exceptions
+### Exceptions
 
 You can add notices about deprecated configurations and functionality. If applicable, you should link to the release notes page that contains the deprecation announcement. 
 
-# Do not use unofficial product abbreviations 
+## Do not use unofficial product abbreviations 
 
 > keywords: writing, word choice, abbreviations  
 content sets: docs, tutorials, WAF, certifications
 
 Do not use the following abbreviation: TF, TFE, TFC, TFC4B, TFCB, HCP TF, VSO, and COM. Refer to [HashiCorp Voice, Style & Language Guidelines](https://docs.google.com/document/u/0/d/1MRvGd6tS5JkIwl_GssbyExkMJqOXKeUE00kSEtFi8m8/edit) for additional guidance.
 
-# Only use "we" when referring to HashiCorp
+## Only use "we" when referring to HashiCorp
 
 > keywords: writing, grammar, active-voice  
 content sets: docs, WAF, tutorials, certifications
@@ -85,7 +90,7 @@ Use the first person plural "we" when providing recommendations from HashiCorp o
 
 Do not use "we" to guide readers through examples. 
 
-## Examples
+### Examples
 
 **Do:**
 
@@ -97,14 +102,14 @@ Do not use "we" to guide readers through examples.
 - `It is recommended that you test your Sentinel policies extensively before deploying them within HCP Terraform.`
 - `Next we will configure the server. We start by creating a configuration file.`
 
-# Address the reader as "you" 
+## Address the reader as "you" 
 
 > keywords: writing, grammar, active-voice  
 content sets: docs, WAF, tutorials, certifications
 
 Address the reader as "you" when describing actions that you expect the reader to perform. You can also use imperative statements to describe actions. Writing to "you" is called using the second person and it helps avoid passive voice.
 
-## Examples
+### Examples
 
 **Do:**
 
@@ -116,7 +121,7 @@ Address the reader as "you" when describing actions that you expect the reader t
 - `Upon completing this tutorial, a user has learned to selectively allow services to communicate with each other by configuring Consul service mesh.`
 - `We can use HCP Terraform's API to create workspaces without a VCS connection.`
 
-# Organize content so that it flows in a single direction from beginning to end 
+## Organize content so that it flows in a single direction from beginning to end 
 
 > keywords: writing, flow  
 content sets: docs, WAF, tutorials
@@ -127,7 +132,7 @@ When you must direct readers to a different section, refer to a specific point i
 
 Use "following" to describe an element or topic that immediately follows the sentence or paragraph.
 
-## Examples
+### Examples
 
 **Do:**
 
@@ -144,19 +149,18 @@ Use "following" to describe an element or topic that immediately follows the sen
 - `Get the output from the previous step . . .`
 - `See above for supported versions.`
 
-# Avoid unnecessary words
+## Avoid unnecessary words
 
 > keywords: writing, word choice  
 content sets: docs, WAF, tutorials, certifications
 
 Avoid extra words and phrases. 
 
-## Examples
+### Examples
 
 - Instead of "in order to", use "to"
 - Instead of "in the case that", use "when"
 - Avoid adding filler words, especially words that editorialize, such as "simply", "just", "very", and "actually". Refer to [Avoid editorializing on the difficulty or comprehensibility of an action or concept](TODO)
-
 
 **Do:** 
 
@@ -168,19 +172,19 @@ Avoid extra words and phrases.
 `Careful precaution should be taken to prohibit new clients from joining during the gossip encryption rotation process, otherwise the new clients will join the gossip pool without knowledge of the new primary gossip encryption key.`
 
 
-# Use the simplest word possible
+## Use the simplest word possible
 
 > keywords: writing, word choice  
 content sets: docs, WAF, tutorials, certifications
 
 Always use the shortest word or phrase that conveys your intended meaning. Use discretion to provide additional clarity when advanced vocabulary is necessary.
 
-## Examples
+### Examples
 
 -  "use", not "utilize" or "utilization": Prefer the root for most "ize" words.
 - "because, not "due to the fact that": Also refer to [Do not use figures of speech](TODO).
 
-# Do not use words or phrases borrowed from other languages, scientific words, or jargon words
+## Do not use words or phrases borrowed from other languages, scientific words, or jargon words
 
 > keywords: writing, word choice  
 content sets: docs, WAF, tutorials, certifications
@@ -189,7 +193,7 @@ Use simple, concrete words so global audiences can understand our content more e
 
 Avoid Latin loan words such as via, which are common in the English language.
 
-## Examples
+### Examples
 
 The following list contains common words and phrases that you should avoid in educational content:
 
@@ -216,7 +220,7 @@ The following list contains common words and phrases that you should avoid in ed
 - `Choose a set of tags germane to your project.`
 - `Vault manages credentials, tokens, etc.`
 
-# Do not place the same type of content elements next to each other
+## Do not place the same type of content elements next to each other
 
 > keywords: formatting  
 content sets: docs, tutorials, WAF, certifications
@@ -231,7 +235,7 @@ Do not place the following non-prose elements immediately next to each other:
 
 Creating blocks of visually complex elements distracts readers from the information. Use introductory text between the same type of elements.
 
-## Examples
+### Examples
 
 **Do:**
 
@@ -251,4 +255,3 @@ This paragraph introduces subtopics organized under each subheading.
 
 ### Subheading
 ```
-
