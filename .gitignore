@@ -51,3 +51,9 @@ public/content
 app/api/versionMetadata.json
 app/api/docsPathsAllVersions.json
 scripts/test-output/**
+
+# tfe-releases release notes workflow
+tfe-releases-repos.json
+
+# copy-cloud-docs-for-tfe action
+.github/actions/copy-cloud-docs-for-tfe/node_modules
