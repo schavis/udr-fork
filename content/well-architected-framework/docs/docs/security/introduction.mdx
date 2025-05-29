@@ -1,0 +1,214 @@
+---
+page_title: Security pillar introduction
+description: The security pillar defines a zero trust approach and the best practices to protect your applications, protect your, network, manage sensitive data, manage identity and access, and build security controls.
+---
+
+# Security pillar introduction
+
+The HashiCorp Well-Architected Framework helps you migrate
+workloads to a multi-cloud architecture that is secure, reliable,
+high-performing, and resilient. 
+The Security pillar defines a [zero trust](https://www.hashicorp.com/solutions/zero-trust-security) 
+architecture approach and best practices to protect your applications,
+secure your networks, manage sensitive data, manage identity and access, and
+build security controls.
+
+## Transition to zero trust architecture
+
+Multi-cloud infrastructure means a shift from host-based identity to
+application-based identity, with zero trust networks that do not have a clear
+network perimeter.
+
+In the traditional security approach, internal networks have high trust, which
+creates a hardened exterior security boundary with a less secure interior environment. With modern zero trust architecture,
+no trust is implicitly granted between systems, which creates a hardened interior environment. The hardened interior environment
+requires that interior applications explicitly authenticate and authorize to perform
+sensitive operations, such accessing secrets.
+
+HashiCorp's portfolio for zero trust security in the multi-cloud environment includes Vault, Consul, and Boundary. 
+ 
+![Zero Trust Components](/img/well-architected/zero-trust-components.png)
+
+HashiCorp Vault verifies the machines' or applications' identities to determine their authorization level. 
+For example, application A is allowed to read data from a production database.
+
+Vault focuses on the protection of sensitive data. 
+It provides data encryption and tokenization capabilities, as well as dynamic generation of database credentials, 
+Kubernetes service accounts, etc. 
+
+Vault provides practitioners a path to implement zero trust security. 
+Vault provides secure storage and controlled access to tokens,
+passwords, certificates, and encryption keys to protect application infrastructure and sensitive data.
+
+![Transition to zero-trust security with
+Vault](/img/well-architected/com-security-intro.png)
+
+HashiCorp Consul provides practitioners a path to implement zero trust networking,
+provides secure service discovery, and service mesh functionality across multiple cloud providers.
+
+![Transition to zero-trust networking with
+Consul](/img/well-architected/com-consul.png)
+
+HashiCorp Boundary provides practitioners a path to implement zero trust security by enabling
+access to hosts and critical systems with fine-grained authorizations based on
+trusted identities without having to manage credentials or expose your network.
+
+![Boundary Components](/img/well-architected/boundary-components-min.png)
+
+## Best Practices
+
+HashiCorp's Security pillar provides best practices to:
+
+- [Protect your applications](#protect-applications)
+- [Secure your network](#secure-the-network)
+- [Manage sensitive data](#manage-sensitive-data)
+- [Manage identity and access](#manage-identity-and-access)
+- [Codify security controls](#codify-security-controls)
+
+### Protect applications
+
+It is best practice to encrypt application data both at rest and in transit. 
+Encrypting this data will help secure your application from outside threats, 
+and keep sensitive data out of the wrong hands.
+
+Application data is at rest when stored on a disk or in a database.
+Enterprises should strive to automatically protect data in MySQL, MongoDB,
+PostgreSQL, and other databases with transparent data encryption (TDE).
+Additionally, enterprises that have high security requirements for data
+compliance (PCI=SS, HIPAA, etc) and cryptographically-protected anonymity for
+personally identifiable information (PII), data protection methods should
+include data tokenization, such as data masking. This enables enterprises to
+protect sensitive customer data such as credit card numbers, sensitive personal
+information, and bank account numbers.
+
+To secure application communication in transit, enterprises need to implement
+fine-grained service segmentation with automatic TLS encryption and
+identity-based authorization. For multi-cloud workloads, enterprises should
+implement [centralized PKI and certificate management](https://www.hashicorp.com/products/vault/pki-with-vault) 
+with HashiCorp Vault.
+
+Traditional solutions for safeguarding user access have typically required you to
+distribute and manage SSH keys, VPN credentials, and configure bastion hosts, which
+creates risks around mismanaging credentials and users having access to entire
+networks and systems. HashiCorp Boundary secures access to applications and
+critical systems with fine-grained authorizations without managing credentials
+or exposing your network.
+
+
+### Secure the network
+
+For many enterprises, the realities of cloud adoption often require
+a shift from a traditional on-premise static infrastructure with clearly defined
+network perimeters, to cloud infrastructure that is highly dynamic and has less
+clear network perimeters.
+
+This shift in operating models requires a fundamentally different approach to
+security. Instead of focusing on a secure network perimeter with the assumption
+of trust, the focus is to acknowledge that the network in the cloud is
+inherently "low trust" and move to the idea of securing infrastructure and
+application services themselves through a trusted source of identity and secrets
+management.
+
+Cloud networking is one of the most difficult
+aspects of adopting an enterprise cloud operating model. The combination
+of dynamic IP addresses, 
+microservices, and the lack of a clear network perimeter is a
+formidable challenge.
+
+[HashiCorp Consul](/consul/) provides a multi-cloud service mesh and networking 
+layer to connect and
+secure services. Consul is a widely deployed product, with many customers
+running [significantly greater](https://www.hashicorp.com/cgsb) than 100,000 service instances in their environments.
+
+Consul provides a distributed service mesh that pushes routing, authorization,
+and other networking functions to the endpoints in the network, rather
+than imposing them through middleware. This makes the network topology easier to manage, 
+removes the need for expensive third party solutions, and makes service-to-service communication reliable
+and scalable.
+
+Consul's API-driven control plane integrates with sidecar proxies
+alongside each service instance (proxies such as Trafik, Envoy, HAProxy, and NGINX).
+These proxies provide the distributed data plane. Together, these two planes
+enable a zero trust network model that secures service-to-service communication
+with automatic TLS encryption and identity-based authorization. Network
+operation and security teams can define security policies through intentions
+with logical services rather than IP addresses.
+
+### Manage sensitive data
+
+The first stage of HashiCorp Vault adoption is securing secrets through a centralized
+location, eliminating the secret sprawl that exists today, and enabling comprehensive secret management and auditing.
+
+Streamline the lifecycle and consumption of secret rewriting for all your 
+legacy applications migrating to the cloud. 
+Vault lets greenfield applications running on newer orchestration platforms, 
+such as Nomad and Kubernetes, securely consume secrets.
+
+Teams can protect applications, machines, users, and sensitive data by using Vault to 
+securely store and control access to tokens, passwords, certificates, and encryption keys. 
+Vault allows you to centrally manage and securely store secrets across on-premise infrastructure 
+and the cloud using a single system.
+
+The Vault API exposes cryptographic operations developers use to secure
+sensitive data without exposing encryption keys. Vault can also act as a
+certificate authority to provide dynamic short-lived certificates to secure
+communications with SSL/TLS. Vault also brokers access between
+different platforms, such as Active Directory, AWS IAM, and LDAP to allow applications to work across platform boundaries.
+
+Vault, running as a centralized service, enables IT teams and organizations to
+provide secrets management and data encryption services across large fleets of
+applications and engineering teams. Vault  globally manages policies, and
+delivers consistent security through a single workflow.
+
+### Manage identity and access
+
+Zero trust security is predicated on securing everything based on trusted identities. 
+Machine authentication and authorization, machine-to-machine access, human authentication and authorization, 
+and human-to-machine access are the four foundational categories for identity-driven controls and zero trust security.
+
+The HashiCorp [security model](/vault/docs/internals/security) is built on 
+identity-based access and security principles.
+ All users and machines must authenticate, and their identity and
+policies authorize access and capabilities.
+
+HashiCorp Vault issues dynamic credentials to authenticate people and machines. 
+Dynamic and short-lived credentials create a multi-cloud solution that is secure and efficient.
+
+With HashiCorp Consul, organizations can discover services, automate network
+configurations, and enable secure connectivity across any cloud or runtime using
+Consul service mesh. Consul defines authorization policies for services in the service mesh with the help of intentions. 
+Policies of intentions control which services may establish connections between each other and facilitate for maximum scale, 
+efficiency, and
+security.
+
+[HashiCorp Boundary](/boundary/) is a secure remote access solution that provides an easy way
+to allow access to applications and critical systems with fine-grained
+authorizations based on trusted identities. 
+Boundary provides an easier way to protect clouds, local data centers, and low-trust networks by limiting 
+access to application and critical systems with trusted identities without
+exposing the underlying network.
+
+Companies use different identity platforms for federated systems of record.
+Leveraging these trusted identity providers is the principle of identity-based
+access and security. HashiCorp products have deep integration with the leading
+identity providers.
+
+![Identity-Driven Controls](/img/well-architected/com-enabling-stackup.png)
+
+### Codify security controls
+
+Infrastructure as Code enables codification and
+automation for the four main components of infrastructure — provision, secure,
+connect, and run. Infrastructure as Code allows users to create and
+manage infrastructure such as compute resources, databases, security controls, and other components. 
+Infrastructure automation helps lower the risk of implementing controls that negatively impact business 
+operations by providing practitioners with consistent, reviewable, and automated security controls. 
+
+Policy as Code limits exposure by codifying business and regulatory policies to
+ensure infrastructure changes are safe. Together Infrastructure as Code and
+Policy as Code empowers users to safely provision, secure, connect to,
+and run any infrastructure for any applications.
+
+[Sentinel](https://docs.hashicorp.com/sentinel) is an embeddable Policy as Code framework to enable fine-grained,
+logic-based policy decisions that can be extended to source external information
+to make decisions. Sentinel enables Policy as Code through version control, pull review, and automate tests. You use real programming constructs to determine policy decisions beyond the limited constraints of typical ACL systems.

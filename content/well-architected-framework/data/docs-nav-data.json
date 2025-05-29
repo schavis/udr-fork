@@ -1,0 +1,166 @@
+[
+  {
+    "title": "What is well-architected framework?",
+    "path": "implement-cloud-operating-model"
+  },
+  {
+    "title": "Cloud operating model",
+    "path": "cloud-operating-model"
+  },
+  {
+    "title": "Implementation resources",
+    "routes": [
+      {
+        "title": "Terraform reliability",
+        "path": "implementation-resources/terraform-reliability"
+      },
+      {
+        "title": "Packer reliability",
+        "path": "implementation-resources/packer-reliability"
+      },
+      {
+        "title": "Vault reliability",
+        "path": "implementation-resources/vault-reliability"
+      },
+      {
+        "title": "Consul reliability",
+        "path": "implementation-resources/consul-reliability"
+      },
+      {
+        "title": "Nomad reliability",
+        "path": "implementation-resources/nomad-reliability"
+      }
+    ]
+  },
+  {
+    "divider": true
+  },
+  {
+    "heading": "Framework pillars"
+  },
+  {
+    "title": "Operational excellence",
+    "routes": [
+      {
+        "title": "Introduction",
+        "path": "operational-excellence/introduction"
+      },
+      {
+        "title": "Architect and automate infrastructure",
+        "path": "operational-excellence/automate-infrastructure"
+      },
+      {
+        "title": "Streamline application deployments",
+        "path": "operational-excellence/application-deployment"
+      },
+      {
+        "title": "Create high performing teams",
+        "path": "operational-excellence/enable-teams"
+      },
+      {
+        "title": "Implement HashiCorp's Tao and principles",
+        "path": "operational-excellence/tao"
+      },
+      {
+        "title": "Manage your infrastructure components",
+        "path": "operational-excellence/manage-your-infrastructure-components-with-terraform"
+      },
+      {
+        "title": "Evolve your manual deployments",
+        "path": "operational-excellence/evolve-your-manual-deployments"
+      },
+      {
+        "title": "Verify HashiCorp binary downloads",
+        "path": "operational-excellence/verify-hashicorp-binary"
+      },
+      {
+        "title": "Implementation resources",
+        "path": "operational-excellence/resources"
+      }
+    ]
+  },
+  {
+    "title": "Reliability",
+    "routes": [
+      {
+        "title": "Introduction",
+        "path": "reliability/introduction"
+      },
+      {
+        "title": "Manage infrastructure and service monitoring",
+        "path": "reliability/deploy-application-monitoring-components"
+      },
+      {
+        "title": "React to metrics and monitoring",
+        "path": "reliability/react-to-monitoring"
+      },
+      {
+        "title": "Deploy infrastructure and applications with zero-downtime",
+        "path": "reliability/zero-downtime-deployments"
+      },
+      {
+        "title": "Design fault-tolerant systems",
+        "path": "reliability/tolerate-failure"
+      }
+    ]
+  },
+  {
+    "title": "Security",
+    "routes": [
+      {
+        "title": "Introduction",
+        "path": "security/introduction"
+      },
+      {
+        "title": "What is zero trust security and zero trust networking?",
+        "path": "security/zero-trust-video"
+      },
+      {
+        "title": "Retrieve CI/CD secrets from Vault",
+        "path": "security/cicd-vault"
+      },
+      {
+        "title": "Protect sensitive data",
+        "path": "security/sensitive-data"
+      },
+      {
+        "title": "Prevent lateral movement",
+        "path": "security/prevent-lateral-movement"
+      },
+      {
+        "title": "Secure HashiCorp tools with TLS",
+        "path": "security/secure-hashicorp-tools-with-tls"
+      },
+      {
+        "title": "Secure identifying digital entities with X.509 certificates",
+        "path": "security/secure-entities-with-x509"
+      }
+    ]
+  },
+  {
+    "divider": true
+  },
+  {
+    "heading": "Reference architecture"
+  },
+  {
+    "title": "Terraform",
+    "href": "/well-architected-framework/terraform/enterprise-reference-architecture"
+  },
+  {
+    "title": "Vault (multi-cluster)",
+    "href": "/well-architected-framework/zero-trust-security/multi-cluster-architecture"
+  },
+  {
+    "title": "Vault (integrated storage)",
+    "href": "/well-architected-framework/zero-trust-security/raft-reference-architecture"
+  },
+  {
+    "title": "Consul",
+    "href": "/well-architected-framework/zero-trust-networking/reference-architecture"
+  },
+  {
+    "title": "Nomad",
+    "href": "/well-architected-framework/nomad/production-reference-architecture-vm-with-consul"
+  }
+]

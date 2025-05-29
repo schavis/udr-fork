@@ -1,0 +1,65 @@
+---
+page_title: Operational Excellence Implementation Resources
+description: Implement the operational excellence pillar with tutorials, videos, and documentation. The pillar recommends strategies to enable your organization to build products quickly and efficiently; including shipping changes, updates, and upgrades.
+---
+
+# Operational Excellence Implementation Resources
+
+The operational excellence pillar recommends strategies to enable your organization to build products quickly and efficiently; including shipping changes, updates, and upgrades. These strategies will help teams in your organization to collaborate with each other without delays or friction, even in failure scenarios. They include recommendations for both team and infrastructure architecture.
+
+To implement our operational excellence recommendations, select a best practice and resource type below.
+
+## Reference architectures
+
+HashiCorp's operational excellence best practices expects that Vault and Consul are deployed in one of the following recommended configurations.
+
+## Vault infrastructure recommendations
+
+The Vault [Reference Architecture](/vault/tutorials/raft/raft-reference-architecture) recommends best practices for infrastructure architects and operators to follow when deploying Vault using the Consul storage backend in a production environment.
+
+[In this tutorial](/vault/tutorials/day-one-raft/multi-cluster-architecture), you will architect your Vault clusters according to HashiCorp recommended patterns and practices for replicating data.
+
+[This guide](/vault/tutorials/day-one-raft/raft-reference-architecture) describes recommended best practices for infrastructure architects and operators to follow when deploying Vault using the Integrated Storage (Raft) storage backend in a production environment.
+
+## Consul infrastructure recommendations
+
+Consul provides a central control plane that helps you discover, connect, and track services' state, enabling multi-cloud zero trust networking for your dynamic environments. Therefore, it is crucial to design, deploy, and monitor the Consul infrastructure correctly to guarantee operational excellence.
+
+The [Consul reference architecture](/consul/tutorials/production-deploy/reference-architecture) and the [Consul multi-cluster reference architecture](/consul/tutorials/multi-cluster-deploy/multi-cluster-reference-architecture) describe recommended best practices for infrastructure architects and operators to follow when deploying Consul in a production environment.
+
+If you have Kubernetes (K8s) workloads, you should review the [K8s reference architecture](/consul/tutorials/kubernetes/kubernetes-reference-architecture) and the [K8s deployment tutorial](/consul/tutorials/kubernetes/kubernetes-deployment-guide). Furthermore, the [Secure Consul on K8s tutorial](/consul/tutorials/kubernetes/kubernetes-secure-agents) will help you keep Consul resilient and secure. Lastly, the [Observability tutorial](/consul/tutorials/kubernetes/kubernetes-layer7-observability) shows you how to visualize workload metrics.
+
+Disaster recovery is critical for highly-available applications, and organizations should plan and prepare for it in advance. The [Disaster recovery considerations tutorial](/consul/tutorials/production-deploy/disaster-recovery), [Disaster recovery on K8s tutorial](/consul/tutorials/kubernetes-production/kubernetes-disaster-recovery), and the [Disaster recovery for multi-cluster deployments tutorial](/consul/tutorials/multi-cluster-deploy/multi-disaster-recovery) all shed more light on preparing for worst-case scenarios.    
+
+Proactive Consul monitoring can help lower the risk of disaster recovery incidents. The [Monitor Consul server health tutorial](/consul/tutorials/observe-your-network/server-metrics-and-logs) explains key telemetry metrics to track, and the [Monitor application health tutorial](/consul/tutorials/observe-your-network/proxy-metrics) guides you setting up detailed health and performance information about your service mesh applications.
+
+## Packer infrastructure recommendations
+
+[Packer](/packer/) complements Terraform, among other tools, by providing [immutable](https://www.hashicorp.com/resources/what-is-mutable-vs-immutable-infrastructure) images such as AMIs or containers that Terraform can ingest to create infrastructure. Packer configures the images by running one or more provisioners, letting users create ready-to-use artifacts. Provisioners use builtin and third-party software to install and configure the machine images. These images let teams run [immutable infrastructure](/packer/guides/packer-on-cicd) by removing the need to install components at run-time, allowing applications to scale rapidly in response to an increase in demand. 
+It is important to configure the immutable images correctly and consistently and that the images are reliably available for Terraform.
+
+[HCP Packer](/hcp/docs/packer) stores metadata about your Packer images so that you can track updates, use the most up-to-date base images, and deploy the most up-to-date downstream images. This bridges the gap between image factories and image deployments, allowing development and security teams to work together to create, manage, and consume images in a centralized way.
+
+We offer hands-on tutorials for practitioners, from creating [your first Packer image](/packer/tutorials/docker-get-started/docker-get-started-build-image),
+to [building a golden image pipeline](/packer/tutorials/cloud-production/golden-image-with-hcp-packer) using Hashicorp’s HCP Packer registry.
+You can also learn how to [prevent access to outdated machine images](/packer/tutorials/hcp/hcp-schedule-image-iterations-revocation) and [enforce image compliance](/packer/tutorials/hcp/run-tasks-resource-image-validation) using Terraform and HCP Packer.
+
+## Architect and automate infrastructure
+
+### Tutorials
+
+HCP Terraform supports automated deployments based on changes to version control through features such as its integration with [GitHub Actions](/terraform/tutorials/automation/github-actions).
+
+The [TFE Terraform provider](/terraform/tutorials/automation/tfe-provider-run-triggers) can codify your HCP Terraform workspaces, teams and processes.
+
+Automate monitoring with the [Terraform Datadog provider tutorial](/terraform/tutorials/applications/datadog-provider) to deploy an application to a Kubernetes cluster and install the Datadog agent across the cluster. The Datadog agent reports the cluster health back to your Datadog dashboard.
+
+Use [application load balancers](/terraform/tutorials/aws/blue-green-canary-tests-deployments) for blue-green and canary deployments. Provision blue and green environments, add feature toggles to your Terraform configuration to define a list of potential deployment strategies, conduct a canary test, and incrementally promote your green environment.
+
+### Reference documentation
+
+Understand the [core Terraform workflow](/terraform/intro/core-workflow), how it evolves when a team is collaborating on infrastructure, and how HCP Terraform enables this workflow to run smoothly for entire organizations.
+
+### Blogs
+
+[This curated list](https://www.hashicorp.com/blog/hashicorp-learning-resources-reference-guide) of HashiCorp learning resources to help practitioners and organizations better understand the cloud operating model

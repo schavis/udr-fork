@@ -1,0 +1,340 @@
+---
+page_title: Best practices to protect sensitive data
+description: The security pillar defines best practices to protect your applications, protect your network, manage sensitive data, manage identity and access, and build security controls.
+---
+
+# Best practices to protect sensitive data
+
+The shift from on-premises data centers to cloud infrastructure requires new secrets management
+techniques for the cloud's dynamic environments, applications, machines, and user credentials.
+Securing infrastructure, data, and access across clouds requires careful planning.
+You must identify and categorize your organization's data based on its sensitivity to decide how to secure them.
+You must apply different practices to protect data in transit and at rest.
+
+## Protect data in transit
+
+Data in transit is any data moving between systems, such as passwords, secrets, and keys.
+In-transit data includes data moving between resources within your organization, and incoming
+and outgoing data with services outside your organization. By protecting your data in transit,
+you protect the confidentiality and integrity of the data within your organization.
+
+### TLS for client to server communication
+
+Human client-to-machine communication is the first hop of data in transit.
+TLS/SSL certificates are used to encrypt such communication - in most cases via browsers -  using HTTPS instead of HTTP.
+TLS can also wrap FTP (FTPS, not to be confused with SFTP, which uses the SSH protocol), IMAP (IMAPS), POP3 (POP3S),
+and SMTP (SMTPS), among others.
+
+HTTP is dangerous because someone (man-in-the-middle) can intercept the traffic and insert malicious code before forwarding
+it to the user's browser. The Transport Layer Security (TLS) protocol solves this problem by allowing the client to verify the identity of the server and allows the server to verify the identity of the client. You should use the latest TLS version (v1.3) because it provides stronger security through improved encryption algorithms and patches known vulnerabilities. It also offers better performance with faster connection times and enhanced privacy protections.
+
+Protect yourself by verifying that your browser supports TLS v1.3.
+Additionally, you can identify whether a site supports HTTP Strict Transport Security (HSTS)
+to protect against man-in-the-middle attacks using the Qualys SSL Server Test.
+Most web browsers show if a website uses TLS encryption, usually with a lock icon  the address bar.
+
+External resource:
+- Verify your browser [supports TLS v1.3](https://caniuse.com/tls1-3)
+- [View Qualys SSL Server Test on hashicorp.com](https://www.ssllabs.com/analyze.html?d=hashicorp.com&latest)
+
+
+### Consul for universal networking
+
+Unencrypted cross-application communications are susceptible to man-in-the-middle attacks.
+An application can protect itself against malicious activities by requiring mTLS (mutual TLS) on both ends
+of the application to application communications.
+
+HashiCorp Consul automatically enable mTLS for all communication between application
+services (machine-to-machine). Even legacy apps can use mTLS through local Consul proxies that intercept network traffic
+as parts of a service mesh. A service mesh architecture lets Consul enforce mTLS across clouds and platforms.
+Consul automatically generates signed certificates, and lets you rapidly and comprehensively upgrade TLS versions
+and cipher suites in the future. This process helps resolve the
+typical slow process of updating the TLS version in your application.
+
+Consul automatically encrypts communications within the service mesh with mTLS. You should also secure outside traffic entering the service mesh.
+Two common entry points for traffic into the Consul Service mesh are the Ingress Gateway and the API Gateway.
+To secure inbound traffic to these gateways, you can enable
+TLS on ingress gateways,
+and enable TLS on the API gateway listeners.
+
+HashiCorp resources:
+- [What is Consul?](/consul/docs/intro)
+- [Update Consul agents to securely communicate with TLS](/consul/tutorials/archive/tls-encryption-secure-existing-datacenter)
+- [Enable TLS on ingress gateways](/consul/docs/north-south/ingress-gateway#custom-tls-certificates-via-secret-discovery-service-sds)
+- [Enable TLS on API gateway listeners](/consul/docs/api-gateway/configuration/gateway#listeners-tls)
+
+
+### Vault for securing specific types of content
+
+Encrypting data sent across the public network is a common practice to protect highly sensitive data.
+However, managing the encryption key introduces operational overhead.
+An organization may require a specific type of encryption key.
+Vault's Transit secrets engine supports a number of key
+types to encrypt and decrypt your in-transit data. The Transit secrets engine can also manage the encryption key lifecycle to relieve the operational burden.
+
+The Transit secrets engine handles cryptographic functions on in-transit data.
+Vault doesn't store any data sent to the Transit secrets engine. You can think of the Transit secrets engine as providing "cryptography as a service" or
+"encryption as a service". The Transit secrets engine can sign and verify data,
+generate hashes and HMACs of data, and act as a source of random bytes.
+
+For more advanced use cases, like encoding credit card numbers, data transformation and tokenization
+are more desirable data protection methods. Vault's Transform secrets engine provides data encryption
+service similar to the Transit secrets engine. The key difference is that the users can specify the
+format of the resulting ciphertext using the Transform secrets engine's format-preserving encryption (FPE) feature.
+
+In addition to FPE, the Transform secrets engine provides data tokenization capability.
+Refer to the [Vault Tokenization](#tokenize-critical-data) section to learn how the Transform secrets
+engine tokenizes data for secure in-transit data transmission.
+
+<Note>
+
+ Transform secrets engine is a Vault Enterprise feature.
+
+</Note>
+
+HashiCorp resources:
+- [Vault's Transit secrets engine](/vault/docs/secrets/transit) 
+- [Encryption as a service: transit secrets engine](/vault/tutorials/encryption-as-a-service/eaas-transit)
+- [Data encryption](/vault/tutorials/encryption-as-a-service)
+- [Transform secrets engine](/vault/tutorials/adp/transform)
+
+
+## Protect data at rest
+
+Data at rest represents any data you maintain in non-volatile storage in your environment.
+Encrypting data at rest, and implementing secure access to your data are two ways you can protect
+your applications from security threats.
+
+### Encrypt data with Vault
+
+Vault uses a security barrier for all requests made to its API endpoints.
+This security barrier automatically encrypts all data leaving Vault using a 256-bit Advanced Encryption Standard (AES) cipher in the Galois Counter Mode (GCM) with 96-bit nonces.
+Vault's barrier encrypts your data, and Vault stores only encrypted data regardless of configured storage type.
+Whenever you use a Vault secrets engine, such as the [Key/Value (KV) secrets engine](/vault/docs/secrets/kv), you also gain the benefits of Vault's cryptographic barrier. You (or your application) must authenticate with Vault to receive a token with attached policies that authorize access to data stored in a secrets engine. You shouldn't store large volumes of secrets in Vault. Instead, you should store the secrets in a database, encrypt the database, and store the encryption key in Vault.
+
+For example, when working with a Microsoft SQL Server using Transparent Data Encryption (TDE), your database already encrypts data using a Data Encryption Key (DEK). Rather than moving all that data to Vault, you should store the Key Encryption Key (KEK) in Vault's KV secrets engine. This KEK encrypts the DEK, which in turn encrypts your database content. This approach leverages Vault's strong security features for the most sensitive component (the encryption key) while enabling your database to efficiently manage the encrypted data.
+
+The following diagram shows how you can store an encryption key in Vault, and use that key to encrypt your database.
+
+<ImageConfig hideBorder>
+
+![Encrypt overview](/img/well-architected/vault-ms-sql-1.png)
+
+</ImageConfig>
+
+When you control access to data, you gain another layer of data protection.
+Vault can secure access to your external data at rest through dynamic credentials.
+These dynamic credentials have a lifecycle attached to them, and Vault automatically revokes them after a predefined period of time.
+We recommend using dynamic secrets when accessing your external data.
+
+For example, you can use Vault to issue your CI/CD pipeline dynamic credentials to an external service,
+such as a PostgreSQL database. Dynamic secrets allows your CI/CD pipelines to access your data at rest,
+and then once the pipeline finishes, Vault revokes the credentials.
+The next time your pipeline runs, Vault issues your pipeline new credentials.
+
+HashiCorp resources:
+- Learn to use [Vault dynamic secrets](/vault/tutorials/get-started/understand-static-dynamic-secrets)
+- Learn to use [versioned key/value secrets engine](/vault/tutorials/secrets-management/versioned-kv)
+- Read how to [retrieve CI/CD secrets from Vault](/well-architected-framework/security/security-cicd-vault).
+- Read the [Vault's Key/Value (KV) secrets engine](/vault/docs/secrets/kv) documentation
+
+
+External resources:
+- [Advanced Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) and [Galois Counter Mode](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
+- [Enabling transparent data encryption for Microsoft SQL with Vault](https://www.hashicorp.com/blog/enabling-transparent-data-encryption-for-microsoft-sql-with-vault)
+- [Why you should use ephemeral credentials](https://www.liatrio.com/blog/why-you-should-be-using-ephemeral-credentials)
+
+
+### Enforce encryption with Terraform
+
+You should protect sensitive data by enforcing encryption standards with infrastructure-as-code (IaC).
+
+Terraform can help you secure your data at rest by deploying infrastructure from code that specifies
+resource and data encryption, along with access control policies.
+
+As an example of using Terraform to create infrastructure that securely stores data, consider
+enabling server-side encryption by default in an AWS S3 bucket.
+Terraform can [create a KMS key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key)
+using the `aws_kms_key` resource. It can then create an S3 bucket,
+[enable default server side encryption](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#enable-default-server-side-encryption)
+for the S3 bucket, and then use the KMS key to encrypt objects.
+
+The following example creates a KMS key and enforces S3 object encryption server-side:
+
+```hcl
+resource "aws_kms_key" "mykey" {
+  description           = "This key is used to encrypt bucket objects"
+  deletion_window_in_days = 10
+}
+
+resource "aws_s3_bucket" "mybucket" {
+  bucket = "mybucket"
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+  bucket = aws_s3_bucket.mybucket.id
+
+  rule {
+        apply_server_side_encryption_by_default {
+        kms_master_key_id = aws_kms_key.mykey.arn
+        sse_algorithm   = "aws:kms"
+        }
+  }
+}
+```
+
+The [AWS S3 module](https://github.com/terraform-aws-modules/terraform-aws-s3-bucket/blob/master/examples/complete/main.tf#L28)
+provides Terraform code that creates a KMS key and
+[encrypts objects](https://github.com/terraform-aws-modules/terraform-aws-s3-bucket/blob/master/examples/complete/main.tf#L189)
+stored in the S3 bucket with the KMS key. You can use this module to create and secure your S3 buckets.
+
+You can enforce data at rest encryption with Terraform in other clouds such as GCP, Azure, and on-prem.
+
+HashiCorp resources:
+
+- [Encrypting data with Transform secrets engine](/vault/tutorials/adp/transform-code-example)
+- [Transform sensitive data with Vault](/vault/tutorials/adp/transform)
+- View our tutorial library on [data encryption](/vault/tutorials/encryption-as-a-service)
+
+
+## Tokenize critical data
+
+Tokenization converts sensitive data into nonsensitive data called tokens.
+Tokens are helpful when sensitive data is being sent out remotely, such as client authentication
+like GitHub login authentication, credit card numbers, banking credentials,
+or any other systems which require external authentication or data exchange.
+
+You can use HashiCorp Vault to create tokens to secure data.
+Vault Transform secrets engine
+can tokenize data to replace highly sensitive data, like credit card numbers, with unique values (tokens)
+that are unrelated to the original value in any algorithmic sense. Therefore,
+the tokens do not risk exposing the critical data satisfying the Payment Card Industry Data Security Standard
+(PCI-DSS) guidance.
+
+The following diagram shows how Vault can take sensitive data, such as a customer's credit card number,
+encrypt the value, and allow the application to use that credit card securely.
+
+<ImageConfig hideBorder>
+
+![Tokenization overview](/img/vault/vault-tokenization-4.png)
+
+</ImageConfig>
+
+
+HashiCorp resources:
+- 
+- [Tokenize data with Transform secrets engine](/vault/tutorials/adp/tokenization)
+- [Vault Transform secrets engine](/vault/docs/secrets/transform)
+
+## Protect sensitive data used by Terraform
+
+Terraform stores, creates, uses, and manages data that can be
+[considered sensitive](/terraform/cloud-docs/architectural-details/data-security#terraform-cloud-and-enterprise).
+This data includes, but is not limited to Terraform state, input variables, plan/apply output, and logs.
+
+Practitioners implementing the Security pillar must secure this data, whether using
+HCP Terraform/Enterprise or Terraform Community Edition.
+
+### Storing Terraform state
+
+Terraform records data about the infrastructure it manages in a state file.
+The backend block defines where to store the state file.
+By default, Terraform uses the local backend, which stores the state file as plaintext in the directory where you run Terraform.
+While this might be acceptable in development environments, using the local backend in production environments can lead to sensitive
+data stored as plaintext in insecure locations, which may compromise your systems [[CWE-256](https://cwe.mitre.org/data/definitions/256.html)].
+
+We recommend that you store your state file in secure remote storage.
+Both HCP Terraform and Terraform Enterprise store state in a secure backend and encrypt the state with
+Vault's in-transit encryption.
+For practitioners who are using AWS S3 as a backend and wish to move to HCP Terraform, we provide a
+[tutorial](/terraform/tutorials/cloud/migrate-remote-s3-backend-tfc) to walk you through the process.
+
+<Warning>
+
+ Never store your Terraform state file in a remote code repository.
+
+</Warning>
+
+Terraform can also store your state in backends hosted by multiple cloud providers or on-prem solutions.
+
+The Amazon S3 backend supports encryption at rest when the
+[encrypt option is enabled](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html).
+AWS IAM policies can control access to the state file, and logging can be used to identify any access requests.
+
+The Google Cloud backend uses a
+[bucket](https://cloud.google.com/storage/docs/json_api/v1/buckets) to store Terraform state.
+Google Cloud offers a [tutorial](https://cloud.google.com/docs/terraform/resource-management/store-state) on using a
+GCP bucket for storing Terraform state, and how to configure the cloud resources to do so.
+
+The Azurerm backendstores the state as a Blob with
+the given Key within the Blob Container within the [Blob Storage Account](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction).
+Azure provides [documentation and a walkthrough](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli)
+on setting up Azure Storage to store Terraform state files
+
+Regardless of the provider you choose, we recommend enabling versioning in your state backend of choice.
+Versioning allows you to recover state lost due to accidental deletions or human error.
+We also recommend encrypting the state file via technologies that encrypt data at rest and in
+transit such as [S3 encryption using KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html),
+[Azure Storage encryption](https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption), or
+[Google Cloud storage](https://cloud.google.com/storage/docs/encryption)
+
+
+### Sensitive data in Terraform state
+
+You should avoid storing sensitive data such as passwords and secrets in your Terraform state.  Managing infrastructure often requires creating and handling sensitive values that you may not want Terraform to persist outside of the current operation. Terraform provides two tools for resources to manage data you do not want to store in state or plan files: ephemeral values and write-only arguments on specific resources.
+
+Ephemeral values in Terraform are essentially temporary. Ephemeral resources have a unique lifecycle, and Terraform does not store information about ephemeral resources in state or plan files.
+
+Terraform's managed resources, defined by resource blocks, can include ephemeral arguments, called write-only arguments. Write-only arguments are only available during the current Terraform operation, and Terraform does not store them in state or plan files.
+Use ephemeral values and write-only arguments to securely pass temporary values to resources during a Terraform operation without worrying about Terraform persisting those values.
+
+
+HashiCorp resources:
+
+- Terraform [ephemeral resources and write-only arguments](/terraform/language/resources/ephemeral) 
+- [Backend block configuration overview](/terraform/language/backend)
+- Backend for [AWS](/terraform/language/settings/backends/s3), [GCP](/terraform/language/settings/backends/gcs), and [Azure](/terraform/language/settings/backends/azurerm).
+- [Use HCP Terraform for state](/terraform/tutorials/aws-get-started/aws-remote)
+- [Migrate remote S3 backend to HCP Terraform](/terraform/tutorials/cloud/migrate-remote-s3-backend-tfc)
+
+External resources:
+- [Store Terraform state in Azure Storage](https://learn.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli)
+- [Store Terraform state in a cloud storage bucket](https://cloud.google.com/docs/terraform/resource-management/store-state)
+- [Store Terraform state in AWS S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+
+## Input Variables
+
+It is common for Terraform practitioners to input variable values containing a password or other data that, in the wrong hands,
+could negatively impact business operations.
+Terraform allows users to mask these values when running `terraform apply`, `terraform plan`, or `terraform output` commands.
+
+By default, the Terraform variable block does not mask input values assigned to them.
+Use the [`sensitive` argument](/terraform/language/values/variables#suppressing-values-in-cli-output)
+on the variable block to indicate that the variable holds a sensitive value.
+
+```hcl
+variable "user_information" {
+  type = object({
+    name    = string
+    address = string
+  })
+  sensitive = true
+}
+```
+
+<Note>
+
+Masking these variables hides their values in the output of Terraform plan and apply operations. Terraform still stores them as plaintext in your Terraform state file and you can still access them with the Terraform CLI with `terraform output`.
+
+</Note>
+
+HashiCorp resources:
+
+- [Protect sensitive input variables](/terraform/tutorials/configuration-language/sensitive-variables)
+
+## Next steps
+
+In this guide, you learned about protecting data in transit and at rest, how to tokenize critical data, and how to protect sensitive data used by Terraform. To learn more about securing your infrastructure and data, view the following resources:
+- [Retrieving CI/CD secrets from Vault](/well-architected-framework/security/security-cicd-vault)
+- [Secure HashiCorp tools with TLS](/well-architected-framework/security/security-secure-hashicorp-tools-with-tls)
+- [Secure identifying digital entities with X.509 certificates](/well-architected-framework/security/security-secure-entities-with-x509)
