@@ -23,5 +23,8 @@ export function middleware({ url }) {
 }
 
 export const config = {
-	matcher: '/api/content/ptfe-releases/:path*',
+	matcher: [
+		'/api/content/ptfe-releases/:path*',
+		'/api/assets/ptfe-releases/:path*',
+	],
 }
