@@ -4,7 +4,6 @@
 - cost-estimation
 - outbound-http-proxy
 - ptfe-health-check
-- ptfe-vault
 - slug-ingress
 - terraform-enterprise
 - terraform-registry
