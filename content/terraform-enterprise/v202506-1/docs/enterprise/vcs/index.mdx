@@ -21,23 +21,28 @@ Configuring a new VCS provider requires permission to manage VCS settings for th
 
 [permissions-citation]: #intentionally-unused---keep-for-maintainers
 
-## Supported VCS providers
+## Supported VCS Providers
 
-You can connect to the following providers. To build custom integrations with other VCS providers, refer to [API-driven run workflow](/terraform/enterprise/run/api):
+HCP Terraform supports the following VCS providers:
 
-| VCS | IP version | Terraform edition |
-| --- | --- | --- |
-| [GitHub.com](/terraform/cloud-docs/vcs/github-app) | IPv4 |  HCP Terraform only|
-| [GitHub App for TFE](/terraform/enterprise/admin/application/github-app-integration) | IPv4 | Terraform Enterprise only |
-| [GitHub.com (OAuth)](/terraform/cloud-docs/vcs/github) | IPv4 | HCP Terraform <br/> Terraform Enterprise |
-| [GitHub Enterprise](/terraform/cloud-docs/vcs/github-enterprise) | IPv4 | HCP Terraform <br/> Terraform Enterprise |
-| [GitLab.com](/terraform/cloud-docs/vcs/gitlab-com) | IPv4 | HCP Terraform <br/> Terraform Enterprise |
-| [GitLab EE and CE](/terraform/cloud-docs/vcs/gitlab-eece) | IPv4 | HCP Terraform <br/> Terraform Enterprise |
-| [Bitbucket Cloud](/terraform/cloud-docs/vcs/bitbucket-cloud) | IPv4 <br/> IPv6 | HCP Terraform <br/> Terraform Enterprise |
-| [Bitbucket Data Center](/terraform/cloud-docs/vcs/bitbucket-data-center) | IPv4 <br/> IPv6 | HCP Terraform <br/> Terraform Enterprise |
-| [Azure DevOps Server](/terraform/cloud-docs/vcs/azure-devops-server) | IPv4 | HCP Terraform <br/> Terraform Enterprise |
-| [Azure DevOps Services (OAuth)](/terraform/cloud-docs/vcs/azure-devops-services) | IPv4 | HCP Terraform <br/> Terraform Enterprise |
-| [Azure DevOps Services (PAT)](/terraform/cloud-docs/vcs/azure-devops-services-pat) | IPv4 | HCP Terraform <br/> Terraform Enterprise |
+<!-- BEGIN: TFC:only -->
+
+-   [GitHub.com](/terraform/enterprise/vcs/github-app)
+
+<!-- END: TFC:only -->
+
+-   [GitHub App for TFE](/terraform/enterprise/admin/application/github-app-integration)
+-   [GitHub.com (OAuth)](/terraform/enterprise/vcs/github)
+-   [GitHub Enterprise](/terraform/enterprise/vcs/github-enterprise)
+-   [GitLab.com](/terraform/enterprise/vcs/gitlab-com)
+-   [GitLab EE and CE](/terraform/enterprise/vcs/gitlab-eece)
+-   [Bitbucket Cloud](/terraform/enterprise/vcs/bitbucket-cloud)
+-   [Bitbucket Data Center](/terraform/enterprise/vcs/bitbucket-data-center)
+-   [Azure DevOps Server](/terraform/enterprise/vcs/azure-devops-server)
+-   [Azure DevOps Services (OAuth)](/terraform/enterprise/vcs/azure-devops-services)
+-   [Azure DevOps Services (PAT)](/terraform/enterprise/vcs/azure-devops-services-pat)
+
+Use the links above to see details on configuring VCS access for each supported provider. If you use another VCS that is not supported, you can build an integration via [the API-driven run workflow](/terraform/enterprise/run/api).
 
 ## How HCP Terraform Uses VCS Access
 
@@ -121,7 +126,7 @@ You can use self-hosted HCP Terraform Agents to connect HCP Terraform to your pr
 
 ## Viewing events
 
--> **Note**: The VCS events page is in beta, and only supports GitLab.com connections after December 2020.
+-> **Note**: The VCS Events page is still in beta as support is being added for additional VCS providers. Currently only GitLab.com connections established after December 2020 are supported.
 
 VCS events describe changes within your organization for VCS-related actions. The VCS events page only displays events from previously processed commits in the past 30 days. The VCS page indicates previously processed commits with the message, `"Processing skipped for duplicate commit SHA"`.
 
