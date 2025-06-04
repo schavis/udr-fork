@@ -15,6 +15,8 @@ Flexible Deployment Options `terraform-enterprise` container digest: amd64/linux
 
 1. Terraform Enterprise now ships as a multi-platform image, though currently only supports `linux/amd64`. If you're on a non-Linux host, provide the `--platform linux/amd64` argument when pulling the Terraform Enterprise image.
 
+2. Terraform Enterprise now supports deployment in IPv6-only network.
+
 ## Features
 
 1. Module authors can now escalate the EOL severity of a module version in the private registry by revoking that version. Revoking a module version adds warnings to the module's registry page, warnings in the run outputs of existing module consumers, and blocks new users from using that version.
