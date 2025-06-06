@@ -110,17 +110,12 @@ Terraform.
    **Save the organization name for later.**
 2. [Create a team](/terraform/cloud-docs/users-teams-organizations/teams) for that
    organization called "ServiceNow", and ensure that it has [permission to
-   manage
-   workspaces](/terraform/cloud-docs/users-teams-organizations/permissions#manage-all-workspaces).
+   manage workspaces](/terraform/cloud-docs/users-teams-organizations/permissions#manage-all-workspaces).
    You do not need to add any users to this team.
    [permissions-citation]: #intentionally-unused---keep-for-maintainers
 3. On the "ServiceNow" team's settings page, generate a [team API
-   token](/terraform/cloud-docs/users-teams-organizations/api-tokens#team-api-tokens).
+   token](/terraform/cloud-docs/users-teams-organizations/api-tokens#team-api-tokens). HCP Terraform now supports fine-grained permissions for team tokens at the project level. You can assign teams and their associated tokens permission levels on specific projects. To learn more about the different permissions necessary to provision resources, refer to [Permissions](/terraform/cloud-docs/users-teams-organizations/permissions#project-permissions). 
    **Save the team API token for later.**
-4. After [generating a team token](/terraform/cloud-docs/users-teams-organizations/api-tokens#team-api-tokens) in HCP Terraform, you can add that token to your ServiceNow context by doing the following:
-    1. Navigate to **Terraform Configs** in ServiceNow
-    2. Select **New** and add your token.
-    3. Use your HCP Terraform team name as your **Org name**.   
 5. If you are using the [VCS flow](/terraform/cloud-docs/integrations/service-now/service-catalog-terraform/service-catalog-config#vcs-configuration): 
     1. Ensure your Terraform organization is [connected to a VCS provider](/terraform/cloud-docs/vcs). Repositories that are connectable to HCP Terraform workspaces can also be used as workspace templates in the ServiceNow integration.
     2. On your organization's VCS provider settings page (**Settings** > **VCS Providers**), find the OAuth Token ID for the VCS provider(s) that you intend to use with the ServiceNow integration. HCP Terraform uses the OAuth token ID to identify and authorize the VCS provider. **Save the OAuth token ID for later.**
@@ -224,8 +219,7 @@ update request items.
 ### Team Tokens
 
 Team-scoped tokens can help you manage a team's access to things in HCP Terraform, but team tokens are limited within the ServiceNow context. We recommend only using one API team token, regardless of the number of teams accessing ServiceNow. 
-
-You can assign teams and their associated tokens permission levels on specific projects. To learn more about the different permissions necessary to provision resources, refer to [Permissions](/terraform/cloud-docs/users-teams-organizations/permissions#project-permissions). To learn more about API tokens, refer to [Team tokens](https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/api-tokens#team-api-tokens).
+To learn more about API tokens, refer to [Team tokens](/terraform/cloud-docs/users-teams-organizations/api-tokens#team-api-tokens).
 
 ### ServiceNow Developer Reference
 
