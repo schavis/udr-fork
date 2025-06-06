@@ -164,42 +164,6 @@ Each specific run of the admin `usage-report` command generates the product usag
 
 To send product usage reports to HashiCorp, visit the [**Licensing utilization reporting** page](https://portal.cloud.hashicorp.com/license-utilization/reports/create) and use the upload form.
 
-## Manage admin API tokens
-
-Terraform Enterprise provides commands to manage authentication tokens for the Admin API, which allows programmatic access to administrative functions.
-
-### Generate an admin API token
-
-To create a new admin API token, use the `admin api-token generate` command with a required description that helps identify the token's purpose or owner:
-
-```shell-session
-$ tfectl admin api-token generate --description "Token description"
-```
-
-By default, tokens expire after 720 hours (30 days). You can specify a custom time-to-live (TTL) in hours using the `--ttl` flag:
-
-```shell-session
-$ tfectl admin api-token generate --description "Token description" --ttl 2000
-```
-
-### List admin API tokens
-
-To list all existing admin API tokens along with their metadata (excluding the actual token value), use:
-
-```shell-session
-$ tfectl admin api-token list
-```
-
-This command displays the token ID, creation date, expiration date, last used date, and description for each token. The output is ordered by creation date.
-
-### Revoke an admin API token
-
-To revoke an admin API token, use the `admin api-token revoke` command with the token ID (obtained from the `list` command):
-
-```shell-session
-$ tfectl admin api-token revoke --id "1"
-```
-
 ## List all Terraform Enterprise installation nodes
 
 To get a list of valid node values, use the following command:
