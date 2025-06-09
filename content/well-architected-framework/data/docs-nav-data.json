@@ -217,6 +217,10 @@
       {
         "title": "Prevent lateral movement",
         "path": "secure-systems/prevent-lateral-movement"
+      },
+      {
+        "title": "Appendix",
+        "path": "secure-systems/appendix"
       }
     ]
   },
