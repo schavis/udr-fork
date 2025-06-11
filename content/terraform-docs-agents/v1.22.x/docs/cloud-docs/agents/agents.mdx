@@ -49,7 +49,7 @@ To start the agent with the official Docker image and connect it to an HCP Terra
 ```shell-session
 export TFC_AGENT_TOKEN=your-token
 export TFC_AGENT_NAME=your-agent-name
-docker run -e TFC_AGENT_TOKEN -e TFC_AGENT_NAME hashicorp/tfc-agent:latest
+docker run --platform=linux/amd64 -e TFC_AGENT_TOKEN -e TFC_AGENT_NAME hashicorp/tfc-agent:latest
 ```
 
 Once complete, your agent and its status appear on the **Agents** page in the HCP Terraform UI. Workspaces can now use this agent pool for runs. Refer to [Configure Workspaces to Use the Agent](/terraform/cloud-docs/agents/agent-pools#configure-workspaces-to-use-the-agent) for details.
