@@ -6,7 +6,7 @@ description: >-
 
 # Enable automated product usage reports
 
-This topic describes how to enable Terraform Enterprise to automatically report product usage information to HashiCorp. Refer to [Terraform Enterprise product data reference](/terraform/enterprise/deploy/reference/product-data) for information about the product usage data Terraform Enterprise sends to HashiCorp.
+This topic describes how to enable Terraform Enterprise to automatically report product usage information to HashiCorp. Refer to [Terraform Enterprise product data reference](/terraform/enterprise/deploy/reference/product-data) for information about the product usage data Terraform Enterprise sends to HashiCorp. This data is human readable.
 
 ## Introduction
 
@@ -86,3 +86,5 @@ When in `external` and `active-active` mode and on Kubernetes, Terraform Enterpr
 Each specific run of the admin `usage-report` command generates the product usage report in a new JSON file.
 
 To send product usage reports to HashiCorp, visit the [**Licensing utilization reporting** page](https://portal.cloud.hashicorp.com/license-utilization/reports/create) and use the upload form.
+
+~> NOTE: If the file is modified, upload will fail due to checksum validation.
