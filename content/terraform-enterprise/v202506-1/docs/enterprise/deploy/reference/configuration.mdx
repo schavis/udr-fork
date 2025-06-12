@@ -581,6 +581,10 @@ You must also configure the [`TFE_TLS_CERT_FILE_SECONDARY`](#tfe_tls_cert_file_s
 
 This settings is required when [`TFE_HOSTNAME_SECONDARY`](#tfe_hostname_secondary) is set.
 
+### `TFE_TLS_REQUIRE_SMTP`
+
+Whether to require TLS when connecting to SMTP servers. When set to `true`, the application will raise an error if it cannot upgrade SMTP connections to TLS. Defaults to `false`.
+
 ### `TFE_TLS_VERSION`
 
 TLS version to use. Must be one of `tls_1_2`, `tls_1_3`, or blank. Leave blank
