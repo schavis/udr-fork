@@ -77,7 +77,7 @@ Once your server receives this payload, HCP Terraform expects you to callback to
 }
 ```
 
-HCP Terraform will consider the request as errored if it has not received a progress callback in the last 10 minutes, or the task has been running for over 60 minutes.
+The request errors if  HCP Terraform does not receive a progress update within 10 minutes or if the request runs for more than 60 minutes.
 HCP Terraform displays the supplied message attribute on the run details page. The status is either `running`, `passed`, or `failed`.
 
 Here's what the data flow looks like:
