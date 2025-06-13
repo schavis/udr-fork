@@ -52,6 +52,8 @@
           }
         ]
       },
+      { "title": "Ping", "path": "api-docs/ping" },
+      { "title": "Usage Bundle", "path": "api-docs/usage-bundle" },
       {
         "title": "Agent Pools",
         "path": "api-docs/agents"
