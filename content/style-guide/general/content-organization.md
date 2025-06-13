@@ -20,7 +20,7 @@ When you must direct readers to a different section, refer to a specific point i
 
 Use "following" to describe an element or topic that immediately follows the sentence or paragraph.
 
-## Examples
+### Examples
 
 **Do:**
 
@@ -68,7 +68,6 @@ Avoid long, complex sentences. Instead, write multiple sentences that each conta
 
 Do not use dashes, semicolons, or other punctuation to merge several ideas into a single sentence. Refer to [Do not use en or em dashes to separate ideas or phrases](TODO) for additional guidance. 
 
-
 **Do:**
 
 ```markdown
@@ -92,7 +91,8 @@ Do not force information into a list when doing so results in multiple tiers of 
 
 ### Examples
 
-```markdown
+```
+
 ## Personas
 
 Consul aligns with the following personas.
@@ -120,9 +120,11 @@ This is someone who is responsible for creating, and possibly deploying applicat
 ### User
 
 This refers to the end user whow uses applications backed by services managed by Consul. In some cases services may be public facing on the internet such as a web server, typically through a load-balancer, or ingress gateway. This is someone who should not have any network access to the Consul agent APIs.
+
 ```
 
-```markdown
+```
+
 ## Requirements
 
 The requirements depend on which operational mode you choose.
@@ -148,11 +150,12 @@ One of the following mounted disk types is required for the persistent storage v
 - iSCSI
 - SAN
 - A disk physically connected to the host machine
+
 ```
 
 **Don't:**
 
-```markdown
+```
 ## Personas
 
 It helps to consider the following types of personas when managing the security requirements of a Consul deployment. The granularity may change depending on your team's requirements.
@@ -168,7 +171,7 @@ It helps to consider the following types of personas when managing the security 
 - User - This is the end user, using applications backed by services managed by Consul. In some cases services may be public facing on the internet such as a web server, typically through a load-balancer, or ingress gateway. This is someone who should not have any network access to the Consul agent APIs.
 ```
 
-```markdown
+```
 ## Requirements
 
 - `external` mode
@@ -207,14 +210,13 @@ Do not describe code examples using comments embedded in the code.
 
 **Do:**
 
-
-```markdown
+```
 The following diagram shows . . .
 
 ![Description](/static/img/graphic.png)
 ```
 
-````markdown
+````
 In the following example, . . .
 
 ```hcl
@@ -224,13 +226,13 @@ In the following example, . . .
 
 **Don't**
 
-```markdown
+```
 ![Description](/static/img/graphic.png)
 
 The above shows . . . 
 ```
 
-````markdown
+````
 
 ```hcl
 # This part of the code does {some action}
@@ -288,7 +290,7 @@ For short tutorials, include the URL the first time it is mentioned. For longer-
 
 **Do:**
 
-`In a browser window, navigate to the UI at `http://localhost:8500`.`
+``In a browser window, navigate to the UI at `http://localhost:8500`.``
 
 **Don't**
 
@@ -329,7 +331,7 @@ In the following example, the page and meta titles match, but they do not agree 
 
 ## Use the `badge` attribute in the navigation file to note release phases and special conditions, such as beta and deprecated
 
-keywords: writing, navigation, beta, deprecated, data.json
+> keywords: writing, navigation, beta, deprecated, data.json  
 content sets: docs, tutorial, WAF, certifications
 
 Use all caps for the contents of the badge.
@@ -369,13 +371,13 @@ Discuss experimental features with your technical writer.
              }
 ```
 
-# Write modular pages and sections 
+## Write modular pages and sections 
 
 > keywords: writing, dry, modular topics  
 content sets: docs, tutorials, WAF, certifications
 
 Describe concepts, instructions, workflows, reference items, and other types of information once in a neutral context and link to them from more specific contexts. 
 
-The method of writing modular topics once so that you don't repeat yourself is referred to as "keeping your writing DRY". Refer to the content types guidance for additional guidance.
+Writing modular topics once so that you don't repeat yourself is referred to as "keeping your writing DRY". Refer to the content types guidance for additional guidance.
 
 Some repetition is unavoided and even expected in some contexts, but copying and pasting the same content without using partials indicates non-modular topics.
