@@ -38,39 +38,28 @@ source: terraform-docs-common
 
 [JSON API error object]: https://jsonapi.org/format/#error-objects
 
-# API Documentation
+# API documentation overview
 
-## HCP Terraform API
+Terraform Enterprise provides an API for a subset of its features. If you need assistance or want to submit a feature request, visit the [HashiCorp support center](https://support.hashicorp.com/hc/en-us) and open a ticket.
 
-HCP Terraform provides an API for a subset of its features. If you need assistance or want to submit a feature request, visit the [HashiCorp support center](https://support.hashicorp.com/hc/en-us) and open a ticket.
+Before planning an API integration, consider whether the [HCP Terraform and Terraform Enterprise provider](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs) meets your needs. It can't create or approve runs in response to arbitrary events, but it's a useful tool for managing your organizations, teams, and workspaces as code.
 
--> **Note:** Before planning an API integration, consider whether [the `tfe` Terraform provider](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs) meets your needs. It can't create or approve runs in response to arbitrary events, but it's a useful tool for managing your organizations, teams, and workspaces as code.
+The [HashiCorp API stability policy](/terraform/cloud-docs/api-docs/stability-policy) ensures backward compatibility for stable endpoints. The [changelog](/terraform/cloud-docs/api-docs/changelog) tracks changes to the API.
 
-HashiCorp provides a [stability policy](/terraform/enterprise/api-docs/stability-policy) for the HCP Terraform API, ensuring backwards compatibility for stable endpoints. The [changelog](/terraform/enterprise/api-docs/changelog) tracks changes to the API for HCP Terraform and Terraform Enterprise.
+## Application endpoints
 
-## API Types
+Some endpoints let you interact with Terraform Enterprise application resources such as workspaces, runs, and variables. Unless otherwise specified, all documentation on this site refers to application endpoints.
 
-HCP Terraform provides two types of API endpoints:
+## System endpoints
 
-- **Application Endpoints** - These are the primary endpoints used for interacting with HCP Terraform resources such as workspaces, runs, and variables. Unless otherwise specified, all documentation on this site refers to application endpoints.
-- **System Endpoints** - These endpoints are used for system-level operations, such as health checks and usage reporting. System endpoints have different authentication and rate limiting requirements than application endpoints.
+The API includes endpoints for system-level operations, such as health checks and usage reporting. System endpoints have different authentication and rate limiting requirements than application endpoints. Refer to the following documentation for details about system endpoints:
 
-### System Endpoints Overview
-
-The following table lists the available system API endpoints in Terraform Enterprise:
-
-| Endpoint | Description | Path | Documentation |
-|---------|-------------|------|---------------|
-| Ping | Health check endpoint to verify system operation | `/api/v1/ping` | [System Ping API](/terraform/enterprise/api-docs/ping) |
-| Usage/Bundle | Retrieves usage data bundle | `/api/v1/usage/bundle` | [System Usage/Bundle API](/terraform/enterprise/api-docs/usage-bundle) |
-
--> **Terraform Enterprise Only:** The System API is exclusive to Terraform Enterprise. It enables access to deployment configuration and data.
+- [`/api/v1/ping`](/terraform/enterprise/api-docs/ping). Call this endpoint to verify system operation.
+- [`/api/v1/usage/bundle`](/terraform/enterprise/api-docs/usage-bundle). Call this endpoint to retrieve a usage data bundle.
 
 ## Authentication
 
-### Application Endpoints
-
-For application endpoints, all requests must be authenticated with a bearer token. Use the HTTP header `Authorization` with the value `Bearer <token>`. If the token is absent or invalid, HCP Terraform responds with [HTTP status 401][401] and a [JSON API error object][]. The 401 status code is reserved for problems with the authentication token; forbidden requests with a valid token result in a 404.
+All requests must be authenticated with a bearer token. Use the HTTP header `Authorization` with the value `Bearer <token>`. If the token is absent or invalid, HCP Terraform responds with [HTTP status 401][401] and a [JSON API error object][]. The 401 status code is reserved for problems with the authentication token; forbidden requests with a valid token result in a 404.
 
 You can use the following types of tokens to authenticate:
 
@@ -81,19 +70,18 @@ You can use the following types of tokens to authenticate:
 -   [Audit trails token](/terraform/enterprise/users-teams-organizations/api-tokens#audit-trail-tokens) - each organization can have a single token that can read that organization's audit trails. Use this token type to authenticate integrations pulling audit trail data, for example, using the [HCP Terraform for Splunk](/terraform/enterprise/integrations/splunk) app.
     <!-- END: TFC:only -->
 
-### System Endpoints
+### System endpoints
 @include "api-code-blocks/authentication.mdx"
 
-### Blob Storage Authentication
+### Blob storage authentication
 
-HCP Terraform relies on a HashiCorp-developed blob storage service for storing statefiles and multiple other pieces of customer data, all of which are documented on our [data security page](/terraform/cloud-docs/architectural-details/data-security).
+Terraform Enterprise relies on a HashiCorp-developed blob storage service for storing state files and other pieces of customer data. This service does not require you to submit a bearer token with each request. Instead, each URL includes a securely-generated secret and is only valid for 25 hours.
 
-Unlike the HCP Terraform API, this service does not require that a bearer token be submitted with each request. Instead, each URL includes a securely generated secret and is only valid for 25 hours.
+For example, the [state versions endpoint](/terraform/enterprise/api-docs/state-versions) returns a field named `hosted-state-download` that contains a URL in the following format:
 
-For example, the [state versions api](/terraform/enterprise/api-docs/state-versions) returns a field named `hosted-state-download`, which is a URL of this form:
 `https://archivist.terraform.io/v1/object/<secret value>`
 
-This is a broadly accepted pattern for secure access. It is important to treat these URLs themselves as secrets. They should not be logged, nor shared with untrusted parties.
+This is a widely accepted pattern for secure access. Treat URLs retrieved from the blob storage service as secrets. Do not log them or share them with untrusted parties.
 
 ## Feature Entitlements
 
@@ -101,7 +89,7 @@ HCP Terraform is available at multiple pricing tiers (including free), which off
 
 Each organization has a set of _entitlements_ that corresponds to its pricing tier. These entitlements determine which HCP Terraform features the organization can use.
 
-If an organization doesn't have the necessary entitlement to use a given feature, HCP Terraform returns a 404 error for API requests to any endpoints devoted to that feature.
+If an organization doesn't have the necessary entitlement to use a given feature, Terraform Enterprise returns a `404` error for API requests to any endpoints devoted to that feature.
 
 The [show entitlement set](/terraform/enterprise/api-docs/organizations#show-the-entitlement-set) endpoint can return information about an organization's current entitlements, which is useful if your client needs to change its interface when a given feature isn't available.
 
