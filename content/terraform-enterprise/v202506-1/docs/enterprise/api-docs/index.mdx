@@ -379,7 +379,7 @@ Unauthenticated requests are associated with the requesting IP address.
 }
 ```
 
-#### Lower rate limits for some endpoints
+### Lower rate limits for some endpoints
 
 To prevent abuse, some endpoints have lower rate limits. The lower limits are unnoticeable under normal use. If you trigger a rate-limited response, you can see that limit in the `x-ratelimit-limit` header.
 
@@ -387,6 +387,8 @@ The following endpoints have lower rate limits:
 
 | Method and endpoint                                                                                                                                                                                                         | Purpose          | Limit                               |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------- |
+| <p>`GET /api/v1/ping`</p> | Verifies system operation in Terraform Enterprise | 1 request per second per authentication token |
+| <p>`GET /api/v1/usage/bundle`</p> | Provides a usage bundle in Terraform Enterprise | 1 request per second per authentication token |
 | <p>`POST /session/two-factor-send-sms`</p><p>`POST /api/v2/account/actions/two-factor-enable`</p><p>`POST /api/v2/account/actions/two-factor-resend-verification-code`</p>                                                  | Send SMS message | 5 requests per minute per user      |
 | <p>`POST /api/v2/account/actions/two-factor-enable`</p><p>`POST /api/v2/account/actions/two-factor-resend-verification-code`</p>                                                                                            | Send SMS message | 10 requests per hour per user       |
 | <p>`POST /api/v2/account/actions/two-factor-enable`</p><p>`POST /api/v2/account/actions/two-factor-resend-verification-code`</p>                                                                                            | Send SMS message | 100 requests per day per IP address |
@@ -396,9 +398,6 @@ The following endpoints have lower rate limits:
 | <p>`POST /api/v2/notification-configurations/{EXTERNAL_ID}/actions/verify`</p><p>`DELETE /api/v2/oauth-tokens`</p>                                                                                                          | Send emails      | 10 per minute                       |
 | <p>`POST /account/reconfirm`</p>                                                                                                                                                                                            | Send emails      | 40 per hour                         |
 | <p>`POST /auth`</p>                                                                                                                                                                                                         | Send emails      | 40 per hour per email address       |
-
-### System Endpoints
-@include "api-code-blocks/rate-limit.mdx"
 
 ## Client libraries and tools
 
