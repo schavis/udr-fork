@@ -141,6 +141,26 @@ This content should stay.
 		expect(result.trim()).toBe(expected.trim())
 	})
 
+	it('should remove NESTED TFEnterprise:only and TFC:only content for terraform product', async () => {
+		const markdown = `
+<!-- BEGIN: TFC:only -->
+This content should be removed.
+<!-- END: TFC:only -->
+	<!-- BEGIN: TFEnterprise:only name:revoke -->
+-   You can now revoke, and revert the revocation of, module versions. Learn more about [Managing module versions](/terraform/enterprise/api-docs/private-registry/manage-module-versions).
+		<!-- END: TFEnterprise:only name:revoke -->
+
+This content should stay.
+`
+
+		const filePath = 'terraform/some-file.md'
+		const expected = `This content should stay.`
+
+		const result = await runTransform(markdown, filePath)
+
+		expect(result.trim()).toBe(expected.trim())
+	})
+
 	it('should remove TFEnterprise:only and TFC:only content for terraform-cdk product', async () => {
 		const markdown = `
 <!-- BEGIN: TFC:only -->
