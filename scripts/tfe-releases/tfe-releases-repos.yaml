@@ -4,7 +4,6 @@ services:
   cost-estimation: hashicorp/cost-estimation
   outbound-http-proxy: hashicorp/outbound-http-proxy
   ptfe-health-check: hashicorp/ptfe-health-check
-  ptfe-vault: hashicorp/ptfe-vault
   slug-ingress: hashicorp/slug-ingress
   terraform-enterprise: hashicorp/terraform-enterprise
   terraform-registry: hashicorp/terraform-registry
