@@ -45,9 +45,9 @@ You can configure Terraform Enterprise to use Redis client certificates to authe
 Configure the following settings to use Redis client certificates: 
 
 - Set the `TFE_REDIS_USE_MTLS` variable to `true`.
-- Specify the path to the CA certificate file in the `TFE_REDIS_CA_CERT_FILE` variable.
-- Specify the path to the client certificate file in the `TFE_REDIS_CLIENT_CERT_FILE` variable.
-- Specify the path to the client key in the `TFE_REDIS_CLIENT_KEY_FILE` variable.
+- Specify the path to the CA certificate file in the `TFE_REDIS_CA_CERT_PATH` variable.
+- Specify the path to the client certificate file in the `TFE_REDIS_CLIENT_CERT_PATH` variable.
+- Specify the path to the client key in the `TFE_REDIS_CLIENT_KEY_PATH` variable.
 
 For detailed information on configuring TLS for Redis, refer to the [official Redis documentation on encryption](https://redis.io/docs/latest/operate/oss_and_stack/management/security/encryption/).
 
