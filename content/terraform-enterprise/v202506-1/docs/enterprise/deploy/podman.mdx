@@ -441,11 +441,11 @@ spec:
       value: "<Path to the private key file corresponding to the client certificate>"
     - name: "TFE_REDIS_SIDEKIQ_USE_MTLS"
       value: "<To use mtls with Redis Enterprise? eg. "false">"
-    - name: "TFE_REDIS_SIDEKIQ_CERT_PATH"
+    - name: "TFE_REDIS_SIDEKIQ_CLIENT_CERT_PATH"
       value: "<Path to the client certificate file to be used for mTLS authentication with Redis server>"
-    - name: "TFE_REDIS_SIDEKIQ_PATH"
+    - name: "TFE_REDIS_SIDEKIQ_CA_CERT_PATH"
       value: "<Path to the Certificate Authority file user to validate the certificate>"
-    - name: "TFE_REDIS_SIDEKIQ_KEY_PATH"
+    - name: "TFE_REDIS_SIDEKIQ_CLIENT_KEY_PATH"
       value: "<Path to the private key file corresponding to the client certificate.>"
       
       # Vault cluster settings.
