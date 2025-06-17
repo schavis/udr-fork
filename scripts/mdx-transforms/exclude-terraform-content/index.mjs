@@ -123,9 +123,10 @@ export function transformExcludeTerraformContent({ filePath }) {
 			const [flag] = block.split(/\s+/)
 			const directive = flag.match(DIRECTIVE_RE)
 
+			// TODO: line start and end do not take into account front matter, as it is just tree parsing and technically front matter is not part of the MDX tree
 			if (!directive) {
 				throw new ExcludeTerraformContentError(
-					'Directive could not be parsed',
+					`Directive block ${block} could not be parsed between lines ${start} and ${end}`,
 					tree,
 				)
 			}
