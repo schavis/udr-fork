@@ -287,15 +287,15 @@ Redis server password. This value is required when `TFE_REDIS_SIDEKIQ_USE_AUTH` 
 
 Must be `true` or `false`. `true` indicates to use mutual TLS (mTLS) authentication for clients to access Redis with Redis Enterprise. Defaults to `false`. 
 
-### `TFE_REDIS_SIDEKIQ_CERT_PATH`
+### `TFE_REDIS_SIDEKIQ_CLIENT_CERT_PATH`
 
 If using mTLS with Redis Enterprise, path to the client certificate file to be used for mTLS authentication with Redis server.
 
-### `TFE_REDIS_SIDEKIQ_PATH`
+### `TFE_REDIS_SIDEKIQ_CA_CERT_PATH`
 
 If using mTLS with Redis Enterprise, path to the certificate authority file to validate the certificate.
 
-### `TFE_REDIS_SIDEKIQ_KEY_PATH`
+### `TFE_REDIS_SIDEKIQ_CLIENT_KEY_PATH`
 
 If using mTLS with Redis Enterprise, path to the private key file corresponding to the client certificate.
 
