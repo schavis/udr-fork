@@ -40,6 +40,15 @@ Verify that you meet the following requirements when TLS is required to connect 
 - The Redis server is properly configured to accept TLS connections.
 - The Terraform Enterprise client is configured to use TLS when connecting to Redis. Refer to the [TLS configuration reference](/terraform/enterprise/deploy/reference/configuration#tls-settings) for additional information.
 
+You can configure Terraform Enterprise to use Redis client certificates to authenticate with the server for Redis standalone and Enterprise. When providing client certificates, the password is not required. 
+
+Configure the following settings to use Redis client certificates: 
+
+- Set the `TFE_REDIS_USE_MTLS` variable to `true`.
+- Specify the path to the CA certificate file in the `TFE_REDIS_CA_CERT_FILE` variable.
+- Specify the path to the client certificate file in the `TFE_REDIS_CLIENT_CERT_FILE` variable.
+- Specify the path to the client key in the `TFE_REDIS_CLIENT_KEY_FILE` variable.
+
 For detailed information on configuring TLS for Redis, refer to the [official Redis documentation on encryption](https://redis.io/docs/latest/operate/oss_and_stack/management/security/encryption/).
 
 ## Specify Redis connection settings
@@ -83,6 +92,10 @@ Add the following settings to your Terraform Enterprise configuration:
 - Set the `TFE_REDIS_USE_TLS` variable to `true` if your Redis server requires TLS. Defaults to `false`.
 - Set the `TFE_REDIS_USE_AUTH` variable to `true` if your Redis server requires authentication.
 - Set the `TFE_REDIS_PASSWORD` variable to the password for the user.
+- Set the `TFE_REDIS_USE_MTLS` variable to use mtls with Redis standalone. Defaults to `false`. When this is `true`, both `TFE_REDIS_USE_TLS` and `TFE_REDIS_USE_AUTH` must be false.
+- Set the `TFE_REDIS_CLIENT_CERT_PATH` variable to set the path to the client certificate file to be used for mTLS authentication with Redis server.
+- Set the `TFE_REDIS_CA_CERT_PATH` variable to set the path to the Certificate Authority file user to validate the certificate.
+- Set the `TFE_REDIS_CLIENT_KEY_PATH` variable to set the path to the private key file corresponding to the client certificate.
 
 Refer to [Redis settings](/terraform/enterprise/deploy/reference/configuration#redis-settings) in the configuration reference for additional information.
 
@@ -102,6 +115,10 @@ Add the following settings to your Terraform Enterprise configuration:
 - Set the `TFE_REDIS_SIDEKIQ_USE_TLS` variable to `true` if your Redis server requires TLS. Defaults to `false`.
 - Set the `TFE_REDIS_SIDEKIQ_USE_AUTH` variable to `true` if your Redis server requires authentication.
 - Set the `TFE_REDIS_SIDEKIQ_PASSWORD` variable to the password for the user.
+- Set the `TFE_REDIS_SIDEKIQ_USE_MTLS` variable to use mtls with Redis Enterprise. Defaults to `false`.
+- Set the `TFE_REDIS_SIDEKIQ_CERT_PATH` variable to set the path to the client certificate file to be used for mTLS authentication with Redis server.
+- Set the `TFE_REDIS_SIDEKIQ_PATH` variable to set the path to the Certificate Authority file user to validate the certificate.
+- Set the `TFE_REDIS_SIDEKIQ_KEY_PATH` variable to set the path to the private key file corresponding to the client certificate.
 
 ### Redis Sentinel
 
@@ -114,7 +131,7 @@ services with Redis Sentinel in the [Redis Sentinel documentation](https://redis
 
 Terraform Enterprise queries Redis Sentinel instances to determine which Redis instance is  active master. Terraform Enterprise performs queries while Redis replicates transaction data to other replicas.
 
-You cannot use Redis Sentinel and [Redis Enterprise](#redis-enterprise) in the same Terraform Enterprise deployment.
+You cannot use Redis Sentinel and [Redis Enterprise](#redis-enterprise) in the same Terraform Enterprise deployment. mTLS is not supported for Redis Sentinel.
 
 Use the following settings in your Terraform Enterprise configuration to use Redis Sentinel. Refer to the [Configuration reference](/terraform/enterprise/deploy/reference/configuration) for information about all configuration settings:
 - Set the `TFE_REDIS_SENTINEL_ENABLED` variable to `true` in order to use Redis Sentinel.

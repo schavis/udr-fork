@@ -87,6 +87,7 @@ This check validates the application's connectivity to Redis. When the connectio
 * `TFE_REDIS_HOST`
 * If `TFE_REDIS_USE_TLS` is set to `true` the application will use `rediss` instead of `redis` as the scheme.
 * If `TFE_REDIS_USE_AUTH` is set to `true` the application will use the credentials provided by `TFE_REDIS_PASSWORD` and `TFE_REDIS_USER` (optional) for authentication.
+* IF `TFE_REDIS_USE_MTLS` or `TFE_REDIS_SIDEKIQ_USE_MTLS` is set to `true` the application will present a valid certificate to the Redis server.
 
 ### TLS certificates
 

@@ -234,6 +234,22 @@ Must be `true` or `false`. `true` indicates Redis server is configured to use `T
 
 Must be `true` or `false`. `true` indicates to use TLS to access Redis. Defaults to `false`.
 
+## `TFE_REDIS_USE_MTLS`
+
+Must be `true` or `false`. `true` indicates to use mutual TLS (mTLS) authentication for clients to access Redis with Redis standalone. Defaults to `false`. mTLS is not currently supported in Sentinel mode.
+
+### `TFE_REDIS_CLIENT_CERT_PATH`
+
+If using mTLS with Redis standalone, path to the client certificate file to be used for mTLS authentication with Redis server. Required when `TFE_REDIS_USE_MTLS` is `true`.
+
+### `TFE_REDIS_CA_CERT_PATH`
+
+If using mTLS with Redis standalone, path to the certificate authority file to validate the certificate. Required when `TFE_REDIS_USE_MTLS` is `true`.
+
+### `TFE_REDIS_CLIENT_KEY_PATH`
+
+If using mTLS with Redis standalone, path to the private key file corresponding to the client certificate. Required when `TFE_REDIS_USE_MTLS` is `true`.
+
 ### `TFE_REDIS_USER`
 
 Redis server user. This value is required when `TFE_REDIS_USE_AUTH` is set to `true`, and Redis server is configured to use username for authentication. There is no need to set this config when running Redis server internally as credential is not required.
@@ -266,6 +282,22 @@ Redis server user. This value is required when `TFE_REDIS_SIDEKIQ_USE_AUTH` is s
 ### `TFE_REDIS_SIDEKIQ_PASSWORD`
 
 Redis server password. This value is required when `TFE_REDIS_SIDEKIQ_USE_AUTH` is set to `true`. There is no need to set this config when running Redis server internally as credential is not required.
+
+### `TFE_REDIS_SIDEKIQ_USE_MTLS`
+
+Must be `true` or `false`. `true` indicates to use mutual TLS (mTLS) authentication for clients to access Redis with Redis Enterprise. Defaults to `false`. 
+
+### `TFE_REDIS_SIDEKIQ_CERT_PATH`
+
+If using mTLS with Redis Enterprise, path to the client certificate file to be used for mTLS authentication with Redis server.
+
+### `TFE_REDIS_SIDEKIQ_PATH`
+
+If using mTLS with Redis Enterprise, path to the certificate authority file to validate the certificate.
+
+### `TFE_REDIS_SIDEKIQ_KEY_PATH`
+
+If using mTLS with Redis Enterprise, path to the private key file corresponding to the client certificate.
 
 ### `TFE_REDIS_SENTINEL_ENABLED`
 

@@ -311,6 +311,14 @@ services:
       TFE_REDIS_PASSWORD: "<Redis password>"
       TFE_REDIS_USE_TLS: "<To use tls? e.g. false>"
       TFE_REDIS_USE_AUTH: "<To use customized credential to authenticate? e.g. false>"
+      TFE_REDIS_USE_MTLS: <To use mtls with Redis standalone? eg. "false">
+      TFE_REDIS_CLIENT_CERT_PATH: <Path to the client certificate file to be used for mTLS authentication with Redis server>
+      TFE_REDIS_CA_CERT_PATH: <Path to the Certificate Authority file user to validate the certificate>
+      TFE_REDIS_CLIENT_KEY_PATH: <Path to the private key file corresponding to the client certificate>
+      TFE_REDIS_SIDEKIQ_USE_MTLS: <To use mtls with Redis Enterprise? eg. "false">
+      TFE_REDIS_SIDEKIQ_CERT_PATH: <Path to the client certificate file to be used for mTLS authentication with Redis server>
+      TFE_REDIS_SIDEKIQ_PATH: <Path to the Certificate Authority file user to validate the certificate>
+      TFE_REDIS_SIDEKIQ_KEY_PATH: <Path to the private key file corresponding to the client certificate>
 
       # Vault cluster settings.
       # If you are using the default internal vault, this should be the private routable IP address of the node itself.

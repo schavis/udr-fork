@@ -68,13 +68,21 @@ Update the Terraform Enterprise configuration to reflect the `active-active` ope
 
 You must also expand your Terraform Enterprise application settings to support an external Redis instance:
 
-| **Key**                   | **Required Value**                                                   | **Specific Format Required** |
-| ---------------------| ------------------------------------------------------------------------- | ---------------------------- |
-| TFE_REDIS_HOST       | Hostname in `host:port` format of an external Redis instance.             | **Yes**, string.             |
-| TFE_REDIS_USE_AUTH\* | Set to `true`, if you are using a Redis service that requires a password. | **Yes**, boolean.            |
-| TFE_REDIS_USER\*     | User used to authenticate to Redis.                                       | **Yes**, string.             |
-| TFE_REDIS_PASSWORD\* | User used to authenticate to Redis.                                       | **Yes**, string.             |
-| TFE_REDIS_USE_TLS\*  | Set to `true` if you are using a Redis service that requires TLS.         | **Yes**, boolean.            |
+| **Key**                       | **Required Value**                                                                       | **Specific Format Required** |
+| ------------------------------| -----------------------------------------------------------------------------------------| ---------------------------- |
+| TFE_REDIS_HOST                | Hostname in `host:port` format of an external Redis instance.                            | **Yes**, string.             |
+| TFE_REDIS_USE_AUTH\*          | Set to `true`, if you are using a Redis service that requires a password.                | **Yes**, boolean.            |
+| TFE_REDIS_USER\*              | User used to authenticate to Redis.                                                      | **Yes**, string.             |
+| TFE_REDIS_PASSWORD\*          | User used to authenticate to Redis.                                                      | **Yes**, string.             |
+| TFE_REDIS_USE_TLS\*           | Set to `true` if you are using a Redis service that requires TLS.                        | **Yes**, boolean.            |
+| TFE_REDIS_USE_MTLS\*          | To use mtls with Redis standalone?                                                       | **Yes**, boolean.            |
+| TFE_REDIS_CLIENT_CERT_PATH\*  | Path to the client certificate file to be used for mTLS authentication with Redis server | **Yes**, file path           |
+| TFE_REDIS_CA_CERT_PATH\*      | Path to the Certificate Authority file user to validate the certificate                  | **Yes**, file path           |
+| TFE_REDIS_CLIENT_KEY_PATH\*   | Path to the private key file corresponding to the client certificate                     | **Yes**, file path           |
+| TFE_REDIS_SIDEKIQ_USE_MTLS\*  | To use mtls with Redis Enterprise?                                                       | **Yes**, boolean.            |
+| TFE_REDIS_SIDEKIQ_CERT_PATH\* | Path to the client certificate file to be used for mTLS authentication with Redis server | **Yes**, file path           |
+| TFE_REDIS_SIDEKIQ_PATH\*      | Path to the Certificate Authority file user to validate the certificate                  | **Yes**, file path           |
+| TFE_REDIS_SIDEKIQ_KEY_PATH\*  | Path to the private key file corresponding to the client certificate                     | **Yes**, file path           |
 
 _\* Fields marked with an asterisk are only necessary if your particular external Redis instance requires them._
 
