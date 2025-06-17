@@ -132,8 +132,8 @@ async function applyMdxTransforms(entry, versionMetadata = {}) {
 
 		const remarkResults = await remark()
 			.use(remarkMdx)
-			.use(remarkIncludePartialsPlugin, { partialsDir, filePath })
 			.use(transformExcludeTerraformContent, { filePath })
+			.use(remarkIncludePartialsPlugin, { partialsDir, filePath })
 			.use(paragraphCustomAlertsPlugin)
 			.use(rewriteInternalRedirectsPlugin, {
 				redirects,
