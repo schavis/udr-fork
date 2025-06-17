@@ -96,7 +96,9 @@ This content should be removed.
 
 		await expect(async () => {
 			return await runTransform(markdown, ptfeFilePath)
-		}).rejects.toThrow('Directive could not be parsed')
+		}).rejects.toThrow(
+			/Directive block TFE:only could not be parsed between lines 2 and 4/,
+		)
 	})
 
 	it('should remove TFC:only content and leave TFEnterprise:only content for terraform-enterprise', async () => {
