@@ -38,11 +38,11 @@ description: >-
 
 # API documentation overview
 
-<!-- BEGIN: TFC -->
+<!-- BEGIN: TFC:only -->
 
 HCP Terraform provides an API for a subset of its features. If you need assistance or want to submit a feature request, visit the [HashiCorp support center](https://support.hashicorp.com/hc/en-us) and open a ticket.
 
-<!-- END: TFC -->
+<!-- END: TFC:only -->
 
 <!-- BEGIN: TFEnterprise:only name:api-overview -->
 
@@ -84,10 +84,13 @@ You can use the following types of tokens to authenticate:
 
 ### Blob storage authentication
 
-<!-- BEGIN: TFC:only -->HCP Terraform relies on a HashiCorp-developed blob storage service for storing statefiles and multiple other pieces of customer data, all of which are documented on our [data security page](/terraform/cloud-docs/architectural-details/data-security). 
+<!-- BEGIN: TFC:only -->
+HCP Terraform relies on a HashiCorp-developed blob storage service for storing statefiles and multiple other pieces of customer data, all of which are documented on our [data security page](/terraform/cloud-docs/architectural-details/data-security).
 <!-- END: TFC:only -->
-<!-- BEGIN: TFEnterprise:only name:blob-storage -->Terraform Enterprise relies on a HashiCorp-developed blob storage service for storing state files and other pieces of customer data.
-<!-- END: TFC:only --> This service does not require you to submit a bearer token with each request. Instead, each URL includes a securely-generated secret and is only valid for 25 hours.
+<!-- BEGIN: TFEnterprise:only name:blob-storage -->
+Terraform Enterprise relies on a HashiCorp-developed blob storage service for storing state files and other pieces of customer data.
+<!-- END: TFEnterprise:only name:blob-storage -->
+This service does not require you to submit a bearer token with each request. Instead, each URL includes a securely-generated secret and is only valid for 25 hours.
 
 For example, the [state versions endpoint](/terraform/enterprise/api-docs/state-versions) returns a field named `hosted-state-download` that contains a URL in the following format:
 
