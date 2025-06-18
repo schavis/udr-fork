@@ -4,8 +4,8 @@ These guidelines are intended to help you write in active voice.
 
 ## Write sentences in which the subject performs the action, embodies a description, or exhibits agency
 
-> keywords: writing, grammar, active-voice  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: writing, grammar, active-voice  
+- **content sets**: docs, WAF, tutorials, certifications
  
 ### Examples
 
@@ -25,8 +25,8 @@ content sets: docs, WAF, tutorials, certifications
 
 ## Use direct, imperative statements that tell readers what to do
 
-> keywords: writing, grammar, active-voice  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: writing, grammar, active-voice  
+- **content sets**: docs, WAF, tutorials, certifications
 
 Imperatives imply "you" as the subject. Imperatives are clear, actionable, and prevent passive voice. 
 

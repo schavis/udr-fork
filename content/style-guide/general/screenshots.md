@@ -15,7 +15,7 @@ HashiCorp UIs change too frequently and are a maintenance burden. Concise descri
 - **keywords**: visual aids, screenshots
 - **content sets**: tutorials, WAF, certifications
 
-Refer to [Guidelines for screenshots in tutorials](TDO) for details.
+Refer to [Guidelines for alert boxes](../appendix#guidelines-for-alerts-boxes) for details.
 
 ## Remove the browser's URL bar and window elements from screenshots
 

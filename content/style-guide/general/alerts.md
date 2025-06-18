@@ -14,7 +14,7 @@ Avoid adding unwarranted notes, warnings, and other alert boxes, which distract 
 - **keywords**: links to tutorials, alerts
 - **content sets**: docs
 
-Place blockquotes in the Overview or Introduction section or in the most relevant section in the body of the page. Refer to [Guidelines for alert boxes](TODO) for additional information.
+Place blockquotes in the Overview or Introduction section or in the most relevant section in the body of the page. Refer to [Guidelines for alert boxes](../appendix#guidelines-for-alerts-boxes) for additional information.
 
 ### Examples
 
@@ -92,7 +92,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 Add an alert box to instructions when they describe actions or configurations that require special consideration to prevent harmful effects. 
 
-Refer to [Guidelines for alert boxes](TDOD) for additional information.
+Refer to [Guidelines for alert boxes](../appendix#guidelines-for-alerts-boxes) for additional information.
 
 ### Examples
 
@@ -130,7 +130,7 @@ In the following example, the only consequence is that the reader must get the n
 
 You can add tip-style alert boxes to highlight a recommendation, best practice, or to provide assistance beyond the scope of the documentation or tutorial. 
 
-Refer to [Guidelines for alert boxes](TDOD) for additional information.
+Refer to [Guidelines for alert boxes](../appendix#guidelines-for-alerts-boxes) for additional information.
 
 ### Examples
 

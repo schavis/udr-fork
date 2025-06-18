@@ -4,8 +4,8 @@ These guidelines describe how to address readers and when to refer to HashiCorp.
 
 ## Address the reader as "you"
 
-> keywords: writing, grammar, point of view, second person, "you"  
-content sets: docs, WAF, tutorials, certifications 
+- **keywords**: writing, grammar, point of view, second person, "you"  
+- **content sets**: docs, WAF, tutorials, certifications 
 
 Write in the second person by addressing the reader as "you" when describing actions that you expect the reader to perform. You can also directly tell readers to perform actions when providing instructions.
 
@@ -25,8 +25,8 @@ Write in the second person by addressing the reader as "you" when describing act
 
 ## Use the inclusive "we" when speaking on behalf of HashiCorp
 
-> keywords: writing, grammar, point of view, "we", hashicorp  
-content sets: docs, WAF, tutorials, certifications 
+- **keywords**: writing, grammar, point of view, "we", hashicorp  
+- **content sets**: docs, WAF, tutorials, certifications 
 
 Use the inclusive "we" when providing recommendations from HashiCorp or when describing actions by the company. Alternatively, you can also use "HashiCorp" in place of "we" when referring to guidance from the company. 
 

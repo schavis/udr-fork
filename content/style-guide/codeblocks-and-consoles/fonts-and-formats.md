@@ -34,7 +34,7 @@ EOH
 
 Use double pound-signs ("##") preceding a comment. This prevents the shell syntax highlighter from treating the comment as a shell command following a root prompt. This will also facilitate eventual styling to make the prompt characters non-selectable.
 
-Note that you should avoid using comments as documentation. Refer to [Avoid providing instructions and documenting functionality in code comments](TDO) for additional guidance.
+Note that you should avoid using comments as documentation. Refer to [Avoid providing instructions and documenting functionality in code comments](organization#avoid-providing-instructions-and-documenting-functionality-in-code-comments) for additional guidance.
 
 ## Use long forms of commands, flags, and options in code blocks when describing HashiCorp CLI    
 
@@ -134,7 +134,7 @@ When providing example code, use the syntax highlighting label that matches file
 ## Use the `javascript` syntax label for JSON that contains unsupported characters
 
 keywords: code, syntax, JSON, javascript 
-content sets: docs, tutorials, WAF, certifications
+- **content sets**: docs, tutorials, WAF, certifications
 
 You should describe how configuration and code samples operate when you introduce them instead of using comments. Refer to [In documentation, introduce code blocks as examples with an explanation of the actions represented in the block](../general/content-organization.md#in-documentation-introduce-code-blocks-as-examples-with-an-explanation-of-the-actions-represented-in-the-block) for additional information.
 

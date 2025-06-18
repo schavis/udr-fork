@@ -111,7 +111,7 @@ Cite third-party work directly in the prose and link to the source.
 ## Capitalize job titles when introducing people, but use lower case when referring to jobs
 
 - **keywords**: writing, capitalization, job titles
-content sets: docs, tutorials, WAF, certifications
+- **content sets**: docs, tutorials, WAF, certifications
 
 ### Examples
 

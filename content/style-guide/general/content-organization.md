@@ -4,15 +4,15 @@ These guidelines are intended to help you organize information within a page in 
 
 ## Do not implement frequently-asked-question (FAQ) sections 
 
-> keywords: writing, faq  
-content sets: docs, cert,tutorials
+- **keywords**: writing, faq  
+- **content sets**: docs, cert,tutorials
 
 If the information has gaps, redesign your content around use cases that would otherwise be filled with FAQs.
 
 ## Organize content so that it flows in a single direction from beginning to end 
 
-> keywords: writing, flow  
-content sets: docs, WAF, tutorials
+- **keywords**: writing, flow  
+- **content sets**: docs, WAF, tutorials
 
 Avoid structuring content so readers have to backtrack or jump forward. 
 
@@ -39,8 +39,8 @@ Use "following" to describe an element or topic that immediately follows the sen
 
 ## Reference specific steps, section headings, or page titles when pointing readers to other sections
 
-> keywords: writing, flow, organization  
-content sets: docs, WAF, cert, tutorials
+- **keywords**: writing, flow, organization  
+- **content sets**: docs, WAF, cert, tutorials
 
 When necessary, direct users to the specific step instead of using directional or temporal phrases. When you must reference previous sections, always direct users to the specific section. Avoid vague positional language such as “above” or “previously”.
 
@@ -60,13 +60,13 @@ When necessary, direct users to the specific step instead of using directional o
 
 ## Write simple sentences that contain a single idea
 
-> keywords: writing, flow, organization  
-content sets: docs, WAF, cert, tutorials
+- **keywords**: writing, flow, organization  
+- **content sets**: docs, WAF, cert, tutorials
 
 
 Avoid long, complex sentences. Instead, write multiple sentences that each contain a single idea. Frontload paragraphs with the most important information to make them more scannable.
 
-Do not use dashes, semicolons, or other punctuation to merge several ideas into a single sentence. Refer to [Do not use en or em dashes to separate ideas or phrases](TODO) for additional guidance. 
+Do not use dashes, semicolons, or other punctuation to merge several ideas into a single sentence. Refer to [Do not use en or em dashes to separate ideas or phrases](grammar#do-not-use-parentheses-en-dashes-or-em-dashes-to-separate-ideas-or-phrases) for additional guidance. 
 
 **Do:**
 
@@ -82,8 +82,8 @@ The `import` block, like all Terraform configuration blocks, is processed during
 
 ## Do not format multiple paragraphs of text into lists 
 
-> keywords: writing, flow, organization, lists  
-content sets: docs, WAF, cert, tutorials
+- **keywords**: writing, flow, organization, lists  
+- **content sets**: docs, WAF, cert, tutorials
 
 Do not force information into lists when doing so results in very large list items spanning multiple lines. 
 
@@ -199,8 +199,8 @@ It helps to consider the following types of personas when managing the security 
 
 ## Describe the contents of diagrams, tables, and example code blocks in the introduction to the elements
 
-> keywords: writing, diagrams, tables  
-content sets: docs, WAF, tutorials
+- **keywords**: writing, diagrams, tables  
+- **content sets**: docs, WAF, tutorials
 
 Introduce diagrams, tables, and example code blocks with a statement that describes its purpose. If you need to provide additional clarity, do so after the page element.
 
@@ -243,8 +243,8 @@ The above shows . . .
 
 ## Do not place the same type of content elements next to each other
 
-> keywords: formatting  
-content sets: docs, tutorials, WAF, certifications
+- **keywords**: formatting  
+- **content sets**: docs, tutorials, WAF, certifications
 
 Do not place the following non-prose elements immediately next to each other: 
 
@@ -279,8 +279,8 @@ This paragraph introduces subtopics organized under each subheading.
 
 ## Include the URL for the locally-running services at least once
 
-> keywords: local services, URLs, links  
-content sets: tutorials, docs
+- **keywords**: local services, URLs, links  
+- **content sets**: tutorials, docs
 
 When describing the address where an application or service is accessible, include the URL at least once in the body of the content so that readers can readily copy, paste, and modify the location for their environment.
 
@@ -298,8 +298,8 @@ For short tutorials, include the URL the first time it is mentioned. For longer-
 
 ## Match the navigation label, page and meta titles, and link text as closely as possible per your product information architecture 
 
-> keywords: navigation, page titles, writing, IA  
-content sets: docs
+- **keywords**: navigation, page titles, writing, IA  
+- **content sets**: docs
 
 Each page has a label in the navigation, an H1 page title, and a meta title that search engines use as part of their algorithms to match queries to content. The navigation label has the most restrictive character length. The H1 page title should match the meta title, but you can write longer or shorter meta titles as necessary. Use keywords from the page and meta title in the navigation label so that the experience is consistent for readers. 
 
@@ -331,8 +331,8 @@ In the following example, the page and meta titles match, but they do not agree 
 
 ## Use the `badge` attribute in the navigation file to note release phases and special conditions, such as beta and deprecated
 
-> keywords: writing, navigation, beta, deprecated, data.json  
-content sets: docs, tutorial, WAF, certifications
+- **keywords**: writing, navigation, beta, deprecated, data.json  
+- **content sets**: docs, tutorial, WAF, certifications
 
 Use all caps for the contents of the badge.
 
@@ -373,8 +373,8 @@ Discuss experimental features with your technical writer.
 
 ## Write modular pages and sections 
 
-> keywords: writing, dry, modular topics  
-content sets: docs, tutorials, WAF, certifications
+- **keywords**: writing, dry, modular topics  
+- **content sets**: docs, tutorials, WAF, certifications
 
 Describe concepts, instructions, workflows, reference items, and other types of information once in a neutral context and link to them from more specific contexts. 
 

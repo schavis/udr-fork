@@ -4,8 +4,8 @@ These guidelines describe verb tense and how to consistently document events tha
 
 ## Use simple present tense to describe immediate actions
 
-> keywords: writing, grammar, tense   
-content sets: docs, WAF, tutorials
+- **keywords**: writing, grammar, tense   
+- **content sets**: docs, WAF, tutorials
 
 Simple present tense describes actions or events that happen regularly, are currently happening, or are facts. Use present tense when describing chronological events, such as procedural steps and outputs. Do not describe events or actions that will happen in the future. For example, describe the results of a command as though it just happened, instead of describing it as an action that will happen. 
 
@@ -25,8 +25,8 @@ Simple present tense describes actions or events that happen regularly, are curr
 
 ## Use future tense when describing a sequences of events in a tutorial 
 
-> keywords: writing, grammar, tense  
-content sets: tutorials
+- **keywords**: writing, grammar, tense  
+- **content sets**: tutorials
 
 Use future tense when introducing a sequence of steps that the practitioner must follow chronologically as part of the tutorial. You can also use future tense to introduce outputs that practitioners can expect as they complete tutorials. Refer to Use simple present tense to describe immediate actions for guidance for documentation.
 
@@ -38,8 +38,8 @@ Use future tense when introducing a sequence of steps that the practitioner must
 
 ## Describe features and functionality as they currently exist 
 
-> keywords: writing, grammar, tense, versions  
-content sets: docs, WAF, tutorials
+- **keywords**: writing, grammar, tense, versions  
+- **content sets**: docs, WAF, tutorials
 
 - Do not refer to features and functionality that will be implemented in the future. 
 - Except for release notes, do not use words that use relational points of time, such as "new", "old", "now", or "currently" to describe products. In release notes, you can describe features and functionality as new, for example, "{product} can now . . ."
@@ -73,8 +73,8 @@ content sets: docs, WAF, tutorials
 ## Do not communicate updates or fixes in prose
 
 
-> keywords: writing, grammar, versions, updates, deprecations  
-content sets: docs, WAF, tutorials
+- **keywords**: writing, grammar, versions, updates, deprecations  
+- **content sets**: docs, WAF, tutorials
 
 Do not communicate updates or fixes for specific releases in prose. Instead, describe them in release notes or in a deprecations page. You should add alerts about deprecations as necessary and link to the appropriate release notes or deprecations page.
 

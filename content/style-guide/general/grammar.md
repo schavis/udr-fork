@@ -4,8 +4,8 @@ These guidelines describe verb tense and how to consistently document events tha
 
 ## Always use the serial comma, also called the "Oxford" comma
 
-> keywords: grammar, punctuation, commas, lists  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: grammar, punctuation, commas, lists  
+- **content sets**: docs, WAF, tutorials, certifications
 
 In prose, add a comma between the second to last item and the word "and". 
 
@@ -21,8 +21,8 @@ In prose, add a comma between the second to last item and the word "and".
 
 ## Always write complete sentences in prose
 
-> keywords: grammar, sentence fragments  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: grammar, sentence fragments  
+- **content sets**: docs, WAF, tutorials, certifications
 
 Do not use sentence fragments or truncated phrases in prose. Do not split complete sentences across codeblocks, screenshots, or other elements. Do not use a list, codeblock, or other element to complete a sentence. 
 
@@ -66,8 +66,8 @@ to link the policy to a token.
 
 ## Avoid mixing fragments and complete sentences in lists and tables
 
-> keywords: grammar, sentence fragments, complete sentence, lists, tables  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: grammar, sentence fragments, complete sentence, lists, tables  
+- **content sets**: docs, WAF, tutorials, certifications
 
 Prefer complete sentences in all cases, but be consistent when you need to use sentence fragments in non-prose constructions, such as tables and lists. If you use a sentence fragment for one cell in a table or for one item in a list, use fragments for all cells or list items.
 
@@ -113,15 +113,15 @@ You can configure the following types of gateways:
 
 ## Do not use parentheses, en dashes, or em dashes to separate ideas or phrases
 
-> keywords: grammar, punctuation, parentheses, dashes  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: grammar, punctuation, parentheses, dashes  
+- **content sets**: docs, WAF, tutorials, certifications
 
 En dashes represent a range. Em dashes are similar to commas, but many writers use them in place of colons, semicolons, parentheses, or to create stylistic pauses. In documentation, only use parentheses when introducing acronyms or when they are characters in code samples. For consistency, use commas to separate phrases and periods to separate ideas. 
 
 Refer to the following guidelines for additional information:
 
-- [Spell out a phrase and place the acronym form in parentheses on first use](TODO)  
-- [Write sentences that contain a single idea](TODO)
+- [Spell out a phrase and place the acronym form in parentheses on first use](language#spell-out-a-phrase-and-place-the-acronym-form-in-parentheses-on-first-use)  
+- [Write sentences that contain a single idea](content-organization#write-simple-sentences-that-contain-a-single-idea)
 
 ### Examples
 
@@ -147,8 +147,8 @@ The name also must be unique — if another organization is already using the na
 
 ## Do not use punctuation or text formatting to add semantic emphasis
 
-> keywords: writing, punctuation, emphasis  
-content sets: docs, WAF, tutorials
+- **keywords**: writing, punctuation, emphasis  
+- **content sets**: docs, WAF, tutorials
 
 Write in an even, consistent tone. Do not use punctuation, such as exclamation marks, or text formatting, such as bold or italics, for semantic emphasis. 
 
@@ -166,8 +166,8 @@ Write in an even, consistent tone. Do not use punctuation, such as exclamation m
 
 ## Use colons to introduce lists, tables, and visual aids
 
-> keywords: writing, colons, lists, tables, visual aids  
-content sets: docs, tutorials, WAF, certifications 
+- **keywords**: writing, colons, lists, tables, visual aids  
+- **content sets**: docs, tutorials, WAF, certifications 
 
 Colons introduce lists of related information, procedural steps, tables, and visual aids. Do not use colons mid-sentence. Do not introduce a list, table, or visual aid with a sentence fragment.
 
@@ -209,8 +209,8 @@ Start by:
 
 ## Do not use quotation marks around file names, constructs, new terms, or to add emphasis
 
-> keywords: punctuation, quotes, emphasis, terminology, code  
-content sets: docs, tutorials, WAF, certifications 
+- **keywords**: punctuation, quotes, emphasis, terminology, code  
+- **content sets**: docs, tutorials, WAF, certifications 
 
 Use quotation marks when required in codeblocks and when referring to titles of books, articles, and other works. Otherwise, do not use them. 
 

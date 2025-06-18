@@ -5,8 +5,8 @@ The following guidelines cover most writing style issues.
 
 ## Write in active voice
 
-> keywords: writing, grammar, active voice, passive voice  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: writing, grammar, active voice, passive voice  
+- **content sets**: docs, WAF, tutorials, certifications
 
 The subject of the sentence always performs the action, embodies a description, or otherwise exhibits agency. 
 
@@ -26,8 +26,8 @@ The subject of the sentence always performs the action, embodies a description, 
 
 ## Use simple present tense to describe immediate actions
 
-> keywords: writing, grammar, tense  
-content sets: docs, WAF, tutorials
+- **keywords**: writing, grammar, tense  
+- **content sets**: docs, WAF, tutorials
 
 Simple present tense describes actions or events that happen regularly, are currently happening, or are facts. Use present tense when describing chronological events, such as procedural steps and outputs. 
 
@@ -51,8 +51,8 @@ Use "when" to describe a sequence of actions, not "if".
 
 ## Describe features and functionality as they currently exist 
 
-> keywords: writing  
-content sets: docs, WAF, tutorials
+- **keywords**: writing  
+- **content sets**: docs, WAF, tutorials
 
 Do not refer to features and functionality that will be implemented in the future. 
 
@@ -76,15 +76,15 @@ You can add notices about deprecated configurations and functionality. If applic
 
 ## Do not use unofficial product abbreviations 
 
-> keywords: writing, word choice, abbreviations  
-content sets: docs, tutorials, WAF, certifications
+- **keywords**: writing, word choice, abbreviations  
+- **content sets**: docs, tutorials, WAF, certifications
 
 Do not use the following abbreviation: TF, TFE, TFC, TFC4B, TFCB, HCP TF, VSO, and COM. Refer to [HashiCorp Voice, Style & Language Guidelines](https://docs.google.com/document/u/0/d/1MRvGd6tS5JkIwl_GssbyExkMJqOXKeUE00kSEtFi8m8/edit) for additional guidance.
 
 ## Only use "we" when referring to HashiCorp
 
-> keywords: writing, grammar, active-voice  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: writing, grammar, active-voice  
+- **content sets**: docs, WAF, tutorials, certifications
 
 Use the first person plural "we" when providing recommendations from HashiCorp or when describing actions by the company. Excluding "we" commonly results in passive voice. Refer to [Write in active voice](#write-in-active-voice) for additional information.
 
@@ -104,8 +104,8 @@ Do not use "we" to guide readers through examples.
 
 ## Address the reader as "you" 
 
-> keywords: writing, grammar, active-voice  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: writing, grammar, active-voice  
+- **content sets**: docs, WAF, tutorials, certifications
 
 Address the reader as "you" when describing actions that you expect the reader to perform. You can also use imperative statements to describe actions. Writing to "you" is called using the second person and it helps avoid passive voice.
 
@@ -123,8 +123,8 @@ Address the reader as "you" when describing actions that you expect the reader t
 
 ## Organize content so that it flows in a single direction from beginning to end 
 
-> keywords: writing, flow  
-content sets: docs, WAF, tutorials
+- **keywords**: writing, flow  
+- **content sets**: docs, WAF, tutorials
 
 Avoid structuring content so readers have to backtrack or jump forward. 
 
@@ -151,8 +151,8 @@ Use "following" to describe an element or topic that immediately follows the sen
 
 ## Avoid unnecessary words
 
-> keywords: writing, word choice  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: writing, word choice  
+- **content sets**: docs, WAF, tutorials, certifications
 
 Avoid extra words and phrases. 
 
@@ -160,7 +160,7 @@ Avoid extra words and phrases.
 
 - Instead of "in order to", use "to"
 - Instead of "in the case that", use "when"
-- Avoid adding filler words, especially words that editorialize, such as "simply", "just", "very", and "actually". Refer to [Avoid editorializing on the difficulty or comprehensibility of an action or concept](TODO)
+- Avoid adding filler words, especially words that editorialize, such as "simply", "just", "very", and "actually". Refer to [Do not editorialize about the difficulty or comprehensibility of an action or concept](general/language#do-not-editorialize-about-the-difficulty-or-comprehensibility-of-an-action-or-concept)
 
 **Do:** 
 
@@ -174,20 +174,20 @@ Avoid extra words and phrases.
 
 ## Use the simplest word possible
 
-> keywords: writing, word choice  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: writing, word choice  
+- **content sets**: docs, WAF, tutorials, certifications
 
 Always use the shortest word or phrase that conveys your intended meaning. Use discretion to provide additional clarity when advanced vocabulary is necessary.
 
 ### Examples
 
 -  "use", not "utilize" or "utilization": Prefer the root for most "ize" words.
-- "because, not "due to the fact that": Also refer to [Do not use figures of speech](TODO).
+- "because, not "due to the fact that": Also refer to [Do not use figures of speech](general/language#do-not-use-figures-of-speech).
 
 ## Do not use words or phrases borrowed from other languages, scientific words, or jargon words
 
-> keywords: writing, word choice  
-content sets: docs, WAF, tutorials, certifications
+- **keywords**: writing, word choice  
+- **content sets**: docs, WAF, tutorials, certifications
 
 Use simple, concrete words so global audiences can understand our content more easily. Refer to Spell out a phrase and place the acronym form in parentheses on first use for related guidance.
 
@@ -222,8 +222,8 @@ The following list contains common words and phrases that you should avoid in ed
 
 ## Do not place the same type of content elements next to each other
 
-> keywords: formatting  
-content sets: docs, tutorials, WAF, certifications
+- **keywords**: formatting  
+- **content sets**: docs, tutorials, WAF, certifications
 
 Do not place the following non-prose elements immediately next to each other: 
 
