@@ -1,6 +1,6 @@
 # Language and word choice
 
-These guideline help you choose consistent words and phrases. 
+These guideline help you choose consistent words and phrases in prose. 
 
 ## Do not use ableist language
 
