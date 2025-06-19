@@ -1,5 +1,5 @@
 # Numbers, dates, and time
 
-- [Dates and time](dates-and-time)
-- [Number formats](format-numbers)
-- [Words as numbers](words-as-numbers)
+- [Dates and time](dates-and-time.md)
+- [Number formats](format-numbers.md)
+- [Words as numbers](words-as-numbers.md)
