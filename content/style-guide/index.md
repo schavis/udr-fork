@@ -5,12 +5,12 @@ This document provides writing style guidance for authors who create and maintai
 ## Table of contents
 
 - [Top 12 guidelines to follow](top-12.md)
-- [General writing guidelines](general/index)
-- [Codeblocks and consoles](codeblocks-and-consoles/index)
-- [UI components](ui-components/index)
-- [Numbers, dates, and time](numbers-dates-time/index)
-- [Markdown standards](markdown/index)
-- [Appendix: Extended guidance](apppendix)
+- [General writing guidelines](general/index.md)
+- [Codeblocks and consoles](codeblocks-and-consoles/index.md)
+- [UI components](ui-components/index.md)
+- [Numbers, dates, and time](numbers-dates-time/index.md)
+- [Markdown standards](markdown/index.md)
+- [Appendix: Extended guidance](apppendix.md)
 
 ## Purpose
 
