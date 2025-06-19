@@ -12,4 +12,4 @@
 - [Screenshots](screenshots.md)
 - [Tense and time](tense-and-time.md)
 - [Titles and headings](titles-and-headings.md)
-- [Variants](variants.md)
+- [Variants](variants.)

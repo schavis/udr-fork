@@ -4,7 +4,7 @@ This document provides writing style guidance for authors who create and maintai
 
 ## Table of contents
 
-- [Top 12 guidelines to follow](top-12)
+- [Top 12 guidelines to follow](top-12.md)
 - [General writing guidelines](general/index)
 - [Codeblocks and consoles](codeblocks-and-consoles/index)
 - [UI components](ui-components/index)
