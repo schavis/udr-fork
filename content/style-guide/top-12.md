@@ -182,7 +182,7 @@ Always use the shortest word or phrase that conveys your intended meaning. Use d
 ### Examples
 
 -  "use", not "utilize" or "utilization": Prefer the root for most "ize" words.
-- "because, not "due to the fact that": Also refer to [Do not use figures of speech](general/language#do-not-use-figures-of-speech).
+- "because, not "due to the fact that": Also refer to [Do not use figures of speech](general/language.md#do-not-use-figures-of-speech).
 
 ## Do not use words or phrases borrowed from other languages, scientific words, or jargon words
 

@@ -258,7 +258,7 @@ Auto-rotating secrets maintain overlapping sets of active credentials to elimina
 - **keywords**: word choice, localhost, addresses  
 - **content sets**: docs, tutorials, WAF, certifications 
 
-Refer to localhost, instead of IPv4 or IPv6 addresses, when describing a locally addressable web service. Refer to [Format IP addresses as code](../codeblocks-and-consoles/fonts-and-formats#format-commands-as-code) for additional guidance.
+Refer to localhost, instead of IPv4 or IPv6 addresses, when describing a locally addressable web service. Refer to [Format IP addresses as code](../codeblocks-and-consoles/fonts-and-formats.md#format-commands-as-code) for additional guidance.
 
 ### Examples
 

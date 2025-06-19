@@ -1,6 +1,6 @@
 # Variants
 
-These guidelines provide at-a-glance reference for using variants. For complete guidance on how to use the variants markdown component, refer to [Guidelines for variants](../appendix#guidelines-for-variants).
+These guidelines provide at-a-glance reference for using variants. For complete guidance on how to use the variants markdown component, refer to [Guidelines for variants](../appendix.md#guidelines-for-variants).
 
 ## Use sentence case for variant, variant option, and tab names
 
