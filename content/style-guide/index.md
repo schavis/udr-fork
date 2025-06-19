@@ -10,7 +10,7 @@ This document provides writing style guidance for authors who create and maintai
 - [UI components](ui-components.md)
 - [Numbers, dates, and time](numbers-dates-time/index.md)
 - [Markdown standards](markdown/index.md)
-- [Appendix: Extended guidance](apppendix.md)
+- [Appendix: Extended guidance](appendix.md)
 
 ## Purpose
 
