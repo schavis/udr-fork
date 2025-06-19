@@ -25,6 +25,8 @@ import {
 } from './rewrite-internal-redirects/rewrite-internal-redirects.mjs'
 import { transformExcludeTerraformContent } from './exclude-terraform-content/index.mjs'
 
+import { PRODUCT_CONFIG } from '../../app/utils/productConfig.mjs'
+
 /**
  * Given a target directory,
  * Apply MDX transforms to all `.mdx` files found in the directory and its
@@ -61,7 +63,9 @@ export async function buildMdxTransforms(
 		 * if versionless, version becomes the content dir
 		 * which will cause an error when trying resolve partials
 		 */
-		const verifiedVersion = semver.valid(semver.coerce(version)) ? version : ''
+		const verifiedVersion = PRODUCT_CONFIG[repoSlug].versionedDocs
+			? version
+			: ''
 		const verifiedContentDir = semver.valid(semver.coerce(version))
 			? contentDir
 			: version
@@ -92,13 +96,13 @@ export async function buildMdxTransforms(
 		.filter((result) => {
 			return result.error !== null
 		})
-		.map(({ error }) => {
-			return error
+		.map(({ error, file }) => {
+			return { error, file }
 		})
 	if (errors.length > 0) {
 		console.error(`❗ Encountered ${errors.length} errors:`)
-		errors.forEach((error) => {
-			console.error(`❌ ${error}`)
+		errors.forEach(({ error, file }) => {
+			console.error(`❌ ${error} in file: ${file}`)
 		})
 	}
 	// Log out that the script has complete
@@ -128,8 +132,8 @@ async function applyMdxTransforms(entry, versionMetadata = {}) {
 
 		const remarkResults = await remark()
 			.use(remarkMdx)
-			.use(remarkIncludePartialsPlugin, { partialsDir, filePath })
 			.use(transformExcludeTerraformContent, { filePath })
+			.use(remarkIncludePartialsPlugin, { partialsDir, filePath })
 			.use(paragraphCustomAlertsPlugin)
 			.use(rewriteInternalRedirectsPlugin, {
 				redirects,
@@ -148,6 +152,6 @@ async function applyMdxTransforms(entry, versionMetadata = {}) {
 		fs.writeFileSync(outPath, transformedFileString)
 		return { error: null }
 	} catch (e) {
-		return { error: String(e).split('\n')[0] }
+		return { error: String(e).split('\n')[0], file: entry.filePath }
 	}
 }

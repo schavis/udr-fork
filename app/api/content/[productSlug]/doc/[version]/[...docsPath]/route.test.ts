@@ -47,7 +47,7 @@ vi.mock('@api/docsPathsAllVersions.json', () => {
 	return {
 		default: {
 			'terraform-plugin-framework': {},
-			'ptfe-releases': {},
+			'terraform-enterprise': {},
 		},
 	}
 })
@@ -56,8 +56,8 @@ vi.mock('@api/docsPathsAllVersions.json', () => {
 vi.mock('@utils/productConfig.mjs', () => {
 	return {
 		PRODUCT_CONFIG: {
-			'ptfe-releases': { contentDir: 'docs' },
-			'terraform-plugin-framework': { contentDir: 'docs' },
+			'terraform-enterprise': { contentDir: 'docs', versionedDocs: true },
+			'terraform-plugin-framework': { contentDir: 'docs', versionedDocs: true },
 		},
 	}
 })
@@ -204,6 +204,47 @@ describe('GET /[productSlug]/[version]/[...docsPath]', () => {
 
 		const response = await mockRequest({
 			docsPath: ['plugin', 'framework', 'internals', 'rpcs'],
+			productSlug,
+			version,
+		})
+
+		expect(consoleMock).not.toHaveBeenCalled()
+		expect(response.status).toBe(200)
+		const { meta, result } = await response.json()
+		expect(meta.status_code).toBe(200)
+		expect(result.product).toBe(productSlug)
+		expect(result.version).toBe(version)
+		expect(result.markdownSource).toBe(markdownSource)
+		expect(result.githubFile).toBe(expectedPath.join('/'))
+	})
+
+	it('returns the markdown source of the requested docs, even if includes .mdx', async () => {
+		const productSlug = 'terraform-plugin-framework'
+		const version = 'v1.13.x'
+		const markdownSource = '# Hello World'
+		const expectedPath = [
+			'content',
+			productSlug,
+			version,
+			PRODUCT_CONFIG[productSlug].contentDir,
+			'plugin/framework/internals/rpcs.mdx',
+		]
+
+		// Force the version(real-ish) to exist
+		vi.mocked(getProductVersion).mockReturnValue(Ok(version))
+
+		// Fake content returned from the filesystem
+		vi.mocked(readFile).mockImplementation(async () => {
+			return Ok(markdownSource)
+		})
+
+		// Mock markdown parser returning valid content
+		vi.mocked(parseMarkdownFrontMatter).mockImplementation(() => {
+			return Ok({ markdownSource, metadata: {} })
+		})
+
+		const response = await mockRequest({
+			docsPath: ['plugin', 'framework', 'internals', 'rpcs.mdx'],
 			productSlug,
 			version,
 		})

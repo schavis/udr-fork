@@ -29,15 +29,15 @@ describe('getVersionFromFilePath', () => {
 
 	test('should return the correct version for a Terraform Enterprise version in the file path', () => {
 		const filePath =
-			'content/ptfe-releases/v202410-1/docs/enterprise/some-doc.mdx'
+			'content/terraform-enterprise/v202410-1/docs/enterprise/some-doc.mdx'
 		const version = getVersionFromFilePath(filePath)
 		expect(version).toBe('v202410-1')
 	})
 
-	test('should return null if the file path is for versionless docs', () => {
+	test('should return false if the file path is for versionless docs', () => {
 		const filePath =
 			'content/terraform-docs-common/docs/cloud-docs/cost-estimation/gcp.mdx'
 		const version = getVersionFromFilePath(filePath)
-		expect(version).toBeNull()
+		expect(version).toBe(false)
 	})
 })

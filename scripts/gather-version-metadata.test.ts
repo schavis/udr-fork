@@ -7,6 +7,15 @@ import { beforeEach, expect, it, vi } from 'vitest'
 import { vol } from 'memfs'
 import { gatherVersionMetadata } from './gather-version-metadata.mjs'
 
+vi.mock('../app/utils/productConfig.mjs', () => {
+	return {
+		PRODUCT_CONFIG: {
+			'terraform-enterprise': { contentDir: 'docs', versionedDocs: true },
+			terraform: { contentDir: 'docs', versionedDocs: true },
+		},
+	}
+})
+
 // tell vitest to use fs mock from __mocks__ folder
 // this can be done in a setup file if fs should always be mocked
 vi.mock('fs')
@@ -19,7 +28,7 @@ beforeEach(() => {
 
 it('walk a directory of products and return a JSON representation of valid versions', async () => {
 	const expected = {
-		'ptfe-releases': [
+		'terraform-enterprise': [
 			{ version: 'v202401-2', releaseStage: 'stable', isLatest: true },
 			{ version: 'v202401-1', releaseStage: 'stable', isLatest: false },
 		],
@@ -32,8 +41,8 @@ it('walk a directory of products and return a JSON representation of valid versi
 		{
 			'./terraform/v1.19.x/': null,
 			'./terraform/v1.18.x/': null,
-			'./ptfe-releases/v202401-1/': null,
-			'./ptfe-releases/v202401-2/': null,
+			'./terraform-enterprise/v202401-1/': null,
+			'./terraform-enterprise/v202401-2/': null,
 		},
 		// default cwd
 		'/content',

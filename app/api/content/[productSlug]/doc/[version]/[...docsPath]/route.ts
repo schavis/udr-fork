@@ -50,7 +50,10 @@ export async function GET(request: Request, { params }: { params: GetParams }) {
 
 	const { value: parsedVersion } = productVersionResult
 
-	const parsedDocsPath = docsPath.join('/')
+	let parsedDocsPath = docsPath.join('/')
+	if (parsedDocsPath.endsWith('.mdx')) {
+		parsedDocsPath = parsedDocsPath.slice(0, -4)
+	}
 
 	/**
 	 * TODO: possible improvement: rename files instead of two requests. Which
@@ -140,7 +143,9 @@ export async function GET(request: Request, { params }: { params: GetParams }) {
 		result: {
 			fullPath: parsedDocsPath,
 			product: productSlug,
-			version: parsedVersion,
+			version: PRODUCT_CONFIG[productSlug].versionedDocs
+				? parsedVersion
+				: 'v0.0.x',
 			metadata,
 			subpath: 'docs', // TODO: I guess we could grab the first part of the rawDocsPath? Is there something I am missing here?
 			markdownSource,
