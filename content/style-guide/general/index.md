@@ -1,0 +1,15 @@
+# General guidelines
+
+- [Active voice](active-voice)
+- [Alert boxes](alerts)
+- [Content organization](content-organization)
+- [Fonts and formats](fonts-and-formats)
+- [Grammar and punctuation](grammar)
+- [Language and word choice](language)
+- [Links](links)
+- [Paid offerings ans pre-GA releases](enterprise-releases)
+- [Point of view](point-of-view)
+- [Screenshots](screenshots)
+- [Tense and time](tense-and-time)
+- [Titles and headings](titles-and-headings)
+- [Variants](variants)

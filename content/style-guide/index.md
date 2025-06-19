@@ -2,9 +2,15 @@
 
 This document provides writing style guidance for authors who create and maintain product documentation, tutorials, WAF articles, and certifications content. 
 
-## Content scope
+## Table of contents
 
-Before conforming to a guideline, check the content sets list to verify that it applies to your content.
+- [Top 12 guidelines to follow](top-12)
+- [General writing guidelines](general/index)
+- [Codeblocks and consoles](codeblocks-and-consoles/index)
+- [UI components](ui-components/index)
+- [Numbers, dates, and time](numbers-dates-time/index)
+- [Markdown standards](markdown/index)
+- [Appendix: Extended guidance](apppendix)
 
 ## Purpose
 
@@ -23,6 +29,15 @@ Writing in a consistent style and voice makes the HashiCorp brand strong and vib
 - Never use the passive voice where you can use the active voice.
 - Never use a foreign phrase, a scientific word, or a jargon word if you can think of an everyday English equivalent.
 - If adhering to any of the guidelines does more harm than good, break the rule. 
+
+## Content scope
+
+Before conforming to a guideline, check the **content sets** list to verify that it applies to your content. The list contains one or more of the following content types:
+
+- docs
+- tutorials
+- WAF
+- certs
 
 ## Deviations
 
