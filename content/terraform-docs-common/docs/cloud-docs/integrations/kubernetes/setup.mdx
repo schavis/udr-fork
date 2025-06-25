@@ -6,13 +6,13 @@ description: >-
 
 # Set up the HCP Terraform Operator for Kubernetes
 
-The HCP Terraform Operator for Kubernetes' CustomResourceDefinitions (CRD) allow you to dynamically create HCP Terraform workspaces with Terraform modules, populate workspace variables, and provision infrastructure with Terraform runs. 
+The HCP Terraform Operator for Kubernetes' CustomResourceDefinitions (CRD) allow you to dynamically create HCP Terraform workspaces with Terraform modules, populate workspace variables, and provision infrastructure with Terraform runs.
 
 You can install the operator with the official [HashiCorp Helm chart](https://github.com/hashicorp/hcp-terraform-operator).
 
 ## Prerequisites
 
-All HCP Terraform users can use the HCP Terraform Operator for Kubernetes. You can use the operator to manage the supported features that your organization's pricing tier enables. 
+All HCP Terraform users can use the HCP Terraform Operator for Kubernetes. You can use the operator to manage the supported features that your organization's pricing tier enables.
 
 
 ## Networking requirements
@@ -36,7 +36,7 @@ The HCP Terraform Operator for Kubernetes supports the following versions:
 
 1. Sign in to [HCP Terraform](https://app.terraform.io/) or Terraform Enterprise and navigate to the organization you want to integrate with Kubernetes.
 
-1. Generate an [organization token](/terraform/cloud-docs/users-teams-organizations/api-tokens#organization-api-tokens) within HCP Terraform or Terraform Enterprise and save it to a file. These instructions assume you are using a file named `credentials`.
+1. Generate a [user](/terraform/cloud-docs/users-teams-organizations/api-tokens#user-api-tokens) or [team](/terraform/cloud-docs/users-teams-organizations/api-tokens#team-api-tokens) API token in Terraform Cloud. The user or team must have permission to create workspaces and apply runs. Save the token to a file named `credentials`.
 
 1. Set the `NAMESPACE` environment variable. This will be the namespace that you will install the Helm chart to.
 
@@ -72,7 +72,7 @@ The HCP Terraform Operator for Kubernetes supports the following versions:
 
       ```shell-session
       $ helm install --namespace ${RELEASE_NAMESPACE} hashicorp/hcp-terraform-operator tfc-operator
-      ``` 
+      ```
    When deploying in self-managed Terraform Enterprise, you must set the `operator.tfeAddress` to the specific hostname of the Terraform Enterprise instance:
 
       ```shell-session
@@ -99,6 +99,6 @@ The HCP Terraform Operator for Kubernetes supports the following versions:
 
 When a new version of the HCP Terraform Operator for Kubernetes Helm Chart is available from the HashiCorp Helm repository, you can upgrade with the following command.
 
-```
+```shell-session
 helm upgrade --namespace ${RELEASE_NAMESPACE} hashicorp/hcp-terraform-operator tfc-operator
 ```

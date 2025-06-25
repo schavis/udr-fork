@@ -12,11 +12,12 @@ import {
 	afterAll,
 	MockInstance,
 } from 'vitest'
-import { GET, GetParams } from './route'
+import { GET } from './route'
 import { Err, Ok } from '@utils/result'
 import { getProductVersion } from '@utils/contentVersions'
 import { PRODUCT_CONFIG } from '__fixtures__/productConfig.mjs'
 import { readFile, parseMarkdownFrontMatter } from '@utils/file'
+import { mockRequest } from '@utils/mockRequest'
 
 vi.mock(import('@utils/contentVersions'), async (importOriginal: any) => {
 	const mod = await importOriginal()
@@ -63,19 +64,8 @@ vi.mock('@utils/productConfig.mjs', () => {
 })
 
 describe('GET /[productSlug]/[version]/[...docsPath]', () => {
-	let mockRequest: (params: GetParams) => ReturnType<typeof GET>
 	let consoleMock: MockInstance<Console['error']>
 	beforeEach(() => {
-		mockRequest = (params: GetParams) => {
-			const { productSlug, version, docsPath } = params
-			// The URL doesn't actually matter in testing, but for completeness
-			// it's nice to have it match the real URL being used
-			const url = new URL(
-				`http://localhost:8000/api/content/${productSlug}/doc/${version}/${docsPath.join('/')}`,
-			)
-			const req = new Request(url)
-			return GET(req, { params })
-		}
 		// spy on console.error so that we can examine it's calls
 		consoleMock = vi.spyOn(console, 'error').mockImplementation(() => {})
 	})
@@ -85,7 +75,7 @@ describe('GET /[productSlug]/[version]/[...docsPath]', () => {
 
 	it('returns a 404 for nonexistent products', async () => {
 		const fakeProductSlug = 'fake product'
-		const response = await mockRequest({
+		const response = await mockRequest(GET, {
 			docsPath: [''],
 			productSlug: fakeProductSlug,
 			version: '',
@@ -107,7 +97,7 @@ describe('GET /[productSlug]/[version]/[...docsPath]', () => {
 		vi.mocked(getProductVersion).mockReturnValue(
 			Err(`Product, ${productSlug}, has no "${version}" version`),
 		)
-		const response = await mockRequest({
+		const response = await mockRequest(GET, {
 			docsPath: [''],
 			productSlug,
 			version,
@@ -135,7 +125,7 @@ describe('GET /[productSlug]/[version]/[...docsPath]', () => {
 			return Err(`Failed to read file at path: ${filePath.join('/')}`)
 		})
 
-		const response = await mockRequest({
+		const response = await mockRequest(GET, {
 			docsPath: [''],
 			productSlug,
 			version,
@@ -166,7 +156,7 @@ describe('GET /[productSlug]/[version]/[...docsPath]', () => {
 			return Err('Failed to parse Markdown front-matter')
 		})
 
-		const response = await mockRequest({
+		const response = await mockRequest(GET, {
 			docsPath: [''],
 			productSlug,
 			version,
@@ -202,8 +192,49 @@ describe('GET /[productSlug]/[version]/[...docsPath]', () => {
 			return Ok({ markdownSource, metadata: {} })
 		})
 
-		const response = await mockRequest({
+		const response = await mockRequest(GET, {
 			docsPath: ['plugin', 'framework', 'internals', 'rpcs'],
+			productSlug,
+			version,
+		})
+
+		expect(consoleMock).not.toHaveBeenCalled()
+		expect(response.status).toBe(200)
+		const { meta, result } = await response.json()
+		expect(meta.status_code).toBe(200)
+		expect(result.product).toBe(productSlug)
+		expect(result.version).toBe(version)
+		expect(result.markdownSource).toBe(markdownSource)
+		expect(result.githubFile).toBe(expectedPath.join('/'))
+	})
+
+	it('returns the markdown source of the requested docs, even if includes .mdx', async () => {
+		const productSlug = 'terraform-plugin-framework'
+		const version = 'v1.13.x'
+		const markdownSource = '# Hello World'
+		const expectedPath = [
+			'content',
+			productSlug,
+			version,
+			PRODUCT_CONFIG[productSlug].contentDir,
+			'plugin/framework/internals/rpcs.mdx',
+		]
+
+		// Force the version(real-ish) to exist
+		vi.mocked(getProductVersion).mockReturnValue(Ok(version))
+
+		// Fake content returned from the filesystem
+		vi.mocked(readFile).mockImplementation(async () => {
+			return Ok(markdownSource)
+		})
+
+		// Mock markdown parser returning valid content
+		vi.mocked(parseMarkdownFrontMatter).mockImplementation(() => {
+			return Ok({ markdownSource, metadata: {} })
+		})
+
+		const response = await mockRequest(GET, {
+			docsPath: ['plugin', 'framework', 'internals', 'rpcs.mdx'],
 			productSlug,
 			version,
 		})
@@ -238,7 +269,7 @@ describe('GET /[productSlug]/[version]/[...docsPath]', () => {
 			Ok({ markdownSource, metadata: {} }),
 		)
 
-		const response = await mockRequest({
+		const response = await mockRequest(GET, {
 			docsPath: ['docs', 'example'],
 			productSlug,
 			version,
