@@ -4,7 +4,7 @@ This document provides writing style guidance for authors who create and maintai
 
 ## Table of contents
 
-- [Top 12 guidelines to follow](top-12.md)
+- [Top 12 guidelines](top-12.md)
 - [General writing guidelines](general/index.md)
 - [Codeblocks and consoles](codeblocks-and-consoles/index.md)
 - [UI components](ui-components.md)
@@ -42,3 +42,12 @@ Before conforming to a guideline, check the **content sets** list to verify that
 ## Deviations
 
 If you feel that you need to break any of these guidelines, you might be right. Work with your technical writer when you think the context requires deviating from the standard guidance. 
+
+## Fallbacks
+
+This style guide is intended to be a complete resource, but you can take the following steps if you are unable to find appropriate guidance.   
+
+1. Ask your technical writer.
+1. Consult a dictionary, such as [Merriam-Webster](https://www.merriam-webster.com/), when missing guidance is related to spelling, capitalization, or grammar. 
+1. Consult the [corporate style guide](https://docs.google.com/document/d/1MRvGd6tS5JkIwl_GssbyExkMJqOXKeUE00kSEtFi8m8/edit?usp=sharing).
+1. Consult the [Google style guide](https://developers.google.com/style). 
