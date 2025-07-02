@@ -380,4 +380,4 @@ Describe concepts, instructions, workflows, reference items, and other types of 
 
 Writing modular topics once so that you don't repeat yourself is referred to as "keeping your writing DRY". Refer to the content types guidance for additional guidance.
 
-Some repetition is unavoided and even expected in some contexts, but copying and pasting the same content without using partials indicates non-modular topics.
+Some repetition is unavoidable and even expected in some contexts, but copying and pasting the same content without using partials indicates non-modular topics.

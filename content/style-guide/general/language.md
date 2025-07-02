@@ -156,7 +156,7 @@ Always use the shortest word that has the same meaning.
 ### Examples
 
 - "use", not "utilize" or "utilization": In most instances, use the root for "ize" words.
-- "because” not "due to the fact that": Also refer to Do not use figures of speech.
+- "because” not "due to the fact that": Also refer to [Do not use figures of speech](#do-not-use-figures-of-speech).
 
 ## Do not use words or phrases borrowed from other languages, scientific words, or jargon words
 
@@ -208,7 +208,7 @@ For consistency and cohesiveness, spell words according to American English inst
 - **keywords**: writing, abbreviations  
 - **content sets**: docs, tutorials, WAF, cert
 
-Shortened and abbreviated forms of words are common, but they may not be understandable to ESL audiences or appropriate in formal settings. Our educational materials are friendly, but they are also professional documents. Using shortened phrases or words, even if they are widely-used and widely-understood, creates a colloquial tone that does not match our voice.  Refer to the [word list](https://docs.google.com/document/d/1MRvGd6tS5JkIwl_GssbyExkMJqOXKeUE00kSEtFi8m8/edit?tab=t.0#heading=h.7xv30zvawyfc) in the corporate style guide for additional information.
+Shortened and abbreviated forms of words are common, but they may not be understandable to English as a Second Language (ESL) audiences or appropriate in formal settings. Our educational materials are friendly, but they are also professional documents. Using shortened phrases or words, even if they are widely-used and widely-understood, creates a colloquial tone that does not match our voice.  Refer to the [word list](https://docs.google.com/document/d/1MRvGd6tS5JkIwl_GssbyExkMJqOXKeUE00kSEtFi8m8/edit?tab=t.0#heading=h.7xv30zvawyfc) in the corporate style guide for additional information.
 
 ### Examples
 

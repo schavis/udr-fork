@@ -7,9 +7,9 @@ These guidelines are intended to help you determine when to use alert boxes.
 - **keywords**: notes, warnings, alerts, callout boxes
 - **content sets**: docs
 
-Avoid adding unwarranted notes, warnings, and other alert boxes, which distract from the rest of the documentation and may give the impression that the rest of the content is unimportant. Refer to Guidelines for alert boxes for additional information.
+Avoid adding unwarranted notes, warnings, and other alert boxes, which distract from the rest of the documentation and may give the impression that the rest of the content is unimportant. Refer to [Guidelines for alert boxes](../appendix.md#guidelines-for-alerts-boxes) for additional information.
 
-## Use markdown blockquotes to call out links to tutorials in documentation 
+## Use Markdown blockquotes to call out links to tutorials in documentation 
 
 - **keywords**: links to tutorials, alerts
 - **content sets**: docs
@@ -67,7 +67,7 @@ This topic provides an overview of the Terraform commands that let you import ex
 - **keywords**: instruqt, alerts, callouts
 - **content sets**: tutorials
 
-Use discretion in where you think this component will best suit the flow of the content, but you should preferably place it directly following introductory content. Refer to Guidelines for alert boxes for additional information.
+Use discretion in where you think this component will best suit the flow of the content, but you should preferably place it directly following introductory content. Refer to [Guidelines for alert boxes](../appendix.md#guidelines-for-alerts-boxes) for additional information.
 
 ### Example
 
@@ -162,7 +162,7 @@ The `recording_storage_minimum_available_capacity` vaule defines the minimum ava
 </Tip>
 ```
 
-The following example contains several style guide issues, including applying the ale the wrong alert type for the information, using a custom title, and using an alert in first place when a regular sentence is more appropriate:
+The following example contains several style guide issues, including applying the wrong alert type for the information, using a custom title, and using an alert when a regular sentence is more appropriate:
 
 ```
 ## Dependency provisioners

@@ -28,7 +28,7 @@ Simple present tense describes actions or events that happen regularly, are curr
 - **keywords**: writing, grammar, tense  
 - **content sets**: tutorials
 
-Use future tense when introducing a sequence of steps that the practitioner must follow chronologically as part of the tutorial. You can also use future tense to introduce outputs that practitioners can expect as they complete tutorials. Refer to Use simple present tense to describe immediate actions for guidance for documentation.
+Use future tense when introducing a sequence of steps that the practitioner must follow chronologically as part of the tutorial. You can also use future tense to introduce outputs that practitioners can expect as they complete tutorials. Refer to [Use simple present tense to describe immediate actions](#use-simple-present-tense-to-describe-immediate-actions) for guidance for documentation.
 
 ### Examples
 

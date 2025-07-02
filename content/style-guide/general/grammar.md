@@ -95,7 +95,7 @@ You can configure the following types of gateways:
 
 **Don't:**
 
-Instead of showing the markdown, the following example shows the rendered table:
+Instead of showing the Markdown, the following example shows the rendered table:
 
 | Parameter | Description | Data type | Default |
 | --- | --- | --- | --- |

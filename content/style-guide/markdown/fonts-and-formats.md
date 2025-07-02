@@ -1,6 +1,6 @@
 # Fonts and text formatting
 
-Follow these guidelines so that you can consistently use markdown to format text.
+Follow these guidelines so that you can consistently use Markdown to format text.
 
 ## Use double asterisks to bold words
 

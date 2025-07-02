@@ -189,7 +189,7 @@ Always use the shortest word or phrase that conveys your intended meaning. Use d
 - **keywords**: writing, word choice  
 - **content sets**: docs, WAF, tutorials, certifications
 
-Use simple, concrete words so global audiences can understand our content more easily. Refer to Spell out a phrase and place the acronym form in parentheses on first use for related guidance.
+Use simple, concrete words so global audiences can understand our content more easily. Refer to [Spell out a phrase and place the acronym form in parentheses on first use](language#spell-out-a-phrase-and-place-the-acronym-form-in-parentheses-on-first-use) for related guidance.
 
 Avoid Latin loan words such as via, which are common in the English language.
 

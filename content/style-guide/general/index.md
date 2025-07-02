@@ -7,7 +7,7 @@
 - [Grammar and punctuation](grammar.md)
 - [Language and word choice](language.md)
 - [Links](links.md)
-- [Paid offerings ans pre-GA releases](enterprise-releases.md)
+- [Paid offerings and pre-GA releases](enterprise-releases.md)
 - [Point of view](point-of-view.md)
 - [Screenshots](screenshots.md)
 - [Tense and time](tense-and-time.md)

@@ -12,7 +12,7 @@ RFC [EDU-032 Image Organization for Learn Tutorials](https://docs.google.com/doc
 - Use color hex value `#F92672` for annotations. Use color hex value `#0D44CC` as an alternative if more contrast is needed. 
 - Use shared HCP organizations so that we only need to update the screenshots relevant to feature releases.
 - Create screenshots that you can share and reuse in other tutorials.
-- Store tutorial images in the top level product directory.
+- Store tutorial images in the top-level product directory.
 - Use clear and descriptive names for screenshot image files. 
 - Separate words with underscores. 
 - Do not append file names with numbers as a way to differentiate similar images.
@@ -125,7 +125,7 @@ Use `<Warning/>` for information that the user must take action on. Warnings onl
 - Place warnings immediately before or after the documentation they apply to, but  consider how the alert box would affect a user who performs each step as they read it.
    - When documenting a procedure, placing a warning before the steps ensures that users are aware of potentially catastrophic consequences. 
    - When documenting a set of configurations, placing alerts immediately after a configuration item may be more appropriate because a user is unlikely to apply configurations one at a time.
-- Use markdown blockquotes to call out links to tutorials. Place blockquotes in the Overview or Introduction section or in the most relevant section in the body of the page. 
+- Use Markdown blockquotes to call out links to tutorials. Place blockquotes in the Overview or Introduction section or in the most relevant section in the body of the page. 
 
 ### Types
 
@@ -176,7 +176,7 @@ Configuring the `metrics_proxy` to expose the metrics backend poses a security r
 
 #### Links to tutorials
 
-Use markdown blockquotes in documentation to direct users to related tutorials. Use "Hands-on" in bold as the label.
+Use Markdown blockquotes in documentation to direct users to related tutorials. Use "Hands-on" in bold as the label.
 
 Example:
 
@@ -199,7 +199,7 @@ Example overview of a paid edition feature:
 ```
 # Admin partitions 
 
-This topic provides and overview of admin partitions, which are entities that define one or more administrative boundaries for single Consul deployments.
+This topic provides an overview of admin partitions, which are entities that define one or more administrative boundaries for single Consul deployments.
 
 @include 'alerts/enterprise.mdx'
 ```
@@ -242,7 +242,7 @@ Use the variants component to add variations of the same information for differe
 
 There are three main steps to use variants. First, you need to create the variants. After you have configured the variant, you can use it in a tutorial by specifying it in the metadata and referencing it in the content.
 
-1. Identify the variant type you want to use in content/variants.
+1. Identify the variant type you want to use in `content/variants`.
 1. There are two ways to specify variants in a tutorial. You can reference all options in a variant or a subset.
    - By default, if you only specify the variant slug (id), the tutorial will render all options in the order as defined in the variants file. For example, the following configuration renders "Terraform Cloud", "OSS", and "Interactive Lab" as variant types for the tutorial.
 
@@ -251,7 +251,7 @@ There are three main steps to use variants. First, you need to create the varian
    - slug: terraform-workflow
    ```
 
-   - You can use the options parameter to reorder or render a subset of the variant options specified in the variant configuration file. For example, the following configuration will render "OSS" and "Terraform Cloud" as variant types for the tutorial.
+   - You can use the `options` parameter to reorder or render a subset of the variant options specified in the variant configuration file. For example, the following configuration will render "OSS" and "Terraform Cloud" as variant types for the tutorial.
 
    ```
    variants:

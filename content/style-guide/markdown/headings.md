@@ -1,18 +1,18 @@
 # Headings
 
-Follow these guidelines so that you can consistently use markdown to format headings.
+Follow these guidelines so that you can consistently use Markdown to format headings.
 
 ## Use #-style headings
 
 - **keywords**: markdown, formatting, headings
 - **content sets**: docs, tutorial, WAF, certifications
 
-## Do not use markdown headings inside tabs
+## Do not use Markdown headings inside tabs
 
 - **keywords**: markdown, tabs, headings
 - **content sets**: docs, tutorials, WAF, certifications
 
-Do not use markdown headings inside tabs. Instead, use the headings attribute. Placing headings inside a tab can cause problems. For example, H2 headings inside tabs affect the table of contents and linking to H3 headings placed inside a tab can negatively affect the user experience.  
+Do not use Markdown headings inside tabs. Instead, use the headings attribute. Placing headings inside a tab can cause problems. For example, H2 headings inside tabs affect the table of contents and linking to H3 headings placed inside a tab can negatively affect the user experience.  
 
 ### Examples
 
