@@ -61,9 +61,9 @@ jobs:
         id: open-docs-pr
         working-directory: '${{github.workspace}}/new-docs-pr'
         env:
-          docs_branch_name: docs/${{inputs.version}}
+          docs_branch_name: tfe-release/${{inputs.version}}
           docs_pr_body: |
-            # Automated Docs Release PR for TFE ${{inputs.version}}
+            # TFE Release ${{inputs.version}}
 
             ...Waiting for the diff PR to be created, before finishing this PR's description...
 
@@ -89,7 +89,7 @@ jobs:
 
           gh pr create \
             --body="${{env.docs_pr_body}}" \
-            --title="Automated Docs Release PR for TFE ${{inputs.version}}" \
+            --title="TFE Release ${{inputs.version}}" \
             --draft \
             --head ${{env.docs_branch_name}} \
             --base main
@@ -117,9 +117,9 @@ jobs:
         working-directory: '${{github.workspace}}/new-docs-diff-pr'
         env:
           docs_branch_name: ${{steps.open-docs-pr.outputs.docs_branch_name}}
-          diff_branch_name: docs-diff/${{inputs.version}}
+          diff_branch_name: HCPTF-diff/${{inputs.version}}
           diff_pr_body: |
-            # Automated Docs Diff PR for TFE ${{inputs.version}}
+            # HCP TF changes for TFE release ${{inputs.version}}
 
             This PR was created via:
             - ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
@@ -155,7 +155,7 @@ jobs:
 
           gh pr create \
             --body="${{env.diff_pr_body}}" \
-            --title="Automated Docs Diff PR for TFE ${{inputs.version}}" \
+            --title="HCP TF changes for TFE release ${{inputs.version}}" \
             --draft \
             --head ${{env.diff_branch_name}} \
             --base ${{env.docs_branch_name}}
@@ -167,13 +167,15 @@ jobs:
       - name: Update DOCS PR with DIFF PR URL
         env:
           docs_pr_body: |
-            # Automated Docs Release PR for TFE ${{inputs.version}}
+            # TFE Release ${{inputs.version}}
 
             This PR was created via:
             - ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
 
             Changes since last release, diff PR:
             - ${{ env.DIFF_PR_URL }}
+
+            ❗ This is the Release PR that will be merged into main, once the release notes and diff PR are merged into it. ❗
 
             ### Reviewers
             - [ ] @hashicorp/ptfe-review
