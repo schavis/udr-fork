@@ -31,7 +31,7 @@ The subject of the sentence always performs the action, embodies a description, 
 
 Simple present tense describes actions or events that happen regularly, are currently happening, or are facts. Use present tense when describing chronological events, such as procedural steps and outputs. 
 
-Do not describe events or actions that will happen in the future. For example, describe t​he results of a command as though it just happened, instead of describing it as an action that will happen.
+Avoid using the world "will", and do not describe events or actions that "will" happen in the future. For example, describe t​he results of a command as though it just happened, instead of describing it as an action that will happen.
 
 Use "when" to describe a sequence of actions, not "if".  
 

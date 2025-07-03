@@ -18,7 +18,7 @@ RFC [EDU-032 Image Organization for Learn Tutorials](https://docs.google.com/doc
 - Do not append file names with numbers as a way to differentiate similar images.
 - Prefix diagram images with diagram_. 
 - Use descriptive alt text when embedding images.
-- Do not use "image of" of "graphic of" in alt text descriptions. Refer to the [Write the Docs page](https://www.writethedocs.org/blog/newsletter-march-2017/#resources-and-best-practices-for-alt-text) for additional alt text guidance and best practices. 
+- Do not use "image of" or "graphic of" in alt text descriptions. Refer to the [Write the Docs page](https://www.writethedocs.org/blog/newsletter-march-2017/#resources-and-best-practices-for-alt-text) for additional alt text guidance and best practices. 
 - Present images using inline links instead of using [reference style links](https://www.markdownguide.org/basic-syntax/#reference-style-links).  
 
 ### Terraform 
@@ -122,7 +122,7 @@ Use `<Warning/>` for information that the user must take action on. Warnings onl
 - Use proper grammar and punctuation and follow style guidelines.
 - Never use consecutive alert boxes.
 - Never begin a topic with a content alert.
-- Place warnings immediately before or after the documentation they apply to, but  consider how the alert box would affect a user who performs each step as they read it.
+- Place warnings immediately before or after the documentation they apply to, but consider how the alert box would affect a user who performs each step as they read it.
    - When documenting a procedure, placing a warning before the steps ensures that users are aware of potentially catastrophic consequences. 
    - When documenting a set of configurations, placing alerts immediately after a configuration item may be more appropriate because a user is unlikely to apply configurations one at a time.
 - Use Markdown blockquotes to call out links to tutorials. Place blockquotes in the Overview or Introduction section or in the most relevant section in the body of the page. 
@@ -153,7 +153,7 @@ In most cases, usage docs describe version compatibility in the requirements sec
 Example:
 
 ```
-<Warning>
+<Warning heading="Compatibility warning">
 
 Do not use Vault v1.11.0+ as the Consul service mesh CA provider. This is because the intermediate CA generated from this version cannot issue the leaf nodes required by service mesh and Consul client agents when auto-encrypt or auto-config and TLS is enabled for agent communication.
 
@@ -167,7 +167,7 @@ In most cases, security considerations should be described within the body of th
 Example:
 
 ```
-<Warning>
+<Warning title="Security warning">
 
 Configuring the `metrics_proxy` to expose the metrics backend poses a security risk in production because Consul cannot process the requests in order to limit access to specific resources.
 
@@ -236,7 +236,7 @@ Use the variants component to add variations of the same information for differe
 - **Be concise with variants and variant names**. Variant and variant options should be approximately 20 characters.
 - **Be consistent across products for slug and name**.
 - **Use sentence-style capitalization** for variant and variant option names, such as, "Interactive lab" instead of "Interactive Lab".
-- **Do not place H2 headers in variants**. H2 headers render on the right sidecar. In addition, variants are meant to separate the learning outcomes from tasks. H2 should be more general, for example,  "Deploy infrastructure". Variants may include more specific guidance, such as "AWS, Azure, Google Cloud".
+- **Do not place H2 headers in variants**. H2 headers render on the right sidecar. In addition, variants are meant to separate the learning outcomes from tasks. H2 should be more general, for example, "Deploy infrastructure". Variants may include more specific guidance, such as "AWS, Azure, Google Cloud".
 
 ### How to use variants
 

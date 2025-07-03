@@ -2,7 +2,7 @@
 
 Our guidelines follow the [Google Developer's Style Guide on UI elements and interactions](https://developers.google.com/style/ui-elements).
 
-## When referring to UI elements, Match capitalization, punctuation, and other formatting elements to the UI
+## When referring to UI elements, match capitalization, punctuation, and other formatting elements to the UI
 
 - **keywords**: UI, formatting, capitalization, punctuation
 - **content sets**: docs, tutorials, WAF, certifications

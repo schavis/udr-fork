@@ -2,14 +2,14 @@
 
 These guidelines are intended to help you write in active voice.
 
-## Write sentences in which the subject performs the action, embodies a description, or exhibits agency
+## Write sentences where a subject performs an action, exhibits agency, or gets described by a predicate phrase
 
 - **keywords**: writing, grammar, active-voice  
 - **content sets**: docs, WAF, tutorials, certifications
  
 ### Examples
 
-**Do:**
+**Do**
 
 - `Next, register the service.`
 - `We recommend configuring VCS access when you set up an organization.`

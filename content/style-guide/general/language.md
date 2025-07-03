@@ -120,7 +120,6 @@ Some users may be struggling with the instructions or with understanding concept
 - just (as in "just run this command")
 - obviously
 
-
 ### Examples
 
 **Do:**

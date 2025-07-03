@@ -5,7 +5,7 @@ These guidelines are intended to help you organize information within a page in 
 ## Do not implement frequently-asked-question (FAQ) sections 
 
 - **keywords**: writing, faq  
-- **content sets**: docs, cert,tutorials
+- **content sets**: docs, cert, tutorials
 
 If the information has gaps, redesign your content around use cases that would otherwise be filled with FAQs.
 
@@ -63,8 +63,7 @@ When necessary, direct users to the specific step instead of using directional o
 - **keywords**: writing, flow, organization  
 - **content sets**: docs, WAF, cert, tutorials
 
-
-Avoid long, complex sentences. Instead, write multiple sentences that each contain a single idea. Frontload paragraphs with the most important information to make them more scannable.
+Avoid long, complex sentences. Instead, write multiple sentences that each contain a single idea. Frontload paragraphs with the most important information to make it easier to scan the page.
 
 Do not use dashes, semicolons, or other punctuation to merge several ideas into a single sentence. Refer to [Do not use en or em dashes to separate ideas or phrases](grammar.md#do-not-use-parentheses-en-dashes-or-em-dashes-to-separate-ideas-or-phrases) for additional guidance. 
 
