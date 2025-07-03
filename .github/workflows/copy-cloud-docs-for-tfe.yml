@@ -49,15 +49,15 @@ jobs:
 
       - name: Create the new TFE version folder for RELEASE PR
         run: |
-          prev-version=$(jq -r '.["terraform-enterprise"][] | select(.isLatest == true) | .version' "${{github.workspace}}/new-docs-pr/app/api/versionMetadata.json")
-          echo "Previous terraform-enterprise version: ${prev-version}"
-          echo "PREV_TFE_VERSION=${prev-version}" >> $GITHUB_ENV
+          prev_version=$(jq -r '.["terraform-enterprise"][] | select(.isLatest == true) | .version' "${{github.workspace}}/new-docs-pr/app/api/versionMetadata.json")
+          echo "Previous terraform-enterprise version: ${prev_version}"
+          echo "PREV_TFE_VERSION=${prev_version}" >> $GITHUB_ENV
 
           mkdir -p "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${{inputs.version}}"
 
-          cp -a "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${prev-version}/." "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${{inputs.version}}"
+          cp -a "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${prev_version}/." "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${{inputs.version}}"
 
-      - name: Open new version DOCS PR
+      - name: Open new version RELEASE PR
         id: open-docs-pr
         working-directory: '${{github.workspace}}/new-docs-pr'
         env:
@@ -164,7 +164,7 @@ jobs:
           echo "DIFF_PR_URL=${diff_pr_url}" >> $GITHUB_ENV
           echo "**Automated DIFF PR URL**: ${diff_pr_url}" >> $GITHUB_STEP_SUMMARY
 
-      - name: Update DOCS PR with DIFF PR URL
+      - name: Update RELEASE PR with DIFF PR URL
         env:
           docs_pr_body: |
             # TFE Release ${{inputs.version}}
