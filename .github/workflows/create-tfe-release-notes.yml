@@ -146,7 +146,6 @@ jobs:
               - [ ] @hashicorp/ptfe-review
               - [ ] @hashicorp/web-platform
           run: |
-            echo ${{ secrets.TFE_WORKFLOWS_GITHUB_TOKEN }} | gh auth login --with-token
             git config --global user.email "team-rel-eng@hashicorp.com"
             git config --global user.name "tfe-release-bot"
 
