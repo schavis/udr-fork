@@ -84,7 +84,7 @@ jobs:
           git checkout -b ${{env.docs_branch_name}}
           git add .
 
-          git commit -m "Automated Release Docs PR" --no-verify
+          git commit -m "TFE Release ${{inputs.version}}" --no-verify
           git push origin HEAD
 
           gh pr create \
@@ -97,7 +97,7 @@ jobs:
           echo "docs_branch_name=${{env.docs_branch_name}}" >> $GITHUB_OUTPUT
           docs_pr_url=$(gh pr view --json url --jq '.url')
           echo "DOCS_PR_URL=${docs_pr_url}" >> $GITHUB_ENV
-          echo "**Automated Docs PR URL**: ${docs_pr_url}" >> $GITHUB_STEP_SUMMARY
+          echo "**TFE Release PR URL**: ${docs_pr_url}" >> $GITHUB_STEP_SUMMARY
 
       # MAKE THE DIFF PR
       - name: Checkout main for new docs version DIFF PR
@@ -150,7 +150,7 @@ jobs:
           git checkout -b ${{env.diff_branch_name}}
           git add .
 
-          git commit -m "Automated Docs Diff PR" --no-verify
+          git commit -m "HCP TF changes for TFE release" --no-verify
           git push origin HEAD
 
           gh pr create \
@@ -162,7 +162,7 @@ jobs:
 
           diff_pr_url=$(gh pr view --json url --jq '.url')
           echo "DIFF_PR_URL=${diff_pr_url}" >> $GITHUB_ENV
-          echo "**Automated DIFF PR URL**: ${diff_pr_url}" >> $GITHUB_STEP_SUMMARY
+          echo "**HCP TF changes for TFE release PR URL**: ${diff_pr_url}" >> $GITHUB_STEP_SUMMARY
 
       - name: Update RELEASE PR with DIFF PR URL
         env:
