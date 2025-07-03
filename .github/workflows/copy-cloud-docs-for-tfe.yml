@@ -16,7 +16,7 @@ on:
     outputs:
       release_branch_name:
         description: 'The name of the branch created for the new TFE version docs.'
-        value: ${{ jobs.copy-docs.outputs.docs_branch_name }}
+        value: ${{ jobs.copy-docs.outputs.release_branch_name }}
       release_branch_pr_url:
         description: 'The URL of the release branch created for the new TFE version docs.'
         value: ${{ jobs.copy-docs.outputs.release_branch_pr_url }}
