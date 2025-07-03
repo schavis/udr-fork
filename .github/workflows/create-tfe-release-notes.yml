@@ -74,7 +74,7 @@ jobs:
 
         - name: Turn branch into PR
           run: |
-            echo "RELEASE_BRANCH_NAME=${{ needs.copy-docs.outputs.release_branch_name }}" >> $GITHUB_ENV
+            export RELEASE_BRANCH_NAME="${{ needs.copy-docs.outputs.release_branch_name }}"
             RELEASE_NOTES_PR_URL=$(scripts/tfe-releases/ci/create-pull-request.sh)
             echo "RELEASE_NOTES_PR_URL=$RELEASE_NOTES_PR_URL" >> $GITHUB_ENV
 
