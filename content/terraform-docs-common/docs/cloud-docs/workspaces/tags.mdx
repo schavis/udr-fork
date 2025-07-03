@@ -27,7 +27,9 @@ Your system may contain single-value tags created using Terraform v1.10 and olde
 ## Requirements
 
 - You must be member of a team with the **Write** permission group enabled for the workspace to create tags for a workspace.
-- You must be member of a team with the **Admin** permission group enabled for the workspace to delete tags on a workspace or member of a team with Organizational Access **Manage all workspaces** (allows tag management on any workspaces).
+- To delete workspace tags, you must be a member of a team with one of the following permissions enabled:
+    - **Admin** permission group for the workspace.
+    - **Manage all workspaces** permissions for the organization. This permissions allows you to manage tags for all workspaces.
 
 You cannot create tags for a workspace using the CLI.
 
