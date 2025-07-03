@@ -107,7 +107,7 @@ jobs:
           ref: '${{steps.open-docs-pr.outputs.docs_branch_name}}'
 
       - name: Copy files for new docs version DIFF PR
-        uses: ./release/.github/actions/copy-cloud-docs-for-tfe
+        uses: ./new-docs-pr/.github/actions/copy-cloud-docs-for-tfe
         with:
           source_path: '${{github.workspace}}/new-docs-pr'
           target_path: '${{github.workspace}}/new-docs-diff-pr'
