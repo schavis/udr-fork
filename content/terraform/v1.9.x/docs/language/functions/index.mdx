@@ -22,8 +22,27 @@ For more details on syntax, see
 [_Function Calls_](/terraform/language/expressions/function-calls)
 in the Expressions section.
 
-The Terraform language does not support user-defined functions, and so only
-the functions built in to the language are available for use. The documentation includes a page for all of the available built-in functions.
+# Provider-defined Functions
+
+The Terraform language does not support _user_-defined functions.
+However [providers can implement functions](/terraform/plugin/framework/functions)
+which users can use.
+
+The language requires such functions to use a prefix `provider::<local-name>::`
+where `<local-name>` corresponds with an entry in `required_providers` block.
+
+```hcl
+provider::terraform::encode_tfvars({
+  example = "Hello!"
+})
+```
+
+The documentation covers the built-in functions and built-in provider-defined functions only.
+
+Functions defined by external providers are documented by those providers
+in the [Terraform Registry](https://registry.terraform.io/browse/providers).
+
+# Experimenting with Functions
 
 You can experiment with the behavior of Terraform's built-in functions from
 the Terraform expression console, by running
