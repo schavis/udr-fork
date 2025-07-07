@@ -24,12 +24,14 @@ in the Expressions section.
 
 # Provider-defined Functions
 
-The Terraform language does not support _user_-defined functions.
-However [providers can implement functions](/terraform/plugin/framework/functions)
-which users can use.
+You cannot define your own functions in the Terraform configuration language, but
+you can develop your own providers that expose functions. Refer to
+[Provider-defined functions](/terraform/plugin/framework/functions)
+for information about defining functions in custom providers.
 
-The language requires such functions to use a prefix `provider::<local-name>::`
-where `<local-name>` corresponds with an entry in `required_providers` block.
+When using a provider-specific function, add the `provider::<local-name>::` where
+`<local-name>` corresponds with an entry in the `required_providers` block.
+The following example calls the `encoode_tvfars` function in the `terraform` provider:
 
 ```hcl
 provider::terraform::encode_tfvars({
