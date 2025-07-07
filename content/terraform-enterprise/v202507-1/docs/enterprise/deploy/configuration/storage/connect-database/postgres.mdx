@@ -119,7 +119,14 @@ Refer to the
 [PostgreSQL library documentation](https://www.postgresql.org/docs/12/libpq-ssl.html)
 for additional information about using `sslmode`.
 
-#### Client certificate configuration
+## Authentication
+
+### Username and password authentication
+
+You can configure Terraform Enterprise to use the database's user and password to authenticate with the server.
+Set the `TFE_DATABASE_USER` and `TFE_DATABASE_PASSWORD` variable for username and password based authentication.
+
+### Client certificate authentication
 
 You can configure Terraform Enterprise to use PostgreSQL client certificates to authenticate with the server. When providing client certificates, the database password is not required and the `sslmode` parameter is set to `verify-full`. 
 Terraform Enterprise requires PostgreSQL server certificate to use Subject Alternative Names (SANs) rather than relying solely on the legacy Common Name field.
@@ -130,3 +137,14 @@ Configure the following settings to use PostgreSQL client certificates:
 - Specify the path to the CA certificate file in the `TFE_DATABASE_CA_CERT_FILE` variable.
 - Specify the path to the client certificate file in the `TFE_DATABASE_CLIENT_CERT_FILE` variable.
 - Specify the path to the client key in the `TFE_DATABASE_CLIENT_KEY_FILE` variable.
+
+### Azure MSI authentication
+
+You can use both system-assigned and user-assigned managed identities to authenticate to Azure Database for PostgreSQL flexible server.
+For more information please see the [Azure documentation](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-connect-with-managed-identity).
+When using Azure MSI authentication, the database password is not required.
+
+Configure the following settings to use Azure MSI:
+
+- Set the `TFE_DATABASE_PASSWORDLESS_AZURE_USE_MSI` variable to `true`.
+- Set the `TFE_DATABASE_PASSWORDLESS_AZURE_CLIENT_ID` to the user-assigned managed identity. Leave blank to use the system-assigned MSI.

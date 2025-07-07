@@ -145,13 +145,51 @@ PostgreSQL connection (e.g., `sslmode=require`).
 
 PostgreSQL password.
 
-Required when connecting to an external PostgreSQL server without client certificates.
+The password is not needed if you are using mTLS or Azure MSI authentication.
 
 ### `TFE_DATABASE_USER`
 
 PostgreSQL user.
 
 Required when connecting to an external PostgreSQL server.
+
+### `TFE_DATABASE_USE_MTLS`
+
+Whether to use mTLS while authenticating with the PostgreSQL server. When mTLS is enabled, Terraform Enterprise uses client certificates to authenticate with the PostgreSQL server.
+Terraform Enterprise requires PostgreSQL server certificate to use Subject Alternative Names (SANs) rather than relying solely on the legacy Common Name field.
+
+Defaults to `false`.
+
+### `TFE_DATABASE_CA_CERT_FILE`
+
+Specifies the path to a file containing the root certificate for validating PostgreSQL server certificates.
+Defaults to `""`.
+
+Required when `TFE_DATABASE_USE_MTLS` is `true`.
+
+### `TFE_DATABASE_CLIENT_CERT_FILE`
+
+Specifies the path to a file containing the client certificate that Terraform Enterprise uses for authenticating with the PostgreSQL server.
+Defaults to `""`.
+
+Required when `TFE_DATABASE_USE_MTLS` is `true`.
+
+### `TFE_DATABASE_CLIENT_KEY_FILE`
+
+Specifies the path to a file containing the client private key corresponding to the PostgreSQL client certificate provided in `TFE_DATABASE_CLIENT_CERT_FILE`.
+Defaults to `""`.
+
+Required when `TFE_DATABASE_USE_MTLS` is `true`.
+
+### `TFE_DATABASE_PASSWORDLESS_AZURE_USE_MSI`
+
+Whether to use Managed Service Identity (MSI) for database authentication. 
+Defaults to `false`.
+
+### `TFE_DATABASE_PASSWORDLESS_AZURE_CLIENT_ID`
+
+Client ID of a user-assigned Managed Service Identity. Leave blank to use the
+system-assigned Managed Service Identity. Defaults to `""`.
 
 ## Database cluster setting
 
@@ -187,34 +225,6 @@ Set it to any positive [Go duration string](https://pkg.go.dev/time#ParseDuratio
 This setting is not applicable for Replicated.
 
 Default is `1s`.
-
-### `TFE_DATABASE_USE_MTLS`
-
-Whether to use mTLS while authenticating with the PostgreSQL server. When mTLS is enabled, Terraform Enterprise uses client certificates to authenticate with the PostgreSQL server.
-Terraform Enterprise requires PostgreSQL server certificate to use Subject Alternative Names (SANs) rather than relying solely on the legacy Common Name field.
-
-Defaults to `false`.
-
-### `TFE_DATABASE_CA_CERT_FILE`
-
-Specifies the path to a file containing the root certificate for validating PostgreSQL server certificates.
-Defaults to `""`.
-
-Required when `TFE_DATABASE_USE_MTLS` is `true`.
-
-### `TFE_DATABASE_CLIENT_CERT_FILE`
-
-Specifies the path to a file containing the client certificate that Terraform Enterprise uses for authenticating with the PostgreSQL server.
-Defaults to `""`.
-
-Required when `TFE_DATABASE_USE_MTLS` is `true`.
-
-### `TFE_DATABASE_CLIENT_KEY_FILE`
-
-Specifies the path to a file containing the client private key corresponding to the PostgreSQL client certificate provided in `TFE_DATABASE_CLIENT_CERT_FILE`.
-Defaults to `""`.
-
-Required when `TFE_DATABASE_USE_MTLS` is `true`.
 
 ## Redis settings
 

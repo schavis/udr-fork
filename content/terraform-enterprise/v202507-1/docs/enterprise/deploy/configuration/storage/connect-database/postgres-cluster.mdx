@@ -101,45 +101,6 @@ Refer to
 [Database settings](/terraform/enterprise/deploy/reference/configuration#database-settings)
 in the configuration reference for addtional information.
 
-### Additional connection parameters
-
-Add the `TFE_DATABASE_PARAMETERS` variable to your configuration and specify any
-additional connection parameters necessary to connect to the server.
-
-#### `sslmode`
-
-When providing extra keyword parameters for the database connection, the
-`sslmode` parameter only allows the following values:
-
-- `require`
-- `verify-full`
-- `verify-ca`
-- `disable`
-
-When operating Terraform Enterprise in `external` mode, the `sslmode` parameter
-is set to `require` by default. When operating Terraform Enterprise in `disk`
-mode, the `sslmode` parameter is set to `disable` by default.
-
-Terraform Enterprise provides a certificates file at
-`/etc/ssl/private/terraform-enterprise/bundle.pem`, which is required by the
-`verify-full` and `verify-ca` modes.
-
-Refer to the
-[PostgreSQL library documentation](https://www.postgresql.org/docs/12/libpq-ssl.html)
-for additional information about using `sslmode`.
-
-#### Client certificate configuration
-
-You can configure Terraform Enterprise to use PostgreSQL client certificates to authenticate with the server. When providing client certificates, the database password is not required and the `sslmode` parameter is set to `verify-full`. 
-Terraform Enterprise requires PostgreSQL server certificate to use Subject Alternative Names (SANs) rather than relying solely on the legacy Common Name field.
-
-Configure the following settings to use PostgreSQL client certificates: 
-- Set the `TFE_DATABASE_USE_MTLS` variable to `true`.
-- Specify the path to the CA certificate file in the `TFE_DATABASE_CA_CERT_FILE` variable.
-- Specify the path to the client certificate file in the `TFE_DATABASE_CLIENT_CERT_FILE` variable.
-- Specify the path to the client key in the `TFE_DATABASE_CLIENT_KEY_FILE` variable.
-
-
 ## Post-failover tasks
 
 In the event that Terraform Enterprise fails over to the secondary database node, you may need to perform the following actions.
