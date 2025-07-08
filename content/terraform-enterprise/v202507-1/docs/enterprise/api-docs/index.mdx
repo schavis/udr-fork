@@ -411,8 +411,10 @@ To prevent abuse, some endpoints have lower rate limits. The lower limits are un
 
 The following endpoints have lower rate limits:
 
-| Method and endpoint                                                                                                                                                                                                         | Purpose          | Limit                               |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------- |
+| Method and endpoint | Purpose | Limit |
+| --- | --- | --- |
+| <p>`GET /api/v1/ping`</p> | Verifies system operation in Terraform Enterprise | 1 request per second per authentication token |
+| <p>`GET /api/v1/usage/bundle`</p> | Provides a usage bundle in Terraform Enterprise | 1 request per second per authentication token |
 | <p>`POST /session/two-factor-send-sms`</p><p>`POST /api/v2/account/actions/two-factor-enable`</p><p>`POST /api/v2/account/actions/two-factor-resend-verification-code`</p>                                                  | Send SMS message | 5 requests per minute per user      |
 | <p>`POST /api/v2/account/actions/two-factor-enable`</p><p>`POST /api/v2/account/actions/two-factor-resend-verification-code`</p>                                                                                            | Send SMS message | 10 requests per hour per user       |
 | <p>`POST /api/v2/account/actions/two-factor-enable`</p><p>`POST /api/v2/account/actions/two-factor-resend-verification-code`</p>                                                                                            | Send SMS message | 100 requests per day per IP address |
