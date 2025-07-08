@@ -60,7 +60,7 @@ Your HCP Terraform edition limits the maximum run concurrency for your organizat
 
 HCP Terraform stores state for its workspaces.
 
-When you trigger runs via the [CLI workflow](/terraform/enterprise/run/cli), Terraform reads from and writes to HCP Terraform's stored state. HCP Terraform uses [the `cloud` block][/terraform/language/terraform#cloud] for runs, overriding any existing [backend](/terraform/language/backend) in the configuration.
+When you trigger runs via the [CLI workflow](/terraform/enterprise/run/cli), Terraform reads from and writes to HCP Terraform's stored state. HCP Terraform uses the (`cloud` block)[/terraform/language/terraform#cloud] for runs, overriding any existing [backend](/terraform/language/backend) in the configuration.
 
 The `cloud` block requires Terraform v1.1 and later. For earlier versions, use the [`remote` backend](/terraform/language/backend/remote) to configure the CLI workflow and migrate state.
 
