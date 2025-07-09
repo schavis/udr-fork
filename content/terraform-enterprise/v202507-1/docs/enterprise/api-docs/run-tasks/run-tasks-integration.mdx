@@ -31,7 +31,12 @@ Refer to [run tasks](/terraform/enterprise/api-docs/run-tasks/run-tasks) for the
 
 When a run reaches the appropriate phase and a run task is triggered, HCP Terraform will send a request to the run task's URL.
 
+<!-- BEGIN: TFC:only name:premium -->
+
 Either HCP Terraform itself, or a self-hosted HCP Terraform agent using [request forwarding](/terraform/cloud-docs/agents/request-forwarding) can make the request to a run task's URL. Your organization [must be entitled to `private-run-tasks`](/terraform/enterprise/api-docs#feature-entitlements) to use request forwarding.
+
+<!-- END: TFC:only name:premium -->
+
 The service receiving the run task request should respond with `200 OK`, or HCP Terraform will retry to trigger the run task.
 
 `POST :url`
@@ -134,10 +139,12 @@ The POST request submits the following properties as the request headers.
 
 ## Run Task Callback
 
-While a run task runs, it may send progressive updates to HCP Terraform with a `running` status. Once an integrator determines that Terraform supports detailed run task outcomes, they can send these outcomes by appending to the run task's callback payload.
+While a run task runs, it should send progressive updates to HCP Terraform with a `running` status.
+Once an integrator determines that Terraform supports detailed run task outcomes, they can send these outcomes by appending to the run task's callback payload.
 
-Once the external integration fulfills the request, that integration must call back into HCP Terraform with the overall result of either `passed` or `failed`. Terraform expects this callback within 10 minutes, or the request is considered errored.
+The request errors if  HCP Terraform does not receive a progress update within 10 minutes or if the request runs for more than 60 minutes.
 
+Once the external integration fulfills the request, that integration must call back into HCP Terraform with the overall result of either `passed` or `failed`.
 You can send outcomes with a status of `running`, `passed`, or `failed`, but it is a good practice only to send outcomes when a run task is `running`.
 
 `PATCH :callback_url`
