@@ -131,9 +131,7 @@ If a provider does not support your agent’s architecture, the following error 
 Error: Incompatible provider version
 ```
 
-If your organization primarily uses providers that are compiled and available for ARM, then you can consider switching all of your agent pools to agents running on ARM.
-
-You can call the [Terraform provider registry API](/terraform/internals/provider-registry-protocol#list-available-versions) to cross-reference providers against the registry for available architectures. 
+You can call the [Terraform provider registry API](/terraform/internals/provider-registry-protocol#list-available-versions) to confirm the architectures available for a provider. 
 
 Sample request:
 
