@@ -125,4 +125,11 @@ The following rules apply to tag keys and values:
 
 Whether to use HCP Terraform as the Terraform execution platform for this project.
 
+You can specify an execution mode for all workspaces in a project.
+
+Execution mode options are:
+* Organization Default
+* Remote (custom)
+* Local (custom)
+* Agent (custom)
 By default, a project will honor the organization default, however it can override it. Any newly created workspaces in a project will inherit the project default.
