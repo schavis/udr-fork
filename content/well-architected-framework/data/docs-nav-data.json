@@ -21,35 +21,66 @@
         "path": "automate-and-define-processes/introduction"
       },
       {
-        "title": "Create high-performing teams",
+        "title": "Team and culture",
         "routes": [
           {
-            "title": "Overview",
-            "path": "automate-and-define-processes/create-high-performing-teams/overview"
-          },
+            "title": "Create high-performing teams",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/overview"
+              },
+              {
+                "title": "Continuous learning",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/continuous-learning"
+              },
+              {
+                "title": "Communication",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/communication"
+              },
+              {
+                "title": "Collaboration",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/collaboration"
+              },
+              {
+                "title": "Writing",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/writing"
+              },
+              {
+                "title": "Sense of ownership",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/sense-of-ownership"
+              },
+              {
+                "title": "Recognition",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/recognition"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Develop and deploy",
+        "routes": [
           {
-            "title": "Continuous learning",
-            "path": "automate-and-define-processes/create-high-performing-teams/continuous-learning"
-          },
-          {
-            "title": "Communication",
-            "path": "automate-and-define-processes/create-high-performing-teams/communication"
-          },
-          {
-            "title": "Collaboration",
-            "path": "automate-and-define-processes/create-high-performing-teams/collaboration"
-          },
-          {
-            "title": "Writing",
-            "path": "automate-and-define-processes/create-high-performing-teams/writing"
-          },
-          {
-            "title": "Sense of ownership",
-            "path": "automate-and-define-processes/create-high-performing-teams/sense-of-ownership"
-          },
-          {
-            "title": "Recognition",
-            "path": "automate-and-define-processes/create-high-performing-teams/recognition"
+            "title": "Zero downtime deployments",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/overview"
+              },
+              {
+                "title": "Infrastructure",
+                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/infrastructure"
+              },
+              {
+                "title": "Applications",
+                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/applications"
+              },
+              {
+                "title": "Service mesh deployments",
+                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/service-mesh"
+              }
+            ]
           }
         ]
       }
