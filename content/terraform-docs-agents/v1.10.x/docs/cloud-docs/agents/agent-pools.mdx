@@ -78,9 +78,9 @@ To configure the workspace to execute runs using an agent:
 
 The workspace begins using the agent for Terraform runs. Runs involving an agent include information about that agent in the run details. Terraform Cloud may use different agents for the plan and apply operations, depending on agent availability within the pool.
 
-## Exclude an Agent Pool from Specific Workspaces
+## Exclude Workspaces from Accessing an Agent Pool
 
-Excluding an agent pool lets you restrict access to agent pools for workspaces.
+Excluding an agent pool prevents the specified workspaces from using it.
 
 To exclude an agent pool from specific workspaces within the organization:
 
@@ -100,9 +100,9 @@ Only the specified workspaces will be restricted from accessing the agent pool.
 
 ## Scope an Agent Pool to Specific Projects
 
-Scoping an agent pool lets you specify which projects can use it. The agent pool is only available from within the chosen projects, and it does not appear other projects's lists of available agent pools.
+You can scope an agent pool to specific projects. Only the selected projects will be able to use the agent pool.
 
-~> **Important:** Scoping an agent pool does not remove it from projects that are actively using it. To remove access, you must first remove the agent pool from within the project's settings.
+~> **Important:** Scoping an agent pool does not remove it from projects that already use it. To remove access, you must first remove the agent pool from the project's settings.
 
 To scope an agent pool to specific projects within the organization:
 
@@ -122,15 +122,13 @@ Only the specified projects can use the agent pool.
 
 Use the following steps to configure a project to use an agent pool.
 
-### Select Agent Pool
-
-To configure the workspace to execute runs using an agent:
+To configure the project to execute runs using an agent:
 
 1. Go to the project's **General Settings** page.
-1. Select **Agent** as the [execution mode](/terraform/cloud-docs/workspaces/settings#execution-mode), and select the agent pool this workspace should use.
+1. Select **Agent** as the [execution mode](/terraform/cloud-docs/workspaces/settings#execution-mode), and select the agent pool this project should use.
 1. Click **Save Settings**.
 
-The project begins using the agent for Terraform runs. Runs involving an agent include information about that agent in the run details. Terraform Cloud may use different agents for the plan and apply operations, depending on agent availability within the pool.
+The project begins using the agent for Terraform runs. Runs involving an agent include information about that agent in the run details. HCP Terraform may use different agents for the plan and apply operations, depending on agent availability within the pool.
 
 ## Revoke an Agent Token
 
