@@ -4,6 +4,7 @@ description: Learn how to use infrastructure as code to manage your container or
 ---
 
 # Container orchestration
+
 Terraform can automate the provisioning, configuration, and management of orchestration systems. These systems range from self-managed and cloud-managed orchestrators like Nomad and Kubernetes to cloud-native container services like AWS ECS.
 
 We recommend you separate the configuration to deploy, configure, and manage the orchestrator from the configuration to deploy services to the orchestrator. For example, you would have Terraform deploy your Kubernetes system in one configuration and then deploy services like NGINX in a different configuration.
@@ -30,3 +31,7 @@ HashiCorp resources:
 - [Manage Kubernetes resources via Terraform](/terraform/tutorials/kubernetes/kubernetes-provider)
 - [Deploy applications with the Helm provider](/terraform/tutorials/kubernetes/helm-provider)
 - [HCP Terraform Operator for Kubernetes overview](/terraform/cloud-docs/integrations/kubernetes)
+
+# Next steps
+
+In this section of how to [Use infrastructure as code](/well-architected-framework/automate-and-define-processes/use-infrastructure-as-code/overview), you learned how you can deploy and manage container orchestration tools like Kubernetes using IaC and Terraform. Use infrastructure as code is part of the Automate and define processes pillar.

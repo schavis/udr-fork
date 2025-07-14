@@ -96,40 +96,35 @@
             "routes": [
               {
                 "title": "CI/CD systems",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools-with-iac/ci-cd"
+                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/ci-cd"
               },
               {
                 "title": "Container orchestration",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools-with-iac/container-orchestration"
+                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/container-orchestration"
               },
               {
                 "title": "Database management",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools-with-iac/database"
+                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/database"
               },
               {
                 "title": "Logging and monitoring",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools-with-iac/logging-and-monitoring"
+                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/logging-and-monitoring"
               },
               {
                 "title": "Version control systems",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools-with-iac/version-control-systems"
-              }
-            ]
-          },
-          {
-            "title": "Write infrastructure as code",
-            "routes": [
+                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/version-control-systems"
+              },
               {
                 "title": "Security and authentication",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/write-iac/security-and-authentication"
+                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/security-and-authentication"
               },
               {
                 "title": "Public cloud and cloud automation",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/write-iac/cloud-automation"
+                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/cloud-automation"
               },
               {
                 "title": "Policy as code",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/write-iac/policy-as-code"
+                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/policy-as-code"
               }
             ]
           }
