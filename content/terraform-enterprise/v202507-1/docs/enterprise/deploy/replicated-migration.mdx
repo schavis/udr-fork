@@ -387,7 +387,7 @@ At a high level, this process involves:
 1. [Restoring your data to external services](/terraform/tutorials/recommended-patterns/pattern-recovery).
 1. Testing that the external services migration succeeded.
 1. Deploying external redis.
-1. Follow the guide for [External Services to Kubernetes migration](/terraform/enterprise/deploy/replicated/replicated-migration#external-services-or-active-active-to-cloud-managed-kubernetes).
+1. Follow the guide for [External Services to Kubernetes migration](#external-services-or-active-active-to-cloud-managed-kubernetes).
 
 Contact your HashiCorp account representative or HashiCorp support if you have additional questions.
 
@@ -662,7 +662,7 @@ Complete the following steps to revert to a Replicated deployment.
 
 You must provide an external PostgreSQL database server, external object storage, and external Redis storage. Refer to the [prerequisites for deploying to Nomad](/terraform/enterprise/deploy/nomad#prerequisites) for additional information. 
 
-You must complete additional steps to migrate a Terraform Enterprise deployment on Replicated in [`disk` mode](/terraform/enterprise/deploy/storage/configure-mode): 
+You must complete additional steps to migrate a Terraform Enterprise deployment on Replicated in [`disk` mode](/terraform/enterprise/deploy/configuration/storage/configure-mode#disk): 
 
 1. [Migrate your Replicated deployment to `external` mode](/terraform/enterprise/deploy/replicated/administration/infrastructure/mounted-to-external-migration) 
 1. Verify that the migration succeeded.
