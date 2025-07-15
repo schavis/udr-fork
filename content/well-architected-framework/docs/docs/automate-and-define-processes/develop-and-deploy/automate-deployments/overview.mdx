@@ -8,15 +8,23 @@ description:
 Manually deploying and configuring cloud infrastructure is a natural starting
 point for cloud practitioners. However, as applications mature, maintaining
 manually deployed infrastructure is unsustainable and is an industry
-anti-pattern
+anti-pattern.
 
 The automation maturity model describes three stages in the progression from manual deployments to fully automated infrastructure. Each stage has specific characteristics, benefits, and challenges that organizations must navigate.
 
 # Manual deployments
 
-Manual deployments is when human operators to create, configure, and manage infrastructure resources. Common methods include using cloud provider web consoles, connecting to remote servers via SSH or RDP, and running commands directly on systems. 
+Manual deployments involve human operators creating, configuring, and managing infrastructure resources. Common methods include using cloud provider web consoles, connecting to remote servers via SSH or RDP, and running commands directly on systems.
 
-Manually deploying your infrastrucuture containers the following risks and challenges:
+The following are examples of semi-automated processes:
+
+- Clicking through cloud provider dashboards to create resources
+- SSHing into servers to install software and configure services
+- Making configuration changes directly on running systems
+- Manually scaling resources up or down based on demand
+- Troubleshooting issues by logging into systems and running diagnostic commands
+
+Manually deploying your infrastructure contains the following risks and challenges:
 
 - **Lack of version control**: No systematic way to track what changes were made, when, or by whom
 - **Human error**: Manual processes are prone to typos, missed steps, and inconsistent configurations
@@ -25,7 +33,7 @@ Manually deploying your infrastrucuture containers the following risks and chall
 - **Difficulty scaling**: Manual processes don't scale with team size or infrastructure complexity
 - **Knowledge silos**: Critical infrastructure knowledge often exists only in individual team members' heads
 
-Occasionally, manually deploying and configuring your infrastrucutre makes sense, such as one-time experiments or proof-of-concept work,e mergency troubleshooting that requires immediate human intervention, and earning and exploring new cloud services
+Occasionally, manually deploying and configuring your infrastructure makes sense, such as one-time experiments or proof-of-concept work, emergency troubleshooting that requires immediate human intervention, and exploring new cloud services.
 
 # Semi-automated deployments
 
@@ -48,9 +56,9 @@ The following are examples of semi-automated processes:
 
 # Fully-automated deployments
 
-Fully-automated deployments use version-controlled infrastructure that are automatically executed through CI/CD systems. Changes to infrastructure are made through code commits, triggering automated testing, validation, and deployment processes.
+Fully-automated deployments use version-controlled infrastructure that is automatically executed through CI/CD systems. Infrastructure changes are implemented through code commits, which trigger automated testing, validation, and deployment processes.
 
-The following are exammples of semi-automated processes:
+The following are examples of semi-automated processes:
 
 - Defining infrastructure using declarative configuration files
 - Automatically triggering deployments through Git commits
@@ -59,9 +67,9 @@ The following are exammples of semi-automated processes:
 - Monitoring and alerting on infrastructure health
 - Self-healing systems that automatically respond to failures
 
-**Benefits:**
+**Benefits over semi-automated deployments:**
 - **Complete audit trail**: Every change is tracked through version control
-- **Automated testing**: Infrastructure changes are validated before deployment
+- **Automated testing**: Automation validates infrastructure changes
 - **Consistent environments**: Identical infrastructure across development, staging, and production
 - **Rapid rollback**: Easy to revert to previous known-good states
 - **Self-service capabilities**: Developers can provision infrastructure without operations team intervention
@@ -78,9 +86,9 @@ To determine where your organization currently sits on the maturity model, consi
 
 **Semi-Automated Deployment Indicators:**
 - Do you use scripts for most deployment tasks?
-- Are your scripts stored in version control?
+- Are your scripts stored in a version control system?
 - Do you still manually execute deployment scripts?
-- Is there occasional drift between your scripts and actual infrastructure?
+- Is there occasional drift between your scripts and the actual infrastructure?
 
 **Fully-Automated Deployment Indicators:**
 - Are infrastructure changes made exclusively through code commits?
@@ -88,4 +96,9 @@ To determine where your organization currently sits on the maturity model, consi
 - Can developers self-service infrastructure needs?
 - Are rollbacks automated and tested regularly?
 
+# Next steps
 
+In this overview of Automate deployments, you learned the benefits and tradeoffs of the automation maturity model, and where your organization is inthe model. Visit the following documents to learn specifics on semi and fully-automated deployments. Automated deployments is part of the [Automate and deploy pillar](Will fix when in the next branch).
+
+- [Semi-automtaed deployments](/well-architected-framework/automate-and-define-processes/develop-and-deploy/automate-deployments/semi-automate)
+- [Fully-automated deployments](/well-architected-framework/automate-and-define-processes/develop-and-deploy/automate-deployments/fully-automate)
