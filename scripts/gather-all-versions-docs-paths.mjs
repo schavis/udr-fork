@@ -33,12 +33,26 @@ export async function gatherAllVersionsDocsPaths(versionMetadata) {
 
 		console.log(`Gathering file information for ${product}...`)
 
-		for (const version of allVersions) {
-			allDocsPaths[product][version?.version ?? ''] = []
+		for (const metadata of allVersions) {
+			let versionPath = metadata.version
+			let versionName = metadata.version
+
+			// If the product is not versioned, we set it's version to 'v0.0.x' but keep the path empty
+			if (!PRODUCT_CONFIG[product].versionedDocs) {
+				versionName = 'v0.0.x'
+				versionPath = ''
+			}
+
+			if (metadata.releaseStage !== 'stable') {
+				versionPath = `${metadata.version} (${metadata.releaseStage})`
+				versionName = metadata.version
+			}
+
+			allDocsPaths[product][versionName] = []
 			const contentPath = path.join(
 				'./content',
 				product,
-				PRODUCT_CONFIG[product].versionedDocs ? (version?.version ?? '') : '',
+				versionPath,
 				PRODUCT_CONFIG[product].contentDir,
 			)
 
@@ -48,7 +62,7 @@ export async function gatherAllVersionsDocsPaths(versionMetadata) {
 				PRODUCT_CONFIG[product].productSlug,
 			)
 
-			allDocsPaths[product][version?.version ?? ''].push(...allPaths)
+			allDocsPaths[product][versionName].push(...allPaths)
 		}
 	}
 
@@ -90,15 +104,16 @@ export async function getProductPaths(directory, productSlug) {
 			}
 		})
 	}
-
 	traverseDirectory(directory)
 
 	await batchPromises(
 		`Creating change history for files in ${directory}`,
 		apiPaths,
 		async (apiPath) => {
+			// Normalize path separators for cross-platform compatibility
+			const normalizedPath = apiPath.itemPath.replace(/\\/g, '/')
 			const created_at = await execAsync(
-				`git log --format=%cI --max-count=1 ${apiPath.itemPath}`,
+				`git log --format=%cI --max-count=1 -- "${normalizedPath}"`,
 			)
 
 			// remove the "\n" from the end of the output
