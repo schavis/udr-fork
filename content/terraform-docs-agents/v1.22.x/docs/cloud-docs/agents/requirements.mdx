@@ -12,6 +12,8 @@ Ensure your system meets the following requirements before installing and config
 
 You can deploy agents to x86_64 and ARM64 Linux. You can also run the agent in Docker using our official [HCP Terraform Agent Docker container](https://hub.docker.com/r/hashicorp/tfc-agent).
 
+All agents in an agent pool should have the same operating system. If the agents use different resources, run performance can vary significantly between each agent in the pool.
+
 The architecture of the agent pool is determined by the first agent that connects to Terraform. For example, when the first agent to register to an empty pool is an ARM64 agent, subsequent agents that register must be ARM64 agents. Attempting to register an ARM64 agent to an existing x86-only agent pool results in an error.
 
 Refer to [Change the agent pool architecture](/terraform/cloud-docs/agents/agent-pools#change-the-agent-pool-architecture) for instructions on how to switch between architectures.
@@ -20,15 +22,17 @@ Refer to [Change the agent pool architecture](/terraform/cloud-docs/agents/agent
 
 You can use the agent with the following versions of Terraform.
 
-- Agents on x86-64 architecture supports Terraform 0.12 and newer.
-- Agents on ARM64 architecture supports Terraform 0.13.5 and newer.
+- Terraform 0.12 and newer for agents on x86-64.
+- Terraform 0.13.5 and newer for agents on ARM64.
 
 Workspaces configured to use Terraform versions older than 0.12 cannot select the agent-based execution mode.
 
 
 ## Hardware 
 
-The host running the agent has varying resource requirements depending on the workspaces the agent will serve and the agent's configuration. A host can be a dedicated or shared cloud instance, virtual machine, bare metal server, or a container. You should monitor and adjust memory, CPU, and disk space based on each workspace's usage and performance.
+The host running the agent has varying resource requirements depending on the workspaces the agent serves and the agent's configuration. A host can be a dedicated or shared cloud instance, virtual machine, bare metal server, or a container. You should monitor and adjust memory, CPU, and disk space based on each workspace's usage and performance.
+
+All agents in an agent pool should have the same hardware resources available. If the agents use different resources, run performance can vary significantly between each agent in the pool.
 
 Use the following specifications as a reference:
 
