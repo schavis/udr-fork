@@ -131,6 +131,21 @@
                 ]
               }
             ]
+          },
+          {
+            "title": "Automate deployments",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/overview"
+              },
+              {
+                "title": "Semi-automate deployments",
+                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/semi-automate"
+              },
+              {
+                "title": "Fully-automate deployments",
+                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/fully-automate"
           }
         ]
       }
