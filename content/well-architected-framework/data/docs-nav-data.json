@@ -81,46 +81,54 @@
                 "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/service-mesh"
               }
             ]
-          }
-        ]
-      },
-      {
-        "title": "Use infrastructure as code",
-        "routes": [
-          {
-            "title": "Overview",
-            "path": "automate-and-define-processes/use-infrastructure-as-code/overview"
           },
           {
-            "title": "Manage tools with IaC",
+            "title": "Use infrastructure as code",
             "routes": [
               {
-                "title": "CI/CD systems",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/ci-cd"
+                "title": "Overview",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/overview"
               },
               {
-                "title": "Container orchestration",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/container-orchestration"
-              },
-              {
-                "title": "Database management",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/database"
-              },
-              {
-                "title": "Logging and monitoring",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/logging-and-monitoring"
-              },
-              {
-                "title": "Version control systems",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/version-control-systems"
-              },
-              {
-                "title": "Security and authentication",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/security-and-authentication"
-              },
-              {
-                "title": "Public cloud and cloud automation",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/cloud-automation"
+                "title": "Manage tools with IaC",
+                "routes": [
+                  {
+                    "title": "CI/CD systems",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/ci-cd"
+                  },
+                  {
+                    "title": "Configuration management",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/configuration-management"
+                  },
+                  {
+                    "title": "Container management",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/container-management"
+                  },
+                  {
+                    "title": "Container orchestration",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/container-orchestration"
+                  },
+                  {
+                    "title": "Database management",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/database"
+                  },
+                  {
+                    "title": "Logging and monitoring",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/logging-and-monitoring"
+                  },
+                  {
+                    "title": "Version control systems",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/version-control-systems"
+                  },
+                  {
+                    "title": "Security and authentication",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/security-and-authentication"
+                  },
+                  {
+                    "title": "Public cloud and cloud automation",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/cloud-automation"
+                  }
+                ]
               }
             ]
           }
