@@ -6,7 +6,7 @@ description: |-
 
 # Deploy the Terraform MCP server
 
-The Terraform MCP server runs in a Docker container that you can deploy to either your local workstation or a remote instance. When running the server locally, start it in the default `stdio` mode. In this mode, the server communicates over standard input/output. When running the server on a remote instance, start the server in `streamable-http` mode so that you can communicate with the server using the Streamable HTTP transport.
+The Terraform MCP (Model Context Protocol) server runs in a Docker container that you can deploy to either your local workstation or a remote instance. When running the server locally, start it in the default `stdio` mode. In this mode, the server communicates over standard input/output. When running the server on a remote instance, start the server in `streamable-http` mode so that you can communicate with the server using the Streamable HTTP transport.
 
 @include 'beta.mdx'
 
@@ -55,7 +55,7 @@ Refer to your client's documentation for instructions on enabling MCP:
 
 You can install the server using the following methods if you intend to run the server locally:
 
-- Install compiled the binary into your client. The binaries are available at [releases.hashicorp.com](https://releases.hashicorp.com/terraform-mcp-server/).
+- Install the binary into your client. The binaries are available at [releases.hashicorp.com](https://releases.hashicorp.com/terraform-mcp-server/).
 - Install from source into your client.
 
 For remote installations, download the source to the remote and build the Docker image.
@@ -150,7 +150,7 @@ $ go install github.com/hashicorp/terraform-mcp-server/cmd/terraform-mcp-server@
 Main:
 
 ```shell-session
-$ go install go install github.com/hashicorp/terraform-mcp-server/cmd/terraform-mcp-server@main
+$ go install github.com/hashicorp/terraform-mcp-server/cmd/terraform-mcp-server@main
 ```
 
 After pulling the image, add the following JSON block to your client and specify the path to the server binary in the `command` attribute:
