@@ -81,6 +81,15 @@
                 "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/service-mesh"
               }
             ]
+          },
+          {
+            "title": "Automate deployments",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/overview"
+              }
+            ]
           }
         ]
       }
