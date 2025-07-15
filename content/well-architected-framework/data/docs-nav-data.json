@@ -121,10 +121,6 @@
               {
                 "title": "Public cloud and cloud automation",
                 "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/cloud-automation"
-              },
-              {
-                "title": "Policy as code",
-                "path": "automate-and-define-processes/use-infrastructure-as-code/manage-tools/policy-as-code"
               }
             ]
           }
