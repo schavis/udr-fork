@@ -6,7 +6,7 @@ description: |-
 
 # Deploy the Terraform MCP server
 
-The Terraform MCP server runs in a Docker container that you can deploy to either your local workstation or a remote instance. When running the server locally, start it in the default `stdio` mode. In this mode, the server receives and sends messages in JSON format over RPC. When running the server on a remote instance, start the server in `streamable-http` mode so that you can communicate with the server using the Streamable HTTP transport.
+The Terraform MCP server runs in a Docker container that you can deploy to either your local workstation or a remote instance. When running the server locally, start it in the default `stdio` mode. In this mode, the server communicates over standard input/output. When running the server on a remote instance, start the server in `streamable-http` mode so that you can communicate with the server using the Streamable HTTP transport.
 
 @include 'beta.mdx'
 
@@ -122,7 +122,7 @@ Create an `mcp.json` file and add the following configuration:
         "run",
         "-i",
         "--rm",
-        "hashicorp/terraform-mcp-server:0.1.0"
+        "hashicorp/terraform-mcp-server:<version>"
        ]
      }
    }
