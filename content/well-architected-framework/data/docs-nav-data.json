@@ -83,19 +83,52 @@
             ]
           },
           {
-            "title": "Automate deployments",
+            "title": "Use infrastructure as code",
             "routes": [
               {
                 "title": "Overview",
-                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/overview"
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/overview"
               },
               {
-                "title": "Semi-automate deployments",
-                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/semi-automate"
-              },
-              {
-                "title": "Fully-automate deployments",
-                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/fully-automate"
+                "title": "Manage tools with IaC",
+                "routes": [
+                  {
+                    "title": "CI/CD systems",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/ci-cd"
+                  },
+                  {
+                    "title": "Configuration management",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/configuration-management"
+                  },
+                  {
+                    "title": "Container management",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/container-management"
+                  },
+                  {
+                    "title": "Container orchestration",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/container-orchestration"
+                  },
+                  {
+                    "title": "Database management",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/database"
+                  },
+                  {
+                    "title": "Logging and monitoring",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/logging-and-monitoring"
+                  },
+                  {
+                    "title": "Version control systems",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/version-control-systems"
+                  },
+                  {
+                    "title": "Security and authentication",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/security-and-authentication"
+                  },
+                  {
+                    "title": "Public cloud and cloud automation",
+                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/cloud-automation"
+                  }
+                ]
               }
             ]
           }
@@ -127,6 +160,15 @@
       {
         "title": "Introduction",
         "path": "secure-systems/introduction"
+      },
+      {
+        "title": "Compliance and governance",
+        "routes": [
+          {
+            "title": "Use policy as code",
+            "path": "secure-systems/compliance-and-governance/policy-as-code"
+          }
+        ]
       },
       {
         "title": "Protect data",
