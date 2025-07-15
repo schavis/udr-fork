@@ -162,6 +162,15 @@
         "path": "secure-systems/introduction"
       },
       {
+        "title": "Compliance and governance",
+        "routes": [
+          {
+            "title": "Use policy as code",
+            "path": "secure-systems/compliance-and-governance/policy-as-code"
+          }
+        ]
+      },
+      {
         "title": "Protect data",
         "routes": [
           {
