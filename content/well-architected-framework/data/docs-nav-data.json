@@ -197,6 +197,28 @@
         ]
       },
       {
+        "title": "Secure application",
+        "routes": [
+          {
+            "title": "CI/CD secrets management",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "secure-systems/secure-applications/ci-cd-secrets/overview"
+              },
+              {
+                "title": "CI/CD secrets anti-patterns",
+                "path": "secure-systems/secure-applications/ci-cd-secrets/ci-cd-anti-patterns"
+              },
+              {
+                "title": "Dynamic and static secrets",
+                "path": "secure-systems/secure-applications/ci-cd-secrets/dynamic-and-static-secrets"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "title": "Prevent lateral movement",
         "path": "secure-systems/prevent-lateral-movement"
       }

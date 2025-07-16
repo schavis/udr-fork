@@ -1,9 +1,9 @@
 ---
-page_title: Automate deployments
-description: 
+page_title: Overview
+description: test
 ---
 
-# Automate deployments
+# Overview
 
 Manually deploying and configuring cloud infrastructure is a natural starting
 point for cloud practitioners. However, as applications mature, maintaining
@@ -12,7 +12,7 @@ anti-pattern.
 
 The automation maturity model describes three stages in the progression from manual deployments to fully automated infrastructure. Each stage has specific characteristics, benefits, and challenges that organizations must navigate.
 
-# Manual deployments
+## Manual deployments
 
 Manual deployments involve human operators creating, configuring, and managing infrastructure resources. Common methods include using cloud provider web consoles, connecting to remote servers via SSH or RDP, and running commands directly on systems.
 
@@ -35,7 +35,7 @@ Manually deploying your infrastructure contains the following risks and challeng
 
 Occasionally, manually deploying and configuring your infrastructure makes sense, such as one-time experiments or proof-of-concept work, emergency troubleshooting that requires immediate human intervention, and exploring new cloud services.
 
-# Semi-automated deployments
+## Semi-automated deployments
 
 Semi-automated deployments introduce scripting and basic automation tools while still requiring human intervention to execute processes. Instead of manually running individual commands, operators execute scripts that perform deployment and configuration tasks.
 
@@ -54,7 +54,7 @@ The following are examples of semi-automated processes:
 - **Documentation**: Scripts serve as executable documentation of deployment processes
 - **Easier scaling**: Scripts can be run across multiple environments more efficiently
 
-# Fully-automated deployments
+## Fully-automated deployments
 
 Fully-automated deployments use version-controlled infrastructure that is automatically executed through CI/CD systems. Infrastructure changes are implemented through code commits, which trigger automated testing, validation, and deployment processes.
 
@@ -75,7 +75,7 @@ The following are examples of semi-automated processes:
 - **Self-service capabilities**: Developers can provision infrastructure without operations team intervention
 - **Compliance and governance**: Automated policy enforcement and security scanning
 
-# Assessing your current state
+## Assessing your current state
 
 To determine where your organization currently sits on the maturity model, consider these questions:
 
@@ -96,7 +96,7 @@ To determine where your organization currently sits on the maturity model, consi
 - Can developers self-service infrastructure needs?
 - Are rollbacks automated and tested regularly?
 
-# Next steps
+## Next steps
 
 In this overview of Automate deployments, you learned the benefits and tradeoffs of the automation maturity model, and where your organization is in the model. Visit the following documents to learn specifics on semi and fully-automated deployments. Automated deployments is part of the [Automate and define processes pillar](/well-architected-framework/automate-and-define-processes/introduction).
 
