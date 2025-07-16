@@ -14,7 +14,7 @@ You can deploy agents to x86_64 and ARM64 Linux. You can also run the agent in D
 
 All agents in an agent pool should have the same operating system. If the agents use different resources, run performance can vary significantly between each agent in the pool.
 
-The architecture of the agent pool is determined by the first agent that connects to Terraform. For example, when the first agent to register to an empty pool is an ARM64 agent, subsequent agents that register must be ARM64 agents. Attempting to register an ARM64 agent to an existing x86-only agent pool results in an error.
+The architecture of the agent pool is determined by the first agent that connects to HCP Terraform. For example, when the first agent to register to an empty pool is an ARM64 agent, subsequent agents that register must be ARM64 agents. Attempting to register an ARM64 agent to an existing x86-only agent pool results in an error.
 
 Refer to [Change the agent pool architecture](/terraform/cloud-docs/agents/agent-pools#change-the-agent-pool-architecture) for instructions on how to switch between architectures.
 
