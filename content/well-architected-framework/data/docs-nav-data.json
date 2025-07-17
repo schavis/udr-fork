@@ -188,15 +188,6 @@
         ]
       },
       {
-        "title": "Protect data",
-        "routes": [
-          {
-            "title": "Protect sensitive data",
-            "path": "secure-systems/protect-data/sensitive-data"
-          }
-        ]
-      },
-      {
         "title": "Secure application",
         "routes": [
           {
@@ -213,6 +204,26 @@
               {
                 "title": "Dynamic and static secrets",
                 "path": "secure-systems/secure-applications/ci-cd-secrets/dynamic-and-static-secrets"
+              },
+              {
+                "title": "GitLab",
+                "path": "secure-systems/secure-applications/ci-cd-secrets/gitlab"
+              },
+              {
+                "title": "GitHub Actions",
+                "path": "secure-systems/secure-applications/ci-cd-secrets/github-actions"
+              },
+              {
+                "title": "Jenkins",
+                "path": "secure-systems/secure-applications/ci-cd-secrets/jenkins"
+              },
+              {
+                "title": "CircleCI",
+                "path": "secure-systems/secure-applications/ci-cd-secrets/circle-ci"
+              },
+              {
+                "title": "TeamCity",
+                "path": "secure-systems/secure-applications/ci-cd-secrets/teamcity"
               }
             ]
           }
