@@ -9,17 +9,17 @@ Once you identify the manual deployments in your organization, you can start aut
 
 You should adopt the following semi-automated best practices:
 
-# Use version control systems (VCS)
+## Use version control systems (VCS)
 
 You should store your automation scripts and IaC in version control systems like GitHub or GitLab. Version control systems increase repeatability and reliability when deploying and configuring infrastructure. Each time you run a script, you should pull it down from your version control system to ensure it is up-to-date since the last time you ran it. You can also version scripts for environments. You can use tags in VCS for each environment, one for development, staging, and production. 
  
-# Use scripts instead of manually running commands
+## Use scripts instead of manually running commands
 
 Infrastructure automation through scripting is a fundamental shift that can increase the reliability and security of your infrastructure and application. When you script your infrastructure, you reduce human error, enable scaling, increase consistency, and create a foundation for further automation. 
 
 You can use infrastructure as code tools, such as Terraform and Ansible, to deploy and configure your infrastructure. Infrastructure as code lets you define your infrastructure using code and configuration files instead of manually configuring servers, networks, and other resources. This approach allows you to version, test, and deploy infrastructure changes just like you would with application code, making it easier to maintain consistency, automate deployments, and quickly recover from failures. By treating infrastructure as code, you can ensure your environments are reproducible, scalable, and maintainable. 
 
-# Create application images with code
+## Create application images with code
 
 You should automate building images that your application runs on. These images contain dependencies, security patches, and the application. Manual configuration can lead to installing incorrect dependencies, missing security patches, and inconsistent application installation and configuration.  
 
@@ -31,7 +31,7 @@ You can use this golden image as the base to install your application on. Once P
 
 HCP Packer further simplifies image creation and deployment by providing a central artifact registry for operations and development teams. HCP Packer stores metadata about the artifacts you build, including when you create the artifact, the associated platform, and which Git commit is associated with your build. 
 
-# Create immutable infrastructure
+## Create immutable infrastructure
 
 Immutable infrastructure is infrastructure that, once deployed, is never modified, only replaced. For example, in a mutable server, you update the server either by connecting to the server and running commands or by using a script. With immutable infrastructure, you would fully replace the server with a new one. 
 
@@ -47,7 +47,7 @@ HashiCorp co-founder and CTO Armon Dadgar explains the differences and trade-off
 
 <VideoEmbed url="https://www.youtube.com/embed/II4PFe9BbmE"/>
 
-# Audit your cloud logs
+## Audit your cloud logs
 
 Once you start automating your infrastructure, it is important to make sure that infrastructure is not manually changed or deployed. By using tools like AWS CloudTrail, Azure Activity Log, or Google Cloud Audit Logs, you can uncover who is making manual changes through the console, when these changes occur, and what resources are being modified outside of automated processes. 
 
@@ -63,6 +63,6 @@ External resources:
 - [Ansible community documentation](https://docs.ansible.com/?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW)
 - Cloud logs documentation for [GCP](https://cloud.google.com/logging/docs/audit), [AWS](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html), and [Azure](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs)
 
-# Next steps
+## Next steps
 
 In this section of [Automate deployments](/well-architected-framework/automate-and-define-processes/develop-and-deploy/automate-deployments/overview), you learned best practices for implementing semi-automated deployments. Automate deployments is part of the [Automate and define processes pillar](/well-architected-framework/automate-and-define-processes/introduction).

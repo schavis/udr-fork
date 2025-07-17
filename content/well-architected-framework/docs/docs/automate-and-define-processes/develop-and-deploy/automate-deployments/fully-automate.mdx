@@ -9,7 +9,7 @@ A fully automated system is a holistic approach to managing the IaC lifecycle. A
 
 Fully automated systems build on the best practices of semi-automated systems (VSC, automation tools, audit). The following are additional best practices when you implement fully automated infrastructure. 
 
-# Run Git-driven deployments through CI/CD
+## Run Git-driven deployments through CI/CD
 
 When you manage your IaC through Git-driven development, you combine your IaC management with interactions to your Git VCS and CI/CD. When you want to modify your infrastructure, such as standing up or tearing down a server, you must commit a change to your VCS, which will kick off a CI/CD job to change your infrastructure. This process ensures that every infrastructure modification goes through proper testing, security scanning, and validation before reaching production. 
 
@@ -24,7 +24,7 @@ With HCP Terraform, you can use the built-in VCS workflow to automatically trigg
 
 You can manage your image creation with Git and CI/CD, similar to how you manage your other infrastructure. Once you commit a change to your Packer file, your CI/CD should trigger a Packer build. Upon completion, your CI/CD system should tag and upload your image to an image repository. You can use HCP Packer to store metadata about the images you build, including when you create the artifact, the associated platform, and which Git commit is associated with your build. HCP Packer allows your downstream processes, like Terraform, to consume these images efficiently. 
 
-# Deploy self-service infrastructure
+## Deploy self-service infrastructure
 
 Application developers can utilize IaC and temporary infrastructure without writing IaC. You increase application development velocity by creating a process for developers to quickly and reliably build the infrastructure they need to run their application code. 
 
@@ -34,7 +34,7 @@ Platform teams define golden workflows for actions such as building an applicati
 
 Once developers deploy the templates to create infrastructure, they must maintain their application. HCP Waypoints actions allow developers to perform day 2 operations to maintain their application, such as rotating secrets, rebuilding a database index, or flushing an application's cache. 
 
-# Use infrastructure monitoring and testing
+## Use infrastructure monitoring and testing
 
 Infrastructure monitoring and testing are important to help prevent outages, security breaches, and performance issues before they impact your business. By continuously monitoring your infrastructure, you gain real-time visibility into system health, resource utilization, and performance metrics, allowing you to detect and address issues proactively rather than reactively.  
 
@@ -55,6 +55,6 @@ HashiCorp resources:
 External resources:
 - [What is GitOps?](https://about.gitlab.com/topics/gitops/)
 
-# Next steps
+## Next steps
 
 In this section of [Automate deployments](/well-architected-framework/automate-and-define-processes/develop-and-deploy/automate-deployments/overview), you learned best practices for implementing fully-automated deployments. Automate deployments is part of the [Automate and define processes pillar](/well-architected-framework/automate-and-define-processes/introduction).
