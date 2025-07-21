@@ -5,77 +5,37 @@ description: Define a data lifecyle policy for your organization and protect sen
 
 # Protect sensitive data 
 
-Sensitive data is data that could cause harm if unauthorized people access it.
-Examples of sensitive data include personally identifiable information,
-financial records, passwords, and confidential business information. Protecting
-sensitive data helps prevent identity theft, fraud, and other security risks.
+Sensitive data is data that could cause harm if unauthorized people access it. Examples of sensitive data include personally identifiable information, financial records, passwords, and confidential business information. Protecting sensitive data helps prevent identity theft, fraud, and other security risks.
 
-Sensitive data most commonly falls into the confidential or restricted data
-[classification categories](/link-to-doc).
+Sensitive data most commonly falls into the confidential or restricted data [classification categories](/link-to-doc).
 
 ## Why should you protect sensitive data?
 
-Security teams are constantly under threat from malicious actors.  If your
-security team is not constantly reviewing their security posture, you put the
-organization at risk of exposing data. You need to protect data throughout all
-stages of its lifecycle to avoid exposing it.
+Security teams are constantly under threat from malicious actors.  If your security team is not constantly reviewing their security posture, you put the organization at risk of exposing data. You need to protect data throughout all stages of its lifecycle to avoid exposing it.
 
 Common phases of a data lifecycle management framework includes:
 
-- **Create (including data acquisition):** Establishing secure data generation
-  processes, implementing proper validation and sanitization procedures, and
-  ensuring you classify data appropriately from the moment of creation or
-  ingestion.
+- **Create (including data acquisition):** Establish secure data generation processes, implementing proper validation and sanitization procedures, and ensuring you classify data appropriately from the moment of creation or ingestion.
 
-- **Store:** Implementing secure storage with appropriate access controls,
-  encryption at rest, and regular security assessments of storage infrastructure
-  and configurations.
+- **Store:** Implement secure storage with appropriate access controls, encryption at rest, and regular security assessments of storage infrastructure and configurations.
 
-- **Use and share:** Enforcing strict access controls, monitoring data usage
-  patterns, implementing secure sharing protocols, and maintaining audit trails
-  of all data interactions.
+- **Use and share:** Enforce strict access controls, monitor data usage patterns, implement secure sharing protocols, and maintain audit trails of all data interactions.
 
-- **Archive (including backup):** Ensuring long-term storage security through
-  encrypted backups, regular restoration testing, and maintaining access
-  controls even for archived data.
+- **Archive (including backup):** Ensure long-term storage security through encrypted backups, regular restoration testing, and maintain access controls even for archived data.
 
-- **Delete:** Implementing secure deletion procedures that ensure data is
-  completely removed from all systems, including backups and temporary files.
+- **Delete:** Implement secure deletion procedures that ensure data is completely removed from all systems, including backups and temporary files.
 
-Once you have developed a data classification scheme for your organization and
-classified your data, you should encrypt all confidential and restricted data
-throughout its lifecycle.
+Once you have developed a data classification scheme for your organization and classified your data, you should encrypt all confidential and restricted data throughout its lifecycle.
 
 ## How to protect sensitive data
 
-Protecting sensitive data requires a defense-in-depth approach due to the nature
-of how data moves across the network through the data lifecycle management
-process. Data in transit requires all applications to use encrypted interfaces,
-such as enabling HTTPS on your web servers and redirecting all traffic
-attempting to connect over HTTP to HTTPS. Protecting data in transit ensures you
-cannot intercept, and alter data during transmission from service to service.
-Data at rest requires encryption of the data, and the underlying storage
-service. If you only encrypt the data, or encrypt the storage service, the data
-is still vulnerable to unauthorized access. 
+Protecting sensitive data requires a defense-in-depth approach due to the nature of how data moves across the network through the data lifecycle management process. Data in transit requires all applications to use encrypted interfaces, such as enabling HTTPS on your web servers and redirecting all traffic attempting to connect over HTTP to HTTPS. Protecting data in transit ensures you cannot intercept, and alter data during transmission from service to service. Data at rest requires encryption of the data, and the underlying storage service. If you only encrypt the data, or encrypt the storage service, the data is still vulnerable to unauthorized access. 
 
-HashiCorp Vault lets you encrypt data using the transit secrets engine. Vault
-does not store the data, rather it provides you with an encryption service that
-you can use to encrypt data received from your applications before writing to
-your applications storage service. When using Vault Enterprise, you can also
-configure your application to use the transform secrets engine, which supports
-NIST vetted cryptographic standards such as format-preserving encryption (FPE).
-Vault is available as a self-hosted application, or you can get started with
-Vault quickly using the [HashiCorp Cloud Platform](https://portal.cloud.hashicorp.com/sign-in).
+HashiCorp Vault lets you encrypt data using the transit secrets engine. Vault does not store the data, rather it provides you with an encryption service that you can use to encrypt data received from your applications before writing to your applications storage service. When using Vault Enterprise, you can also configure your application to use the transform secrets engine, which supports NIST vetted cryptographic standards such as format-preserving encryption (FPE). Vault is available as a self-hosted application, or you can get started with Vault quickly using the [HashiCorp Cloud Platform](https://portal.cloud.hashicorp.com/sign-in).
 
-[HCP Vault Radar](https://portal.cloud.hashicorp.com/sign-in) scans
-connected data sources such as Azure DevOps, GitHub, Confluence, and Jira to
-ensure no secrets or sensitive data is in version control, documentation,
-and project management tools.
+[HCP Vault Radar](https://portal.cloud.hashicorp.com/sign-in) scans connected data sources such as Azure DevOps, GitHub, Confluence, and Jira to ensure no secrets or sensitive data is in version control, documentation, and project management tools.
 
-HashiCorp Consul encrypts traffic using mutual transport layer security (mTLS)
-between services connected to the Consul service mesh. mTLS adds an additional
-layer of encryption transmitting data between services. Consul is available as a
-self-hosted application.
+HashiCorp Consul encrypts traffic using mutual transport layer security (mTLS) between services connected to the Consul service mesh. mTLS adds an additional layer of encryption transmitting data between services. Consul is available as a self-hosted application.
 
 HashiCorp resources:
 
@@ -93,7 +53,4 @@ External resources:
 
 ## Next steps
 
-In this section of how to [secure data](link to overview), you learned about
-common ways to secure sensitive data using HashiCorp Vault, HCP Vault Radar, and
-Consul. In the next section you will learn more about how to protect data in
-transit (link to overview once we have it).
+In this section of how to [secure data](/well-architected-framework/secure-systems/data), you learned about common ways to secure sensitive data using HashiCorp Vault, HCP Vault Radar, and Consul. In the next section, you will learn more about how to [protect data in transit](/well-architected-framework/secure-systems/data/protect-data-in-transit).

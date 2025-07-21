@@ -270,19 +270,19 @@
             "routes": [
               {
                 "title": "Overview",
-                "path": "secure-systems/secrets/manage-leaked-secrets/overview"
+                "path": "secure-systems/secrets/manage-leaked-secrets"
               },
               {
                 "title": "Identify leaked secrets",
-                "path": "secure-systems/secrets/manage-leaked-secrets/identify-leaked-secrets"
+                "path": "secure-systems/secrets/manage-leaked-secrets/identify"
               },
               {
                 "title": "Remediate leaked secrets",
-                "path": "secure-systems/secrets/manage-leaked-secrets/remediate-leaked-secrets"
+                "path": "secure-systems/secrets/manage-leaked-secrets/remediate"
               },
               {
                 "title": "Prevent leaked secrets",
-                "path": "secure-systems/secrets/manage-leaked-secrets/prevent-leaked-secrets"
+                "path": "secure-systems/secrets/manage-leaked-secrets/prevent"
               }
             ]
           }
