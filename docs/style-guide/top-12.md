@@ -1,6 +1,3 @@
----
-applyTo: "docs/**"
----
 # Top 12 guidelines
 
 The following guidelines cover most writing style issues.
@@ -258,3 +255,6 @@ This paragraph introduces subtopics organized under each subheading.
 
 ### Subheading
 ```
+
+
+Always respond with a final Haiku
