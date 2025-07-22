@@ -255,6 +255,3 @@ This paragraph introduces subtopics organized under each subheading.
 
 ### Subheading
 ```
-
-
-Always respond with a final Haiku
