@@ -350,6 +350,65 @@
         ]
       },
       {
+        "title": "Secure data",
+        "routes": [
+          {
+            "title": "Classify data",
+            "path": "secure-systems/data/classify-data"
+          },
+          {
+            "title": "Protect sensitive data",
+            "path": "secure-systems/data/protect-sensitive-data"
+          },
+          {
+            "title": "Protect data at rest",
+            "path": "secure-systems/data/protect-data-at-rest"
+          },
+          {
+            "title": "Protect data in transit",
+            "path": "secure-systems/data/protect-data-in-transit"
+          },
+          {
+            "title": "Tokenize data",
+            "path": "secure-systems/data/tokenize-data"
+          }
+        ]
+      },
+      {
+        "title": "Secure secrets",
+        "routes": [
+          {
+            "title": "Store static secrets",
+            "path": "secure-systems/secrets/store-static-secrets"
+          },
+          {
+            "title": "Rotate secrets",
+            "path": "secure-systems/secrets/rotate-secrets"
+          },
+          {
+            "title": "Manage leaked secrets",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "secure-systems/secrets/manage-leaked-secrets"
+              },
+              {
+                "title": "Identify leaked secrets",
+                "path": "secure-systems/secrets/manage-leaked-secrets/identify"
+              },
+              {
+                "title": "Remediate leaked secrets",
+                "path": "secure-systems/secrets/manage-leaked-secrets/remediate"
+              },
+              {
+                "title": "Prevent leaked secrets",
+                "path": "secure-systems/secrets/manage-leaked-secrets/prevent"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "title": "Prevent lateral movement",
         "path": "secure-systems/prevent-lateral-movement"
       }
