@@ -2674,7 +2674,7 @@
     ]
   },
   {
-    "title": "Audit Devices",
+    "title": "Audit Logging",
     "routes": [
       {
         "title": "Overview",
