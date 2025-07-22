@@ -11,31 +11,6 @@ requests to Vault, and their responses. Because every operation with Vault is an
 request/response, when using a single audit device, the audit log contains _every_ interaction with
 the Vault API, including errors - except for a few paths which do not go via the audit system.
 
-The non-audited paths are:
-
-    sys/init
-    sys/seal-status
-    sys/seal
-    sys/step-down
-    sys/unseal
-    sys/leader
-    sys/health
-    sys/rekey/init
-    sys/rekey/update
-    sys/rekey/verify
-    sys/rekey-recovery-key/init
-    sys/rekey-recovery-key/update
-    sys/rekey-recovery-key/verify
-    sys/storage/raft/bootstrap
-    sys/storage/raft/join
-    sys/internal/ui/feature-flags
-
-and also, if the relevant listener configuration settings allow unauthenticated access:
-
-    sys/metrics
-    sys/pprof/*
-    sys/in-flight-req
-
 ## Enabling/Disabling audit devices
 
 When a Vault server is first initialized, no auditing is enabled. Audit
@@ -214,6 +189,37 @@ curl \
 Another way to identify the source of a request is through the User-Agent request header.
 Vault will automatically record this value as `user-agent` within the `headers` of a
 request entry within the audit log.
+
+## Excepted API endpoints
+
+Requests and responses to and from the following API endpoints are **not** recorded to Vault's audit devices:
+
+```
+sys/init
+sys/seal-status
+sys/seal
+sys/step-down
+sys/unseal
+sys/leader
+sys/health
+sys/rekey/init
+sys/rekey/update
+sys/rekey/verify
+sys/rekey-recovery-key/init
+sys/rekey-recovery-key/update
+sys/rekey-recovery-key/verify
+sys/storage/raft/bootstrap
+sys/storage/raft/join
+sys/internal/ui/feature-flags
+```
+
+Additionally, requests to the following API endpoints are not recorded if unauthenticated access to them is permitted by the relevant listener configuration settings:
+
+```
+sys/metrics
+sys/pprof/*
+sys/in-flight-req
+```
 
 ## Tutorial
 
