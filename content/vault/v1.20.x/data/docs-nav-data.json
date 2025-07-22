@@ -2681,6 +2681,10 @@
         "path": "audit"
       },
       {
+        "title": "Structure",
+        "path": "audit/structure"
+      },
+      {
         "title": "Best Practices",
         "path": "audit/best-practices"
       },
