@@ -1,3 +1,6 @@
+---
+applyTo: "docs/**"
+---
 # Top 12 guidelines
 
 The following guidelines cover most writing style issues.
