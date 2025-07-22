@@ -344,5 +344,10 @@
     "source": "/vault/docs/browser-support",
     "destination": "/vault/docs/ui/browser-support",
     "permanent": true
+  },
+  {
+    "source": "/vault/docs/commands/hcp",
+    "destination": "/vault/docs/commands/hcp/connect",
+    "permanent": true
   }
 ]
