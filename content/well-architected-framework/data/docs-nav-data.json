@@ -17,8 +17,8 @@
     "title": "Automate and define processes",
     "routes": [
       {
-        "title": "Introduction",
-        "path": "automate-and-define-processes/introduction"
+        "title": "Overview",
+        "path": "automate-and-define-processes"
       },
       {
         "title": "Team and culture",
@@ -286,8 +286,8 @@
     "title": "Design resilient systems",
     "routes": [
       {
-        "title": "Introduction",
-        "path": "design-resilient-systems/introduction"
+        "title": "Overview",
+        "path": "design-resilient-systems"
       }
     ]
   },
@@ -295,8 +295,8 @@
     "title": "Secure systems",
     "routes": [
       {
-        "title": "Introduction",
-        "path": "secure-systems/introduction"
+        "title": "Overview",
+        "path": "secure-systems"
       },
       {
         "title": "Compliance and governance",
