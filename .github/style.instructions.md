@@ -1,5 +1,5 @@
 ---
-applyTo: "docs/**"
+applyTo: "content/**"
 description: "Style guide for documentation files"
 ---
 
