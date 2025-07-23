@@ -51,10 +51,6 @@ Audit logs are critically important, and ignoring auditing failures opens an ave
 
 When two or more audit devices are enabled, Vault will attempt to send each audit log entry to all audit devices. However, Vault guarantees only that an audit log entry is written to *at least one* audit device. Hence, to ensure a complete record of every API request and response when multiple audit devices are enabled, you must analyze the combined audit log entries across all enabled audit devices.
 
-<Warning title="Blocking device failures">
-  Audit devices can experience blocking failures, where Vault cannot determine whether the write to the audit device has succeeded and hangs while waiting. Blocking failures are unlikely to happen with local disk devices but may happen with network-based devices. When any configured audit device experiences a blocking failure, Vault will not complete any requests until the blocking audit device becomes healthy again.
-</Warning>
-
 ## Hashing of sensitive values ((#hashing-of-sensitive-values))
 
 To protect the confidentiality of potentially sensitive information in audit logs, Vault by default writes only a keyed hash (HMAC-SHA256) of most string values within request and response audit entries. Vault exposes an API endpoint, [`/sys/audit-hash`](/vault/api-docs/system/audit-hash), to calculate the keyed hash of any known value for a given audit device.
