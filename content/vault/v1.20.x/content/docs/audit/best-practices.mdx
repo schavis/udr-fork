@@ -10,7 +10,7 @@ description: Recommendations for setting up audit logging in HashiCorp Vault.
   This page contains recommendations that are <strong>generally applicable</strong> to Vault customers. You should independently evaluate whether each recommendation on this page is advisable in the context of your organization's environment and use cases for Vault.
 </Highlight>
 
-## Test audit logging configuration changes in a non-production cluster
+## Test configuration changes
 
 You should test every configuration change to Vault's audit logging in a non-production environment. The non-production environment should closely mirror the production environment in all aspects relevant to the audit logging configuration and should include performance benchmarking under production-like loads.
 
@@ -81,6 +81,8 @@ For each authentication backend and secrets engine mount you configure in Vault,
 
 You can disable hashing for individual request and response attributes through the `audit_non_hmac_request_keys` and `audit_non_hmac_response_keys` attributes in the "tune" API endpoints of each [authentication backend](https://developer.hashicorp.com/vault/api-docs/system/auth#tune-auth-method) and [secret engine](https://developer.hashicorp.com/vault/api-docs/system/mounts#tune-mount-configuration) mount.
 
-## Event monitoring and alerting
+## Monitor suspicious activity
 
 You should configure monitoring and alerting of Vault's audit logs for unusual or suspicious activity.
+
+Examples of events to monitor include root token creation, root token usage, modifications to audit loggig configuration, spikes in authentication failures, and spikes in permission denied failures.
