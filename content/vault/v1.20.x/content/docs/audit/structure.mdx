@@ -71,7 +71,7 @@ Most attributes in the `<auth>` object are omitted when they are not relevant. F
 | `display_name` | `string` | Name associated with the Vault token that performed the request. This is a non-sensitive value that can help identify tokens. If a display name is not set, `"token"` will be shown. | `"my-token"` |
 | `token_type` | `string` | Whether the Vault token is a `service`, `batch`, or `periodic` token. Refer to [token types](/vault/docs/concepts/tokens#token-types). | `"service"` |
 | `token_issue_time` | `string` | Date and time when the Vault token was issued, in ISO 8601 format. | `"2025-06-05T16:10:22.292639Z"` |
-| `token_ttl` | `integer` | Validity period of the Vault token, in seconds and as of when the token was first issued, relative to `token_issue_time`. | `2764800` |
+| `token_ttl` | `integer` | Validity period of the Vault token, in seconds and as of when the token was first issued, relative to `token_issue_time`. Note that this value is not updated when the token's lifetime is changed subsequent to initial issuance. | `2764800` |
 | `metadata` | `object` | Metadata associated with the Vault token. | `{ "username": "alice" }` |
 | `num_uses` | `integer` | When the API request results in a token being issued, which token has a limited number of uses, the number of uses on that token. | `5` |
 | `remaining_uses` | `integer` | If the Vault token has a limit on the number of uses, the number of uses remaining *prior to the current request*. | `5` |
@@ -136,7 +136,7 @@ The following request object definition includes example data with simple types 
 | `operation` | `string` | Whether the request is a `create`, `read`, `update`, `delete`, or `list` operation. | `"read"` |
 | `namespace` | `object` | JSON object with the namespace's unique `id` and its `path`. | `{"id": "root"}` |
 | `path` | `string` | API path that received the request. | `"auth/token/lookup-self"` |
-| `request_uri` | `string` | The original request path from the HTTP request, if it differs from `path`. | |
+| `request_uri` | `string` | The original request path from the HTTP request, if it differs from `path` (e.g., when the Vault namespace is specified as an HTTP header). |  |
 | `mount_accessor` | `string` | Unique identifier of the Vault mount (secret engine or authentication backend) that received the API request. | `"auth_token_a928787c"` |
 | `mount_type` | `string` | Type of Vault mount that received the API request. | `"token"` |
 | `mount_running_version` | `string` | Version string for the Vault mount that received the API request. | `"v1.20.0+builtin.vault"` |
@@ -147,12 +147,12 @@ The following request object definition includes example data with simple types 
 | `headers` | `object` | JSON object containing request headers [configured](/vault/docs/audit#logging-of-request-headers) to be logged. | `{"user-agent": ["Go-http-client/1.1"]}` |
 | `policy_override` | `boolean` | Whether the client requested an override of a [Sentinel policy](/vault/docs/enterprise/sentinel). | `true` |
 | `client_id` | `string` | ID of the Vault [client](https://developer.hashicorp.com/vault/docs/concepts/client-count) making the request. | `"f60d5e8b-7a77-..."` |
-| `client_token` | `string` | Vault token that performed the request, in hashed form. | |
+| `client_token` | `string` | Vault token that performed the request, in hashed form. | `"hmac-sha256:cb1456a6..."` |
 | `client_token_accessor` | `string` | Accessor of the Vault token that performed the request. This value is hashed by default; the example shows a *non-hashed* token accessor. Refer to [token accessors](/vault/docs/concepts/tokens#token-accessors) for more information. | `"gwAezHGajo8hzAtMFKm4JLz8"` |
 | `client_certificate_ serial_number` | `string` | If the client's connection to Vault is mutually authenticated, the serial number of the client's TLS certificate. |  |
 | `wrap_ttl` | `integer` | If the client requested the response to be [wrapped](/vault/docs/concepts/response-wrapping), the number of seconds for which the wrapped response will be available. | `3600` |
 | `data` | `object` | JSON object containing the request's payload. This is dependent on the API endpoint called. |  |
-| `replication_cluster` | | | |
+| `replication_cluster` | `string` | If the request was forwarded from a Performance Replication secondary cluster, the name of the secondary cluster. | |
 
 ```json
 {
@@ -192,8 +192,8 @@ The following response object definition includes example data with simple types
 | Attribute | Type | Description |
 | :---- | :---- | :---- |
 | `auth` | `object` | If the request results in a token being created, an `auth` object with the token information. See [`auth`](#auth) above. |
-| `headers` | | |
-| `redirect` | | |
+| `headers` | `object` | Set of HTTP response headers sent by the plugin that handled the API request. |
+| `redirect` | `string` | For requests sent to authentication backends, the URL to which the authentication backend redirected the user for further authentication. |
 | `warnings` | `list(string)` | If the API returned one or more warnings, a list of the warning messages. |
 | `data` | `object` | JSON object containing the response payload. This is dependent on the API endpoint called. |
 | `secret` | `object` | If the API returned a [leased secret](/vault/docs/concepts/lease), a JSON object with one attribute, `lease_id`, that identifies that leased secret. |
@@ -237,17 +237,24 @@ The following response object definition includes example data with simple types
 
 ## JSON schemas
 
-### Request audit entries
+<details>
+<summary>Request audit entries</summary>
 
 @include 'audit/request-entry-json-schema.mdx'
 
-### Response audit entries
+</details>
+
+<details>
+<summary>Response audit entries</summary>
 
 @include 'audit/response-entry-json-schema.mdx'
 
+</details>
+
 ## Sample entries
 
-### Request
+<details>
+<summary>Sample request audit entry</summary>
 
 ```json
 {
@@ -291,7 +298,10 @@ The following response object definition includes example data with simple types
 }
 ```
 
-### Response
+</details>
+
+<details>
+<summary>Sample response audit entry</summary>
 
 ```json
 {
@@ -365,3 +375,5 @@ The following response object definition includes example data with simple types
   "type": "response"
 }
 ```
+
+</details>
