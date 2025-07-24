@@ -54,7 +54,6 @@ For example, specifying `app` as a tag prefix for the registry module instructs 
 
 Refer to [Enable publishing from a single repository](#enable-publishing-from-a-single-repository)
 
-
 ### Module 
 
 Modules in the repository must use the following three-part naming convention:
@@ -122,27 +121,19 @@ Complete the following steps when the **Publish modules to your private registry
 1. Click on a VCS connection. The screen advances to the **Choose a repository** step.
 1. In the **Select a VC Repository** field, choose the repository containing your modules' source code. You can search the list by typing part or all of a repository name into the filter field. VCS providers use `<NAMESPACE>/<REPO NAME>` strings to locate repositories. The namespace is an organization name for most providers, but Bitbucket Data Center, not Bitbucket Cloud, uses project keys, such as `INFRA`.
 1. Enable either the **Tag** or **Branch** module publishing type. Refer to [Tag-based publishing considerations](#tag-based-publishing-considerations) and [Branch-based publishing considerations](#branch-based-publishing-considerations) for more information.
-1. Complete the fields for your publishing type:
+1. Complete the fields for your publishing type.
   
-  <Tabs>
-
-  <Tab heading="Tag">
+  When **Tag** is enabled:
       
    - In the **Module Tag Prefix** field, specify a Git tag prefix. The registry uses the prefix and a release version as a unique identifier when sourcing code for multiple modules in a single repository. Refer to [Requirements](#requirements) for more information about setting up tags.  
    - In the **Source Directory** field, specify the path to the module source code.
 
-  </Tab>
-
-  <Tab heading="Branch">
+  When **Branch** is enabled:
 
    - In the **Branch name** field, specify the name of the branch to scan for the module code.
    - In the **Module version** field, specify the version of the module.
    - In the **Source Directory** field, specify the path to the module source code.
 
-  </Tab>
-
-  </Tabs>
-  
 1. Click **Next** to advance to the **Confirm selection** screen.
 1. In the **Module Name** field, specify a name for the module as it will appear in the registry. HCP Terraform and Terraform Enterprise use the name in the module address. 
 1. In the **Provider Name** field, specify the name of the provider that integrates the module. HCP Terraform and Terraform Enterprise use the name in the module address.  
