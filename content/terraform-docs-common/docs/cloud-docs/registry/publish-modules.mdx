@@ -102,9 +102,9 @@ The **Publish modules to your private registry from a single repository** option
 
 1.  (Optional) If this module is a [no-code ready module](/terraform/cloud-docs/no-code-provisioning/module-design), select the **Add Module to no-code provision allowlist** checkbox.
 
-  <!-- BEGIN: TFC:only name:pnp-callout -->
-  @include 'tfc-package-callouts/nocode.mdx'
-  <!-- END: TFC:only name:pnp-callout -->
+<!-- BEGIN: TFC:only name:pnp-callout -->
+@include 'tfc-package-callouts/nocode.mdx'
+<!-- END: TFC:only name:pnp-callout -->
 
 1.  Click **Publish module**.
 
@@ -128,16 +128,16 @@ Complete the following steps when the **Publish modules to your private registry
 
   <Tab heading="Tag">
       
-  - In the **Module Tag Prefix** field, specify a Git tag prefix. The registry uses the prefix and a release version as a unique identifier when sourcing code for multiple modules in a single repository. Refer to [Requirements](#requirements) for more information about setting up tags.  
-  - In the **Source Directory** field, specify the path to the module source code.
+   - In the **Module Tag Prefix** field, specify a Git tag prefix. The registry uses the prefix and a release version as a unique identifier when sourcing code for multiple modules in a single repository. Refer to [Requirements](#requirements) for more information about setting up tags.  
+   - In the **Source Directory** field, specify the path to the module source code.
 
   </Tab>
 
   <Tab heading="Branch">
 
-  - In the **Branch name** field, specify the name of the branch to scan for the module code.
-  - In the **Module version** field, specify the version of the module.
-  - In the **Source Directory** field, specify the path to the module source code.
+   - In the **Branch name** field, specify the name of the branch to scan for the module code.
+   - In the **Module version** field, specify the version of the module.
+   - In the **Source Directory** field, specify the path to the module source code.
 
   </Tab>
 
@@ -147,9 +147,11 @@ Complete the following steps when the **Publish modules to your private registry
 1. In the **Module Name** field, specify a name for the module as it will appear in the registry. HCP Terraform and Terraform Enterprise use the name in the module address. 
 1. In the **Provider Name** field, specify the name of the provider that integrates the module. HCP Terraform and Terraform Enterprise use the name in the module address.  
 1. It is optional, but if this module is a [no-code ready module](/terraform/cloud-docs/no-code-provisioning/module-design), enable the **Add Module to no-code provision allowlist** option to allow your organization members to provision resources defined by this module using the no-code workflow. Refer to [Provision no-code infrastructure](/terraform/cloud-docs/no-code-provisioning/provisioning) for more information.
-  <!-- BEGIN: TFC:only name:pnp-callout -->
-  @include 'tfc-package-callouts/nocode.mdx'
-  <!-- END: TFC:only name:pnp-callout -->
+
+<!-- BEGIN: TFC:only name:pnp-callout -->
+@include 'tfc-package-callouts/nocode.mdx'
+<!-- END: TFC:only name:pnp-callout -->
+
 1. Click **Publish module**.
 
 HCP Terraform and Terraform Enterprise displays a loading page while it imports the module versions and then directs you to the new module's details page. On the details page, you can view available versions, read documentation, and copy a usage example.
