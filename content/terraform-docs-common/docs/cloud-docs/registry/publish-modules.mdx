@@ -48,7 +48,7 @@ The registry automatically detects module names and versions. Your module reposi
 - Subfolders that contain module source code must adhere to the [standard module structure](/terraform/language/modules/develop/structure) so that the registry can inspect your module, generate documentation, and track resource usage.
 
 ### Release tag prefixes
-Specify a prefix to filter repository Git tags when using the [tag-based publishing type](#tag-based-publishing-considerations) in a repository that contains code for multiple modules. Without a prefix, HCP Terraform publishes new versions of modules tagged with a valid semantic version.
+Specify a prefix to filter repository Git tags when using the [tag-based publishing type](#tag-based-publishing-considerations) in a repository that contains code for multiple modules. Without a prefix, HCP Terraform and Terraform Enterprise publish new versions for all modules with valid Git tags that use semantic versioning.
 
 For example, specifying `app` as a tag prefix for the registry module instructs HCP Terraform to select only Git tags with the prefix `app` in them. As a result, HCP Terrraform selects the module tagged with `appv1.0.0` and publishes `v1.0.0` to the registry. 
 
@@ -83,7 +83,7 @@ After enabling this option, complete the instructions for [publishing a new modu
 
 You can publish modules using either the UI or API. Refer to [Publish a Private Module from a VCS](/terraform/cloud-docs/api-docs/private-registry/modules#publish-a-private-module-from-a-vcs) for instructions on using API. Note that you can also call the API to publish modules without a VCS repository as the source, which is not possible in the UI.
 
-The interface for publishing modules and the registry behavior depends how the **Publish modules to your private registry from a single repository** option. Refer to [Enable publishing from a single repository](#enable-publishing-from-a-single-repository) for more information about this setting.
+The interface for publishing modules and the registry behavior depends on how the **Publish modules to your private registry from a single repository** option. Refer to [Enable publishing from a single repository](#enable-publishing-from-a-single-repository) for more information about this setting.
 
 ### One module per repository
 
@@ -119,7 +119,7 @@ Complete the following steps when the **Publish modules to your private registry
 1. Select **Registry** from the sidebar. 
 1. Choose  **Module** from the  **Publish** and drop-down menu. The **Add Module** page appears with a list of available repositories.
 1. Click on a VCS connection. The screen advances to the **Choose a repository** step.
-1. In the **Select a VC Repository** field, choose the repository containing your modules' source code. You can search the list by typing part or all of a repository name into the filter field. VCS providers use `<NAMESPACE>/<REPO NAME>` strings to locate repositories. The namespace is an organization name for most providers, but Bitbucket Data Center, not Bitbucket Cloud, uses project keys, such as `INFRA`.
+1. In the **Select a VCS Repository** field, choose the repository containing your modules' source code. You can search the list by typing part or all of a repository name into the filter field. VCS providers use `<NAMESPACE>/<REPO NAME>` strings to locate repositories. The namespace is an organization name for most providers, but Bitbucket Data Center, not Bitbucket Cloud, uses project keys, such as `INFRA`.
 1. Enable either the **Tag** or **Branch** module publishing type. Refer to [Tag-based publishing considerations](#tag-based-publishing-considerations) and [Branch-based publishing considerations](#branch-based-publishing-considerations) for more information.
 1. Complete the fields for your publishing type.
   
