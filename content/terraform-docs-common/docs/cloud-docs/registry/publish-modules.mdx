@@ -13,13 +13,13 @@ This topic describes how to publish private modules to an organization's private
 
 ## Introduction
 
-When publishing modules to the private registry, the registry downloads the module source code. It uses API tokens to control access so consumers do not need access to the module's source repository, even when running Terraform from the command line. Additionally, the private registry uses your [version control system (VCS) integrations][vcs] and delegates management tasks, such as handling new version releases, to your VCS provider. The only manual tasks are adding a new module and deleting module versions.
+When publishing modules to the private registry, the registry downloads the module source code. The registry handles downloads and controls access with HCP Terraform API tokens, so consumers do not need access to the module's source repository, even when running Terraform from the command line. The private registry uses your [version control system (VCS) integrations][vcs] and delegates management tasks, such as handling new version releases, to your VCS provider. The only manual tasks are adding a new module and deleting module versions.
 
 ### Access to private modules
 
-Private modules are only available to members of the organization where you add them. In Terraform Enterprise, they are also available to organizations that you configure to [share modules](/terraform/enterprise/admin/application/registry-sharing) with that organization.
+Private modules are only available to members of the organization that owns the private registry. In Terraform Enterprise, they are also available to organizations that you configure to [share modules](/terraform/enterprise/admin/application/registry-sharing) with that organization.
 
-### Publishing types
+### Publishing worfklows
 
 You can publish modules according to VCS tags or branches. Refer to [Tag-based publishing considerations](#tag-based-publishing-considerations) and [Branch-based publishing considerations](#branch-based-publishing-considerations) for more information.
 
@@ -33,14 +33,14 @@ Verify that you have met the following requirements before completing these inst
 
 You must be a member of the [owners team](/terraform/cloud-docs/users-teams-organizations/permissions#organization-owners) and teams with [**Manage private registry** permissions](/terraform/cloud-docs/users-teams-organizations/permissions#manage-private-registry) enabled to publish and delete modules from the private registry.
 
-### VCS
+### VCS provider settings
 
 - You must configure a VCS provider connection. Refer to [Connect to VCS Providers](/terraform/cloud-docs/vc) for more information. 
 - The source directory settings in your VCS must specify the path to the module configuration files.
 
-### Repository
+### Repository configuration
 
-The registry automatically detects module names and versions. Your module repository meets all of the following requirements before adding it to the registry.
+The registry automatically detects module names and versions in the repository. Your module repository must meet all of the following requirements before adding it to the registry.
 
 - The repository must be in one of your configured [VCS providers][vcs]. 
 - The HCP Terraform or Terraform Enterprise user account must have admin access to the repository. The registry needs admin access to create the webhooks to import new module versions. 
