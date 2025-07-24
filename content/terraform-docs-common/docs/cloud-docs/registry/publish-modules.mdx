@@ -35,7 +35,7 @@ You must be a member of the [owners team](/terraform/cloud-docs/users-teams-orga
 
 ### VCS
 
-- You must configure a VC provider connection. Refer to [Connect to VCS Providers](/terraform/cloud-docs/vc) for more information. 
+- You must configure a VCS provider connection. Refer to [Connect to VCS Providers](/terraform/cloud-docs/vc) for more information. 
 - The source directory settings in your VCS must specify the path to the module configuration files.
 
 ### Repository
@@ -48,6 +48,7 @@ The registry automatically detects module names and versions. Your module reposi
 - Subfolders that contain module source code must adhere to the [standard module structure](/terraform/language/modules/develop/structure) so that the registry can inspect your module, generate documentation, and track resource usage.
 
 ### Release tag prefixes
+
 Specify a prefix to filter repository Git tags when using the [tag-based publishing type](#tag-based-publishing-considerations) in a repository that contains code for multiple modules. Without a prefix, HCP Terraform and Terraform Enterprise publish new versions for all modules with valid Git tags that use semantic versioning.
 
 For example, specifying `app` as a tag prefix for the registry module instructs HCP Terraform to select only Git tags with the prefix `app` in them. As a result, HCP Terrraform selects the module tagged with `appv1.0.0` and publishes `v1.0.0` to the registry. 
@@ -56,7 +57,7 @@ Refer to [Enable publishing from a single repository](#enable-publishing-from-a-
 
 ### Module 
 
-Modules in the repository must use the following three-part naming convention:
+By default, HCP Terraform and Terraform Enterprise require a separate repository for each module. As a result, each module must use the following three-part naming convention:
 
 `terraform-<PROVIDER>-<NAME>`
 
@@ -68,6 +69,11 @@ Examples:
 
 - `terraform-google-vault`
 - `terraform-aws-ec2-instance`
+
+When the **Publish modules to your private registry from a single repository** option is enabled,you can store multiple modules in a single repository. As a result, modules do not need to follow the naming convention. Refer to the following topics for more information:
+
+- [Enable publishing from a single repository](#enable-publishing-from-a-single-repository)
+- [Multiple modules in a single repository](#multiple-modules-in-a-single-repository) 
 
 ## Enable publishing from a single repository
 
@@ -118,7 +124,7 @@ Complete the following steps when the **Publish modules to your private registry
 1. Sign in to [HCP Terraform](https://app.terraform.io/) or Terraform Enterprise and navigate to the organization where you want to publish a module.
 1. Select **Registry** from the sidebar. 
 1. Choose  **Module** from the  **Publish** and drop-down menu. The **Add Module** page appears with a list of available repositories.
-1. Click on a VCS connection. The screen advances to the **Choose a repository** step.
+1. Click on a VCS connection. The screen advances to the **Configure VCS Settings** step.
 1. In the **Select a VCS Repository** field, choose the repository containing your modules' source code. You can search the list by typing part or all of a repository name into the filter field. VCS providers use `<NAMESPACE>/<REPO NAME>` strings to locate repositories. The namespace is an organization name for most providers, but Bitbucket Data Center, not Bitbucket Cloud, uses project keys, such as `INFRA`.
 1. Enable either the **Tag** or **Branch** module publishing type. Refer to [Tag-based publishing considerations](#tag-based-publishing-considerations) and [Branch-based publishing considerations](#branch-based-publishing-considerations) for more information.
 1. Complete the fields for your publishing type.
@@ -130,12 +136,12 @@ Complete the following steps when the **Publish modules to your private registry
 
   When **Branch** is enabled:
 
-   - In the **Branch name** field, specify the name of the branch to scan for the module code.
-   - In the **Module version** field, specify the version of the module.
+   - In the **Branch Name** field, specify the name of the branch to scan for the module code.
+   - In the **Module Version** field, specify the version of the module.
    - In the **Source Directory** field, specify the path to the module source code.
 
 1. Click **Next** to advance to the **Confirm selection** screen.
-1. In the **Module Name** field, specify a name for the module as it will appear in the registry. HCP Terraform and Terraform Enterprise use the name in the module address. 
+1. In the **Module Name** field, specify a name for the module. This is the name that appears in the registry. HCP Terraform and Terraform Enterprise use the name in the module address. 
 1. In the **Provider Name** field, specify the name of the provider that integrates the module. HCP Terraform and Terraform Enterprise use the name in the module address.  
 1. It is optional, but if this module is a [no-code ready module](/terraform/cloud-docs/no-code-provisioning/module-design), enable the **Add Module to no-code provision allowlist** option to allow your organization members to provision resources defined by this module using the no-code workflow. Refer to [Provision no-code infrastructure](/terraform/cloud-docs/no-code-provisioning/provisioning) for more information.
 
