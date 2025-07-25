@@ -89,7 +89,7 @@ There is no requirement that both clusters use the same storage engine.
 ### Seals
 
 There is no requirement that both clusters use the same seal type, but see
-[sealwrap](/docs/enterprise/sealwrap#seal-wrap-and-replication) for the full
+[sealwrap](/vault/docs/enterprise/sealwrap#seal-wrap-and-replication) for the full
 details.
 
 Also note that enabling replication will modify the secondary seal.
@@ -109,7 +109,7 @@ fragments.
 ### Vault versions
 
 Vault changes are designed and tested to ensure that the
-[upgrade instructions](/docs/upgrading#replication-installations) are viable, i.e.
+[upgrade instructions](/vault/docs/upgrading#replication-installations) are viable, i.e.
 that a secondary can run a newer Vault version than its primary.
 
 That said, we do not recommend running replicated Vault clusters with different
@@ -118,7 +118,7 @@ versions any longer than necessary to perform the upgrade.
 ## Internals
 
 Details on the internal design of the replication feature can be found in the
-[replication internals](/docs/internals/replication) document.
+[replication internals](/vault/docs/internals/replication) document.
 
 ## Security Model
 

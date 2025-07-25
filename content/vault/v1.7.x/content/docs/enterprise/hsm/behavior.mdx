@@ -29,7 +29,7 @@ Vault usually generates a master key and splits it using [Shamir's Secret
 Sharing](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) to prevent a
 single operator from being able to modify and unseal Vault (see more
 information about Vault's security model
-[here](/docs/internals/security)).
+[here](/vault/docs/internals/security)).
 
 When using an HSM, Vault instead stores the master key, encrypted by the HSM,
 into its internal storage. As a result, during an `init` command, the number of
@@ -71,7 +71,7 @@ and their API equivalents in the
 
 Additionally, Vault will refuse to initialize if the option has not been set to
 generate a key but no key is found. See
-[Configuration](/docs/configuration/seal/pkcs11) for more details.
+[Configuration](/vault/docs/configuration/seal/pkcs11) for more details.
 
 ### Rekeying
 

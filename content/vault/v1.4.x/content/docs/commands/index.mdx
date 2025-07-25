@@ -50,7 +50,7 @@ and arguments if any:
 vault <command> [options] [path] [args]
 ```
 
-- `options` - [Flags](/docs/commands#flags) to specify additional settings
+- `options` - [Flags](/vault/docs/commands#flags) to specify additional settings
 - `args` - API arguments specific to the operation
 
   -> **NOTE:** Run `vault path-help <path>` to see the list of args (parameters).
@@ -206,7 +206,7 @@ precedence over the environment variables.
 Vault authentication token. Conceptually similar to a session token on a
 website, the `VAULT_TOKEN` environment variable holds the contents of the token.
 For more information, please see the [token
-concepts](/docs/concepts/tokens) page.
+concepts](/vault/docs/concepts/tokens) page.
 
 ### `VAULT_ADDR`
 
@@ -257,7 +257,7 @@ High Availability mode.
 
 Do not verify Vault's presented certificate before communicating with it.
 Setting this variable is not recommended and voids Vault's [security
-model](/docs/internals/security).
+model](/vault/docs/internals/security).
 
 ### `VAULT_TLS_SERVER_NAME`
 
