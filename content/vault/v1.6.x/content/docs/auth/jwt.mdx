@@ -233,7 +233,7 @@ EOF
 
   `cat jwt.json | jq -r .access_token | cut -d. -f2 | base64 -D`
 
-- As of Vault 1.2, the [`verbose_oidc_logging`](/api/auth/jwt#verbose_oidc_logging) role
+- As of Vault 1.2, the [`verbose_oidc_logging`](/vault/api-docs/auth/jwt#verbose_oidc_logging) role
   option is available which will log the received OIDC token to the _server_ logs if debug-level logging is enabled. This can
   be helpful when debugging provider setup and verifying that the received claims are what you expect.
   Since claims data is logged verbatim and may contain sensitive information, this option should not be
@@ -302,7 +302,7 @@ management tool.
 
 1.  Use the `/config` endpoint to configure Vault. To support JWT roles, either local keys or an OIDC
     Discovery URL must be present. For OIDC roles, OIDC Discovery URL, OIDC Client ID and OIDC Client Secret are required. For the
-    list of available configuration options, please see the [API documentation](/api/auth/jwt).
+    list of available configuration options, please see the [API documentation](/vault/api-docs/auth/jwt).
 
     ```text
     $ vault write auth/jwt/config \
@@ -334,4 +334,4 @@ management tool.
 ## API
 
 The JWT Auth Plugin has a full HTTP API. Please see the
-[API docs](/api/auth/jwt) for more details.
+[API docs](/vault/api-docs/auth/jwt) for more details.

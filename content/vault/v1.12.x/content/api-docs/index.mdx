@@ -89,8 +89,8 @@ Typically the request data, body and response data to and from Vault is in JSON.
 Vault sets the `Content-Type` header appropriately with its response and does 
 not require it from the clients request.
 
-The demonstration below uses the [`KVv1` secrets engine](/api/secret/kv/kv-v1), which is a 
-simple Key/Value store. Please read [the API documentation of KV secret engines](/api/secret/kv) 
+The demonstration below uses the [`KVv1` secrets engine](/vault/api-docs/secret/kv/kv-v1), which is a 
+simple Key/Value store. Please read [the API documentation of KV secret engines](/vault/api-docs/secret/kv) 
 for details of `KVv1` compared to `KVv2` and how they differ in their URI paths 
 as well as the features available in version 2 of the KV secrets engine.
 
@@ -204,7 +204,7 @@ methods, etc. then append `?help=1` to any URL. If you have valid permission to
 access the path, then the help text will be returned as a markdown-formatted block 
 in the `help` attribute of the response.
 
-Additionally, with the [OpenAPI generation](/api/system/internal-specs-openapi) in Vault, you will get back a small
+Additionally, with the [OpenAPI generation](/vault/api-docs/system/internal-specs-openapi) in Vault, you will get back a small
 OpenAPI document in the `openapi` attribute. This document is relevant for the 
 path you're looking up and any paths under it - also note paths in the OpenAPI 
 document are relative to the initial path queried.

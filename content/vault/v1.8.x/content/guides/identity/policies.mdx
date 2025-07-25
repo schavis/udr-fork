@@ -39,7 +39,7 @@ valid input.
 ## Reference Material
 
 - [Policies](/vault/docs/concepts/policies#default-policy) documentation
-- [Policy API](/api/system/policy) documentation
+- [Policy API](/vault/api-docs/system/policy) documentation
 - [Getting Started guide](/intro/getting-started/policies) on policies
 
 ~> **NOTE:** An [interactive
@@ -375,7 +375,7 @@ passing your modified policy (`*.hcl`).
 #### API call using cURL
 
 To create a policy, use the
-[`sys/policies/acl`](/api/system/policies#create-update-acl-policy)
+[`sys/policies/acl`](/vault/api-docs/system/policies#create-update-acl-policy)
 endpoint:
 
 ```shell-session
@@ -389,7 +389,7 @@ Where `<TOKEN>` is your valid token, and `<PAYLOAD>` includes the policy name an
 stringified policy.
 
 -> **NOTE:** To create ACL policies, you can use the
-[`sys/policy`](/api/system/policy) endpoint as well.
+[`sys/policy`](/vault/api-docs/system/policy) endpoint as well.
 
 **Example:**
 
