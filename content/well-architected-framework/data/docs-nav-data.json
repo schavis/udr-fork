@@ -18,11 +18,25 @@
     "routes": [
       {
         "title": "Overview",
+        "badge": {
+          "text": "TBD",
+          "type": "filled",
+          "color": "highlight"
+        },
         "path": "automate-and-define-processes"
       },
       {
         "title": "Team and culture",
         "routes": [
+          {
+            "title": "Overview",
+            "badge": {
+              "text": "TBD",
+              "type": "filled",
+              "color": "highlight"
+            },
+            "path": "automate-and-define-processes/team-and-culture"
+          },
           {
             "title": "Create high-performing teams",
             "routes": [
@@ -55,12 +69,48 @@
                 "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/recognition"
               }
             ]
+          },
+          {
+            "title": "DevOps culture",
+            "badge": {
+              "text": "TBD",
+              "type": "filled",
+              "color": "highlight"
+            },
+            "path": "automate-and-define-processes/team-and-culture/devops-culture"
+          },
+          {
+            "title": "Remote work",
+            "badge": {
+              "text": "TBD",
+              "type": "filled",
+              "color": "highlight"
+            },
+            "path": "automate-and-define-processes/team-and-culture/remote-work"
+          },
+          {
+            "title": "Process over technology",
+            "badge": {
+              "text": "TBD",
+              "type": "filled",
+              "color": "highlight"
+            },
+            "path": "automate-and-define-processes/team-and-culture/process-over-technology"
           }
         ]
       },
       {
         "title": "Develop and deploy",
         "routes": [
+          {
+            "title": "Overview",
+            "badge": {
+              "text": "TBD",
+              "type": "filled",
+              "color": "highlight"
+            },
+            "path": "automate-and-define-processes/develop-and-deploy"
+          },
           {
             "title": "Zero downtime deployments",
             "routes": [
@@ -73,11 +123,11 @@
                 "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/infrastructure"
               },
               {
-                "title": "Applications",
+                "title": "Application",
                 "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/applications"
               },
               {
-                "title": "Service mesh deployments",
+                "title": "Service mesh",
                 "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/service-mesh"
               }
             ]
@@ -90,45 +140,40 @@
                 "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code"
               },
               {
-                "title": "Manage tools with IaC",
-                "routes": [
-                  {
-                    "title": "CI/CD systems",
-                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/ci-cd"
-                  },
-                  {
-                    "title": "Configuration management",
-                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/configuration-management"
-                  },
-                  {
-                    "title": "Container management",
-                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/container-management"
-                  },
-                  {
-                    "title": "Container orchestration",
-                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/container-orchestration"
-                  },
-                  {
-                    "title": "Database management",
-                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/database"
-                  },
-                  {
-                    "title": "Logging and monitoring",
-                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/logging-and-monitoring"
-                  },
-                  {
-                    "title": "Version control systems",
-                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/version-control-systems"
-                  },
-                  {
-                    "title": "Security and authentication",
-                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/security-and-authentication"
-                  },
-                  {
-                    "title": "Public cloud and cloud automation",
-                    "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/manage-tools/cloud-automation"
-                  }
-                ]
+                "title": "CI/CD systems",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/ci-cd"
+              },
+              {
+                "title": "Configuration management",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/configuration-management"
+              },
+              {
+                "title": "Container management",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/container-management"
+              },
+              {
+                "title": "Container orchestration",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/container-orchestration"
+              },
+              {
+                "title": "Database management",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/database"
+              },
+              {
+                "title": "Logging and monitoring",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/logging-and-monitoring"
+              },
+              {
+                "title": "Version control systems",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/version-control-systems"
+              },
+              {
+                "title": "Security and authentication",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/security-and-authentication"
+              },
+              {
+                "title": "Public cloud and cloud automation",
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/cloud-automation"
               }
             ]
           },
@@ -170,15 +215,15 @@
                 "path": "automate-and-define-processes/ops-monitoring/setup-monitoring-agents/manage-secrets"
               },
               {
-                "title": "Configure agent on VMs",
+                "title": "Virtual machines (VMs)",
                 "path": "automate-and-define-processes/ops-monitoring/setup-monitoring-agents/vm"
               },
               {
-                "title": "Configure agent on containers",
+                "title": "Containers",
                 "path": "automate-and-define-processes/ops-monitoring/setup-monitoring-agents/containers"
               },
               {
-                "title": "Configure agent on service mesh",
+                "title": "Service mesh",
                 "path": "automate-and-define-processes/ops-monitoring/setup-monitoring-agents/service-mesh"
               }
             ]
@@ -287,6 +332,7 @@
     "routes": [
       {
         "title": "Overview",
+        "badge": { "text": "TBD", "type": "filled", "color": "highlight" },
         "path": "design-resilient-systems"
       }
     ]
@@ -318,8 +364,8 @@
                 "path": "secure-systems/secure-applications/ci-cd-secrets"
               },
               {
-                "title": "CI/CD secrets anti-patterns",
-                "path": "secure-systems/secure-applications/ci-cd-secrets/ci-cd-anti-patterns"
+                "title": "Anti-patterns",
+                "path": "secure-systems/secure-applications/ci-cd-secrets/anti-patterns"
               },
               {
                 "title": "Dynamic and static secrets",

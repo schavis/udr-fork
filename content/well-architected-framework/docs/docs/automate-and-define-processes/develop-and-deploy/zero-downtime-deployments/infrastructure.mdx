@@ -5,12 +5,11 @@ description: Learn how to deploy infrastructure with zero downtime.
 
 # Zero-downtime infrastructure deployments
 
-
 Properly managing changes to your infrastructure, such as updating network policies or upgrading your Kubernetes cluster, is important to ensure the reliability of your upgraded application and achieve zero-downtime deployments. 
 
 Blue/green deployment limits downtime and reduces risk by maintaining two identical production environments — one live, one idle. You deploy to the idle environment, test thoroughly, then switch traffic over. If problems occur, you can roll back immediately by switching traffic back. 
 
-## How to deploy blue/green infrastructure
+## Blue/green infrastructure
 
 Blue/green deployments require two identical application infrastructure environments, a method for deploying your application to your two environments, and a way to route your traffic between them.
 

@@ -25,28 +25,21 @@ Blue/green, canary, and rolling deployments all improve application reliability 
 
 The difference between these strategies is how and where the application deploys. This involves the environment the application runs in, cost considerations, deployment methods, and traffic direction.
 
-- Environment setup:
-    - Blue/Green: Requires two nearly identical environments.
-    - Canary: Requires two nearly identical environments. Initially uses a small subset of users or servers.
-    - Rolling: Updates subsets of servers in batches.
-- Traffic switching:
-    - Blue/Green: Switches all traffic at once.
-    - Canary: Gradually increases traffic to the new version.
-    - Rolling: Sequentially updates and transitions traffic.
-- Rollback mechanism:
-    - Blue/Green: Switching back to the blue environment.
-    - Canary: Rollback involves reducing or stopping the canary deployment.
-    - Rolling: Rollback involves reverting batches, which can be more complex.
+|                       | Blue/Green                                      | Canary                                                                                      | Rolling                                         |
+|-----------------------|-------------------------------------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------|
+| **Environment Setup** | Requires two nearly identical environments.     | Requires two nearly identical environments. Starts with a small subset of users or servers. | Updates subsets of servers in batches.          |
+| **Traffic Switching** | Switches all traffic at once.                   | Gradually increases traffic to the new version.                                             | Sequentially updates and transitions traffic.   |
+| **Rollback Mechanism**| Switches back to the blue environment.          | Reduces or stop the canary deployment.                                                      | Reverts batches; can be more complex.           |
 
 Since all three zero-downtime strategies offer similar benefits and aim to achieve zero-downtime deployments, the changes you plan to make will be the most important consideration when determining which deployment to implement. The changes can be either infrastructure or application.
 
-**Infrastructure** changes involve setting up your environments so they are prepared to host your zero-downtime application. With blue/green deployments, you must have two identical environments. An infrastructure environment can range from creating a new green full stack (servers, networking, or databases) to creating a new cluster to run containers or adding a single green VM to an existing infrastructure stack.
+- **Infrastructure** changes involve setting up your environments so they are prepared to host your zero-downtime application. With blue/green deployments, you must have two identical environments. An infrastructure environment can range from creating a new green full stack (servers, networking, or databases) to creating a new cluster to run containers or adding a single green VM to an existing infrastructure stack.
 
-However, it is important to note that running two identical infrastructure environments can increase costs. You can run blue/green environments only in production to save money. You should also have an infrastructure lifecycle strategy, such as using infrastructure-as-code to deploy your green environment only when you plan to deploy your new application version.
+ However, it is important to note that running two identical infrastructure environments can increase costs. You can run blue/green environments only in production to save money. You should also have an infrastructure lifecycle strategy, such as using infrastructure-as-code to deploy your green environment only when you plan to deploy your new application version.
 
-**Application** changes involve deploying and directing traffic to your new application version. You can configure your load balancer or reverse proxies to direct traffic to your green stack and perform canary testing or direct traffic in a controlled manner for rolling deployments.
+- **Application** changes involve deploying and directing traffic to your new application version. You can configure your load balancer or reverse proxies to direct traffic to your green stack and perform canary testing or direct traffic in a controlled manner for rolling deployments.
 
-**Service mesh** deployments use service splitters to implement zero-downtime deployments. These components, often used in service mesh architectures, allow traffic to route between different versions of an application dynamically.
+- **Service mesh** deployments use service splitters to implement zero-downtime deployments. These components, often used in service mesh architectures, allow traffic to route between different versions of an application dynamically.
 
 External resources:
 - [AWS deployment strategies](https://docs.aws.amazon.com/whitepapers/latest/overview-deployment-options/deployment-strategies.html)
