@@ -383,3 +383,19 @@ already rotated before the restart.
 Upgrade to 1.18.9+ or 1.19.3+. If you cannot upgrade, the only workaround is to
 avoid restarting the backend.
 
+### Counters API requires start time in OSS Vault ((#start-time-counters-api))
+
+| Change      | Status | Affected version | Fixed version
+| ----------- | ------ | ---------------- | --------------------
+| Known issue | Fixed  | 1.18.x, 1.19.x   | 1.20.0
+
+The `/sys/internal/counters/activity` API requires the `start_time` parameter when used 
+with OSS Vault. Unlike Enterprise Vault, OSS Vault does not define a billing start time, and ommitting `start_time` may lead
+to unexpected behavior in affected versions (1.18.x and 1.19.x). In Enterprise Vault, `start_time` parameter is optional and 
+can be safely ommitted, as it defaults to the cluster's billing start date. To avoid issues in OSS Vault, ensure that your 
+API calls explicitely provide a valid `start_time`.
+
+#### Workaround
+
+Provide a valid `start_time` parameter in `/sys/internal/counters/activity` API calls when using OSS Vault.
+Or upgrade to Vault 1.20.0+

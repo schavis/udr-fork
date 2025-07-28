@@ -92,6 +92,14 @@ WARNING! The following warnings were returned from Vault:
 
 </CodeBlockConfig>
 
+#### Counters API requires start time in OSS Vault
+
+The `/sys/internal/counters/activity` API requires the `start_time` parameter when used 
+with OSS Vault. Unlike Enterprise Vault, OSS Vault does not define a billing start time, and ommitting `start_time` may lead
+to unexpected behavior in affected versions (1.18.x and 1.19.x). In Enterprise Vault, `start_time` parameter is optional and 
+can be safely ommitted, as it defaults to the cluster's billing start date. To avoid issues in OSS Vault, ensure that your 
+API calls explicitely provide a valid `start_time`.
+
 ### Docker image no longer contains `curl`
 
 The `curl` binary is no longer included in the published Docker container images for Vault and Vault
