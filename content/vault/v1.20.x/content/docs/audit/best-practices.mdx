@@ -1,88 +1,102 @@
 ---
 layout: docs
-page_title: Audit Logging Best Practices
+page_title: Audit logging best practices
 description: Recommendations for setting up audit logging in HashiCorp Vault.
 ---
 
-# Best practices
+# Best practices for audit logging
 
-<Highlight title="Mileage may vary">
-  This page contains recommendations that are <strong>generally applicable</strong> to Vault customers. You should independently evaluate whether each recommendation on this page is advisable in the context of your organization's environment and use cases for Vault.
-</Highlight>
+The following recommendations apply generally to most Vault deployments. You should always independently evaluate whether a given recommendation makes sense in the context of your deployment and use of Vault.
 
 ## Test configuration changes
 
-You should test every configuration change to Vault's audit logging in a non-production environment. The non-production environment should closely mirror the production environment in all aspects relevant to the audit logging configuration and should include performance benchmarking under production-like loads.
+Always test your audit logging changes in a non-production environment that closely mirrors your production environment. Your test environment should include performance benchmarking under production-like loads and match in all aspects relevant to the audit logging configuration you want to test.
 
 ## Enable audit devices at cluster initialization
 
-You should ensure that at least one audit device is enabled immediately after a new Vault cluster is initialized. The audit device's configuration must be [valid for all Vault cluster nodes](/vault/docs/audit#enabling-and-disabling-audit-devices).
+Enable at least one audit device immediately after you initialize a new Vault cluster. The configuration of you audit device must be [valid for all Vault cluster nodes](/vault/docs/audit#enabling-and-disabling-audit-devices).
 
-When a new Vault cluster is initialized, audit logging is disabled by default. Enabling at least one audit device post-initialization ensures that all subsequent API requests, including those for initial cluster configuration and root token revocation, are audited.
+Audit logging is disabled by default on new Vault clusters. By enabling at least one audit device post-initialization, you ensure that all subsequent API requests, including those for initial cluster configuration and root token revocation, are audited.
 
 ## Enable at least two audit devices
 
-You should enable at least two audit devices on each Vault cluster. We generally recommend enabling at least two audit devices of different types and configuring *at least one* of those devices to forward logs to a remote system for analysis and long-term storage.
+Enable at least two audit devices, of different types, on each Vault cluster. Configure *at least one* of those devices to forward logs to a remote system for analysis and long-term storage.
+
+Vault does not respond to client requests it cannot log. Having at least two audit devices reduces the risk of Vault not responding to client requests when the only audit device becomes partially or fully unavailable.
 
 <Warning>
-  <p>When only one audit device is enabled, and that audit device becomes partially or fully unavailable, Vault will not respond to client requests it cannot log. Enabling two or more audit devices reduces the risk of no audit devices being available.</p>
-
-  <p>When two or more audit devices are enabled, Vault will attempt to send each audit log entry to all audit devices. However, Vault guarantees only that an audit log entry is written to at least one audit device. When you configure two or more audit devices, you <strong>must</strong> analyze audit log entries across all configured devices to ensure that you have a complete record of all API requests and responses. You may deduplicate audit log entries based on the value of <code>.request.id</code>.</p>
+  Vault sends each audit log entry to all enabled devices, with the guarantee that the audit log entry writes successfully to at least one audit device. To ensure that you have a complete record of all API requests and responses, you <strong>must</strong> analyze audit log entries across all configured devices. You may deduplicate audit log entries based on the value of <code>.request.id</code>.
 </Warning>
 
-### File devices
+<Tabs>
 
-If you configure a `file` audit device, ensure that you have a process in place for rotating the corresponding log file. You should also use a dedicated volume or partition for Vault's audit logs, to protect against the risk of other workloads on the system taking up the disk space intended for them.
+<Tab heading="File devices">
 
-Vault does not automatically rotate log files. If log files are not rotated, they may grow to consume all available disk space, eventually causing the audit device to become unavailable.
+If you enable a `file` audit device, use a dedicated volume or partition for Vault's audit logs to protect against other workloads on the system taking up the disk space intended for your log files.
 
-You should use a purpose-built system, such as *logrotate*, to rotate Vault's audit log file according to your organization's policies. You can configure your log rotation system to send Vault an `HUP` signal, which will cause Vault to start writing audit log entries to the new log file.
+Additionally, establish a log rotation process that is appropriate for your organization, deployment, and policies, using a purpose-built system like *logrotate*. Configure your log rotation system to send Vault an `HUP` signal, which will cause Vault to start writing audit log entries to the new log file.
 
-<Tip>
-  When running Vault on a Kubernetes cluster, a common approach is to configure a <code>file</code> audit device with <code>file_path</code> set to <code>stdout</code>. This will cause Vault's audit logs to be written to the container's standard output, from where they can be processed by a Kubernetes cluster-level log collector. You should also consider configuring the audit device with a <code>prefix</code> that enables the log collector to separate audit logs from server logs.
+<Tip title="Logging with Kubernetes">
+
+  When running Vault on a Kubernetes cluster, a common approach is to configure a `file` audit device with `file_path` set to `stdout`. Vault will write audit logs to the standard output for the container, which lets you process the logs with a Kubernetes cluster-level log collector.
+  
+  If you choose this approach, we suggest configuring the audit device with a `prefix`, so your log collector can separate audit logs from server logs.
+
 </Tip>
 
-### Syslog devices
+</Tab>
 
-If you configure a `syslog` audit device, use a TCP listener to ensure successful recording of large audit log entries. Note that Vault can only write audit logs to the default syslog service running on the same host as the Vault server. Note also that Vault's `syslog` audit device is available only on Unix systems.
+<Tab heading="Syslog devices">
 
-Vault logs API requests and responses in detail. As a result, some audit log entries can exceed the message size allowed for UDP transmission of syslog messages.
+To configure a `syslog` audit device, you must deploy Vault on Unix, and you must use the default syslog service running on the same host as the Vault server. If you enable a `syslog` audit device, use a TCP listener so that Vault can record large audit log entries that may exceed the size limit of UDP listeners.
 
-### Socket devices
+</Tab>
 
-If you configure a `socket` audit device, you should configure a local service to bind a Unix socket.
+<Tab heading="Socket devices">
 
-Socket devices using TCP and UDP listeners can result in lost audit log data when the TCP connection is interrupted or the receiving UDP endpoint becomes unavailable.
+If you configure a `socket` audit device, configure a local service to bind a Unix socket.
+
+Socket devices using TCP and UDP listeners can result in lost audit log data if the TCP connection is interrupted or the receiving UDP endpoint becomes unavailable. Using a local socket helps protect against data loss.
+
+</Tab>
+
+</Tabs>
 
 ## Configure audit devices
 
-You should review all configuration options that are [common](/vault/api-docs/system/audit#parameters) to all audit device types *and* those specific to a given audit device type (`file`, `syslog`, `socket`) and ensure that all audit devices are configured in a way that is appropriate for your organization and deployment.
+Review the configuration options that are specific to the type of audit device, as well as those [common](/vault/api-docs/system/audit#parameters) to all audit device types, and ensure that all audit devices are configured in a way that is appropriate for your organization and deployment.
 
-In general, we recommend you set the following options:
+In general, we recommend the following options for all audit devices:
 
-- `elide_list_responses = true`. This reduces the volume of log data produced by API list requests (see [Eliding list response bodies](/vault/docs/audit#eliding-list-response-bodies)).  
-- `hmac_accessor = false`. A token accessor is generally not considered sensitive information: it does not grant any access to Vault, but rather serves as a unique identifier for a single Vault token. A token accessor enables you to [revoke](/vault/docs/commands/token/revoke) its corresponding Vault token, even when you do not know the token itself. By disabling token accessor hashing, if you identify unusual access patterns in your audit logs, you can quickly revoke the corresponding Vault token through its accessor.
+- Set `elide_list_responses = true` to reduce the volume of log data produced by API list requests (see [Eliding list response bodies](/vault/docs/audit#eliding-list-response-bodies)).  
+- Set `hmac_accessor = false`. A token accessor is generally not considered sensitive information: it does not grant any access to Vault, but rather serves as a unique identifier for a single Vault token. A token accessor enables you to [revoke](/vault/docs/commands/token/revoke) its corresponding Vault token, even when you do not know the token itself. By disabling token accessor hashing, if you identify unusual access patterns in your audit logs, you can quickly revoke the corresponding Vault token through its accessor.
 
 ## Monitor audit device health
 
-You should configure monitoring and alerting on the health of your audit devices.
+Configure monitoring and alerting on the health of your audit devices through Vault telemetry and device-specific monitoring (such as available disk space, disk IOPS, and log rotation status for `file` type audit devices).
 
-Vault produces several [telemetry metrics](/vault/docs/internals/telemetry/metrics/audit) related to audit logging. You should especially monitor `vault.audit.log_request_failure`, `vault.audit.log_response_failure`, `vault.audit.{DEVICE}.log_request`, and `vault.audit.{DEVICE}.log_response` for spikes, which can indicate one or more audit devices failing.
+Vault produces several audit logging [telemetry metrics](/vault/docs/internals/telemetry/metrics/audit). We especially recommend monitoring the following metrics for spikes, which can indicate one or more audit devices failing:
 
-Additionally, you should configure monitoring and alerting specific to each type of audit device, such as available disk space, disk IOPS, and log rotation status for `file` audit devices.
+- [`vault.audit.log_request_failure`](/vault/docs/internals/telemetry/metrics/audit#vault-audit-log_request_failure)
+- [`vault.audit.log_response_failure`](/vault/docs/internals/telemetry/metrics/audit#vault-audit-log_response_failure)
+- [`vault.audit.{DEVICE}.log_request`](/vault/docs/internals/telemetry/metrics/audit#vault-audit-device-log_request)
+- [`vault.audit.{DEVICE}.log_response`](/vault/docs/internals/telemetry/metrics/audit#vault-audit-device-log_response)
 
 ## Configure attribute hashing
 
-For each authentication backend and secrets engine mount you configure in Vault, you should evaluate which request and response attributes need *not* be [hashed](/vault/docs/audit#hashing-of-sensitive-values) in the audit logs.
+Evaluate which request and response attributes need *not* be [hashed](/vault/docs/audit#hashing-of-sensitive-values) in the audit logs for each authentication backend and secrets engine mount you configure in Vault. Hashing should be left on for attributes that are sensitive (e.g., passwords, private keys) or that may be excessively large for your audit log.
 
-<Tip>
-  Hashing should be left on for attributes that are sensitive (e.g., passwords, private keys) or that may be excessively large for your audit log.
-</Tip>
+You can disable hashing for individual request and response attributes with the `audit_non_hmac_request_keys` and `audit_non_hmac_response_keys` attributes in the following tuning endpoints:
 
-You can disable hashing for individual request and response attributes through the `audit_non_hmac_request_keys` and `audit_non_hmac_response_keys` attributes in the "tune" API endpoints of each [authentication backend](https://developer.hashicorp.com/vault/api-docs/system/auth#tune-auth-method) and [secret engine](https://developer.hashicorp.com/vault/api-docs/system/mounts#tune-mount-configuration) mount.
+- [`/sys/auth/{path}/tune`](/vault/api-docs/system/auth#tune-auth-method)
+- [`/sys/mounts/{path}/tune`](/vault/api-docs/system/mounts#tune-mount-configuration)
 
 ## Monitor suspicious activity
 
-You should configure monitoring and alerting of Vault's audit logs for unusual or suspicious activity.
+Configure monitoring and alerting for unusual or suspicious activity in your audit logs. Examples of events to monitor include:
 
-Examples of events to monitor include root token creation, root token usage, modifications to audit loggig configuration, spikes in authentication failures, and spikes in permission denied failures.
+- Root token creation
+- Root token usage
+- Modifications to audit loggig configuration
+- Spikes in authentication failures
+- Spikes in permission denied failures
