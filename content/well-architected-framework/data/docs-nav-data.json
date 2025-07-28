@@ -28,7 +28,7 @@
             "routes": [
               {
                 "title": "Overview",
-                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/overview"
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams"
               },
               {
                 "title": "Continuous learning",
@@ -66,7 +66,7 @@
             "routes": [
               {
                 "title": "Overview",
-                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/overview"
+                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments"
               },
               {
                 "title": "Infrastructure",
@@ -87,7 +87,7 @@
             "routes": [
               {
                 "title": "Overview",
-                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/overview"
+                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code"
               },
               {
                 "title": "Manage tools with IaC",
@@ -137,7 +137,7 @@
             "routes": [
               {
                 "title": "Overview",
-                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/overview"
+                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments"
               },
               {
                 "title": "Semi-automate deployments",
@@ -315,7 +315,7 @@
             "routes": [
               {
                 "title": "Overview",
-                "path": "secure-systems/secure-applications/ci-cd-secrets/overview"
+                "path": "secure-systems/secure-applications/ci-cd-secrets"
               },
               {
                 "title": "CI/CD secrets anti-patterns",
