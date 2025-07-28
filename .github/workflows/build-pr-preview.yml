@@ -185,6 +185,7 @@ jobs:
           repository: hashicorp/dev-portal
           ref: migrate-waf-to-udr-docs
           path: ./unified-docs-frontend-preview
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Use cache
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
