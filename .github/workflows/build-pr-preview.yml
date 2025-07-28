@@ -184,8 +184,9 @@ jobs:
         with:
           repository: hashicorp/dev-portal
           path: ./unified-docs-frontend-preview
-        # TODO: temp, remove this right before we merge the PR
-      - run: git checkout migrate-waf-to-udr-docs
+      # TODO: temp, remove this right before we merge the PR
+      - name: Checkout migrate-waf-to-udr-docs
+        run: cd unified-docs-frontend-preview && git checkout migrate-waf-to-udr-docs
       - name: Use cache
         uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
         with:
