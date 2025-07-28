@@ -6,17 +6,17 @@ description: Audit devices are mountable devices that log requests and responses
 
 # Audit logging
 
-With a small set of [exceptions](#excepted-api-endpoints), Vault audit devices enable the detailed recording of all API requests and responses. An audit device can be a [file](/vault/docs/audit/file), a [syslog server](/vault/docs/audit/syslog), or a [socket](/vault/docs/audit/socket).
+With a small set of [exceptions](#excepted-api-endpoints), Vault audit devices record all API requests and responses in detail. An audit device can be a [file](/vault/docs/audit/file), a [syslog server](/vault/docs/audit/syslog), or a [socket](/vault/docs/audit/socket).
 
-Refer to the [best practices](/vault/docs/audit/best-practices) page for important considerations before configuring your audit devices.
+Refer to the [best practices](/vault/docs/audit/best-practices) page for important considerations before you configure your audit devices.
 
-Audit logs are distinct from server logs (also known as operational logs). Server logs emit information about the Vault server process, such as process errors and configuration warnings. Audit logs record the details of every request received and response and sent by the Vault API. Refer to the [Troubleshoot Vault](/vault/tutorials/monitoring/troubleshooting-vault#vault-server-logs) tutorial for more information about server logs.
+Audit logs differ from server logs (also known as operational logs). Server logs emit information about the Vault server process, such as process errors and configuration warnings. Audit logs record the details of every request received and response sent by the Vault API. Refer to the [Troubleshoot Vault](/vault/tutorials/monitoring/troubleshooting-vault#vault-server-logs) tutorial for more information about server logs.
 
 ## Enabling and disabling audit devices
 
 When you initialize a new Vault cluster, auditing is disabled. You must enable audit devices with the [API](/vault/api-docs/system/audit#enable-audit-device) or related tooling (such as the [Vault CLI](/vault/docs/commands/audit/enable) or the [Terraform Vault provider](/vault/docs/configuration/programmatic-management)).
 
-When you enable an audit device, you can configure it with a set of options. There is a set of [common configuration options](/vault/api-docs/system/audit#common-configuration-options) that apply to all types of audit devices. In addition, each type of audit device has its own set of options, which are documented in the respective page for that audit device type.
+When you enable an audit device, you can configure it with a set of options. There is a set of [common configuration options](/vault/api-docs/system/audit#common-configuration-options) that apply to all types of audit devices. Each type of audit device also has its own set of options, which the respective page for that audit device type documents.
 
 For example, the command below enables a `file` type audit device that writes to the file at `/var/log/vault_audit.log`. The additional options disable [hashing](#hashing-of-sensitive-values) of token accessors and [elide list responses](#eliding-list-response-bodies):
 
@@ -27,45 +27,49 @@ $ vault audit enable file \
     elide_list_responses=true
 ```
 
-Audit device configurations are replicated to all nodes within a cluster. In Vault Enterprise, audit device configurations are also replicated to Performance Secondary and DR Secondary clusters unless the audit device is configured as [`local`](/vault/api-docs/system/audit#local) to the cluster.
+Vault replicates audit device configurations to all nodes within a cluster. In Vault Enterprise, Vault also replicates audit device configurations to Performance Secondary and DR Secondary clusters unless you configure the audit device as [`local`](/vault/api-docs/system/audit#local) to the cluster.
 
 <Note>
-  Before enabling an audit device, ensure that all Vault nodes to which the audit device configuration will be replicated can successfully log to that audit device.
+  Before you enable an audit device, ensure that all Vault nodes to which the audit device configuration replicates can successfully log to that audit device.
 </Note>
 
-When an audit device is disabled, it will stop receiving logs immediately. The existing logs that it did store are untouched.
+When you disable an audit device, it stops receiving logs immediately. The existing logs that it stored remain untouched.
 
 <Warning>
-  Once an audit device is disabled, you will no longer be able to <a href="#hashing-of-sensitive-values">compute hashes</a> for audit log entries previously written to that audit device. This is true even if you re-enable the audit device at the same path, as a new hashing key will be created.
+  Once you disable an audit device, you can no longer <a href="#hashing-of-sensitive-values">compute hashes</a> for audit log entries previously written to that audit device. This remains true even if you re-enable the audit device at the same path, as Vault creates a new hashing key.
 </Warning>
 
 ## Availability of audit devices  
 
-Audit logs are critically important, and ignoring auditing failures opens an avenue for attack. As such, when you enable at least one audit device, Vault guarantees that every API request and response is recorded to *at least one* of the enabled audit devices. If at least one audit device is enabled *and* Vault cannot write to at least one of the enabled audit devices, Vault refuses to service the corresponding API request.
+Audit logs are critically important, and ignoring auditing failures opens an avenue for attack. As such, when you enable at least one audit device, Vault guarantees that it records every API request and response to *at least one* of the enabled audit devices. If at least one audit device is enabled *and* Vault cannot write to at least one of the enabled audit devices, Vault refuses to service the corresponding API request.
 
 <Note>
-  When all enabled audit devices become unavailable, Vault in effect becomes unavailable as well. To prevent audit-related unavailability of Vault, HashiCorp recommends that at least two audit devices be enabled. Refer to the <a href="/vault/docs/audit/best-practices">best practices</a> page for additional information.
+
+  When all enabled audit devices become unavailable, Vault in effect becomes unavailable as well. To prevent audit-related unavailability of Vault, HashiCorp recommends that you enable at least two audit devices. Refer to the [best practices](/vault/docs/audit/best-practices) page for additional information.
+
 </Note>
 
-When two or more audit devices are enabled, Vault will attempt to send each audit log entry to all audit devices. However, Vault guarantees only that an audit log entry is written to *at least one* audit device. Hence, to ensure a complete record of every API request and response when multiple audit devices are enabled, you must analyze the combined audit log entries across all enabled audit devices.
+When two or more audit devices are enabled, Vault attempts to send each audit log entry to all audit devices. However, Vault guarantees only that it writes an audit log entry to *at least one* audit device. Hence, to ensure a complete record of every API request and response when multiple audit devices are enabled, you must analyze the combined audit log entries across all enabled audit devices.
 
 ## Hashing of sensitive values ((#hashing-of-sensitive-values))
 
 To protect the confidentiality of potentially sensitive information in audit logs, Vault by default writes only a keyed hash (HMAC-SHA256) of most string values within request and response audit entries. Vault exposes an API endpoint, [`/sys/audit-hash`](/vault/api-docs/system/audit-hash), to calculate the keyed hash of any known value for a given audit device.
 
-Users can configure which request/response attributes are exempted from hashing for each [authentication backend](/vault/docs/commands/auth/tune) and [secrets engine](/vault/docs/commands/secrets/tune) they configure.
+You can configure which request/response attributes are exempted from hashing for each [authentication backend](/vault/docs/commands/auth/tune) and [secrets engine](/vault/docs/commands/secrets/tune) you enable.
 
 <Note>
-  Non-string values, such as integers and booleans, are not hashed. HashiCorp recommends that all sensitive data be provided as string values inside all JSON sent to Vault. For example, integer values should be encapsulated in quotes.
+
+  Non-string values, such as integers and booleans, are not hashed. HashiCorp recommends that you provide all sensitive data as string values inside all JSON sent to Vault. For example, encapsulate integer values in quotes.
+
 </Note>
 
 ## Eliding list response bodies
 
-Some Vault responses can be very large. This is commonly the case with "list" requests, where listing a very large set of objects (such as a list of leases) can result in a response that is tens of megabytes long. Some audit backends are unable to process individual audit records of larger sizes.
+Some Vault responses can be very large. This is commonly the case with "list" requests, where listing a very large set of objects (such as a list of leases) can result in a response that is tens of megabytes long. Some audit backends cannot process individual audit records of larger sizes.
 
 In parallel, the contents of the response for a list operation are often of little value. Most responses contain only a "keys" field with a list of IDs. Some API endpoints (e.g. [`/identity/entity-alias/id`](/vault/api-docs/secret/identity/entity-alias#list-entity-aliases-by-id)) additionally return a "key\_info" field with some additional information about each list entry; even in this case, the information returned is usually not sensitive.
 
-The [`elide_list_responses`](/vault/api-docs/system/audit#elide_list_responses) option causes `keys` and `key_info` lists in audit log entries for responses to list requests to be replaced with the number of objects they contain. This improves compatibility with audit devices and reduces the amount of audit data that is ingested, stored, and processed, while retaining some level of information about what was returned to the client.
+The [`elide_list_responses`](/vault/api-docs/system/audit#elide_list_responses) option replaces `keys` and `key_info` lists in audit log entries for responses to list requests with the number of objects they contain. This improves compatibility with audit devices and reduces the amount of audit data that is ingested, stored, and processed, while retaining some level of information about what was returned to the client.
 
 Here is an example of an audit record with elided lists (formatted with extra whitespace, and with fields not relevant to the example omitted):
 
@@ -86,17 +90,15 @@ Here is an example of an audit record with elided lists (formatted with extra wh
 
 ## Logging of request headers
 
-You can use the [`/sys/config/auditing`](/vault/api-docs/system/config-auditing#create-update-audit-request-header) API to configure which headers in incoming client requests should be recorded in the corresponding audit log entries.
+You can use the [`/sys/config/auditing`](/vault/api-docs/system/config-auditing#create-update-audit-request-header) API to configure which headers in incoming client requests Vault records in the corresponding audit log entries.
 
-By default, Vault will automatically record values for the User Agent header, as well as for the `correlation-id` and `x-correlation-id` request headers to assist with request correlation in distributed systems.
+By default, Vault automatically records values for the User Agent header, as well as for the `correlation-id` and `x-correlation-id` request headers to assist with request correlation in distributed systems.
 
-<Note>
-  Request header values are not hashed by default, including for the <code>correlation-id</code> and <code>x-correlation-id</code> headers. You can <a href="/vault/api-docs/system/config-auditing#hmac">configure</a> Vault to apply the <a href="#hashing-of-sensitive-values">keyed hash</a> to the values of request headers you consider sensitive.
-</Note>
+Vault does not hash request header values by default, including for the <code>correlation-id</code> and <code>x-correlation-id</code> headers. You can [configure](/vault/api-docs/system/config-auditing#hmac) Vault to apply the [keyed hash](#hashing-of-sensitive-values) to the values of request headers you consider sensitive.
 
 ## Excepted API endpoints ((#excepted-api-endpoints))
 
-Requests and responses to and from the following API endpoints are **not** recorded to Vault's audit devices:
+Vault does not record requests and responses to and from the following API endpoints to its audit devices:
 
 ```
 sys/init
@@ -117,7 +119,7 @@ sys/storage/raft/join
 sys/internal/ui/feature-flags
 ```
 
-Additionally, requests to the following API endpoints are not recorded if unauthenticated access to them is permitted by the relevant listener configuration settings:
+Additionally, Vault does not record requests to the following API endpoints if unauthenticated access to them is permitted by the relevant listener configuration settings:
 
 ```
 sys/metrics
@@ -131,4 +133,4 @@ Refer to [Recover blocked audit devices](/vault/tutorials/monitoring/blocked-aud
 
 ## API
 
-Vault enables configuration of audit devices via an HTTP API. Please see the [audit API docs](/vault/api-docs/system/audit) for more details.
+Vault enables you to configure audit devices via an HTTP API. Please see the [audit API docs](/vault/api-docs/system/audit) for more details.

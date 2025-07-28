@@ -8,9 +8,9 @@ description: Schema and description of the structure of Vault's audit log entrie
 
 Each Vault audit log entry is its own JSON object, separated from other entries by line breaks.
 
-Audit log entries share a set of attributes that are common across all API endpoints. In addition, each entry will record request and response attributes that are specific to the API endpoint that was called.
+Audit log entries share a set of attributes that are common across all API endpoints. In addition, each entry records request and response attributes that are specific to the API endpoint that was called.
 
-Audit log entries can be of `"type": "request"` or `"type": "response"`, depending on whether they represent the API request received by the server or the response sent by it. Each "response" audit log entry can be matched with its corresponding "request" entry through the `.request.id` value included in both entries.
+Audit log entries can be of `"type": "request"` or `"type": "response"`, depending on whether they represent the API request received by the server or the response sent by it. Each "response" audit log entry matches its corresponding "request" entry through the `.request.id` value included in both entries.
 
 ## Request audit entry
 
@@ -21,7 +21,7 @@ Audit log entries can be of `"type": "request"` or `"type": "response"`, dependi
 | `auth` | `object` | JSON object containing information about the authenticated principal that performed the API request. See [`auth`](#auth) below. |  |
 | `request` | `object` | JSON object containing information about the API request. See [`request`](#request) below. |  |
 | `error` | `string` | If there is an error in the request, this field contains the corresponding error message. | `"error converting input {\"name\":\"John\"} for field \"data\": '' expected a map, got 'string'"` |
-| `forwarded_from` | `string` | If the request was forwarded from a Performance Standby node, the host (and usually port) information of the Performance Standby node that forwarded it. | `"10.1.14.156:8200"` or `"vault-1.prod.corp.com:443"` |
+| `forwarded_from` | `string` | If a Performance Standby node forwarded the request, this field contains the host (and usually port) information of the Performance Standby node. | `"10.1.14.156:8200"` or `"vault-1.prod.corp.com:443"` |
 
 ```json
 {
@@ -44,7 +44,7 @@ Audit log entries can be of `"type": "request"` or `"type": "response"`, dependi
 | `request` | `object` | JSON object containing information about the API request. See [`request`](#request) below. |  |
 | `response` | `object` | JSON object containing information about the API response. See [`response`](#response) below. |  |
 | `error` | `string` | If the request resulted in an error, this field contains the corresponding error message. | `"1 error occurred:\n\t* invalid request\n\n"` |
-| `forwarded_from` | `string` | If the request was forwarded from a Performance Standby node, the host (and usually port) information of the Performance Standby node that forwarded it. | `"10.1.14.156:8200"` or `"vault-1.prod.corp.com:443"` |
+| `forwarded_from` | `string` | If a Performance Standby node forwarded the request, this field contains the host (and usually port) information of the Performance Standby node. | `"10.1.14.156:8200"` or `"vault-1.prod.corp.com:443"` |
 
 ```json
 {
@@ -195,7 +195,7 @@ The following response object definition includes example data with simple types
 | `headers` | `object` | Set of HTTP response headers sent by the plugin that handled the API request. |
 | `redirect` | `string` | For requests sent to authentication backends, the URL to which the authentication backend redirected the user for further authentication. |
 | `warnings` | `list(string)` | If the API returned one or more warnings, a list of the warning messages. |
-| `data` | `object` | JSON object containing the response payload. This is dependent on the API endpoint called. |
+| `data` | `object` | JSON object containing the response payload. This is dependent on the API endpoint called. |  |
 | `secret` | `object` | If the API returned a [leased secret](/vault/docs/concepts/lease), a JSON object with one attribute, `lease_id`, that identifies that leased secret. |
 | `wrap_info` | `object` | If the API returned a [response-wrapped secret](/vault/docs/concepts/response-wrapping), a JSON object containing the properties of the wrapping token. See below for the attributes in the JSON object. |
 | `mount_class` | `string` | Type of API mount, `auth` or `secret`. |
