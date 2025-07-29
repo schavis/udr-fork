@@ -237,6 +237,23 @@
                 "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/service-mesh"
               }
             ]
+          },
+          {
+            "title": "Configure dashboards and alerts",
+            "routes": [
+              {
+                "title": "Introduction",
+                "path": "define-and-automate-processes/monitor-and-operate/dashboards-alerts"
+              },
+              {
+                "title": "Vendor monitoring tools",
+                "path": "define-and-automate-processes/monitor-and-operate/dashboards-alerts/vendor-monitoring-tools"
+              },
+              {
+                "title": "Cloud-native monitoring tools",
+                "path": "define-and-automate-processes/monitor-and-operate/dashboards-alerts/cloud-native-monitoring-tools"
+              }
+            ]
           }
         ]
       }
