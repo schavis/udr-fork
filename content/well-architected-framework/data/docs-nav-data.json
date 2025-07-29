@@ -542,5 +542,16 @@
         "path": "secure-systems/prevent-lateral-movement"
       }
     ]
+  },
+  {
+    "heading": "Implementation resources"
+  },
+  {
+    "title": "Overview",
+    "path": "resources"
+  },
+  {
+    "title": "Verify HashiCorp binaries",
+    "path": "resources/verify-hashicorp-binary"
   }
 ]
