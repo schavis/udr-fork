@@ -439,21 +439,16 @@
         "title": "Monitor system health",
         "routes": [
           {
-            "title": "Detect configuration drift",
-            "path": "optimize-systems/monitor-system-health/detect-configuration-drift"
+            "title": "Identify common metrics",
+            "path": "optimize-systems/monitor-system-health/measure-performance-metrics/identify-metrics"
           },
           {
-            "title": "Measure performance metrics",
-            "routes": [
-              {
-                "title": "Identify common metrics",
-                "path": "optimize-systems/monitor-system-health/measure-performance-metrics/identify-metrics"
-              },
-              {
-                "title": "Monitor network traffic",
-                "path": "optimize-systems/monitor-system-health/measure-performance-metrics/monitor-network"
-              }
-            ]
+            "title": "Monitor network traffic",
+            "path": "optimize-systems/monitor-system-health/measure-performance-metrics/monitor-network"
+          },
+          {
+            "title": "Detect configuration drift",
+            "path": "optimize-systems/monitor-system-health/detect-configuration-drift"
           }
         ]
       },
@@ -480,17 +475,12 @@
         "path": "design-resilient-systems"
       },
       {
-        "title": "Principles",
-        "routes": [
-          {
-            "title": "Distributed systems principles",
-            "path": "design-resilient-systems/principles/distributed-systems-principles"
-          },
-          {
-            "title": "Plan for resilience",
-            "path": "design-resilient-systems/principles/plan-for-resilience"
-          }
-        ]
+        "title": "Understand distributed systems",
+        "path": "design-resilient-systems/distributed-systems"
+      },
+      {
+        "title": "Plan for resilience",
+        "path": "design-resilient-systems/plan-for-resilience"
       },
       {
         "title": "Ensure high availability",
@@ -506,13 +496,8 @@
         ]
       },
       {
-        "title": "Optimize performance",
-        "routes": [
-          {
-            "title": "Tune performance",
-            "path": "design-resilient-systems/optimize-performance/tune-performance"
-          }
-        ]
+        "title": "Scale and tune performance",
+        "path": "design-resilient-systems/optimize-performance/scale-and-tune-performance"
       }
     ]
   },
