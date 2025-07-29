@@ -26,6 +26,48 @@
         ]
       },
       {
+        "title": "Team and culture",
+        "routes": [
+          {
+            "title": "Create high-performing teams",
+            "routes": [
+              {
+                "title": "Introduction",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams"
+              },
+              {
+                "title": "Continuous learning",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/continuous-learning"
+              },
+              {
+                "title": "Communication",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/communication"
+              },
+              {
+                "title": "Collaboration",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/collaboration"
+              },
+              {
+                "title": "Writing",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/writing"
+              },
+              {
+                "title": "Sense of ownership",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/sense-of-ownership"
+              },
+              {
+                "title": "Recognition",
+                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/recognition"
+              }
+            ]
+          },
+          {
+            "title": "Workflows over technologies",
+            "path": "define-and-automate-processes/team-and-culture/workflows-over-technologies"
+          }
+        ]
+      },
+      {
         "title": "Develop and test",
         "routes": [
           {
@@ -132,6 +174,10 @@
             "title": "Automate deployments",
             "routes": [
               {
+                "title": "Introduction",
+                "path": "define-and-automate-processes/deploy-systems/automate-deployments"
+              },
+              {
                 "title": "Semi-automate deployments",
                 "path": "define-and-automate-processes/deploy-systems/automate-deployments/semi-automate"
               },
@@ -144,6 +190,10 @@
           {
             "title": "Zero downtime deployment",
             "routes": [
+              {
+                "title": "Introduction",
+                "path": "define-and-automate-processes/deploy-systems/zero-downtime-deployment"
+              },
               {
                 "title": "Applications",
                 "path": "define-and-automate-processes/deploy-systems/zero-downtime-deployment/applications"
@@ -185,24 +235,6 @@
               {
                 "title": "Service mesh",
                 "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/service-mesh"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Team and culture",
-        "routes": [
-          {
-            "title": "Create high-performing teams",
-            "routes": [
-              {
-                "title": "Communication",
-                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/communication"
-              },
-              {
-                "title": "Continuous learning",
-                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/continuous-learning"
               }
             ]
           }
@@ -394,12 +426,12 @@
         "title": "Scale resources",
         "routes": [
           {
-            "title": "Scale containers",
-            "path": "optimize-systems/scale-resources/containers"
+            "title": "Servers",
+            "path": "optimize-systems/scale-resources/servers"
           },
           {
-            "title": "Scale servers",
-            "path": "optimize-systems/scale-resources/servers"
+            "title": "Container orchestrator and workloads",
+            "path": "optimize-systems/scale-resources/containers"
           }
         ]
       }
