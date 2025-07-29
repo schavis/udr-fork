@@ -199,40 +199,40 @@
             "routes": [
               {
                 "title": "Introduction",
-                "path": "automate-and-define-processes/develop-and-deploy/develop-applications/introduction"
+                "path": "automate-and-define-processes/develop-and-deploy/applications/introduction"
               },
               {
                 "title": "Define security strategy",
-                "path": "automate-and-define-processes/develop-and-deploy/develop-applications/define-security-strategy"
+                "path": "automate-and-define-processes/develop-and-deploy/applications/define-security-strategy"
 
               },
               {
                 "title": "Development environment",
-                  "path": "automate-and-define-processes/develop-and-deploy/develop-applications/development-environment"
+                  "path": "automate-and-define-processes/develop-and-deploy/applications/development-environment"
 
               },
               {
                 "title": "Package",
-                "path": "automate-and-define-processes/develop-and-deploy/develop-applications/package-application"
+                "path": "automate-and-define-processes/develop-and-deploy/applications/package"
 
               },
               {
                 "title": "Application infrastructure",
-                "path": "automate-and-define-processes/develop-and-deploy/develop-applications/application-infrastructure"
+                "path": "automate-and-define-processes/develop-and-deploy/applications/infrastructure"
 
               },
               {
                 "title": "Deploy applications",
-                "path": "automate-and-define-processes/develop-and-deploy/develop-applications/deploy-applications"
+                "path": "automate-and-define-processes/develop-and-deploy/applications/deploy"
               },
               {
                 "title": "Monitor applications",
-                "path": "automate-and-define-processes/develop-and-deploy/develop-applications/monitor"
+                "path": "automate-and-define-processes/develop-and-deploy/applications/monitor"
 
               },
               {
                 "title": "Integrate CI/CD pipelines",
-                "path": "automate-and-define-processes/develop-and-deploy/develop-applications/integrate-ci-cd"
+                "path": "automate-and-define-processes/develop-and-deploy/applications/integrate-ci-cd"
               }
             ]
           },

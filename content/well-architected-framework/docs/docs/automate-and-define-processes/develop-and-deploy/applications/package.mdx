@@ -3,6 +3,8 @@ page_title: Package application
 description: Learn how to package your application.
 ---
 
+# Package application
+
 Packaging your application is the process of turning your source code, configuration, and dependencies into a single deployable artifact, such as a virtual machine image or Docker container.
 
 [Packer](/packer) lets you create identical artifacts for multiple platforms, such as AWS, Azure, and GCP, from a single source template. Packer templates define which source images to use and the steps to build your artifacts.
@@ -19,7 +21,6 @@ Together, this creates a golden image pipeline. This pipeline may look like the 
 1. If your security team finds a vulnerability, they can update the base image and revoke the vulnerable version so that no new images are built on top of it.
 1. Since HCP Packer knows the child images are now out of date, it shows which images need to be rebuilt on the new base image.
 
-![An overview of HCP Packer. Packer pulls template files from GitHub, built with Packer, and stores the machine in a cloud provider. Packer sends metadata about the build to HCP Packer, which Terraform references when deploying infrastructure.](/img/packer/hcp_packer_overview.png)
 
 HashiCorp resources:
 

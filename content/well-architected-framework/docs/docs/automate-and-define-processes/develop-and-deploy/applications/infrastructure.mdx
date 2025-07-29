@@ -10,11 +10,7 @@ Depending on your organization's deployment strategy, you may provision your inf
 ![An example ops workflow to deploy infrastructure. The Ops team writes Terraform config. They commit the source to VCS, which triggers a run in HCP Terraform to provision infrastructure. Every time they apply changes to their configuration, it updates the infrastructure.](/img/well-architected-framework/terraform-ops-workflow.png#light-theme-only)
 ![An example ops workflow to deploy infrastructure. The Ops team writes Terraform config. They commit the source to VCS, which triggers a run in HCP Terraform to provision infrastructure. Every time they apply changes to their configuration, it updates the infrastructure.](/img/well-architected-framework/terraform-ops-workflow-dark.png#dark-theme-only)
 
-[Terraform](/terraform) is an infrastructure-as-code tool that lets you define
-and manage infrastructure resources through human-readable configuration files.
-Terraform has over [4000
-providers](https://registry.terraform.io/browse/providers), letting you deploy
-to any cloud provider or platform that has an API.
+[Terraform](/terraform) is an infrastructure-as-code tool that lets you define and manage infrastructure resources through human-readable configuration files. Terraform has over [4000 providers](https://registry.terraform.io/browse/providers), letting you deploy to any cloud provider or platform that has an API.
 
 HCP Terraform manages Terraform runs in a consistent and reliable environment instead of on your local machine. HCP Terraform securely stores your state files, letting your team safely collaborate on the same Terraform deployment by preventing simultaneous deployments. HCP Terraform offers features that enhance the Terraform workflow, such as the following:
 
