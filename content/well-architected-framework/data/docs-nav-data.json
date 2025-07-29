@@ -33,31 +33,31 @@
             "routes": [
               {
                 "title": "Introduction",
-                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams"
+                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams"
               },
               {
                 "title": "Continuous learning",
-                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/continuous-learning"
+                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/continuous-learning"
               },
               {
                 "title": "Communication",
-                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/communication"
+                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/communication"
               },
               {
                 "title": "Collaboration",
-                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/collaboration"
+                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/collaboration"
               },
               {
                 "title": "Writing",
-                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/writing"
+                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/writing"
               },
               {
                 "title": "Sense of ownership",
-                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/sense-of-ownership"
+                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/sense-of-ownership"
               },
               {
                 "title": "Recognition",
-                "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams/recognition"
+                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/recognition"
               }
             ]
           },
