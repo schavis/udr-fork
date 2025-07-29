@@ -13,10 +13,10 @@ Follow these steps to configure IBM Verify as the identity provider (IdP) for Te
 1. In IBM Verify's web interface, go to the **Applications** tab and click **add application**.  
 ![image](/img/docs/ibm-verify-add-application.png)
 
-1. Select **Terraform Cloud** as the sign on method, and then click **Next**.
+1. Select **Terraform Cloud** as the sign on method, and then click **Next**.  
 ![image](/img/docs/ibm-verify-select-application.png)
 
-1. In the **General** page, enter `Terraform Enterprise` and optionally add an Application Owner.
+1. In the **General** page, enter `Terraform Enterprise` and optionally add an Application Owner.  
 ![image](/img/docs/ibm-verify-application-general.png)
 
 1. Go to the **Sign-on** tab.
@@ -31,7 +31,7 @@ Follow these steps to configure IBM Verify as the identity provider (IdP) for Te
 ![image](/img/docs/ibm-verify-saml-settings-1.png)
 
 
-1. In the **Attribute mappings** section, configure the **MemberOf** to map **groupsIds** to Terraform Enterprise teams.
+1. In the **Attribute mappings** section, configure the **MemberOf** to map **groupsIds** to Terraform Enterprise teams.  
 ![image](/img/docs/ibm-verify-saml-settings-2.png)
 
 1. Optionally configure a site admin permissions attribute statement. This statement determines which users can administer the entire Terraform Enterprise instance. Refer to [Administering Terraform Enterprise](/terraform/enterprise/application-administration) for more information about site admin permissions. Under the **Directory - Attributes (Optional)**, configure an attribute as follows:
@@ -42,7 +42,7 @@ Follow these steps to configure IBM Verify as the identity provider (IdP) for Te
    | **Availability**            | Single sign-on SSO          | Use with Single sign-on SSO                                                                                                                |
    | **Attribute identifier**    | siteadmin            | Identifier for the site admin attribute     |
    | **Data type**    | Boolean            | SiteAdmin true or false   |
-
+  
 ![image](/img/docs/ibm-verify-siteadmin-attribute.png)
 
 1. Optionally add the Username attribute. Refer to [Username details](/terraform/enterprise/saml/attributes) for more information.
@@ -61,7 +61,7 @@ Follow these steps to configure IBM Verify as the identity provider (IdP) for Te
    | IDP Certificate                   | urn:oasis:names:tc:SAML:2.0:attrname-format:basic        |  X.509 Certificate                                 |
 
 
-1. On the **Entitlements** tab, add the users that are allowed access.
+1. On the **Entitlements** tab, add the users that are allowed access.  
 ![image](/img/docs/ibm-verify-entitlements.png)
 
 1. Save all the settings.
