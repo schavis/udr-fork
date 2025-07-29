@@ -167,8 +167,24 @@
             "title": "Setup monitoring agents",
             "routes": [
               {
+                "title": "Introduction",
+                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents"
+              },
+              {
+                "title": "Manage secrets",
+                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/manage-secrets"
+              },
+              {
+                "title": "Virtual machines (VMs)",
+                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/vm"
+              },
+              {
                 "title": "Containers",
-                "path": "define-and-automate-processes/monitor-and-operate/ops-monitoring/setup-monitoring-agents/containers"
+                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/containers"
+              },
+              {
+                "title": "Service mesh",
+                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/service-mesh"
               }
             ]
           }
