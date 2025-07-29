@@ -29,19 +29,10 @@
         "title": "Team and culture",
         "routes": [
           {
-            "title": "Overview",
-            "badge": {
-              "text": "TODO",
-              "type": "filled",
-              "color": "highlight"
-            },
-            "path": "automate-and-define-processes/team-and-culture"
-          },
-          {
             "title": "Create high-performing teams",
             "routes": [
               {
-                "title": "Overview",
+                "title": "Introduction",
                 "path": "automate-and-define-processes/team-and-culture/create-high-performing-teams"
               },
               {
@@ -103,40 +94,10 @@
         "title": "Develop and deploy",
         "routes": [
           {
-            "title": "Overview",
-            "badge": {
-              "text": "TODO",
-              "type": "filled",
-              "color": "highlight"
-            },
-            "path": "automate-and-define-processes/develop-and-deploy"
-          },
-          {
-            "title": "Zero downtime deployments",
-            "routes": [
-              {
-                "title": "Overview",
-                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments"
-              },
-              {
-                "title": "Infrastructure",
-                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/infrastructure"
-              },
-              {
-                "title": "Application",
-                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/applications"
-              },
-              {
-                "title": "Service mesh",
-                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/service-mesh"
-              }
-            ]
-          },
-          {
             "title": "Use infrastructure as code",
             "routes": [
               {
-                "title": "Overview",
+                "title": "Introduction",
                 "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code"
               },
               {
@@ -144,19 +105,11 @@
                 "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/ci-cd"
               },
               {
-                "title": "Configuration management",
-                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/configuration-management"
-              },
-              {
-                "title": "Container management",
-                "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/container-management"
-              },
-              {
                 "title": "Container orchestration",
                 "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/container-orchestration"
               },
               {
-                "title": "Database management",
+                "title": "Databases",
                 "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/database"
               },
               {
@@ -174,23 +127,6 @@
               {
                 "title": "Public cloud and cloud automation",
                 "path": "automate-and-define-processes/develop-and-deploy/use-infrastructure-as-code/cloud-automation"
-              }
-            ]
-          },
-          {
-            "title": "Automate deployments",
-            "routes": [
-              {
-                "title": "Overview",
-                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments"
-              },
-              {
-                "title": "Semi-automate deployments",
-                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/semi-automate"
-              },
-              {
-                "title": "Fully-automate deployments",
-                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/fully-automate"
               }
             ]
           },
@@ -237,52 +173,74 @@
             ]
           },
           {
-            "title": "Define development workflows (CI/CD)",
+            "title": "Development workflows (CI/CD)",
             "routes": [
               {
-                "title": "Overview",
-                "path": "automate-and-define-processes/develop-and-deploy/ci-cd",
-                "badge": {
-                  "text": "TODO",
-                  "type": "filled",
-                  "color": "highlight"
-                }
+                "title": "Introduction",
+                "path": "automate-and-define-processes/develop-and-deploy/ci-cd"
+              },
+              {
+                "title": "Use infrastructure as code",
+                "path": "automate-and-define-processes/develop-and-deploy/ci-cd/infrastructure-as-code"
+              },
+              {
+                "title": "Use version control",
+                "path": "automate-and-define-processes/develop-and-deploy/ci-cd/version-control"
               },
               {
                 "title": "Identify reusable components",
-                "path": "automate-and-define-processes/develop-and-deploy/ci-cd/infrastructure/identify-reusable-components",
-                "badge": {
-                  "text": "TODO",
-                  "type": "filled",
-                  "color": "highlight"
-                }
+                "path": "automate-and-define-processes/develop-and-deploy/ci-cd/identify-reusable-components"
               },
               {
                 "title": "Standardize workflows",
-                "href": "https://developer.hashicorp.com/well-architected-framework/operational-excellence/operational-excellence-automate-infrastructure#standardize-and-automate-workflows",
-                "badge": {
-                  "text": "TODO",
-                  "type": "filled",
-                  "color": "highlight"
-                }
+                "path": "automate-and-define-processes/develop-and-deploy/ci-cd/standardize-workflows"
               },
               {
-                "title": "Atomic deployments",
-                "href": "https://developer.hashicorp.com/well-architected-framework/operational-excellence/operational-excellence-automate-infrastructure#deploy-atomic-infrastructure-components",
-                "badge": {
-                  "text": "TODO",
-                  "type": "filled",
-                  "color": "highlight"
-                }
+                "title": "Deploy atomic components",
+                "path": "automate-and-define-processes/develop-and-deploy/ci-cd/atomic-deployments"
               },
               {
                 "title": "Plan for scale",
-                "href": "https://developer.hashicorp.com/well-architected-framework/operational-excellence/operational-excellence-automate-infrastructure#plan-for-scale",
-                "badge": {
-                  "text": "TODO",
-                  "type": "filled",
-                  "color": "highlight"
-                }
+                "path": "automate-and-define-processes/develop-and-deploy/ci-cd/plan-for-scale"
+              }
+            ]
+          },
+          {
+            "title": "Automate deployments",
+            "routes": [
+              {
+                "title": "Introduction",
+                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments"
+              },
+              {
+                "title": "Semi-automate deployments",
+                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/semi-automate"
+              },
+              {
+                "title": "Fully-automate deployments",
+                "path": "automate-and-define-processes/develop-and-deploy/automate-deployments/fully-automate"
+              }
+            ]
+          },
+          
+          {
+            "title": "Zero downtime deployments",
+            "routes": [
+              {
+                "title": "Introduction",
+                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments"
+              },
+              {
+                "title": "Infrastructure",
+                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/infrastructure"
+              },
+              {
+                "title": "Application",
+                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/applications"
+              },
+              {
+                "title": "Service mesh",
+                "path": "automate-and-define-processes/develop-and-deploy/zero-downtime-deployments/service-mesh"
               }
             ]
           }
@@ -292,14 +250,10 @@
         "title": "Operations and monitoring",
         "routes": [
           {
-            "title": "Overview",
-            "path": "automate-and-define-processes/ops-monitoring"
-          },
-          {
             "title": "Setup monitoring agents",
             "routes": [
               {
-                "title": "Overview",
+                "title": "Introduction",
                 "path": "automate-and-define-processes/ops-monitoring/setup-monitoring-agents"
               },
               {
@@ -324,7 +278,7 @@
             "title": "Configure dashboards and alerts",
             "routes": [
               {
-                "title": "Overview",
+                "title": "Introduction",
                 "path": "automate-and-define-processes/ops-monitoring/dashboards-alerts"
               },
               {
@@ -354,95 +308,32 @@
         }
       },
       {
-        "title": "Performance and scaling",
+        "title": "Detect resource drift and health",
+        "path": "optimize-systems/detect-drift"
+      },
+      {
+        "title": "Measure performance",
         "routes": [
           {
-            "title": "Overview",
-            "path": "optimize-systems/performance-scaling"
-          },
-          {
-            "title": "Monitor infrastructure",
-            "routes": [
-              {
-                "title": "Overview",
-                "path": "optimize-systems/performance-scaling/monitor-infrastructure"
-              },
-              {
-                "title": "Identify common metrics",
-                "path": "optimize-systems/performance-scaling/monitor-infrastructure/identify-metrics"
-              },
-              {
-                "title": "Scale servers",
-                "path": "optimize-systems/performance-scaling/monitor-infrastructure/scale-servers"
-              }
-            ]
+            "title": "Identify common metrics",
+            "path": "optimize-systems/measure-performance/identify-metrics"
           },
           {
             "title": "Monitor network traffic",
-            "path": "optimize-systems/performance-scaling/monitor-network"
-          },
-          {
-            "title": "Detect resource drift and health",
-            "path": "optimize-systems/performance-scaling/detect-drift"
-          },
-          {
-            "title": "Scale containers",
-            "path": "optimize-systems/performance-scaling/scale-containers"
+            "path": "optimize-systems/measure-performance/monitor-network"
           }
         ]
       },
       {
-        "title": "Lifecycle management",
-        "badge": {
-          "text": "TODO",
-          "type": "filled",
-          "color": "highlight"
-        },
+        "title": "Scale and tune systems",
         "routes": [
           {
-            "title": "Overview",
-            "path": "optimize-systems/lifecycle-management",
-            "badge": {
-              "text": "TODO",
-              "type": "filled",
-              "color": "highlight"
-            }
+            "title": "Scale servers",
+            "path": "optimize-systems/scale/servers"
           },
           {
-            "title": "Track resources",
-            "href": "",
-            "badge": {
-              "text": "TODO",
-              "type": "filled",
-              "color": "highlight"
-            }
-          },
-          {
-            "title": "Decommission resources",
-            "href": "",
-            "badge": {
-              "text": "TODO",
-              "type": "filled",
-              "color": "highlight"
-            }
-          },
-          {
-            "title": "Enforce data retention policies",
-            "href": "",
-            "badge": {
-              "text": "TODO",
-              "type": "filled",
-              "color": "highlight"
-            }
-          },
-          {
-            "title": "Dynamically scale resources",
-            "href": "",
-            "badge": {
-              "text": "TODO",
-              "type": "filled",
-              "color": "highlight"
-            }
+            "title": "Scale containers",
+            "path": "optimize-systems/scale/containers"
           }
         ]
       }
@@ -453,32 +344,27 @@
     "routes": [
       {
         "title": "Overview",
-        "badge": {
-          "text": "TODO",
-          "type": "filled",
-          "color": "highlight"
-        },
         "path": "design-resilient-systems"
       },
       {
-        "title": "Plan for resilience and availability",
-        "href": "https://developer.hashicorp.com/well-architected-framework/reliability/reliability-tolerate-failure#plan-for-resiliency-and-availability"
+        "title": "Distributed systems principles",
+        "path": "design-resilient-systems/distributed-systems-principles"
       },
       {
-        "title": "Consider distributed systems principles",
-        "href": "https://developer.hashicorp.com/well-architected-framework/reliability/reliability-tolerate-failure#consider-distributed-systems-principles"
+        "title": "Plan for resilience and availability",
+        "path": "design-resilient-systems/plan-for-resiliency-and-availability"
       },
       {
         "title": "Scale and tune performance",
-        "href": "https://developer.hashicorp.com/well-architected-framework/reliability/reliability-tolerate-failure#scale-and-tune-performance"
+        "path": "design-resilient-systems/scale-and-tune-performance"
       },
       {
         "title": "Secure distributed systems",
-        "href": "https://developer.hashicorp.com/well-architected-framework/reliability/reliability-tolerate-failure#secure-distributed-systems"
+        "path": "design-resilient-systems/secure-distributed-systems"
       },
       {
         "title": "Disaster recovery",
-        "href": "https://developer.hashicorp.com/well-architected-framework/reliability/reliability-tolerate-failure#understand-state-management-and-disaster-recovery"
+        "path": "design-resilient-systems/disaster-recovery"
       },
       {
         "title": "Plan for failover",
@@ -550,10 +436,10 @@
             ]
           },
           {
-            "title": "CI/CD secrets management",
+            "title": "Secure CI/CD secrets",
             "routes": [
               {
-                "title": "Overview",
+                "title": "Introduction",
                 "path": "secure-systems/secure-applications/ci-cd-secrets"
               },
               {
@@ -628,7 +514,7 @@
             "title": "Manage leaked secrets",
             "routes": [
               {
-                "title": "Overview",
+                "title": "Introduction",
                 "path": "secure-systems/secrets/manage-leaked-secrets"
               },
               {

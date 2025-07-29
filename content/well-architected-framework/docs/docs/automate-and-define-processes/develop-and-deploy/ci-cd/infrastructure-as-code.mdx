@@ -1,0 +1,32 @@
+---
+page_title: Use infrastructure as code
+description: Learn how to use infrastructure as code.
+---
+
+# Use infrastructure as code
+
+Infrastructure as code (IaC) tools let you codify your resource definitions, making it easier to understand your resource configurations and infrastructure topology. Codifying your resources also enables collaboration since your team can more easily review changes made in code than manual updates. When you define your infrastructure as code, you can use the same engineering practices for your infrastructure as for application development, such as code review, automated deployment, and phased rollout that allows you to test your configuration across environments. 
+
+Infrastructure as code provides the following operational excellence benefits:
+
+- Infrastructure that is written as code can follow your organization's established development best practices. 
+- Version control systems such as GitHub, GitLab, or Bitbucket, let you version your infrastructure code. This allows you to audit infrastructure changes, and roll back changes as needed.  
+- Infrastructure as code enables team and cross-team collaboration. By storing your code in a code repository, you can share the code with other developers. These developers can then contribute to the infrastructure code, provide feedback, and catch issues such as security or other policy violations.
+- Infrastructure as code allows you to test the code similar to how you test application code.
+- Deploying infrastructure as code lets you automate infrastructure deployment through scripts and CI/CD systems.
+- Infrastructure as code increases deployment consistency and repeatability. You will know what infrastructure your code will deploy. Code should be able to be deployed multiple times, with almost identical outcomes. 
+
+Terraform is a cloud agnostic infrastructure as code tool. It lets you define resources and infrastructure in human-readable, declarative configuration files, and manages your infrastructure's lifecycle. Using Terraform has several advantages:
+
+- Terraform can manage infrastructure on multiple cloud platforms.
+- Terraform is declarative, so running code with the same inputs will result in the same infrastructure output.
+- The human-readable configuration language helps you write infrastructure code quickly.
+- Terraform's state allows you to track resource changes throughout your deployments.
+
+HashiCorp resources:
+- [What is Infrastructure as Code with Terraform?](/terraform/tutorials/certification-associate-tutorials-003/infrastructure-as-code)
+- [Infrastructure as Code: What is it? Why is it important?](https://www.hashicorp.com/resources/what-is-infrastructure-as-code)
+- [Retrieving CI/CD secrets from Vault](/well-architected-framework/security/security-cicd-vault)
+
+External resources:
+- [IBM What is Infrastructure as Code (IaC)?](https://www.ibm.com/topics/infrastructure-as-code)
