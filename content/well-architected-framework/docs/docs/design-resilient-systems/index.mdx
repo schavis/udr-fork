@@ -1,16 +1,84 @@
 ---
 page_title: Design resilient systems
-description: Learn how to design resilient systems.
+description: Learn how to design resilient systems for high availability and fault tolerance.
 ---
 
-# Overview
+# Design resilient systems
 
-A fault-tolerant system prevents disruptions from a single point of failure, and ensures high availability and business continuity for your mission-critical applications or infrastructure. When you design and implement fault-tolerant systems, you reduce costs, intelligently scale, and minimize downtime. 
+The **Design resilient systems** pillar helps you build fault-tolerant architectures that maintain availability and performance during failures through redundancy, disaster recovery planning, zero-downtime deployments, and robust networking strategies. This pillar ensures business continuity and high availability for your mission-critical applications and infrastructure.
 
-Fault-tolerant systems also enhance your business outcomes and increase customer satisfaction in the following ways:
+When you successfully implement this pillar, you transform from fragile, failure-prone systems to robust, self-healing architectures that can withstand various failure scenarios. This transformation helps you maintain service availability during infrastructure failures, natural disasters, and other disruptive events. You can build customer trust through consistent service delivery and reduce the financial and reputational impact of downtime.
 
-- Ensures critical systems remain available even during failure to support business continuity and minimize the effects of disruptions.
-- Failover and redundancy help reduce risk of data loss, corruption, and damage from security breaches.
-- Improve the quality of service and deliver better user experience through consistent performance and responsiveness.
+## Why this matters
 
-HashiCorp tools feature fault-tolerance properties which enhance the overall resiliency and fault tolerance of applications they integrate with. Use the guidance and resources here to help design your fault-tolerant systems with HashiCorp tools.
+Resilient system design gives you immediate operational benefits and long-term business value. From a technical perspective, resilient systems prevent single points of failure through redundancy and fault isolation. You can implement failover mechanisms that automatically redirect traffic and workloads when components fail, reducing mean time to recovery and minimizing service disruption.
+
+The business impact goes far beyond technical reliability. Resilient systems ensure business continuity during infrastructure failures or disasters, protecting revenue streams and maintaining customer relationships. Organizations that can maintain service availability during adverse conditions build customer trust and competitive advantage.
+
+Resilient systems also protect against data loss and corruption through robust backup strategies and data replication. You can implement disaster recovery procedures that enable rapid recovery from various failure scenarios, ensuring that critical data and services remain available even during catastrophic events.
+
+## Who needs this
+
+System architects and infrastructure designers will find this pillar essential for designing fault-tolerant system architectures and failure scenarios. These professionals need to understand how to build redundancy into system designs, implement failover mechanisms, and ensure that systems can withstand various failure modes.
+
+Site reliability engineers and operations teams are the primary implementers who will use this guidance to build and maintain high-availability systems. They need practical guidance on implementing monitoring systems, failover procedures, and disaster recovery processes that ensure continuous service availability.
+
+Infrastructure engineers and platform teams will benefit from understanding how to build resilient infrastructure with redundancy and failover capabilities. These professionals need guidance on implementing load balancing, clustering, and redundancy across infrastructure components.
+
+Business continuity teams and risk management professionals will find value in understanding how to plan and test disaster recovery procedures. These teams need to work closely with technical teams to ensure that disaster recovery plans are comprehensive, tested, and aligned with business requirements.
+
+## When to focus on this pillar
+
+Focus on this pillar when your organization experiences frequent outages, has critical applications that cannot tolerate downtime, or needs to ensure business continuity during failures. This pillar is most valuable when you have mission-critical applications, when you are experiencing growing user expectations for availability, or when you need to protect against data loss and service disruption.
+
+Organizations that have already established automation and optimization practices will find this pillar particularly valuable, as it builds upon those foundations to achieve high availability and fault tolerance. It is also essential for organizations operating in regulated industries or those with strict uptime requirements.
+
+## How this fits with the framework
+
+The Design Resilient Systems pillar builds upon the automation and optimization foundations to ensure systems remain available and performant under adverse conditions. It provides the reliability layer that makes secure systems trustworthy and cost-effective systems dependable. Without resilience, you risk significant business impact from infrastructure failures.
+
+This pillar relies on the automation practices established in the Automate and Define Processes pillar. Automated processes help you consistently and reliably deploy redundant systems and failover mechanisms. You can implement automated failover, monitoring, and recovery procedures that operate consistently and reliably without manual intervention.
+
+Resilient systems benefit from the optimization practices established in the Optimize Systems pillar. You can implement high-availability architectures without excessive cost overhead by optimizing resource utilization and implementing efficient scaling strategies. Optimization ensures that redundant systems are cost-effective to operate and maintain.
+
+The Secure Systems pillar is enhanced by resilient design practices that ensure security controls remain operational during failures. You can implement security monitoring and response systems that continue to function during infrastructure failures, maintaining security posture even during adverse conditions.
+
+## Topics in this pillar
+
+This pillar covers four main areas that work together to create comprehensive system resilience:
+
+- **Distributed systems principles** provide the foundational concepts and patterns for building fault-tolerant architectures, including fault isolation, redundancy, and secure distributed systems design.
+
+- **High availability and failover** covers the mechanisms and strategies for maintaining service availability during component failures, including planning for resiliency and automated failover mechanisms.
+
+- **Disaster recovery** focuses on planning and procedures for catastrophic failure scenarios, including backup strategies, recovery time objectives, and disaster recovery testing.
+
+- **Performance and scaling** ensures that resilient systems can handle increased load without compromising availability, including performance optimization practices and capacity planning.
+
+### Distributed systems principles
+
+These topics provide the foundational knowledge needed to design systems that can withstand failures. Without understanding these principles, you cannot build truly resilient architectures that maintain availability during component failures. This section covers fault isolation, redundancy, eventual consistency, and secure distributed systems design patterns. These principles help you understand and implement core concepts for building resilient distributed systems in modern architectures.
+
+### High availability and failover
+
+These topics represent the practical implementation of resilience. High availability and failover are the core mechanisms that transform theoretical resilience concepts into operational reality that maintains business continuity. This section covers planning for resiliency, automated failover mechanisms, and various failover strategies including active-passive and active-active configurations. These mechanisms help you implement redundancy and failover to ensure continuous service availability.
+
+### Disaster recovery
+
+These topics address the most severe failure scenarios that could impact business operations. Disaster recovery planning ensures that even catastrophic events do not result in permanent data loss or extended service outages. This section covers backup strategies, recovery time objectives, disaster recovery testing, and procedures. These procedures help you establish comprehensive disaster recovery and backup strategies for protecting against catastrophic failures.
+
+### Performance and scaling
+
+Resilient systems must also perform well under normal conditions. Without proper performance optimization, resilient architectures may be reliable but unusable, failing to meet business requirements for responsiveness and throughput. This section covers performance optimization practices, capacity planning, and scaling strategies. These strategies help you optimize system performance while maintaining resilience to ensure systems can handle increased load without compromising availability.
+
+## Next steps
+
+In this overview, you learned about designing resilient systems. Designing resilient systems is part of the [Well-Architected Framework](/well-architected-framework).
+
+Refer to the following documents to learn how to design resilient systems.
+
+- [Distributed systems principles](/well-architected-framework/design-resilient-systems/distributed-systems-principles) to understand core concepts for resilient architectures
+- [Plan for resiliency and availability](/well-architected-framework/design-resilient-systems/plan-for-resiliency-and-availability) to design high-availability architectures
+- [Failover](/well-architected-framework/design-resilient-systems/failover) to implement automated failover mechanisms
+- [Disaster recovery](/well-architected-framework/design-resilient-systems/disaster-recovery) to establish comprehensive disaster recovery procedures
+- [Scale and tune performance](/well-architected-framework/design-resilient-systems/scale-and-tune-performance) to optimize performance while maintaining resilience
