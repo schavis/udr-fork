@@ -11,11 +11,15 @@ When you successfully implement this pillar, you transform from fragile, failure
 
 ## Topics in this pillar
 
-This pillar covers three main areas that work together to create comprehensive system resilience:
+This pillar covers five main areas that work together to create comprehensive system resilience:
 
 - **Principles** provide the foundational concepts and patterns for building fault-tolerant architectures, including distributed systems principles and planning for resilience.
 
-- **Ensure high availability** covers the mechanisms and strategies for maintaining service availability during component failures, including disaster recovery planning and automated failover mechanisms.
+- **Plan for resilience** covers the strategies and mechanisms for maintaining service availability during component failures, including disaster recovery planning and automated failover mechanisms.
+
+- **Secure distributed systems** covers building security into distributed architectures, including zero trust principles, secure communication channels, and threat monitoring.
+
+- **Plan for failover** covers the strategies and mechanisms for automatically redirecting traffic and workloads when components fail, ensuring continuous service availability.
 
 - **Scale and tune performance** ensures that resilient systems can handle increased load without compromising availability, including performance optimization practices and capacity planning.
 
@@ -23,9 +27,17 @@ This pillar covers three main areas that work together to create comprehensive s
 
 These topics provide the foundational knowledge needed to design systems that can withstand failures. Without understanding these principles, you cannot build truly resilient architectures that maintain availability during component failures. This section covers distributed systems principles and planning for resilience. These principles help you understand and implement core concepts for building resilient distributed systems in modern architectures.
 
-### Ensure high availability
+### Plan for resilience
 
 These topics represent the practical implementation of resilience. High availability and disaster recovery are the core mechanisms that transform theoretical resilience concepts into operational reality that maintains business continuity. This section covers disaster recovery planning and automated failover mechanisms. These mechanisms help you implement redundancy and failover to ensure continuous service availability.
+
+### Secure distributed systems
+
+Distributed systems involve multiple components communicating across networks, creating an expanded attack surface with many potential points of vulnerability. A breach in one component can cascade through the entire system, compromising data integrity, confidentiality, and availability. This section covers zero trust architecture, secure communication channels, and threat monitoring practices. These practices help you implement comprehensive security measures that prevent data breaches and service disruptions while maintaining performance and reliability.
+
+### Plan for failover
+
+Failover mechanisms are essential for maintaining service availability when infrastructure components fail. Without proper failover planning, single points of failure can cause complete service outages and significant business impact. This section covers load balancing, service discovery, and multi-region deployment strategies. These mechanisms help you implement automatic failover procedures that redirect traffic and workloads to healthy components when failures occur.
 
 ### Scale and tune performance
 

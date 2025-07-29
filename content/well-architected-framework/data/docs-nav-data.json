@@ -202,12 +202,21 @@
         "path": "secure-systems"
       },
       {
-        "title": "Prevent lateral movement",
-        "path": "secure-systems/prevent-lateral-movement"
-      },
-      {
-        "title": "Secure distributed systems",
-        "path": "secure-systems/secure-distributed-systems"
+        "title": "Compliance and governance",
+        "routes": [
+          {
+            "title": "Use policy as code",
+            "path": "secure-systems/compliance-and-governance/policy-as-code"
+          },
+          {
+            "title": "Document shared responsibilities",
+            "path": "secure-systems/compliance-and-governance/document-shared-responsibilities"
+          },
+          {
+            "title": "Audit trails",
+            "path": "secure-systems/compliance-and-governance/audit-trails"
+          }
+        ]
       },
       {
         "title": "Secure applications",
@@ -336,21 +345,8 @@
         ]
       },
       {
-        "title": "Compliance and governance",
-        "routes": [
-          {
-            "title": "Use policy as code",
-            "path": "secure-systems/compliance-and-governance/policy-as-code"
-          },
-          {
-            "title": "Document shared responsibilities",
-            "path": "secure-systems/compliance-and-governance/document-shared-responsibilities"
-          },
-          {
-            "title": "Audit trails",
-            "path": "secure-systems/compliance-and-governance/audit-trails"
-          }
-        ]
+        "title": "Prevent lateral movement",
+        "path": "secure-systems/prevent-lateral-movement"
       }
     ]
   },
@@ -365,16 +361,16 @@
         "title": "Monitor system health",
         "routes": [
           {
-            "title": "Detect configuration drift",
-            "path": "optimize-systems/monitor-system-health/detect-configuration-drift"
-          },
-          {
             "title": "Identify common metrics",
             "path": "optimize-systems/monitor-system-health/identify-metrics"
           },
           {
             "title": "Monitor network traffic",
             "path": "optimize-systems/monitor-system-health/monitor-network"
+          },
+          {
+            "title": "Detect configuration drift",
+            "path": "optimize-systems/monitor-system-health/detect-configuration-drift"
           }
         ]
       },
@@ -400,10 +396,7 @@
         "title": "Overview",
         "path": "design-resilient-systems"
       },
-      {
-        "title": "Plan for resilience",
-        "path": "design-resilient-systems/plan-for-resilience"
-      },
+
       {
         "title": "Principles",
         "routes": [
@@ -418,7 +411,15 @@
         ]
       },
       {
-        "title": "Failover",
+        "title": "Plan for resilience",
+        "path": "design-resilient-systems/plan-for-resilience"
+      },
+      {
+        "title": "Secure distributed systems",
+        "path": "design-resilient-systems/secure-distributed-systems"
+      },
+      {
+        "title": "Plan for failover",
         "path": "design-resilient-systems/failover"
       },
       {
