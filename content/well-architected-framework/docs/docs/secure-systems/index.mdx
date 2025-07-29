@@ -1,7 +1,7 @@
 ---
 layout: docs
 page_title: Secure systems
-description: Learn how to implement comprehensive security controls for your infrastructure and applications.
+description: Implement comprehensive security controls including identity and access management, data protection, secrets management, and network security to prevent unauthorized access and protect sensitive information.
 ---
 
 # Secure systems
@@ -9,6 +9,46 @@ description: Learn how to implement comprehensive security controls for your inf
 The **Secure systems** pillar helps you implement comprehensive security controls including identity and access management, data protection, secrets management, and network security to prevent unauthorized access and protect sensitive information. This pillar ensures security is built into every layer of your infrastructure and application stack, from the network perimeter to individual application components.
 
 When you successfully implement this pillar, you transform from reactive, compliance-focused security to proactive, integrated security that protects against modern threats. This transformation helps you build security into your development and deployment processes, ensuring that security controls scale with infrastructure growth and application complexity. You can maintain comprehensive security posture while accelerating delivery and innovation.
+
+## Topics in this pillar
+
+This pillar covers five main areas that work together to create comprehensive system security:
+
+- **Prevent lateral movement** provides protection against network-based threats and unauthorized access, including service mesh implementation and zero trust security.
+
+- **Secure distributed systems** covers building security into distributed architectures, including zero trust principles, secure communication channels, and threat monitoring.
+
+- **Secure applications** covers building security into the development process, including certificate management, CI/CD security, and secure coding practices.
+
+- **Secure data** focuses on protecting data throughout its lifecycle, including data classification, encryption, and data protection strategies.
+
+- **Secure secrets** covers the secure storage and distribution of sensitive credentials and configuration, including automatic rotation, access control, and audit logging.
+
+- **Compliance and governance** ensures adherence to regulations and standards, including compliance frameworks, audit trails, and security governance processes.
+
+### Prevent lateral movement
+
+Network security provides the perimeter defense that prevents initial compromise. Without proper network security controls, attackers can easily gain access to infrastructure and move laterally to compromise additional systems and data. This section covers service mesh implementation, zero trust security, and lateral movement prevention practices. These practices help you implement network-level security controls to prevent unauthorized access and lateral movement within infrastructure.
+
+### Secure distributed systems
+
+Distributed systems involve multiple components communicating across networks, creating an expanded attack surface with many potential points of vulnerability. A breach in one component can cascade through the entire system, compromising data integrity, confidentiality, and availability. This section covers zero trust architecture, secure communication channels, and threat monitoring practices. These practices help you implement comprehensive security measures that prevent data breaches and service disruptions while maintaining performance and reliability.
+
+### Secure applications
+
+Applications are the primary attack surface for most organizations. Without secure application development practices, vulnerabilities in code can undermine all infrastructure security controls and provide attackers with direct access to systems and data. This section covers certificate management, CI/CD security, and secure coding practices. These practices help you build security into applications from design through deployment.
+
+### Secure data
+
+Data is often the most valuable asset organizations protect. Data breaches can have severe financial, legal, and reputational consequences, making data security practices critical for comprehensive protection. This section covers data classification, encryption, and data protection strategies. These practices help you protect data at rest and in transit through encryption, access controls, and data classification throughout its lifecycle.
+
+### Secure secrets
+
+Secrets are the keys to your infrastructure. Compromised credentials can bypass all other security controls, making secrets management essential for protecting against credential-based attacks and ensuring secure application deployment. This section covers secrets storage, rotation, access control, and audit logging practices. These practices help you securely store, distribute, and manage sensitive information such as passwords, API keys, and certificates.
+
+### Compliance and governance
+
+Compliance requirements drive many security decisions. Without proper governance and compliance practices, organizations risk regulatory penalties and may implement security controls that do not align with business objectives or provide effective protection. This section covers compliance frameworks, audit trails, and governance processes. These processes help you establish security policies, procedures, and monitoring for compliance with regulations and standards.
 
 ## Why this matters
 
@@ -43,56 +83,3 @@ This pillar relies on the automation practices established in the Automate and D
 The Optimize Systems pillar benefits from security practices that ensure optimization does not compromise security posture. You can implement security monitoring and response systems that scale with infrastructure growth, ensuring that security controls remain effective as systems scale and optimize.
 
 The Design Resilient Systems pillar is enhanced by security practices that ensure security controls remain operational during failures. You can implement security monitoring and response systems that continue to function during infrastructure failures, maintaining security posture even during adverse conditions.
-
-## Topics in this pillar
-
-This pillar covers six main areas that work together to create comprehensive system security:
-
-- **Identity and access management** provides the foundation for controlling access to resources and protecting sensitive information, including authentication, authorization, and role-based access control.
-
-- **Secrets management** covers the secure storage and distribution of sensitive credentials and configuration, including automatic rotation, access control, and audit logging.
-
-- **Data security** focuses on protecting data throughout its lifecycle, including encryption, access controls, and data classification for data at rest and in transit.
-
-- **Secure applications** covers building security into the development process, including secure coding practices, vulnerability management, and application security testing.
-
-- **Compliance and governance** ensures adherence to regulations and standards, including compliance frameworks, audit trails, and security governance processes.
-
-- **Network security** provides protection against network-based threats and unauthorized access, including network segmentation, firewalls, and intrusion detection systems.
-
-### Identity and access management
-
-Identity and access management is the foundation of security. Without proper authentication and authorization, all other security controls are ineffective since you cannot control who has access to your systems and data. This section covers user management, role-based access control, identity federation, and multi-factor authentication practices. These practices help you implement robust authentication and authorization systems for controlling access to resources and protecting sensitive information.
-
-### Secrets management
-
-Secrets are the keys to your infrastructure. Compromised credentials can bypass all other security controls, making secrets management essential for protecting against credential-based attacks and ensuring secure application deployment. This section covers secrets storage, rotation, access control, and audit logging practices. These practices help you securely store, distribute, and manage sensitive information such as passwords, API keys, and certificates.
-
-### Data security
-
-Data is often the most valuable asset organizations protect. Data breaches can have severe financial, legal, and reputational consequences, making data security practices critical for comprehensive protection. This section covers data encryption, backup security, data loss prevention, and data classification practices. These practices help you protect data at rest and in transit through encryption, access controls, and data classification throughout its lifecycle.
-
-### Secure applications
-
-Applications are the primary attack surface for most organizations. Without secure application development practices, vulnerabilities in code can undermine all infrastructure security controls and provide attackers with direct access to systems and data. This section covers secure coding practices, vulnerability management, and application security testing. These practices help you build security into applications from design through deployment.
-
-### Compliance and governance
-
-Compliance requirements drive many security decisions. Without proper governance and compliance practices, organizations risk regulatory penalties and may implement security controls that do not align with business objectives or provide effective protection. This section covers compliance frameworks, audit trails, and governance processes. These processes help you establish security policies, procedures, and monitoring for compliance with regulations and standards.
-
-### Network security
-
-Network security provides the perimeter defense that prevents initial compromise. Without proper network security controls, attackers can easily gain access to infrastructure and move laterally to compromise additional systems and data. This section covers network segmentation, firewalls, intrusion detection, and lateral movement prevention practices. These practices help you implement network-level security controls to prevent unauthorized access and lateral movement within infrastructure.
-
-## Next steps
-
-In this overview, you learned about securing systems. Securing systems is part of the [Well-Architected Framework](/well-architected-framework).
-
-Refer to the following documents to learn how to secure systems.
-
-- [Identity and access management](/well-architected-framework/secure-systems/identity-access-management) to implement robust authentication and authorization
-- [Secrets management](/well-architected-framework/secure-systems/secrets) to securely manage sensitive credentials and configuration
-- [Data security](/well-architected-framework/secure-systems/data) to protect data throughout its lifecycle
-- [Secure applications](/well-architected-framework/secure-systems/secure-applications) to build security into application development
-- [Compliance and governance](/well-architected-framework/secure-systems/compliance-and-governance) to establish security governance and compliance
-- [Prevent lateral movement](/well-architected-framework/secure-systems/prevent-lateral-movement) to implement network security controls

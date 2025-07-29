@@ -9,6 +9,28 @@ The **Design resilient systems** pillar helps you build fault-tolerant architect
 
 When you successfully implement this pillar, you transform from fragile, failure-prone systems to robust, self-healing architectures that can withstand various failure scenarios. This transformation helps you maintain service availability during infrastructure failures, natural disasters, and other disruptive events. You can build customer trust through consistent service delivery and reduce the financial and reputational impact of downtime.
 
+## Topics in this pillar
+
+This pillar covers three main areas that work together to create comprehensive system resilience:
+
+- **Principles** provide the foundational concepts and patterns for building fault-tolerant architectures, including distributed systems principles and planning for resilience.
+
+- **Ensure high availability** covers the mechanisms and strategies for maintaining service availability during component failures, including disaster recovery planning and automated failover mechanisms.
+
+- **Scale and tune performance** ensures that resilient systems can handle increased load without compromising availability, including performance optimization practices and capacity planning.
+
+### Principles
+
+These topics provide the foundational knowledge needed to design systems that can withstand failures. Without understanding these principles, you cannot build truly resilient architectures that maintain availability during component failures. This section covers distributed systems principles and planning for resilience. These principles help you understand and implement core concepts for building resilient distributed systems in modern architectures.
+
+### Ensure high availability
+
+These topics represent the practical implementation of resilience. High availability and disaster recovery are the core mechanisms that transform theoretical resilience concepts into operational reality that maintains business continuity. This section covers disaster recovery planning and automated failover mechanisms. These mechanisms help you implement redundancy and failover to ensure continuous service availability.
+
+### Scale and tune performance
+
+Resilient systems must also perform well under normal conditions. Without proper performance optimization, resilient architectures may be reliable but unusable, failing to meet business requirements for responsiveness and throughput. This section covers performance optimization practices and capacity planning. These strategies help you optimize system performance while maintaining resilience to ensure systems can handle increased load without compromising availability.
+
 ## Why this matters
 
 Resilient system design gives you immediate operational benefits and long-term business value. From a technical perspective, resilient systems prevent single points of failure through redundancy and fault isolation. You can implement failover mechanisms that automatically redirect traffic and workloads when components fail, reducing mean time to recovery and minimizing service disruption.
@@ -42,35 +64,3 @@ This pillar relies on the automation practices established in the Automate and D
 Resilient systems benefit from the optimization practices established in the Optimize Systems pillar. You can implement high-availability architectures without excessive cost overhead by optimizing resource utilization and implementing efficient scaling strategies. Optimization ensures that redundant systems are cost-effective to operate and maintain.
 
 The Secure Systems pillar is enhanced by resilient design practices that ensure security controls remain operational during failures. You can implement security monitoring and response systems that continue to function during infrastructure failures, maintaining security posture even during adverse conditions.
-
-## Topics in this pillar
-
-This pillar covers three main areas that work together to create comprehensive system resilience:
-
-- **Principles** provide the foundational concepts and patterns for building fault-tolerant architectures, including distributed systems principles and planning for resilience.
-
-- **Ensure high availability** covers the mechanisms and strategies for maintaining service availability during component failures, including disaster recovery planning and automated failover mechanisms.
-
-- **Optimize performance** ensures that resilient systems can handle increased load without compromising availability, including performance optimization practices and capacity planning.
-
-### Principles
-
-These topics provide the foundational knowledge needed to design systems that can withstand failures. Without understanding these principles, you cannot build truly resilient architectures that maintain availability during component failures. This section covers distributed systems principles and planning for resilience. These principles help you understand and implement core concepts for building resilient distributed systems in modern architectures.
-
-### Ensure high availability
-
-These topics represent the practical implementation of resilience. High availability and disaster recovery are the core mechanisms that transform theoretical resilience concepts into operational reality that maintains business continuity. This section covers disaster recovery planning and automated failover mechanisms. These mechanisms help you implement redundancy and failover to ensure continuous service availability.
-
-### Optimize performance
-
-Resilient systems must also perform well under normal conditions. Without proper performance optimization, resilient architectures may be reliable but unusable, failing to meet business requirements for responsiveness and throughput. This section covers performance optimization practices and capacity planning. These strategies help you optimize system performance while maintaining resilience to ensure systems can handle increased load without compromising availability.
-
-## Next steps
-
-In this overview, you learned about designing resilient systems. Designing resilient systems is part of the [Well-Architected Framework](/well-architected-framework).
-
-Refer to the following documents to learn how to design resilient systems.
-
-- [Principles](/well-architected-framework/design-resilient-systems/principles) to understand core concepts for resilient architectures
-- [Ensure high availability](/well-architected-framework/design-resilient-systems/ensure-high-availability) to implement high-availability and disaster recovery mechanisms
-- [Optimize performance](/well-architected-framework/design-resilient-systems/optimize-performance) to optimize performance while maintaining resilience
