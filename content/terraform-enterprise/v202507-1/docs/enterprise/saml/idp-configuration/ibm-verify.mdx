@@ -27,7 +27,7 @@ Follow these steps to configure IBM Verify as the identity provider (IdP) for Te
    | --------------------------------------------------------------------- | ------------------------------- | -------------------------------------------- |
    | **Provider ID**                                                       | Metadata (Audience) URL         | `https://<TFE HOSTNAME>/users/saml/metadata`     |
    | **Assertion consumer service URL (HTTP-POST)**                        | ACS Consumer (Recipient) URL    | `https://<TFE HOSTNAME>/users/saml/auth` |
-   | **Name identifier*                                                    |                                 |  Email                                        |
+   | **Name identifier**                                                   |                                 |  Email                                        |
 ![image](/img/docs/ibm-verify-saml-settings-1.png)
 
 
@@ -36,12 +36,12 @@ Follow these steps to configure IBM Verify as the identity provider (IdP) for Te
 
 1. Optionally configure a site admin permissions attribute statement. This statement determines which users can administer the entire Terraform Enterprise instance. Refer to [Administering Terraform Enterprise](/terraform/enterprise/application-administration) for more information about site admin permissions. Under the **Directory - Attributes (Optional)**, configure an attribute as follows:
 
-   | Attribute name                       | Value       |Description                                                                                                   |
-   | --------------------------- | ----------- | ------------------- ---------------------------------------------------------------------------------------- |
-   | **Name**                    | `SiteAdmin` | This is the default name for Terraform Enterprise's site admin [attribute][]. You can change the name of this attribute in [Terraform Enterprise's SAML settings](/terraform/enterprise/saml/configuration) if necessary.                                                                                                                                                               |
-   | **Availability**            | Single sign-on SSO          | Use with Single sign-on SSO                                                                                                                |
-   | **Attribute identifier**    | siteadmin            | Identifier for the site admin attribute     |
-   | **Data type**    | Boolean            | SiteAdmin true or false   |
+   | Attribute name              | Value                       | Description                                                                                                                                                                                                               |
+   | --------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Name**                    | `SiteAdmin`                 | This is the default name for Terraform Enterprise's site admin [attribute][]. You can change the name of this attribute in [Terraform Enterprise's SAML settings](/terraform/enterprise/saml/configuration) if necessary. |
+   | **Availability**            | Single sign-on SSO          | Use with Single sign-on SSO                                                                                                                                                                                               |
+   | **Attribute identifier**    | siteadmin                   | Identifier for the site admin attribute                                                                                                                                                                                   |
+   | **Data type**               | Boolean                     | SiteAdmin true or false                                                                                                                                                                                                   |
   
 ![image](/img/docs/ibm-verify-siteadmin-attribute.png)
 
