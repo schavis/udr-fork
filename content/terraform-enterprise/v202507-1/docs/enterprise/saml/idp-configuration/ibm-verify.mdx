@@ -74,7 +74,7 @@ Follow these steps to configure IBM Verify as the identity provider (IdP) for Te
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <saml:Issuer Format="urn:oasis:names:tc:SAML:2.0:nameid-format:entity">https://example.verify.ibm.com/saml/sps/saml20ip/saml20</saml:Issuer>
     <saml:Subject>
-        <saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">example@gmail.com</saml:NameID>
+        <saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">example@ibm.com</saml:NameID>
         <saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
             <saml:SubjectConfirmationData InResponseTo="_18b23dcd-a903-4438-b079-32eecd31925a" NotOnOrAfter="2025-07-29T11:46:58Z" Recipient="https://tfe.aws.example.com/users/saml/auth"/>
         </saml:SubjectConfirmation>
