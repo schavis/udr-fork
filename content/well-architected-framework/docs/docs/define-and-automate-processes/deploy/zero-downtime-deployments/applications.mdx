@@ -34,11 +34,11 @@ The following is an example of canary testing your green environment:
 
 After the green environment is ready, the load balancer sends a small fraction of the traffic to the green environment (in this example, 10%).
 
-![Canary test/deployment. All traffic is directed to the blue environment initially. When you perform a canary test, 10% of the traffic is directed to the green environment.](/img/docs/well-architected-framework/blue-green-canary-tests-deployments/canary-deployment.png)
+![Canary test/deployment. All traffic is directed to the blue environment initially. When you perform a canary test, 10% of the traffic is directed to the green environment.](/img/well-architected-framework/blue-green-canary-tests-deployments/canary-deployment.png)
 
 If the canary test succeeds without errors, you can incrementally direct traffic to the green environment (50/50 — split traffic) over time. In the end state, you redirect all traffic to the green environment. After verifying the new deployment, you can destroy the old blue environment. The green environment is now your current production service.
 
-![Rolling deployment. After the initial canary test, traffic to the green environment is split evenly with the blue environment (50/50). Finally, all traffic is directed to the green environment.](/img/docs/well-architected-framework/blue-green-canary-tests-deployments/rolling-deployment.png)
+![Rolling deployment. After the initial canary test, traffic to the green environment is split evenly with the blue environment (50/50). Finally, all traffic is directed to the green environment.](/img/well-architected-framework/blue-green-canary-tests-deployments/rolling-deployment.png)
 
 ## Containerized applications
 
