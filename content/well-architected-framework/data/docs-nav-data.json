@@ -31,7 +31,12 @@
           {
             "title": "Fully automated deployments",
             "path": "define-and-automate-processes/process-automation/fully-automated"
+          },
+          {
+            "title": "GitOps workflow",
+            "path": "define-and-automate-processes/process-automation/gitops"
           }
+          
         ]
       },
       {
