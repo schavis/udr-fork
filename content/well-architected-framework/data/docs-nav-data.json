@@ -128,10 +128,6 @@
             "path": "define-and-automate-processes/define/development-environment"
           },
           {
-            "title": "Implement automated scaling",
-            "path": "define-and-automate-processes/define/plan-for-scale"
-          },
-          {
             "title": "Standardize workflows",
             "path": "define-and-automate-processes/define/standardize-workflows"
           }
@@ -429,6 +425,10 @@
       {
         "title": "Scale resources",
         "routes": [
+          {
+            "title": "Plan for scale",
+            "path": "optimize-systems/scale-resources/plan"
+          },
           {
             "title": "Servers",
             "path": "optimize-systems/scale-resources/servers"
