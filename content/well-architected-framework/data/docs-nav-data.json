@@ -335,10 +335,6 @@
         "title": "Secure data",
         "routes": [
           {
-            "title": "Introduction",
-            "path": "secure-systems/data"
-          },
-          {
             "title": "Classify data",
             "path": "secure-systems/data/classify-data"
           },
@@ -363,10 +359,6 @@
       {
         "title": "Secure secrets",
         "routes": [
-          {
-            "title": "Introduction",
-            "path": "secure-systems/secrets"
-          },
           {
             "title": "Store static secrets",
             "path": "secure-systems/secrets/store-static-secrets"
