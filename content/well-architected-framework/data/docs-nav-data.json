@@ -4,9 +4,6 @@
     "path": "what-is"
   },
   {
-    "divider": true
-  },
-  {
     "heading": "Framework pillars"
   },
   {
@@ -17,199 +14,181 @@
         "path": "define-and-automate-processes"
       },
       {
-        "title": "Principles",
+        "title": "Process automation",
         "routes": [
           {
-            "title": "Application delivery",
-            "path": "define-and-automate-processes/principles/application-delivery"
+            "title": "Process automation workflow",
+            "path": "define-and-automate-processes/process-automation/process-automation-workflow"
+          },
+          {
+            "title": "Automation maturity model",
+            "path": "define-and-automate-processes/process-automation"
+          },
+          {
+            "title": "Semi-automated deployments",
+            "path": "define-and-automate-processes/process-automation/semi-automated"
+          },
+          {
+            "title": "Fully automated deployments",
+            "path": "define-and-automate-processes/process-automation/fully-automated"
           }
         ]
       },
       {
-        "title": "Team and culture",
+        "title": "Build your team culture",
         "routes": [
+          {
+            "title": "Workflows over technologies",
+            "path": "define-and-automate-processes/build-culture/workflows-over-technologies"
+          },
           {
             "title": "Create high-performing teams",
             "routes": [
               {
                 "title": "Introduction",
-                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams"
+                "path": "define-and-automate-processes/build-culture/create-high-performing-teams"
               },
               {
                 "title": "Continuous learning",
-                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/continuous-learning"
+                "path": "define-and-automate-processes/build-culture/create-high-performing-teams/continuous-learning"
               },
               {
                 "title": "Communication",
-                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/communication"
+                "path": "define-and-automate-processes/build-culture/create-high-performing-teams/communication"
               },
               {
                 "title": "Collaboration",
-                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/collaboration"
+                "path": "define-and-automate-processes/build-culture/create-high-performing-teams/collaboration"
               },
               {
                 "title": "Writing",
-                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/writing"
+                "path": "define-and-automate-processes/build-culture/create-high-performing-teams/writing"
               },
               {
                 "title": "Sense of ownership",
-                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/sense-of-ownership"
+                "path": "define-and-automate-processes/build-culture/create-high-performing-teams/sense-of-ownership"
               },
               {
                 "title": "Recognition",
-                "path": "define-and-automate-processes/team-and-culture/create-high-performing-teams/recognition"
+                "path": "define-and-automate-processes/build-culture/create-high-performing-teams/recognition"
               }
             ]
-          },
-          {
-            "title": "Workflows over technologies",
-            "path": "define-and-automate-processes/team-and-culture/workflows-over-technologies"
           }
         ]
       },
       {
-        "title": "Develop and test",
+        "title": "Define your processes",
         "routes": [
           {
-            "title": "Use version control",
-            "path": "define-and-automate-processes/develop-and-test/version-control"
+            "title": "Map your workflows",
+            "path": "define-and-automate-processes/define/workflows"
           },
           {
-            "title": "Use development environment",
-            "path": "define-and-automate-processes/develop-and-test/development-environment"
+            "title": "Define infrastructure as code",
+            "path": "define-and-automate-processes/define/infrastructure"
+          },
+          {
+            "title": "Create reusable modules",
+            "path": "define-and-automate-processes/define/modules"
+          },
+          {
+            "title": "Define CI/CD infrastructure",
+            "path": "define-and-automate-processes/define/cicd"
+          },
+          {
+            "title": "Define container orchestration",
+            "path": "define-and-automate-processes/define/orchestration"
+          },
+          {
+            "title": "Define database infrastructure",
+            "path": "define-and-automate-processes/define/database"
+          },
+          {
+            "title": "Define security infrastructure",
+            "path": "define-and-automate-processes/define/security"
+          },
+          {
+            "title": "Define monitoring infrastructure",
+            "path": "define-and-automate-processes/define/monitoring"
+          },
+          {
+            "title": "Define version control infrastructure",
+            "path": "define-and-automate-processes/define/version-control"
+          },
+          {
+            "title": "Define cloud automation",
+            "path": "define-and-automate-processes/define/cloud"
+          },
+          {
+            "title": "Define application delivery process",
+            "path": "define-and-automate-processes/define/app-delivery"
+          },
+          {
+            "title": "Define development environment",
+            "path": "define-and-automate-processes/define/development-environment"
+          },
+          {
+            "title": "Implement automated scaling",
+            "path": "define-and-automate-processes/define/plan-for-scale"
           },
           {
             "title": "Standardize workflows",
-            "path": "define-and-automate-processes/develop-and-test/standardize-workflows"
-          },
-          {
-            "title": "Identify reusable components",
-            "path": "define-and-automate-processes/develop-and-test/identify-reusable-components"
-          },
-          {
-            "title": "Plan for scale",
-            "path": "define-and-automate-processes/develop-and-test/plan-for-scale"
-          },
-          {
-            "title": "Integrate CI/CD pipelines",
-            "path": "define-and-automate-processes/develop-and-test/integrate-ci-cd"
-          },
-          {
-            "title": "Define security strategy",
-            "path": "define-and-automate-processes/develop-and-test/define-security-strategy"
-          },
-          {
-            "title": "Codify systems and tools",
-            "routes": [
-              {
-                "title": "Introduction",
-                "path": "define-and-automate-processes/develop-and-test/codify-systems-and-tools"
-              },
-              {
-                "title": "CI/CD systems",
-                "path": "define-and-automate-processes/develop-and-test/codify-systems-and-tools/ci-cd"
-              },
-              {
-                "title": "Cloud automation",
-                "path": "define-and-automate-processes/develop-and-test/codify-systems-and-tools/cloud-automation"
-              },
-              {
-                "title": "Container orchestration",
-                "path": "define-and-automate-processes/develop-and-test/codify-systems-and-tools/container-orchestration"
-              },
-              {
-                "title": "Databases",
-                "path": "define-and-automate-processes/develop-and-test/codify-systems-and-tools/database"
-              },
-              {
-                "title": "Logging and monitoring",
-                "path": "define-and-automate-processes/develop-and-test/codify-systems-and-tools/logging-and-monitoring"
-              },
-              {
-                "title": "Security and authentication",
-                "path": "define-and-automate-processes/develop-and-test/codify-systems-and-tools/security-and-authentication"
-              },
-              {
-                "title": "Version control systems",
-                "path": "define-and-automate-processes/develop-and-test/codify-systems-and-tools/version-control-systems"
-              }
-            ]
+            "path": "define-and-automate-processes/define/standardize-workflows"
           }
         ]
       },
       {
-        "title": "Deploy systems",
+        "title": "Automate your workflows",
         "routes": [
           {
-            "title": "Infrastructure",
-            "routes": [
-              {
-                "title": "Atomic deployments",
-                "path": "define-and-automate-processes/deploy-systems/infrastructure/atomic-deployments"
-              },
-              {
-                "title": "Deploy application infrastructure",
-                "path": "define-and-automate-processes/deploy-systems/infrastructure/deploy-application"
-              }
-            ]
-          },
-          {
-            "title": "Applications",
-            "routes": [
-              {
-                "title": "Deploy applications",
-                "path": "define-and-automate-processes/deploy-systems/applications/deploy"
-              },
-              {
-                "title": "Monitor applications",
-                "path": "define-and-automate-processes/deploy-systems/applications/monitor"
-              },
-              {
-                "title": "Package applications",
-                "path": "define-and-automate-processes/deploy-systems/applications/package"
-              }
-            ]
+            "title": "Implement CI/CD",
+            "path": "define-and-automate-processes/automate/cicd"
           },
           {
             "title": "Automate deployments",
-            "routes": [
-              {
-                "title": "Introduction",
-                "path": "define-and-automate-processes/deploy-systems/automate-deployments"
-              },
-              {
-                "title": "Semi-automate deployments",
-                "path": "define-and-automate-processes/deploy-systems/automate-deployments/semi-automate"
-              },
-              {
-                "title": "Fully-automate deployments",
-                "path": "define-and-automate-processes/deploy-systems/automate-deployments/fully-automate"
-              }
-            ]
+            "path": "define-and-automate-processes/automate/deployments"
           },
           {
-            "title": "Zero downtime deployment",
+            "title": "Package applications",
+            "path": "define-and-automate-processes/automate/packaging"
+          },
+          {
+            "title": "Automate testing",
+            "path": "define-and-automate-processes/automate/testing"
+          }
+        ]
+      },
+      {
+        "title": "Deploy with confidence",
+        "routes": [
+          {
+            "title": "Atomic deployments",
+            "path": "define-and-automate-processes/deploy/atomic-deployments"
+          },
+          {
+            "title": "Zero-downtime deployments",
             "routes": [
               {
                 "title": "Introduction",
-                "path": "define-and-automate-processes/deploy-systems/zero-downtime-deployment"
+                "path": "define-and-automate-processes/deploy/zero-downtime-deployments"
               },
               {
-                "title": "Applications",
-                "path": "define-and-automate-processes/deploy-systems/zero-downtime-deployment/applications"
+                "title": "Application deployments",
+                "path": "define-and-automate-processes/deploy/zero-downtime-deployments/applications"
               },
               {
-                "title": "Infrastructure",
-                "path": "define-and-automate-processes/deploy-systems/zero-downtime-deployment/infrastructure"
+                "title": "Infrastructure deployments",
+                "path": "define-and-automate-processes/deploy/zero-downtime-deployments/infrastructure"
               },
               {
-                "title": "Service mesh",
-                "path": "define-and-automate-processes/deploy-systems/zero-downtime-deployment/service-mesh"
+                "title": "Service mesh deployments",
+                "path": "define-and-automate-processes/deploy/zero-downtime-deployments/service-mesh"
               }
             ]
           }
         ]
       },
+
       {
         "title": "Monitor and operate",
         "routes": [
@@ -218,23 +197,23 @@
             "routes": [
               {
                 "title": "Introduction",
-                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents"
+                "path": "define-and-automate-processes/monitor/setup-monitoring-agents"
               },
               {
                 "title": "Manage secrets",
-                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/manage-secrets"
+                "path": "define-and-automate-processes/monitor/setup-monitoring-agents/manage-secrets"
               },
               {
                 "title": "Virtual machines (VMs)",
-                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/vm"
+                "path": "define-and-automate-processes/monitor/setup-monitoring-agents/vm"
               },
               {
                 "title": "Containers",
-                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/containers"
+                "path": "define-and-automate-processes/monitor/setup-monitoring-agents/containers"
               },
               {
                 "title": "Service mesh",
-                "path": "define-and-automate-processes/monitor-and-operate/setup-monitoring-agents/service-mesh"
+                "path": "define-and-automate-processes/monitor/setup-monitoring-agents/service-mesh"
               }
             ]
           },
@@ -243,15 +222,15 @@
             "routes": [
               {
                 "title": "Introduction",
-                "path": "define-and-automate-processes/monitor-and-operate/dashboards-alerts"
+                "path": "define-and-automate-processes/monitor/dashboards-alerts"
               },
               {
                 "title": "Vendor monitoring tools",
-                "path": "define-and-automate-processes/monitor-and-operate/dashboards-alerts/vendor-monitoring-tools"
+                "path": "define-and-automate-processes/monitor/dashboards-alerts/manage-vendor"
               },
               {
                 "title": "Cloud-native monitoring tools",
-                "path": "define-and-automate-processes/monitor-and-operate/dashboards-alerts/cloud-native-monitoring-tools"
+                "path": "define-and-automate-processes/monitor/dashboards-alerts/manage-cloud-native"
               }
             ]
           }
@@ -350,6 +329,10 @@
         "title": "Secure data",
         "routes": [
           {
+            "title": "Introduction",
+            "path": "secure-systems/data"
+          },
+          {
             "title": "Classify data",
             "path": "secure-systems/data/classify-data"
           },
@@ -374,6 +357,10 @@
       {
         "title": "Secure secrets",
         "routes": [
+          {
+            "title": "Introduction",
+            "path": "secure-systems/secrets"
+          },
           {
             "title": "Store static secrets",
             "path": "secure-systems/secrets/store-static-secrets"
@@ -494,14 +481,10 @@
     ]
   },
   {
-    "heading": "Implementation resources"
-  },
-  {
-    "title": "Overview",
-    "path": "resources"
+    "heading": "Additional resources"
   },
   {
     "title": "Verify HashiCorp binaries",
-    "path": "resources/verify-hashicorp-binary"
+    "path": "verify-hashicorp-binary"
   }
 ]

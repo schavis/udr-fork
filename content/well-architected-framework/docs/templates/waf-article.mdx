@@ -7,15 +7,15 @@ description: [Brief description of what the article covers and what the reader w
 
 [What is the topic and why it is important. Include the rationale and business case in this introduction section. Explain the value and context for implementing this practice.]
 
-## [Action-oriented section header]
+## [Single focused section header]
 
-[Practical, implementation-focused content. When helpful, include the who/when/why to provide context. If it is clear from reading the content who/when/where, then you do not need to explicitly add it. Focus on how to implement the practice.]
+[Practical, implementation-focused content focused on ONE specific aspect of the topic. When helpful, include the who/when/why to provide context. If it is clear from reading the content who/when/where, then you do not need to explicitly add it. Focus on how to implement the practice.]
 
 [Continue with practical guidance, examples, and implementation steps. Use written prose rather than bullet points or lists unless absolutely necessary for clarity.]
 
-## [Another action-oriented section header]
+## [Optional second focused section header - only if needed]
 
-[Additional practical content, implementation guidance, or advanced considerations. Keep sections focused and concise.]
+[Additional practical content, implementation guidance, or advanced considerations. Keep sections focused and concise. Only include if the topic truly requires a second section.]
 
 ## Next steps
 
@@ -37,11 +37,12 @@ If you are interested in learning more about [topic], you can check out the foll
 ## Writing Style Notes
 
 ### Structure and Headers
+- **Single topic focus** - Each article should focus on ONE specific, actionable topic
+- **1-2 sections maximum** - Keep content atomic and focused, avoid excessive sections
 - **Action-oriented headers** - Use verbs like "Build", "Implement", "Configure" instead of "-ing" forms (unless it's the main action)
-- **Concise sections** - 2-3 main sections maximum, keep content focused and atomic
 - **Integrated rationale** - Include "why" in the introduction, not as separate sections
 - **Natural flow** - Introduction → Implementation → Next steps
-- **Avoid excessive headers** - Too many headers break reading flow and make articles too long
+- **Atomic content** - If a topic has multiple aspects, consider splitting into separate articles
 
 ### Tone and Voice
 - **Conversational and practical** - Tutorial-like, implementation-focused, NOT command-like
@@ -59,6 +60,7 @@ If you are interested in learning more about [topic], you can check out the foll
 - **Cloud-agnostic** - High-level principles that work across environments
 - **HashiCorp integration** - Naturally incorporate relevant HashiCorp tools when applicable
 - **Short and focused** - WAF articles should be shorter and more atomic than pillar overviews
+- **MVP approach** - Focus on essential content that requires minimal net-new creation
 
 ### Link Formatting
 - **Internal HashiCorp links** - Use relative paths like `/vault/docs/audit` NOT `https://developer.hashicorp.com/vault/docs/audit`
