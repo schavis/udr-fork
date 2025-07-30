@@ -253,17 +253,6 @@ The `start_time` in the response is the earliest time there is activity data
 in the queried period. The `end_time` is the end of the final month of the queried
 period.
 
-<Note>
-
-This API supports only monthly granularity until support for daily-level is added. Until then, 
-the `start_time` and `end_time` values in the reponse are normalized to align with full calendar months. 
-This normalization occurs whether the times are explicitly provided in the request or defaulted by Vault.
-
-- The `start_time` is normalized to the start of the month in which the effective `start_time` falls.
-- The `end_time` is normalized to the end of the month in which the effective `end_time` falls.
-
-</Note>
-
 - If the `end_date` supplied to the API is the current month, exact activity
 information will be returned for all months in the queried period, except for the
 current month. The last element in the `months` response stanza will signify the current month. Furthermore, the
@@ -1154,10 +1143,7 @@ There are a few things to keep in mind while using this API.
 
 - The response includes the actual time period covered, which may not exactly
 match the query parameters due to the month granularity of data or missing
-months in the requested time range. Vault normalizes the effective `start_time`
-and `end_time` to full clandar months - adjusting the `start_time` to the 
-beginning of the month and `end_time` to the end of the month, even if those 
-times were defaulted.
+months in the requested time range.
 
 - If the `end_date` supplied to the API is for the current month, the activity
 information returned by this API will include activity for this month, however
