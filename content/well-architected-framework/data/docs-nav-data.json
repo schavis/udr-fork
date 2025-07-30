@@ -93,7 +93,7 @@
             "path": "define-and-automate-processes/define/version-control"
           },
           {
-            "title": "Codify infrastructure, systems, and tools as code",
+            "title": "Codify infrastructure and tools",
             "routes": [
               {
                 "title": "Introduction",
