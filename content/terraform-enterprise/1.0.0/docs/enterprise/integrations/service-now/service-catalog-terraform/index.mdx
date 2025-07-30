@@ -120,7 +120,7 @@ Terraform.
     You do not need to add any users to this team.
     [permissions-citation]: #intentionally-unused---keep-for-maintainers
 4.  On the "ServiceNow" team's settings page, generate a [team API
-    token](/terraform/enterprise/users-teams-organizations/api-tokens#team-api-tokens). You can assign teams and their associated tokens permission levels on specific projects. To learn more about the different permissions necessary to provision resources, refer to [Permissions](/terraform/enterprise/users-teams-organizations/permissions#project-permissions). 
+    token](/terraform/enterprise/users-teams-organizations/api-tokens#team-api-tokens). HCP Terraform now supports fine-grained permissions for team tokens at the project level. You can assign teams and their associated tokens permission levels on specific projects. To learn more about the different permissions necessary to provision resources, refer to [Permissions](/terraform/enterprise/users-teams-organizations/permissions#project-permissions). 
     **Save the team API token for later.**
 5.  If you are using the [VCS flow](/terraform/enterprise/integrations/service-now/service-catalog-terraform/service-catalog-config#vcs-configuration): 
     1.  Ensure your Terraform organization is [connected to a VCS provider](/terraform/enterprise/vcs). Repositories that are connectable to HCP Terraform workspaces can also be used as workspace templates in the ServiceNow integration.
