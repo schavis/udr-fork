@@ -93,7 +93,7 @@ When using Azure MSI authentication, the Redis password is not required.
 Configure the following settings to use Azure MSI:
 
 - Set the `TFE_REDIS_PASSWORDLESS_AZURE_USE_MSI` variable to `true`.
-- Set the `TFE_REDIS_SIDEKIQ_PASSWORDLESS_AZURE_USE_MSI` variable to `true` if your Sidekiq Redis instance requires to connect using Azure Entra as well.
+- Set the `TFE_REDIS_SIDEKIQ_PASSWORDLESS_AZURE_USE_MSI` variable to `true` if your Sidekiq Redis instance requires connecting using Azure Entra as well.
 - Set the `TFE_REDIS_PASSWORDLESS_AZURE_CLIENT_ID` to the user-assigned managed identity. Leave blank to use the system-assigned MSI. This is required to generate a token with Microsoft Entra ID.
 - Set the `TFE_REDIS_SIDEKIQ_PASSWORDLESS_AZURE_CLIENT_ID` to the user-assigned managed identity. Leave blank to use the system-assigned MSI. Defaults to the same value as `TFE_REDIS_PASSWORDLESS_AZURE_CLIENT_ID` if not set.
 - Set the `TFE_REDIS_USER` to the managed identity. Redis cache expects this while issuing the `AUTH` command.
