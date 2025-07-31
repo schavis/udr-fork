@@ -47,6 +47,10 @@
             "path": "define-and-automate-processes/build-culture/workflows-over-technologies"
           },
           {
+            "title": "HashiCorp Tao",
+            "path": "define-and-automate-processes/build-culture/implement-tao"
+          },
+          {
             "title": "Create high-performing teams",
             "routes": [
               {
@@ -389,6 +393,10 @@
               {
                 "title": "Prevent leaked secrets",
                 "path": "secure-systems/secrets/manage-leaked-secrets/prevent"
+              },
+              {
+                "title": "Implement zero trust security",
+                "path": "secure-systems/secrets/manage-leaked-secrets/zero-trust-security"
               }
             ]
           }
