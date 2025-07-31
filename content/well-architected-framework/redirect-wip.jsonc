@@ -1,0 +1,82 @@
+/**
+ * Redirects in this file are intended to be for documentation content only. The redirects will be applied to developer.hashicorp.com.
+ */
+[
+  {
+    "source": "/well-architected-framework/operational-excellence/operational-excellence-enable-teams",
+    "destination": "/well-architected-framework/define-and-automate-processes/build-culture/create-high-performing-teams",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/operational-excellence/operational-excellence-automate-infrastructure",
+    "destination": "/well-architected-framework/define-and-automate-processes/define/workflows",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/operational-excellence/operational-excellence-application-deployment",
+    "destination": "/well-architected-framework/define-and-automate-processes/automate/cicd",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/operational-excellence/verify-hashicorp-binary",
+    "destination": "/well-architected-framework/verify-hashicorp-binary",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/operational-excellence/operational-excellence-manage-your-infrastructure-components-with-terraform",
+    "destination": "/well-architected-framework/define-and-automate-processes/define/as-code",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/operational-excellence/operational-excellence-tao",
+    "destination": "/well-architected-framework/define-and-automate-processes/build-culture/implement-tao",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/reliability/reliability-deploy-application-monitoring-components",
+    "destination": "/well-architected-framework/define-and-automate-processes/monitor/setup-monitoring-agents",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/reliability/reliability-react-to-monitoring",
+    "destination": "/well-architected-framework/optimize-systems/scale-resources/plan",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/reliability/reliability-zero-downtime-deployments",
+    "destination": "/well-architected-framework/define-and-automate-processes/deploy/zero-downtime-deployments",
+    "permanent": true
+  },
+  {
+    "source": "//well-architected-framework/reliability/reliability-tolerate-failure",
+    "destination": "/well-architected-framework/design-resilient-systems/plan-for-resilience",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/security/security-sensitive-data",
+    "destination": "/well-architected-framework/secure-systems/data",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/security/security-cicd-vault",
+    "destination": "/well-architected-framework/secure-systems/secure-applications/ci-cd-secrets",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/security/security-prevent-lateral-movement",
+    "destination": "/well-architected-framework/secure-systems/prevent-lateral-movement",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/security/security-secure-entities-with-x509",
+    "destination": "/well-architected-framework/secure-systems/secure-applications/certificates/build-certificate-authority",
+    "permanent": true
+  },
+  {
+    "source": "/well-architected-framework/security/security-identify-protect-leaked-secrets",
+    "destination": "/well-architected-framework/secure-systems/secrets",
+    "permanent": true
+  }
+]
+
+
