@@ -340,6 +340,22 @@ Redis Sentinel server user.
 
 Redis Sentinel server password.
 
+### `TFE_REDIS_PASSWORDLESS_AZURE_USE_MSI`
+
+Whether to use Managed Service Identity (MSI) for Redis authentication. Defaults to `false`.
+
+### `TFE_REDIS_SIDEKIQ_PASSWORDLESS_AZURE_USE_MSI`
+
+Whether to use Managed Service Identity (MSI) for Redis authentication used by Sidekiq. Defaults to `false`.
+
+### `TFE_REDIS_PASSWORDLESS_AZURE_CLIENT_ID`
+
+Client ID of a user-assigned Managed Service Identity. Leave blank to use the system-assigned Managed Service Identity. Defaults to `""`.
+
+### `TFE_REDIS_SIDEKIQ_PASSWORDLESS_AZURE_CLIENT_ID`
+
+Client ID of a user-assigned Managed Service Identity. Leave blank to use the system-assigned Managed Service Identity. Defaults to `""`.
+
 ## Initial admin creation token
 
 ### `TFE_IACT_TOKEN`
