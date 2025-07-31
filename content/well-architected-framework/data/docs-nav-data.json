@@ -393,10 +393,6 @@
               {
                 "title": "Prevent leaked secrets",
                 "path": "secure-systems/secrets/manage-leaked-secrets/prevent"
-              },
-              {
-                "title": "Implement zero trust security",
-                "path": "secure-systems/secrets/manage-leaked-secrets/zero-trust-security"
               }
             ]
           }
@@ -409,6 +405,10 @@
       {
         "title": "Validate software integrity",
         "path": "secure-systems/validate-software-integrity"
+      },
+      {
+        "title": "Implement zero trust security",
+        "path": "secure-systems/zero-trust-security"
       }
     ]
   },
@@ -500,5 +500,31 @@
   {
     "title": "Verify HashiCorp binaries",
     "path": "verify-hashicorp-binary"
-  }
+  },
+  {
+        "title": "Implementation resources",
+        "routes": [
+          {
+            "title": "Run a reliable TFE instance",
+            "path": "/implementation-resources/implementation-resources-terraform-reliability"
+          },
+          {
+            "title": "Run a reliable Vault cluster",
+            "path": "/implementation-resources/implementation-resources-vault-reliability"
+          },
+          {
+            "title": "Run a reliable Consul cluster",
+            "path": "/implementation-resources/implementation-resources-consul-reliability"
+          },
+          {
+            "title": "Run a reliable Nomad cluster",
+            "path": "/implementation-resources/implementation-resources-nomad-reliability"
+          },
+          {
+            "title": "Run a reliable Packer Pipeline",
+            "path": "/implementation-resources/implementation-resources-packer-reliability"
+          }
+
+        ]
+      }
 ]
