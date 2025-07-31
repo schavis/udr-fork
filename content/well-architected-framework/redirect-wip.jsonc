@@ -55,12 +55,6 @@
     "destination": "/well-architected-framework/define-and-automate-processes/define/as-code",
     "permanent": true
   },
-  {
-
-    "source": "/well-architected-framework/operational-excellence/operational-excellence-tao",
-    "destination": "/well-architected-framework/define-and-automate-processes/build-culture/implement-tao",
-    "permanent": true
-  },
   // 
   // Reliability
   // 

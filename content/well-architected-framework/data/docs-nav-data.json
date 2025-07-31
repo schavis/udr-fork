@@ -47,10 +47,6 @@
             "path": "define-and-automate-processes/build-culture/workflows-over-technologies"
           },
           {
-            "title": "HashiCorp Tao",
-            "path": "define-and-automate-processes/build-culture/implement-tao"
-          },
-          {
             "title": "Create high-performing teams",
             "routes": [
               {
