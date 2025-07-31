@@ -104,7 +104,7 @@
       {
         "title": "Hold Your Own Key",
         "routes": [
-          { "title": "Key Configurations", "path": "api-docs/hold-your-own-key/configurations" },
+          { "title": "Configurations", "path": "api-docs/hold-your-own-key/configurations" },
           { "title": "Key Versions", "path": "api-docs/hold-your-own-key/key-versions" },
           { "title": "Encrypted Data Keys", "path": "api-docs/hold-your-own-key/encrypted-data-keys" },
           {
