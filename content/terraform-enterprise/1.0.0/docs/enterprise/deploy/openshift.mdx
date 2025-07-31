@@ -54,7 +54,8 @@ FROM hashicorp/tfc-agent
 USER root
 
 RUN mkdir /.tfc-agent && \
-    chmod 770 /.tfc-agent
+    chmod og+rw /.tfc-agent && \
+    chmod o+rx /home/tfc-agent
 
 USER tfc-agent
 ```
