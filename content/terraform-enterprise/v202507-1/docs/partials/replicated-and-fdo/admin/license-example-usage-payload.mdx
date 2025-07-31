@@ -300,13 +300,21 @@ The following JSON payload describes the product usage data that Terraform Enter
                 "key": "workspaces_count_sentinel_policy_sets",
                 "value": 0,
                 "mode": "write"
+            },
+            "using_tfe_explorer": { # Set to 1 when Explorer is enabled in the TFE installation
+                "key":  "using_tfe_explorer",
+                "value": 0,
+                "mode": "write"
+            }
+            "cpu_architecture": { # The underlying cpu architecture the TFE installation is setup in, 0 = other, 1 = amd64, 2 = arm64
+                "key":  "using_tfe_explorer",
+                "value": 1,
+                "mode": "write"
             }
         },
       }
     ],
     "metadata":{
-
     }
-  }
 }
 ```
