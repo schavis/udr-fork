@@ -42,9 +42,7 @@ source: terraform-docs-common
 [speculative plans]: /terraform/enterprise/run/remote-operations#speculative-plans
 
 <!-- BEGIN: TFEnterprise:only name:explorer -->
-
-@include 'beta.mdx'
-
+@include 'beta/explorer.mdx'
 <!-- END: TFEnterprise:only name:explorer -->
 
 # Explorer API reference
@@ -624,7 +622,7 @@ curl \
 
 ## Update a saved view
 
-Use this endpoint to update the data a saved view queries. 
+Use this endpoint to update the data a saved view queries.
 
 `PATCH /api/v2/organizations/:organization_name/explorer/views/:view_id`
 
@@ -736,7 +734,7 @@ curl \
 
 ## Query a saved view
 
-Re-execute a saved view's query to retrieve current results. 
+Re-execute a saved view's query to retrieve current results.
 
 `GET /api/v2/organizations/:organization_name/explorer/views/:view_id/results`
 
