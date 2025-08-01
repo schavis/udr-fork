@@ -35,7 +35,7 @@ Vault replicates audit device configurations to all nodes within a cluster. Vaul
 
 When you disable an audit device, Vault immediately stops writing information to the device, but leaves the existing log information untouched.
 
-Once you disable an audit device, you can no longer [compute hashes](#hashing-sensitive-values) for the assocaited audit log entries. Even if you re-enable the audit device at the same path, Vault creates a new hashing key for the new log entries.
+Once you disable an audit device, you can no longer [compute hashes](#hashing-sensitive-values) for the associated audit log entries. Even if you re-enable the audit device at the same path, Vault creates a new hashing key for the new log entries.
 
 <a id="blocked-audit-devices"></a>
 
@@ -71,7 +71,7 @@ Alternatively, you can selectively exempt specific request or response attribute
 
 Some Vault responses can be very large, especially with `LIST` requests. For example, listing all active leases could return a list that is tens of megabytes long.
 
-Some audit backends cannot process individual audit records of larger sizes. To avoid overloading your audit devies, you can use the [`elide_list_responses`](/vault/api-docs/system/audit#elide_list_responses) option to replace `keys` and `key_info` values in audit log entries for `LIST` responses with the number of objects those fields contain.
+Some audit backends cannot process individual audit records of larger sizes. To avoid overloading your audit devices, you can use the [`elide_list_responses`](/vault/api-docs/system/audit#elide_list_responses) option to replace `keys` and `key_info` values in audit log entries for `LIST` responses with the number of objects those fields contain.
 
 Using `elide_list_responses` [`elide_list_responses`](/vault/api-docs/system/audit#elide_list_responses) improves compatibility with audit devices and reduces the amount of audit data that audit devices ingest, store, and process, while retaining some level of information about what was returned to the client.
 
