@@ -370,14 +370,6 @@ is unknown.
   period for which client counts will be reported. If no start time is specified, the billing start date will be used.
   The [billing start date](/vault/docs/concepts/billing-start-date) automatically rolls over to the latest billing year at the end of the last cycle.
 
-<Note>
-
-The `start_time` parameter is required when using OSS Vault. In Enterprise Vault, this parameter defaults to the cluster's billing start date as defined 
-in the license. OSS Vault does not have a billing start time, so ommitting `start_time` in versions 1.18 and 1.19 can lead to undefined behavior. This
-issue is resolved in version 1.20 and above, so ommitting this parameter no longer causes any unexpected behavior. To ensure reliable behavior in all versions,
-always provide a valid `start_time` when using OSS Vault.
-
-</Note>
 
 - `end_time` `(string, optional)` - An RFC3339 timestamp or Unix epoch time. Specifies the end of the period
   for which client counts will be reported. If no end time is specified, the end of the current month will be used.
