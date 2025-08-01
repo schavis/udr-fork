@@ -2674,18 +2674,18 @@
     ]
   },
   {
-    "title": "Audit Logging",
+    "title": "Audit logging",
     "routes": [
       {
         "title": "Overview",
         "path": "audit"
       },
       {
-        "title": "Structure",
-        "path": "audit/structure"
+        "title": "Auditing schema",
+        "path": "audit/schema"
       },
       {
-        "title": "Best Practices",
+        "title": "Best practices",
         "path": "audit/best-practices"
       },
       {
