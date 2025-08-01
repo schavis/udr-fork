@@ -86,7 +86,7 @@ Vault produces several audit logging [telemetry metrics](/vault/docs/internals/t
 
 ## Configure attribute hashing
 
-Evaluate which request and response attributes need *not* be [hashed](/vault/docs/audit#hashing-of-sensitive-values) in the audit logs for each authentication backend and secrets engine mount you configure in Vault. Leave hashing enabled for attributes that are sensitive (e.g., passwords, private keys) or that may be excessively large for your audit log.
+Evaluate which request and response attributes need *not* be [hashed](/vault/docs/audit#hashing-sensitive-values) in the audit logs for each authentication backend and secrets engine mount you configure in Vault. Leave hashing enabled for attributes that are sensitive (e.g., passwords, private keys) or that may be excessively large for your audit log.
 
 You can disable hashing for individual request and response attributes with the `audit_non_hmac_request_keys` and `audit_non_hmac_response_keys` attributes in the following tuning endpoints:
 
