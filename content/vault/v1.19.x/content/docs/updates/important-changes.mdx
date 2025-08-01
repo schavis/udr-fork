@@ -389,11 +389,13 @@ avoid restarting the backend.
 | ----------- | ------ | ---------------- | --------------------
 | Known issue | Fixed  | 1.18.x, 1.19.x   | 1.20.0
 
-The `/sys/internal/counters/activity` API requires the `start_time` parameter when used 
-with OSS Vault. Unlike Enterprise Vault, OSS Vault does not define a billing start time, and ommitting `start_time` may lead
-to unexpected behavior in affected versions (1.18.x and 1.19.x). In Enterprise Vault, `start_time` parameter is optional and 
-can be safely ommitted, as it defaults to the cluster's billing start date. To avoid issues in OSS Vault, ensure that your 
-API calls explicitely provide a valid `start_time`.
+Vault Community requires the `start_time` parameter  for
+`/sys/internal/counters/activity`. Unlike Enterprise Vault, Vault Commuity does
+not define a billing start time, and ommitting `start_time` may lead to
+unexpected behavior in affected versions (1.18.x and 1.19.x). 
+
+You can safely omit `start_time` for Vault Enterprise as `start_time` defaults
+to the billing start date for the cluster.
 
 #### Workaround
 
