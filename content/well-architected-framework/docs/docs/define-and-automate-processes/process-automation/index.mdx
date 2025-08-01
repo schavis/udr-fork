@@ -43,6 +43,9 @@ The following are examples of semi-automated processes:
 - Employing configuration management tools like Ansible for application setup
 - Storing scripts in version control systems
 - Using basic CI/CD pipelines for some deployment tasks
+- Create application images with code
+- Immutable infrastructure
+- Ability to audit cloud logs
 
 **Benefits over manual deployments:**
 - **Improved repeatability**: Scripts can be run multiple times with consistent results
@@ -55,14 +58,14 @@ The following are examples of semi-automated processes:
 
 Fully-automated deployments use version-controlled infrastructure that is automatically executed through CI/CD systems. Infrastructure changes are implemented through code commits, which trigger automated testing, validation, and deployment processes.
 
-The following are examples of semi-automated processes:
+The following are examples of fully-automated processes:
 
-- Defining infrastructure using declarative configuration files
-- Automatically triggering deployments through Git commits
+- Automatically triggering deployments through Git commits using tools like GitHub Actions or HCP Terraform
 - Running automated tests against infrastructure changes
 - Implementing blue-green or canary deployments
-- Monitoring and alerting on infrastructure health
-- Self-healing systems that automatically respond to failures
+- Monitoring and alerting on infrastructure health with tools like Datadog
+- Self-healing systems that automatically respond to failures like Nomad or auto-scaling groups
+- Self-service infrastructure
 
 **Benefits over semi-automated deployments:**
 - **Complete audit trail**: Every change is tracked through version control
@@ -80,11 +83,16 @@ To determine where your organization currently sits on the maturity model, consi
 - Do you primarily use cloud provider web consoles for infrastructure changes?
 - Are you frequently SSHing into servers to make configuration changes?
 - Are infrastructure changes often made without tracking or approval processes?
+- Do you manually install software and dependencies on servers?
+- Are you scaling resources up or down manually based on demand?
 
 **Semi-Automated Deployment Indicators:**
 - Do you use scripts for most deployment tasks?
 - Are your scripts stored in a version control system?
 - Do you still manually execute deployment scripts?
+- Are you using infrastructure as code tools like Terraform or Ansible?
+- Do you build application images using tools like Packer or Docker?
+- Do you use golden images as a base for your applications?
 - Is there occasional drift between your scripts and the actual infrastructure?
 
 **Fully-Automated Deployment Indicators:**
