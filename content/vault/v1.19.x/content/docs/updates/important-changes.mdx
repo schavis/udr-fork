@@ -397,5 +397,6 @@ API calls explicitely provide a valid `start_time`.
 
 #### Workaround
 
-Provide a valid `start_time` parameter in `/sys/internal/counters/activity` API calls when using OSS Vault.
-Or upgrade to Vault 1.20.0+
+To avoid issues and unexpected behavior with Vault Community, always provide a
+valid `start_time` value when calling `/sys/internal/counters/activity` or
+upgrade to v1.20.x.
