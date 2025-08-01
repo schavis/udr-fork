@@ -12,7 +12,7 @@ Refer to the [best practices](/vault/docs/audit/best-practices) page for importa
 
 Audit logs differ from server logs (also known as operational logs). Server logs emit information about the Vault server process, such as process errors and configuration warnings. Audit logs record the details of every request received and response sent by the Vault API. Refer to the [Troubleshoot Vault](/vault/tutorials/monitoring/troubleshooting-vault#vault-server-logs) tutorial for more information about server logs.
 
-## Enabling and disabling audit devices
+## Enabling and disabling audit devices ((#enabling-disabling-audit-devices))
 
 When you initialize a new Vault cluster, auditing is disabled. You must enable audit devices with the [Vault API](/vault/api-docs/system/audit#enable-audit-device), [Vault CLI](/vault/docs/commands/audit/enable), or tools like the [Terraform Vault provider](/vault/docs/configuration/programmatic-management).
 
@@ -37,7 +37,9 @@ When you disable an audit device, Vault immediately stops writing information to
 
 Once you disable an audit device, you can no longer [compute hashes](#hashing-sensitive-values) for the assocaited audit log entries. Even if you re-enable the audit device at the same path, Vault creates a new hashing key for the new log entries.
 
-## Availability of audit devices  
+<a id="blocked-audit-devices"></a>
+
+## Availability of audit devices ((#enabling-multiple-devices))
 
 Vault sends the audit log entry of every API request and response to all enabled audit devices and guarantees that it saves to at least one of the enabled devices. As a result, if you have audit devices enabled and Vault cannot log information to at least one of the enabled devices, Vault refuses to service the corresponding API request.
 
@@ -89,7 +91,7 @@ For example, the following partial audit record shows an elided list where the `
 }
 ```
 
-## Logging request headers
+## Logging request headers ((#audit-request-headers))
 
 You can use the [`/sys/config/auditing`](/vault/api-docs/system/config-auditing#create-update-audit-request-header) endpoint to configure which incoming client request headers you want Vault to record in the corresponding audit log entries.
 
