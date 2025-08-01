@@ -13,7 +13,7 @@ The automation maturity model describes three stages in the progression from man
 
 Manual deployments involve human operators creating, configuring, and managing infrastructure resources. Common methods include using cloud provider web consoles, connecting to remote servers via SSH or RDP, and running commands directly on systems.
 
-The following are examples of semi-automated processes:
+The following are examples of semi-automated deployments:
 
 - Clicking through cloud provider dashboards to create resources
 - SSHing into servers to install software and configure services
@@ -36,7 +36,7 @@ Occasionally, manually deploying and configuring your infrastructure makes sense
 
 Semi-automated deployments introduce scripting and basic automation tools while still requiring human intervention to execute processes. Instead of manually running individual commands, operators execute scripts that perform deployment and configuration tasks.
 
-The following are examples of semi-automated processes:
+The following are examples of semi-automated deployments:
 
 - Running bash, Python, or PowerShell scripts to provision infrastructure
 - Using cloud-init or user-data scripts for server configuration
@@ -58,7 +58,7 @@ The following are examples of semi-automated processes:
 
 Fully-automated deployments use version-controlled infrastructure that is automatically executed through CI/CD systems. Infrastructure changes are implemented through code commits, which trigger automated testing, validation, and deployment processes.
 
-The following are examples of fully-automated processes:
+The following are examples of fully-automated deployments:
 
 - Automatically triggering deployments through Git commits using tools like GitHub Actions or HCP Terraform
 - Running automated tests against infrastructure changes
@@ -105,5 +105,5 @@ To determine where your organization currently sits on the maturity model, consi
 
 In this section of Process automation, you learned the benefits and tradeoffs of different automation levels, and where your organization is in the model. Visit the following documents to learn specifics on semi and fully-automated deployments. The automation maturity model is part of the [Define and automate processes pillar](/well-architected-framework/define-and-automate-processes).
 
-- [Semi-automated deployments](/well-architected-framework/define-and-automate-processes/process-automation/semi-automated)
-- [Fully-automated deployments](/well-architected-framework/define-and-automate-processes/process-automation/fully-automated)
+- [Semi-automated deployments - Start here if you're currently doing manual deployments](/well-architected-framework/define-and-automate-processes/process-automation/semi-automated)
+- [Fully-automated deployments - Start here if you're currently doing semi-automated deployments](/well-architected-framework/define-and-automate-processes/process-automation/fully-automated)
