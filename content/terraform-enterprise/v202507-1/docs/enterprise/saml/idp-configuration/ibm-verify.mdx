@@ -54,11 +54,12 @@ Follow these steps to configure IBM Verify as the identity provider (IdP) for Te
    | **Username**       (optional)     | urn:oasis:names:tc:SAML:2.0:attrname-format:basic        |  Username                                    |
 
 1. You can find the values needed for Terraform Enterprise SAML settings on the right side of the screen. Save these settings in Terraform Enterprise SAML settings.
+
    | Terraform Enterprise SAML Field   | IBM Verify                                               | Value example                         |
    | --------------------------------- | ---------------------------------------------------------| -------------------------------------------- |
    | Single Sign-On URL                | 	Single Sign-On URL                                      | `https://<id>.verify.ibm.com/saml/sps/saml20ip/saml20/login`                                     |
    | Single Log-Out URL                | 	Single Sign-Out URL                                    | `https://<id>.verify.ibm.com/idaas/mtfim/sps/idaas/logout`                                    |
-   | IDP Certificate                   | urn:oasis:names:tc:SAML:2.0:attrname-format:basic        |  X.509 Certificate                                 |
+   | IDP Certificate                   |    urn:oasis:names:tc:SAML:2.0:attrname-format:basic        |  X.509 Certificate                                 |
 
 
 1. On the **Entitlements** tab, add the users that are allowed access.  
