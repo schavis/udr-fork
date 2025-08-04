@@ -9,11 +9,11 @@ Before you can automate container orchestration processes, you need to clearly d
 
 ## Define orchestration with Terraform
 
-Terraform can define the provisioning, configuration, and management of container orchestration systems. These systems range from self-managed orchestrators like Nomad and Kubernetes to cloud-managed services like AWS ECS, EKS, GKE, and AKS.
+Terraform can provision, configure, and manage container orchestration systems. These systems range from self-managed orchestrators like Nomad and Kubernetes to cloud-managed services like AWS ECS, EKS, GKE, and AKS.
 
 We recommend separating the configuration to deploy and configure the orchestrator from the configuration to deploy services to the orchestrator. For example, define your Kubernetes or Nomad cluster infrastructure in one configuration and define applications and services that run on the orchestrator in a different configuration. This separation provides better organization, clearer responsibilities, and easier maintenance.
 
-Define consistent container orchestration across your environments. For development, define development Kubernetes/Nomad clusters, configure development-specific resource limits and scaling, and set up development namespace and access controls. For staging, define staging orchestration infrastructure, configure staging-specific testing and validation, and set up staging environment promotion processes. For production, define production orchestration infrastructure, configure production-specific security and compliance, and set up production deployment and scaling policies.
+Customize container orchestration configuration and tooling across your environments. For development, define development Kubernetes/Nomad clusters, configure development-specific resource limits and scaling, and set up development namespace and access controls. For staging, define staging orchestration infrastructure, configure staging-specific testing and validation, and set up staging environment promotion processes. For production, define production orchestration infrastructure, configure production-specific security and compliance, and set up production deployment and scaling policies.
 
 ## Next steps
 
