@@ -11,13 +11,19 @@ Before you can automate your infrastructure processes, you need to clearly defin
 
 Infrastructure as code lets you define your infrastructure using declarative configuration files, making it easier to understand your resource configurations and infrastructure topology. When you define your infrastructure as code, you can use the same engineering practices for your infrastructure as for application development, such as code review, automated deployment, and phased rollout.
 
-Defining your infrastructure as code provides version control to track changes over time, collaboration to enable team review and feedback, consistency to ensure identical infrastructure across environments, testing to validate infrastructure changes before deployment, automation to enable automated deployment and management, and audit trails to maintain clear records of infrastructure modifications.
+Defining your infrastructure as code lets you version control your infrastructure changes to track changes over time. Infrastructure as code with version control enables seamless team collaboration through structured review and feedback processes, while ensuring consistency by deploying identical infrastructure across all environments. It also supports thorough testing to validate infrastructure changes before deployment, streamlines automation for deployment and ongoing management, and establishes clear audit trails that maintain detailed records of every infrastructure modification.
 
 ## Use Terraform to define your infrastructure
 
 Terraform uses providers to interact with cloud resources and services. Terraform creates and manages these resources by storing the state of your infrastructure. You define the desired state of your infrastructure using HashiCorp Configuration Language (HCL), and Terraform deploys and configures the resources to match your configuration.
 
-Terraform enables you to create an infrastructure delivery workflow with four phases. Adopt involves composing infrastructure as code using HCL to provision resources from any infrastructure provider. Build focuses on creating infrastructure automation workflows to compose, collaborate, reuse, and provision infrastructure as code. Standardize establishes guardrails for security, compliance, and cost management through role-based access controls, policy enforcement, and audit. Scale extends workflow automation to all teams with self-service infrastructure as code.
+The following Terraform maturity model provides a roadmap for you create consistent infrastructure, application configurations, and images.
+
+1. **Adopt:** Compose infrastructure as code in a Terraform file using HCL to provision resources from any infrastructure provider.
+1. **Build:** Infrastructure automation workflows to compose, collaborate, reuse, and provision infrastructure as code across IT operations and teams of developers.
+1. **Standardize:** Establish guardrails for security, compliance, and cost management through role-based access controls, policy, enforcement, and audit.
+1. **Scale:** Extend workflow automation to all teams in the organization with self-service infrastructure as code and integrate with VSC, ITSM, and CI/CD.
+
 
 Use Terraform to define your CI/CD infrastructure, container orchestration platforms like Kubernetes or Nomad, database systems including database instances and storage, monitoring and observability systems, security systems including identity providers and access controls, and version control systems including repositories and access controls.
 
