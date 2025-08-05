@@ -6,7 +6,7 @@ description: >-
 
 # Explorer on Terraform Enterprise Beta configuration reference
 
-This topic contains reference information about the configurations you can specify to run Explorer on Terraform Enterprise. The Explorer beta is available with Terraform Enterprise 1.0.0. 
+This topic contains reference information about the configurations you can specify to run Explorer on Terraform Enterprise. The Explorer beta is available with Terraform Enterprise 1.0.0, when running in external services or active/active operational mode. 
 
 <Note title="Beta Warning">
 
@@ -18,10 +18,18 @@ Please contact your account team with any beta feedback.
 
 ## Introduction
 
-In order to enabled Explorer, you will need to provide a new database and specify environment variables to configure Terraform Enterprise to enable Explorer and to store Explorer data. Specify the variables in a configuration file for your runtime environment, such as a [Docker Compose file](https://docs.docker.com/compose/compose-file/), Kubernetes [Helm chart](https://helm.sh/), or in the `env` block of your [Nomad job](/nomad/docs/job-specification/env). Refer to [Create deployment configuration overview](/terraform/enterprise/deploy/configuration) for additional information.
+In order to use Explorer, you will need to provide a new database and specify environment variables to configure Terraform Enterprise to enable Explorer and to store Explorer data. This database is in addition to the normal one required for external services or active/active mode. Specify the variables in a configuration file for your runtime environment, such as a [Docker Compose file](https://docs.docker.com/compose/compose-file/), Kubernetes [Helm chart](https://helm.sh/), or in the `env` block of your [Nomad job](/nomad/docs/job-specification/env). Refer to [Create deployment configuration overview](/terraform/enterprise/deploy/configuration) for additional information.
 
 The Explorer beta is available with Terraform Enterprise 1.0.0, and is only possible when running in external services or active/active operational modes. Authentication to the Explorer database currently only support username/password - passwordless authentication methods will be added in a future update.
 
+
+## Explorer database sizing and setup
+
+Performance testing will be on-going throughout the beta, which may result in changing guidelines. At this time we recommend the Explorer database be roughly 25-50% the size of your main Terraform Enterprise database. 
+
+You may also need to slightly increase the size of your Redis instance due to the increased load. We recommend monitoring the resource utilization of all your external services in addition to the Terraform Enteprise nodes. 
+
+Upon first start, a schema named `explorer` will be created, if it does not exist. That schema can also be pre-created if necessary. No extensions need to be installed.
 
 ## Explorer settings
 
