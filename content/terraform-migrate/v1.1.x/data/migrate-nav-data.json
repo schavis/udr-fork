@@ -7,6 +7,14 @@
         "path": ""
     },
     {
+        "title": "Install",
+        "path": "install"
+    },
+    {
+        "title": "Authenticate",
+        "path": "install"
+    },
+    {
         "title": "Reference",
         "routes": [
             {
