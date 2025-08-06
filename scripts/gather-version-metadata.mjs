@@ -10,6 +10,8 @@ import semver from 'semver'
 
 import { PRODUCT_CONFIG } from '../app/utils/productConfig.mjs'
 
+const acceptedReleaseStages = ['alpha', 'beta', 'rc']
+
 /**
  * Given a content directory, and a JSON output file, build version metadata
  * based on the content directory structure, and return it.
@@ -64,40 +66,87 @@ export async function gatherVersionMetadata(contentDir) {
 
 		// Sort versions by semver if possible, otherwise sort alphabetically
 		const isAllSemver = rawVersions.every((v) => {
-			return semver.valid(normalizeGenericPatchVersion(v))
+			return semver.valid(normalizeVersion(v))
 		})
 
-		const versions = rawVersions
-			.sort((a, b) => {
-				const [aVersion, bVersion] = [a, b].map(normalizeGenericPatchVersion)
-				if (isAllSemver) {
-					// Sort semver
+		let versions
+
+		if (isAllSemver) {
+			versions = rawVersions
+				.sort((a, b) => {
+					const [aVersion, bVersion] = [a, b].map(normalizeVersion)
+					// Sort by semver
 					return semver.compare(aVersion, bVersion)
-				} else {
+				})
+				// Reverse the array after sorting, so the latest version is first
+				.reverse()
+		} else {
+			const rawSemverVersions = rawVersions.filter((v) => {
+				return semver.valid(normalizeVersion(v))
+			})
+			const rawNonSemverVersions = rawVersions.filter((v) => {
+				return !semver.valid(normalizeVersion(v))
+			})
+
+			const sortedSemverVersions = rawSemverVersions
+				.sort((a, b) => {
+					const [aVersion, bVersion] = [a, b].map(normalizeVersion)
+					// Sort by semver
+					return semver.compare(aVersion, bVersion)
+				})
+				.reverse()
+
+			const sortedNonSemverVersions = rawNonSemverVersions
+				.sort((a, b) => {
+					const [aVersion, bVersion] = [a, b].map(normalizeVersion)
 					// Sort alphabetically
 					return aVersion.localeCompare(bVersion)
-				}
-			})
-			// Reverse the array after sorting, so the latest version is first
-			.reverse()
+				})
+				.reverse()
+
+			// semver versions should be before non-semver versions since they are more recent
+			versions = [...sortedSemverVersions, ...sortedNonSemverVersions]
+		}
+
 		/**
 		 * Iterate over the version entries, augmenting them with version metadata,
 		 * and adding them to the `versionMetadata` object.
-		 *
-		 * TODO: implement meaningful releaseStage and isLatest.
-		 * Maybe like a `_version-metadata.json` in each version directory?
-		 * To populate that data initially, might make sense to fetch from the
-		 * existing `content.hashicorp.com` API. To maintain the version metadata
-		 * going forward, will definitely want to collaborate with content authors
-		 * to find a good workflow. Manual MIGHT actually be OK, since events that
-		 * change version metadata are relatively infrequent?
 		 */
+		let latestVersionIndex = 0
 		for (const [idx, version] of versions.entries()) {
-			// TODO: Placeholder `releaseStage` to make it work, needs more thought
-			const releaseStage = 'stable'
-			// TODO: Placeholder `isLatest` to make it work, needs more thought
-			const isLatest = idx === 0
-			versionMetadata[product].push({ version, releaseStage, isLatest })
+			// Check if version contains beta and adjust accordingly
+			let cleanVersion = version
+			let releaseStage = 'stable'
+
+			if (version.includes('(') && version.includes(')')) {
+				const stage = version.match(/\(([^)]+)\)/)?.[1]
+				const spacesCount = version.split(' ').length - 1
+
+				if (spacesCount > 1) {
+					throw new Error(
+						`Invalid version format "${version}" for product "${product}". Release stage should be in parentheses with only one space separating it from the version, e.g., "1.0.0 (beta)".`,
+					)
+				}
+
+				if (stage && acceptedReleaseStages.includes(stage)) {
+					releaseStage = stage
+					cleanVersion = version.replace(` (${stage})`, '').trim()
+				} else {
+					throw new Error(
+						`Invalid release stage "${stage}" in version "${version}" for product "${product}". Accepted stages are: ${acceptedReleaseStages.join(', ')}.`,
+					)
+				}
+			}
+
+			if (releaseStage !== 'stable') {
+				latestVersionIndex++
+			}
+
+			versionMetadata[product].push({
+				version: cleanVersion,
+				releaseStage,
+				isLatest: idx === latestVersionIndex,
+			})
 		}
 	}
 	// Return the version metadata
@@ -105,12 +154,14 @@ export async function gatherVersionMetadata(contentDir) {
 }
 
 /**
- * Given a version string, which _may_ end in a generic patch `.x` suffix,
- * Return a normalized version string with any trailing `.x` replaced with `.0`.
+ * Normalizes a version string by replacing trailing `.x` with `.0` and removing any release stage in parentheses.
+ * This allows generic patch versions to be processed by semver.
  *
- * @param {string} version
- * @returns {string}
+ * @param {string} version - The version string to normalize
+ * @returns {string} The normalized version string
  */
-function normalizeGenericPatchVersion(version) {
-	return version.replace(/\.x$/, '.0')
+function normalizeVersion(version) {
+	return version
+		.replace(/\s*\([^)]+\)/, '') // Remove any release stage in parentheses
+		.replace(/\.x$/, '.0') // Replace trailing `.x` with `.0`
 }
