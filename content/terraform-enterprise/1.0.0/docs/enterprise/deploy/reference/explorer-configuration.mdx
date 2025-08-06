@@ -1,0 +1,60 @@
+---
+page_title: Explorer on Terraform Enterprise configuration reference BETA
+description: >-
+  Learn about the configuration options for deploying Explorer (Beta) on Terraform Enterprise.
+---
+
+# Explorer on Terraform Enterprise Beta configuration reference
+
+This topic contains reference information about the configurations you can specify to run Explorer on Terraform Enterprise. The Explorer beta is available with Terraform Enterprise 1.0.0, when running in external services or active/active operational mode. 
+
+<Warning>
+Explorer on Terraform Enterprise is in BETA and should not be run in production environments. There may be patches or bugs during the course of the beta that require you to destroy the Explorer database entirely. Running Explorer may increase the load on the Terraform Enterprise server in unexpected ways, resulting in slowdowns or outages. 
+
+Please select `Give Feedback` from the Actions button to provide direct feedback or contact your account team with any beta feedback. 
+</Warning>
+
+## Introduction
+
+In order to use Explorer, you will need to provide a new database and specify environment variables to configure Terraform Enterprise to enable Explorer and to store Explorer data. This database is in addition to the normal one required for external services or active/active mode. Specify the variables in a configuration file for your runtime environment, such as a [Docker Compose file](https://docs.docker.com/compose/compose-file/), Kubernetes [Helm chart](https://helm.sh/), or in the `env` block of your [Nomad job](/nomad/docs/job-specification/env). Refer to [Create deployment configuration overview](/terraform/enterprise/deploy/configuration) for additional information.
+
+The Explorer beta is available with Terraform Enterprise 1.0.0, and is only possible when running in external services or active/active operational modes. Authentication to the Explorer database currently only support username/password - passwordless authentication methods will be added in a future update.
+
+
+## Explorer database sizing and setup
+
+Performance testing will be on-going throughout the beta, which may result in changing guidelines. At this time we recommend the Explorer database be roughly 25-50% the size of your main Terraform Enterprise database. 
+
+You may also need to slightly increase the size of your Redis instance due to the increased load. We recommend monitoring the resource utilization of all your external services in addition to the Terraform Enteprise nodes. 
+
+Upon first start, a schema named `explorer` will be created, if it does not exist. That schema can also be pre-created if necessary. No extensions need to be installed.
+
+## Explorer settings
+
+### `TFE_EXPLORER_DATABASE_HOST`
+
+The PostgreSQL server to connect to in the format `HOST[:PORT]` (e.g., `db.example.com` or `db.example.com:5432`). If only `HOST` is provided then the `:PORT` defaults to `:5432`. Multi host connection strings are not supported. 
+
+Setting this variable will enable the Explorer feature.
+
+### `TFE_EXPLORER_DATABASE_NAME`
+
+Name of the PostgreSQL database to store the Explorer data in.
+
+Required to use Explorer.
+
+### `TFE_EXPLORER_DATABASE_USER`
+
+PostgreSQL username.
+
+Required to use Explorer.
+
+### `TFE_EXPLORER_DATABASE_PASSWORD`
+
+PostgreSQL password.
+
+Required to use Explorer.
+
+### `TFE_EXPLORER_DATABASE_PARAMETERS`
+
+PostgreSQL server parameters for the connection URI. Used to configure the PostgreSQL connection (e.g., `sslmode=require`).

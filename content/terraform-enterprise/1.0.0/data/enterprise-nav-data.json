@@ -644,6 +644,10 @@
             "path": "deploy/reference/configuration"
           },
           {
+            "title": "Explorer Configuration <sup>BETA</sup>",
+            "path": "deploy/reference/explorer-configuration"
+          },
+          {
             "title": "CLI",
             "path": "deploy/reference/cli"
           },
