@@ -1372,6 +1372,10 @@
         "path": "releases"
       },
       {
+        "title": "1.0.x",
+        "path": "releases/10x"
+      },
+      {
         "title": "2025",
         "routes": [
           { "title": "Overview", "path": "releases/2025" },
