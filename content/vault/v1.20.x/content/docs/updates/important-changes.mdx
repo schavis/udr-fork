@@ -55,9 +55,11 @@ and cannot use file modes with executable permissions (e.g., 0777, 0755).
 
 #### Recommendation
 
-- If you use the `prefix` option with file audit devices, add `allow_audit_log_prefixing = true` to your Vault server configuration. 
-- Ensure audit log file paths are not within the plugin directory.
-- Use non-executable file modes (e.g., 0644, 0666).
+If you use the `prefix` option with `file` audit devices, you have three options:
+
+1. Add `allow_audit_log_prefixing = true` to your Vault server configuration.
+1. Configure the `file` audit device to write log files outside the plugin directory.
+1. Use non-executable file modes (e.g., 0644, 0666).
 
 ## Breaking changes
 
