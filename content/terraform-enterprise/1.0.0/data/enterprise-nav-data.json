@@ -1484,15 +1484,15 @@
         "routes": [
           {
             "title": "2020",
-            "routes": [{ "title": "Overview", "path": "releases/archived/2020" }]
+            "routes": [{ "title": "Overview", "path": "releases/2020" }]
           },
           {
             "title": "2019",
-            "routes": [{ "title": "Overview", "path": "releases/archived/2020" }]
+            "routes": [{ "title": "Overview", "path": "releases/2019" }]
           },
           {
             "title": "2018",
-            "routes": [{ "title": "Overview", "path": "releases/archived/2018" }]
+            "routes": [{ "title": "Overview", "path": "releases/2018" }]
           }
         ]
       }
