@@ -12,7 +12,7 @@
     },
     {
         "title": "Authenticate",
-        "path": "install"
+        "path": "authenticate"
     },
     {
         "title": "Reference",
