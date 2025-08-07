@@ -7,7 +7,14 @@ description: >-
 
 # Terraform Enterprise Releases
 
-~> The next release `v1.0.0` is scheduled for the week of August 11, 2025.
+
+<Tip title="Next Release">
+
+Terraform Enterprise is releasing versions 1.0.1 on the week of September 15, 2025.
+
+</Tip>
+
+
 
 <Note title="Upgrade Warning" variant="warning">
 The Replicated deployment option is limited to customers who purchased Terraform Enterprise before January 2024. Terraform Enterprise now supports new deployment options and will end support for the Replicated Native Scheduler option.
@@ -28,7 +35,7 @@ Below is a list of the most recent Terraform Enterprise Releases that can deploy
 
 | Version           | OpenShift Enabled | Linked <br />Terraform CLI\**                                     | Sentinel                                                                    | Tested Kubernetes Versions (EKS, AKS, GKE) | Helm Chart Version |
 | ----------------- | --- |------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------ | ------------------ |
-| [1.0.0](/terraform/enterprise/releases/10x)   | *yes* | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  |  -                  | -       |
+| [1.0.x](/terraform/enterprise/releases/10x)   | *yes* | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  |  -                  | -       |
 | [v202507-1](/terraform/enterprise/releases/2025/v202507-1)   | *yes* | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  |  [1.33](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html), [1.33](https://learn.microsoft.com/en-us/azure/aks/supported-kubernetes-versions?tabs=azure-cli#aks-kubernetes-release-calendar), [1.32](https://cloud.google.com/kubernetes-engine/docs/release-notes)                  | [1.6.4](https://github.com/hashicorp/terraform-enterprise-helm/releases/tag/v1.6.4)       |
 | [v202506-1](/terraform/enterprise/releases/2025/v202506-1)   | *yes* | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  |  [1.33](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html), [1.33](https://learn.microsoft.com/en-us/azure/aks/supported-kubernetes-versions?tabs=azure-cli#aks-kubernetes-release-calendar), [1.32](https://cloud.google.com/kubernetes-engine/docs/release-notes)                  | [1.6.3](https://github.com/hashicorp/terraform-enterprise-helm/releases/tag/v1.6.3)       |
 | [v202505-1](/terraform/enterprise/releases/2025/v202505-1)   | *yes* | [1.11.4](https://github.com/hashicorp/terraform/releases/tag/v1.11.4) | [0.30.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-30-0-february-17-2025)  |  [1.32](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html), [1.32](https://learn.microsoft.com/en-us/azure/aks/supported-kubernetes-versions?tabs=azure-cli#aks-kubernetes-release-calendar), [1.32](https://cloud.google.com/kubernetes-engine/docs/release-notes)                  | [1.6.2](https://github.com/hashicorp/terraform-enterprise-helm/releases/tag/v1.6.2)       |
@@ -61,6 +68,7 @@ Below is a list of the most recent Terraform Enterprise Releases that can deploy
 
 | Version           | Linked <br />Terraform CLI\**                                     | Sentinel                                                                    | Recommended Docker Compose version |
 | ----------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------- |
+| [1.0.x](/terraform/enterprise/releases/10x)    | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  | [V2](https://docs.docker.com/compose/migrate/)                       |
 | [v202507-1](/terraform/enterprise/releases/2025/v202507-1)   | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  | [V2](https://docs.docker.com/compose/migrate/)                       |
 | [v202506-1](/terraform/enterprise/releases/2025/v202506-1)   | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  | [V2](https://docs.docker.com/compose/migrate/)                       |
 | [v202505-1](/terraform/enterprise/releases/2025/v202505-1)   | [1.11.4](https://github.com/hashicorp/terraform/releases/tag/v1.11.4) | [0.30.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-30-0-february-17-2025)  | [V2](https://docs.docker.com/compose/migrate/)                       |
@@ -93,6 +101,7 @@ Below is a list of the most recent Terraform Enterprise Releases that can deploy
 
 | Version           | Linked <br />Terraform CLI\**                                     | Sentinel                                                                    | Tested Podman version |
 | ----------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------- |
+| [1.0.x](/terraform/enterprise/releases/10x)   | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  | [v5](https://github.com/containers/podman/releases/tag/v5.0.0)                       |
 | [v202507-1](/terraform/enterprise/releases/2025/v202507-1)   | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  | [v5](https://github.com/containers/podman/releases/tag/v5.0.0)                       |
 | [v202506-1](/terraform/enterprise/releases/2025/v202506-1)   | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  | [v5](https://github.com/containers/podman/releases/tag/v5.0.0)                       |
 | [v202505-1](/terraform/enterprise/releases/2025/v202505-1)   | [1.11.4](https://github.com/hashicorp/terraform/releases/tag/v1.11.4) | [0.30.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-30-0-february-17-2025)  | [v5](https://github.com/containers/podman/releases/tag/v5.0.0)                       |
@@ -122,6 +131,7 @@ Below is a list of the most recent Terraform Enterprise Releases that can deploy
 
 | Version           | Linked <br />Terraform CLI\**                                       | Sentinel                                                                    | Tested Nomad versions       | Min supported version |
 | ----------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------- | --------------------- |
+| [1.0.x](/terraform/enterprise/releases/10x)    | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  | 1.7 | 1.5 |
 | [v202507-1](/terraform/enterprise/releases/2025/v202507-1)   | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  | 1.7 | 1.5 |
 | [v202506-1](/terraform/enterprise/releases/2025/v202506-1)   | [1.12.1](https://github.com/hashicorp/terraform/releases/tag/v1.12.1) | [0.40.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-40-0-may-12-2025)  | 1.7 | 1.5 |
 | [v202505-1](/terraform/enterprise/releases/2025/v202505-1)   | [1.11.4](https://github.com/hashicorp/terraform/releases/tag/v1.11.4) | [0.30.0](https://developer.hashicorp.com/sentinel/docs/changelog#0-30-0-february-17-2025)  | 1.7 | 1.5 |
