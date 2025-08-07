@@ -40,7 +40,7 @@ Special character | Description
 `(` and `)`       | Wraps parameter definitions and regex definitions.
 `{ min, max }`    | Matches the pattern `min` or more times up to an optional `max` number of times
 `[` and `]`       | Define a range of characters or strings
-``|``             | Defines alternatives in a range or non-capture group
+`\|`             | Defines alternatives in a range or non-capture group
 `\`               | Indicates a predefined character class
 `^`               | Matches a non-capture group to the start of the string
 `.`               | Matches to any single character
