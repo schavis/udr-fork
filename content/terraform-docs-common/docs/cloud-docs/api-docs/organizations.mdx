@@ -832,14 +832,10 @@ curl \
   }
 }
 ```
-
+<!-- BEGIN: TFEnterprise:only name:module-producers-endpoint -->
 ## Show Module Producers
 
-<EnterpriseAlert>
-This endpoint is exclusive to Terraform Enterprise, and not available in HCP Terraform.
-</EnterpriseAlert>
-
-This endpoint shows organizations that are configured to share modules with an organization through [Module Sharing](/terraform/enterprise/admin/application/module-sharing).
+This endpoint shows organizations that are configured to share modules with an organization through [module sharing](/terraform/enterprise/admin/application-administration/registry-sharing).
 
 `GET /organizations/:organization_name/relationships/module-producers`
 
@@ -905,12 +901,10 @@ curl \
   }
 }
 ```
+<!-- END: TFEnterprise:only name:module-producers-endpoint -->
+<!-- BEGIN: TFEnterprise:only name:module-data-retention-policy-endpoint -->
 
 ## Show data retention policy
-
-<EnterpriseAlert>
-This endpoint is exclusive to Terraform Enterprise and is not available in HCP Terraform.
-</EnterpriseAlert>
 
 `GET /organizations/:organization_name/relationships/data-retention-policy`
 
@@ -926,10 +920,6 @@ For additional information, refer to [Data Retention Policy Types](/terraform/en
 
 ## Create or update data retention policy
 
-<EnterpriseAlert>
-This endpoint is exclusive to Terraform Enterprise and is not available in HCP Terraform.
-</EnterpriseAlert>
-
 `POST /organizations/:organization_name/relationships/data-retention-policy`
 
 | Parameter            | Description                                                                |
@@ -944,10 +934,6 @@ Refer to [Data Retention Policy API](/terraform/enterprise/api-docs/data-retenti
 
 ## Remove data retention policy
 
-<EnterpriseAlert>
-This endpoint is exclusive to Terraform Enterprise and is not available in HCP Terraform.
-</EnterpriseAlert>
-
 `DELETE /organizations/:organization_name/relationships/data-retention-policy`
 
 | Parameter            | Description                                                                                                                                                                          |
@@ -960,6 +946,7 @@ When the data retention policy is deleted, the organization inherits the default
 Refer to [Data Retention Policies](/terraform/enterprise/users-teams-organizations/organizations#data-retention-policies) for information about configuring data retention policies for an organization.
 
 Refer to [Data Retention Policy API](/terraform/enterprise/api-docs/data-retention-policies#remove-data-retention-policy) in the Terraform Enterprise documentation for details.
+<!-- END: TFEnterprise:only name:module-data-retention-policy-endpoint -->
 
 ## Available Related Resources
 
