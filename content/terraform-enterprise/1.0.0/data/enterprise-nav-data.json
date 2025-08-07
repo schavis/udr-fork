@@ -281,6 +281,15 @@
                 "path": "deploy/configuration/storage/connect-vault"
               }
             ]
+          },
+          {
+            "title": "Enable Explorer",
+            "path": "deploy/configuration/enable-explorer",
+            "badge": {
+              "text": "BETA",
+              "type": "outlined",
+              "color": "neutral"
+            }
           }
         ]
       },
@@ -642,10 +651,6 @@
           {
             "title": "Configuration",
             "path": "deploy/reference/configuration"
-          },
-          {
-            "title": "Explorer Configuration <sup>BETA</sup>",
-            "path": "deploy/reference/explorer-configuration"
           },
           {
             "title": "CLI",
