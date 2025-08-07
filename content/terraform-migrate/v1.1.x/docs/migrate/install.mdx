@@ -6,6 +6,8 @@ description: >-
 
 # Install Terraform migrate
 
+HashiCorp distributes Terraform as an executable CLI that you can install on supported operating systems, including Microsoft Windows, macOS, and several Linux distributions.
+
 <Tabs>
 
 <Tab heading="Manual installation">
@@ -40,4 +42,20 @@ $ brew install hashicorp/tap/tf-migrate
 
 </Tabs>
 
-##
+## Verify installation
+
+Verify that the installation worked by opening a new terminal and using the `-help` flag of `tf-migrate`:
+
+```shell-session
+$ tf-migrate -help
+Welcome to the HCP Terraform Migrator for Community Edition.
+
+Usage: tf-migrate [global options] <subcommand> [args]
+
+The available commands for execution are listed below.
+The primary workflow commands are given first,
+followed by global options.
+
+Commands:
+##...
+```
