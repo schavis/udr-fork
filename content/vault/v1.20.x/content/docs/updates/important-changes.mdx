@@ -48,7 +48,10 @@ to the official [Snowflake documentation](https://docs.snowflake.com/en/user-gui
 | ------------ | ----------------------------------------- | --------------------
 | Breaking     | 1.20.1                                    | N/A
 
-File audit devices with the `prefix` option will fail to enable unless `allow_audit_log_prefixing = true` is set in the server configuration. Additionally, file audit devices cannot write to the plugin directory or any subdirectory within it, and cannot use file modes with executable permissions (e.g., 0777, 0755).
+You must set `allow_audit_log_prefixing` to `true` in your server configuration
+to enable `file` audit devices with the `prefix` option. Additionally, `file`
+audit devices cannot write to the plugin directory, including subdirectories,
+and cannot use file modes with executable permissions (e.g., 0777, 0755).
 
 #### Recommendation
 
