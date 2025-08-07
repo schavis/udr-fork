@@ -3,80 +3,8 @@
  * SPDX-License-Identifier: BUSL-1.1
  */
 
-/**
-  DEFINITIONS
-  ------------------------------------------------------------------------------
-  Standard redirects
-  Redirects old URLs that no longer exist under the   containing docset to the
-  new URLs. For example, updating /vault/v1.20.x/redirects.jsonc with a redirect
-  that sends requests for `path/pageA` in the v1.20 docset to `path/pageB` in
-  the v1.20 docset.
-
-  Versioned redirect
-  Redirects old URLs that no longer exist under the containing docset to an
-  older URL in a different docset. For example, updating
-  /vault/v1.20.x/redirects.jsonc with a redirect that sends requests for
-  `path/upgrade-to-1.18` in the v1.20 docset (invalid) to `path/upgrade-to-1.18`
-  in the v1.18 docset as vault/docs/v1.18.x/path/upgrade-to-1.18.
-  Use versioned redirects to ensure that the version picker can still find the
-  right page across versions.
-
-  Backfacing redirect
-  Redirects versioned URLs using new URLs from the containing docset to an
-  appropriate URL in another docset version. For example, updating
-  /vault/v1.20.x/redirects.jsonc with a redirect that sends requests for
-  `path/important-changes` in the 1.18.x docset (invalid) to
-  `path/upgrade-to-1.18` in the v1.18 docset.
-  Use backfacing redirects to keep URL formatting consistant in long-living
-  pages across multiple versions. For example, the Vault change tracker.
-
-
-  EXAMPLES
-  ------------------------------------------------------------------------------
-
-  Standard redirect:
-  {
-    "source": "/vault/docs/old/path",
-    "destination": "/vault/docs/new/path",
-    "permanent": true,
-  }
-
-  Redirect all child paths:
-  {
-    "source": "/vault/docs/old/path/:slug(.*)",
-    "destination": "/vault/docs/new/path/:slug",
-    "permanent": true,
-  }
-
-  Redirect for a specific version:
-  {
-    "source": "/vault/docs/<version_string>/old/path",
-    "destination": "/vault/docs/<version_string>/new/path",
-    "permanent": true,
-  }
-
-  Use regex to redirect for a specific versions:
-  {
-    "source": "/vault/docs/:slug(<regex>)/old/path",
-    "destination": "/vault/docs/:slug/new/path",
-    "permanent": true,
-  }
-
-  Example regex strings
-
-  token definition            | :slug token value
-  --------------------------- | -----------------
-  :slug(v1\\.(?:12|13)\\.x)   | v1.12.x, v1.13.x
-  v:slug(1\\.(?:12|13)\\.x)   | 1.12.x, 1.13.x
-  v:slug(1\\.(?:12|13)).x     | 1.12, 1.13
-  :slug((?!path1$).*)         | any subpath that does not start with "path1"
-  :slug((?!path1$|!path2$).*) | any subpath that does not start with "path1" or "path2"
-
-*/
 
 [
-
-
   /*****************************************************************************
    * Pre-2023 redirects
    *****************************************************************************/
