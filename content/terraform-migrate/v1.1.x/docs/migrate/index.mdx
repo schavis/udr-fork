@@ -16,8 +16,8 @@ Complete the following steps to install and configure `tf-migrate`:
 
 1. [Download and install `tf-migrate`](/terraform/migrate/install).
 1. Configure `tf-migrate` to [authenticate](/terraform/migrate/install#connect-to-hcp-terraform-or-enterprise-terraform) to HCP Terraform or Terraform Enterprise. 
-1. Optionally, [authenticate your VCS provider](/terraform/migrate/install#authenticate-your-vcs-provider) with your version control provider API key to create a pull request with your configuration changes.
-1. Enable [logging](#enable-logging) so that you can troubleshoot potential issues that may occur during the migration process.
+1. Optionally [authenticate your VCS provider](/terraform/migrate/install#authenticate-your-vcs-provider) with your version control provider API key to create a pull request with your configuration changes.
+1. Optionally enable [logging](#enable-logging) so that you can troubleshoot potential issues that may occur during the migration process.
 
 ## Supported backends
 
@@ -38,9 +38,7 @@ The `tf-migrate` tool supports migrating state from the following backends to HC
 
 ## Supported workspace workflows
 
-The `tf-migrate` tool can create CLI- or VCS-driven HCP Terraform workspaces. 
-
-The `tf-migrate` tool will only prompt you to create a VCS-driven workspace if you meet the following requirements:
+The `tf-migrate` tool can create CLI- or VCS-driven HCP Terraform workspaces. It will only prompt you to create a VCS-driven workspace if you meet the following requirements:
 
 - Your local configuration is a Git repository.
 - Your local Git repository has either GitHub or GitLab configured as a remote.
