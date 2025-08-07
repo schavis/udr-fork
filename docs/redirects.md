@@ -40,7 +40,7 @@ Special character | Description
 `(` and `)`       | Wraps parameter definitions and regex definitions.
 `{ min, max }`    | Matches the pattern `min` or more times up to an optional `max` number of times
 `[` and `]`       | Define a range of characters or strings
-`\|`             | Defines alternatives in a range or non-capture group
+`\|`              | Defines alternatives in a range or non-capture group<sup>1</sup>
 `\`               | Indicates a predefined character class
 `^`               | Matches a non-capture group to the start of the string
 `.`               | Matches to any single character
@@ -51,6 +51,8 @@ Special character | Description
 `?`               | Match the pattern zero or one times
 `$`               | Match to the end of the string
 `!`               | Start a negative look-ahead non-capture group
+
+<sup>1</sup>: the actual character is `|`, but the markdown requires an escape character to render properly in GitHub
 
 To escape special characters in your regex expression, use `\\`. For example, to
 escape the `.` character in versioned URLs, use `\\.`.
