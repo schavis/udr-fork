@@ -150,7 +150,7 @@ After you unlink, you can begin using your HCP Terraform credentials to log in. 
 
 ### SSO identities
 
-Click **SSO Identities** in the sidebar to review and [remove SSO identity links](/terraform/enterprise/users-teams-organizations/single-sign-on/linking-user-account#remove-sso-identity-link) associated with your account.
+Click **SSO Identities** in the sidebar to review and [remove SSO identity links](/terraform/cloud-docs/users-teams-organizations/single-sign-on/linking-user-account#remove-sso-identity-link) associated with your account.
 
 You have an SSO identity for every SSO-enabled HCP Terraform organization. HCP Terraform links each SSO identity to a single HCP Terraform user account. This link determines which account you can use to access each organization.
 
@@ -209,7 +209,9 @@ To create a GitHub App token, click **Create a GitHub App token**. The **GitHub 
 #### Revoking a GitHub app token
 
 To revoke the GitHub App token, click the **ellipses button (...)**. The dropdown menu appears. Click the **Delete Token** option. This triggers a confirmation window to appear, which asks you to confirm that you want to revoke the token. Once confirmed, the token is revoked and you can no longer view GitHub App installations.
-
+<!--BEGIN: tfc:only name:github-permissions>
 #### Additional resources
 
--   [GitHub App permissions in HCP Terraform](/terraform/enterprise/vcs/github-app#github-permissions)
+-   [GitHub App permissions in HCP Terraform](/terraform/cloud-docs/vcs/github-app#github-permissions)
+
+<!--END: tfc:only name:github-permissions>
