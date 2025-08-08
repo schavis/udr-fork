@@ -140,6 +140,10 @@ Configure the following settings to use PostgreSQL client certificates:
 
 ### Azure MSI authentication
 
+<Note>
+  Workload Identities are not supported.
+</Note>
+
 You can use both system-assigned and user-assigned managed identities to authenticate to Azure Database for PostgreSQL flexible server.
 For more information please see the [Azure documentation](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-connect-with-managed-identity).
 When using Azure MSI authentication, the database password is not required.
@@ -148,3 +152,8 @@ Configure the following settings to use Azure MSI:
 
 - Set the `TFE_DATABASE_PASSWORDLESS_AZURE_USE_MSI` variable to `true`.
 - Set the `TFE_DATABASE_PASSWORDLESS_AZURE_CLIENT_ID` to the user-assigned managed identity. Leave blank to use the system-assigned MSI.
+- Set the `TFE_DATABASE_USER` as the managed identity name.
+
+You need to ensure that the managed identity user has the [required permissions](#user) on the database.
+If you are migrating from password-based authentication to MSI-based authentication, the database and schema are initially owned by the previous user. 
+You need to ensure that the managed identity user has the required permissions or is the owner of the database and schemas inside it.
