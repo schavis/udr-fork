@@ -246,7 +246,7 @@ Must be `true` or `false`. `true` indicates to use TLS to access Redis. Defaults
 
 ## `TFE_REDIS_USE_MTLS`
 
-Must be `true` or `false`. `true` indicates to use mutual TLS (mTLS) authentication for clients to access Redis with Redis standalone. Defaults to `false`. mTLS is not currently supported in Sentinel mode.
+Must be `true` or `false`. `true` indicates to use mutual TLS (mTLS) authentication for clients to access Redis with Redis standalone or Sentinel. Defaults to `false`. 
 
 ### `TFE_REDIS_CLIENT_CERT_PATH`
 
@@ -311,7 +311,7 @@ If using mTLS with Redis Enterprise, path to the private key file corresponding 
 
 ### `TFE_REDIS_SENTINEL_ENABLED`
 
-Must be `true` or `false`. `true` indicates Redis Sentinel is configured. Defaults to `true`.
+Must be `true` or `false`. `true` indicates Redis Sentinel is configured. Defaults to `false`.
 
 ### `TFE_REDIS_SENTINEL_HOSTS`
 
