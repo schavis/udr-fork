@@ -122,3 +122,14 @@ The following rules apply to tag keys and values:
     -   `hcp`
     -   `hc`
     -   `ibm`
+
+## Manage execution mode
+
+By default, a project uses the organization's execution mode. You can enable the **Remote** or **Local** execution mode option for an organization. You can override the organization execution mode in your project. Any workspaces created in the project after changing the project execution mode inherit the project default.
+
+You can enable the following execution modes:
+
+- **Organization Default**: Uses the organization's execution mode. This is either **Remote** or **Local**.
+- **Remote**: Plan and apply operations run on HCP Terraform's or Terraform Enterprise's infrastructure. You and your team have the ability to review and collaborate on runs within the application.
+- **Local**: Plan and apply operations run on machines that you control. HCP Terraform and Terraform Enterprise only store and synchronize state.
+- **Agent**: Plan and apply operations that your agent executes are managed by HCP Terraform or Terraform Enterprise.
