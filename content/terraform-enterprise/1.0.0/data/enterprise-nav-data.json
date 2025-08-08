@@ -62,6 +62,10 @@
       { "title": "Applies", "path": "api-docs/applies" },
       { "title": "Assessment Results", "path": "api-docs/assessment-results" },
       {
+        "title": "Change requests",
+        "path": "api-docs/change-requests"
+      },
+      {
         "title": "Comments",
         "path": "api-docs/comments"
       },
@@ -74,6 +78,7 @@
         "path": "api-docs/cost-estimates"
       },
       { "title": "Data Retention Policies", "path": "api-docs/data-retention-policies" },
+      { "title": "Explorer", "path": "api-docs/explorer" },
       {
         "title": "GitHub App Installations",
         "path": "api-docs/github-app-installations"
@@ -276,6 +281,15 @@
                 "path": "deploy/configuration/storage/connect-vault"
               }
             ]
+          },
+          {
+            "title": "Enable Explorer",
+            "path": "deploy/configuration/enable-explorer",
+            "badge": {
+              "text": "BETA",
+              "type": "outlined",
+              "color": "neutral"
+            }
           }
         ]
       },
@@ -865,6 +879,17 @@
       {
         "title": "Browse workspaces",
         "path": "workspaces/browse"
+      },
+      { "title": "Explorer", "path": "workspaces/explorer" },
+      {
+        "title": "Change requests",
+        "routes": [
+          { "title": "Overview", "path": "workspaces/change-requests" },
+          {
+            "title": "Manage change requests",
+            "path": "workspaces/change-requests/manage"
+          }
+        ]
       },
       {
         "title": "Terraform Configurations",

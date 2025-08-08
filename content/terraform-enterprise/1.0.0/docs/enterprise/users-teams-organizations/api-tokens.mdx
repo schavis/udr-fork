@@ -26,9 +26,9 @@ Navigate to the **Organization Settings > API Tokens > Team Tokens** tab to mana
 
 Teams can have multiple valid tokens at a time, so long as the tokens' descriptions are unique within the context of the given team. A token without a description is considered a legacy token, and only one legacy token can exist at a given time.
 
-The [legacy API](/terraform/enterprise/api-docs/team-tokens#legacy-team-tokens-api-reference) only operates on the legacy token. Generating a new legacy token invalidates the previous legacy token.
+The [legacy API](/terraform/enterprise/api-docs/team-tokens#legacy-team-tokens-api-reference) uses a legacy token, generating a new legacy token invalidates the previous token.
 
-The [current team token API](/terraform/enterprise/api-docs/team-tokens#team-tokens-api-reference) supports multiple team tokens. Adding new tokens does not invalidate existing tokens.
+The [current team token API](/terraform/enterprise/api-docs/team-tokens#team-tokens-api-reference) supports multiple team tokens, and adding new tokens does not invalidate older ones.
 
 Owners and users with [manage teams](/terraform/enterprise/users-teams-organizations/permissions#manage-teams) permissions have the ability to enable and disable team token management for a team, which limits the actions that team members can take on a team token. Refer to [Allow Member Token Management](/terraform/enterprise/users-teams-organizations/permissions#allow-member-token-management) for more information.
 
@@ -60,11 +60,11 @@ Organization API tokens have permissions across the entire organization. They ca
 
 ## Audit trail tokens
 
-You can generate an audit trails token to read an organization's [audit trails](/terraform/enterprise/api-docs/audit-trails). Use this token type to authenticate integrations pulling audit trail data, for example, using the [HCP Terraform for Splunk](/terraform/enterprise/integrations/splunk) app.
+You can generate an audit trails token to read an organization's [audit trails](/terraform/cloud-docs/api-docs/audit-trails). Use this token type to authenticate integrations pulling audit trail data, for example, using the [HCP Terraform for Splunk](/terraform/cloud-docs/integrations/splunk) app.
 
 To manage an organization's audit trails token, go to **Organization settings > API Token** and use the settings under the "Audit Token" header.
 
-Each organization can only have a _single_ valid audit trails token. Only [organization owners](/terraform/enterprise/users-teams-organizations/teams#the-owners-team) can generate or revoke an organization's audit trails token.
+Each organization can only have a _single_ valid audit trails token. Only [organization owners](/terraform/cloud-docs/users-teams-organizations/teams#the-owners-team) can generate or revoke an organization's audit trails token.
 
 [permissions-citation]: #intentionally-unused---keep-for-maintainers
 
