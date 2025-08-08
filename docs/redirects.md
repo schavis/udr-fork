@@ -63,32 +63,30 @@ Special character | Description
 
 ### Predefined character classes
 
-Special character | Description
------------------ | -----------
-`\d`              | Matches any digit (0-9).
-
-
--`\D` - Matches any non-digit.
--`\w` - Matches any word character (alphanumeric and underscore).
--`\W` - Matches any non-word character (including most special characters).
--`\s` - Matches any whitespace character.
--`\S` - Matches any non-whitespace character.
+Notation | Character set
+-------- | -----------
+`\d`     | Single digits (0-9)
+`\D`     | Non-digits
+`\w`     | Any word character (alphanumeric and underscore)
+`\W`     | Non-word characters including most special characters
+`\s`     | Whitespace characters
+`\S`     | Non-whitespace characters
 
 
 ### Example regex strings
 
 Parameter definition (:slug)       | :slug value
 ---------------------------------- | -----------------
-`:slug(v1\\.(?:12|13)\\.x)`        | v1.12.x, v1.13.x
-`v:slug(1\\.(?:12|13)\\.x)`        | 1.12.x, 1.13.x
-`v:slug(1\\.(?:12|13)).x`          | 1.12, 1.13
+`:slug(v1\\.(?:12\|13)\\.x)`        | v1.12.x, v1.13.x
+`v:slug(1\\.(?:12\|13)\\.x)`        | 1.12.x, 1.13.x
+`v:slug(1\\.(?:12\|13)).x`          | 1.12, 1.13
 `:slug(path1(?:\\-abc$)?)`         | "path1" or "path1-abc"
 `:slug((?!path1$).*)`              | a string that does not match "path1"
-`:slug((?!path1$|path2$).*)`       | a string that does not match "path1" or "path2"
+`:slug((?!path1$\|path2$).*)`       | a string that does not match "path1" or "path2"
 `:slug(\\d{1,})`                   | a string of length 1 or more that only contains digits
 `:slug(\\d{1,4})`                  | a string of length 1, 2, 3, or 4 that only contains digits
 `:slug(release-(?:[1-5]))`         | a string starting with "release-" followed by 1, 2, 3, 4, or 5
-`:slug(release-(?:[[0-9]|10|11]))` | a string starting with "release-" followed by any number between 0 and 11
+`:slug(release-(?:[[0-9]\|10\|11]))` | a string starting with "release-" followed by any number between 0 and 11
 
 
 
