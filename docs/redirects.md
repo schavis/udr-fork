@@ -29,11 +29,19 @@
 
 ## Path parameters and regex
 
+> [!NOTE]  
+> If you are reading the raw Markdown, the table says `\|`, but the actual
+> character is `|`. GitHub requires an escape character when `|` appears in
+> a table for the page to render properly on github.com
+
 You can define and name parameters in the source path and use the matched value
 your in destination path definitions. Parameter definitions include string
 constants, predefined character classes, and regex expressions that match to
 multiple paths using non-capture groups. Use `?:` to mark the start of a
 non-capture group.
+
+To escape special characters in your regex expression, use `\\`. For example, to
+escape the `.` character in versioned URLs, use `\\.`.
 
 Special character | Description
 ----------------- | -----------
@@ -52,10 +60,6 @@ Special character | Description
 `$`               | Match to the end of the string
 `!`               | Start a negative look-ahead non-capture group
 
-<sup>1</sup>: the actual character is `|`, but the markdown requires an escape character to render properly in GitHub
-
-To escape special characters in your regex expression, use `\\`. For example, to
-escape the `.` character in versioned URLs, use `\\.`.
 
 ### Predefined character classes
 
@@ -69,18 +73,18 @@ escape the `.` character in versioned URLs, use `\\.`.
 
 ### Example regex strings
 
-Parameter definition (:slug)      | :slug value
---------------------------------- | -----------------
-:slug(v1\\.(?:12|13)\\.x)         | v1.12.x, v1.13.x
-v:slug(1\\.(?:12|13)\\.x)         | 1.12.x, 1.13.x
-v:slug(1\\.(?:12|13)).x           | 1.12, 1.13
-:slug(path1(?:\\-abc$)?)          | "path1" or "path1-abc"
-:slug((?!path1$).*)               | a string that does not match "path1"
-:slug((?!path1$|!path2$).*)       | a string that does not match "path1" or "path2"
-:slug(\\d{1,})                    | a string of length 1 or more that only contains digits
-:slug(\\d{1,4})                   | a string of length 1, 2, 3, or 4 that only contains digits
-:slug(release-(?:[1-5]))          | a string starting with "release-" followed by 1, 2, 3, 4, or 5
-:slug(release-(?:[[0-9]|10|11]))  | a string starting with "release-" followed by any number between 0 and 11
+Parameter definition (:slug)       | :slug value
+---------------------------------- | -----------------
+`:slug(v1\\.(?:12|13)\\.x)`        | v1.12.x, v1.13.x
+`v:slug(1\\.(?:12|13)\\.x)`        | 1.12.x, 1.13.x
+`v:slug(1\\.(?:12|13)).x`          | 1.12, 1.13
+`:slug(path1(?:\\-abc$)?)`         | "path1" or "path1-abc"
+`:slug((?!path1$).*)`              | a string that does not match "path1"
+`:slug((?!path1$|!path2$).*)`      | a string that does not match "path1" or "path2"
+`:slug(\\d{1,})`                   | a string of length 1 or more that only contains digits
+`:slug(\\d{1,4})`                  | a string of length 1, 2, 3, or 4 that only contains digits
+`:slug(release-(?:[1-5]))`         | a string starting with "release-" followed by 1, 2, 3, 4, or 5
+`:slug(release-(?:[[0-9]|10|11]))` | a string starting with "release-" followed by any number between 0 and 11
 
 
 
@@ -116,7 +120,7 @@ Redirect for a specific version:
   }
 ```
 
-Use regex to redirect versioned URLs for v1.12.x and v1.13.x:
+Use regex to create backfacing redirects for v1.12.x and v1.13.x:
 
 ```json
   {
@@ -126,7 +130,7 @@ Use regex to redirect versioned URLs for v1.12.x and v1.13.x:
   }
 ```
 
-Use regex to pull out the number portion (`1.N`) of a versioned URL that looks
+Use regex to pull out the number portion (`1.N.x`) of a versioned URL that looks
 like `vault/docs/v1.N.x/path/to/page`:
 
 ```json
