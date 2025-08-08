@@ -38,7 +38,7 @@ You can define and name parameters in the source path and use the matched value
 your in destination path definitions. Parameter definitions include string
 constants, predefined character classes, and regex expressions that match to
 multiple paths using non-capture groups. Use `?:` to mark the start of a
-non-capture group.
+non-capture group and `?!` to mark the start of a negative look-ahead group.
 
 To escape special characters in your regex expression, use `\\`. For example, to
 escape the `.` character in versioned URLs, use `\\.`.
@@ -48,22 +48,26 @@ Special character | Description
 `(` and `)`       | Wraps parameter definitions and regex definitions.
 `{ min, max }`    | Matches the pattern `min` or more times up to an optional `max` number of times
 `[` and `]`       | Define a range of characters or strings
-`\|`              | Defines alternatives in a range or non-capture group<sup>1</sup>
+`\|`              | Defines alternatives in a range or non-capture group
 `\`               | Indicates a predefined character class
 `^`               | Matches a non-capture group to the start of the string
 `.`               | Matches to any single character
-`:`               | Start a non-capture group
+`:`               | Start a parameter definition or non-capture group
 `*`               | Matches the pattern zero or more times
 `+`               | Matches the pattern one or more times
 `-`               | Defines a **single-character** range (numbers or letters)
 `?`               | Match the pattern zero or one times
 `$`               | Match to the end of the string
-`!`               | Start a negative look-ahead non-capture group
+`?!`              | Start a negative look-ahead non-capture group
 
 
 ### Predefined character classes
 
--`\d` - Matches any digit (0-9).
+Special character | Description
+----------------- | -----------
+`\d`              | Matches any digit (0-9).
+
+
 -`\D` - Matches any non-digit.
 -`\w` - Matches any word character (alphanumeric and underscore).
 -`\W` - Matches any non-word character (including most special characters).
@@ -80,7 +84,7 @@ Parameter definition (:slug)       | :slug value
 `v:slug(1\\.(?:12|13)).x`          | 1.12, 1.13
 `:slug(path1(?:\\-abc$)?)`         | "path1" or "path1-abc"
 `:slug((?!path1$).*)`              | a string that does not match "path1"
-`:slug((?!path1$|!path2$).*)`      | a string that does not match "path1" or "path2"
+`:slug((?!path1$|path2$).*)`       | a string that does not match "path1" or "path2"
 `:slug(\\d{1,})`                   | a string of length 1 or more that only contains digits
 `:slug(\\d{1,4})`                  | a string of length 1, 2, 3, or 4 that only contains digits
 `:slug(release-(?:[1-5]))`         | a string starting with "release-" followed by 1, 2, 3, 4, or 5
