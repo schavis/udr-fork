@@ -105,6 +105,7 @@ export const parseJsonc = (jsonString: string) => {
 		})
 
 		if (parserError.length > 0) {
+			console.log(`JSONC parse errors: ${JSON.stringify(parserError, null, 2)}`)
 			return Err(`Failed to parse JSONC: ${parserError}`)
 		}
 
@@ -135,4 +136,11 @@ function ifNeededAddReleaseStageToPath(
 	}
 
 	return newFilePath
+}
+
+export const joinFilePath = (path: string[] = []): string => {
+	return path
+		.filter(Boolean)
+		.join('/')
+		.replace(/\/{2,}/g, '/')
 }
