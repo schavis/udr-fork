@@ -73,21 +73,23 @@ Notation | Character set
 `\S`     | Non-whitespace characters
 
 
-### Example regex strings
+### Example pattern strings
 
-Parameter definition (:slug)       | :slug value
----------------------------------- | -----------------
-`:slug(v1\\.(?:12\|13)\\.x)`        | v1.12.x, v1.13.x
-`v:slug(1\\.(?:12\|13)\\.x)`        | 1.12.x, 1.13.x
-`v:slug(1\\.(?:12\|13)).x`          | 1.12, 1.13
-`:slug(path1(?:\\-abc$)?)`         | "path1" or "path1-abc"
-`:slug((?!path1$).*)`              | a string that does not match "path1"
-`:slug((?!path1$\|path2$).*)`       | a string that does not match "path1" or "path2"
-`:slug(\\d{1,})`                   | a string of length 1 or more that only contains digits
-`:slug(\\d{1,4})`                  | a string of length 1, 2, 3, or 4 that only contains digits
-`:slug(release-(?:[1-5]))`         | a string starting with "release-" followed by 1, 2, 3, 4, or 5
-`:slug(release-(?:[[0-9]\|10\|11]))` | a string starting with "release-" followed by any number between 0 and 11
-
+Path definition (:slug)                                          | :slug value
+---------------------------------------------------------------- | -----------------
+`:slug(v1\\.(?:12\|13)\\.x)`                                     | v1.12.x, v1.13.x
+`v:slug(1\\.(?:12\|13)\\.x)`                                     | 1.12.x, 1.13.x
+`v:slug(1\\.(?:12\|13)).x`                                       | 1.12, 1.13
+`:slug(path1(?:\\-abc$)?)`                                       | "path1" or "path1-abc"
+`:slug((?!path1$).*)`                                            | any string != "path1"
+`:slug((?!path1$\|path2$).*)`                                    | any string not in ("path1", "path2")
+`:slug(\\d{1,})`                                                 | any string of 1 or more digits
+`:slug(\\d{1,4})`                                                | any string of 1 to 4 digits
+`:slug(release-(?:[1-5]))`                                       | "release-" followed by 1, 2, 3, 4, or 5
+`:slug(release-(?:[[0-9]\|10\|11]))`                             | "release-" followed by any number between 0 and 11
+`:slug(1\\.(?:9\|1(?:[0-5]))\\.x)`                               | 1.9.x through 1.15.x
+`:slug(1\\.(?:[7-9]\|1[0-8])\\.x)`                               | 1.7.x through 1.18.x
+`:slug(1\\.(?:7\|8\|9\|10\|11\|12\|13\|14\|15\|16\|17\|18)\\.x)` | 1.7.x through 1.18.x
 
 
 ## Examples
@@ -133,7 +135,8 @@ Use regex to create backfacing redirects for v1.12.x and v1.13.x:
 ```
 
 Use regex to pull out the number portion (`1.N.x`) of a versioned URL that looks
-like `vault/docs/v1.N.x/path/to/page`:
+like `vault/docs/v1.N.x/path/to/page` and use the number in the destination page
+name:
 
 ```json
   {
@@ -143,8 +146,8 @@ like `vault/docs/v1.N.x/path/to/page`:
   },
 ```
 
-Use regex to redirect all `docs/agent/*` paths except `docs/agent/autoauth/*` to
-`/agent-and-proxy/agent/*`:
+Use regex to redirect all `docs/agent/` paths except `docs/agent/autoauth/` to
+a path under `/agent-and-proxy/agent/`:
 
 ```json
   {
