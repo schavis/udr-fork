@@ -1,5 +1,7 @@
 # Using redirects
 
+Use redirects for fun and profit!
+
 ---
 
 - [Definitions](#definitions)
@@ -23,26 +25,26 @@
 
 
 - **Containing docset** - The docset associated with a specific redirect
-  definition file. For example, `vault/docs/v1.20/x` is the containing docset
+  definition file. For example, `vault/docs/v1.20.x` is the containing docset
   for the `/content/vault/1.20.x/redirects.jsonc` file.
 
 
-- **Standard redirects** - Redirect unversioned URLs that no longer exist under
-  the containing docset to a different URL in the same docset.
+- **Standard redirects** - Redirect **unversioned URLs** that no longer exist
+  under the containing docset to a different URL in the same docset.
 
   For example, updating the v1.20 redirect file to send requests for `path/pageA`
   to `path/pageB`.
 
 
-- **Versioned redirects** - Redirect unversioned URLs that no longer exist under
-  the containing docset to a different URL in another docset.
+- **Versioned redirects** - Redirect **unversioned URLs** that no longer exist
+  under the containing docset to a different URL in another docset.
   
   For example, updating the v1.20 redirect file to send requests for
   `path/upgrade-to-1.18` to a URL in the v1.18 docset
   (`vault/docs/v1.18.x/path/upgrade-to-1.18`).
 
 
-- **Backfacing redirects** - Redirect invalid, versioned URLs that use valid
+- **Backfacing redirects** - Redirect invalid, **versioned URLs** that use valid
   paths from the containing docset to appropriate URLs in other docsets. You can
   use backfacing redirects to help the version picker find the right page across
   versions or keep URL formatting consistent in long-living pages that span
@@ -50,12 +52,13 @@
   
   For example, versioned URLs for `updates/important-changes` in the current
   Vault docset (`/vault/docs/{version}/updates/important-changes`) redirect to
-  an appropriate page in older docsets based on the requested version.
+  appropriate URLs in older docsets based on the version slug in the requested
+  URL.
 
 
 ## Limitations and gotchas
 
-- The developers.hashicorp.com platform does not support global redirects. The
+- The `developers.hashicorp.com` platform does not support global redirects. The
   most current docset only knows about redirects associated with that docset.
 
 - You must perpetuate backfacing redirects across future docsets. Otherwise,
