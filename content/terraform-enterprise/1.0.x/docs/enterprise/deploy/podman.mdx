@@ -432,7 +432,7 @@ spec:
     - name: "TFE_REDIS_USE_TLS"
       value: "<To use tls? e.g. false>"
     - name: "TFE_REDIS_USE_MTLS"
-    value: "<To use mtls with Redis standalone? eg. "false">
+      value: "<To use mtls with Redis standalone or Sentinel? eg. "false">
     - name: "TFE_REDIS_CLIENT_CERT_PATH"
       value: "<Path to the client certificate file to be used for mTLS authentication with Redis server>
     - name: "TFE_REDIS_CA_CERT_PATH"
@@ -447,7 +447,13 @@ spec:
       value: "<Path to the Certificate Authority file user to validate the certificate>"
     - name: "TFE_REDIS_SIDEKIQ_CLIENT_KEY_PATH"
       value: "<Path to the private key file corresponding to the client certificate.>"
-      
+    - name: "TFE_REDIS_SENTINEL_ENABLED"
+      value: "<To use sentinel? e.g. false>"
+    - name: "TFE_REDIS_SENTINEL_HOSTS"
+      value: "<Hostname and port of Sentinel hosts, e.g. sentinel.example.com:26379>"
+    - name: "TFE_REDIS_SENTINEL_LEADER_NAME"
+      value: "<Name of the Sentinel leader>"
+
       # Vault cluster settings.
       # If you are using the default internal vault, this should be the private routable IP address of the node itself.
     - name: "TFE_VAULT_CLUSTER_ADDRESS"
