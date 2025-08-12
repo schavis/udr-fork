@@ -16,32 +16,40 @@
 
 ## Definitions
 
-- **Standard redirects** - Redirect old URLs that no longer exist under the
-  containing docset to the new URLs.
+- **Docset** - A collection of docs associated with a specific product and
+  version. For example, the 1.20 Vault docset (`vault/docs/v1.20/x`) lives under
+  `/content/vault/1.20.x/`.
 
-  For example, updating the 1.20 redirect file (`/vault/v1.20.x/redirects.jsonc`)
-  to send requests for `path/pageA` in the v1.20 docset to `path/pageB` in the
-  v1.20 docset.
 
-- **Versioned redirects** - Redirect URLs that no longer exist under the
-  containing docset to a URL in a different docset. For example, updating
-  the 1.20 redirect file (`/vault/v1.20.x/redirects.jsonc`) to send invalid
-  requests for `path/upgrade-to-1.18` in the v1.20 docset to `path/upgrade-to-1.18`
-  in the v1.18 docset (`vault/docs/v1.18.x/path/upgrade-to-1.18`).
-  You can use versioned redirects to help the version picker find the right page
-  across versions.
+- **Containing docset** - The docset associated with a specific redirect
+  definition file. For example, `vault/docs/v1.20/x` is the containing docset
+  for the `/content/vault/1.20.x/redirects.jsonc` file.
 
-- **Backfacing redirects** - Redirect versioned URLs that use new paths from the
-  containing docset to an appropriate URL in another docset version. For example,
-  updating the 1.20 redirect file (`/vault/v1.20.x/redirects.jsonc`) to send
-  invalid requests for `path/important-changes` in the 1.18.x docset
-  (`vault/docs/v1.18.x/path/important-changes`) to `path/upgrade-to-1.18` in the
-  v1.18 docset (`vault/docs/v1.18.x/path/upgrade-to-1.18`).
-  You can use backfacing redirects to keep URL formatting consistent in
-  long-living pages across multiple versions. For example, the Vault change
-  tracker (`/vault/docs/updates/change-tracker`) uses
-  `/vault/docs/<version>/updates/important-changes` URL references for all the
-  important changes links to simplify maintenance for contributors.
+
+- **Standard redirects** - Redirect unversioned URLs that no longer exist under
+  the containing docset to a different URL in the same docset.
+
+  For example, updating the v1.20 redirect file to send requests for `path/pageA`
+  to `path/pageB`.
+
+
+- **Versioned redirects** - Redirect unversioned URLs that no longer exist under
+  the containing docset to a different URL in another docset.
+  
+  For example, updating the v1.20 redirect file to send requests for
+  `path/upgrade-to-1.18` to a URL in the v1.18 docset
+  (`vault/docs/v1.18.x/path/upgrade-to-1.18`).
+
+
+- **Backfacing redirects** - Redirect invalid, versioned URLs that use valid
+  paths from the containing docset to appropriate URLs in other docsets. You can
+  use backfacing redirects to help the version picker find the right page across
+  versions or keep URL formatting consistent in long-living pages that span
+  docsets.
+  
+  For example, the Vault change tracker (`/vault/docs/updates/change-tracker`)
+  uses `/vault/docs/{version}/updates/important-changes` URL references for all
+  links to simplify maintenance over time.
 
 
 
