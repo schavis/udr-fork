@@ -48,15 +48,19 @@
   versions or keep URL formatting consistent in long-living pages that span
   docsets.
   
-  For example, the Vault change tracker (`/vault/docs/updates/change-tracker`)
-  uses `/vault/docs/{version}/updates/important-changes` URL references for all
-  links to simplify maintenance over time.
+  For example, versioned URLs for `updates/important-changes` in the current
+  Vault docset (`/vault/docs/{version}/updates/important-changes`) redirect to
+  an appropriate page in older docsets based on the requested version.
 
 
 ## Limitations and gotchas
 
 - The developers.hashicorp.com platform does not support global redirects. The
   most current docset only knows about redirects associated with that docset.
+
+- You must perpetuate backfacing redirects across future docsets. Otherwise,
+  the most current version of a docset will "forget" how to handle the
+  backfacing redirects.
 
 - You cannot split redirects across multiple files. For example, you cannot
   create a file to define your backfacing redirects and include it in the main
