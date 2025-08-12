@@ -17,9 +17,11 @@
 ## Definitions
 
 - **Standard redirects** - Redirect old URLs that no longer exist under the
-  containing docset to the new URLs. For example, updating the 1.20 redirect
-  file (`/vault/v1.20.x/redirects.jsonc`) to send requests for `path/pageA` in
-  the v1.20 docset to `path/pageB` in the v1.20 docset.
+  containing docset to the new URLs.
+
+  For example, updating the 1.20 redirect file (`/vault/v1.20.x/redirects.jsonc`)
+  to send requests for `path/pageA` in the v1.20 docset to `path/pageB` in the
+  v1.20 docset.
 
 - **Versioned redirects** - Redirect URLs that no longer exist under the
   containing docset to a URL in a different docset. For example, updating
