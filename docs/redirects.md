@@ -14,7 +14,7 @@
 
 ---
 
-## [Definitions](#definitions)
+## Definition ((#definitions))
 
 - **Standard redirects** - Redirect old URLs that no longer exist under the
   containing docset to the new URLs. For example, updating the 1.20 redirect
