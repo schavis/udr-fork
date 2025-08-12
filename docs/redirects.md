@@ -1,8 +1,9 @@
-# Defining redirects
+# Using redirects
 
 ---
 
 - [Definitions](#definitions)
+- [Limitations and gotchas](#limitations-and-gotchas)
 - [Path parameter definition](#path-parameter-definition)
   - [Predefined character classes](#predefined-character-classes)
 - [Example path parameter definitions](#example-path-parameter-definitions)
@@ -51,6 +52,15 @@
   uses `/vault/docs/{version}/updates/important-changes` URL references for all
   links to simplify maintenance over time.
 
+
+## Limitations and gotchas
+
+- The developers.hashicorp.com platform does not support global redirects. The
+  most current docset only knows about redirects associated with that docset.
+
+- You cannot split redirects across multiple files. For example, you cannot
+  create a file to define your backfacing redirects and include it in the main
+  redirect file.
 
 
 ## Path parameter definition
