@@ -1,10 +1,20 @@
 # Defining redirects
 
-sdfdsf
+---
 
+- [Definitions](#definitions)
+- [Path parameter definition](#params)
+  - [Predefined character classes](#char-classes)
+- [Example path parameter definitions](#slug-examples)
+- [Example redirects](#redirect-examples)
+  - [Basic redirects](#basic-redirects)
+  - [Pattern matching](#patterns)
+  - [Non-capture groups](#non-capture)
+  - [Negative look-ahead non-capture groups](#negation)
 
+---
 
-## Definitions
+## [Definitions](#definitions)
 
 - **Standard redirects** - Redirect old URLs that no longer exist under the
   containing docset to the new URLs. For example, updating the 1.20 redirect
@@ -33,7 +43,7 @@ sdfdsf
 
 
 
-## Path parameter definition
+## [Path parameter definition](#params)
 
 > [!NOTE]  
 > If you are reading the raw Markdown, the table says `\|`, but the actual
@@ -67,7 +77,7 @@ To escape special characters in your non-capture group, use `\\`. For example,
 to escape the `.` character in versioned URLs, use `\\.`.
 
 
-### Predefined character classes
+### [Predefined character classes](#char-classes)
 
 Notation | Character set
 -------- | -------------
@@ -80,7 +90,7 @@ Notation | Character set
 
 
 
-## Example path parameter definitions
+## [Example path parameter definitions](#slug-examples)
 
 Depending on the paths and page names you want to capture, there may be multiple
 ways to capture the same information.
@@ -104,13 +114,13 @@ Path segment                                                     | `:slug` value
 
 
 
-## Example redirects
+## [Example redirects](#redirect-examples)
 
 Example redirects. Some examples come from actual redirects in
 `/content/vault/v1.20.x/redirects.jsonc`.
 
 
-### Basic redirects
+### [Basic redirects](#basic-redirects)
 
 Standard redirect:
 
@@ -143,7 +153,7 @@ Create a versioned redirect to a specific versioned URL:
 ```
 
 
-### Pattern matching
+### [Pattern matching](#patterns)
 
 Redirect any `/old/path/` path that starts with "hello":
 
@@ -176,7 +186,7 @@ Redirect any `/old/path/` path that starts with "hello" and ends with "goodbye":
 ```
 
 
-### Non-capture groups
+### [Non-capture groups](#non-capture)
 
 Use a non-capture group to redirect all child paths:
 
@@ -223,7 +233,7 @@ version to redirect to a versioned URL for the same page:
 ```
 
 
-### Negative look-ahead non-capture groups
+### [Negative look-ahead non-capture groups](#negation)
 
 Use a negative look-ahead group to redirect all `docs/agent/` paths except
 `docs/agent/autoauth/` to a path under `/agent-and-proxy/agent/`:
