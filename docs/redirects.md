@@ -3,18 +3,18 @@
 ---
 
 - [Definitions](#definitions)
-- [Path parameter definition](#params)
-  - [Predefined character classes](#char-classes)
-- [Example path parameter definitions](#slug-examples)
-- [Example redirects](#redirect-examples)
+- [Path parameter definition](#path-parameter-definition)
+  - [Predefined character classes](#predefined-character-classes)
+- [Example path parameter definitions](#example-path-parameter-definitions)
+- [Example redirects](#example-redirects)
   - [Basic redirects](#basic-redirects)
-  - [Pattern matching](#patterns)
-  - [Non-capture groups](#non-capture)
-  - [Negative look-ahead non-capture groups](#negation)
+  - [Pattern matching](#pattern-matching)
+  - [Non-capture groups](#non-capture-groups)
+  - [Negative look-ahead non-capture groups](#negative-look-ahead-non-capture-groups)
 
 ---
 
-## Definition ((#definitions))
+## Definitions
 
 - **Standard redirects** - Redirect old URLs that no longer exist under the
   containing docset to the new URLs. For example, updating the 1.20 redirect
@@ -43,7 +43,7 @@
 
 
 
-## [Path parameter definition](#params)
+## Path parameter definition
 
 > [!NOTE]  
 > If you are reading the raw Markdown, the table says `\|`, but the actual
@@ -77,7 +77,7 @@ To escape special characters in your non-capture group, use `\\`. For example,
 to escape the `.` character in versioned URLs, use `\\.`.
 
 
-### [Predefined character classes](#char-classes)
+### Predefined character classes
 
 Notation | Character set
 -------- | -------------
@@ -90,7 +90,7 @@ Notation | Character set
 
 
 
-## [Example path parameter definitions](#slug-examples)
+## Example path parameter definitions
 
 Depending on the paths and page names you want to capture, there may be multiple
 ways to capture the same information.
@@ -114,13 +114,13 @@ Path segment                                                     | `:slug` value
 
 
 
-## [Example redirects](#redirect-examples)
+## Example redirects
 
 Example redirects. Some examples come from actual redirects in
 `/content/vault/v1.20.x/redirects.jsonc`.
 
 
-### [Basic redirects](#basic-redirects)
+### Basic redirects
 
 Standard redirect:
 
@@ -153,7 +153,7 @@ Create a versioned redirect to a specific versioned URL:
 ```
 
 
-### [Pattern matching](#patterns)
+### Pattern matching
 
 Redirect any `/old/path/` path that starts with "hello":
 
@@ -186,7 +186,7 @@ Redirect any `/old/path/` path that starts with "hello" and ends with "goodbye":
 ```
 
 
-### [Non-capture groups](#non-capture)
+### Non-capture groups
 
 Use a non-capture group to redirect all child paths:
 
@@ -233,7 +233,7 @@ version to redirect to a versioned URL for the same page:
 ```
 
 
-### [Negative look-ahead non-capture groups](#negation)
+### Negative look-ahead non-capture groups
 
 Use a negative look-ahead group to redirect all `docs/agent/` paths except
 `docs/agent/autoauth/` to a path under `/agent-and-proxy/agent/`:
