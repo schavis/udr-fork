@@ -1,15 +1,18 @@
-### File audit devices require explicit configuration for prefixing and cannot use executable file permissions (CVE-2025-6000) ((#file-audit-devices))
+### CVE-2025-6000: File audit devices cannot use executable file permissions ((#cve-2025-6000))
 
-| Change       | Affected version                          | Fixed version
-| ------------ | ----------------------------------------- | --------------------
-| Breaking     | 1.20.1+, 1.19.7+, 1.18.12+, 1.16.23+      | N/A
+| Change       | Affected version                     | Vault edition
+| ------------ | ------------------------------------ | -------------
+| Breaking     | 1.20.1+, 1.19.7+, 1.18.12+, 1.16.23+ | All
 
-You must set `allow_audit_log_prefixing` to `true` in your server configuration to enable `file` audit devices with the `prefix` option.
-Additionally, `file` audit devices cannot use the [mode](/vault/docs/audit/file#mode) option with executable permissions (e.g., 0777, 0755).
+File audit devices require explicit configuration for prefixing and cannot use
+executable file permissions.  You must set `allow_audit_log_prefixing` to `true`
+in your server configuration to enable `file` audit devices with the `prefix`
+option. Additionally, `file` audit devices cannot use file modes with executable
+permissions (e.g., 0777, 0755).
 
 #### Recommendation
 
-If you use `file` audit devices, you need to:
+If you use `file` audit devices:
 
 1. Add `allow_audit_log_prefixing = true` to your Vault server configuration if
    you want to use the `prefix` option.
