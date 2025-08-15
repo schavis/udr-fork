@@ -11,7 +11,7 @@ Last required release: [v202406-1 (776)](/terraform/enterprise/releases/2024/v20
 Flexible Deployment Options `terraform-enterprise` container digest: amd64/linux `sha256:3e48ce529c1cb40217b4526c93a8bc345482184e0c8d1073b3efbaaa6e0057d0`
 
 ## Known Issues
-
+1. (Updated 08/15/2025) You may experience failures when using an S3-compatible storage solution. A library was upgraded that is triggering authentication issues with some 3rd party storage solutions. Errors may arise when running plans and applies, or when accessing terraform state files. More detailed information about this issue can be found on the [aws sdk github issues page](https://github.com/aws/aws-sdk-go-v2/discussions/2960). This issue will be resolved in an upcoming patch release. 
 1. The **Create a team token** button in the Teams Tokens page may not always be visible. The workaround for this issue is to navigate to the Teams page and then back to the API Tokens page.
 
 ## Deprecations
