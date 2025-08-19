@@ -1,0 +1,28 @@
+name: Trigger Repo Sync in Other Repo
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dispatch_workflow:
+    # Because this runs into a "chicken or egg" situation where the code needs to exist in both repos before we can test, we are going to:
+    # 1. Push to main
+    # 2. Sync code to both repos
+    # 3. Push a change to internal
+    # If this works then we can enable it in both repos
+    if: github.repository == 'hashicorp/web-unified-docs-internal'
+    # github.repository == 'hashicorp/web-unified-docs-internal' || github.repository == 'hashicorp/web-unified-docs'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch workflow in target repo
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.CI_GITHUB_TOKEN }}
+          repository: hashicorp/${{ github.repository == 'hashicorp/web-unified-docs-internal' && 'web-unified-docs' || 'web-unified-docs-internal' }}
+          event-type: push-repo-sync
+          client-payload: |
+            {
+              "repository": "${{ github.repository }}",
+              "commit": "${{ github.sha }}"
+            }
