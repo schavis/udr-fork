@@ -17,7 +17,7 @@ This repository uses a focused broken link monitoring system that provides visib
 
 - **Focus**: All broken links affecting end users
 - **Behavior**:
-  - Monthly full content scan (1st of each month)
+  - Weekly full content scan ((every Sunday))
   - Single GitHub issue with latest results (auto-updated)
   - Production broken links logged to Datadog
   - Critical alerts for user-facing issues
@@ -29,7 +29,7 @@ The system automatically maintains a single "Link Checker Report" issue:
 - **Auto-closes** previous reports when new ones are generated
 - **Creates** a fresh issue with current broken link data
 - **Labels** with `link-checker-report` for easy filtering
-- **Updates** monthly with the latest production scan results
+- **Updates** Weekly with the latest production scan results
 
 **Find current broken links**: Search for issues with label `link-checker-report`
 
@@ -41,7 +41,7 @@ Check the active GitHub issue titled "Link Checker Report":
 
 - Go to Issues → Filter by label: `link-checker-report`
 - The most recent issue contains all current production broken links
-- Updated monthly with fresh scan results
+- Updated weekly with fresh scan results
 
 ### PR-Level Broken Links
 
@@ -59,7 +59,7 @@ Check the active GitHub issue titled "Link Checker Report":
 ### Why Production Monitoring is Critical:
 
 1. **End users** are actually affected by broken links
-2. **Monthly scans** catch issues that impact real usage
+2. **Weekly scans** catch issues that impact real usage
 3. **GitHub issues** provide trackable action items
 4. **Datadog alerts** ensure team awareness of user-facing problems
 
@@ -69,12 +69,12 @@ Check the active GitHub issue titled "Link Checker Report":
 
 1. **Review PR comments** - see what links are broken in your changes
 2. **Fix critical internal links** - but don't be blocked by external issues
-3. **Monitor the monthly GitHub issue** - stay aware of overall link health
+3. **Monitor the weekly GitHub issue** - stay aware of overall link health
 4. **Focus on content quality** - write good links and double-check the path
 
 ### For Content Teams
 
-1. **Monitor the monthly GitHub issue** - prioritize fixing user-facing broken links
+1. **Monitor the weekly GitHub issue** - prioritize fixing user-facing broken links
 2. **Review production Datadog alerts** - respond to issues affecting users
 3. **Update external link policies** - avoid linking to unreliable external sites
 4. **Coordinate with dev team** - ensure critical fixes get prioritized
@@ -112,7 +112,7 @@ This focused approach provides:
 
 1. **Developer-friendly** - No broken link noise blocking development
 2. **User-focused** - Critical alerts only for production issues
-3. **Full visibility** - See all broken links in PR comments and monthly issues
+3. **Full visibility** - See all broken links in PR comments and weekly issues
 4. **Actionable alerts** - Datadog alerts when users are actually affected
 
 ## Troubleshooting Guide
@@ -156,11 +156,11 @@ find content/ -name "target-file.mdx" -type f
 - Right: `/vault/docs/agent`
 ```
 
-## Monthly Review Process
+## Weekly Review Process
 
 ### For Content Teams
 
-1. **Check the monthly GitHub issue** labeled `link-checker-report`
+1. **Check the weekly GitHub issue** labeled `link-checker-report`
 2. **Prioritize internal links** - these directly impact user experience
 3. **Evaluate external links** - update, replace, or remove as needed
 4. **Track patterns** - note frequently broken external domains

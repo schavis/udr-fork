@@ -3,7 +3,7 @@ name: Broken Link Check (full)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: '0 0 * * 0'
 
 jobs:
   link-checker:
@@ -61,7 +61,7 @@ jobs:
 
           # Create enhanced issue content
           cat > ./issue-content.md << EOF
-          # 🔗 Monthly Link Checker Report - $(date '+%B %Y')
+          # 🔗 Weekly Link Checker Report - $(date '+%B %Y')
 
           ## 📊 Summary
 
@@ -98,7 +98,7 @@ jobs:
 
           ---
 
-          **Note**: This issue is automatically updated monthly. Previous reports are closed when new ones are generated.
+          **Note**: This issue is automatically updated weekly. Previous reports are closed when new ones are generated.
 
           For more information, see our [Broken Link Monitoring documentation](.github/BROKEN_LINK_MONITORING.md).
           EOF
