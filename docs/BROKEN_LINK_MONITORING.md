@@ -17,7 +17,7 @@ This repository uses a focused broken link monitoring system that provides visib
 
 - **Focus**: All broken links affecting end users
 - **Behavior**:
-  - Weekly full content scan ((every Sunday))
+  - Weekly full content scan ((every Monday))
   - Single GitHub issue with latest results (auto-updated)
   - Production broken links logged to Datadog
   - Critical alerts for user-facing issues
