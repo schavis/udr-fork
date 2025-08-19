@@ -31,7 +31,7 @@ introduces several Vault listener options that enforce payload size limits appli
 These settings are configured on a listener and give administrators granular control over the
 structure and size of JSON payloads that Vault will process and the configuration and performance characteristics of their Vault cluster.
 We've chosen defaults that are intentionally generous to accommodate a wide range of
-legitimate use cases, but they provide a strong defense against malicious or malformed requests.
+legitimate use cases, and which should guard against most malicious or malformed requests.
 
 `max_json_depth`
 This parameter specifies the maximum allowed nesting depth of a JSON object or array.
