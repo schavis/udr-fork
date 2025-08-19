@@ -125,6 +125,18 @@ The weekly [`broken-link-check-full`](https://github.com/hashicorp/web-unified-d
 
 For detailed information about the monitoring system, see [Broken Link Monitoring Documentation](./.github/BROKEN_LINK_MONITORING.md).
 
+### UDR Migration Link Check
+
+For teams migrating products to UDR (Unified Docs Renderer), use the dedicated migration workflow:
+
+1. Go to [Actions → UDR Product Link Check](https://github.com/hashicorp/web-unified-docs/actions/workflows/udr-product-link-check.yml)
+2. Click "Run workflow" and select your product
+3. Review migration-specific broken link analysis in the generated GitHub issue
+
+This workflow provides targeted link checking with migration-focused reporting and prioritization.
+
+### Local Testing
+
 You can also run the broken link checker locally. The following commands launch a lychee Docker container to check the content directories you specify.
 
 Run the broken link checker on all content.

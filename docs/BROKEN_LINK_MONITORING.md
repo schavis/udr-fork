@@ -43,6 +43,24 @@ Check the active GitHub issue titled "Link Checker Report":
 - The most recent issue contains all current production broken links
 - Updated weekly with fresh scan results
 
+### Product Specific Broken Links
+
+A new targeted workflow for teams to check links before migrating products.
+
+**Workflow:** `.github/workflows/udr-product-link-check.yml`
+
+**How to use:**
+
+1. Go to [Actions tab → UDR Product Link Check](https://github.com/hashicorp/web-unified-docs/actions/workflows/udr-product-link-check.yml)
+2. Click "Run workflow"
+3. Select your product from the dropdown (terraform, vault, consul, etc.)
+4. Optionally specify custom paths to check
+5. Review the results in the generated GitHub issue
+
+**Key features:**
+
+- **Product-specific**: Check only the content you're migrating
+
 ### PR-Level Broken Links
 
 - Check PR comments for broken link reports
