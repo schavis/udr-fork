@@ -1,6 +1,6 @@
 # Web Unified Docs
 
-The project in this repository, `hashicorp/web-unified-docs`, aims to implement [[DEVThe repository uses a focused broken link monitoring system:
+The project in this repository, `hashicorp/web-unified-docs`, aims to implement [[DEVDOT-023] Unified Product Documentation Repository](https://docs.google.com/document/d/1p8kOqySttvWUVfn7qiC4wGBR73LMBGMelwLt69pM3FQ/edit). The RFC for this project was intentionally light on implementation details, in order to foster consensus on the broad direction.
 
 - **PR previews**: Show broken links in comments for awareness (informational only, don't block PRs)
 - **Production monitoring**: Monthly scans create GitHub issues and send critical alerts to Datadog when users are affected
