@@ -1,4 +1,4 @@
-name: UDR Migration Link Check
+name: UDR Product Link Check
 
 on:
   workflow_dispatch:
