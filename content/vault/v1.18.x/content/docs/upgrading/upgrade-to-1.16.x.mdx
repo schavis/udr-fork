@@ -27,7 +27,7 @@ Vault 1.15. **Please read carefully**.
 |              |                  |              |
 
 To guard against potential Denial-of-Service (DoS) attacks, this release
-introduces several new security limits that are applied to incoming JSON request bodies.
+introduces several Vault listener options that enforce payload size limits applied to incoming JSON request bodies.
 These settings are configured on a listener and give administrators granular control over the
 structure and size of JSON payloads that Vault will process.
 We've chosen defaults that are intentionally generous to accommodate a wide range of
