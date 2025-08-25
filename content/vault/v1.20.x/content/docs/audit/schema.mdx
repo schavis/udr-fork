@@ -59,25 +59,25 @@ Attribute        | Type     | Description
 
 Vault omits irrelevant `authentication` object attributes from the audit entry. For example, `accessor` and `client_token` are irrelevant for unauthenticated requests and `metadata` is irrelevant if the authentication token lacks metadata.
 
-| Attribute | Type | Description | Example |
-| :---- | :---- | :---- | :---- |
-| `accessor` | `string` | Accessor of the Vault token that performed the request. This value is hashed by default; the example shows a *non-hashed* token accessor. Refer to [token accessors](/vault/docs/concepts/tokens#token-accessors) for more information. | `"gwAezHGajo8hzAtMFKm4JLz8"` |
-| `client_token` | `string` | Vault token that performed the request, in hashed form. | `"hmac-sha256:cb1456a6..."` |
-| `display_name` | `string` | Name associated with the Vault token that performed the request. This is a non-sensitive value that can help identify tokens. If a display name is not set, `"token"` will be shown. | `"my-token"` |
-| `token_type` | `string` | Whether the Vault token is a `service`, `batch`, or `periodic` token. Refer to [token types](/vault/docs/concepts/tokens#token-types). | `"service"` |
-| `token_issue_time` | `string` | Date and time when the Vault token was issued, in ISO 8601 format. | `"2025-06-05T16:10:22.292639Z"` |
-| `token_ttl` | `integer` | Validity period of the Vault token, in seconds and as of when the token was first issued, relative to `token_issue_time`. Note that this value is not updated when the token's lifetime is changed subsequent to initial issuance. | `2764800` |
-| `metadata` | `object` | Metadata associated with the Vault token. | `{ "username": "alice" }` |
-| `num_uses` | `integer` | When the API request results in a token being issued, which token has a limited number of uses, the number of uses on that token. | `5` |
-| `remaining_uses` | `integer` | If the Vault token has a limit on the number of uses, the number of uses remaining *prior to the current request*. | `5` |
-| `entity_created` | `boolean` | Whether the request resulted in an entity being created, i.e. an authorized principal logs into Vault for the first time. Omitted when false. | `true` |
-| `entity_id` | `string` | If the Vault token is associated with an entity, the ID of that entity. | `"c314fc09-7d87-f7c2-93f0-e1c053d9762e"` |
-| `policies` | `list(string)` | List of the names of the ACL policies associated with either the Vault token or the corresponding entity. | `["my-policy", "default"]` |
-| `identity_policies` | `list(string)` | If the Vault token is associated with an entity, a list of the names of the ACL policies associated (directly or via group membership) with that entity. | `["my-policy"]` |
-| `token_policies` | `list(string)` | A list of the names of the ACL policies associated directly with the Vault token. | `["default"]` |
-| `no_default_policy` | `boolean` | Whether the Vault token does **not** have Vault's "default" ACL policy associated with it. Omitted when false. | `true` |
-| `external_namespace_ policies` | `object` | If the Vault token is associated with an entity, and that entity inherits ACL policies from a namespace other than the namespace in which the entity exists, a JSON object containing a boolean attribute `allowed` and `granting_policies`, a list of those inherited ACL policies. Refer to the JSON structure below for more information about `granting_policies`. |  |
-| `policy_results` | `object` | JSON object containing a boolean attribute `allowed` and `granting_policies`, a list of ACL policies associated with either the Vault token or the corresponding entity that resulted in the request being allowed. Refer to the JSON structure below for more information about `granting_policies`. |  |
+| Attribute | Type | Description |
+| :---- | :---- | :---- |
+| `accessor` | `string` | Accessor of the Vault token that performed the request. This value is hashed by default; the example shows a *non-hashed* token accessor. Refer to [token accessors](/vault/docs/concepts/tokens#token-accessors) for more information. |
+| `client_token` | `string` | Vault token that performed the request, in hashed form. |
+| `display_name` | `string` | Name associated with the Vault token that performed the request. This is a non-sensitive value that can help identify tokens. If a display name is not set, `"token"` will be shown. |
+| `token_type` | `string` | Whether the Vault token is a `service`, `batch`, or `periodic` token. Refer to [token types](/vault/docs/concepts/tokens#token-types). |
+| `token_issue_time` | `string` | Date and time when the Vault token was issued, in ISO 8601 format. |
+| `token_ttl` | `integer` | Validity period of the Vault token, in seconds and as of when the token was first issued, relative to `token_issue_time`. Note that this value is not updated when the token's lifetime is changed subsequent to initial issuance. |
+| `metadata` | `object` | Metadata associated with the Vault token. |
+| `num_uses` | `integer` | When the API request results in a token being issued, which token has a limited number of uses, the number of uses on that token. |
+| `remaining_uses` | `integer` | If the Vault token has a limit on the number of uses, the number of uses remaining *prior to the current request*. |
+| `entity_created` | `boolean` | Whether the request resulted in an entity being created, i.e. an authorized principal logs into Vault for the first time. Omitted when false. |
+| `entity_id` | `string` | If the Vault token is associated with an entity, the ID of that entity. |
+| `policies` | `list(string)` | List of the names of the ACL policies associated with either the Vault token or the corresponding entity. |
+| `identity_policies` | `list(string)` | If the Vault token is associated with an entity, a list of the names of the ACL policies associated (directly or via group membership) with that entity. |
+| `token_policies` | `list(string)` | A list of the names of the ACL policies associated directly with the Vault token. |
+| `no_default_policy` | `boolean` | Whether the Vault token does **not** have Vault's "default" ACL policy associated with it. Omitted when false. |
+| `external_namespace_ policies` | `object` | If the Vault token is associated with an entity, and that entity inherits ACL policies from a namespace other than the namespace in which the entity exists, a JSON object containing a boolean attribute `allowed` and `granting_policies`, a list of those inherited ACL policies. Refer to the JSON structure below for more information about `granting_policies`. |
+| `policy_results` | `object` | JSON object containing a boolean attribute `allowed` and `granting_policies`, a list of ACL policies associated with either the Vault token or the corresponding entity that resulted in the request being allowed. Refer to the JSON structure below for more information about `granting_policies`. |
 
 ```json
 {
@@ -125,29 +125,29 @@ Vault omits irrelevant `authentication` object attributes from the audit entry. 
 
 The following request object definition includes example data with simple types (`string`, `bool`, `int`) and used in other JSON examples that include a `<request>` object.
 
-| Attribute | Type | Description | Example |
-| :---- | :---- | :---- | :---- |
-| `id` | `string` | Random ID generated by Vault to uniquely identify the API request. | `"c3af465f-fd72-..."` |
-| `operation` | `string` | Whether the request is a `create`, `read`, `update`, `delete`, or `list` operation. | `"read"` |
-| `namespace` | `object` | JSON object with the namespace's unique `id` and its `path`. | `{"id": "root"}` |
-| `path` | `string` | API path that received the request. | `"auth/token/lookup-self"` |
-| `request_uri` | `string` | The original request path from the HTTP request, if it differs from `path` (e.g., when the Vault namespace is specified as an HTTP header). |  |
-| `mount_accessor` | `string` | Unique identifier of the Vault mount (secret engine or authentication backend) that received the API request. | `"auth_token_a928787c"` |
-| `mount_type` | `string` | Type of Vault mount that received the API request. | `"token"` |
-| `mount_running_version` | `string` | Version string for the Vault mount that received the API request. | `"v1.20.0+builtin.vault"` |
-| `mount_running_sha256` | `string` | If the mount that received the API request is an external plugin, the SHA-256 hash of the plugin's running version. |  |
-| `mount_is_external_ plugin` | `boolean` | Whether the mount that received the API request is an external plugin. | `true` |
-| `remote_address` | `string` | IP address of the client making the request, as seen by Vault. Note that load balancers, proxies, and reverse proxies may all mask the true client's IP address. | `"127.0.0.1"` |
-| `remote_port` | `integer` | Port number used by the client making the request, as seen by Vault. | `61787` |
-| `headers` | `object` | JSON object containing request headers [configured](/vault/docs/audit#logging-of-request-headers) to be logged. | `{"user-agent": ["Go-http-client/1.1"]}` |
-| `policy_override` | `boolean` | Whether the client requested an override of a [Sentinel policy](/vault/docs/enterprise/sentinel). | `true` |
-| `client_id` | `string` | ID of the Vault [client](https://developer.hashicorp.com/vault/docs/concepts/client-count) making the request. | `"f60d5e8b-7a77-..."` |
-| `client_token` | `string` | Vault token that performed the request, in hashed form. | `"hmac-sha256:cb1456a6..."` |
-| `client_token_accessor` | `string` | Accessor of the Vault token that performed the request. This value is hashed by default; the example shows a *non-hashed* token accessor. Refer to [token accessors](/vault/docs/concepts/tokens#token-accessors) for more information. | `"gwAezHGajo8hzAtMFKm4JLz8"` |
-| `client_certificate_ serial_number` | `string` | If the client's connection to Vault is mutually authenticated, the serial number of the client's TLS certificate. |  |
-| `wrap_ttl` | `integer` | If the client requested the response to be [wrapped](/vault/docs/concepts/response-wrapping), the number of seconds for which the wrapped response will be available. | `3600` |
-| `data` | `object` | JSON object containing the request's payload. This is dependent on the API endpoint called. |  |
-| `replication_cluster` | `string` | If the request was forwarded from a Performance Replication secondary cluster, the name of the secondary cluster. | |
+| Attribute | Type | Description |
+| :---- | :---- | :---- |
+| `id` | `string` | Random ID generated by Vault to uniquely identify the API request. |
+| `operation` | `string` | Whether the request is a `create`, `read`, `update`, `delete`, or `list` operation. |
+| `namespace` | `object` | JSON object with the namespace's unique `id` and its `path`. |
+| `path` | `string` | API path that received the request. |
+| `request_uri` | `string` | The original request path from the HTTP request, if it differs from `path` (e.g., when the Vault namespace is specified as an HTTP header). |
+| `mount_accessor` | `string` | Unique identifier of the Vault mount (secret engine or authentication backend) that received the API request. |
+| `mount_type` | `string` | Type of Vault mount that received the API request. |
+| `mount_running_version` | `string` | Version string for the Vault mount that received the API request. |
+| `mount_running_sha256` | `string` | If the mount that received the API request is an external plugin, the SHA-256 hash of the plugin's running version. |
+| `mount_is_external_ plugin` | `boolean` | Whether the mount that received the API request is an external plugin. |
+| `remote_address` | `string` | IP address of the client making the request, as seen by Vault. Note that load balancers, proxies, and reverse proxies may all mask the true client's IP address. |
+| `remote_port` | `integer` | Port number used by the client making the request, as seen by Vault. |
+| `headers` | `object` | JSON object containing request headers [configured](/vault/docs/audit#logging-of-request-headers) to be logged. |
+| `policy_override` | `boolean` | Whether the client requested an override of a [Sentinel policy](/vault/docs/enterprise/sentinel). |
+| `client_id` | `string` | ID of the Vault [client](https://developer.hashicorp.com/vault/docs/concepts/client-count) making the request. |
+| `client_token` | `string` | Vault token that performed the request, in hashed form. |
+| `client_token_accessor` | `string` | Accessor of the Vault token that performed the request. This value is hashed by default; the example shows a *non-hashed* token accessor. Refer to [token accessors](/vault/docs/concepts/tokens#token-accessors) for more information. |
+| `client_certificate_ serial_number` | `string` | If the client's connection to Vault is mutually authenticated, the serial number of the client's TLS certificate. |
+| `wrap_ttl` | `integer` | If the client requested the response to be [wrapped](/vault/docs/concepts/response-wrapping), the number of seconds for which the wrapped response will be available. |
+| `data` | `object` | JSON object containing the request's payload. This is dependent on the API endpoint called. |
+| `replication_cluster` | `string` | If the request was forwarded from a Performance Replication secondary cluster, the name of the secondary cluster. |
 
 ```json
 {
@@ -190,7 +190,7 @@ The following response object definition includes example data with simple types
 | `headers` | `object` | Set of HTTP response headers sent by the plugin that handled the API request. |
 | `redirect` | `string` | For requests sent to authentication backends, the URL to which the authentication backend redirected the user for further authentication. |
 | `warnings` | `list(string)` | If the API returned one or more warnings, a list of the warning messages. |
-| `data` | `object` | JSON object containing the response payload. This is dependent on the API endpoint called. |  |
+| `data` | `object` | JSON object containing the response payload. This is dependent on the API endpoint called. |
 | `secret` | `object` | If the API returned a [leased secret](/vault/docs/concepts/lease), a JSON object with one attribute, `lease_id`, that identifies that leased secret. |
 | `wrap_info` | `object` | If the API returned a [response-wrapped secret](/vault/docs/concepts/response-wrapping), a JSON object containing the properties of the wrapping token. See below for the attributes in the JSON object. |
 | `mount_class` | `string` | Type of API mount, `auth` or `secret`. |
