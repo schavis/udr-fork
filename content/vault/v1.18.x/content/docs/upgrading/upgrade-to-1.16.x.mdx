@@ -51,7 +51,7 @@ limit and is large enough to comfortably accommodate common secrets like full TL
 This parameter sets the maximum number of key-value pairs allowed in a single JSON object.
 This is a direct defense against HashDoS (Hash Flooding) attacks, where an attacker could send
 an object with an enormous number of keys to overwhelm the server's CPU. A legitimate JSON object
-with more than 10,000 keys is extremely rare, so the default provides a high ceiling for normal operations
+with more than 10,000 keys is extremely rare, so the default of 10,000 provides a high ceiling for normal operations
 while ensuring server stability.
 
 `max_json_array_element_count`
