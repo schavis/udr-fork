@@ -30,13 +30,11 @@ jobs:
         run: |
           echo "BRANCH_LIST=$(git branch --list '${{ github.event.inputs.product }}/*')" >> $GITHUB_OUTPUT
       - name: Debugging data
-        env:
-          BRANCH_LIST: ${{ steps.get-branches.outputs.BRANCH_LIST }}
         run: |
           echo "🚧 Setup complete"
           echo "  - Trigger event:   ${{ github.event_name }}"
           echo "  - Branch:          ${{ github.ref }}"
-          echo "  - Target branches: ${{ BRANCH_LIST }}"
+          echo "  - Target branches: ${{ steps.get-branches.outputs.BRANCH_LIST }}"
   sync-branches:
     needs: setup
     runs-on: ubuntu-latest
