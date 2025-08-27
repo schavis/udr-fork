@@ -1,23 +1,59 @@
-name: GitHub Actions Demo
+name: Sync Vault release branches
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 
-on: [workflow_dispatch]
+on: 
+  workflow_dispatch:
+    branches: [main]
+    inputs:
+      product:
+        required: true
+        default: 'vault'
+        description: >-
+          Product slug (e.g., vault, hcp)
+
+permissions: 
+  contents: write
+
+env:
+  release-branch-prefix: ${{ }}
+  rc-release-branch: Monday
 
 jobs:
-  Sync-Vault-Release-Branch:
+
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      branch-list: ${{ steps.branch-list.outputs.value }}
+    steps:
+      - name:
+        id: branch-list
+        run: |
+          echo "::set-output name=branchList::$(git branch --list '${{ github.event.inputs.product }}/*')"
+      - name: Debugging data
+        run: |
+          echo "🚧 ${{ github.repository }} - Syncing ${{ github.event.inputs.product }} release branches with main"
+          echo "  - Trigger event:   ${{ github.event_name }}"
+          echo "  - Branch:          ${{ github.ref }}"
+          echo "  - Target branches: ${{ steps.branch-list.outputs.value }}"
+          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+
+  sync-branches:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "🚧 ${{ github.repository }} - Syncing Vault release branch with main"
-          echo "    - Trigger event: ${{ github.event_name }}"
-          echo "    - Branch:        ${{ github.ref }}"
-          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: |
+        with:
+          fetch-depth: 0
+      - name: Status update
+        run: |
           echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
           echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: Setup Git User
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "test@example.com"
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: "Wrap-up"
+        run: echo "🍏 This job's status is ${{ job.status }}."
