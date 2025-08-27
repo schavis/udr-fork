@@ -16,7 +16,7 @@ permissions:
   contents: write
 
 jobs:
-  setup:
+  job-prep:
     runs-on: ubuntu-latest
     outputs:
       branch-list: ${{ steps.get-branches.outputs.BRANCH_LIST }}
@@ -36,17 +36,17 @@ jobs:
           echo "  - Branch:          ${{ github.ref }}"
           echo "  - Target branches: ${{ steps.get-branches.outputs.BRANCH_LIST }}"
   sync-branches:
-    needs: setup
+    needs: job-prep
     runs-on: ubuntu-latest
     steps:
       - env:
-          BRANCH_LIST: ${{ needs.setup.outputs.branch-list }}
+          BRANCH_LIST: ${{ needs.job-prep.outputs.branch-list }}
       - name: Debugging data        
         run: |
           echo "🚧 ${{ github.repository }} - Syncing ${{ github.event.inputs.product }} release branches with main"
           echo "  - Trigger event:   ${{ github.event_name }}"
           echo "  - Branch:          ${{ github.ref }}"
-          echo "  - Target branches: ${{ BRANCH_LIST }}"
+          echo "  - Target branches: $BRANCH_LIST"
           echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: "Wrap-up"
         run: echo "🍏 This job's status is ${{ job.status }}."
