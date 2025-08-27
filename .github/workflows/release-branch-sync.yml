@@ -1,5 +1,6 @@
 name: Sync content release branches
-run-name:  🚀 ${{ github.actor }} is syncing ${{ github.event.inputs.product }} release branches
+
+run-name: 🚀 ${{ github.actor }} is syncing ${{ github.event.inputs.product }} release branches
 
 on: 
   workflow_dispatch:
@@ -18,18 +19,18 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      branch-list: ${{ steps.branch-list.outputs.value }}
+      branch-list: ${{ steps.get-branches.outputs.list }}
     steps:
       - name:
-        id: branch-list
+        id: get-branches
         run: |
-          echo "::set-output name=branchList::$(git branch --list '${{ github.event.inputs.product }}/*')"
+          echo "::set-output name=list::$(git branch --list '${{ github.event.inputs.product }}/*')"
       - name: Debugging data
         run: |
           echo "🚧 ${{ github.repository }} - Syncing ${{ github.event.inputs.product }} release branches with main"
           echo "  - Trigger event:   ${{ github.event_name }}"
           echo "  - Branch:          ${{ github.ref }}"
-          echo "  - Target branches: ${{ steps.branch-list.outputs.value }}"
+          echo "  - Target branches: ${{ steps.get-branches.outputs.list }}"
           echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
 
   sync-branches:
