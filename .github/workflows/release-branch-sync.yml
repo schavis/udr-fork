@@ -16,7 +16,7 @@ permissions:
   contents: write
 
 jobs:
-  job1:
+  setup:
     runs-on: ubuntu-latest
     outputs:
       output_1: ${{ steps.gen_output.outputs.output_1 }}
@@ -24,7 +24,7 @@ jobs:
       output_3: ${{ steps.gen_output.outputs.output_3 }}
     strategy:
       matrix:
-        version: [1, 2, 3]
+        version: [$(for i in {1..3}; do  echo "${i}" ; done)]
     steps:
       - name: Generate output
         id: gen_output
@@ -33,6 +33,6 @@ jobs:
           echo "output_${version}=${version}" >> "$GITHUB_OUTPUT"
   job2:
     runs-on: ubuntu-latest
-    needs: [job1]
+    needs: [setup]
     steps:
       - run: echo '${{ toJSON(needs.job1.outputs) }}'
