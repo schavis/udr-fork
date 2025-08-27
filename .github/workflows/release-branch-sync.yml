@@ -19,7 +19,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      branch-list: ${{ steps.get-branches.outputs.list }}
+      branch-list: ${{ steps.get-branches.outputs.BRANCH_LIST }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -29,14 +29,24 @@ jobs:
         id: get-branches
         run: |
           echo "BRANCH_LIST=$(git branch --list '${{ github.event.inputs.product }}/*')" >> $GITHUB_OUTPUT
-      - name: Debugging data
-        env:
-          BRANCH_LIST: ${{ steps.get-branches.outputs.BRANCH_LIST }}
+      - name: Debugging data        
+        run: |
+          echo "🚧 Setup complete"
+          echo "  - Trigger event:   ${{ github.event_name }}"
+          echo "  - Branch:          ${{ github.ref }}"
+          echo "  - Target branches: ${{ BRANCH_LIST }}"
+  sync-branches:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          BRANCH_LIST: ${{ needs.setup.outputs.branch-list }}
+      - name: Debugging data        
         run: |
           echo "🚧 ${{ github.repository }} - Syncing ${{ github.event.inputs.product }} release branches with main"
           echo "  - Trigger event:   ${{ github.event_name }}"
           echo "  - Branch:          ${{ github.ref }}"
-          echo "  - Target branches: ${{ steps.get-branches.outputs.list }}"
+          echo "  - Target branches: ${{ BRANCH_LIST }}"
           echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: "Wrap-up"
         run: echo "🍏 This job's status is ${{ job.status }}."
