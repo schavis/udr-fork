@@ -14,6 +14,16 @@ on:
           Release branch name. Monthly release branches use YYYYMM notation.
           Major release branches use the corresponding content version
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  RELEASE_BRANCH: "${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
+  MERGE_TARGET: "main"
+  LABELS: "${{ inputs.product }}-docs"
+  PR_TITLE: "[PUBLISH] ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
+  PR_BODY: |
+    Merging ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}
+    Created by Github action
+
 permissions: 
   contents: write
 
@@ -24,42 +34,18 @@ jobs:
       - name: Debugging data
         run: |
           echo "🚧 ${{ github.repository }} - Creating PR"
-          echo "    - Source branch: ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
-          echo "    - Target branch:        ${{ github.ref }}"
+          echo "    - Release branch: $RELEASE_BRANCH"
+          echo "    - Merge target:   $MERGE_TARGET"
           echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: Create pull request
         run: |
-          gh pr create  \
-            -B main     \
-            -H ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }} \
-            --label "${{ github.event.inputs.product }}-docs"
-            --title "[PUBLISH] ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
-            --body "Merging ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}\nCreated by Github action"
-
+          gh pr create          \
+            -B $MERGE_TARGET    \
+            -H $RELEASE_BRANCH  \
+            --label $LABELS     \
+            --title $PR_TITLE   \
+            --body $PR_BODY
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Status update
-        run: |
-          echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-          echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: Setup Git User
-        run: |
-          git config user.name "GitHub Action"
-          git config user.email "<EMAIL>"
-      - name: Update vault/ Branch
-        run: |
-          git checkout main
-          git fetch origin
-          git checkout test
-          git pull
-          git merge origin/main
-          git push origin test
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - name: "Wrap-up"
+      - name: Wrap-up
         run: echo "🍏 This job's status is ${{ job.status }}."
