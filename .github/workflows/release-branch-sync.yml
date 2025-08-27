@@ -1,5 +1,5 @@
-name: Sync Vault release branches
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Sync content release branches
+run-name:  🚀 ${{ github.actor }} is syncing ${{ github.event.inputs.product }} release branches
 
 on: 
   workflow_dispatch:
@@ -14,12 +14,7 @@ on:
 permissions: 
   contents: write
 
-env:
-  release-branch-prefix: ${{ }}
-  rc-release-branch: Monday
-
 jobs:
-
   setup:
     runs-on: ubuntu-latest
     outputs:
