@@ -1,5 +1,5 @@
 name: Create release branch PR
-run-name: 🚀 Creating a ${{ env.product }} release PR
+run-name: 🚀 Creating ${{ env.product }} release PR
 
 on: 
   workflow_dispatch:
