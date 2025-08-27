@@ -21,35 +21,22 @@ jobs:
     outputs:
       branch-list: ${{ steps.get-branches.outputs.list }}
     steps:
-      - name:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get release branches
         id: get-branches
         run: |
-          echo "::set-output name=list::$(git branch --list '${{ github.event.inputs.product }}/*')"
+          echo "BRANCH_LIST=$(git branch --list '${{ github.event.inputs.product }}/*')" >> $GITHUB_OUTPUT
       - name: Debugging data
+        env:
+          BRANCH_LIST: ${{ steps.get-branches.outputs.BRANCH_LIST }}
         run: |
           echo "🚧 ${{ github.repository }} - Syncing ${{ github.event.inputs.product }} release branches with main"
           echo "  - Trigger event:   ${{ github.event_name }}"
           echo "  - Branch:          ${{ github.ref }}"
           echo "  - Target branches: ${{ steps.get-branches.outputs.list }}"
           echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-
-  sync-branches:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Status update
-        run: |
-          echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-          echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: Setup Git User
-        run: |
-          git config user.name "GitHub Action"
-          git config user.email "test@example.com"
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
       - name: "Wrap-up"
         run: echo "🍏 This job's status is ${{ job.status }}."
