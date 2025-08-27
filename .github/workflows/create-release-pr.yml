@@ -24,8 +24,7 @@ env:
   MERGE_TARGET:   "main"
   LABELS:         "${{ inputs.product }}-docs"
   PR_TITLE:       "[PUBLISH] ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
-  PR_BODY: |
-    Publication PR created by Github action
+  PR_BODY:        "Publication PR created by Github action"
 
 jobs:
   create-pr:
@@ -42,8 +41,8 @@ jobs:
           gh pr create          \
             -B $MERGE_TARGET    \
             -H $RELEASE_BRANCH  \
-            --label $LABELS     \
-            --title $PR_TITLE   \
-            --body $PR_BODY
+            --label "$LABELS"   \
+            --title "$PR_TITLE" \
+            --body "$PR_BODY"
       - name: Wrap-up
         run: echo "🍏 This job's status is ${{ job.status }}."
