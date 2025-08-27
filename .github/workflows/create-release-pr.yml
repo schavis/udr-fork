@@ -9,6 +9,7 @@ on:
     inputs:
       product:
         required: true
+        default: vault
         description: >-
           Product slug (e.g., vault, hcp)
       branch-name:
@@ -41,8 +42,6 @@ jobs:
             MERGE_TARGET: "main"
             LABELS: "${{ inputs.product }}-docs"
             PR_TITLE: "[PUBLISH] ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
-            PR_BODY: |
-              Merging ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}
-              Created by Github action
+            PR_BODY: Created by Github action
       - name: Wrap-up
         run: echo "🍏 This job's status is ${{ job.status }}."
