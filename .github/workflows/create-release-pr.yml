@@ -14,22 +14,21 @@ on:
           Release branch name. Monthly release branches use YYYYMM notation.
           Major release branches use the corresponding content version
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  RELEASE_BRANCH: "${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
-  MERGE_TARGET: "main"
-  LABELS: "${{ inputs.product }}-docs"
-  PR_TITLE: "[PUBLISH] ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
-  PR_BODY: |
-    Merging ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}
-    Created by Github action
-
 permissions: 
   contents: write
 
 jobs:
   create-pr:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      RELEASE_BRANCH: "${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
+      MERGE_TARGET: "main"
+      LABELS: "${{ inputs.product }}-docs"
+      PR_TITLE: "[PUBLISH] ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
+      PR_BODY: |
+        Merging ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}
+        Created by Github action
     steps:
       - name: Debugging data
         run: |
