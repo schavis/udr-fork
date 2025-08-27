@@ -15,11 +15,9 @@ on:
       branch-name:
         required: true
         description: >-
-          Release branch name. Monthly release branches use YYYYMM notation.
-          Major release branches use the corresponding content version
+          Release branch name without product prefix.
 
 env:
-  GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
   RELEASE_BRANCH: "${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
   MERGE_TARGET:   "main"
   LABELS:         "${{ inputs.product }}-docs"
@@ -35,7 +33,10 @@ jobs:
           echo "🚧 ${{ github.repository }} - Creating PR"
           echo "    - Release branch: $RELEASE_BRANCH"
           echo "    - Merge target:   $MERGE_TARGET"
-          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Create pull request
         run: |
           gh pr create          \
@@ -44,5 +45,7 @@ jobs:
             --label "$LABELS"   \
             --title "$PR_TITLE" \
             --body "$PR_BODY"
+        env:
+          GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
       - name: Wrap-up
         run: echo "🍏 This job's status is ${{ job.status }}."
