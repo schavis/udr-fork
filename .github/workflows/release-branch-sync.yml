@@ -29,7 +29,7 @@ jobs:
     needs: [build]
     strategy:
       matrix:
-        branch-name: ${{ fromJson(steps.generate-matrix.outputs.mylist) }}
+        branch-name: ${{ fromJson(needs.build.outputs.mylist) }}
     steps:
       - name: Dynamic matrix job
         run: |
