@@ -1,0 +1,65 @@
+name: Create release branch PR
+run-name: 🚀 Creating a ${{ env.product }} release PR
+
+on: 
+  workflow_dispatch:
+    inputs:
+      product:
+        required: true
+        description: >-
+          Product slug (e.g., vault, hcp)
+      branch-name:
+        required: true
+        description: >-
+          Release branch name. Monthly release branches use YYYYMM notation.
+          Major release branches use the corresponding content version
+
+permissions: 
+  contents: write
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debugging data
+        run: |
+          echo "🚧 ${{ github.repository }} - Creating PR"
+          echo "    - Source branch: ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
+          echo "    - Target branch:        ${{ github.ref }}"
+          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Create pull request
+        run: |
+          gh pr create  \
+            -B main     \
+            -H ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }} \
+            --label "${{ github.event.inputs.product }}-docs"
+            --title "[PUBLISH] ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
+            --body "Merging ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}\nCreated by Github action"
+
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Status update
+        run: |
+          echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+          echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: Setup Git User
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "<EMAIL>"
+      - name: Update vault/ Branch
+        run: |
+          git checkout main
+          git fetch origin
+          git checkout test
+          git pull
+          git merge origin/main
+          git push origin test
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: "Wrap-up"
+        run: echo "🍏 This job's status is ${{ job.status }}."
