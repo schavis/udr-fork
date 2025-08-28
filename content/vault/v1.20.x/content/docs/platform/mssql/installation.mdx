@@ -207,11 +207,11 @@ DB using the EKM provider.
     use a different version of the Transit key, please specify the version as shown below.
 
     ```sql
-        CREATE ASYMMETRIC KEY TransitVaultAsymmetricV1
-        FROM PROVIDER TransitVaultProvider
-        WITH
-        CREATION_DISPOSITION = OPEN_EXISTING,
-        PROVIDER_KEY_NAME = 'ekm-encryption-key?version=1';
+    CREATE ASYMMETRIC KEY TransitVaultAsymmetricV1
+    FROM PROVIDER TransitVaultProvider
+    WITH
+    CREATION_DISPOSITION = OPEN_EXISTING,
+    PROVIDER_KEY_NAME = 'ekm-encryption-key?version=1';
     ```
     -> **Note:** Specifying the version
     of the Transit key can be useful when sharing KEKs across different SQL Server instances, or in cases of restoring
