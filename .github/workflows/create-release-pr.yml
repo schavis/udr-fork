@@ -46,6 +46,6 @@ jobs:
             --title "$PR_TITLE" \
             --body "$PR_BODY"
         env:
-          GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN:   ${{ secrets.MY_GITHUB_TOKEN }}
       - name: Wrap-up
         run: echo "🍏 This job's status is ${{ job.status }}."
