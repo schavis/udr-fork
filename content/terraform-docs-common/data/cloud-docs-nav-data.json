@@ -26,6 +26,10 @@
     "href": "https://learn.hashicorp.com/collections/terraform/cloud-get-started?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS"
   },
   {
+    "title": "Use cases",
+    "path": "use-cases"
+  },
+  {
     "title": "Migrate to HCP Terraform",
     "path": "migrate"
   },
@@ -739,17 +743,14 @@
     ]
   },
    {
-    "title": "Stacks",
+    "title": "Manage Stacks",
     "routes": [
       { "title": "Overview", "path": "stacks" },
-      {
-        "title": "Manage a Stack",
-        "routes": [
-          { "title": "Create a Stack", "path": "stacks/manage/create" },
-          { "title": "Configure a Stack", "path": "stacks/manage/configure" },
-          { "title": "Destroy a Stack", "path": "stacks/destroy" }
-        ]
-      },
+      { "title": "Create a Stack", "path": "stacks/create" },
+      { "title": "Configure a Stack", "path": "stacks/configure" },
+      { "title": "Destroy a Stack", "path": "stacks/destroy" },
+      { "title": "State", "path": "stacks/state" },
+      { "title": "Runs", "path": "stacks/runs" },
       {
         "title": "Deploy infrastructure",
         "routes": [
