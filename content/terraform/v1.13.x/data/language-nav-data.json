@@ -31,7 +31,7 @@
       { "title": "Override files", "path": "files/override" },
       { "title": "Dependency lock file", "path": "files/dependency-lock" },
       { "title": "Test files", "path": "files/tests" },
-      { "title": "Stack Files", "path": "files/stack" }
+      { "title": "Stack files", "path": "files/stack" }
     ]
   },
   {
