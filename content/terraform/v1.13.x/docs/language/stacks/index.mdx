@@ -63,10 +63,14 @@ After fully configuring your Stack, use HCP Terraform to deploy your Stack’s i
 
 Stacks are useful when managing complex, multi-environment infrastructures where consistency and reusability are crucial. Refer to Stack [use cases](/terraform/language/stacks/use-cases) for inspiration on situations where Stacks are particularly well suited.
 
-## Constraints, limitations, and troubleshooting
+## Constraints and limitations
 
-While Stacks provide powerful capabilities, there are some limitations to be aware of during this beta phase:
+Stacks have the following constraints:
 
 - Each Stack currently supports a maximum of 20 deployments, which may limit scalability for large environments.
 - Stack deployment groups currently support only one deployment per group.
+- Each Stack supports up to 100 components.
+- Each Stack supports up to 10,000 resources.
+- Stacks can link to up to 20 other upstream Stacks. [Learn more about passing data between Stacks](/terraform/language/stacks/deploy/pass-data).
+- Stacks can expose values to up to 25 downstream Stacks. [Learn more about passing data between Stacks](/terraform/language/stacks/deploy/pass-data).
 - Stacks are not available for users on legacy HCP Terraform team plans. Learn more about [migrating to a current HCP Terraform plan](/terraform/cloud-docs/overview/migrate-teams-standard).
