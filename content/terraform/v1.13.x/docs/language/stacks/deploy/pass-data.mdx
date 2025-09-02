@@ -15,11 +15,13 @@ To output information from a Stack, declare a `publish_output` block in the depl
 
 To consume the data exported by the upstream Stack, declare an `upstream_input` block in the deployment configuration of a different Stack in the same project. We refer to the Stack that declares an `upstream_input` block as the downstream Stack.
 
-## Requirements
+## Requirements and limitations
 
-The `publish_output` and `upstream_input` blocks require at least Terraform version `terraform_1.10.0-alpha20241009` or higher. Download the [latest version of Terraform](https://releases.hashicorp.com/terraform/) to use the most up-to-date functionality.
+Downstream Stacks must reside in the same project as their upstream Stacks.
 
-Downstream Stacks must also reside in the same project as their upstream Stacks.
+The following limitations apply to passing data between Stacks:
+- Stacks can link to up to 20 other upstream Stacks. [Learn more about passing data between Stacks](/terraform/language/stacks/deploy/pass-data).
+- Stacks can expose values to up to 25 downstream Stacks. [Learn more about passing data between Stacks](/terraform/language/stacks/deploy/pass-data).
 
 ## Expose outputs to another Stack
 
