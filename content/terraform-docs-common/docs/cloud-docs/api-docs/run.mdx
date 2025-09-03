@@ -40,7 +40,7 @@ description: >-
 
 -> **Note:** Before working with the runs or configuration versions APIs, read the [API-driven run workflow](/terraform/cloud-docs/run/api) page, which includes both a full overview of this workflow and a walkthrough of a simple implementation of it.
 
-Performing a run on a new configuration is a multi-step process.
+Performing a workspace run on a new configuration is a multi-step process.
 
 1. [Create a configuration version on the workspace](/terraform/cloud-docs/api-docs/configuration-versions#create-a-configuration-version).
 1. [Upload configuration files to the configuration version](/terraform/cloud-docs/api-docs/configuration-versions#upload-configuration-files).
@@ -48,6 +48,7 @@ Performing a run on a new configuration is a multi-step process.
 1. [Create and queue an apply on the run](#apply-a-run); if the run can't be auto-applied.
 
 Alternatively, you can create a run with a pre-existing configuration version, even one from another workspace. This is useful for promoting known good code from one workspace to another.
+
 
 ## Attributes
 
@@ -361,7 +362,7 @@ This endpoint supports pagination [with standard URL query parameters](/terrafor
 | `page[size]`               | If omitted, the endpoint returns 20 runs per page.                                                                                                                                                                         | Optional |
 | `filter[operation]`        | A comma-separated list of run operations. The result lists runs that perform one of these operations. For details on options, refer to [Run operations](/terraform/enterprise/api-docs/run#run-operations).                    | Optional |
 | `filter[status]`           | A comma-separated list of run statuses. The result lists runs that are in one of the statuses you specify. For details on options, refer to [Run states](/terraform/enterprise/api-docs/run#run-states).                                  | Optional |
-| `filter[agent_pool_names]` | A comma-separated list of agent pool names. The result lists runs that use one of the agent pools you specify. | Optional |                                                                      
+| `filter[agent_pool_names]` | A comma-separated list of agent pool names. The result lists runs that use one of the agent pools you specify. | Optional |
 | `filter[source]`           | A comma-separated list of run sources. The result lists runs that came from one of the sources you specify. Options are listed in [Run Sources](/terraform/enterprise/api-docs/run#run-sources).                               | Optional |
 | `filter[status_group]`     | A single status group. The result lists runs whose status falls under this status group. For details on options, refer to [Run status groups](/terraform/enterprise/api-docs/run#run-status-groups).                            | Optional |
 | `filter[timeframe]`        | A single year period. The result lists runs that were created within the year you specify. An integer year or the string "year" for the past year are valid values. If omitted, the endpoint returns all runs since the creation of the workspace.      | Optional |
