@@ -282,7 +282,7 @@
     ]
   },
   {
-    "title": "Projects",
+    "title": "Structure using projects",
     "routes": [
       { "title": "Overview", "path": "projects" },
       {
@@ -293,7 +293,7 @@
     ]
   },
   {
-    "title": "Workspaces",
+    "title": "Use workspaces",
     "routes": [
       { "title": "Overview", "path": "workspaces" },
       {
@@ -743,7 +743,7 @@
     ]
   },
    {
-    "title": "Manage infrastructure as code with Stacks",
+    "title": "Use Stacks to manage infrastructure at scale",
     "routes": [
       { "title": "Overview", "path": "stacks" },
       { "title": "Create a Stack", "path": "stacks/create" },
