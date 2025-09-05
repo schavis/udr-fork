@@ -88,4 +88,4 @@ Vault IC:
 WAF:
 - any:
   - changed-files:
-    - any-glob-to-any-file: ['well-architected-framework/**']
+    - any-glob-to-any-file: ['content/well-architected-framework/**']
