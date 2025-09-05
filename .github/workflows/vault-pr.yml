@@ -8,12 +8,9 @@ run-name: 🚀 Processing Vault PR
 on: [pull_request_target]
 
 env:
-  yes: ✔️
-  no: ❌
-  idk: ⏹️
-  main_select: ${{ github.env.idk }}
-  month_select: ${{ github.env.idk }}
-  release_select: ${{ github.env.idk }}
+  main_select: ⏹️
+  month_select: ⏹️
+  release_select: ⏹️
   pub_comment: |
     ## 🕛 Publication timeline
     
@@ -35,12 +32,14 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
-          message: ${{ env.pub_comment }}
-            
+          message: ${{ github.env.pub_comment }}
 
   update-pub-comment:
     name: Add timeline selection
     runs-on: ubuntu-latest
+    env:
+      yes: ✔️
+      no: ❌
     steps:
       - name: PR publishes immediately
         if: ${{ github.base_ref }} == "main"
@@ -68,4 +67,4 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
-          message: ${{ env.pub_comment }}
+          message: ${{ github.env.pub_comment }}
