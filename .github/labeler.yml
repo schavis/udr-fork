@@ -1,3 +1,35 @@
-Vault:
-- changed-files:
-  - any-glob-to-any-file: 'content/vault/*'
+# Add 'Terraform' label to changes in the following folders (includes subfolders)
+Terraform:
+- any:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'content/terraform/**'
+      - 'content/terraform-enterprise/**'
+      - 'content/terraform-plugin-mux/**'
+      - 'content/terraform-cdk/**'
+      - 'content/terraform-migrate/**'
+      - 'content/terraform-plugin-sdk/**'
+      - 'content/terraform-docs-agents/**'
+      - 'content/terraform-plugin-framework/**'
+      - 'content/terraform-plugin-testing/**'
+      - 'content/terraform-docs-common/**'
+      - 'content/terraform-plugin-log/**'
+
+# Add 'Vault' label to changes in the following folders (includes subfolders)
+Vault Docs:
+- any:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'content/vault/**'
+
+# Add 'WAF' label to changes in the following folders (includes subfolders)
+WAF:
+- any:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'well-architected-framework/**'
+
+# Add 'Release' label to any PR that is opened against a release branch.
+# For example, vault/202509 (monthly release) or vault/1.21.x (major release)
+Release:
+- base-branch: 'vault/*' 
