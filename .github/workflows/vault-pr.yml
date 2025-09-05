@@ -14,7 +14,8 @@ env:
   pub_comment: |
     ## 🕛 Publication timeline
     
-    Content changes publish based on the merge target
+    Content changes publish based on the merge target.
+    ${{ github.base_ref }}
     
     | Branch            | Publication timeline  | Selection
     | ----------------- | --------------------- | ---------
