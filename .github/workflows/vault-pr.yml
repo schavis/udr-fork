@@ -5,7 +5,9 @@
 # file with configuration.  For more information, see:
 # https://github.com/actions/labeler
 
-name: Labeler
+name: TESTING - Process content PR
+run-name: 🚀 Processing content PR
+
 on: [pull_request_target]
 
 jobs:
