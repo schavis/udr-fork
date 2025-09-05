@@ -10,10 +10,9 @@ on: [pull_request_target]
 env:
   yes: ✔️
   no: ❌
-  idk: ⏹️
-  main_select:    ${{ env.idk }}
-  month_select:   ${{ env.idk }}
-  release_select: ${{ env.idk }}
+  main_select: ⏹️
+  month_select: ⏹️
+  release_select: ⏹️
   pub_comment: |
     ## 🕛 Publication timeline
     
@@ -21,14 +20,13 @@ env:
   pub_table: |
     Branch            | Publication timeline  | Selection
     ----------------- | --------------------- | ---------
-    `main`            | Immediately           | ${{ env.main_select }}
-    `vault/YYYYMM`    | End of the month      | ${{ env.month_select }}
-    `vault/<version>` | Next major release    | ${{ env.release_select }}
+    `main`            | Immediately           | ${{ github.env.main_select }}
+    `vault/YYYYMM`    | End of the month      | ${{ github.env.month_select }}
+    `vault/<version>` | Next major release    | ${{ github.env.release_select }}
 
 jobs:
 
   add-pub-comment:
-    needs: 
     if: github.repository == 'octo-org/octo-repo-prod'
     name: Add release comment
     runs-on: ubuntu-latest
