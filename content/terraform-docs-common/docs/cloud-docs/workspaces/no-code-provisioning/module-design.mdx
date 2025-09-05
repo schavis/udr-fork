@@ -11,7 +11,7 @@ Terraform [modules](/terraform/language/modules) let you define standardized col
 @include 'tfc-package-callouts/nocode.mdx'
 <!-- END: TFC:only name:pnp-callout -->
 
-No-code provisioning enables a self-service workflow that lets users provision approved collections of resources without learning Terraform or infrastructure best practices. You can enable no-code provisioning for any public or private module in your [private registry](/terraform/cloud-docs/registry). Users can then [provision no-code infrastructure](/terraform/cloud-docs/no-code-provisioning/provisioning), set the module's input variables, and deploy its resources.
+No-code provisioning enables a self-service workflow that lets users provision approved collections of resources without learning Terraform or infrastructure best practices. You can enable no-code provisioning for any public or private module in your [private registry](/terraform/cloud-docs/registry). Users can then [provision no-code infrastructure](/terraform/cloud-docs/workspaces/no-code-provisioning/provisioning), set the module's input variables, and deploy its resources.
 
 > **Hands On:** Try the [Create and Use No-Code Ready Modules tutorial](/terraform/tutorials/cloud/no-code-provisioning).
 
@@ -63,4 +63,3 @@ The no-code provisioning workflow prompts users to set values for the module ver
 If your module has variables without defaults, you can define options to limit the values a user can input when you enable a module for no-code provisioning. You can define input options using the HCP Terraform UI, the [No-Code Provisioning API](/terraform/cloud-docs/api-docs/no-code-provisioning), or the [TFE provider](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/no_code_module). We recommend using the TFE provider if you want to track variable input options through a code approval process, therefore keeping your configuration as code.
 
 HCP Terraform surfaces any subsequent changes to a variable’s input options when no-code users provision a new module version. If you update the selected module version enabled for no-code provisioning, consider revisiting the variables and adjusting the defined input values accordingly.
-

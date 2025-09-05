@@ -38,7 +38,7 @@ _Leaving this stage:_
 
 The pre-plan phase only occurs if there are enabled [run tasks](/terraform/cloud-docs/workspaces/settings/run-tasks) in the workspace that are configured to begin before Terraform creates the plan. HCP Terraform sends information about the run to the configured external system and waits for a `passed` or `failed` response to determine whether the run can continue. The information sent to the external system includes the configuration version of the run.
 
-All runs can enter this phase, including [speculative plans](/terraform/cloud-docs/run/remote-operations#speculative-plans).
+All runs can enter this phase, including [speculative plans](/terraform/cloud-docs/workspaces/run/remote-operations#speculative-plans).
 
 _States in this stage:_
 
@@ -79,7 +79,7 @@ Note, if you want to directly integrate third-party tools and services between y
 ## The Post-Plan Stage
 
 The post-plan phase only occurs if you configure [run tasks](/terraform/cloud-docs/workspaces/settings/run-tasks) on a workspace to begin after Terraform successfully completes a plan operation.
-All runs can enter this phase, including [speculative plans](/terraform/cloud-docs/run/remote-operations#speculative-plans). During this phase, HCP Terraform sends information about the run to the configured external system and waits for a `passed` or `failed` response to determine whether the run can continue.
+All runs can enter this phase, including [speculative plans](/terraform/cloud-docs/workspaces/run/remote-operations#speculative-plans). During this phase, HCP Terraform sends information about the run to the configured external system and waits for a `passed` or `failed` response to determine whether the run can continue.
 
 -> **Note:** The information sent to the configured external system includes the [JSON output](/terraform/internals/json-format) of the Terraform plan.
 

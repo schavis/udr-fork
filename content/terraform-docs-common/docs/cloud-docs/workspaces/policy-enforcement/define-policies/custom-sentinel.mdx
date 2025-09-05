@@ -9,9 +9,9 @@ This topic describes how to create and manage custom policies using Sentinel pol
 
 ## Overview
 
-To define a policy, create a file and declare an `import` function to include reusable libraries, external data, and other functions. Sentinel policy language includes several types of elements you can import using the `import` function. 
+To define a policy, create a file and declare an `import` function to include reusable libraries, external data, and other functions. Sentinel policy language includes several types of elements you can import using the `import` function.
 
-Declare and configure additional Sentinel policy language elements. The details depend on which elements you want to use in your policy. Refer to the [Sentinel documentation](/sentinel/docs) for additional information. 
+Declare and configure additional Sentinel policy language elements. The details depend on which elements you want to use in your policy. Refer to the [Sentinel documentation](/sentinel/docs) for additional information.
 
 
 <!-- BEGIN: TFC:only name:pnp-callout -->
@@ -27,7 +27,7 @@ HCP Terraform provides four imports to define policy rules for the plan, configu
 - [tfplan](/terraform/cloud-docs/policy-enforcement/import-reference/tfplan-v2) - Access a Terraform plan, which is the file created as a result of the [`terraform plan` command](/terraform/cli/commands/plan). The plan represents the changes that Terraform must make to reach the desired infrastructure state described in the configuration.
 - [tfconfig](/terraform/cloud-docs/policy-enforcement/import-reference/tfconfig-v2) - Access a Terraform configuration. The configuration is the set of `.tf` files that describe the desired infrastructure state.
 - [tfstate](/terraform/cloud-docs/policy-enforcement/import-reference/tfstate-v2) - Access the Terraform [state](/terraform/language/state). Terraform uses state to map real-world resources to your configuration.
-- [tfrun](/terraform/cloud-docs/policy-enforcement/import-reference/tfrun) - Access data associated with a [run in HCP Terraform](/terraform/cloud-docs/run/remote-operations). For example, you could retrieve the run's workspace.
+- [tfrun](/terraform/cloud-docs/policy-enforcement/import-reference/tfrun) - Access data associated with a [run in HCP Terraform](/terraform/cloud-docs/workspaces/run/remote-operations). For example, you could retrieve the run's workspace.
 
 You can create mocks of these imports to use with the the [Sentinel
 CLI](/sentinel/docs/commands) mocking and testing features. Refer to [Mocking Terraform Sentinel Data](/terraform/cloud-docs/policy-enforcement/test-sentinel) for more details.
@@ -252,4 +252,4 @@ You can write similar functions and policies to restrict Terraform configuration
 
 1. Group your policies into sets and apply them to your workspaces. Refer to [Create policy sets](/terraform/cloud-docs/policy-enforcement/manage-policy-sets#create-policy-sets) for additional information.
 1. View results and address Terraform runs that do not comply with your policies. Refer to [View results](/terraform/cloud-docs/policy-enforcement/view-results) for additional information.
-1. You can also view Sentinel policy results in JSON format. Refer to [View Sentinel JSON results](/terraform/cloud-docs/policy-enforcement/view-results/json) for additional information. 
+1. You can also view Sentinel policy results in JSON format. Refer to [View Sentinel JSON results](/terraform/cloud-docs/policy-enforcement/view-results/json) for additional information.

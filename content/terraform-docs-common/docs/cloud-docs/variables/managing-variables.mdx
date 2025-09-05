@@ -20,7 +20,7 @@ You must have [**Read variables** permission](/terraform/cloud-docs/users-teams-
 
 To create, update, or delete organization-owned variable sets, you must be one of the following:
 
--   A member of the [owners team](/terraform/cloud-docs/users-teams-organizations/permissions#organization-owners) 
+-   A member of the [owners team](/terraform/cloud-docs/users-teams-organizations/permissions#organization-owners)
 -   A member of a team with [**Manage all projects**](/terraform/cloud-docs/users-teams-organizations/permissions#manage-all-projects)
 -   A member of a team with [**Manage all workspaces**](/terraform/cloud-docs/users-teams-organizations/permissions#manage-all-workspaces)
 
@@ -43,7 +43,7 @@ You can set run-specific Terraform variable values by:
   ```
   terraform apply -var="key=value" -var-file="testing.tfvars"
   ```
-- Creating local environment variables prefixed with `TF_VAR_`. For example, if you declare a variable called `replicas` in your configuration, you could create a local environment variable called `TF_VAR_replicas` and set it to a particular value. When you use the [CLI Workflow](/terraform/cloud-docs/run/cli), Terraform automatically identifies these environment variables and applies their values to the run.
+- Creating local environment variables prefixed with `TF_VAR_`. For example, if you declare a variable called `replicas` in your configuration, you could create a local environment variable called `TF_VAR_replicas` and set it to a particular value. When you use the [CLI Workflow](/terraform/cloud-docs/workspaces/run/cli), Terraform automatically identifies these environment variables and applies their values to the run.
 
 Refer to the [variables on the command line](/terraform/language/values/variables#variables-on-the-command-line) documentation for more details and examples.
 
@@ -63,7 +63,7 @@ To add a variable:
 
 1. Go to the workspace **Variables** page and click **+ Add variable** in the **Workspace Variables** section.
 
-1. Choose a variable category (Terraform or environment), optionally mark the variable as [sensitive](#sensitive-values), and enter a variable key, value, and optional description. For Terraform variables only, you can check the **HCL** checkbox to enter a value in HashiCorp Configuration Language. 
+1. Choose a variable category (Terraform or environment), optionally mark the variable as [sensitive](#sensitive-values), and enter a variable key, value, and optional description. For Terraform variables only, you can check the **HCL** checkbox to enter a value in HashiCorp Configuration Language.
 
    Refer to [variable values and format](#variable-values-and-format) for variable limits, allowable values, and formatting.
 
@@ -198,7 +198,7 @@ Although HCP Terraform does not store environment variables in state, it can inc
 
 #### Dynamic Credentials
 
-An alternative to passing static credentials for some providers is to use [dynamic credentials](/terraform/cloud-docs/workspaces/dynamic-provider-credentials).
+An alternative to passing static credentials for some providers is to use [dynamic credentials](/terraform/cloud-docs/dynamic-provider-credentials).
 
 Dynamic credentials allows for using temporary per-run credentials and eliminates the need to manually rotate secrets.
 

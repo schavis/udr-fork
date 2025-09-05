@@ -6,7 +6,7 @@ description: >-
 
 # Workspace variables
 
-HCP Terraform workspace variables let you customize configurations, modify Terraform's behavior, setup [dynamic provider credentials](/terraform/cloud-docs/workspaces/dynamic-provider-credentials), and store information like static provider credentials.
+HCP Terraform workspace variables let you customize configurations, modify Terraform's behavior, setup [dynamic provider credentials](/terraform/cloud-docs/dynamic-provider-credentials), and store information like static provider credentials.
 
 You can set variables specifically for each workspace or you can create variable sets to reuse the same variables across multiple workspaces. For example, you could define a variable set of provider credentials and automatically apply it to all of the workspaces using that provider. You can use the command line to specify variable values for each plan or apply. Otherwise, HCP Terraform applies workspace variables to all runs within that workspace.
 
@@ -28,11 +28,11 @@ Environment variables can store provider credentials and other data. Refer to yo
 
 You can use the `TFE_PARALLELISM` environment variable when your infrastructure providers produce errors on concurrent operations or use non-standard rate limiting. The `TFE_PARALLELISM` variable sets the  `-parallelism=<N>` flag for  `terraform plan` and `terraform apply`  ([more about `parallelism`](/terraform/internals/graph#walking-the-graph)). Valid values are between 1 and 256, inclusive, and the default is `10`. HCP Terraform agents do not support `TFE_PARALLELISM`, but you can specify flags as environment variables directly via [`TF_CLI_ARGS_name`](/terraform/cli/config/environment-variables#tf-cli-args). In these cases, use `TF_CLI_ARGS_plan="-parallelism=<N>"` or `TF_CLI_ARGS_apply="-parallelism=<N>"` instead.
 
-!> **Warning:** We recommend reading and understanding [Terraform parallelism](https://support.hashicorp.com/hc/en-us/articles/10348130482451) prior to setting `TFE_PARALLELISM`. You can also contact HashiCorp support for direct advice. 
+!> **Warning:** We recommend reading and understanding [Terraform parallelism](https://support.hashicorp.com/hc/en-us/articles/10348130482451) prior to setting `TFE_PARALLELISM`. You can also contact HashiCorp support for direct advice.
 
 #### Dynamic credentials
 
-You can configure [dynamic credentials](/terraform/cloud-docs/workspaces/dynamic-provider-credentials) for certain providers using environment variables [at the workspace level](/terraform/cloud-docs/workspaces/variables/managing-variables#workspace-specific-variables) or using [variable sets](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets).
+You can configure [dynamic credentials](/terraform/cloud-docs/dynamic-provider-credentials) for certain providers using environment variables [at the workspace level](/terraform/cloud-docs/workspaces/variables/managing-variables#workspace-specific-variables) or using [variable sets](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets).
 
 Dynamic credentials allows for using temporary per-run credentials and eliminates the need to manually rotate secrets.
 
@@ -172,7 +172,7 @@ Variables in the HCP Terraform workspace and variables provided through the comm
 Variables in the `.auto.tfvars` files take precedence over variables in the `terraform.tfvars` file.
 
 <Note>
-  
+
 Although HCP Terraform uses variables from `terraform.tfvars`, Terraform Enterprise currently ignores this file.
 
 </Note>
