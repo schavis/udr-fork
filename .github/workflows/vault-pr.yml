@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PR publishes immediately
-        if: ${{ github.base_ref }} == "refs/head/main"
+        if: ${{ github.base_ref }} == "main"
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
