@@ -1,28 +1,49 @@
-# Add 'Terraform' label to changes in the following folders (includes subfolders)
-Terraform:
+# Add 'Terraform CE' label to changes under the following folders
+Terraform CE:
 - any:
   - changed-files:
     - any-glob-to-any-file: [
         'content/terraform/**',
-        'content/terraform-enterprise/**',
         'content/terraform-plugin-mux/**',
         'content/terraform-cdk/**',
         'content/terraform-migrate/**',
         'content/terraform-plugin-sdk/**',
         'content/terraform-docs-agents/**',
-        'content/terraform-plugin-framework/**',
         'content/terraform-plugin-testing/**',
-        'content/terraform-docs-common/**',
         'content/terraform-plugin-log/**'
       ]
 
-# Add 'Vault' label to changes in the following folders (includes subfolders)
-Vault Docs:
+# Add 'Terraform Enterprise' label to changes under content/terraform-enterprise
+Terraform Enterprise:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: [
+        'content/terraform-enterprise/**'
+      ]
+
+# Add 'HCP Terraform' label to changes under content/terraform-docs-common
+HCP Terraform:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: [
+        'content/terraform-docs-common/**'
+      ]
+
+# Add 'TF Plugin Framework' label to changes under content/terraform-plugin-framework
+TF Plugin Framework:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: [
+        'content/terraform-plugin-framework/**'
+      ]
+
+# Add 'Vault' label to changes under 'content/vault'
+Vault:
 - any:
   - changed-files:
     - any-glob-to-any-file: ['content/vault/**']
 
-# Add 'WAF' label to changes in the following folders (includes subfolders)
+# Add 'WAF' label to changes under 'content/well-architected-framework'
 WAF:
 - any:
   - changed-files:
