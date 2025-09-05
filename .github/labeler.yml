@@ -1,4 +1,4 @@
-"Terraform":
+Terraform:
 - any:
   - changed-files:
     - any-glob-to-any-file: 'content/terraform/*'
@@ -12,11 +12,11 @@
     - any-glob-to-any-file: 'terraform-plugin-testing/*'
     - any-glob-to-any-file: 'terraform-docs-common/*'
     - any-glob-to-any-file: 'terraform-plugin-log/*'
-"Vault Docs":
+Vault Docs:
 - any:
   - changed-files:
     - any-glob-to-any-file: 'content/vault/*'
-"WAF":
+WAF:
 - any:
   - changed-files:
     - any-glob-to-any-file: 'well-architected-framework/*'
