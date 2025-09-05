@@ -35,8 +35,7 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
-          message: |
-            ${{ github.env.pub_comment }}
+          message: ${{ github.env.pub_comment }}
             
 
   update-pub-comment:
@@ -69,5 +68,4 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
-          message: |
-            ${{ github.env.pub_comment }}
+          message: ${{ github.env.pub_comment }}
