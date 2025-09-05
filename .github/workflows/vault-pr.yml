@@ -8,11 +8,20 @@ run-name: 🚀 Processing Vault PR
 on: [pull_request_target]
 
 env:
-
+  yes: ✔️
+  no: ❌
+  idk: ⏹️
   pub_comment: |
-    ## Publication expectations
+    ## 🕛 Publication timeline
     
-    Content changes publish 
+    Content changes publish based on the merge target
+    
+    Branch            | Publication timeline  | Selection
+    ----------------- | --------------------- | ---------
+
+  main_entry: "`main`            | Immediately           |"
+  monthly_entry: "`vault/YYYYMM`    | End of the month      |"
+  release_entry: "`vault/<version>` | Next major release    |"
 
 jobs:
 
@@ -24,30 +33,38 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          header: Publication notice
-          message: ${{ env.pub_comment }}
+          header: Publication notice [${{ github.base_ref }}]
+          message: |
+            ${{ env.pub_comment }}
+            ${{ env.main_entry }} ${{ env.idk }}
+            ${{ env.monthly_entry }} ${{ env.idk }}
+            ${{ env.release_entry }} ${{ env.idk }}
 
   update-pub-comment:
     name: Update with pb
     runs-on: ubuntu-latest
     steps:
       - name: PR publishes immediately
-        if: ${{ github.base_ref }} == "main"
+        if: ${{ github.base_ref }} == "refs/head/main"
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
           message: |
             ${{ env.pub_comment }}
-            This PR will publish as soon as the PR merges
+            ${{ env.main_entry }} ${{ env.yes }}
+            ${{ env.monthly_entry }} ${{ env.no }}
+            ${{ env.release_entry }} ${{ env.no }}
 
       - name: PR publishes with monthly release
-        if: ${{ github.base_ref }} ~= "vault/[0-9]{4}"
+        if: ${{ github.base_ref }} ~= "vault/[0-9]{6}"
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
           message: |
             ${{ env.pub_comment }}
-            This PR will publish with the monthly update
+            ${{ env.main_entry }} ${{ env.no }}
+            ${{ env.monthly_entry }} ${{ env.yes }}
+            ${{ env.release_entry }} ${{ env.no }}
 
       - name: PR publishes with next major release
         if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
@@ -56,4 +73,6 @@ jobs:
           header: Publication notice
           message: |
             ${{ env.pub_comment }}
-            This PR will publish with the next major release
+            ${{ env.main_entry }} ${{ env.no }}
+            ${{ env.monthly_entry }} ${{ env.no }}
+            ${{ env.release_entry }} ${{ env.yes }}
