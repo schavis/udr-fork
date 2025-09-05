@@ -11,21 +11,25 @@ env:
   yes: ✔️
   no: ❌
   idk: ⏹️
+  main_select:    ${{ env.idk }}
+  month_select:   ${{ env.idk }}
+  release_select: ${{ env.idk }}
   pub_comment: |
     ## 🕛 Publication timeline
     
-    Content changes publish based on the merge target.
-    ${{ github.base_ref }}
-    
-    | Branch            | Publication timeline  | Selection
-    | ----------------- | --------------------- | ---------
-  main_entry: "| `main`            | Immediately           |"
-  monthly_entry: "| `vault/YYYYMM`    | End of the month      |"
-  release_entry: "| `vault/<version>` | Next major release    |"
+    Content changes publish based on the merge target [${{ github.base_ref }}]
+  pub_table: |
+    Branch            | Publication timeline  | Selection
+    ----------------- | --------------------- | ---------
+    `main`            | Immediately           | ${{ env.main_select }}
+    `vault/YYYYMM`    | End of the month      | ${{ env.month_select }}
+    `vault/<version>` | Next major release    | ${{ env.release_select }}
 
 jobs:
 
   add-pub-comment:
+    needs: 
+    if: github.repository == 'octo-org/octo-repo-prod'
     name: Add release comment
     runs-on: ubuntu-latest
     steps:
@@ -36,9 +40,8 @@ jobs:
           header: Publication notice [${{ github.base_ref }}]
           message: |
             ${{ env.pub_comment }}
-            ${{ env.main_entry }} ${{ env.idk }}
-            ${{ env.monthly_entry }} ${{ env.idk }}
-            ${{ env.release_entry }} ${{ env.idk }}
+            ${{ env.pub_table }}
+            
 
   update-pub-comment:
     name: Update with pb
@@ -46,25 +49,24 @@ jobs:
     steps:
       - name: PR publishes immediately
         if: ${{ github.base_ref }} == "main"
-        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
-        with:
-          header: Publication notice
-          message: |
-            ${{ env.pub_comment }}
-            ${{ env.main_entry }} ${{ env.yes }}
-            ${{ env.monthly_entry }} ${{ env.no }}
-            ${{ env.release_entry }} ${{ env.no }}
+        run: |
+          echo "main_select=${{ env.yes }}" >> $GITHUB_ENV
+          echo "month_select=${{ env.no }}" >> $GITHUB_ENV
+          echo "release_select=${{ env.no }}" >> $GITHUB_ENV
 
       - name: PR publishes with monthly release
         if: ${{ github.base_ref }} ~= "vault/[0-9]{6}"
-        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
-        with:
-          header: Publication notice
-          message: |
-            ${{ env.pub_comment }}
-            ${{ env.main_entry }} ${{ env.no }}
-            ${{ env.monthly_entry }} ${{ env.yes }}
-            ${{ env.release_entry }} ${{ env.no }}
+        run: |
+          echo "main_select=${{ env.no }}" >> $GITHUB_ENV
+          echo "month_select=${{ env.yes }}" >> $GITHUB_ENV
+          echo "release_select=${{ env.no }}" >> $GITHUB_ENV
+
+      - name: PR publishes with next major release
+        if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
+        run: |
+          echo "main_select=${{ env.no }}" >> $GITHUB_ENV
+          echo "month_select=${{ env.no }}" >> $GITHUB_ENV
+          echo "release_select=${{ env.yes }}" >> $GITHUB_ENV
 
       - name: PR publishes with next major release
         if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
@@ -73,6 +75,4 @@ jobs:
           header: Publication notice
           message: |
             ${{ env.pub_comment }}
-            ${{ env.main_entry }} ${{ env.no }}
-            ${{ env.monthly_entry }} ${{ env.no }}
-            ${{ env.release_entry }} ${{ env.yes }}
+            ${{ env.pub_table }}
