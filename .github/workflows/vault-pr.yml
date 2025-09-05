@@ -16,7 +16,7 @@ env:
   pub_comment: |
     ## 🕛 Publication timeline
     
-    Content changes publish based on the merge target [${{ github.base_ref }}]
+    Content changes publish based on the merge target [`${{ github.base_ref }}`]
   pub_table: |
     Branch            | Publication timeline  | Selection
     ----------------- | --------------------- | ---------
@@ -27,7 +27,6 @@ env:
 jobs:
 
   add-pub-comment:
-    if: github.repository == 'octo-org/octo-repo-prod'
     name: Add release comment
     runs-on: ubuntu-latest
     steps:
