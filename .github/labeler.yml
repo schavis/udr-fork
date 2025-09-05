@@ -2,29 +2,28 @@
 Terraform:
 - any:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'content/terraform/**'
-      - 'content/terraform-enterprise/**'
-      - 'content/terraform-plugin-mux/**'
-      - 'content/terraform-cdk/**'
-      - 'content/terraform-migrate/**'
-      - 'content/terraform-plugin-sdk/**'
-      - 'content/terraform-docs-agents/**'
-      - 'content/terraform-plugin-framework/**'
-      - 'content/terraform-plugin-testing/**'
-      - 'content/terraform-docs-common/**'
-      - 'content/terraform-plugin-log/**'
+    - any-glob-to-any-file: [
+        'content/terraform/**',
+        'content/terraform-enterprise/**',
+        'content/terraform-plugin-mux/**',
+        'content/terraform-cdk/**',
+        'content/terraform-migrate/**',
+        'content/terraform-plugin-sdk/**',
+        'content/terraform-docs-agents/**',
+        'content/terraform-plugin-framework/**',
+        'content/terraform-plugin-testing/**',
+        'content/terraform-docs-common/**',
+        'content/terraform-plugin-log/**'
+      ]
 
 # Add 'Vault' label to changes in the following folders (includes subfolders)
 Vault Docs:
 - any:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'content/vault/**'
+    - any-glob-to-any-file: ['content/vault/**']
 
 # Add 'WAF' label to changes in the following folders (includes subfolders)
 WAF:
 - any:
   - changed-files:
-    - any-glob-to-any-file:
-      - 'well-architected-framework/**'
+    - any-glob-to-any-file: ['well-architected-framework/**']
