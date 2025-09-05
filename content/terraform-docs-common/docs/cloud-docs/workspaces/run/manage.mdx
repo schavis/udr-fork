@@ -43,7 +43,7 @@ The following options are available, depending on the state of the run:
 
 [permissions-citation]: #intentionally-unused---keep-for-maintainers
 
-If a plan needs confirmation (with [manual apply](/terraform/cloud-docs/workspaces/settings#auto-apply-and-manual-apply) enabled) or a soft-mandatory policy failed, the run remains paused until a user with appropriate permissions uses these buttons to continue or discard the run. Refer to [Run States and Stages](/terraform/cloud-docs/run/states) for more details.
+If a plan needs confirmation (with [manual apply](/terraform/cloud-docs/workspaces/settings#auto-apply-and-manual-apply) enabled) or a soft-mandatory policy failed, the run remains paused until a user with appropriate permissions uses these buttons to continue or discard the run. Refer to [Run States and Stages](/terraform/cloud-docs/workspaces/run/states) for more details.
 
 ### Canceling Runs
 
@@ -65,7 +65,7 @@ You can lock the workspace to temporarily stop runs from proceeding. Locking a w
 
 A lock prevents HCP Terraform from performing any applies in the workspace, and also prevents many kinds of plans. New runs remain in the **Pending** state until the workspace unlocks.
 
-Locking **does not** affect [plan-only runs](/terraform/cloud-docs/run/remote-operations#speculative-plans) or the planning stages of [saved plan runs](/terraform/cloud-docs/run/cli#remote-saved-plans). Terraform allows these types of runs because they can not affect infrastructure resources, do not attempt to lock the workspace themselves, and might provide important information about tasks to perform before removing the lock. Note that you can not _apply_ saved-plan runs while the workspace is locked, and HCP Terraform automatically discards these runs if the workspace's state is changed before they can be applied. Terraform Enterprise does not yet support saved plans.
+Locking **does not** affect [plan-only runs](/terraform/cloud-docs/workspaces/run/remote-operations#speculative-plans) or the planning stages of [saved plan runs](/terraform/cloud-docs/workspaces/run/cli#remote-saved-plans). Terraform allows these types of runs because they can not affect infrastructure resources, do not attempt to lock the workspace themselves, and might provide important information about tasks to perform before removing the lock. Note that you can not _apply_ saved-plan runs while the workspace is locked, and HCP Terraform automatically discards these runs if the workspace's state is changed before they can be applied. Terraform Enterprise does not yet support saved plans.
 
 HCP Terraform shows the lock status in the workspace's header, next to the **Actions** menu.
 

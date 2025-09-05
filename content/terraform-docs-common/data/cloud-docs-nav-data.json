@@ -22,18 +22,702 @@
     ]
   },
   {
-    "title": "Getting Started",
+    "title": "Get Started",
     "href": "https://learn.hashicorp.com/collections/terraform/cloud-get-started?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS"
-  },
-  {
-    "title": "Organize your infrastructure",
-    "path": "organize-infrastructure"
   },
   {
     "title": "Migrate to HCP Terraform",
     "path": "migrate"
   },
   {
+    "title": "Manage access and organizations",
+    "routes": [
+      { "title": "Users", "path": "users-teams-organizations/users" },
+    {
+        "title": "Teams",
+        "routes": [
+          {"title": "Overview","path": "users-teams-organizations/teams"},
+          { "title": "Manage teams", "path": "users-teams-organizations/teams/manage" },
+          { "title": "Notifications", "path": "users-teams-organizations/teams/notifications" }
+        ]
+      },
+      {
+        "title": "Organizations",
+        "routes": [
+          {"title": "Overview","path": "users-teams-organizations/organizations"},
+          {
+            "title": "Manage reserved tag keys",
+            "path": "users-teams-organizations/organizations/manage-reserved-tags"
+          },
+          { "title": "VCS Status Checks", "path": "users-teams-organizations/organizations/vcs-status-checks" },
+          { "title": "Automatically cancel plan-only runs", "path": "users-teams-organizations/organizations/vcs-speculative-plan-management" },
+          { "title": "Public Registry Namespaces", "routes": [
+            {
+              "title": "Overview",
+              "path": "users-teams-organizations/organizations/public-namespace"
+            },
+            {
+              "title": "Create or claim a namespace",
+              "path": "users-teams-organizations/organizations/public-namespace/create_or_claim"
+            },
+            {
+              "title": "Manage namespaces",
+              "path": "users-teams-organizations/organizations/public-namespace/manage"
+            },
+            {
+              "title": "Manage namespace artifacts",
+              "path": "users-teams-organizations/organizations/public-namespace/artifacts"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Permissions",
+        "path": "users-teams-organizations/permissions"
+      },
+
+      {
+        "title": "Two-factor Authentication",
+        "path": "users-teams-organizations/2fa"
+      },
+      {
+        "title": "API Tokens",
+        "path": "users-teams-organizations/api-tokens"
+      },
+      {
+        "title": "Single Sign On",
+        "routes": [
+          {
+            "title": "Overview",
+            "path": "users-teams-organizations/single-sign-on"
+          },
+          {
+            "title": "Microsoft Entra ID",
+            "path": "users-teams-organizations/single-sign-on/entra-id"
+          },
+          {
+            "title": "Okta",
+            "path": "users-teams-organizations/single-sign-on/okta"
+          },
+          {
+            "title": "SAML",
+            "path": "users-teams-organizations/single-sign-on/saml"
+          },
+          {
+            "title": "Linking a User Account",
+            "path": "users-teams-organizations/single-sign-on/linking-user-account"
+          },
+          {
+            "title": "Testing",
+            "path": "users-teams-organizations/single-sign-on/testing"
+          }
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Private Registry",
+    "routes": [
+      { "title": "Overview", "path": "registry" },
+      {
+        "title": "Adding Public Providers and Modules",
+        "path": "registry/add"
+      },
+      {
+        "title": "Publishing Private Providers",
+        "path": "registry/publish-providers"
+      },
+      {
+        "title": "Publishing Private Modules",
+        "path": "registry/publish-modules"
+      },
+      { "title": "Manage Module Versions", "path": "registry/manage-module-versions" },
+      {
+        "title": "Test-Integrated Modules",
+        "path": "registry/test"
+      },
+      { "title": "Using Providers and Modules", "path": "registry/using" },
+      {
+        "title": "Configuration Designer",
+        "path": "registry/design"
+      }
+      ]
+  },
+  {
+    "title": "Group with projects",
+    "routes": [
+      { "title": "Overview", "path": "projects" },
+      {
+        "title": "Manage Projects",
+        "path": "projects/manage"
+      },
+      { "title": "Best Practices", "path": "projects/best-practices" }
+    ]
+  },
+  {
+    "title": "Stacks or workspaces",
+    "path": "workspace-or-stack"
+  },
+  {
+    "title": "Use workspaces",
+    "routes": [
+      { "title": "Overview", "path": "workspaces" },
+      {
+        "title": "Manage a Workspace",
+        "routes": [
+          {
+            "title": "Create Workspaces",
+            "path": "workspaces/create"
+          },
+          {
+            "title": "Create tags",
+            "path": "workspaces/tags"
+          },
+          { "title":  "Browse workspaces", "path":  "workspaces/browse"},
+          { "title": "Explorer", "path": "workspaces/explorer" },
+          {
+            "title": "Change requests",
+            "routes": [
+              { "title": "Overview", "path": "workspaces/change-requests" },
+              {
+                "title": "Manage change requests",
+                "path": "workspaces/change-requests/manage"
+              }
+            ]
+          },
+      {
+        "title": "Settings",
+        "routes": [
+          { "title": "Overview", "path": "workspaces/settings" },
+          { "title": "VCS Connections", "path": "workspaces/settings/vcs" },
+          { "title": "Access", "path": "workspaces/settings/access" },
+          {
+            "title": "Notifications",
+            "path": "workspaces/settings/notifications"
+          },
+          {
+            "title": "SSH Keys for Modules",
+            "path": "workspaces/settings/ssh-keys"
+          },
+          {
+            "title": "Run Triggers",
+            "path": "workspaces/settings/run-triggers"
+          },
+          {
+            "title": "Run Tasks",
+            "path": "workspaces/settings/run-tasks"
+          },
+          {
+            "title": "Destruction and Deletion",
+            "path": "workspaces/settings/deletion"
+          }
+        ]
+        },
+        { "title": "Best Practices", "path": "workspaces/best-practices"}
+        ]
+      },
+      { "title": "Health", "path": "workspaces/health" },
+      {
+        "title": "Terraform Configurations",
+        "path": "workspaces/configurations"
+      },
+      {
+        "title": "Dynamic Provider Credentials",
+        "routes": [
+          { "title":  "Overview", "href":  "dynamic-provider-credentials" },
+          { "title":  "Workload Identity Tokens", "href":  "dynamic-provider-credentials/workload-identity-tokens" },
+          { "title":  "Vault Configuration", "href":  "dynamic-provider-credentials/vault-configuration" },
+          { "title":  "AWS Configuration", "href":  "dynamic-provider-credentials/aws-configuration" },
+          { "title":  "GCP Configuration", "href":  "dynamic-provider-credentials/gcp-configuration" },
+          { "title":  "Azure Configuration", "href":  "dynamic-provider-credentials/azure-configuration" },
+          { "title":  "Kubernetes Configuration", "href":  "dynamic-provider-credentials/kubernetes-configuration" },
+          { "title":  "HCP Configuration", "href":  "dynamic-provider-credentials/hcp-configuration" },
+          { "title":  "Manually Generating Workload Identity Tokens", "href":  "dynamic-provider-credentials/manual-generation" },
+          { "title":  "Specifying Multiple Configurations", "href": "dynamic-provider-credentials/specifying-multiple-configurations"},
+          {
+            "title": "Vault-Backed Dynamic Credentials",
+            "routes": [
+              { "title":  "Overview", "href":  "dynamic-provider-credentials/vault-backed" },
+              { "title":  "AWS Configuration", "href": "dynamic-provider-credentials/vault-backed/aws-configuration" },
+              { "title":  "GCP Configuration", "href": "dynamic-provider-credentials/vault-backed/gcp-configuration" },
+              { "title":  "Azure Configuration", "href": "dynamic-provider-credentials/vault-backed/azure-configuration" }
+            ]
+          },
+          {
+            "title": "HCP Vault Secrets-Backed Dynamic Credentials",
+            "routes": [
+              { "title":  "Overview", "href":  "dynamic-provider-credentials/hcp-vault-secrets-backed" },
+              { "title":  "AWS Configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/aws-configuration" },
+              { "title":  "GCP Configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/gcp-configuration" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Variables",
+        "routes": [
+          { "title": "Overview", "href": "variables" },
+          {
+            "title": "Managing Variables",
+            "href": "variables/managing-variables"
+          }
+        ]
+      },
+      {
+        "title": "Connecting to VCS",
+        "routes": [
+          { "title": "Overview", "href": "vcs" },
+          {
+            "title": "GitHub.com",
+            "href": "vcs/github-app"
+          },
+          { "title": "GitHub.com (OAuth)", "href": "vcs/github" },
+          {
+            "title": "GitHub Enterprise",
+            "href": "vcs/github-enterprise"
+          },
+          { "title": "GitLab.com", "href": "vcs/gitlab-com" },
+          { "title": "GitLab EE and CE", "href": "vcs/gitlab-eece" },
+          { "title": "Bitbucket Cloud", "href": "vcs/bitbucket-cloud" },
+          {
+            "title": "Bitbucket Data Center",
+            "href": "vcs/bitbucket-data-center"
+          },
+          {
+            "title": "Azure DevOps Services (OAuth)",
+            "href": "vcs/azure-devops-services"
+          },
+          {
+            "title": "Azure DevOps Services (PAT)",
+            "href": "vcs/azure-devops-services-pat"
+          },
+          {
+            "title": "Azure DevOps Server",
+            "href": "vcs/azure-devops-server"
+          },
+          { "title": "Private VCS Providers", "href": "vcs/private"},
+          { "title": "Troubleshooting", "href": "vcs/troubleshooting" }
+        ]
+      },
+      { "title": "Terraform State", "path": "workspaces/state" },
+      {
+        "title": "JSON Filtering",
+        "path": "workspaces/json-filtering"
+      },
+      {
+        "title": "No-Code Provisioning",
+        "routes": [
+          {
+            "title": "Designing No-Code Ready Modules",
+            "path": "workspaces/no-code-provisioning/module-design"
+          },
+          {
+            "title": "Provisioning No-Code Infrastructure",
+            "path": "workspaces/no-code-provisioning/provisioning"
+          }
+        ]
+      },
+      {
+        "title": "Policy Enforcement",
+        "routes": [
+          {
+            "title": "Overview",
+            "path": "workspaces/policy-enforcement"
+          },
+          {
+            "title": "Define policies",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "workspaces/policy-enforcement/define-policies"
+              },
+              {
+                "title": "Custom Sentinel policies",
+                "path": "workspaces/policy-enforcement/define-policies/custom-sentinel"
+              },
+              {
+                "title": "OPA policies",
+                "path": "workspaces/policy-enforcement/define-policies/opa"
+              }
+            ]
+          },
+          {
+            "title": "Create and manage policy sets",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "workspaces/policy-enforcement/manage-policy-sets"
+              },
+              {
+                "title": "Create Sentinel policy sets in VCS",
+                "path": "workspaces/policy-enforcement/manage-policy-sets/sentinel-vcs"
+              },
+              {
+                "title": "Connect to OPA policies in VCS",
+                "path": "workspaces/policy-enforcement/manage-policy-sets/opa-vcs"
+              }
+            ]
+          },
+          {
+            "title": "Run pre-written Sentinel policies",
+            "path": "workspaces/policy-enforcement/prewritten-sentinel"
+          },
+          {
+            "title": "Test Sentinel policies",
+            "path": "workspaces/policy-enforcement/test-sentinel"
+          },
+          {
+            "title": "View policy results",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "workspaces/policy-enforcement/view-results"
+              },
+              {
+                "title": "View Sentinel JSON results",
+                "path": "workspaces/policy-enforcement/view-results/json"
+              }
+            ]
+          },
+          {
+            "title": "Pre-written policy library",
+            "path": "workspaces/policy-enforcement/prewritten-library"
+          },
+          {
+            "title": "Sentinel import reference",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "workspaces/policy-enforcement/import-reference"
+              },
+              {
+                "title": "tfconfig",
+                "path": "workspaces/policy-enforcement/import-reference/tfconfig"
+              },
+              {
+                "title": "tfconfig/v2",
+                "path": "workspaces/policy-enforcement/import-reference/tfconfig-v2"
+              },
+              {
+                "title": "tfplan",
+                "path": "workspaces/policy-enforcement/import-reference/tfplan"
+              },
+              {
+                "title": "tfplan/v2",
+                "path": "workspaces/policy-enforcement/import-reference/tfplan-v2"
+              },
+              {
+                "title": "tfstate",
+                "path": "workspaces/policy-enforcement/import-reference/tfstate"
+              },
+              {
+                "title": "tfstate/v2",
+                "path": "workspaces/policy-enforcement/import-reference/tfstate-v2"
+              },
+              {
+                "title": "tfrun",
+                "path": "workspaces/policy-enforcement/import-reference/tfrun"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Cost Estimation",
+        "routes": [
+          { "title": "Overview", "path": "workspaces/cost-estimation" },
+          { "title": "AWS", "path": "workspaces/cost-estimation/aws" },
+          { "title": "GCP", "path": "workspaces/cost-estimation/gcp" },
+          { "title": "Azure", "path": "workspaces/cost-estimation/azure" }
+        ]
+      },
+      {
+        "title": "Terraform Runs",
+        "routes": [
+          { "title": "Remote Operations", "href": "run/remote-operations" },
+          { "title": "Viewing and Managing Runs", "href": "run/manage" },
+          { "title": "Run States and Stages", "href": "run/states" },
+          { "title": "Run Modes and Options", "href": "run/modes-and-options" },
+          { "title": "UI/VCS-driven Runs", "href": "run/ui" },
+          { "title": "API-driven Runs", "href": "run/api" },
+          { "title": "CLI-driven Runs", "href": "run/cli" },
+          {
+            "title": "The Run Environment",
+            "href": "run/run-environment"
+          },
+          {
+            "title": "Installing Software",
+            "href": "run/install-software"
+          }
+        ]
+      },
+      {
+    "title": "Control state and plan file encryption",
+    "routes": [
+      { "title": "Overview", "path": "hold-your-own-key" },
+      { "title": "How hold your own key works", "path": "hold-your-own-key/concepts" },
+      { "title": "Configure and manage keys", "path": "hold-your-own-key/configure" }
+    ]
+  },
+  {
+        "title": "Integrations",
+        "routes": [
+          {
+            "title": "Overview",
+            "href": "integrations"
+          },
+          {
+            "title": "Kubernetes Operator",
+            "routes": [
+              {
+                "title": "Overview",
+                "href": "integrations/kubernetes"
+              },
+              {
+                "title": "Setup",
+                "href": "integrations/kubernetes/setup"
+              },
+              {
+                "title": "API Reference",
+                "href": "integrations/kubernetes/api-reference"
+              },
+              {
+                "title": "Annotations and Labels",
+                "href": "integrations/kubernetes/annotations-and-labels"
+              },
+              {
+                "title": "Migration Guide",
+                "href": "integrations/kubernetes/ops-v2-migration"
+              }
+            ]
+          },
+          {
+            "title": "ServiceNow Integrations",
+            "routes": [
+              {
+                "title": "Service Catalog for Terraform",
+                "routes": [
+                  { "title": "Overview", "href": "integrations/service-now/service-catalog-terraform" },
+                  {
+                    "title": "Service Catalog",
+                    "href": "integrations/service-now/service-catalog-terraform/service-catalog-config"
+                  },
+                  {
+                    "title": "Admin Guide",
+                    "href": "integrations/service-now/service-catalog-terraform/admin-guide"
+                  },
+                  {
+                    "title": "Developer Reference",
+                    "href": "integrations/service-now/service-catalog-terraform/developer-reference"
+                  },
+                  {
+                    "title": "Example Customizations",
+                    "href": "integrations/service-now/service-catalog-terraform/example-customizations"
+                  },
+                  {
+                    "title": "Troubleshoot",
+                    "href": "integrations/service-now/service-catalog-terraform/troubleshoot"
+                  }
+                ]
+              },
+              {
+                "title": "Service Graph Connector for Terraform",
+                "routes": [
+                  {
+                    "title": "Overview",
+                    "href": "integrations/service-now/service-graph"
+                  },
+                  {
+                    "title": "Setup",
+                    "href": "integrations/service-now/service-graph/service-graph-setup"
+                  },
+                  {
+                    "title": "Resource Coverage",
+                    "routes": [
+                      {
+                        "title": "Overview",
+                        "href": "integrations/service-now/service-graph/resource-coverage"
+                      },
+                      {
+                        "title": "AWS",
+                        "href": "integrations/service-now/service-graph/resource-coverage/aws"
+                      },
+                      {
+                        "title": "Azure",
+                        "href": "integrations/service-now/service-graph/resource-coverage/azure"
+                      },
+                      {
+                        "title": "GCP",
+                        "href": "integrations/service-now/service-graph/resource-coverage/gcp"
+                      },
+                      {
+                        "title": "vSphere",
+                        "href": "integrations/service-now/service-graph/resource-coverage/vsphere"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Customizations",
+                    "href": "integrations/service-now/service-graph/customizations"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Splunk Integration",
+            "href": "integrations/splunk"
+          },
+          {
+            "title": "Run Tasks Integration",
+            "href": "integrations/run-tasks"
+          },
+          {
+            "title": "AWS Service Catalog Integration",
+            "href": "integrations/aws-service-catalog"
+          }
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Use Stacks",
+    "routes": [
+      { "title": "Overview", "path": "stacks" },
+      {
+        "title": "Manage a Stack",
+        "routes": [
+          { "title": "Create a Stack", "path": "stacks/create" },
+          { "title": "Configure a Stack", "path": "stacks/configure" },
+          { "title": "Destroy a Stack", "path": "stacks/destroy" }
+        ]
+      },
+      { "title": "State", "path": "stacks/state" },
+      { "title": "Runs", "path": "stacks/runs" },
+      {
+        "title": "Deploy infrastructure",
+        "routes": [
+          { "title": "Configuration versions", "path": "stacks/deploy/configuration-versions" },
+          { "title": "Review deployment plans", "path": "stacks/deploy/plans" }
+        ]
+      },
+      {
+        "title": "Dynamic Provider Credentials",
+        "routes": [
+          { "title":  "Overview", "href":  "dynamic-provider-credentials" },
+          { "title":  "Workload Identity Tokens", "href":  "dynamic-provider-credentials/workload-identity-tokens" },
+          { "title":  "Vault Configuration", "href":  "dynamic-provider-credentials/vault-configuration" },
+          { "title":  "AWS Configuration", "href":  "dynamic-provider-credentials/aws-configuration" },
+          { "title":  "GCP Configuration", "href":  "dynamic-provider-credentials/gcp-configuration" },
+          { "title":  "Azure Configuration", "href":  "dynamic-provider-credentials/azure-configuration" },
+          { "title":  "Kubernetes Configuration", "href":  "dynamic-provider-credentials/kubernetes-configuration" },
+          { "title":  "HCP Configuration", "href":  "dynamic-provider-credentials/hcp-configuration" },
+          { "title":  "Manually Generating Workload Identity Tokens", "href":  "dynamic-provider-credentials/manual-generation" },
+          { "title":  "Specifying Multiple Configurations", "href": "dynamic-provider-credentials/specifying-multiple-configurations"},
+          {
+            "title": "Vault-Backed Dynamic Credentials",
+            "routes": [
+              { "title":  "Overview", "href":  "dynamic-provider-credentials/vault-backed" },
+              { "title":  "AWS Configuration", "href": "dynamic-provider-credentials/vault-backed/aws-configuration" },
+              { "title":  "GCP Configuration", "href": "dynamic-provider-credentials/vault-backed/gcp-configuration" },
+              { "title":  "Azure Configuration", "href": "dynamic-provider-credentials/vault-backed/azure-configuration" }
+            ]
+          },
+          {
+            "title": "HCP Vault Secrets-Backed Dynamic Credentials",
+            "routes": [
+              { "title":  "Overview", "href":  "dynamic-provider-credentials/hcp-vault-secrets-backed" },
+              { "title":  "AWS Configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/aws-configuration" },
+              { "title":  "GCP Configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/gcp-configuration" }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Variables",
+        "routes": [
+          { "title": "Overview", "href": "variables" },
+          {
+            "title": "Managing Variables",
+            "href": "variables/managing-variables"
+          }
+        ]
+      },
+      {
+        "title": "Connecting to VCS",
+        "routes": [
+          { "title": "Overview", "href": "vcs" },
+          {
+            "title": "GitHub.com",
+            "href": "vcs/github-app"
+          },
+          { "title": "GitHub.com (OAuth)", "href": "vcs/github" },
+          {
+            "title": "GitHub Enterprise",
+            "href": "vcs/github-enterprise"
+          },
+          { "title": "GitLab.com", "href": "vcs/gitlab-com" },
+          { "title": "GitLab EE and CE", "href": "vcs/gitlab-eece" },
+          { "title": "Bitbucket Cloud", "href": "vcs/bitbucket-cloud" },
+          {
+            "title": "Bitbucket Data Center",
+            "href": "vcs/bitbucket-data-center"
+          },
+          {
+            "title": "Azure DevOps Services (OAuth)",
+            "href": "vcs/azure-devops-services"
+          },
+          {
+            "title": "Azure DevOps Services (PAT)",
+            "href": "vcs/azure-devops-services-pat"
+          },
+          {
+            "title": "Azure DevOps Server",
+            "href": "vcs/azure-devops-server"
+          },
+          { "title": "Troubleshooting", "href": "vcs/troubleshooting" }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Recommended practices",
+    "routes": [
+      { "title": "Overview", "path": "recommended-practices" },
+      {
+        "title": "Part 1: Overview of Our Recommended Workflow",
+        "path": "recommended-practices/part1"
+      },
+      {
+        "title": "Part 2: Evaluating Your Current Provisioning Practices",
+        "path": "recommended-practices/part2"
+      },
+      {
+        "title": "Part 3: How to Evolve Your Provisioning Practices",
+        "path": "recommended-practices/part3"
+      },
+      {
+        "title": "Part 3.1: From Manual Changes to Semi-Automation",
+        "path": "recommended-practices/part3.1"
+      },
+      {
+        "title": "Part 3.2: From Semi-Automation to Infrastructure as Code",
+        "path": "recommended-practices/part3.2"
+      },
+      {
+        "title": "Part 3.3: From Infrastructure as Code to Collaborative Infrastructure as Code",
+        "path": "recommended-practices/part3.3"
+      },
+      {
+        "title": "Part 3.4: Advanced Workflow Improvements",
+        "path": "recommended-practices/part3.4"
+      }
+    ]
+  },
+  { "divider": true },
+  { "heading": "REFERENCE" },
+    {
     "title": "API",
     "routes": [
       {
@@ -195,814 +879,7 @@
     ]
   },
   {
-    "title": "Users, Teams, Organizations",
-    "routes": [
-      { "title": "Users", "path": "users-teams-organizations/users" },
-    {
-        "title": "Teams",
-        "routes": [
-          {"title": "Overview","path": "users-teams-organizations/teams"},
-          { "title": "Manage teams", "path": "users-teams-organizations/teams/manage" },
-          { "title": "Notifications", "path": "users-teams-organizations/teams/notifications" }
-        ]
-      },
-      {
-        "title": "Organizations",
-        "routes": [
-          {"title": "Overview","path": "users-teams-organizations/organizations"},
-          {
-            "title": "Manage reserved tag keys",
-            "path": "users-teams-organizations/organizations/manage-reserved-tags"
-          },
-          { "title": "VCS Status Checks", "path": "users-teams-organizations/organizations/vcs-status-checks" },
-          { "title": "Automatically cancel plan-only runs", "path": "users-teams-organizations/organizations/vcs-speculative-plan-management" },
-          { "title": "Public Registry Namespaces", "routes": [
-            {
-              "title": "Overview",
-              "path": "users-teams-organizations/organizations/public-namespace"
-            },
-            {
-              "title": "Create or claim a namespace",
-              "path": "users-teams-organizations/organizations/public-namespace/create_or_claim"
-            },
-            {
-              "title": "Manage namespaces",
-              "path": "users-teams-organizations/organizations/public-namespace/manage"
-            },
-            {
-              "title": "Manage namespace artifacts",
-              "path": "users-teams-organizations/organizations/public-namespace/artifacts"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Permissions",
-        "path": "users-teams-organizations/permissions"
-      },
-
-      {
-        "title": "Two-factor Authentication",
-        "path": "users-teams-organizations/2fa"
-      },
-      {
-        "title": "API Tokens",
-        "path": "users-teams-organizations/api-tokens"
-      },
-      {
-        "title": "Single Sign On",
-        "routes": [
-          {
-            "title": "Overview",
-            "path": "users-teams-organizations/single-sign-on"
-          },
-          {
-            "title": "Microsoft Entra ID",
-            "path": "users-teams-organizations/single-sign-on/entra-id"
-          },
-          {
-            "title": "Okta",
-            "path": "users-teams-organizations/single-sign-on/okta"
-          },
-          {
-            "title": "SAML",
-            "path": "users-teams-organizations/single-sign-on/saml"
-          },
-          {
-            "title": "Linking a User Account",
-            "path": "users-teams-organizations/single-sign-on/linking-user-account"
-          },
-          {
-            "title": "Testing",
-            "path": "users-teams-organizations/single-sign-on/testing"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "Structure using projects",
-    "routes": [
-      { "title": "Overview", "path": "projects" },
-      {
-        "title": "Manage Projects",
-        "path": "projects/manage"
-      },
-      { "title": "Best Practices", "path": "projects/best-practices" }
-    ]
-  },
-  {
-    "title": "Use workspaces",
-    "routes": [
-      { "title": "Overview", "path": "workspaces" },
-      {
-        "title": "Manage a Workspace",
-        "routes": [
-          {
-            "title": "Create Workspaces",
-            "path": "workspaces/create"
-          },
-          {
-            "title": "Create tags",
-            "path": "workspaces/tags"
-          },
-          { "title":  "Browse workspaces", "path":  "workspaces/browse"},
-          { "title": "Explorer", "path": "workspaces/explorer" },
-          {
-            "title": "Change requests",
-            "routes": [
-              { "title": "Overview", "path": "workspaces/change-requests" },
-              {
-                "title": "Manage change requests",
-                "path": "workspaces/change-requests/manage"
-              }
-            ]
-          },
-      {
-        "title": "Settings",
-        "routes": [
-          { "title": "Overview", "path": "workspaces/settings" },
-          { "title": "VCS Connections", "path": "workspaces/settings/vcs" },
-          { "title": "Access", "path": "workspaces/settings/access" },
-          {
-            "title": "Notifications",
-            "path": "workspaces/settings/notifications"
-          },
-          {
-            "title": "SSH Keys for Modules",
-            "path": "workspaces/settings/ssh-keys"
-          },
-          {
-            "title": "Run Triggers",
-            "path": "workspaces/settings/run-triggers"
-          },
-          {
-            "title": "Run Tasks",
-            "path": "workspaces/settings/run-tasks"
-          },
-          {
-            "title": "Destruction and Deletion",
-            "path": "workspaces/settings/deletion"
-          }
-        ]
-        },
-        { "title": "Best Practices", "path": "workspaces/best-practices"}
-        ]
-      },
-      { "title": "Health", "path": "workspaces/health" },
-      {
-        "title": "Terraform Configurations",
-        "path": "workspaces/configurations"
-      },
-      {
-        "title": "Dynamic Provider Credentials",
-        "routes": [
-          { "title":  "Overview", "href":  "dynamic-provider-credentials" },
-          { "title":  "Workload Identity Tokens", "href":  "dynamic-provider-credentials/workload-identity-tokens" },
-          { "title":  "Vault Configuration", "href":  "dynamic-provider-credentials/vault-configuration" },
-          { "title":  "AWS Configuration", "href":  "dynamic-provider-credentials/aws-configuration" },
-          { "title":  "GCP Configuration", "href":  "dynamic-provider-credentials/gcp-configuration" },
-          { "title":  "Azure Configuration", "href":  "dynamic-provider-credentials/azure-configuration" },
-          { "title":  "Kubernetes Configuration", "href":  "dynamic-provider-credentials/kubernetes-configuration" },
-          { "title":  "HCP Configuration", "href":  "dynamic-provider-credentials/hcp-configuration" },
-          { "title":  "Manually Generating Workload Identity Tokens", "href":  "dynamic-provider-credentials/manual-generation" },
-          { "title":  "Specifying Multiple Configurations", "href": "dynamic-provider-credentials/specifying-multiple-configurations"},
-          {
-            "title": "Vault-Backed Dynamic Credentials",
-            "routes": [
-              { "title":  "Overview", "href":  "dynamic-provider-credentials/vault-backed" },
-              { "title":  "AWS Configuration", "href": "dynamic-provider-credentials/vault-backed/aws-configuration" },
-              { "title":  "GCP Configuration", "href": "dynamic-provider-credentials/vault-backed/gcp-configuration" },
-              { "title":  "Azure Configuration", "href": "dynamic-provider-credentials/vault-backed/azure-configuration" }
-            ]
-          },
-          {
-            "title": "HCP Vault Secrets-Backed Dynamic Credentials",
-            "routes": [
-              { "title":  "Overview", "href":  "dynamic-provider-credentials/hcp-vault-secrets-backed" },
-              { "title":  "AWS Configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/aws-configuration" },
-              { "title":  "GCP Configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/gcp-configuration" }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Variables",
-        "routes": [
-          { "title": "Overview", "href": "variables" },
-          {
-            "title": "Managing Variables",
-            "href": "variables/managing-variables"
-          }
-        ]
-      },
-      {
-        "title": "Connecting to VCS",
-        "routes": [
-          { "title": "Overview", "href": "vcs" },
-          {
-            "title": "GitHub.com",
-            "href": "vcs/github-app"
-          },
-          { "title": "GitHub.com (OAuth)", "href": "vcs/github" },
-          {
-            "title": "GitHub Enterprise",
-            "href": "vcs/github-enterprise"
-          },
-          { "title": "GitLab.com", "href": "vcs/gitlab-com" },
-          { "title": "GitLab EE and CE", "href": "vcs/gitlab-eece" },
-          { "title": "Bitbucket Cloud", "href": "vcs/bitbucket-cloud" },
-          {
-            "title": "Bitbucket Data Center",
-            "href": "vcs/bitbucket-data-center"
-          },
-          {
-            "title": "Azure DevOps Services (OAuth)",
-            "href": "vcs/azure-devops-services"
-          },
-          {
-            "title": "Azure DevOps Services (PAT)",
-            "href": "vcs/azure-devops-services-pat"
-          },
-          {
-            "title": "Azure DevOps Server",
-            "href": "vcs/azure-devops-server"
-          },
-          { "title": "Private VCS Providers", "href": "vcs/private"},
-          { "title": "Troubleshooting", "href": "vcs/troubleshooting" }
-        ]
-      },
-      { "title": "Terraform State", "path": "workspaces/state" },
-      {
-        "title": "JSON Filtering",
-        "path": "workspaces/json-filtering"
-      },
-      {
-        "title": "Private Registry",
-        "routes": [
-          { "title": "Overview", "href": "registry" },
-          {
-            "title": "Adding Public Providers and Modules",
-            "href": "registry/add"
-          },
-          {
-            "title": "Publishing Private Providers",
-            "href": "registry/publish-providers"
-          },
-          {
-            "title": "Publishing Private Modules",
-            "href": "registry/publish-modules"
-          },
-          { "title": "Manage Module Versions", "href": "registry/manage-module-versions" },
-          {
-            "title": "Test-Integrated Modules",
-            "href": "registry/test"
-          },
-          { "title": "Using Providers and Modules", "href": "registry/using" },
-          {
-            "title": "Configuration Designer",
-            "href": "registry/design"
-          }
-          ]
-      },
-      {
-        "title": "No-Code Provisioning",
-        "routes": [
-          {
-            "title": "Designing No-Code Ready Modules",
-            "path": "no-code-provisioning/module-design"
-          },
-          {
-            "title": "Provisioning No-Code Infrastructure",
-            "path": "no-code-provisioning/provisioning"
-          }
-        ]
-      },
-      {
-        "title": "Policy Enforcement",
-        "routes": [
-          {
-            "title": "Overview",
-            "path": "policy-enforcement"
-          },
-          {
-            "title": "Define policies",
-            "routes": [
-              {
-                "title": "Overview",
-                "path": "policy-enforcement/define-policies"
-              },
-              {
-                "title": "Custom Sentinel policies",
-                "path": "policy-enforcement/define-policies/custom-sentinel"
-              },
-              {
-                "title": "OPA policies",
-                "path": "policy-enforcement/define-policies/opa"
-              }
-            ]
-          },
-          {
-            "title": "Create and manage policy sets",
-            "routes": [
-              {
-                "title": "Overview",
-                "path": "policy-enforcement/manage-policy-sets"
-              },
-              {
-                "title": "Create Sentinel policy sets in VCS",
-                "path": "policy-enforcement/manage-policy-sets/sentinel-vcs"
-              },
-              {
-                "title": "Connect to OPA policies in VCS",
-                "path": "policy-enforcement/manage-policy-sets/opa-vcs"
-              }
-            ]
-          },
-          {
-            "title": "Run pre-written Sentinel policies",
-            "path": "policy-enforcement/prewritten-sentinel"
-          },
-          {
-            "title": "Test Sentinel policies",
-            "path": "policy-enforcement/test-sentinel"
-          },
-          {
-            "title": "View policy results",
-            "routes": [
-              {
-                "title": "Overview",
-                "path": "policy-enforcement/view-results"
-              },
-              {
-                "title": "View Sentinel JSON results",
-                "path": "policy-enforcement/view-results/json"
-              }
-            ]
-          },
-          {
-            "title": "Pre-written policy library",
-            "path": "policy-enforcement/prewritten-library"
-          },
-          {
-            "title": "Sentinel import reference",
-            "routes": [
-              {
-                "title": "Overview",
-                "path": "policy-enforcement/import-reference"
-              },
-              {
-                "title": "tfconfig",
-                "path": "policy-enforcement/import-reference/tfconfig"
-              },
-              {
-                "title": "tfconfig/v2",
-                "path": "policy-enforcement/import-reference/tfconfig-v2"
-              },
-              {
-                "title": "tfplan",
-                "path": "policy-enforcement/import-reference/tfplan"
-              },
-              {
-                "title": "tfplan/v2",
-                "path": "policy-enforcement/import-reference/tfplan-v2"
-              },
-              {
-                "title": "tfstate",
-                "path": "policy-enforcement/import-reference/tfstate"
-              },
-              {
-                "title": "tfstate/v2",
-                "path": "policy-enforcement/import-reference/tfstate-v2"
-              },
-              {
-                "title": "tfrun",
-                "path": "policy-enforcement/import-reference/tfrun"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Cost Estimation",
-        "routes": [
-          { "title": "Overview", "path": "cost-estimation" },
-          { "title": "AWS", "path": "cost-estimation/aws" },
-          { "title": "GCP", "path": "cost-estimation/gcp" },
-          { "title": "Azure", "path": "cost-estimation/azure" }
-        ]
-      },
-      {
-        "title": "Terraform Runs",
-        "routes": [
-          { "title": "Remote Operations", "href": "run/remote-operations" },
-          { "title": "Viewing and Managing Runs", "href": "run/manage" },
-          { "title": "Run States and Stages", "href": "run/states" },
-          { "title": "Run Modes and Options", "href": "run/modes-and-options" },
-          { "title": "UI/VCS-driven Runs", "href": "run/ui" },
-          { "title": "API-driven Runs", "href": "run/api" },
-          { "title": "CLI-driven Runs", "href": "run/cli" },
-          {
-            "title": "The Run Environment",
-            "href": "run/run-environment"
-          },
-          {
-            "title": "Installing Software",
-            "href": "run/install-software"
-          }
-        ]
-      },
-      {
-    "title": "Control state and plan file encryption",
-    "routes": [
-      { "title": "Overview", "path": "hold-your-own-key" },
-      { "title": "How hold your own key works", "path": "hold-your-own-key/concepts" },
-      { "title": "Configure and manage keys", "path": "hold-your-own-key/configure" }
-    ]
-  },
-  {
-        "title": "Integrations",
-        "routes": [
-          {
-            "title": "Overview",
-            "href": "integrations"
-          },
-          {
-            "title": "Kubernetes Operator",
-            "routes": [
-              {
-                "title": "Overview",
-                "href": "integrations/kubernetes"
-              },
-              {
-                "title": "Setup",
-                "href": "integrations/kubernetes/setup"
-              },
-              {
-                "title": "API Reference",
-                "href": "integrations/kubernetes/api-reference"
-              },
-              {
-                "title": "Annotations and Labels",
-                "href": "integrations/kubernetes/annotations-and-labels"
-              },
-              {
-                "title": "Migration Guide",
-                "href": "integrations/kubernetes/ops-v2-migration"
-              }
-            ]
-          },
-          {
-            "title": "ServiceNow Integrations",
-            "routes": [
-              {
-                "title": "Service Catalog for Terraform",
-                "routes": [
-                  { "title": "Overview", "href": "integrations/service-now/service-catalog-terraform" },
-                  {
-                    "title": "Service Catalog",
-                    "href": "integrations/service-now/service-catalog-terraform/service-catalog-config"
-                  },
-                  {
-                    "title": "Admin Guide",
-                    "href": "integrations/service-now/service-catalog-terraform/admin-guide"
-                  },
-                  {
-                    "title": "Developer Reference",
-                    "href": "integrations/service-now/service-catalog-terraform/developer-reference"
-                  },
-                  {
-                    "title": "Example Customizations",
-                    "href": "integrations/service-now/service-catalog-terraform/example-customizations"
-                  },
-                  {
-                    "title": "Troubleshoot",
-                    "href": "integrations/service-now/service-catalog-terraform/troubleshoot"
-                  }
-                ]
-              },
-              {
-                "title": "Service Graph Connector for Terraform",
-                "routes": [
-                  {
-                    "title": "Overview",
-                    "href": "integrations/service-now/service-graph"
-                  },
-                  {
-                    "title": "Setup",
-                    "href": "integrations/service-now/service-graph/service-graph-setup"
-                  },
-                  {
-                    "title": "Resource Coverage",
-                    "routes": [
-                      {
-                        "title": "Overview",
-                        "href": "integrations/service-now/service-graph/resource-coverage"
-                      },
-                      {
-                        "title": "AWS",
-                        "href": "integrations/service-now/service-graph/resource-coverage/aws"
-                      },
-                      {
-                        "title": "Azure",
-                        "href": "integrations/service-now/service-graph/resource-coverage/azure"
-                      },
-                      {
-                        "title": "GCP",
-                        "href": "integrations/service-now/service-graph/resource-coverage/gcp"
-                      },
-                      {
-                        "title": "vSphere",
-                        "href": "integrations/service-now/service-graph/resource-coverage/vsphere"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Customizations",
-                    "href": "integrations/service-now/service-graph/customizations"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "title": "Splunk Integration",
-            "href": "integrations/splunk"
-          },
-          {
-            "title": "Run Tasks Integration",
-            "href": "integrations/run-tasks"
-          },
-          {
-            "title": "AWS Service Catalog Integration",
-            "href": "integrations/aws-service-catalog"
-          }
-        ]
-      }
-    ]
-  },
-   {
-    "title": "Use Stacks to manage infrastructure at scale",
-    "routes": [
-      { "title": "Overview", "path": "stacks" },
-      { "title": "Create a Stack", "path": "stacks/create" },
-      { "title": "Configure a Stack", "path": "stacks/configure" },
-      { "title": "Destroy a Stack", "path": "stacks/destroy" },
-      { "title": "State", "path": "stacks/state" },
-      { "title": "Runs", "path": "stacks/runs" },
-      {
-        "title": "Deploy infrastructure",
-        "routes": [
-          { "title": "Configuration versions", "path": "stacks/deploy/configuration-versions" },
-          { "title": "Review deployment plans", "path": "stacks/deploy/plans" }
-        ]
-      },
-      {
-        "title": "Dynamic Provider Credentials",
-        "routes": [
-          { "title":  "Overview", "href":  "dynamic-provider-credentials" },
-          { "title":  "Workload Identity Tokens", "href":  "dynamic-provider-credentials/workload-identity-tokens" },
-          { "title":  "Vault Configuration", "href":  "dynamic-provider-credentials/vault-configuration" },
-          { "title":  "AWS Configuration", "href":  "dynamic-provider-credentials/aws-configuration" },
-          { "title":  "GCP Configuration", "href":  "dynamic-provider-credentials/gcp-configuration" },
-          { "title":  "Azure Configuration", "href":  "dynamic-provider-credentials/azure-configuration" },
-          { "title":  "Kubernetes Configuration", "href":  "dynamic-provider-credentials/kubernetes-configuration" },
-          { "title":  "HCP Configuration", "href":  "dynamic-provider-credentials/hcp-configuration" },
-          { "title":  "Manually Generating Workload Identity Tokens", "href":  "dynamic-provider-credentials/manual-generation" },
-          { "title":  "Specifying Multiple Configurations", "href": "dynamic-provider-credentials/specifying-multiple-configurations"},
-          {
-            "title": "Vault-Backed Dynamic Credentials",
-            "routes": [
-              { "title":  "Overview", "href":  "dynamic-provider-credentials/vault-backed" },
-              { "title":  "AWS Configuration", "href": "dynamic-provider-credentials/vault-backed/aws-configuration" },
-              { "title":  "GCP Configuration", "href": "dynamic-provider-credentials/vault-backed/gcp-configuration" },
-              { "title":  "Azure Configuration", "href": "dynamic-provider-credentials/vault-backed/azure-configuration" }
-            ]
-          },
-          {
-            "title": "HCP Vault Secrets-Backed Dynamic Credentials",
-            "routes": [
-              { "title":  "Overview", "href":  "dynamic-provider-credentials/hcp-vault-secrets-backed" },
-              { "title":  "AWS Configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/aws-configuration" },
-              { "title":  "GCP Configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/gcp-configuration" }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Private Registry",
-        "routes": [
-          { "title": "Overview", "href": "registry" },
-          {
-            "title": "Adding Public Providers and Modules",
-            "href": "registry/add"
-          },
-          {
-            "title": "Publishing Private Providers",
-            "href": "registry/publish-providers"
-          },
-          {
-            "title": "Publishing Private Modules",
-            "href": "registry/publish-modules"
-          },
-          { "title": "Manage Module Versions", "href": "registry/manage-module-versions" },
-          {
-            "title": "Test-Integrated Modules",
-            "href": "registry/test"
-          },
-          { "title": "Using Providers and Modules", "href": "registry/using" },
-          {
-            "title": "Configuration Designer",
-            "href": "registry/design"
-          }
-          ]
-      },
-      {
-        "title": "Variables",
-        "routes": [
-          { "title": "Overview", "href": "variables" },
-          {
-            "title": "Managing Variables",
-            "href": "variables/managing-variables"
-          }
-        ]
-      },
-      {
-        "title": "Connecting to VCS",
-        "routes": [
-          { "title": "Overview", "href": "vcs" },
-          {
-            "title": "GitHub.com",
-            "href": "vcs/github-app"
-          },
-          { "title": "GitHub.com (OAuth)", "href": "vcs/github" },
-          {
-            "title": "GitHub Enterprise",
-            "href": "vcs/github-enterprise"
-          },
-          { "title": "GitLab.com", "href": "vcs/gitlab-com" },
-          { "title": "GitLab EE and CE", "href": "vcs/gitlab-eece" },
-          { "title": "Bitbucket Cloud", "href": "vcs/bitbucket-cloud" },
-          {
-            "title": "Bitbucket Data Center",
-            "href": "vcs/bitbucket-data-center"
-          },
-          {
-            "title": "Azure DevOps Services (OAuth)",
-            "href": "vcs/azure-devops-services"
-          },
-          {
-            "title": "Azure DevOps Services (PAT)",
-            "href": "vcs/azure-devops-services-pat"
-          },
-          {
-            "title": "Azure DevOps Server",
-            "href": "vcs/azure-devops-server"
-          },
-          { "title": "Private VCS Providers", "href": "vcs/private"},
-          { "title": "Troubleshooting", "href": "vcs/troubleshooting" }
-        ]
-      },
-      {
-        "title": "Terraform Runs",
-        "routes": [
-          { "title": "Remote Operations", "href": "run/remote-operations" },
-          { "title": "Viewing and Managing Runs", "href": "run/manage" },
-          { "title": "Run States and Stages", "href": "run/states" },
-          { "title": "Run Modes and Options", "href": "run/modes-and-options" },
-          { "title": "UI/VCS-driven Runs", "href": "run/ui" },
-          { "title": "API-driven Runs", "href": "run/api" },
-          { "title": "CLI-driven Runs", "href": "run/cli" },
-          {
-            "title": "The Run Environment",
-            "href": "run/run-environment"
-          },
-          {
-            "title": "Installing Software",
-            "href": "run/install-software"
-          }
-        ]
-      },
-      {
-        "title": "Integrations",
-        "routes": [
-          {
-            "title": "Overview",
-            "href": "integrations"
-          },
-          {
-            "title": "Kubernetes Operator",
-            "routes": [
-              {
-                "title": "Overview",
-                "href": "integrations/kubernetes"
-              },
-              {
-                "title": "Setup",
-                "href": "integrations/kubernetes/setup"
-              },
-              {
-                "title": "API Reference",
-                "href": "integrations/kubernetes/api-reference"
-              },
-              {
-                "title": "Annotations and Labels",
-                "href": "integrations/kubernetes/annotations-and-labels"
-              },
-              {
-                "title": "Migration Guide",
-                "href": "integrations/kubernetes/ops-v2-migration"
-              }
-            ]
-          },
-          {
-            "title": "ServiceNow Integrations",
-            "routes": [
-              {
-                "title": "Service Catalog for Terraform",
-                "routes": [
-                  { "title": "Overview", "href": "integrations/service-now/service-catalog-terraform" },
-                  {
-                    "title": "Service Catalog",
-                    "href": "integrations/service-now/service-catalog-terraform/service-catalog-config"
-                  },
-                  {
-                    "title": "Admin Guide",
-                    "href": "integrations/service-now/service-catalog-terraform/admin-guide"
-                  },
-                  {
-                    "title": "Developer Reference",
-                    "href": "integrations/service-now/service-catalog-terraform/developer-reference"
-                  },
-                  {
-                    "title": "Example Customizations",
-                    "href": "integrations/service-now/service-catalog-terraform/example-customizations"
-                  },
-                  {
-                    "title": "Troubleshoot",
-                    "href": "integrations/service-now/service-catalog-terraform/troubleshoot"
-                  }
-                ]
-              },
-              {
-                "title": "Service Graph Connector for Terraform",
-                "routes": [
-                  {
-                    "title": "Overview",
-                    "href": "integrations/service-now/service-graph"
-                  },
-                  {
-                    "title": "Setup",
-                    "href": "integrations/service-now/service-graph/service-graph-setup"
-                  },
-                  {
-                    "title": "Resource Coverage",
-                    "routes": [
-                      {
-                        "title": "Overview",
-                        "href": "integrations/service-now/service-graph/resource-coverage"
-                      },
-                      {
-                        "title": "AWS",
-                        "href": "integrations/service-now/service-graph/resource-coverage/aws"
-                      },
-                      {
-                        "title": "Azure",
-                        "href": "integrations/service-now/service-graph/resource-coverage/azure"
-                      },
-                      {
-                        "title": "GCP",
-                        "href": "integrations/service-now/service-graph/resource-coverage/gcp"
-                      },
-                      {
-                        "title": "vSphere",
-                        "href": "integrations/service-now/service-graph/resource-coverage/vsphere"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Customizations",
-                    "href": "integrations/service-now/service-graph/customizations"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "title": "Splunk Integration",
-            "href": "integrations/splunk"
-          },
-          {
-            "title": "AWS Service Catalog Integration",
-            "href": "integrations/aws-service-catalog"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "title": "System Architecture",
+    "title": "System architecture",
     "routes": [
       { "title": "Overview", "path": "architectural-details" },
       {
@@ -1016,40 +893,6 @@
       {
         "title": "Security Model",
         "path": "architectural-details/security-model"
-      }
-    ]
-  },
-  {
-    "title": "Recommended Practices",
-    "routes": [
-      { "title": "Overview", "path": "recommended-practices" },
-      {
-        "title": "Part 1: Overview of Our Recommended Workflow",
-        "path": "recommended-practices/part1"
-      },
-      {
-        "title": "Part 2: Evaluating Your Current Provisioning Practices",
-        "path": "recommended-practices/part2"
-      },
-      {
-        "title": "Part 3: How to Evolve Your Provisioning Practices",
-        "path": "recommended-practices/part3"
-      },
-      {
-        "title": "Part 3.1: From Manual Changes to Semi-Automation",
-        "path": "recommended-practices/part3.1"
-      },
-      {
-        "title": "Part 3.2: From Semi-Automation to Infrastructure as Code",
-        "path": "recommended-practices/part3.2"
-      },
-      {
-        "title": "Part 3.3: From Infrastructure as Code to Collaborative Infrastructure as Code",
-        "path": "recommended-practices/part3.3"
-      },
-      {
-        "title": "Part 3.4: Advanced Workflow Improvements",
-        "path": "recommended-practices/part3.4"
       }
     ]
   },

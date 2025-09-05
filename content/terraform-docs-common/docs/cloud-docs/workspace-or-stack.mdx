@@ -1,11 +1,11 @@
 ---
-page_title: Organize infrastructure with Stacks and workspaces in HCP Terraform
+page_title: Choose workspaces or Stacks in HCP Terraform
 description: |-
   Learn about workspace and Stacks, the ways of managing infrastructure in HCP Terraform. Determine if a Stack or a workspace is best for your use case.
 tfc_only: true
 ---
 
-# Organize infrastructure
+# Choose workspaces or Stacks
 
 In HCP Terraform, there are two ways of organizing your infrastructure:
 
@@ -16,7 +16,7 @@ Learn if a workspace or a Stack works best for your use case by comparing what e
 
 ## When to use workspaces
 
-A [workspace](#TODO) contains one Terraform root module, one set of inputs, and one state file. We recommend using workspaces if your use case meets any of the following conditions:
+A [workspace](/terraform/cloud-docs/workspaces) contains one Terraform root module, one set of inputs, and one state file. We recommend using workspaces if your use case meets any of the following conditions:
 
 - You can manage your infrastructure using a single Terraform configuration.
 - You require a strict separation between environments.
@@ -34,7 +34,7 @@ If you want to migrate an existing workspace to a Stack, refer to the [Terraform
 
 ## When to use Stacks
 
-[Stacks](/terraform/cloud-docs/stacks) use a component-based architecture to repeatedly deploy infrastructure, simplifying managing your infrastructure lifecycle at scale. You define the modules that make up your Stack as components in a [component configuration](/terraform/language/stacks/component/config), then define how to repeatedly deploy that infrastructure in a [deployment configuration](/terraform/cloud-docs/stacks/TODO).
+[Stacks](/terraform/cloud-docs/stacks) use a component-based architecture to repeatedly deploy infrastructure, simplifying managing your infrastructure lifecycle at scale. You define the modules that make up your Stack as components in a [component configuration](/terraform/language/stacks/component/config), then define how to repeatedly deploy that infrastructure in a [deployment configuration](/terraform/language/stacks/deploy/config).
 
 We recommend using Stacks if your use case meets any of the following conditions:
 

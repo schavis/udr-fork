@@ -18,6 +18,12 @@ You can use HCP Terraform’s native OpenID Connect integration with HCP to use 
 3. **[Configure HCP Terraform](#configure-hcp-terraform)**: Add additional environment variables to the HCP Terraform workspaces where you want to use HCP Vault Secrets-backed dynamic credentials.
 4. **[Configure Terraform Providers](#configure-terraform-providers)**: Configure your Terraform providers to work with HCP Vault Secrets-backed dynamic credentials.
 
+<!-- BEGIN: TFC:only name:stacks-tfe -->
+
+If you are configuring a Stack, refer to [Authenticate a Stack](/terraform/language/stacks/deploy/authenticate) to learn about the workflow of authenticating your Stack deployments with dynamic credentials.
+
+<!-- END: TFC:only name:stacks-tfe -->
+
 Once you complete this setup, HCP Terraform automatically authenticates with AWS via HCP Vault Secrets-generated credentials during the plan and apply phase of each run. The AWS provider's authentication is only valid for the length of the plan or apply phase.
 
 ## Configure HCP Provider Credentials
@@ -29,6 +35,13 @@ You must first set up HCP dynamic provider credentials before you can use HCP Va
 Follow the instructions in the HCP Vault Secrets documentation for [setting up the AWS integration in your HCP project](/hcp/docs/vault-secrets/dynamic-secrets/aws).
 
 ## Configure HCP Terraform
+
+<!-- BEGIN: TFC:only name:stacks-tfe -->
+
+If you are configuring a Stack, refer to [Authenticate a Stack](/terraform/language/stacks/deploy/authenticate) to learn how to use the `identity_token` block to authenticate your Stack deployments with dynamic credentials.
+
+<!-- END: TFC:only name:stacks-tfe -->
+
 Next, you need to set certain environment variables in your HCP Terraform workspace to authenticate HCP Terraform with AWS using HCP Vault Secrets-backed dynamic credentials. These variables are in addition to those you previously set while configuring [HCP provider credentials](#configure-hcp-provider-credentials). You can add these as workspace variables or as a [variable set](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets).
 
 ### Required Environment Variables

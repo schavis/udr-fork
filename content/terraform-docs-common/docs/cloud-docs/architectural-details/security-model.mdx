@@ -1,5 +1,5 @@
 ---
-page_title: HCP Terraform security model 
+page_title: HCP Terraform security model
 description: >-
  Learn about HCP Terraform's security and authorization model to identify potential security threats and follow our recommendations for using HCP Terraform securely.
 tfc_only: true
@@ -20,7 +20,7 @@ Projects let you group related workspaces in your organization. You can use proj
 
 ### Terraform runs - plans and applies
 
-HCP Terraform will provision infrastructure according to your Terraform configuration which you can upload through the VCS-driven, API-driven, or CLI-driven workflows. You can read more about the different workflows [here](/terraform/cloud-docs/run/remote-operations#starting-runs). It’s important to note that HCP Terraform performs all Terraform operations within the same privilege context. Both the plan and apply operations have access to the full workspace variables, state versions, and Terraform configuration.
+HCP Terraform will provision infrastructure according to your Terraform configuration which you can upload through the VCS-driven, API-driven, or CLI-driven workflows. You can read more about the different workflows [here](/terraform/cloud-docs/workspaces/run/remote-operations#starting-runs). It’s important to note that HCP Terraform performs all Terraform operations within the same privilege context. Both the plan and apply operations have access to the full workspace variables, state versions, and Terraform configuration.
 
 ### Terraform state file
 
@@ -167,4 +167,4 @@ HCP Terraform uses a blob storage service called Archivist for storing various p
 
 Storing static credentials in HCP Terraform increases the inherent risk of a malicious user or a compromised plan or apply operation exposing your credentials. Because static credentials are usually long-lived and exposed in many locations, they are troublesome to revoke and replace.
 
-Using [dynamic provider credentials](/terraform/cloud-docs/workspaces/dynamic-provider-credentials/) eliminates the need to store static credentials in HCP Terraform, reducing the risk of exposure. Dynamic provider credentials generate new temporary credentials for each operation and expire after that operation completes. 
+Using [dynamic provider credentials](/terraform/cloud-docs/dynamic-provider-credentials/) eliminates the need to store static credentials in HCP Terraform, reducing the risk of exposure. Dynamic provider credentials generate new temporary credentials for each operation and expire after that operation completes.

@@ -38,7 +38,7 @@ description: >-
 
 # No-code provisioning API reference
 
-The no-code provisioning API allows you to create, configure, and deploy Terraform modules as workspaces in the no-code provisioning workflows within HCP Terraform. For more information on no-code modules, refer to [Designing No-Code Ready Modules](/terraform/cloud-docs/no-code-provisioning/module-design).
+The no-code provisioning API allows you to create, configure, and deploy Terraform modules as workspaces in the no-code provisioning workflows within HCP Terraform. For more information on no-code modules, refer to [Designing No-Code Ready Modules](/terraform/cloud-docs/workspaces/no-code-provisioning/module-design).
 
 ## Enable no-code provisioning for a module
 
@@ -51,7 +51,7 @@ The no-code provisioning API allows you to create, configure, and deploy Terrafo
 To deploy a module using the no-code provisioning workflow, the module must meet the following requirement:
 
 1. The module must exist in your organization's private registry.
-1. The module must meet the [design requirements](/terraform/cloud-docs/no-code-provisioning/module-design#requirements) for a no-code module.
+1. The module must meet the [design requirements](/terraform/cloud-docs/workspaces/no-code-provisioning/module-design#requirements) for a no-code module.
 1. You must enable no-code provisioning for the module.
 
 You can send a `POST` request to the `/no-code-modules` endpoint to enable no-code provisioning for a specific module. You can also call this endpoint to set options for the allowed values of a variable for a no-code module in your organization.

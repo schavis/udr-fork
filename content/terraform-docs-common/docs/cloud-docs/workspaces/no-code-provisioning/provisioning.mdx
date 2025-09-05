@@ -19,7 +19,7 @@ To use no-code provisioning, you must be a member of a team with [manage all pro
 
 ## Provider Credentials
 
-Terraform automatically starts a new run to provision no-code infrastructure upon workspace creation. No-code modules contain provider blocks in their configuration, but still require provider credentials for successful deployment. Organization administrators determine how new workspaces should [access provider credentials](/terraform/cloud-docs/no-code-provisioning/module-design#provider-credentials), which may require specific module design.
+Terraform automatically starts a new run to provision no-code infrastructure upon workspace creation. No-code modules contain provider blocks in their configuration, but still require provider credentials for successful deployment. Organization administrators determine how new workspaces should [access provider credentials](/terraform/cloud-docs/workspaces/no-code-provisioning/module-design#provider-credentials), which may require specific module design.
 
 ## Creating a Workspace and Deploying Resources
 
@@ -65,7 +65,7 @@ Start a new run in your workspace to update your existing infrastructure with yo
 
 ### Module Version Updates
 
-When you [update the module version](/terraform/cloud-docs/no-code-provisioning/module-design#updating-a-module-s-version) designated for no-code provisioning, every workspace provisioned from the module is notified that an updated version is available on the workspace overview page. HCP Terraform does not automatically update workspaces. A workspace admin must respond to the update notification to upgrade the workspace, and HCP Terraform prompts for values for any new input variables.
+When you [update the module version](/terraform/cloud-docs/workspaces/no-code-provisioning/module-design#updating-a-module-s-version) designated for no-code provisioning, every workspace provisioned from the module is notified that an updated version is available on the workspace overview page. HCP Terraform does not automatically update workspaces. A workspace admin must respond to the update notification to upgrade the workspace, and HCP Terraform prompts for values for any new input variables.
 
 To change the version of the module that users can deploy:
 

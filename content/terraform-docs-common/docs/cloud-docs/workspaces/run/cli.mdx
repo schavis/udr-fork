@@ -1,12 +1,12 @@
 ---
 page_title: The CLI-driven remote run workflow for HCP Terraform
 description: >-
-  Configure the Terraform CLI to trigger remote runs in HCP Terraform from your terminal. 
+  Configure the Terraform CLI to trigger remote runs in HCP Terraform from your terminal.
 ---
 
 [private]: /terraform/cloud-docs/registry
 
-[speculative plan]: /terraform/cloud-docs/run/remote-operations#speculative-plans
+[speculative plan]: /terraform/cloud-docs/workspaces/run/remote-operations#speculative-plans
 
 [tfe-provider]: https://registry.terraform.io/providers/hashicorp/tfe/latest/docs
 
@@ -16,8 +16,8 @@ description: >-
 
 HCP Terraform has three workflows for managing Terraform runs.
 
-- The [UI/VCS-driven run workflow](/terraform/cloud-docs/run/ui), which is the primary mode of operation.
-- The [API-driven run workflow](/terraform/cloud-docs/run/api), which is more flexible but requires you to create some tooling.
+- The [UI/VCS-driven run workflow](/terraform/cloud-docs/workspaces/run/ui), which is the primary mode of operation.
+- The [API-driven run workflow](/terraform/cloud-docs/workspaces/run/api), which is more flexible but requires you to create some tooling.
 - The CLI-driven run workflow described below, which uses Terraform's standard CLI tools to execute runs in HCP Terraform.
 
 ## Summary
@@ -30,13 +30,13 @@ HCP Terraform offers a few types of CLI-driven runs, to support different stages
 
 - `terraform plan` starts a [speculative plan][] in an HCP Terraform workspace, using configuration files from a local directory. You can quickly check the results of edits (including compliance with Sentinel policies) without needing to copy sensitive variables to your local machine.
 
-  Speculative plans work with all workspaces, and can co-exist with the [VCS-driven workflow](/terraform/cloud-docs/run/ui).
+  Speculative plans work with all workspaces, and can co-exist with the [VCS-driven workflow](/terraform/cloud-docs/workspaces/run/ui).
 
 - `terraform apply` starts a standard plan and apply in an HCP Terraform workspace, using configuration files from a local directory.
 
   Remote `terraform apply` is for workspaces without a linked VCS repository. It replaces the VCS-driven workflow with a more traditional CLI workflow.
 
-- `terraform plan -out <FILE>` and `terraform apply <FILE>` perform a two-part [saved plan run](/terraform/cloud-docs/run/modes-and-options/#saved-plans) in an HCP Terraform workspace, using configuration files from a local directory. The first command performs and saves the plan, and the second command applies it. You can use `terraform show <FILE>` to inspect a saved plan.
+- `terraform plan -out <FILE>` and `terraform apply <FILE>` perform a two-part [saved plan run](/terraform/cloud-docs/workspaces/run/modes-and-options/#saved-plans) in an HCP Terraform workspace, using configuration files from a local directory. The first command performs and saves the plan, and the second command applies it. You can use `terraform show <FILE>` to inspect a saved plan.
 
     Like remote `terraform apply`, remote saved plans are for workspaces without a linked VCS repository.
 
@@ -205,9 +205,9 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 > **Hands On:** Try the [Deploy Infrastructure with HCP Terraform and CircleCI](/terraform/tutorials/automation/circle-ci) tutorial.
 
-External systems cannot run the traditional apply workflow because Terraform requires console input from the user to approve plans. We recommend using the [API-driven Run Workflow](/terraform/cloud-docs/run/api) for non-interactive workflows when possible.
+External systems cannot run the traditional apply workflow because Terraform requires console input from the user to approve plans. We recommend using the [API-driven Run Workflow](/terraform/cloud-docs/workspaces/run/api) for non-interactive workflows when possible.
 
-If you prefer to use the CLI in a non-interactive environment, we recommend first running a [speculative plan](/terraform/cloud-docs/run/remote-operations#speculative-plans) to preview the changes Terraform will make to your infrastructure. Then, use one of the following approaches with the `-auto-approve` flag based on the [execution mode](/terraform/cloud-docs/workspaces/settings#execution-mode) of your workspace. The [`-auto-approve`](/terraform/cli/commands/apply#auto-approve) flag skips prompting you to approve the plan.
+If you prefer to use the CLI in a non-interactive environment, we recommend first running a [speculative plan](/terraform/cloud-docs/workspaces/run/remote-operations#speculative-plans) to preview the changes Terraform will make to your infrastructure. Then, use one of the following approaches with the `-auto-approve` flag based on the [execution mode](/terraform/cloud-docs/workspaces/settings#execution-mode) of your workspace. The [`-auto-approve`](/terraform/cli/commands/apply#auto-approve) flag skips prompting you to approve the plan.
 
 - **Local Execution:**  Save the approved speculative plan and then run `terraform apply -auto-approve` with the saved plan.
 - **Remote Execution:** HCP Terraform does not support uploading saved plans for remote execution, so we recommend running `terraform apply -auto-approve` immediately after approving the speculative plan to prevent the plan from becoming stale.
@@ -289,7 +289,7 @@ Do you want to override the soft failed policy check?
 
 ## Options for Plans and Applies
 
-[Run Modes and Options](/terraform/cloud-docs/run/modes-and-options) contains more details about the various options available for plans and applies when you use the CLI-driven workflow.
+[Run Modes and Options](/terraform/cloud-docs/workspaces/run/modes-and-options) contains more details about the various options available for plans and applies when you use the CLI-driven workflow.
 
 ## Networking/Connection Issues
 

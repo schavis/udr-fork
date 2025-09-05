@@ -9,8 +9,8 @@ description: >-
 HCP Terraform has three workflows for managing Terraform runs.
 
 - The UI/VCS-driven run workflow described below, which is the primary mode of operation.
-- The [API-driven run workflow](/terraform/cloud-docs/run/api), which is more flexible but requires you to create some tooling.
-- The [CLI-driven run workflow](/terraform/cloud-docs/run/cli), which uses Terraform's standard CLI tools to execute runs in HCP Terraform.
+- The [API-driven run workflow](/terraform/cloud-docs/workspaces/run/api), which is more flexible but requires you to create some tooling.
+- The [CLI-driven run workflow](/terraform/cloud-docs/workspaces/run/cli), which uses Terraform's standard CLI tools to execute runs in HCP Terraform.
 
 ## Summary
 
@@ -18,7 +18,7 @@ In the UI and VCS workflow, every workspace is associated with a specific branch
 
 HCP Terraform also performs a [speculative plan][] when a pull request is opened against that branch. HCP Terraform posts a link to the plan in the pull request, and re-runs the plan if the pull request is updated.
 
-[speculative plan]: /terraform/cloud-docs/run/remote-operations#speculative-plans
+[speculative plan]: /terraform/cloud-docs/workspaces/run/remote-operations#speculative-plans
 
 The Terraform code for a normal run always comes from version control, and is always associated with a specific commit.
 
@@ -44,19 +44,19 @@ To start a run:
 
 1. Sign in to [HCP Terraform](https://app.terraform.io/) or Terraform Enterprise and navigate to the workspace you want to start a run in.
 1. Click **+ New run**, opening the **Start a new run** dialog.
-1. Select the run mode and provide an optional message. 
+1. Select the run mode and provide an optional message.
 
-Review the [run modes documentation](/terraform/cloud-docs/run/modes-and-options) for more detail on supported options.
+Review the [run modes documentation](/terraform/cloud-docs/workspaces/run/modes-and-options) for more detail on supported options.
 
 Run modes that have a plan phase support debugging mode. This is equivalent to setting the `TF_LOG` environment variable to `TRACE` for this run only. To enable debugging, click **Additional planning options** under the run mode and click **Enable debugging mode**.  See [Debugging Terraform](/terraform/internals/debugging) for more information.
 
-To [replace](/terraform/cloud-docs/run/modes-and-options#replacing-selected-resources) specific resources as part of a standard plan and apply run, expand the **Additional planning options** section and select the resources to replace.
+To [replace](/terraform/cloud-docs/workspaces/run/modes-and-options#replacing-selected-resources) specific resources as part of a standard plan and apply run, expand the **Additional planning options** section and select the resources to replace.
 
 Manually starting a run requires permission to queue plans for the workspace. ([More about permissions.](/terraform/cloud-docs/users-teams-organizations/permissions))
 
 [permissions-citation]: #intentionally-unused---keep-for-maintainers
 
-If the workspace has a plan that is still in the [plan stage](/terraform/cloud-docs/run/states#the-plan-stage) when a new plan is queued, you can either wait for it to complete, or visit the **Current Run** page and click **Run this plan now**. Be aware that this action terminates the current plan and unlocks the workspace, which can lead to anomalies in behavior, but can be useful if the plans are long-running and the current plan does not have all the desired changes.
+If the workspace has a plan that is still in the [plan stage](/terraform/cloud-docs/workspaces/run/states#the-plan-stage) when a new plan is queued, you can either wait for it to complete, or visit the **Current Run** page and click **Run this plan now**. Be aware that this action terminates the current plan and unlocks the workspace, which can lead to anomalies in behavior, but can be useful if the plans are long-running and the current plan does not have all the desired changes.
 
 ## Automatically cancel plan-only runs triggered by outdated commits
 
@@ -134,4 +134,4 @@ If the run is successful, you can change the workspace's Terraform version and [
 
 ## Speculative Plans During Development
 
-You can also use the CLI to run speculative plans on demand before making a pull request. Refer to the [CLI-driven run workflow](/terraform/cloud-docs/run/cli#remote-speculative-plans) for more details.
+You can also use the CLI to run speculative plans on demand before making a pull request. Refer to the [CLI-driven run workflow](/terraform/cloud-docs/workspaces/run/cli#remote-speculative-plans) for more details.

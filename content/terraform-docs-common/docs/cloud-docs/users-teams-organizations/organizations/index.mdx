@@ -66,9 +66,9 @@ HCP Terraform shows the new organization and prompts you to create a new workspa
 
 ## Managed resources
 
-Your organization’s managed resource count helps you understand the number of infrastructure resources that HCP Terraform manages across all your workspaces.
+Your organization’s managed resource count helps you understand the number of infrastructure resources that HCP Terraform manages across all your workspaces and Stacks.
 
-HCP Terraform reads all the workspaces’ state files to determine the total number of managed resources. Each [resource](/terraform/language/resources/syntax) instance in the state equals one managed resource. HCP Terraform includes resources in modules and each resource created with the `count` or `for_each` meta-arguments. HCP Terraform does not include [data sources](/terraform/language/data-sources) in the count. Refer to [Managed Resources Count](/terraform/cloud-docs/workspaces/state#managed-resources-count) in the workspace state documentation for more details.
+HCP Terraform reads all the workspace and Stack deployment state files to determine the total number of managed resources. Each [resource](/terraform/language/resources/syntax) instance in the state equals one managed resource. HCP Terraform includes resources in modules and each resource created with the `count` or `for_each` meta-arguments. HCP Terraform does not include [data sources](/terraform/language/data-sources) in the count. Refer to [Managed Resources Count](/terraform/cloud-docs/workspaces/state#managed-resources-count) in the workspace state documentation for more details.
 
 You can view your organization's managed resource count on the **Usage** page.
 
@@ -201,11 +201,11 @@ You can apply the following filters to limit the runs HCP Terraform displays:
 - Click **On Hold** to display paused runs.
 
 
-For precise filtering, click **More filters** and check the boxes to filter runs by specific [run statuses](/terraform/cloud-docs/run/states), [run operations](/terraform/cloud-docs/run/modes-and-options), workspaces, or [agent pools](/terraform/cloud-docs/agents/agent-pools). Click **Apply filters** to list the runs that match your criteria.
+For precise filtering, click **More filters** and check the boxes to filter runs by specific [run statuses](/terraform/cloud-docs/workspaces/run/states), [run operations](/terraform/cloud-docs/workspaces/run/modes-and-options), workspaces, or [agent pools](/terraform/cloud-docs/agents/agent-pools). Click **Apply filters** to list the runs that match your criteria.
 
 You can dismiss any of your filtering criteria by clicking the **X** next to the filter name above the table displaying your runs.
 
-For more details about run states, refer to [Run States and Stages](/terraform/cloud-docs/run/states).
+For more details about run states, refer to [Run States and Stages](/terraform/cloud-docs/workspaces/run/states).
 
 ### Integrations
 

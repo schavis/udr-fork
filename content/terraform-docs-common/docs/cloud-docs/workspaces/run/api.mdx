@@ -8,9 +8,9 @@ description: >-
 
 HCP Terraform has three workflows for managing Terraform runs.
 
-- The [UI/VCS-driven run workflow](/terraform/cloud-docs/run/ui), which is the primary mode of operation.
+- The [UI/VCS-driven run workflow](/terraform/cloud-docs/workspaces/run/ui), which is the primary mode of operation.
 - The API-driven run workflow described below, which is more flexible but requires you to create some tooling.
-- The [CLI-driven run workflow](/terraform/cloud-docs/run/cli), which uses Terraform's standard CLI tools to execute runs in HCP Terraform.
+- The [CLI-driven run workflow](/terraform/cloud-docs/workspaces/run/cli), which uses Terraform's standard CLI tools to execute runs in HCP Terraform.
 
 ## Summary
 
@@ -22,7 +22,7 @@ Once your other tooling has decided a run should occur, it must make a series of
 
 The most significant difference in this workflow is that HCP Terraform _does not_ fetch configuration files from version control. Instead, your own tooling must upload the configurations as a `.tar.gz` file. This allows you to work with configurations from unsupported version control systems, automatically generate Terraform configurations from some other source of data, or build a variety of other integrations.
 
-~> **Important:** The script below is provided to illustrate the run process, and is not intended for production use. If you want to drive HCP Terraform runs from the command line, please see the [CLI-driven run workflow](/terraform/cloud-docs/run/cli).
+~> **Important:** The script below is provided to illustrate the run process, and is not intended for production use. If you want to drive HCP Terraform runs from the command line, please see the [CLI-driven run workflow](/terraform/cloud-docs/workspaces/run/cli).
 
 ## Pushing a New Configuration Version
 
