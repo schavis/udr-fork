@@ -16,12 +16,12 @@ env:
     
     Content changes publish based on the merge target
     
-    Branch            | Publication timeline  | Selection
-    ----------------- | --------------------- | ---------
+    | Branch            | Publication timeline  | Selection
+    | ----------------- | --------------------- | ---------
 
-  main_entry: "`main`            | Immediately           |"
-  monthly_entry: "`vault/YYYYMM`    | End of the month      |"
-  release_entry: "`vault/<version>` | Next major release    |"
+  main_entry: "| `main`            | Immediately           |"
+  monthly_entry: "| `vault/YYYYMM`    | End of the month      |"
+  release_entry: "| `vault/<version>` | Next major release    |"
 
 jobs:
 
