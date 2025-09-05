@@ -28,8 +28,3 @@ WAF:
   - changed-files:
     - any-glob-to-any-file:
       - 'well-architected-framework/**'
-
-# Add 'Release' label to any PR that is opened against a release branch.
-# For example, vault/202509 (monthly release) or vault/1.21.x (major release)
-Release:
-- base-branch: 'vault/*' 
