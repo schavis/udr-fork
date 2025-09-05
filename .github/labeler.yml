@@ -1,19 +1,40 @@
-# Add 'Terraform CE' label to changes under the following folders
+# Add a Terraform label to changes under the related folders:
+#
+# Folder                      | Labels
+# --------------------------- | ------------------------------------------------
+# terraform                   | Terraform CE
+# terraform-cdk               | None
+# terraform-docs-agents       | Terraform agents
+# terraform-docs-common       | HCP Terraform
+# terraform-enterprise        | Terraform Enterprise
+# terraform-migrate           | Terraform migrate
+# terraform-plugin-framework  | TF Plugin Framework
+# terraform-plugin-log        | None
+# terraform-plugin-mux        | None
+# terraform-plugin-sdk        | None
+# terraform-plugin-testing    | None
+
 Terraform CE:
 - any:
   - changed-files:
     - any-glob-to-any-file: [
-        'content/terraform/**',
-        'content/terraform-plugin-mux/**',
-        'content/terraform-cdk/**',
-        'content/terraform-migrate/**',
-        'content/terraform-plugin-sdk/**',
-        'content/terraform-docs-agents/**',
-        'content/terraform-plugin-testing/**',
-        'content/terraform-plugin-log/**'
+        'content/terraform/**'
       ]
 
-# Add 'Terraform Enterprise' label to changes under content/terraform-enterprise
+Terraform agents:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: [
+        'content/terraform/**'
+      ]
+
+HCP Terraform:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: [
+        'content/terraform/**'
+      ]
+
 Terraform Enterprise:
 - any:
   - changed-files:
@@ -21,15 +42,13 @@ Terraform Enterprise:
         'content/terraform-enterprise/**'
       ]
 
-# Add 'HCP Terraform' label to changes under content/terraform-docs-common
-HCP Terraform:
+Terraform migrate:
 - any:
   - changed-files:
     - any-glob-to-any-file: [
         'content/terraform-docs-common/**'
       ]
 
-# Add 'TF Plugin Framework' label to changes under content/terraform-plugin-framework
 TF Plugin Framework:
 - any:
   - changed-files:
@@ -37,13 +56,35 @@ TF Plugin Framework:
         'content/terraform-plugin-framework/**'
       ]
 
+
 # Add 'Vault' label to changes under 'content/vault'
+#
+# Label           | Rule
+# --------------- | ------------------------------------------------------------
+# Vault           | Default; applies to all doc updates
+# Vault IC update | Updates on "Important changes" related docs
+
 Vault:
 - any:
   - changed-files:
     - any-glob-to-any-file: ['content/vault/**']
 
+Vault IC:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: [
+        'content/vault/global/partials/important-changes/**',
+        'content/vault/*/content/docs/updates/change-tracker.mdx',
+        'content/vault/*/content/docs/updates/important-changes.mdx',
+        'content/vault/*/content/docs/updates/lts-tracker.mdx'
+      ]
+
 # Add 'WAF' label to changes under 'content/well-architected-framework'
+#
+# Label           | Rule
+# --------------- | ------------------------------------------------------------
+# WAF             | Default; applies to all doc updates
+
 WAF:
 - any:
   - changed-files:
