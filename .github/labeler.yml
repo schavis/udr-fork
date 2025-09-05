@@ -1,5 +1,5 @@
 # Add 'Terraform' label to changes in the following folders (includes subfolders)
-"Terraform":
+Terraform:
 - any:
   - changed-files:
     - any-glob-to-any-file:
@@ -16,14 +16,14 @@
       - 'content/terraform-plugin-log/**'
 
 # Add 'Vault' label to changes in the following folders (includes subfolders)
-"Vault Docs":
+Vault Docs:
 - any:
   - changed-files:
     - any-glob-to-any-file:
       - 'content/vault/**'
 
 # Add 'WAF' label to changes in the following folders (includes subfolders)
-"WAF":
+WAF:
 - any:
   - changed-files:
     - any-glob-to-any-file:
@@ -31,5 +31,5 @@
 
 # Add 'Release' label to any PR that is opened against a release branch.
 # For example, vault/202509 (monthly release) or vault/1.21.x (major release)
-"Release":
- - base-branch: 'vault/*'
+Release:
+- base-branch: 'vault/*' 
