@@ -1,14 +1,17 @@
 ---
-page_title: Workspace variables in HCP Terraform
+page_title: Variables in HCP Terraform
 description: >-
-  HCP Terraform workspaces allow you to customize Terraform runs. Learn how to use Terraform variables and environment variables.
+  Variables let you customize runs in HCP Terraform. Learn how to use Terraform variables and environment variables.
 ---
 
-# Workspace variables
+# Variables overview
 
-HCP Terraform workspace variables let you customize configurations, modify Terraform's behavior, setup [dynamic provider credentials](/terraform/cloud-docs/dynamic-provider-credentials), and store information like static provider credentials.
+Variables let you customize configurations, modify Terraform's behavior, setup [dynamic provider credentials](/terraform/cloud-docs/dynamic-provider-credentials), and store information like static provider credentials.
 
-You can set variables specifically for each workspace or you can create variable sets to reuse the same variables across multiple workspaces. For example, you could define a variable set of provider credentials and automatically apply it to all of the workspaces using that provider. You can use the command line to specify variable values for each plan or apply. Otherwise, HCP Terraform applies workspace variables to all runs within that workspace.
+You can set variables specifically for each workspace or you can create variable sets to reuse the same variables across multiple workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe -->. For example, you could define a variable set of provider credentials and automatically apply it to all of the workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> using that provider.
+
+
+For workspaces, you can use the command line to specify workspace variable values for each plan or apply. Otherwise, HCP Terraform applies workspace variables to all runs within that workspace.
 
 [permissions-citation]: #intentionally-unused---keep-for-maintainers
 
@@ -24,6 +27,12 @@ HCP Terraform performs Terraform runs on disposable Linux worker VMs using a POS
 
 Environment variables can store provider credentials and other data. Refer to your provider's Terraform Registry documentation for a full list of supported shell environment variables (e.g., authentication variables for [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables), [Google Cloud Platform](https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/getting_started#adding-credentials), and [Azure](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs#argument-reference)). Environment variables can also [modify Terraform's behavior](/terraform/cli/config/environment-variables). For example, `TF_LOG` enables detailed logs for debugging.
 
+<!-- BEGIN: TFC:only name:stacks-tfe -->
+
+To learn more about accessing environment variable values in Stacks, refer to [Variable sets and Stacks](/terraform/cloud-docs/variables/managing-variables#variable-sets-and-stacks).
+
+<!-- END: TFC:only name:stacks-tfe -->
+
 #### Parallelism
 
 You can use the `TFE_PARALLELISM` environment variable when your infrastructure providers produce errors on concurrent operations or use non-standard rate limiting. The `TFE_PARALLELISM` variable sets the  `-parallelism=<N>` flag for  `terraform plan` and `terraform apply`  ([more about `parallelism`](/terraform/internals/graph#walking-the-graph)). Valid values are between 1 and 256, inclusive, and the default is `10`. HCP Terraform agents do not support `TFE_PARALLELISM`, but you can specify flags as environment variables directly via [`TF_CLI_ARGS_name`](/terraform/cli/config/environment-variables#tf-cli-args). In these cases, use `TF_CLI_ARGS_plan="-parallelism=<N>"` or `TF_CLI_ARGS_apply="-parallelism=<N>"` instead.
@@ -32,13 +41,19 @@ You can use the `TFE_PARALLELISM` environment variable when your infrastructure 
 
 #### Dynamic credentials
 
+Dynamic credentials lets you use temporary per-run credentials and eliminates the need to manually rotate secrets.
+
 You can configure [dynamic credentials](/terraform/cloud-docs/dynamic-provider-credentials) for certain providers using environment variables [at the workspace level](/terraform/cloud-docs/variables/managing-variables#workspace-specific-variables) or using [variable sets](/terraform/cloud-docs/variables/managing-variables#variable-sets).
 
-Dynamic credentials allows for using temporary per-run credentials and eliminates the need to manually rotate secrets.
+<!-- BEGIN: TFC:only name:stacks-tfe -->
+
+If you are configuring a Stack, refer to [Authenticate a Stack](/terraform/language/stacks/deploy/authenticate) to learn the workflow of authenticating your Stack deployments with dynamic credentials.
+
+<!-- END: TFC:only name:stacks-tfe -->
 
 ### Terraform variables
 
-Terraform variables refer to [input variables](/terraform/language/values/variables) that define parameters without hardcoding them into the configuration. For example, you could create variables that let users specify the number and type of Amazon Web Services EC2 instances they want to provision with a Terraform module.
+In workspaces, Terraform variables refer to [input variables](/terraform/language/block/variable) that define parameters without hardcoding them into the configuration. For example, you could create variables that let users specify the number and type of Amazon Web Services EC2 instances they want to provision with a Terraform module.
 
 ```hcl
 variable "instance_count" {
@@ -61,17 +76,23 @@ module "ec2_instances" {
 
 If a required input variable is missing, Terraform plans in the workspace will fail and print an explanation in the log.
 
+<!-- BEGIN: TFC:only name:stacks-tfe -->
+
+To learn more about accessing Terraform variable values in Stacks, refer to [Variable sets and Stacks](/terraform/cloud-docs/variables/managing-variables#variable-sets-and-stacks).
+
+<!-- END: TFC:only name:stacks-tfe -->
+
 ## Scope
 
 Each environment and Terraform variable can have one of the following scopes:
 
 | Scope                         | Description                                                                        | Resources                                                                                                                                                                                                                                                                                                                                              |
 | ----------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Run-Specific                  | Apply to a specific run within a single workspace.                                 | [Specify Run-Specific Variables](/terraform/cloud-docs/variables/managing-variables#run-specific-variables)                                                                                                                                                                                                                                 |
+| Workspace run-specific                  | Apply to a specific run within a single workspace.                                 | [Specify Run-Specific Variables](/terraform/cloud-docs/variables/managing-variables#run-specific-variables)                                                                                                                                                                                                                                 |
 | Workspace-Specific            | Apply to a single workspace.                                                       | [Create Workspace-Specific Variables](/terraform/cloud-docs/variables/managing-variables#workspace-specific-variables), [Loading Variables from Files](/terraform/cloud-docs/variables/managing-variables#loading-variables-from-files), [Workspace-Specific Variables API](/terraform/cloud-docs/api-docs/workspace-variables). |
 | Workspace-Scoped Variable Set | Apply to multiple workspaces within the same organization.                         | [Create Variable Sets](/terraform/cloud-docs/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
-| Project-Scoped Variable Set   | Automatically applied to all current and future workspaces within a project.       | [Create Variable Sets](/terraform/cloud-docs/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
-| Global Variable Set           | Automatically applied to all current and future workspaces within an organization. | [Create Variable Sets](/terraform/cloud-docs/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
+| Project-Scoped Variable Set   | Automatically applied and available to all current and future workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> within a project.       | [Create Variable Sets](/terraform/cloud-docs/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
+| Global Variable Set           | Automatically applied to all current and future workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> within an organization. | [Create Variable Sets](/terraform/cloud-docs/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
 
 ## Variable set ownership
 
@@ -87,9 +108,9 @@ Refer to [**Manage variable sets**](/terraform/cloud-docs/variables/managing-var
 
 > **Hands On:** The [Manage Multiple Variable Sets in HCP Terraform](/terraform/tutorials/cloud/cloud-multiple-variable-sets) tutorial shows how to manage multiple variable sets and demonstrates variable precedence.
 
-There may be cases when a workspace contains conflicting variables of the same type with the same key. HCP Terraform marks overwritten variables in the UI.
+There may be cases when a workspace contains conflicting variables of the same type with the same key. HCP Terraform marks overwritten variables in the UI. <!-- BEGIN: TFC:only name:stacks-tfe -->Stacks directly reference individual variable sets using the `store` block, so they do not need to heed the following precedence rules.<!-- END: TFC:only name:stacks-tfe -->
 
-HCP Terraform prioritizes and overwrites conflicting variables according to the following precedence:
+HCP Terraform prioritizes and overwrites conflicting variables in workspaces according to the following precedence:
 
 ### 1. Priority global variable sets
 
@@ -177,7 +198,7 @@ Although HCP Terraform uses variables from `terraform.tfvars`, Terraform Enterpr
 
 </Note>
 
-## Precedence with priority variable sets
+### Precedence with priority variable sets
 
 You can select to prioritize all values of the variables in a variable set.
 When a variable set is priority, the values take precedence over any variables with the same key set at a more specific scope.
