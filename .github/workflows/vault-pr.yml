@@ -18,9 +18,9 @@ env:
 
     Branch            | Publication timeline  | Selection
     ----------------- | --------------------- | ---------
-    `main`            | Immediately           | ${{ env.main_select }}
-    `vault/YYYYMM`    | End of the month      | ${{ env.month_select }}
-    `vault/<version>` | Next major release    | ${{ env.release_select }}
+    `main`            | Immediately           | ${{ github.env.main_select }}
+    `vault/YYYYMM`    | End of the month      | ${{ github.env.month_select }}
+    `vault/<version>` | Next major release    | ${{ github.env.release_select }}
 
 jobs:
 
@@ -32,7 +32,7 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
-          message: ${{ env.pub_comment }}
+          message: ${{ github.env.pub_comment }}
 
   update-pub-comment:
     name: Add timeline selection
@@ -67,4 +67,4 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
-          message: ${{ env.pub_comment }}
+          message: ${{ github.env.pub_comment }}
