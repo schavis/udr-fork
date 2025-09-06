@@ -32,7 +32,7 @@ You can use the `TFE_PARALLELISM` environment variable when your infrastructure 
 
 #### Dynamic credentials
 
-You can configure [dynamic credentials](/terraform/cloud-docs/dynamic-provider-credentials) for certain providers using environment variables [at the workspace level](/terraform/cloud-docs/workspaces/variables/managing-variables#workspace-specific-variables) or using [variable sets](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets).
+You can configure [dynamic credentials](/terraform/cloud-docs/dynamic-provider-credentials) for certain providers using environment variables [at the workspace level](/terraform/cloud-docs/variables/managing-variables#workspace-specific-variables) or using [variable sets](/terraform/cloud-docs/variables/managing-variables#variable-sets).
 
 Dynamic credentials allows for using temporary per-run credentials and eliminates the need to manually rotate secrets.
 
@@ -67,21 +67,21 @@ Each environment and Terraform variable can have one of the following scopes:
 
 | Scope                         | Description                                                                        | Resources                                                                                                                                                                                                                                                                                                                                              |
 | ----------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Run-Specific                  | Apply to a specific run within a single workspace.                                 | [Specify Run-Specific Variables](/terraform/cloud-docs/workspaces/variables/managing-variables#run-specific-variables)                                                                                                                                                                                                                                 |
-| Workspace-Specific            | Apply to a single workspace.                                                       | [Create Workspace-Specific Variables](/terraform/cloud-docs/workspaces/variables/managing-variables#workspace-specific-variables), [Loading Variables from Files](/terraform/cloud-docs/workspaces/variables/managing-variables#loading-variables-from-files), [Workspace-Specific Variables API](/terraform/cloud-docs/api-docs/workspace-variables). |
-| Workspace-Scoped Variable Set | Apply to multiple workspaces within the same organization.                         | [Create Variable Sets](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
-| Project-Scoped Variable Set   | Automatically applied to all current and future workspaces within a project.       | [Create Variable Sets](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
-| Global Variable Set           | Automatically applied to all current and future workspaces within an organization. | [Create Variable Sets](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
+| Run-Specific                  | Apply to a specific run within a single workspace.                                 | [Specify Run-Specific Variables](/terraform/cloud-docs/variables/managing-variables#run-specific-variables)                                                                                                                                                                                                                                 |
+| Workspace-Specific            | Apply to a single workspace.                                                       | [Create Workspace-Specific Variables](/terraform/cloud-docs/variables/managing-variables#workspace-specific-variables), [Loading Variables from Files](/terraform/cloud-docs/variables/managing-variables#loading-variables-from-files), [Workspace-Specific Variables API](/terraform/cloud-docs/api-docs/workspace-variables). |
+| Workspace-Scoped Variable Set | Apply to multiple workspaces within the same organization.                         | [Create Variable Sets](/terraform/cloud-docs/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
+| Project-Scoped Variable Set   | Automatically applied to all current and future workspaces within a project.       | [Create Variable Sets](/terraform/cloud-docs/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
+| Global Variable Set           | Automatically applied to all current and future workspaces within an organization. | [Create Variable Sets](/terraform/cloud-docs/variables/managing-variables#variable-sets) and [Variable Sets API](/terraform/cloud-docs/api-docs/variable-sets)                                                                                                                                                                              |
 
 ## Variable set ownership
 
 Projects and organizations can both own variable sets. The owner of a variable set can determine the precedence of that set.
 
-Use organization-owned variable sets to share variables across multiple projects. Managing organization-owned variable sets [requires a higher permission level](/terraform/cloud-docs/workspaces/variables/managing-variables#permissions) because you can apply these sets to any project in your organization.
+Use organization-owned variable sets to share variables across multiple projects. Managing organization-owned variable sets [requires a higher permission level](/terraform/cloud-docs/variables/managing-variables#permissions) because you can apply these sets to any project in your organization.
 
 Use project-owned variable sets to share variables across multiple workspaces within a single project. Project-owned variable sets only require permissions on the project itself, rather than organization-level permissions.
 
-Refer to [**Manage variable sets**](/terraform/cloud-docs/workspaces/variables/managing-variables#permissions) for more details on variable set permissions.
+Refer to [**Manage variable sets**](/terraform/cloud-docs/variables/managing-variables#permissions) for more details on variable set permissions.
 
 ## Precedence
 
@@ -93,23 +93,23 @@ HCP Terraform prioritizes and overwrites conflicting variables according to the 
 
 ### 1. Priority global variable sets
 
-If [prioritized](/terraform/cloud-docs/workspaces/variables#precedence-with-priority-variable-sets), variables in a global variable set have precedence over all other variables with the same key.
+If [prioritized](/terraform/cloud-docs/variables#precedence-with-priority-variable-sets), variables in a global variable set have precedence over all other variables with the same key.
 
 ### 2. Priority project-scoped variable set owned by an organization
 
-If [prioritized](/terraform/cloud-docs/workspaces/variables#precedence-with-priority-variable-sets), variables in a priority project-scoped variable set have precedence over variables with the same key set at a more specific scope. Prioritized variables sets owned by organizations take precedence over priority variable sets owned by projects.
+If [prioritized](/terraform/cloud-docs/variables#precedence-with-priority-variable-sets), variables in a priority project-scoped variable set have precedence over variables with the same key set at a more specific scope. Prioritized variables sets owned by organizations take precedence over priority variable sets owned by projects.
 
 ### 3. Priority workspace-scoped variable set owned by an organization
 
-If [prioritized](/terraform/cloud-docs/workspaces/variables#precedence-with-priority-variable-sets), variables in an organization-owned variable set scoped to a workspace have precedence over variables with the same key set at a more specific scope. Prioritized variables sets owned by organizations take precedence over sets owned by projects.
+If [prioritized](/terraform/cloud-docs/variables#precedence-with-priority-variable-sets), variables in an organization-owned variable set scoped to a workspace have precedence over variables with the same key set at a more specific scope. Prioritized variables sets owned by organizations take precedence over sets owned by projects.
 
 ### 4. Priority project-scoped variable set owned by a project
 
-If [prioritized](/terraform/cloud-docs/workspaces/variables#precedence-with-priority-variable-sets), variables in a priority project-scoped variable set have precedence over variables with the same key set at a more specific scope.
+If [prioritized](/terraform/cloud-docs/variables#precedence-with-priority-variable-sets), variables in a priority project-scoped variable set have precedence over variables with the same key set at a more specific scope.
 
 ### 5. Priority workspace-scoped variable set owned by a project
 
-If [prioritized](/terraform/cloud-docs/workspaces/variables#precedence-with-priority-variable-sets), variables in a priority workspace-scoped variable set have precedence over variables with the same key set at a more specific scope.
+If [prioritized](/terraform/cloud-docs/variables#precedence-with-priority-variable-sets), variables in a priority workspace-scoped variable set have precedence over variables with the same key set at a more specific scope.
 
 ### 6. Command line argument variables
 
@@ -121,7 +121,7 @@ When using a CLI workflow, local environment variables prefixed with `TF_VAR_` (
 
 ### 8. Workspace-specific variables
 
-Workspace-specific variables always overwrite variables from variable sets that have the same key. Refer to [overwrite variables from variable sets](/terraform/cloud-docs/workspaces/variables/managing-variables#overwrite-variable-sets) for details.
+Workspace-specific variables always overwrite variables from variable sets that have the same key. Refer to [overwrite variables from variable sets](/terraform/cloud-docs/variables/managing-variables#overwrite-variable-sets) for details.
 
 ### 9. Workspace-scoped variable owned by a project
 
