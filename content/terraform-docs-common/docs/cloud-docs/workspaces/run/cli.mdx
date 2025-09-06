@@ -95,7 +95,7 @@ If you configure the `cloud` block to use a workspace that doesn't yet exist in 
 
 Automatically created workspaces might not be immediately ready to use, so use HCP Terraform's UI to check a workspace's settings and data before performing any runs. In particular, note that:
 
-- No Terraform variables or environment variables are created by default, unless your organization has configured one or more [global variable sets](/terraform/cloud-docs/workspaces/variables#scope). HCP Terraform will use `*.auto.tfvars` files if they are present, but you will usually still need to set some workspace-specific variables.
+- No Terraform variables or environment variables are created by default, unless your organization has configured one or more [global variable sets](/terraform/cloud-docs/variables#scope). HCP Terraform will use `*.auto.tfvars` files if they are present, but you will usually still need to set some workspace-specific variables.
 - The execution mode defaults to "Remote," so that runs occur within HCP Terraform's infrastructure instead of on your workstation.
 - New workspaces are not automatically connected to a VCS repository and do not have a working directory specified.
 - A new workspace's Terraform version defaults to the most recent release of Terraform at the time the workspace was created.
@@ -115,7 +115,7 @@ Remote runs in HCP Terraform use:
 - Any variable sets applied globally, on the project containing the workspace, or on the workspace itself.
 - Terraform variables from any `*.auto.tfvars` files included in the configuration.
 
-Refer to [Variables](/terraform/cloud-docs/workspaces/variables) for more details about variable types, variable scopes, variable precedence, and how to set run-specific variables through the command line.
+Refer to [Variables](/terraform/cloud-docs/variables) for more details about variable types, variable scopes, variable precedence, and how to set run-specific variables through the command line.
 
 ## Remote Working Directories
 
