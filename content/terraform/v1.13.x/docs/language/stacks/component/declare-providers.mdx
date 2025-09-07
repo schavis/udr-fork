@@ -78,10 +78,10 @@ component "s3" {
 After configuring your provider, you can use the Terraform CLI to generate a provider lock file:
 
 ```shell
-$ terraform stacks providers-lock
+$ terraform stacks init
 ```
 
-If you update a provider version and want to apply those changes to your Stack locally, re-run the [`terraform stacks providers-lock` command](terraform/cli/commands/stacks/providers-lock) to update the provider lock file.
+If you update a provider version and want to apply those changes to your Stack locally, re-run the [`terraform stacks init -upgrade` command](terraform/cli/commands/stacks/init) to update the provider lock file.
 
 ### Dynamic provider configurations
 
@@ -149,15 +149,13 @@ Check your provider in the [Terraform registry](https://registry.terraform.io/) 
 
 ## Provider lock file
 
-A Stack cannot run without a lock file for its providers. After defining your providers, use the Terraform CLI to generate a `.terraform.lock.hcl` lock file. The `terraform stacks providers-lock` command creates and updates your `.terraform.lock.hcl` file:
+A Stack cannot run without a lock file for its providers. After defining your providers, use the Terraform CLI to generate a `.terraform.lock.hcl` lock file. The `terraform stacks init` command creates and updates your `.terraform.lock.hcl` file:
 
 ```shell-session
-$ terraform stacks providers-lock
+$ terraform stacks init
 ```
 
-The `terraform stacks providers-lock` command uses the `required_providers` block from your configuration to download the listed providers and compute the provider lock hashes. The `terraform stacks providers-lock` command only checks the `required_providers` block, so you must list all of the providers you use in that block to ensure that the `terraform stacks` CLI can find them.
-
-If you update your Stack’s providers, rerun the `terraform stacks providers-lock` command to update your Stack’s lock file locally. For more details, refer to the [`terraform stacks` commands](/terraform/cli/commands/stacks).
+The `terraform stacks init` command uses the `required_providers` block from your configuration to download the listed providers and compute the provider lock hashes. If you update your Stack’s providers, run `terraform stacks init -upgrade` command to update your Stack’s lock file locally. For more details, refer to the [`terraform stacks` commands](/terraform/cli/commands/stacks).
 
 ## Next steps
 
