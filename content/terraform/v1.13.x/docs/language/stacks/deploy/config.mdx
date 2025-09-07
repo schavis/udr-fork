@@ -5,7 +5,7 @@ description: Learn how to write Stack deployment configuration files to define h
 
 # Define deployment configuration
 
-In Stacks, deployments let you replicate infrastructure across multiple environments, regions, or accounts. Each deployment has in its own isolated state, ensuring that changes in one deployment do not affect others. Learn how to write a deployment configuration to define how HCP Terraform deploys your infrastructure.
+In Stacks, deployments let you replicate infrastructure across multiple environments, regions, or accounts. Each deployment has its own isolated state, ensuring that changes in one deployment do not affect others. Learn how to write a deployment configuration to define how HCP Terraform deploys your infrastructure.
 
 ## Background
 
@@ -22,7 +22,7 @@ You can also create deployment groups to define rules that let you auto-approve 
 
 ## Write a deployment configuration file
 
-Deployment configuration files live at the top level of your repository and use the `.tfdeploy.hcl` file extension. We recommend naming your deployments file `deployments.tfdeploy.hcl`.
+Deployment configuration files live at the top level of your repository and use the `.tfdeploy.hcl` file extension. You can organize your deployment configuration into multiple files, as in traditional Terraform configurations.
 
 You can define the following blocks in deployment configuration files to support setting up your Stack's deployments:
 
@@ -149,6 +149,8 @@ To learn more about the `identity_token` block, refer to the [`identity_token` b
 
 ## Automatically approve deployment runs
 
+@include 'premium-deployment-groups.mdx'
+
 You can create deployment groups to define rules that let you auto-approve deployment runs that match your specified criteria.
 
 
@@ -157,7 +159,6 @@ You can create deployment groups to define rules that let you auto-approve deplo
 Deployment groups only support one deployment per group at this time.
 
 </Note>
-
 
 Define a `deployment_group` block to create a new group, and specify the auto-approve rules that deployment group enforces. In the following example, the `production` deployment group enforces the `no_destroys` rule:
 
