@@ -45,11 +45,13 @@ We recommend using Stacks if your use case meets any of the following conditions
 - You repeat infrastructure across different environments, regions, or accounts that require consistent and synchronized deployments.
 - You have a tightly orchestrated infrastructure that changes across different environments.
 
-Stacks codify the entire behavior of your infrastructure lifecycle within version-controlled configuration files. To learn more about Stacks and review examples, refer to [Stack use cases](/terraform/language/stacks/use-cases). If you want to migrate an existing workspace to a Stack, refer to the [Terraform migrate CLI](#TODO).
+Stacks codify the entire behavior of your infrastructure lifecycle within version-controlled configuration files. To learn more about Stacks and review examples, refer to [Stack use cases](/terraform/language/stacks/use-cases). If you want to migrate an existing workspace to a Stack, refer to the [Terraform migrate CLI](/terraform/language/stacks/deploy/conditions).
 
 Stacks were designed to simplify and scale Terraform workflows that become complex or repetitive using workspaces. When you use a Stack, HCP Terraform automatically recognizes the dependency between components, automatically deferring the component's plan and apply steps until it can complete them successfully. Learn more about how Stacks plan [deferred changes](/terraform/cloud-docs/stacks/deploy/plans#deferred-changes).
 
-You can also define rules to automatically approve Stack deployment runs using [deployment group orchestration rules](#TODO). To learn more about the features that Stack do and do not support, refer to [Feature support](#feature-support).
+If you have multiple Stacks that do not share a provisioning lifecycle, you can link those Stacks together to export data from one Stack for another to consume. Like [workspace run triggers](/terraform/cloud-docs/workspaces/settings/run-triggers), if the output value of a Stack changes after a run, HCP Terraform automatically triggers runs for any Stacks that depend on those outputs. To learn more, refer to [Pass data from one Stack to another](/terraform/language/stacks/deploy/pass-data).
+
+You can also define rules to automatically approve Stack deployment runs using [deployment group orchestration rules](/terraform/language/stacks/deploy/conditions). To learn more about the features that Stack do and do not support, refer to [Feature support](#feature-support).
 
 ## Feature support
 
