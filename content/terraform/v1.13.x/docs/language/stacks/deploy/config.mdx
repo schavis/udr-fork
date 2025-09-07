@@ -85,13 +85,13 @@ Use the following blocks to set up authentication for your deployment's provider
 - The `store` block lets you reference values in an HCP Terraform [variable set](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets).
 - The `identity_token` block generates a JSON Web Token (JWT) for OIDC authentication.
 
-The `store` block lets you access a variable set from your deployment configuration. In the following example, the `api_keys` store fetches API keys from a variable set with the ID `varset-abc123456`:
+The `store` block lets you access a variable set from your deployment configuration. In the following example, the `api_keys` store fetches API keys from a variable set named `api_keys_default_project`:
 
 <CodeBlockConfig filename="deployments.tfdeploy.hcl">
 
 ```hcl
 store "varset" "api_keys" {
-  id       = "varset-abc123456"
+  name       = "api_keys_default_project"
   category = "terraform"
 }
 

@@ -128,11 +128,11 @@ The following examples demonstrate common use cases for `store` blocks.
 
 ### Define a store and access variables
 
-The following example defines a `varset` store named `api_keys` that accesses a variable set using its external ID:
+The following example defines a `varset` store named `api_keys` that accesses a variable set named `api_keys_default_project`:
 
 ```hcl
 store "varset" "api_keys" {
-  id       = "varset-abc123"
+  name       = "api_keys_default_project"
   category = "terraform"
 }
 
