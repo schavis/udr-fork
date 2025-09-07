@@ -10,21 +10,22 @@ Stacks enable you to provision and coordinate your infrastructure lifecycle at s
 
 > **Hands-on**: Try out the [Deploy a Stack with HCP Terraform](/terraform/tutorials/cloud/stacks-deploy) tutorial to get started with Stacks quickly.
 
-This article explains how to create a Stack in HCP Terraform using a Stack’s configuration and deployment configuration files.
+This article explains how to create a Stack in HCP Terraform using component and deployment configuration files.
 
 ## Requirements
 
 Stacks are not available for users on legacy HCP Terraform team plans. Learn more about [migrating to current HCP Terraform plans](/terraform/cloud-docs/overview/migrate-teams-standard).
 
 To create a Stack in HCP Terraform, you must set up the following:
-* [Connect a VCS provider](/terraform/cloud-docs/vcs) using the Github App, GitHub OAuth workflow, or a GitLab VCS workflow.
-* A repository with a top-level [Stack configuration](/terraform/language/stacks/create/config) and a [deployment configuration](/terraform/language/stacks/deploy/config). Your component configuration file should include at least one `component` block, and your deployment configuration file should include at least one `deployment` block.
-
-You must also be a member of a team in your organization with one of the following permissions:
+ must also be a member of a team in your organization with one of the following permissions:
 * [Organization-level **Manage all projects**](/terraform/cloud-docs/users-teams-organizations/permissions#manage-all-projects)
 * [Project-level **Maintain**](/terraform/cloud-docs/users-teams-organizations/permissions#maintain) or higher
 
 ## Create a Stack
+
+You can create a Stack 
+
+<!-- TODO: is this still true past GA? -->
 
 If you are creating a Stack in an organization for the first time, you should first enable Stacks for your organization. Navigate to your organization’s **Settings** page, and in the **General** settings, check the box next to **Stacks** to enable them.
 
