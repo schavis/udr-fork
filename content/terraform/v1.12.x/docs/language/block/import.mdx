@@ -26,11 +26,14 @@ The following `module` block includes all built-in arguments:
 ```hcl
 import {
   to = resource.type.address
-  id = "cloud-provider-id"	  
-  for_each = {          	  # `for_each` accepts a map or a set of strings 
+  id = "cloud-provider-id"      # `id` is mutually exclusive with `identity` 
+  identity = {                  # `identity` is mutually exclusive with `id`
+    <ATTRIBUTE> = <VALUE>
+  }	  
+  for_each = {          	    # `for_each` accepts a map or a set of strings 
     <KEY> = <VALUE>
   }
-  for_each = [       	  # `for_each` accepts a map or a set of strings 
+  for_each = [       	        # `for_each` accepts a map or a set of strings 
     "<VALUE>", 
     "<VALUE>"
   ]
