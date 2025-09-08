@@ -357,32 +357,28 @@ prevent duplicate password rotations on the LDAP server.
 
 | Change | Affected version | Fixed version |
 | :--- | :--- | :--- |
-| Known issue | 1.20.x, 1.19.x | None |
+| Known issue | 1.20.0+ | None |
 
-Write operations targeting a local auth mount on a performance replication secondary
-cluster are incorrectly forwarded to the primary cluster for processing. This
-prevents the independent configuration of local mounts on secondary clusters.
+Vault incorrectly forwards write operations targeting a local authentication
+mounts on a performance replication secondary to the primary cluster for
+processing. Forwarding the request prevents independent configuration of local
+mounts on secondary clusters for the following authentication methods:
 
-The following auth methods are affected:
 - Azure
 - GCP
 - AWS
-- LDAP
+- LDA
 
-This behavior leads to two distinct failure modes. If a local auth mount with the
-same path exists on the primary, the write operation is incorrectly applied to
-the primary's mount. If the auth mount path does not exist on the primary, the
-secondary cluster panics with a `nil pointer dereference` error, causing the
-Vault node to crash.
+Incorrect forwarding leads to two distinct failure modes:
 
-As a result, it is not possible to maintain independent configurations for
-local mounts that share the same path across a primary and its secondaries.
-Furthermore, attempting to use unique paths on the secondary that do not exist
-on the primary leads to a panic as Vault will forward the request.
+1. If a local auth mount with the same path exists on the primary, Vault
+   incorrectly applies the write operation to the primary node mount.
+
+1. If the auth mount path does not exist on the primary, the secondary cluster
+   panics with a `nil pointer dereference` error and the Vault node crashes.
 
 #### Recommendation
 
-There is currently no known workaround for this issue. Do not attempt to
-configure local auth mounts on performance replication secondaries until a fix
-is available.
+Do not attempt to configure local auth mounts on performance replication
+secondaries.
 
