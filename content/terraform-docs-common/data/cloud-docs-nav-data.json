@@ -156,38 +156,6 @@
     ]
   },
   {
-  "title": "Use dynamic provider credentials",
-    "routes": [
-  { "title":  "Overview", "href":  "dynamic-provider-credentials" },
-  { "title":  "Workload identity tokens", "href":  "dynamic-provider-credentials/workload-identity-tokens" },
-  { "title":  "Vault configuration", "href":  "dynamic-provider-credentials/vault-configuration" },
-  { "title":  "AWS configuration", "href":  "dynamic-provider-credentials/aws-configuration" },
-  { "title":  "GCP configuration", "href":  "dynamic-provider-credentials/gcp-configuration" },
-  { "title":  "Azure configuration", "href":  "dynamic-provider-credentials/azure-configuration" },
-  { "title":  "Kubernetes configuration", "href":  "dynamic-provider-credentials/kubernetes-configuration" },
-  { "title":  "HCP configuration", "href":  "dynamic-provider-credentials/hcp-configuration" },
-  { "title":  "Manually generating workload identity tokens", "href":  "dynamic-provider-credentials/manual-generation" },
-  { "title":  "Specifying multiple configurations", "href": "dynamic-provider-credentials/specifying-multiple-configurations"},
-      {
-  "title": "Vault-backed dynamic credentials",
-        "routes": [
-          { "title":  "Overview", "href":  "dynamic-provider-credentials/vault-backed" },
-          { "title":  "AWS configuration", "href": "dynamic-provider-credentials/vault-backed/aws-configuration" },
-          { "title":  "GCP configuration", "href": "dynamic-provider-credentials/vault-backed/gcp-configuration" },
-          { "title":  "Azure configuration", "href": "dynamic-provider-credentials/vault-backed/azure-configuration" }
-        ]
-      },
-      {
-  "title": "HCP Vault secrets-backed dynamic credentials",
-        "routes": [
-          { "title":  "Overview", "href":  "dynamic-provider-credentials/hcp-vault-secrets-backed" },
-          { "title":  "AWS configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/aws-configuration" },
-          { "title":  "GCP configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/gcp-configuration" }
-        ]
-      }
-    ]
-  },
-  {
   "title": "Variables",
     "routes": [
   { "title": "Overview", "path": "variables" },
@@ -200,37 +168,37 @@
   {
   "title": "Connecting to VCS",
     "routes": [
-  { "title": "Overview", "path": "vcs" },
-      {
-        "title": "GitHub.com",
-        "path": "vcs/github-app"
-      },
-  { "title": "GitHub.com (OAuth)", "path": "vcs/github" },
-      {
-        "title": "GitHub Enterprise",
-        "path": "vcs/github-enterprise"
-      },
-  { "title": "GitLab.com", "path": "vcs/gitlab-com" },
-  { "title": "GitLab EE and CE", "path": "vcs/gitlab-eece" },
-  { "title": "Bitbucket cloud", "path": "vcs/bitbucket-cloud" },
-      {
-        "title": "Bitbucket data center",
-        "path": "vcs/bitbucket-data-center"
-      },
-      {
-        "title": "Azure DevOps services (OAuth)",
-        "path": "vcs/azure-devops-services"
-      },
-      {
-        "title": "Azure DevOps services (PAT)",
-        "path": "vcs/azure-devops-services-pat"
-      },
-      {
-        "title": "Azure DevOps server",
-        "path": "vcs/azure-devops-server"
-      },
-  { "title": "Private VCS providers", "path": "vcs/private"},
-  { "title": "Troubleshooting", "path": "vcs/troubleshooting" }
+    { "title": "Overview", "path": "vcs" },
+        {
+          "title": "GitHub.com",
+          "path": "vcs/github-app"
+        },
+    { "title": "GitHub.com (OAuth)", "path": "vcs/github" },
+        {
+          "title": "GitHub Enterprise",
+          "path": "vcs/github-enterprise"
+        },
+    { "title": "GitLab.com", "path": "vcs/gitlab-com" },
+    { "title": "GitLab EE and CE", "path": "vcs/gitlab-eece" },
+    { "title": "Bitbucket cloud", "path": "vcs/bitbucket-cloud" },
+        {
+          "title": "Bitbucket data center",
+          "path": "vcs/bitbucket-data-center"
+        },
+        {
+          "title": "Azure DevOps services (OAuth)",
+          "path": "vcs/azure-devops-services"
+        },
+        {
+          "title": "Azure DevOps services (PAT)",
+          "path": "vcs/azure-devops-services-pat"
+        },
+        {
+          "title": "Azure DevOps server",
+          "path": "vcs/azure-devops-server"
+        },
+    { "title": "Private VCS providers", "path": "vcs/private"},
+    { "title": "Troubleshooting", "path": "vcs/troubleshooting" }
     ]
   },
   {
@@ -424,6 +392,38 @@
         ]
       },
       {
+        "title": "Use dynamic provider credentials",
+          "routes": [
+        { "title":  "Overview", "href":  "dynamic-provider-credentials" },
+        { "title":  "Workload identity tokens", "href":  "dynamic-provider-credentials/workload-identity-tokens" },
+        { "title":  "Vault configuration", "href":  "dynamic-provider-credentials/vault-configuration" },
+        { "title":  "AWS configuration", "href":  "dynamic-provider-credentials/aws-configuration" },
+        { "title":  "GCP configuration", "href":  "dynamic-provider-credentials/gcp-configuration" },
+        { "title":  "Azure configuration", "href":  "dynamic-provider-credentials/azure-configuration" },
+        { "title":  "Kubernetes configuration", "href":  "dynamic-provider-credentials/kubernetes-configuration" },
+        { "title":  "HCP configuration", "href":  "dynamic-provider-credentials/hcp-configuration" },
+        { "title":  "Manually generating workload identity tokens", "href":  "dynamic-provider-credentials/manual-generation" },
+        { "title":  "Specifying multiple configurations", "href": "dynamic-provider-credentials/specifying-multiple-configurations"},
+            {
+        "title": "Vault-backed dynamic credentials",
+              "routes": [
+                { "title":  "Overview", "href":  "dynamic-provider-credentials/vault-backed" },
+                { "title":  "AWS configuration", "href": "dynamic-provider-credentials/vault-backed/aws-configuration" },
+                { "title":  "GCP configuration", "href": "dynamic-provider-credentials/vault-backed/gcp-configuration" },
+                { "title":  "Azure configuration", "href": "dynamic-provider-credentials/vault-backed/azure-configuration" }
+              ]
+            },
+            {
+        "title": "HCP Vault secrets-backed dynamic credentials",
+              "routes": [
+                { "title":  "Overview", "href":  "dynamic-provider-credentials/hcp-vault-secrets-backed" },
+                { "title":  "AWS configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/aws-configuration" },
+                { "title":  "GCP configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/gcp-configuration" }
+              ]
+            }
+          ]
+        },
+      {
         "title": "Cost estimation",
         "routes": [
           { "title": "Overview", "path": "workspaces/cost-estimation" },
@@ -453,11 +453,11 @@
         ]
       },
       {
-  "title": "Control state and plan file encryption",
-    "routes": [
-  { "title": "Overview", "path": "hold-your-own-key" },
-  { "title": "How hold your own key works", "path": "hold-your-own-key/concepts" },
-  { "title": "Configure and manage keys", "path": "hold-your-own-key/configure" }
+        "title": "Control state and plan file encryption",
+          "routes": [
+        { "title": "Overview", "path": "hold-your-own-key" },
+        { "title": "How hold your own key works", "path": "hold-your-own-key/concepts" },
+        { "title": "Configure and manage keys", "path": "hold-your-own-key/configure" }
     ]
       },
       {
@@ -601,7 +601,39 @@
           { "title": "Configuration versions", "path": "stacks/deploy/configuration-versions" },
           { "title": "Review deployment plans", "path": "stacks/deploy/plans" }
         ]
-      }
+      },
+      {
+  "title": "Use dynamic provider credentials",
+    "routes": [
+      { "title":  "Overview", "href":  "dynamic-provider-credentials" },
+      { "title":  "Workload identity tokens", "href":  "dynamic-provider-credentials/workload-identity-tokens" },
+      { "title":  "Vault configuration", "href":  "dynamic-provider-credentials/vault-configuration" },
+      { "title":  "AWS configuration", "href":  "dynamic-provider-credentials/aws-configuration" },
+      { "title":  "GCP configuration", "href":  "dynamic-provider-credentials/gcp-configuration" },
+      { "title":  "Azure configuration", "href":  "dynamic-provider-credentials/azure-configuration" },
+      { "title":  "Kubernetes configuration", "href":  "dynamic-provider-credentials/kubernetes-configuration" },
+      { "title":  "HCP configuration", "href":  "dynamic-provider-credentials/hcp-configuration" },
+      { "title":  "Manually generating workload identity tokens", "href":  "dynamic-provider-credentials/manual-generation" },
+      { "title":  "Specifying multiple configurations", "href": "dynamic-provider-credentials/specifying-multiple-configurations"},
+      {
+        "title": "Vault-backed dynamic credentials",
+          "routes": [
+            { "title":  "Overview", "href":  "dynamic-provider-credentials/vault-backed" },
+            { "title":  "AWS configuration", "href": "dynamic-provider-credentials/vault-backed/aws-configuration" },
+            { "title":  "GCP configuration", "href": "dynamic-provider-credentials/vault-backed/gcp-configuration" },
+            { "title":  "Azure configuration", "href": "dynamic-provider-credentials/vault-backed/azure-configuration" }
+          ]
+      },
+      {
+        "title": "HCP Vault secrets-backed dynamic credentials",
+          "routes": [
+            { "title":  "Overview", "href":  "dynamic-provider-credentials/hcp-vault-secrets-backed" },
+            { "title":  "AWS configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/aws-configuration" },
+            { "title":  "GCP configuration", "href": "dynamic-provider-credentials/hcp-vault-secrets-backed/gcp-configuration" }
+          ]
+        }
+      ]
+    }
     ]
   },
   {
