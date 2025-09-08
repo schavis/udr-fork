@@ -222,7 +222,7 @@
     "title": "Manage infrastructure at scale with Stacks",
     "routes": [
       { "title": "Overview", "path": "stacks",  "alias": "stacks"},
-      { "title": "Update from beta to general availability", "path": "update-GA" },
+      { "title": "Update from beta to general availability", "path": "stacks/update-GA" },
       { "title": "Use cases", "path": "stacks/use-cases" },
       { "title": "Design a Stack", "path": "stacks/design" },
       {
@@ -326,7 +326,8 @@
         { "title": "provider", "path": "block/stack/component_configuration/provider" },
         { "title": "variable", "path": "block/stack/component_configuration/variable" },
         { "title": "output", "path": "block/stack/component_configuration/output" },
-        { "title": "removed", "path": "block/stack/component_configuration/removed" }
+        { "title": "removed", "path": "block/stack/component_configuration/removed" },
+        { "title": "locals", "href": "block/locals" }
       ]
       },
       { "title": "Deployment configuration", "routes": [
@@ -337,7 +338,11 @@
         { "title": "identity_token", "path": "block/stack/deploy/identity_token" },
         { "title": "store", "path": "block/stack/deploy/store" },
         { "title": "publish_output", "path": "block/stack/deploy/publish_output" },
-        { "title": "upstream_input", "path": "block/stack/deploy/upstream_input" }
+        { "title": "upstream_input", "path": "block/stack/deploy/upstream_input" },
+        {
+          "title": "locals",
+          "href": "block/locals"
+        }
       ]
       }
     ]
