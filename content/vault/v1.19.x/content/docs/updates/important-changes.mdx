@@ -467,3 +467,37 @@ due to improper credential refreshes and stale connections in the connection poo
 When two or more concurrent operations occur, Vault tries to reuse an idle
 connection from the pool and the request fails due to session timeout in the
 Snowflake database.
+
+### Writing configuration to local auth mount (ldap, aws, gcp, azure) ignores local flag ((#local-auth-known-issue))
+
+| Change | Affected version | Fixed version |
+| :--- | :--- | :--- |
+| Known issue | 1.20.x, 1.19.x | None |
+
+Write operations targeting a local auth mount on a performance replication secondary
+cluster are incorrectly forwarded to the primary cluster for processing. This
+prevents the independent configuration of local mounts on secondary clusters.
+
+The following auth methods are affected:
+- Azure
+- GCP
+- AWS
+- LDAP
+
+This behavior leads to two distinct failure modes. If a local auth mount with the
+same path exists on the primary, the write operation is incorrectly applied to
+the primary's mount. If the auth mount path does not exist on the primary, the
+secondary cluster panics with a `nil pointer dereference` error, causing the
+Vault node to crash.
+
+As a result, it is not possible to maintain independent configurations for
+local mounts that share the same path across a primary and its secondaries.
+Furthermore, attempting to use unique paths on the secondary that do not exist
+on the primary leads to a panic as Vault will forward the request.
+
+#### Recommendation
+
+There is currently no known workaround for this issue. Do not attempt to
+configure local auth mounts on performance replication secondaries until a fix
+is available.
+
