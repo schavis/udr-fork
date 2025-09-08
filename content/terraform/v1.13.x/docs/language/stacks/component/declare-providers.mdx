@@ -1,28 +1,28 @@
 ---
 page_title: Declare providers
-description: Learn how to declare providers in Stack configurations.
+description: Learn how to declare providers in component configurations.
 ---
 
 # Declare providers
 
 Terraform relies on plugins called providers to interact with cloud providers, SaaS providers, and other APIs.
 
-Like traditional Terraform configurations, Terraform Stack configurations declare which providers they require at the top level so that Terraform can install and use them.
+Like traditional Terraform configurations, Terraform component configurations declare which providers they require at the top level so that Terraform can install and use them.
 
-Providers in Stack configurations differ from normal Terraform configurations in the following ways:
+Providers in component configurations differ from normal Terraform configurations in the following ways:
 * Modules sourced by `component` blocks cannot declare their own providers. Instead, each `component` block accepts a top-level map of providers.
 * You must pass attributes to providers using a `config` block.
 * You define provider alias names in the header of its block.
-* Providers in Stack configurations support the [`for_each`](/terraform/language/meta-arguments#for_each) meta argument.
+* Providers in component configurations support the [`for_each`](/terraform/language/meta-arguments/for_each) meta argument.
 
 After defining your providers, you must use the Terraform Stacks CLI to install the providers and create a provider lock file before you can use deploy your Stack.
 
 ## Use a provider in a Stack
 
-Define your Stack’s `provider` blocks in a top-level `.tfstack.hcl` file. The following example file named `providers.tfstack.hcl` defines an AWS provider.
+Define your Stack’s `provider` blocks in a top-level `.tfcomponent.hcl` file. The following example file named `providers.tfcomponent.hcl` defines an AWS provider.
 
 ```hcl
-# providers.tfstack.hcl
+# providers.tfcomponent.hcl
 
 required_providers {
     aws = {
@@ -48,7 +48,7 @@ provider "aws" "this" {
 }
 ```
 
-When you define a provider, you must also add that provider to a `required_providers` to ensure the Terraform Stacks CLI knows which provider version to download. For more details on Stack-specific provider syntax, refer to the [Stack configuration file reference](/terraform/language/stacks/reference/tfstack).
+When you define a provider, you must also add that provider to a `required_providers` to ensure the Terraform Stacks CLI knows which provider version to download. For more details on Stack-specific provider syntax, refer to the [Component configuration file reference](/terraform/language/stacks/reference/tfcomponent).
 
 You must authenticate that provider to ensure the provider can create your infrastructure. Refer to [Authenticate a Stack](/terraform/language/stacks/deploy/authenticate) for details and examples.
 
@@ -57,7 +57,7 @@ After you define your providers, you can pass them to your Stack’s `component`
 After defining your Stack’s providers, pass each `component` block the provider(s) it requires.
 
 ```hcl
-# components.tfstack.hcl
+# components.tfcomponent.hcl
 
 component "s3" {
     source = "./s3"
@@ -70,14 +70,14 @@ component "s3" {
 }
 ```
 
-After configuring your provider, you can use the Terraform Stacks CLI to [generate a provider lock file](/terraform/language/stacks/reference/tfstacks-cli#tfstack-providers-lock-command).
+After configuring your provider, you can use the Terraform Stacks CLI to [generate a provider lock file](/terraform/language/stacks/reference/tfcomponents-cli#tfcomponent-providers-lock-command).
 
 ### Dynamic provider configurations
 
 Unlike traditional Terraform providers, Stack providers also support the `for_each` meta-argument. The `for_each` meta-argument lets you dynamically create provider configurations based on your inputs, which is beneficial for multi-region deployments.
 
 ```hcl
-# providers.tfstack.hcl
+# providers.tfcomponent.hcl
 
 required_providers {
     aws = {
@@ -109,7 +109,7 @@ In your component configuration, you could the `for_each` block to define config
 
 
 ```hcl
-# components.tfstack.hcl
+# components.tfcomponent.hcl
 
 component "s3" {
     for_each = var.regions
@@ -137,16 +137,16 @@ Check your provider in the [Terraform registry](https://registry.terraform.io/) 
 
 ## Provider lock file
 
-A Stack cannot run without a lock file for its providers. After defining your providers, use the Terraform Stacks CLI to generate a `.terraform.lock.hcl` lock file. The `tfstacks providers lock` command creates and updates your `.terraform.lock.hcl` file.
+A Stack cannot run without a lock file for its providers. After defining your providers, use the Terraform Stacks CLI to generate a `.terraform.lock.hcl` lock file. The `tfcomponents providers lock` command creates and updates your `.terraform.lock.hcl` file.
 
 ```shell-session
-$ tfstacks providers lock
+$ tfcomponents providers lock
 ```
 
-The `tfstacks providers lock` command uses the `required_providers` block from your configuration to download the listed providers and compute the provider lock hashes. The `tfstacks providers lock` command only checks the `required_providers` block, so you must list all of the providers you use in that block to ensure that the `tfstacks` CLI can find them.
+The `tfcomponents providers lock` command uses the `required_providers` block from your configuration to download the listed providers and compute the provider lock hashes. The `tfcomponents providers lock` command only checks the `required_providers` block, so you must list all of the providers you use in that block to ensure that the `tfcomponents` CLI can find them.
 
-If you update your Stack’s providers, you must rerun the `tfstacks providers lock` command to update your Stack’s providers lock file. For more details, refer to [Terraform Stacks CLI](/terraform/language/stacks/reference/tfstacks-cli).
+If you update your Stack’s providers, you must rerun the `tfcomponents providers lock` command to update your Stack’s providers lock file. For more details, refer to [Terraform Stacks CLI](/terraform/language/stacks/reference/tfcomponents-cli).
 
 ## Next steps
 
-After declaring your providers, you can either finish [defining the rest of your Stack configuration](/terraform/language/stacks/create/config) or move on to [define your Stack’s deployment configuration](/terraform/language/stacks/deploy/config).
+After declaring your providers, you can either finish [defining the rest of your component configuration](/terraform/language/stacks/component/config) or move on to [define your Stack’s deployment configuration](/terraform/language/stacks/deploy/config).
