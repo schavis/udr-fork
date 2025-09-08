@@ -77,7 +77,7 @@ component "s3" {
 
 After configuring your provider, you can use the Terraform CLI to generate a provider lock file:
 
-```shell
+```shell-session
 $ terraform stacks init
 ```
 
@@ -155,7 +155,7 @@ A Stack cannot run without a lock file for its providers. After defining your pr
 $ terraform stacks init
 ```
 
-The `terraform stacks init` command uses the `required_providers` block from your configuration to download the listed providers and compute the provider lock hashes. If you update your Stack’s providers, run `terraform stacks init -upgrade` command to update your Stack’s lock file locally. For more details, refer to the [`terraform stacks` commands](/terraform/cli/commands/stacks).
+The `terraform stacks init` command uses the `required_providers` block from your configuration to download the listed providers and compute the provider lock hashes. If you update your Stack’s providers, run the `terraform stacks init -upgrade` command to update your Stack’s lock file locally. For more details, refer to the [`terraform stacks` commands](/terraform/cli/commands/stacks).
 
 ## Next steps
 

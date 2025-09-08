@@ -19,6 +19,8 @@ Terraform Stacks enable you to split your Terraform configuration into component
 
 Each deployment in a Stack represents a group of components that work together, such as a development and production environment. The configuration for each Stack is identical across deployments, and you can customize each deployment with input variables. You can then use HCP Terraform to roll out changes to each of your deployments and keep track of the changes across your environments.
 
+If you participated in the Stacks beta, you need to update your configurations to be compatible with the GA release. For details, refer to [Update for general availability](/terraform/language/stacks/update-GA).
+
 ## Workflow
 
 Begin creating Stack by making a component configuration file, ending in `tfcomponent.hcl`, and filling it with `component` blocks. Each `component` block includes a Terraform module as its source, and you can configure each `component` using the `inputs` argument. All of your Stack components share a lifecycle, which you repeatedly deploy together using HCP Terraform.
