@@ -727,7 +727,7 @@
     "permanent": true
   },
   {
-    "source": "/terraform/cli/v:version(1\\.(?:9|1[0-2])\\.x)/commands/stacks",
+    "source": "/terraform/cli/v:version(1\\.(?:9|1[0-2])\\.x)/commands/stacks/:slug*",
     "destination": "/terraform/language/v:version/stacks/reference/tfstacks-cli",
     "permanent": true
   },
