@@ -353,16 +353,16 @@
     "source": "/terraform/language/v:version((?:1\\.(?:1[2-9]|[2-9]\\d)|[2-9]\\d*\\.\\d+)\\.x)/resources/behavior",
     "destination": "/terraform/language/v:version/resources",
     "permanent": true
-  },  
+  },
   // Refactor provisioners
   {
     "source": "/terraform/language/resources/provisioners/null_resource",
-    "destination": "/terraform/language/provisioners#run-provisioners-without-a-resource", 
+    "destination": "/terraform/language/provisioners#run-provisioners-without-a-resource",
     "permanent": true
   },
   {
     "source": "/terraform/language/resources/provisioners/:slug((?!null_resource$).*)",
-    "destination": "/terraform/language/provisioners", 
+    "destination": "/terraform/language/provisioners",
     "permanent": true
   },
     // Provisioners content pre PR-530 (anything 1.11 and older)
@@ -658,6 +658,82 @@
   {
     "source": "/terraform/cloud-docs/migrate/tf-migrate/reference/configuration",
     "destination": "/terraform/migrate/reference/configuration",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/stacks/create/config",
+    "destination": "/terraform/language/stacks/component/config",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/v:version(1\\.(?:9|1[0-2])\\.x)/stacks/component/config",
+    "destination": "/terraform/language/v:version/stacks/create/config",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/v:version((?:1\\.(?:1[3-9]|[2-9]\\d)|[2-9]\\d*\\.\\d+)\\.x)/stacks/create/config",
+    "destination": "/terraform/language/v:version/stacks/component/config",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/stacks/create/declare-providers",
+    "destination": "/terraform/language/stacks/component/declare-providers",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/v:version(1\\.(?:9|1[0-2])\\.x)/stacks/component/declare-providers",
+    "destination": "/terraform/language/v:version/stacks/create/declare-providers",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/v:version((?:1\\.(?:1[3-9]|[2-9]\\d)|[2-9]\\d*\\.\\d+)\\.x)/stacks/create/declare-providers",
+    "destination": "/terraform/language/v:version/stacks/component/declare-providers",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/stacks/reference/tfstack",
+    "destination": "/terraform/language/block/stack/component_configuration",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/v:version(1\\.(?:9|1[0-2])\\.x)/block/stack/component_configuration",
+    "destination": "/terraform/language/v:version/stacks/reference/tfstack",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/v:version((?:1\\.(?:1[3-9]|[2-9]\\d)|[2-9]\\d*\\.\\d+)\\.x)/stacks/reference/tfstack",
+    "destination": "/terraform/language/v:version/block/stack/component_configuration",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/stacks/reference/tfdeploy",
+    "destination": "/terraform/language/block/stack/deploy",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/v:version(1\\.(?:9|1[0-2])\\.x)/block/stack/deploy",
+    "destination": "/terraform/language/v:version/stacks/reference/tfdeploy",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/v:version((?:1\\.(?:1[3-9]|[2-9]\\d)|[2-9]\\d*\\.\\d+)\\.x)/stacks/reference/tfdeploy",
+    "destination": "/terraform/language/v:version/block/stack/deploy",
+    "permanent": true
+  },
+
+  {
+    "source": "/terraform/language/stacks/reference/tfstacks-cli",
+    "destination": "/terraform/cli/commands/stacks",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/cli/v:version(1\\.(?:9|1[0-2])\\.x)/commands/stacks",
+    "destination": "/terraform/language/v:version/stacks/reference/tfstacks-cli",
+    "permanent": true
+  },
+  {
+    "source": "/terraform/language/v:version((?:1\\.(?:1[3-9]|[2-9]\\d)|[2-9]\\d*\\.\\d+)\\.x)/stacks/reference/tfstacks-cli",
+    "destination": "/terraform/cli/v:version/commands/stacks",
     "permanent": true
   }
 ]
