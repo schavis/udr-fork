@@ -1,6 +1,6 @@
 ---
 page_title: Pass data from one Stack to another
-description: Learn how to link Stacks together to pass data from one Stack to another using `publish_output` blocks to export data and `upstream_input` blocks to consume that data. 
+description: Learn how to link Stacks together to pass data from one Stack to another using `publish_output` blocks to export data and `upstream_input` blocks to consume that data.
 ---
 
 # Pass data from one Stack to another
@@ -42,7 +42,7 @@ publish_output "vpc_id" {
 
 After applying your configuration, any Stack in the same project can now reference your network deployment's `vpc_id` output by declaring an `upstream_input` block.
 
-Once you apply a Stack configuration version that includes your `publish_output` block, HCP Terraform publishes a snapshot of those values, which allows HCP Terraform to resolve them. Meaning, you must apply your Stack’s deployment configuration before any downstream Stacks can reference your Stack's outputs.
+Once you apply a component configuration version that includes your `publish_output` block, HCP Terraform publishes a snapshot of those values, which allows HCP Terraform to resolve them. Meaning, you must apply your Stack’s deployment configuration before any downstream Stacks can reference your Stack's outputs.
 
 Learn more about the [`publish_output` block](/terraform/language/stacks/reference/tfdeploy#publish_output-block-configuration).
 
