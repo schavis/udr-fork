@@ -10,15 +10,39 @@ on: [pull_request_target]
 env:
   yes: ✔️
   no: ❌
-  main_select: ⏹️
-  month_select: ⏹️
-  release_select: ⏹️
-
+  idk: ⏹️
+  main_select: "idk"
+  month_select: "idk"
+  release_select: "idk"
 jobs:
 
-  add-pub-comment:
-    name: Add initial comment
+  set-pub-timeline:
+    name: Make timeline selection
     runs-on: ubuntu-latest
+    steps:
+      - name: Set defaults
+        id: set-defaults
+        run: |
+          echo "main_select=${{ github.env.idk }}" >> "$GITHUB_ENV"
+          echo "month_select=${{ github.env.idk }}" >> "$GITHUB_ENV"
+          echo "month_select=${{ github.env.idk }}" >> "$GITHUB_ENV"
+      - name: Check main
+        id: check-main
+        if: ${{ github.base_ref }} == "main"
+        run: |
+          echo "main_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+      - name: Check monthly update
+        id: check-monthly
+        if: ${{ github.base_ref }} ~= "vault/[0-9]{6}"
+        run: |
+          echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+      - name: Check release
+        id: check-release
+        if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
+        run: |
+          echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+
+  alert-pub-timeline:
     env:
       local_comment:  |
         ## 🕛 Publication timeline
@@ -30,58 +54,10 @@ jobs:
         `main`            | Immediately           | ${{ github.env.main_select }}
         `vault/YYYYMM`    | End of the month      | ${{ github.env.month_select }}
         `vault/<version>` | Next major release    | ${{ github.env.release_select }}
-    steps:
-      - name: Initial comment on PR
-        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
-        with:
-          header: Publication notice
-          message: ${{ env.local_comment }}
-
-  set-pub-timeline:
-    name: Make timeline selection
-    runs-on: ubuntu-latest
-    outputs:
-      main_select: ${{ steps.check-main.outputs.main_select }}
-      month_select: ${{ steps.check-month.outputs.month_select }}
-      release_select: ${{ steps.check-release.outputs.release_select }}
-    steps:
-      - name: PR publishes immediately
-        id: check-main
-        if: ${{ github.base_ref }} == "main"
-        run: |
-          echo "main_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
-
-      - name: PR publishes with monthly release
-        id: check-month
-        if: ${{ github.base_ref }} ~= "vault/[0-9]{6}"
-        run: |
-          echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
-
-      - name: PR publishes with next major release
-        id: check-release
-        if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
-        run: |
-          echo "release_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
-
-  update-pub-timeline:
-    env:
-      main_select: ${{ needs.set-pub-timeline.outputs.main_select }}
-      month_select: ${{ needs.set-pub-timeline.outputs.month_select }}
-      release_select: ${{ needs.set-pub-timeline.outputs.release_select }}
-      local_comment:  |
-        ## 🕛 Publication timeline
-
-        Content changes publish based on the merge target [`${{ github.base_ref }}`]
-
-        Branch            | Publication timeline  | Selection
-        ----------------- | --------------------- | ---------
-        `main`            | Immediately           | ${{ needs.set-pub-timeline.outputs.main_select }}
-        `vault/YYYYMM`    | End of the month      | ${{ needs.set-pub-timeline.outputs.month_select }}
-        `vault/<version>` | Next major release    | ${{ needs.set-pub-timeline.outputs.release_select }}
     runs-on: ubuntu-latest
     needs: set-pub-timeline
     steps:
-      - name: Update publication notice
+      - name: Add publication notice
         if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
