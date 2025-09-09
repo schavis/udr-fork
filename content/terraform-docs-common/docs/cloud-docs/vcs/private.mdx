@@ -15,6 +15,12 @@ Connect HCP Terraform to your private VCS provider using a self-hosted HCP Terra
 
 ## Background
 
+<Note>
+
+Only workspaces can connect to a private VCS provider, Stacks do not support them.
+
+</Note>
+
 You can use HCP Terraform agents to connect HCP Terraform to your private VCS providers. The following are examples of private VCS providers that you can manage locally on your private network:
 
 - GitHub Enterprise
@@ -22,8 +28,6 @@ You can use HCP Terraform agents to connect HCP Terraform to your private VCS pr
 - BitBucket Data Center
 
 For more information about HCP Terraform agents, refer to the [HCP Terraform agent documentation](/terraform/cloud-docs/agents).
-
-Note that Stacks do not support private VCS providers, only workspaces can connect to them.
 
 ## Requirements
 

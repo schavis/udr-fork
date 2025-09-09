@@ -145,24 +145,14 @@
       ]
   },
   {
-  "title": "Group with projects",
+  "title": "Scope access with projects",
     "routes": [
-  { "title": "Overview", "path": "projects" },
-      {
-        "title": "Manage projects",
-        "path": "projects/manage"
-      },
-  { "title": "Best practices", "path": "projects/best-practices" }
-    ]
-  },
-  {
-  "title": "Variables",
-    "routes": [
-  { "title": "Overview", "path": "variables" },
-      {
-        "title": "Managing variables",
-        "path": "variables/managing-variables"
-      }
+    { "title": "Overview", "path": "projects" },
+        {
+          "title": "Manage projects",
+          "path": "projects/manage"
+        },
+    { "title": "Best practices", "path": "projects/best-practices" }
     ]
   },
   {
@@ -202,8 +192,8 @@
     ]
   },
   {
-  "title": "Stacks or workspaces",
-    "path": "workspace-or-stack"
+  "title": "Compare Stacks and workspaces",
+    "path": "stack-workspace"
   },
   {
   "title": "Use workspaces",
@@ -263,6 +253,16 @@
           ]
         },
   { "title": "Best practices", "path": "workspaces/best-practices"},
+    {
+  "title": "Configure variables",
+    "routes": [
+  { "title": "Overview", "href": "variables" },
+      {
+        "title": "Managing variables",
+        "href": "variables/managing-variables"
+      }
+    ]
+  },
   { "title": "Health", "path": "workspaces/health" },
       {
         "title": "Terraform configurations",
@@ -602,6 +602,16 @@
           { "title": "Review deployment plans", "path": "stacks/deploy/runs" }
         ]
       },
+        {
+        "title": "Configure variables",
+          "routes": [
+        { "title": "Overview", "href": "variables" },
+            {
+              "title": "Managing variables",
+              "href": "variables/managing-variables"
+            }
+          ]
+        },
       {
   "title": "Use dynamic provider credentials",
     "routes": [
