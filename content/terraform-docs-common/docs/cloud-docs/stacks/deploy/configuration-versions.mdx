@@ -66,7 +66,11 @@ You can also create a configuration version using the HCP Terraform API. To lear
 
 ## Review configuration versions
 
-The **Configurations** page contains a numbered list of your configuration versions. Clicking on an individual configuration version reveals the following:
+The **Configurations** page contains a numbered sequential list of your configuration versions.
+
+Configuration versions create deployment runs for each of your Stack's deployments. HCP Terraform marks each configuration version as **Completed** if it created deployment runs for all of your Stack's deployments, or **Failed** if it failed out and could not create the necessary deployment runs.
+
+Clicking on an individual configuration version reveals the following:
 
 - How long ago the configuration version was created.
 - The latest commit that HCP Terraform based this configuration version on and who made that commit.
@@ -78,6 +82,8 @@ The **Configurations** page contains a numbered list of your configuration versi
 Clicking the ellipsis next to a run reveals options to **View deployment run** or **Approve all plans**. Note that you can only approve plans in the **Pending** state.
 
 Clicking **Details** reveals any associated commit message with the run, and if there were any updates for components sourced from any registry modules or external repositories.
+
+Clicking on a Stack’s **Inputs** reveals a list of the inputs this Stack has access to from `upstream_input` blocks, along with the upstream Stacks that supply those inputs. Clicking on a Stack’s **Outputs** reveals a list of the outputs of this Stack and any downstream Stacks that intake those outputs. To learn more about passing data from one Stack to another, refer to [Pass data from one Stack to another](/terraform/language/stacks/deploy/pass-data).
 
 ## Next steps
 

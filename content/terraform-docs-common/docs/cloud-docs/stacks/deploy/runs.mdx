@@ -12,7 +12,7 @@ To learn more about how deployment runs work, including how they update Stack de
 
 ## Requirements
 
-To view a Stack and its plans, you must also be a member of a team in your organization with one of the following permissions:
+To view a Stack and its deployment runs, you must also be a member of a team in your organization with one of the following permissions:
 * [Organization-level **View all projects**](/terraform/cloud-docs/users-teams-organizations/permissions#view-all-projects) or higher
 * [Project-level **Write**](/terraform/cloud-docs/users-teams-organizations/permissions#write) or higher
 
@@ -26,72 +26,75 @@ If you are not already on your Stack's deployment page, navigate to it:
 1. Select the Stack you want to review.
 1. Select **Deployments** in the side navigation.
 
-A Stack's **Overview** page displays the following information:
+A Stack's **Deployments** page displays a list of all of that Stack's deployments. Each deployment lists the latest available configuration version for that deployment.
 
+Click **View run history** to view a list of all of the configuration versions a deployment has executed deployment runs for, and the status of each run. You can review the details of a deployment run by clicking on a specific configuration version.
 
-Clicking on a Stack’s **Inputs** reveals a list of the inputs this Stack has access to from `upstream_input` blocks, along with the upstream Stacks that supply those inputs. Clicking on a Stack’s **Outputs** reveals a list of the outputs of this Stack and any downstream Stacks that intake those outputs. To learn more about passing data from one Stack to another, refer to [Pass data from one Stack to another](/terraform/language/stacks/deploy/pass-data).
+## View deployment runs
 
-To view all of the plans for a deployment, click the name of the deployment you want to review.
+A deployment run is a combination of an individual configuration version and one of your Stack's deployments.
 
-### View plans
+You can review the latest deployment run from the **Deployments** page by clicking on the configuration version number under **Activity**. You can also view deployment runs for specific versions on the **Configurations** page by selecting a version and clicking on the name of a specific deployment.
 
-A Stack deployment can have multiple plans. In a deployment's page, underneath **Latest plans**, each deployment plan lists:
+A deployment run consists of the steps that Terraform can perform to update that deployment to match the associated configuration version. All deployment run pages display the following information:
 
-* The plan name
-* The trigger why HCP Terraform created this plan
-* The configuration version HCP Terraform created the plan with
-* When HCP Terraform created the plan
+- The ID of the deployment run.
+- The name of the associated deployment.
+- The configuration version number associated with this deployment run.
+- The status of the deployment run.
+- If a deployment run was approve, the name of the approver, and any comment they left when approving.
+- When HCP Terraform created the run.
+- Any infrastructure resources the deployment run plans to create, update, or destroy.
+- A button to **Approve all plans** for this configuration version, approving this deployment run and other associated runs for this configuration version.
+- A button to **Cancel run** to discard this deployment run.
 
-You can see a plan’s full details by clicking the plan’s name or an abbreviated list of the plan’s changes by clicking **Quick View**. You can also click **View all plans** to display a list of all the plans for this deployment. You can filter plans by [health status](#check-deployment-health) in the list of all plans.
+HCP Terraform stores the state of Stacks in files corresponding to each deployment of that Stack. After applying any plan, HCP Terraform displays a **View state** button next to each step of that plan to let you view a sanitized version of the state for the deployment at that step. To learn more about how state works for deployments, refer to [State in Stacks](/terraform/cloud-docs/stacks/state).
 
-Each plan includes that plan's inputs and outputs, a timeline detailing when the plan started, when the plan received its configuration version, and when it was approved.
+If you have enabled [debug logging](/terraform/cloud-docs/stacks/configure) for your Stack, you can download detailed logs of each step of your deployment run by expanding the **Inspect** dropdown.
 
-### Check deployment health
+### Deployment run status
 
-Click **Overview** in the sidebar of your Stack to view the status of each of your deployments.
+A deployment run can be in one of several states:
 
 | Status | Description |
 | :---- | :---- |
-| Healthy | HCP Terraform is not applying this deployment, no plans await approval, and no diagnostic alerts exist. |
-| Deploying | A plan is approved, and HCP Terraform is applying it. |
-| Plans waiting for approval | HCP Terraform created a plan successfully and is waiting for approval. |
-| Error diagnostics | The deployment has error diagnostic alerts. |
-| Warning diagnostics | The deployment has warning diagnostic alerts. |
-
-
-## Download plan data
-
-You can download Stack plan data to debug and analyze how your Stack changes over time.
-
-Select one of the following options in the **Inspect** drop-down to perform the associated action:
-
-* **View plan orchestration results** displays HCP Terraform's decisions while making this plan.
-* **Download plan event stream** downloads a log file of your plan’s events.
-* **Download plan description** downloads a file with all plan information.
-* **View apply orchestration results** displays HCP Terraform's decisions to apply this plan.
-* **Download apply event stream** downloads a log file of your plan’s events.
-* **Download apply description** downloads a file with all the information about this applied plan.
+| Plan: Queued | HCP Terraform is preparing to create a plan for this deployment. |
+| Plan: Started | HCP Terraform is starting to create a plan for a deployment. |
+| Plan: Running | HCP Terraform is creating a plan for a deployment. |
+| Plan: Pending operator | HCP Terraform created a plan for a deployment and is waiting for you to approve that plan. |
+| Apply: Queued | HCP Terraform is preparing to apply a plan for this deployment. |
+| Errored | The deployment run has encountered an error. Review the deployment run's errors to learn more. |
 
 ## Approve plans
 
-Like traditional Terraform plans, Stack deployment plans list the changes that will occur if you approve that plan. Each component lists its expected resource changes, and you can review those changes as you decide whether to apply a plan.
+Like traditional Terraform plans, Stack deployment runs list the changes that occur if you approve that plan. Each deployment run lists its expected resource changes for that deployment, and you can review those changes to whether to apply a plan. You can manage each deployment plan independently, so any plans you approve only affect the current deployment you are interacting with.
 
-When viewing a deployment plan, HCP Terraform notes if that plan is awaiting approval. Click **Approve plan** if you want HCP Terraform to apply a plan to this deployment or **Discard plan** to ignore it. You manage each deployment independently, so any plans you approve only affect the current deployment you are interacting with.
+To approve a deployment run's plan you can perform the following steps:
+1. On the **Configurations** page, click on a specific configuration version, then click on the ellipsis next to a deployment and select **View deployment run**.
+1. On the deployment run page, you can click **Approve plan** to approve the plan for this deployment, or **Approve plan with comment** to approve the plan and add a comment.
+
+You can also approve a deployment run's plan from the **Deployments** page:
+1. On the **Deployments** page, click on the configuration version number under **Activity**.
+1. Click **Approve plan** to approve the plan for this deployment, or **Approve plan with comment** to approve the plan and add a comment.
+
+To approve all of the deployment runs for a specific configuration version, you can do either of the following:
+1. Click **Approve all plans** on a deployment run to approve all pending plans for this configuration version across all deployments.
+1. On the **Configurations** page, click on a specific configuration version, then click on the ellipsis next to a specific deployment and click **Approve all plans**.
 
 ### Convergence checks
 
-After applying any plan, HCP Terraform automatically triggers a plan called a convergence check. A convergence check is a replan to ensure components do not have any [deferred changes](#deferred-changes). HCP Terraform continues to trigger new plans until the convergence check returns a plan that does not contain changes.
+By default, each Stack has an `auto_approve` rule named `empty_plan`, which auto-approves a plan if it does not contain changes.
 
-By default, each Stack has an `auto_approve` rule named `empty_plan`, which auto-approves a plan if it does not contain changes. When a convergence check contains no changes, HCP Terraform auto-applies that plan.
+After applying any step in a plan, HCP Terraform automatically triggers a step called a convergence check. A convergence check is a replan to ensure components do not have any [deferred changes](#deferred-changes). HCP Terraform continues to trigger new replan steps until the convergence check returns an empty plan, indicating that the deployment has reached convergence.
+
+To learn more about deployment runs and their steps, refer to [Stack deployment runs](/terraform/cloud-docs/stacks/runs).
 
 ## Deferred changes
 
-Like with Terraform configuration files, HCP Terraform generates a dependency graph and creates resources defined in `*.tfstack.hcl` and `*.tfdeploy.hcl` files.
+Like with Terraform configuration files, HCP Terraform generates a dependency graph and creates resources defined in `<NAME>.tfcomponent.hcl` and `<NAME>.tfdeploy.hcl` files.
 
-When you deploy a Stack with resources that depend on resources provisioned by other components in your stack, HCP Terraform recognizes the dependency between components and automatically defers that plan until HCP Terraform can complete it successfully. Plans with deferred changes are plans with resources that depend on resources that don't exist yet, requiring follow-up plans.
+When you deploy a Stack with resources that depend on resources provisioned by other components in your stack, HCP Terraform recognizes the dependency between components and automatically defers the step in that plan until HCP Terraform can complete it successfully.
 
 -> **Hands-on**: Complete the [Manage Kubernetes workloads with stacks](/terraform/tutorials/cloud/stacks-eks-deferred) tutorial to create plans with deferred changes.
 
 HCP Terraform notifies you in the UI if a plan contains deferred changes. Approving a plan with deferred changes makes HCP Terraform automatically create a follow-up plan to properly set up resources in the order of operations those resources require.
-
-After applying a plan with deferred changes, HCP Terraform notifies you of any replans it creates with a link to **View replan**. You can review the replan to ensure HCP Terraform created your resources as expected.
