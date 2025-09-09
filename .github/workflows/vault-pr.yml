@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "main_select=${{ github.env.idk }}" >> "$GITHUB_ENV"
           echo "month_select=${{ github.env.idk }}" >> "$GITHUB_ENV"
-          echo "month_select=${{ github.env.idk }}" >> "$GITHUB_ENV"
+          echo "release_select=${{ github.env.idk }}" >> "$GITHUB_ENV"
       - name: Check main
         id: check-main
         if: ${{ github.base_ref }} == "main"
@@ -40,7 +40,7 @@ jobs:
         id: check-release
         if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
         run: |
-          echo "month_select=${{ env.yes }}" >> "$GITHUB_ENV"
+          echo "release_select=${{ env.yes }}" >> "$GITHUB_ENV"
 
   alert-pub-timeline:
     name: Add publication alert
