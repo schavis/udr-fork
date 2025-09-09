@@ -32,7 +32,7 @@ Properties without a default value are required.
 | `data.attributes.priority`            | boolean | `false`                                                | When true, the variables in the set override any other variable values with a more specific scope, including values set on the command line. |
 | `data.relationships.workspaces`       | array   | `[]`                                                   | Array of references to workspaces that the variable set should be assigned to.                                                               |                                                                                                                                              
 | `data.relationships.projects`         | array   | `[]`                                                   | Array of references to projects that the variable set should be assigned to.                                                                 |                                                                                                                                              
-| `data.relationships.stacks`           | array   | `[]`                                                   | Array of references to stacks that the variable set should be assigned to.                                                                   |                                                                                         
+| `data.relationships.stacks`           | array   | `[]`                                                   | Array of references to Stacks that HCP Terraform assigns the variable set to.                                                                   |                                                                                         
 | `data.relationships.vars`             | array   | `[]`                                                   | Array of complete variable definitions that comprise the variable set.                                                                       |                                                                                                                                           
 | `data.relationships.parent`           | object  | Organization that the variable set belongs to          | The parent that owns this variable set. If the parent is a project, `data.attributes.global` must be `false`.                                |
 | `data.relationships.parent.data.type` | string  | `"organizations"`                                      | The resource type of the parent that owns this variable set. Valid values are `organizations` or `projects`.                                 |
@@ -193,7 +193,7 @@ HCP Terraform does not allow you to change the parent organization or project of
 | `data.attributes.priority`      | boolean | `false` | When true, the variables in the set override any other variable values set with a more specific scope, including values set on the command line. |
 | `data.relationships.workspaces` | array   |         | **Optional** Array of references to workspaces that the variable set should be assigned to. Sending an empty array clears all workspace assignments. |
 | `data.relationships.projects`   | array   |         | **Optional** Array of references to projects that the variable set should be assigned to. Sending an empty array clears all project assignments.     |
-| `data.relationships.stacks`     | array   |         | **Optional** Array of references to stacks that the variable set should be assigned to. Sending an empty array clears all stack assignments.         |
+| `data.relationships.stacks`     | array   |         | **Optional** Array of references to Stacks that HCP Terraform assigns the variable set to. Sending an empty array clears all Stack assignments.         |
 | `data.relationships.vars`       | array   |         | **Optional** Array of complete variable definitions to add to the variable set.                                                                      |
 
 | Status  | Response                  | Reason(s)                                                                      |
@@ -1034,7 +1034,7 @@ curl \
 
 ## Apply Variable Set to Stacks
 
-Accepts a list of stacks to add the variable set to.
+Accepts a list of Stacks to assign this variable set to.
 
 `POST varsets/:varset_id/relationships/stacks`
 
@@ -1047,7 +1047,7 @@ Properties without a default value are required.
 | Key path      | Type   | Default | Description                                        |
 | ------------- | ------ | ------- | -------------------------------------------------- |
 | `data[].type` | string |         | Must be `"stacks"`                             |
-| `data[].id`   | string |         | The id of the stack to add the variable set to |
+| `data[].id`   | string |         | The ID of the Stack to add the variable set to. |
 
 | Status  | Response                  | Reason(s)                                                             |
 | ------- | ------------------------- | --------------------------------------------------------------------- |
@@ -1081,7 +1081,7 @@ curl \
 
 ## Remove a Variable Set from Stacks
 
-Accepts a list of stacks to remove the variable set from.
+Accepts a list of Stacks to remove the variable set from.
 
 `DELETE varsets/:varset_id/relationships/stacks`
 
@@ -1094,7 +1094,7 @@ Properties without a default value are required.
 | Key path      | Type   | Default | Description                                             |
 | ------------- | ------ | ------- | ------------------------------------------------------- |
 | `data[].type` | string |         | Must be `"stacks"`                                  |
-| `data[].id`   | string |         | The id of the stack to delete the variable set from |
+| `data[].id`   | string |         | The ID of the Stack to delete the variable set from. |
 
 | Status  | Response                  | Reason(s)                                                             |
 | ------- | ------------------------- | --------------------------------------------------------------------- |
