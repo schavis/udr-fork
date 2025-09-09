@@ -27,21 +27,21 @@ jobs:
         id: check-target
         run: |
           if [[ "${{ github.base_ref }}" == 'main' ]]; then
-            echo "main_select=${{ github.env.yes }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ github.env.no }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ github.env.no }}" >> "$GITHUB_OUTPUT"
-          elif [[ "${{ github.base_ref }}" == ${{ github.env.monthlyPattern }}  ]]; then
-            echo "main_select=${{ github.env.no }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ github.env.yes }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ github.env.no }}" >> "$GITHUB_OUTPUT"
-          elif [[ "${{ github.base_ref }}" == ${{ github.env.releasePattern }} ]]; then
-            echo "main_select=${{ github.env.no }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ github.env.no }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ github.env.yes }}" >> "$GITHUB_OUTPUT"
+            echo "main_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+            echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.base_ref }}" == ${{ env.monthlyPattern }}  ]]; then
+            echo "main_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+            echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.base_ref }}" == ${{ env.releasePattern }} ]]; then
+            echo "main_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
           else
-            echo "main_select=${{ github.env.idk }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ github.env.idk }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ github.env.idk }}" >> "$GITHUB_OUTPUT"
+            echo "main_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
+            echo "month_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
+            echo "month_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
           fi
 
   alert-pub-timeline:
