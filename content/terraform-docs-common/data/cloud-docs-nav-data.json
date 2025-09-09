@@ -599,7 +599,7 @@
         "title": "Deploy infrastructure",
         "routes": [
           { "title": "Configuration versions", "path": "stacks/deploy/configuration-versions" },
-          { "title": "Review deployment plans", "path": "stacks/deploy/plans" }
+          { "title": "Review deployment plans", "path": "stacks/deploy/runs" }
         ]
       },
       {
