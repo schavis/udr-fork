@@ -234,7 +234,7 @@
   // Stacks links
   {
     "source": "/terraform/cloud-docs/stacks/review-plans",
-    "destination": "/terraform/cloud-docs/stacks/deploy/plans",
+    "destination": "/terraform/cloud-docs/stacks/deploy/runs",
     "permanent": true
   },
   {

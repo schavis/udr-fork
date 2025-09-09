@@ -8,7 +8,7 @@ tfc_only: true
 
 Deployment runs are a combination of an individual configuration version and one of your Stack's deployments. As in the traditional Terraform workflow, HCP Terraform creates runs every time a new configuration version introduces potential changes for a deployment.
 
-This guide explains how to review and approve deployment runs in HCP Terraform.
+To learn more about how deployment runs work, including how they update Stack deployment state, refer to [Stack deployment runs](/terraform/cloud-docs/stacks/runs).
 
 ## Requirements
 
@@ -23,25 +23,15 @@ If you are not already on your Stack's deployment page, navigate to it:
 1. Sign in to [HCP Terraform](https://app.terraform.io), and select the organization that contains your Stack.
 1. In the navigation menu, click **Projects** under **Manage**.
 1. Select the project containing your Stack.
-1. Click **Stacks** in the navigation menu.
 1. Select the Stack you want to review.
+1. Select **Deployments** in the side navigation.
 
 A Stack's **Overview** page displays the following information:
 
-* The number of your Stack's components and deployments
-* Your deployment’s current [health](#check-deployment-health)
-* The latest configuration version
-* The inputs and outputs for your stack
-* A chart listing each deployment’s recent configuration versions
 
 Clicking on a Stack’s **Inputs** reveals a list of the inputs this Stack has access to from `upstream_input` blocks, along with the upstream Stacks that supply those inputs. Clicking on a Stack’s **Outputs** reveals a list of the outputs of this Stack and any downstream Stacks that intake those outputs. To learn more about passing data from one Stack to another, refer to [Pass data from one Stack to another](/terraform/language/stacks/deploy/pass-data).
 
 To view all of the plans for a deployment, click the name of the deployment you want to review.
-
-A deployment’s page lists its components and the last five deployment plans. Clicking on a component reveals all of the resources it contains. Opening the **Inspect** dropdown menu on a deployment's page reveals the option to download:
-
-* **State description** downloads that deployment’s current state.
-* **Provider schemas** downloads the schema of the providers of your deployment.
 
 ### View plans
 
