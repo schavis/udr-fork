@@ -43,6 +43,7 @@ jobs:
           echo "month_select=${{ env.yes }}" >> "$GITHUB_ENV"
 
   alert-pub-timeline:
+    name: Add publication alert
     env:
       local_comment:  |
         ## 🕛 Publication timeline
