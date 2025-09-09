@@ -5,7 +5,10 @@
 name: Process Vault PR
 run-name: 🚀 Processing Vault PR
 
-on: [pull_request_target]
+on:
+  pull_request_target:
+    paths:
+      - content/vault/**
 
 env:
   yes: ✔️
@@ -29,19 +32,19 @@ jobs:
           if [[ "${{ github.base_ref }}" == "main" ]]; then
             echo "main_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "release_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
           elif [[ "${{ github.base_ref }}" =~ ${{ env.monthlyPattern }}  ]]; then
             echo "main_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "release_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
           elif [[ "${{ github.base_ref }}" =~ ${{ env.releasePattern }} ]]; then
             echo "main_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+            echo "release_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
           else
             echo "main_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
+            echo "release_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
           fi
 
   alert-pub-timeline:
