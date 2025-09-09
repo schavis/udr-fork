@@ -10,16 +10,9 @@ on: [pull_request_target]
 env:
   yes: ✔️
   no: ❌
-  comment_text: |
-    ## 🕛 Publication timeline
-
-    Content changes publish based on the merge target [`${{ github.base_ref }}`]
-
-    Branch            | Publication timeline  | Selection
-    ----------------- | --------------------- | ---------
-    `main`            | Immediately           | ${{ env.main_select }}
-    `vault/YYYYMM`    | End of the month      | ${{ env.month_select }}
-    `vault/<version>` | Next major release    | ${{ env.release_select }}
+  main_select: ⏹️
+  month_select: ⏹️
+  release_select: ⏹️
 
 jobs:
 
@@ -27,10 +20,16 @@ jobs:
     name: Add initial comment
     runs-on: ubuntu-latest
     env:
-      main_select: ⏹️
-      month_select: ⏹️
-      release_select: ⏹️
-      local_comment: ${{ github.env.comment_text }}
+      local_comment:  |
+        ## 🕛 Publication timeline
+
+        Content changes publish based on the merge target [`${{ github.base_ref }}`]
+
+        Branch            | Publication timeline  | Selection
+        ----------------- | --------------------- | ---------
+        `main`            | Immediately           | ${{ github.env.main_select }}
+        `vault/YYYYMM`    | End of the month      | ${{ github.env.month_select }}
+        `vault/<version>` | Next major release    | ${{ github.env.release_select }}
     steps:
       - name: Initial comment on PR
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
@@ -69,7 +68,16 @@ jobs:
       main_select: ${{ needs.set-pub-timeline.outputs.main_select }}
       month_select: ${{ needs.set-pub-timeline.outputs.month_select }}
       release_select: ${{ needs.set-pub-timeline.outputs.release_select }}
-      local_comment: ${{ github.env.comment_text }}
+      local_comment:  |
+        ## 🕛 Publication timeline
+
+        Content changes publish based on the merge target [`${{ github.base_ref }}`]
+
+        Branch            | Publication timeline  | Selection
+        ----------------- | --------------------- | ---------
+        `main`            | Immediately           | ${{ needs.set-pub-timeline.outputs.main_select }}
+        `vault/YYYYMM`    | End of the month      | ${{ needs.set-pub-timeline.outputs.month_select }}
+        `vault/<version>` | Next major release    | ${{ needs.set-pub-timeline.outputs.release_select }}
     runs-on: ubuntu-latest
     needs: set-pub-timeline
     steps:
