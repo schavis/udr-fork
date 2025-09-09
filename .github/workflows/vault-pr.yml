@@ -26,15 +26,15 @@ jobs:
       - name: Check target
         id: check-target
         run: |
-          if [[ "${{ github.base_ref }}" == 'main' ]]; then
+          if [[ "${{ github.base_ref }}" == "main" ]]; then
             echo "main_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
-          elif [[ "${{ github.base_ref }}" == ${{ env.monthlyPattern }}  ]]; then
+          elif [[ "${{ github.base_ref }}" =~ ${{ env.monthlyPattern }}  ]]; then
             echo "main_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
-          elif [[ "${{ github.base_ref }}" == ${{ env.releasePattern }} ]]; then
+          elif [[ "${{ github.base_ref }}" =~ ${{ env.releasePattern }} ]]; then
             echo "main_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
             echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
