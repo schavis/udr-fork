@@ -79,7 +79,7 @@ jobs:
     name: Check for 'Important changes' updates
     runs-on: ubuntu-latest
     outputs:
-      icUpdate: ${{ steps.filter.outputs.tbd }}
+      addICComment: ${{ steps.check-ic.outputs.addICComment }}
     steps:
     - uses: actions/checkout@v4
     - uses: dorny/paths-filter@v3
@@ -87,7 +87,7 @@ jobs:
       with:
         filters: |
           icUpdate:
-            - 'content/vault/*/content/docs/updates/important-changes.mdx'
+            - 'content/vault/*/content/docs/updates/**'
           icPartial:
             - 'content/vault/global/partials/important-changes/breaking-changes/**'
             - 'content/vault/global/partials/important-changes/new-behavior/**'
@@ -96,6 +96,9 @@ jobs:
           summaries:
             - 'content/vault/global/partials/important-changes/summary-tables/**'
     # Only run if 'icChanges' files updated but summaryChanges did not
-    - name: ic test
-      if: steps.filter.outputs.icUpdate == 'true' && steps.filter.outputs.summaries == 'false'
-      run: echo "Workflow file"
+    - name: Check for IC update
+      id: check-ic
+      if: (steps.filter.outputs.icUpdate == 'true') && (steps.filter.outputs.summaries == 'false')
+      run: |
+        echo "Workflow file"
+        echo "addICComment=${{ env.yes }}" >> "$GITHUB_OUTPUT"
