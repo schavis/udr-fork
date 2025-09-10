@@ -6,9 +6,9 @@ tfc_only: true
 
 # Review deployment runs
 
-Deployment runs are a combination of an individual configuration version and one of your Stack's deployments. As in the traditional Terraform workflow, HCP Terraform creates runs every time a new configuration version introduces potential changes for a deployment.
+Deployment runs are a combination of an individual configuration version and one of your Stack's deployments. As in the traditional Terraform workflow, HCP Terraform creates runs every time a new configuration version introduces potential changes for a deployment. To learn more about how deployment runs work, including how they update Stack deployment state, refer to [Stack deployment runs](/terraform/cloud-docs/stacks/runs).
 
-To learn more about how deployment runs work, including how they update Stack deployment state, refer to [Stack deployment runs](/terraform/cloud-docs/stacks/runs).
+You can also view, approve, or cancel deployment runs directly from the Terraform CLI, to learn more refer to the [`terraform stacks deployment-run` commands](/terraform/cli/commands/stacks/deployment-run).
 
 ## Requirements
 
@@ -80,6 +80,8 @@ You can also approve a deployment run's plan from the **Deployments** page:
 To approve all of the deployment runs for a specific configuration version, you can do either of the following:
 1. Click **Approve all plans** on a deployment run to approve all pending plans for this configuration version across all deployments.
 1. On the **Configurations** page, click on a specific configuration version, then click on the ellipsis next to a specific deployment and click **Approve all plans**.
+
+You can also view, approve, or cancel deployment runs directly from the Terraform CLI, to learn more refer to the [`terraform stacks deployment-run` commands](/terraform/cli/commands/stacks/deployment-run).
 
 ### Convergence checks
 
