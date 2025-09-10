@@ -1,0 +1,44 @@
+name: Create release branch PR
+run-name: 🥌 Create release PR for ${{ github.event.inputs.branch }}
+
+permissions: 
+  pull-requests: write
+
+on: 
+  workflow_dispatch:
+    inputs:
+      branchName:
+        required: true
+        description: >-
+          Release branch name
+
+env:
+  mergeTarget: "main"
+  prTitle:     "[PUBLISH] ${{ github.event.inputs.branchName }}"
+  prBody:      "Publication PR created by Github action"
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Debugging data
+        run: |
+          echo "🚧 ${{ github.repository }} - Creating PR"
+          echo "    - Release branch: ${{ github.event.inputs.branchName }}"
+          echo "    - Merge target:   ${{ github.base_ref }}"
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create pull request
+        run: |
+          gh pr create                                    \
+            --base  ${{ env.mergeTarget }}                \
+            --head  ${{ github.event.inputs.branchName }} \
+            --title "${{ env.prTitle }}"                  \
+            --body  "${{ env.prBody }}"
+      - name: Wrap-up
+        run: |
+          echo "🍏 Final job status:  ${{ job.status }}"

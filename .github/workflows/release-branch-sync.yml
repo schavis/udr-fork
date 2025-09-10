@@ -1,4 +1,4 @@
-name: Sync content release branches
+name: TESTING - Sync content release branches
 
 run-name: 🚀 ${{ github.actor }} is syncing ${{ github.event.inputs.product }} release branches
 
