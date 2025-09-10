@@ -1,5 +1,5 @@
-name: TESTING - Create release branch PR
-run-name: 🚀 Creating ${{ github.event.inputs.product }} release PR
+name: Create release branch PR
+run-name: 🚀 Create release PR for ${{ github.event.inputs.branch }}
 
 permissions: 
   contents: write
@@ -7,22 +7,15 @@ permissions:
 on: 
   workflow_dispatch:
     inputs:
-      product:
-        required: true
-        default: vault
-        description: >-
-          Product slug (e.g., vault, hcp)
-      branch-name:
+      branchName:
         required: true
         description: >-
-          Release branch name without product prefix.
+          Release branch name
 
 env:
-  RELEASE_BRANCH: "${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
-  MERGE_TARGET:   "main"
-  LABELS:         "${{ inputs.product }}-docs"
-  PR_TITLE:       "[PUBLISH] ${{ github.event.inputs.product }}/${{ github.event.inputs.branch-name }}"
-  PR_BODY:        "Publication PR created by Github action"
+  mergeTarget:   "main"
+  prTitle:       "[PUBLISH] ${{ github.event.inputs.branchName }}"
+  prBody:        "Publication PR created by Github action"
 
 jobs:
   create-pr:
@@ -31,21 +24,21 @@ jobs:
       - name: Debugging data
         run: |
           echo "🚧 ${{ github.repository }} - Creating PR"
-          echo "    - Release branch: $RELEASE_BRANCH"
-          echo "    - Merge target:   $MERGE_TARGET"
+          echo "    - Release branch: ${{ github.event.inputs.branchName }}"
+          echo "    - Merge target:   ${{ github.base_ref }}"
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Create pull request
         run: |
-          gh pr create          \
-            -B $MERGE_TARGET    \
-            -H $RELEASE_BRANCH  \
-            --label "$LABELS"   \
-            --title "$PR_TITLE" \
-            --body "$PR_BODY"
+          gh pr create                                     \
+            --base  ${{ github.env.mergeTarget }}          \
+            --head  ${{ github.event.inputs.branchName }}  \
+            --title ${{ github.env.prTitle }}              \
+            --body  ${{ github.env.prBody }}
         env:
           GITHUB_TOKEN:   ${{ secrets.MY_GITHUB_TOKEN }}
       - name: Wrap-up
-        run: echo "🍏 This job's status is ${{ job.status }}."
+        run: |
+          echo "🍏 Final job status:  ${{ job.status }}"
