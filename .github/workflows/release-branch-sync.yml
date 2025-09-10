@@ -27,7 +27,6 @@ jobs:
       - name: Generate branch list
         id: generate-matrix
         run: |
-          #echo "branchList=[$(git branch --list ${{ github.event.inputs.product }}/*)]" >> $GITHUB_OUTPUT
           echo $(git branch --list ${{ github.event.inputs.product }}/*)
           echo "branchList=[vault/test, vault/202513]" >> $GITHUB_OUTPUT
   usematrix:
