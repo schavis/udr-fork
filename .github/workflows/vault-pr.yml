@@ -100,5 +100,22 @@ jobs:
       id: check-ic
       if: (steps.filter.outputs.icUpdate == 'true') && (steps.filter.outputs.summaries == 'false')
       run: |
-        echo "Workflow file"
         echo "addICComment=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+
+  # Add a PR comment with the publication timeline
+  alert-summary-table:
+    name: Add summary table comment
+    runs-on: ubuntu-latest
+    needs: check-important-changes
+    if:  needs.check-important-changes.outputs.addICComment == 'true'
+    steps:
+      - name: Add summary table notice
+        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
+        with:
+          header: Summary table notice
+          message: |
+            > [!IMPORTANT]
+            >
+            > PRs that update the "Important changes" page **must** also have
+            > updates to the associated summary tables under:
+            > `content/vault/global/partials/important-changes/summary-tables/`
