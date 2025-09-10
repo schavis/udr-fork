@@ -1,5 +1,5 @@
 name: Create release branch PR
-run-name: 🚀 Create release PR for ${{ github.event.inputs.branch }}
+run-name: 🥌 Create release PR for ${{ github.event.inputs.branch }}
 
 permissions: 
   contents: write
@@ -16,6 +16,7 @@ env:
   mergeTarget:   "main"
   prTitle:       "[PUBLISH] ${{ github.event.inputs.branchName }}"
   prBody:        "Publication PR created by Github action"
+  GITHUB_TOKEN:   ${{ secrets.MY_GITHUB_TOKEN }}
 
 jobs:
   create-pr:
@@ -32,13 +33,11 @@ jobs:
           fetch-depth: 0
       - name: Create pull request
         run: |
-          gh pr create                                     \
-            --base  ${{ github.env.mergeTarget }}          \
-            --head  ${{ github.event.inputs.branchName }}  \
-            --title ${{ github.env.prTitle }}              \
-            --body  ${{ github.env.prBody }}
-        env:
-          GITHUB_TOKEN:   ${{ secrets.MY_GITHUB_TOKEN }}
+          gh pr create                                    \
+            --base  ${{ env.mergeTarget }}                \
+            --head  ${{ github.event.inputs.branchName }} \
+            --title ${{ env.prTitle }}                    \
+            --body  ${{ env.prBody }}
       - name: Wrap-up
         run: |
           echo "🍏 Final job status:  ${{ job.status }}"
