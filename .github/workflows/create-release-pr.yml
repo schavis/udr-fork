@@ -1,5 +1,5 @@
-name: Create release branch PR
-run-name: 🥌 Create release PR for ${{ github.event.inputs.branch }}
+name: Create publication PR
+run-name: 🥌 Create publication PR
 
 permissions: 
   pull-requests: write
