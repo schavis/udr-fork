@@ -1,11 +1,12 @@
 # Process Vault PRs:
 # 
-# (1) Add a comment that explains when the changes will publish
-# (2) If the PR updates important changes, make sure the PR includes summary
-# tables 
+# 1. Add a comment that explains when the changes will publish.
+# 2. If the PR updates important changes, add a comment about updating the
+#    summary tables.
+
 
 name: Process Vault PR
-run-name: Process Vault PR
+run-name: 🟡 Process Vault PR
 
 on:
   pull_request_target:
