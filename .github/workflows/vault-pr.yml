@@ -1,9 +1,11 @@
-# Add comments to Vault PRs with a reminder about release branches
-# github.base_ref (target)
-# github.head_ref (source)
+# Process Vault PRs:
+# 
+# (1) Add a comment that explains when the changes will publish
+# (2) If the PR updates important changes, make sure the PR includes summary
+# tables 
 
 name: Process Vault PR
-run-name: 🚀 Processing Vault PR
+run-name: Process Vault PR
 
 on:
   pull_request_target:
@@ -16,53 +18,79 @@ env:
   idk: ⏹️
   monthlyPattern: 'vault/([0-9]{6})'
   releasePattern: 'vault/1\.([0-9]{2})\.x'
+
 jobs:
 
+  # Figure out the publication timeline based on the target branch
   set-timeline:
-    name: Make timeline selection
+    name: Set publication timeline
     runs-on: ubuntu-latest
     outputs:
-      main_select: ${{ steps.check-target.outputs.main_select }}
-      month_select: ${{ steps.check-target.outputs.month_select }}
-      release_select: ${{ steps.check-target.outputs.release_select }}
+      mainSelect: ${{ steps.check-target.outputs.mainSelect }}
+      monthSelect: ${{ steps.check-target.outputs.monthSelect }}
+      releaseSelect: ${{ steps.check-target.outputs.releaseSelect }}
     steps:
       - name: Check target
         id: check-target
         run: |
           if [[ "${{ github.base_ref }}" == "main" ]]; then
-            echo "main_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
-            echo "release_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "mainSelect=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+            echo "monthSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "releaseSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
           elif [[ "${{ github.base_ref }}" =~ ${{ env.monthlyPattern }}  ]]; then
-            echo "main_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
-            echo "release_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "mainSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "monthSelect=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+            echo "releaseSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
           elif [[ "${{ github.base_ref }}" =~ ${{ env.releasePattern }} ]]; then
-            echo "main_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ env.no }}" >> "$GITHUB_OUTPUT"
-            echo "release_select=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+            echo "mainSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "monthSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "releaseSelect=${{ env.yes }}" >> "$GITHUB_OUTPUT"
           else
-            echo "main_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
-            echo "month_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
-            echo "release_select=${{ env.idk }}" >> "$GITHUB_OUTPUT"
+            echo "mainSelect=${{ env.idk }}" >> "$GITHUB_OUTPUT"
+            echo "monthSelect=${{ env.idk }}" >> "$GITHUB_OUTPUT"
+            echo "releaseSelect=${{ env.idk }}" >> "$GITHUB_OUTPUT"
           fi
 
+  # Add a PR comment with the publication timeline
   alert-pub-timeline:
+    name: Add publication comment
     runs-on: ubuntu-latest
     needs: set-timeline
     steps:
       - name: Add publication notice
-        if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
           message: |
             ## 🕛 Publication timeline
 
-            Content changes publish based on the merge target [`${{ github.base_ref }}`]
+            Your content changes publish based on the merge target [`${{ github.base_ref }}`].
+            If the timeline indicated below is inappropriate, please adjust the
+            merge target (base branch).
 
             Branch            | Publication timeline  | Selection
             ----------------- | --------------------- | ---------
-            `main`            | Immediately           | ${{ needs.set-timeline.outputs.main_select }}
-            `vault/YYYYMM`    | End of the month      | ${{ needs.set-timeline.outputs.month_select }}
-            `vault/<version>` | Next major release    | ${{ needs.set-timeline.outputs.release_select }}
+            `main`            | Immediately           | ${{ needs.set-timeline.outputs.mainSelect }}
+            `vault/YYYYMM`    | End of the month      | ${{ needs.set-timeline.outputs.monthSelect }}
+            `vault/<version>` | Next major release    | ${{ needs.set-timeline.outputs.releaseSelect }}
+
+  # Check if the PR includes important changes updates
+  check-important-changes:
+    name: Check for 'Important changes' updates
+    runs-on: ubuntu-latest
+    outputs:
+      icUpdate: ${{ steps.filter.outputs.tbd }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          icUpdate:
+            - 'content/vault/*/content/docs/updates/important-changes.mdx'
+          summaries:
+            - 'content/vault/global/partials/important-changes/summary-tables/**'
+    # run only if 'icChanges' files were changed and summaryChanges files were not
+    - name: ic test
+      if: steps.filter.outputs.icUpdate == 'true' && steps.filter.outputs.summaries == 'true'
+      run: echo "Workflow file"
