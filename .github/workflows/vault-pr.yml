@@ -79,7 +79,7 @@ jobs:
     name: Check for 'Important changes' updates
     runs-on: ubuntu-latest
     outputs:
-      addICComment: ${{ steps.check-ic.outputs.addICComment }}
+      icComment: ${{ steps.check-ic.outputs.icComment }}
     steps:
     - uses: actions/checkout@v4
     - uses: dorny/paths-filter@v3
@@ -98,16 +98,23 @@ jobs:
     # Only run if 'icChanges' files updated but summaryChanges did not
     - name: Check for IC update
       id: check-ic
-      if: (steps.filter.outputs.icUpdate == 'true') && (steps.filter.outputs.summaries == 'false')
       run: |
         echo "addICComment=true" >> "$GITHUB_OUTPUT"
+        if [[
+              "${{ steps.filter.outputs.icUpdate }}" == "true"    &&
+              "${{ steps.filter.outputs.summaries }}" == "false"
+        ]]; then
+            echo "icComment=add" >> "$GITHUB_OUTPUT"
+        else
+            echo "icComment=hide" >> "$GITHUB_OUTPUT"
+        fi
 
   # Add a PR comment about missing summary table updates
   alert-important-changes-add:
     name: Add IC change alert
     runs-on: ubuntu-latest
     needs: check-important-changes
-    if:  needs.check-important-changes.outputs.addICComment == 'true'
+    if:  needs.check-important-changes.outputs.addICComment == 'add'
     steps:
       - name: Add comment
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
@@ -126,7 +133,7 @@ jobs:
     name: Hide IC change alert
     runs-on: ubuntu-latest
     needs: check-important-changes
-    if:  needs.check-important-changes.outputs.addICComment == 'false'
+    if:  needs.check-important-changes.outputs.addICComment == 'hide'
     steps:
       - name: Hide comment
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
