@@ -87,7 +87,7 @@ jobs:
       with:
         filters: |
           icUpdate:
-            - 'content/vault/*/content/docs/updates/**'
+            - 'content/vault/*/content/docs/updates/important-changes.mdx'
           icPartial:
             - 'content/vault/global/partials/important-changes/breaking-changes/**'
             - 'content/vault/global/partials/important-changes/new-behavior/**'
