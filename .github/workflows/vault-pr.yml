@@ -100,7 +100,7 @@ jobs:
       id: check-ic
       if: (steps.filter.outputs.icUpdate == 'true') && (steps.filter.outputs.summaries == 'false')
       run: |
-        echo "addICComment=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+        echo "addICComment=true}}" >> "$GITHUB_OUTPUT"
 
   # Add a PR comment with the publication timeline
   alert-summary-table:
