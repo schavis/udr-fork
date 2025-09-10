@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Generate dynamic matrix
+      - name: Generate branch list
         id: generate-matrix
         run: |
           echo "branchList=[$(git branch --list ${{ github.event.inputs.product }}/*)]" >> $GITHUB_OUTPUT
