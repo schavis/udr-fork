@@ -99,7 +99,6 @@ jobs:
     - name: Check for IC update
       id: check-ic
       run: |
-        echo "addICComment=true" >> "$GITHUB_OUTPUT"
         if [[
               "${{ steps.filter.outputs.icUpdate }}" == "true"    &&
               "${{ steps.filter.outputs.summaries }}" == "false"
