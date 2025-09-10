@@ -123,8 +123,7 @@ jobs:
           message: |
             > [!IMPORTANT]
             >
-            > PRs that update the "Important changes" page **must** also have
-            > updates to the associated summary tables under:
+            > PRs that update the "Important changes" page **must** also have updates to the associated summary tables under:
             > `content/vault/global/partials/important-changes/summary-tables/`
 
   # Hide the previous comment (if it exists)
