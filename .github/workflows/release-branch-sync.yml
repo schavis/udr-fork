@@ -27,15 +27,15 @@ jobs:
       - name: Generate branch list
         id: generate-matrix
         run: |
-          echo $(git branch --list ${{ github.event.inputs.product }}/*)
-          echo "branchList=[vault/test, vault/202513]" >> $GITHUB_OUTPUT
+          theList=( $(git branch -r --list ${{ github.event.inputs.product }}/*) )
+          echo "branchList=toJSON(${theList[@]})" >> $GITHUB_OUTPUT
   usematrix:
     runs-on: ubuntu-latest
     needs: [build]
     strategy:
       matrix:
-        branch-name: ${{ fromJson(needs.build.outputs.branchList) }}
+        branchName: ${{ fromJSON(needs.build.outputs.branchList) }}
     steps:
       - name: Dynamic matrix job
         run: |
-          echo "Running job with input ${{ matrix.branch-name }}"
+          echo "Running job with input ${{ matrix.branchName }}"
