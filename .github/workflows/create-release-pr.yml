@@ -36,8 +36,8 @@ jobs:
           gh pr create                                    \
             --base  ${{ env.mergeTarget }}                \
             --head  ${{ github.event.inputs.branchName }} \
-            --title ${{ env.prTitle }}                    \
-            --body  ${{ env.prBody }}
+            --title "${{ env.prTitle }}"                  \
+            --body  "${{ env.prBody }}"
       - name: Wrap-up
         run: |
           echo "🍏 Final job status:  ${{ job.status }}"
