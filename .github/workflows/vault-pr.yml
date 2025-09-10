@@ -22,7 +22,7 @@ env:
 jobs:
 
   # Figure out the publication timeline based on the target branch
-  set-timeline:
+  set-pub-timeline:
     name: Set publication timeline
     runs-on: ubuntu-latest
     outputs:
@@ -55,7 +55,7 @@ jobs:
   alert-pub-timeline:
     name: Add publication comment
     runs-on: ubuntu-latest
-    needs: set-timeline
+    needs: set-pub-timeline
     steps:
       - name: Add publication notice
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
@@ -70,9 +70,9 @@ jobs:
 
             Branch            | Publication timeline  | Selection
             ----------------- | --------------------- | ---------
-            `main`            | Immediately           | ${{ needs.set-timeline.outputs.mainSelect }}
-            `vault/YYYYMM`    | End of the month      | ${{ needs.set-timeline.outputs.monthSelect }}
-            `vault/<version>` | Next major release    | ${{ needs.set-timeline.outputs.releaseSelect }}
+            `main`            | Immediately           | ${{ needs.set-pub-timeline.outputs.mainSelect }}
+            `vault/YYYYMM`    | End of the month      | ${{ needs.set-pub-timeline.outputs.monthSelect }}
+            `vault/<version>` | Next major release    | ${{ needs.set-pub-timeline.outputs.releaseSelect }}
 
   # Check if the PR includes important changes updates
   check-important-changes:
@@ -100,10 +100,10 @@ jobs:
       id: check-ic
       if: (steps.filter.outputs.icUpdate == 'true') && (steps.filter.outputs.summaries == 'false')
       run: |
-        echo "addICComment=true}}" >> "$GITHUB_OUTPUT"
+        echo "addICComment=true" >> "$GITHUB_OUTPUT"
 
   # Add a PR comment with the publication timeline
-  alert-summary-table:
+  alert-important-changes:
     name: Add summary table comment
     runs-on: ubuntu-latest
     needs: check-important-changes
@@ -112,7 +112,9 @@ jobs:
       - name: Add summary table notice
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
-          header: Summary table notice
+          header: Important change alert
+          hide: true
+          hide_classify: "OUTDATED"
           message: |
             > [!IMPORTANT]
             >
