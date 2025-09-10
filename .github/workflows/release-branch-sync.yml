@@ -28,7 +28,7 @@ jobs:
         id: generate-matrix
         run: |
           #echo "branchList=[$(git branch --list ${{ github.event.inputs.product }}/*)]" >> $GITHUB_OUTPUT
-          git branch --list ${{ github.event.inputs.product }}/*
+          echo $(git branch --list ${{ github.event.inputs.product }}/*)
           echo "branchList=[vault/test, vault/202513]" >> $GITHUB_OUTPUT
   usematrix:
     runs-on: ubuntu-latest
