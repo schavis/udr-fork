@@ -88,9 +88,14 @@ jobs:
         filters: |
           icUpdate:
             - 'content/vault/*/content/docs/updates/important-changes.mdx'
+          icPartial:
+            - 'content/vault/global/partials/important-changes/breaking-changes/**'
+            - 'content/vault/global/partials/important-changes/new-behavior/**'
+            - 'content/vault/global/partials/important-changes/known-issue/**'
+            - 'content/vault/*/content/partials/know-issues/**'
           summaries:
             - 'content/vault/global/partials/important-changes/summary-tables/**'
-    # run only if 'icChanges' files were changed and summaryChanges files were not
+    # Only run if 'icChanges' files updated but summaryChanges did not
     - name: ic test
-      if: steps.filter.outputs.icUpdate == 'true' && steps.filter.outputs.summaries == 'true'
+      if: steps.filter.outputs.icUpdate == 'true' && steps.filter.outputs.summaries == 'false'
       run: echo "Workflow file"
