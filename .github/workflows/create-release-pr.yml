@@ -7,37 +7,38 @@ permissions:
 on: 
   workflow_dispatch:
     inputs:
-      branchName:
+      releaseBranch:
         required: true
-        description: >-
-          Release branch name
-
-env:
-  mergeTarget: "main"
-  prTitle:     "[PUBLISH] ${{ github.event.inputs.branchName }}"
-  prBody:      "Publication PR created by Github action"
+        description: Release branch name
+      mergeTarget:
+        required: true
+        default: 'main'
+        description: Merge target for PR
 
 jobs:
   create-pr:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
+      prTitle:     "[PUBLISH] ${{ github.event.inputs.releaseBranch }}"
+      prBody: |
+        🚧 ${{ github.repository }} publication PR
+        
+        Triggered by: ${{ github.actor }} with a Github action
+        Release branch: ${{ github.event.inputs.releaseBranch }}
+        Merge target:   ${{ github.event.inputs.mergeTarget }}
+
     steps:
-      - name: Debugging data
-        run: |
-          echo "🚧 ${{ github.repository }} - Creating PR"
-          echo "    - Release branch: ${{ github.event.inputs.branchName }}"
-          echo "    - Merge target:   ${{ github.base_ref }}"
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Create pull request
         run: |
-          gh pr create                                    \
-            --base  ${{ env.mergeTarget }}                \
-            --head  ${{ github.event.inputs.branchName }} \
-            --title "${{ env.prTitle }}"                  \
+          gh pr create                                       \
+            --base  ${{ github.event.inputs.mergeTarget }}   \
+            --head  ${{ github.event.inputs.releaseBranch }} \
+            --title "${{ env.prTitle }}"                     \
             --body  "${{ env.prBody }}"
       - name: Wrap-up
         run: |
