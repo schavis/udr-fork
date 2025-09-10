@@ -2,7 +2,7 @@ name: Create release branch PR
 run-name: 🥌 Create release PR for ${{ github.event.inputs.branch }}
 
 permissions: 
-  contents: write
+  pull-requests: write
 
 on: 
   workflow_dispatch:
