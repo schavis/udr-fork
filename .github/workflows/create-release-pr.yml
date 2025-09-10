@@ -13,14 +13,15 @@ on:
           Release branch name
 
 env:
-  mergeTarget:   "main"
-  prTitle:       "[PUBLISH] ${{ github.event.inputs.branchName }}"
-  prBody:        "Publication PR created by Github action"
-  GITHUB_TOKEN:   ${{ secrets.MY_GITHUB_TOKEN }}
+  mergeTarget: "main"
+  prTitle:     "[PUBLISH] ${{ github.event.inputs.branchName }}"
+  prBody:      "Publication PR created by Github action"
 
 jobs:
   create-pr:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN:   ${{ secrets.MY_GITHUB_TOKEN }}
     steps:
       - name: Debugging data
         run: |
