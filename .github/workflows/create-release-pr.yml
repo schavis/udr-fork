@@ -1,5 +1,5 @@
-name: Create publication PR
-run-name: 🥌 Create publication PR
+name: 🥌 Create publication PR
+run-name: Create publication PR
 
 permissions: 
   pull-requests: write
