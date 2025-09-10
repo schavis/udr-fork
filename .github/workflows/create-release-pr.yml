@@ -23,10 +23,10 @@ jobs:
       prTitle:     "[PUBLISH] ${{ github.event.inputs.releaseBranch }}"
       prBody: |
         🚧 ${{ github.repository }} publication PR
-        
-        Triggered by: ${{ github.actor }} with a Github action
-        Release branch: ${{ github.event.inputs.releaseBranch }}
-        Merge target:   ${{ github.event.inputs.mergeTarget }}
+
+        **Triggered by**: @${{ github.actor }} with a Github action
+        **Release branch**: `${{ github.event.inputs.releaseBranch }}`
+        **Merge target**:   `${{ github.event.inputs.mergeTarget }}`
 
     steps:
       - name: Check out repository code
