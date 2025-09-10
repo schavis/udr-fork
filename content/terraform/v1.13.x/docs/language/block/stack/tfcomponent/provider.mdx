@@ -11,7 +11,7 @@ If you are declaring a `provider` block in a traditional Terraform configuration
 
 ## Background
 
-In component configurations, you must declare a provider in the [`required_providers`](/terraform/language/block/stack/configuration/required_providers) block at the top level of your `tfcomponent.hcl` file before you can use that provider.
+In component configurations, you must declare a provider in the [`required_providers`](/terraform/language/block/stack/tfcomponent/required_providers) block at the top level of your `tfcomponent.hcl` file before you can use that provider.
 
 After your provider declaration, use the `provider` block to further configure your providers. Unlike traditional Terraform configurations, `provider` blocks in component configurations support the following:
 
@@ -19,7 +19,7 @@ After your provider declaration, use the `provider` block to further configure y
 - Defining provider aliases in the block header.
 - Using a `config` block to pass in provider arguments.
 
-After configuring your providers, pass them to your Stack's [`component` blocks using the `providers` argument](/terraform/language/block/stack/configuration/component#providers). Passing configurations directly to components ensures that every component in your Stack uses the same provider configuration. To learn more and view examples, refer to [Declare providers](/terraform/language/stacks/component/declare-providers).
+After configuring your providers, pass them to your Stack's [`component` blocks using the `providers` argument](/terraform/language/block/stack/tfcomponent/component#providers). Passing configurations directly to components ensures that every component in your Stack uses the same provider configuration. To learn more and view examples, refer to [Declare providers](/terraform/language/stacks/component/declare-providers).
 
 ## Configuration model
 

@@ -320,25 +320,25 @@
     "title": "Stack blocks",
     "routes": [
       { "title": "Component configuration", "routes": [
-        { "title": "Overview", "path": "block/stack/component_configuration" },
-        { "title": "component", "path": "block/stack/component_configuration/component" },
-        { "title": "required_providers", "path": "block/stack/component_configuration/required_providers" },
-        { "title": "provider", "path": "block/stack/component_configuration/provider" },
-        { "title": "variable", "path": "block/stack/component_configuration/variable" },
-        { "title": "output", "path": "block/stack/component_configuration/output" },
-        { "title": "removed", "path": "block/stack/component_configuration/removed" },
+        { "title": "Overview", "path": "block/stack/tfcomponent" },
+        { "title": "component", "path": "block/stack/tfcomponent/component" },
+        { "title": "required_providers", "path": "block/stack/tfcomponent/required_providers" },
+        { "title": "provider", "path": "block/stack/tfcomponent/provider" },
+        { "title": "variable", "path": "block/stack/tfcomponent/variable" },
+        { "title": "output", "path": "block/stack/tfcomponent/output" },
+        { "title": "removed", "path": "block/stack/tfcomponent/removed" },
         { "title": "locals", "href": "block/locals" }
       ]
       },
       { "title": "Deployment configuration", "routes": [
-        { "title": "Overview", "path": "block/stack/deploy" },
-        { "title": "deployment", "path": "block/stack/deploy/deployment" },
-        { "title": "deployment_group", "path": "block/stack/deploy/deployment_group" },
-        { "title": "deployment_auto_approve", "path": "block/stack/deploy/deployment_auto_approve" },
-        { "title": "identity_token", "path": "block/stack/deploy/identity_token" },
-        { "title": "store", "path": "block/stack/deploy/store" },
-        { "title": "publish_output", "path": "block/stack/deploy/publish_output" },
-        { "title": "upstream_input", "path": "block/stack/deploy/upstream_input" },
+        { "title": "Overview", "path": "block/stack/tfdeploy" },
+        { "title": "deployment", "path": "block/stack/tfdeploy/deployment" },
+        { "title": "deployment_group", "path": "block/stack/tfdeploy/deployment_group" },
+        { "title": "deployment_auto_approve", "path": "block/stack/tfdeploy/deployment_auto_approve" },
+        { "title": "identity_token", "path": "block/stack/tfdeploy/identity_token" },
+        { "title": "store", "path": "block/stack/tfdeploy/store" },
+        { "title": "publish_output", "path": "block/stack/tfdeploy/publish_output" },
+        { "title": "upstream_input", "path": "block/stack/tfdeploy/upstream_input" },
         {
           "title": "locals",
           "href": "block/locals"
