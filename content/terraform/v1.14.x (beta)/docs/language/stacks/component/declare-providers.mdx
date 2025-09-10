@@ -13,7 +13,7 @@ Providers in component configurations differ from normal Terraform configuration
 - Modules sourced by `component` blocks cannot declare their own providers. Instead, each `component` block accepts a top-level map of providers.
 - You must pass arguments to providers using a `config` block.
 - You define provider alias names for a provider in the header of its block.
-- Providers in component configurations support the [`for_each`](/terraform/language/block/stack/component_configuration/provider#for_each) meta-argument.
+- Providers in component configurations support the [`for_each`](/terraform/language/block/stack/tfcomponent/provider#for_each) meta-argument.
 
 After defining your providers, you can use the Terraform Stacks  to install the providers and create a provider lock file before you can use deploy your Stack.
 
@@ -51,7 +51,7 @@ provider "aws" "this" {
 
 When you define a provider, you must also add that provider to the `required_providers` block to ensure that Terraform knows which provider version to download.
 
-For more details on the `required_providers` block in Stacks, refer to the [`required_providers` block reference](/terraform/language/block/stack/component_configuration/required_providers). For more details on the `provider` block in Stacks, refer to the [`provider` block reference](/terraform/language/block/stack/component_configuration/provider).
+For more details on the `required_providers` block in Stacks, refer to the [`required_providers` block reference](/terraform/language/block/stack/tfcomponent/required_providers). For more details on the `provider` block in Stacks, refer to the [`provider` block reference](/terraform/language/block/stack/tfcomponent/provider).
 
 When you define a cloud provider, you often must authenticate that provider to ensure it can create infrastructure. Refer to [Authenticate a Stack](/terraform/language/stacks/deploy/authenticate) for details and examples.
 

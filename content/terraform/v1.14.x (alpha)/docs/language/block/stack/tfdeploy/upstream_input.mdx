@@ -15,7 +15,7 @@ The `upstream_input` block requires Terraform version 1.10.0-alpha20241009 or hi
 
 </Note>
 
-A Stack can expose an output to other Stacks by defining a [`publish_output`](/terraform/language/block/stack/deployment/publish_output) blocks in its deployment configuration.
+A Stack can expose an output to other Stacks by defining a [`publish_output`](/terraform/language/block/stack/tfdeploy/publish_output) blocks in its deployment configuration.
 
 The `upstream_input` block specifies another Stack in the same project to consume outputs from. You must declare an `upstream_input` block for each Stack you want to reference outputs from. When an output from an upstream Stack changes, HCP Terraform automatically triggers runs for any Stacks that depend on those outputs.
 
