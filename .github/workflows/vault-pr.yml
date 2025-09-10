@@ -1,70 +1,142 @@
-# Add comments to Vault PRs with a reminder about release branches
-# github.base_ref (target)
-# github.head_ref (source)
+# Process Vault PRs:
+# 
+# (1) Add a comment that explains when the changes will publish
+# (2) If the PR updates important changes, make sure the PR includes summary
+# tables 
 
 name: Process Vault PR
-run-name: 🚀 Processing Vault PR
+run-name: Process Vault PR
 
-on: [pull_request_target]
+on:
+  pull_request_target:
+    paths:
+      - content/vault/**
 
 env:
-  main_select: ⏹️
-  month_select: ⏹️
-  release_select: ⏹️
-  pub_comment: |
-    ## 🕛 Publication timeline
-    
-    Content changes publish based on the merge target [`${{ github.base_ref }}`]
-
-    Branch            | Publication timeline  | Selection
-    ----------------- | --------------------- | ---------
-    `main`            | Immediately           | ${{ github.env.main_select }}
-    `vault/YYYYMM`    | End of the month      | ${{ github.env.month_select }}
-    `vault/<version>` | Next major release    | ${{ github.env.release_select }}
+  yes: ✔️
+  no: ❌
+  idk: ⏹️
+  monthlyPattern: 'vault/([0-9]{6})'
+  releasePattern: 'vault/1\.([0-9]{2})\.x'
 
 jobs:
 
-  add-pub-comment:
-    name: Add release comment
+  # Figure out the publication timeline based on the target branch
+  set-pub-timeline:
+    name: Set publication timeline
     runs-on: ubuntu-latest
+    outputs:
+      mainSelect: ${{ steps.check-target.outputs.mainSelect }}
+      monthSelect: ${{ steps.check-target.outputs.monthSelect }}
+      releaseSelect: ${{ steps.check-target.outputs.releaseSelect }}
     steps:
-      - name: Initial comment on PR
+      - name: Check target
+        id: check-target
+        run: |
+          if [[ "${{ github.base_ref }}" == "main" ]]; then
+            echo "mainSelect=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+            echo "monthSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "releaseSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.base_ref }}" =~ ${{ env.monthlyPattern }}  ]]; then
+            echo "mainSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "monthSelect=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+            echo "releaseSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.base_ref }}" =~ ${{ env.releasePattern }} ]]; then
+            echo "mainSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "monthSelect=${{ env.no }}" >> "$GITHUB_OUTPUT"
+            echo "releaseSelect=${{ env.yes }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "mainSelect=${{ env.idk }}" >> "$GITHUB_OUTPUT"
+            echo "monthSelect=${{ env.idk }}" >> "$GITHUB_OUTPUT"
+            echo "releaseSelect=${{ env.idk }}" >> "$GITHUB_OUTPUT"
+          fi
+
+  # Add a PR comment with the publication timeline
+  alert-pub-timeline:
+    name: Add publication comment
+    runs-on: ubuntu-latest
+    needs: set-pub-timeline
+    steps:
+      - name: Add publication notice
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
           header: Publication notice
-          message: ${{ github.env.pub_comment }}
+          message: |
+            ## 🕛 Publication timeline
 
-  update-pub-comment:
-    name: Add timeline selection
+            Your content changes publish based on the merge target [`${{ github.base_ref }}`].
+            If the timeline indicated below is inappropriate, please adjust the
+            merge target (base branch).
+
+            Branch            | Publication timeline  | Selection
+            ----------------- | --------------------- | ---------
+            `main`            | Immediately           | ${{ needs.set-pub-timeline.outputs.mainSelect }}
+            `vault/YYYYMM`    | End of the month      | ${{ needs.set-pub-timeline.outputs.monthSelect }}
+            `vault/<version>` | Next major release    | ${{ needs.set-pub-timeline.outputs.releaseSelect }}
+
+  # Check if the PR includes important changes updates
+  check-important-changes:
+    name: Check for 'Important changes' updates
     runs-on: ubuntu-latest
-    env:
-      yes: ✔️
-      no: ❌
+    outputs:
+      icComment: ${{ steps.check-ic.outputs.icComment }}
     steps:
-      - name: PR publishes immediately
-        if: ${{ github.base_ref }} == "main"
-        run: |
-          echo "main_select=${{ env.yes }}" >> "$GITHUB_ENV"
-          echo "month_select=${{ env.no }}" >> "$GITHUB_ENV"
-          echo "release_select=${{ env.no }}" >> "$GITHUB_ENV"
+    - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          icUpdate:
+            - 'content/vault/*/content/docs/updates/important-changes.mdx'
+          icPartial:
+            - 'content/vault/global/partials/important-changes/breaking-changes/**'
+            - 'content/vault/global/partials/important-changes/new-behavior/**'
+            - 'content/vault/global/partials/important-changes/known-issue/**'
+            - 'content/vault/*/content/partials/know-issues/**'
+          summaries:
+            - 'content/vault/global/partials/important-changes/summary-tables/**'
+    # Only run if 'icChanges' files updated but summaryChanges did not
+    - name: Check for IC update
+      id: check-ic
+      run: |
+        if [[
+              "${{ steps.filter.outputs.icUpdate }}" == "true"    &&
+              "${{ steps.filter.outputs.summaries }}" == "false"
+        ]]; then
+            echo "icComment=add" >> "$GITHUB_OUTPUT"
+        else
+            echo "icComment=hide" >> "$GITHUB_OUTPUT"
+        fi
 
-      - name: PR publishes with monthly release
-        if: ${{ github.base_ref }} ~= "vault/[0-9]{6}"
-        run: |
-          echo "main_select=${{ env.no }}" >> "$GITHUB_ENV"
-          echo "month_select=${{ env.yes }}" >> "$GITHUB_ENV"
-          echo "release_select=${{ env.no }}" >> "$GITHUB_ENV"
-
-      - name: PR publishes with next major release
-        if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
-        run: |
-          echo "main_select=${{ env.no }}" >> "$GITHUB_ENV"
-          echo "month_select=${{ env.no }}" >> "$GITHUB_ENV"
-          echo "release_select=${{ env.yes }}" >> "$GITHUB_ENV"
-
-      - name: Update publication notice
-        if: ${{ github.base_ref }} ~= "vault/[0-9]\\.[0-9]{2}\\.x"
+  # Add a PR comment about missing summary table updates
+  alert-important-changes-add:
+    name: Add IC change alert
+    runs-on: ubuntu-latest
+    needs: check-important-changes
+    if:  needs.check-important-changes.outputs.addICComment == 'add'
+    steps:
+      - name: Add comment
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
         with:
-          header: Publication notice
-          message: ${{ github.env.pub_comment }}
+          header: Important change alert
+          hide: true
+          hide_classify: "OUTDATED"
+          message: |
+            > [!IMPORTANT]
+            >
+            > PRs that update the "Important changes" page **must** also have
+            > updates to the associated summary tables under:
+            > `content/vault/global/partials/important-changes/summary-tables/`
+  # Hide the previous comment (if it exists)
+  alert-important-changes-remove:
+    name: Hide IC change alert
+    runs-on: ubuntu-latest
+    needs: check-important-changes
+    if:  needs.check-important-changes.outputs.addICComment == 'hide'
+    steps:
+      - name: Hide comment
+        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
+        with:
+          header: Important change alert
+          hide: true
+          hide_classify: "OUTDATED"
