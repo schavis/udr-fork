@@ -10,6 +10,7 @@ run-name: 🟡 Process Vault PR
 
 on:
   pull_request_target:
+    types: [opened, synchronize, reopened] # Trigger on these events
     paths:
       - content/vault/**
 
