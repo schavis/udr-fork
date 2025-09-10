@@ -21,7 +21,7 @@ jobs:
   create-pr:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN:   ${{ secrets.MY_GITHUB_TOKEN }}
+      GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Debugging data
         run: |
