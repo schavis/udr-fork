@@ -14,7 +14,7 @@ An `import` block supports the following configuration:
 
 - [`import`](#import) &nbsp block
   - [`to`](#to) &nbsp address | required
-  - [`id`](#id) &nbsp string   
+  - [`id`](#id) &nbsp string | mutually exclusive with `identity`
   - [`identity`](#identity) &nbsp map | mutually exclusive with `id`
   - [`for_each`](#for_each) &nbsp map or set of strings
   - [`provider`](#provider) &nbsp reference
@@ -119,7 +119,7 @@ import {
 }
 ```
 
-The specific attributes are specific to the resource type and provider. You can only import resources that are supported by the provider. Refer to your provider documentation for details.  
+The keys of the `identity` argument are specific to the resource type and provider. You can only import resources that are supported by the provider. Refer to your provider documentation for details.  
 
 You cannot use the `identity` argument and [`id` argument](#id) in the same `import` block.
 
