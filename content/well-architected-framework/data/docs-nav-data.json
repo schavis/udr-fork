@@ -421,6 +421,10 @@
           {
             "title": "Implement data retention policies",
             "path": "optimize-systems/lifecycle-management/data-management"
+          },
+          {
+            "title": "Decommission Infrastructure",
+            "path": "optimize-systems/lifecycle-management/decommission-infrastructure"
           }
         ]
       },
