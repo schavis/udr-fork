@@ -1,6 +1,6 @@
 ---
 page_title: Implement data management policies
-description: Implement automated data management policies to reduce storage costs, ensure compliance, and manage data lifecycle across cloud environments
+description: Implement data management policies to reduce storage costs, ensure compliance, and manage data lifecycles with infrastructure as code.
 ---
 
 # Implement data management policies
@@ -71,8 +71,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
   }
 }
 ```
-
-For more information on resource tagging, see our [Track infrastructure documentation](To be written).
 
 It is important to note that in the previous examples, other cloud providers, such as Google Cloud Platform and Microsoft Azure, offer similar lifecycle management features for their storage services. You can use Terraform to manage lifecycle policies across multiple cloud providers, ensuring consistent data management practices regardless of where your data resides.
 

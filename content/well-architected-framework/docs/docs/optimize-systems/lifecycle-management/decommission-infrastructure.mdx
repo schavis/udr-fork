@@ -1,6 +1,6 @@
 ---
 page_title: Decommission resources
-description: Learn how to safely retire infrastructure components while maintaining system integrity and avoiding disruptions through proper planning and automation.
+description: Learn how to decommission infrastructure components while maintaining system integrity and avoiding disruptions through proper planning and automation.
 ---
 
 # Decommission resources
@@ -9,11 +9,11 @@ Resource decommissioning is the process of safely removing or deleting infrastru
 
 When you decommission unused resources, you gain the following benefits:
 - Reduce costs by removing charges associated with unused resources.
-- Minimize security risks by removing outdated or vulnerable resources that bad actors could exploit.
+- Minimize security risks by removing outdated or vulnerable resources that bad actors can exploit.
 - Reduce configuration drift by only running necessary resources.
 - Improve audit and compliance by maintaining a smaller infrastructure footprint.
 
-To successfully decommission resources, you need to create a well-defined plan that includes dependency analysis, stakeholder communication, and a gradual removal process. Depending on your infrastructure implementation, such as if you manually or automate your infrastructure creation, you may need to adjust your decommissioning approach accordingly.
+To successfully decommission resources, you need to create a well-defined plan that includes dependency analysis, stakeholder communication, and a gradual removal process. Depending on your infrastructure implementation, such as if you manually or automate your infrastructure creation, you may need to adjust your decommissioning approach.
 
 ## Find resources to decommission
 
@@ -27,7 +27,7 @@ Terraform tracks all infrastructure it manages with state files. You can use the
 
 Your plan should outline how you will inform stakeholders about the decommissioning process, including timelines and potential impacts. Effective communication prevents surprises and ensures all affected teams can prepare for the changes.
 
-Start by identifying all stakeholders who might be affected by the decommissioning, including development teams, operations staff, end users, and business owners. Create a notification timeline that provides adequate warning. Your communications should explain what resources you are removing, when the decommissioning will occur, and what actions stakeholders need to take.
+Start by identifying all stakeholders who you might affect by the decommissioning, including development teams, operations staff, end users, and business owners. Create a notification timeline that provides adequate warning. Your communications should explain what resources you are removing, when the decommissioning will occur, and what actions stakeholders need to take.
 
 ## Create a dependency plan
 
@@ -43,7 +43,7 @@ terraform graph -type=plan | dot -Tpng >graph.png
 
 <Note>
 
-The `terraform graph` command requires Graphviz to be installed on your system to generate visualizations. For more information on installing Graphviz, refer to the [Graphviz installation guide](https://graphviz.org/download/).
+You need to install Graphviz on your system to use the `terraform graph` command and generate visualizations. For more information on installing Graphviz, refer to the [Graphviz installation guide](https://graphviz.org/download/).
 
 </Note>
 
@@ -54,7 +54,7 @@ HashiCorp resources:
 
 Before decommissioning, confirm that you have backups of any critical data or configurations associated with the resources you are removing. Backups provide a safety net in case you need to roll back changes.
 
-The following are some of the resources you may want to back up:
+The following are some resources you may want to back up:
 - Servers in the form of machine images
 - Database snapshots
 - Configuration files
