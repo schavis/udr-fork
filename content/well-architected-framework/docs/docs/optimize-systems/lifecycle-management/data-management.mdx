@@ -15,11 +15,11 @@ When you implement data management policies, you gain the following benefits:
 - Reduce storage costs by automatically deleting data that is no longer needed.
 - Reduce storage costs by storing data in the most cost-effective storage class based on access patterns and retention requirements.
 - Ensure compliance with legal and regulatory requirements for data retention.
-- Remove sensitive data after a defined period to minimize security risks.
+- Minimize security risks by removing sensitive data after a defined period of time.
 
 ## Automate policy management with infrastructure as code
 
-You can use Terraform to define and manage lifecycle policies with infrastructure as code and implement the policy across your organization. You can create Terraform modules to create data management policies for different data types and compliance requirements. These modules can automatically apply appropriate lifecycle rules, storage class transitions, and deletion policies to new or existing storage resources.
+You can use Terraform to define and manage lifecycle policies and implement those policies across your organization. You can create Terraform modules to create data management policies for different data types and compliance requirements. These modules can automatically apply appropriate lifecycle rules, storage class transitions, and deletion policies to new or existing storage resources.
 
 The following is an example of using Terraform to [create a data lifecycle policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration#specifying-a-filter-based-on-object-size) to move AWS S3 data to Glacier Instant Retrieval after 365 days:
 
@@ -72,7 +72,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
 }
 ```
 
-It is important to note that in the previous examples, other cloud providers, such as Google Cloud Platform and Microsoft Azure, offer similar lifecycle management features for their storage services. You can use Terraform to manage lifecycle policies across multiple cloud providers, ensuring consistent data management practices regardless of where your data resides.
+It is important to note that other cloud providers, such as [Google Cloud Platform](https://registry.terraform.io/providers/hashicorp/google/5.0.0/docs/resources/storage_bucket.html#example-usage---life-cycle-settings-for-storage-bucket-objects) and [Microsoft Azure](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_management_policy), offer similar lifecycle management features for their storage services. You can use Terraform to manage lifecycle policies across multiple cloud providers, ensuring consistent data management practices regardless of where your data resides.
 
 HashiCorp resources:
 - Search the [Terraform Registry](https://registry.terraform.io/browse/providers) for the [cloud](https://registry.terraform.io/browse/providers?category=public-cloud) or [database](https://registry.terraform.io/browse/providers?category=database) provider you use.
