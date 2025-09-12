@@ -19,7 +19,7 @@ To successfully decommission resources, you need to create a well-defined plan t
 
 Before you begin decommissioning resources, you need to identify which resources exist in your environment and determine which ones are candidates for removal. This discovery phase helps you avoid accidentally removing resources that are still in use and ensures you target the right components for decommissioning.
 
-Start by creating an inventory of your infrastructure. Most cloud providers offer resource tagging and billing reports that can help identify unused or underutilized resources. Pay particular attention to resources that were created for temporary purposes, like testing or proof-of-concepts, but may have been left running.
+Start by creating an inventory of your infrastructure. Most cloud providers offer resource tagging and billing reports that help identify unused or underutilized resources. Pay particular attention to active resources created for temporary purposes, like testing or proof-of-concepts.
 
 Terraform tracks all infrastructure it manages with state files. You can use the `terraform state list` to see all managed resources and `terraform show` to examine their current configurations. This list of resources will help you identify which resources are still in use and which ones you can decommission.
 
@@ -33,7 +33,7 @@ Start by identifying all stakeholders who you might affect by the decommissionin
 
  Your plan should analyze which services, applications, or other resources rely on the components you plan to remove. Your plan will lower the risk of unexpected outages by identifying and addressing dependencies before decommissioning.
 
-If you are using infrastructure as code tools like Terraform, you can use a dependency graph to understand resource relationships. This graph helps you visualize how resources are connected and identify potential impacts of removing specific components.
+If you are using infrastructure as code tools like Terraform, you can use a dependency graph to understand resource relationships. This graph helps you visualize connectivity between resources and identify potential impacts of removing specific components.
 
 You can create a dependency graph of your Terraform resources by running the following CLI command:
 
@@ -92,9 +92,9 @@ lifecycle {
 
 Consul can help you gradually remove resources by directing traffic away from services you are decommissioning. You can use Consul's service discovery and health checking features to monitor the status of services and ensure that dependent services are not affected during the decommissioning process.
 
-If you are using orchestration tools like Nomad or Kubernetes, you can use their built-in capabilities to drain workloads before decommissioning nodes gracefully. Nomad provides node drain functionality through the `nomad node drain` command, which prevents new allocations from being scheduled on a node while safely migrating existing jobs to other available nodes. The Kubernetes `kubectl drain` command safely removes pods from nodes while respecting Pod Disruption Budgets, which ensure that a minimum number of application replicas remain available throughout the process. 
+If you are using orchestration tools like Nomad or Kubernetes, you can use their built-in capabilities to drain workloads before decommissioning nodes gracefully. Nomad provides node drain functionality through the `nomad node drain` command, which prevents new scheduling new allocations on a node while safely migrating existing jobs to other available nodes. The Kubernetes `kubectl drain` command safely removes pods from nodes while respecting Pod Disruption Budgets, which ensure that a minimum number of application replicas remain available throughout the process. 
 
-Review our [Zero-downtime deployments](/well-architected-framework/define-and-automate-processes/deploy/zero-downtime-deployments) documentation for strategies on how to redirect traffic and disable functions gradually.
+Review the [Zero-downtime deployments](/well-architected-framework/define-and-automate-processes/deploy/zero-downtime-deployments) documentation for strategies on how to redirect traffic and disable functions gradually.
 
 ## Verify health of infrastructure and applications
 
