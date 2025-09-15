@@ -57,13 +57,22 @@ Below is a list of the most recent Terraform Enterprise Releases that can deploy
 
 \** The release package contains this version of the Terraform CLI, but you can install older and newer versions of the Terraform CLI as needed via the Admin [UI](/terraform/enterprise/application-administration/resources#managing-terraform-versions) or [API](/terraform/enterprise/api-docs/admin/terraform-versions).
 
-\+ This release is unavailable.
-
 ## 1.0.1
-<span class="h4-size">2025-08-18</span>
+<span class="h4-size">2025-09-15</span>
+
+Last required release: [v202406-1 (776)](/terraform/enterprise/releases/2024/v202406-1)
+
+Flexible Deployment Options `terraform-enterprise` container digest: amd64/linux `sha256:edc06293b395e5beb3dfbbda4e89341334ab184c5895b81cf31c074dadc43ff7`, arm64/linux `sha256:7d7dfa2b283f252b8a65b1689a49db2b3a0b81fcaefd11a560a93baf8ad6041f`
+
+## Deprecations
+1. Redis 6.0 will be officially deprecated as of the November release.
+2. As part of the upcoming release, the `tfectl db *` commands will be marked for deprecation.
 
 ## Bug Fixes
 1. This release fixes a bug for Terraform Enterprise installs that make use of Redis with mTLS where the archivist service exited early.
+
+## Security
+1. Security vulnerabilities have been addressed and resolved in this update to enhance overall system protection.
 
 ## 1.0.0
 <span class="h4-size">2025-08-11</span>
