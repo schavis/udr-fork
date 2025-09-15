@@ -30,7 +30,8 @@
       { "title": "Overview", "path": "files" },
       { "title": "Override files", "path": "files/override" },
       { "title": "Dependency lock file", "path": "files/dependency-lock" },
-      { "title": "Test files", "path": "files/tests" }
+      { "title": "Test files", "path": "files/tests" },
+      { "title": "Query files", "path": "files/tfquery" }
     ]
   },
   {
@@ -323,6 +324,27 @@
       {
         "title": "variable",
         "path": "block/variable"
+      }
+    ]
+  },
+  {
+    "title": "tfquery blocks",
+    "routes": [
+      {
+        "title": "list",
+        "path": "block/tfquery/list"
+      },
+      {
+        "title": "locals",
+        "href": "/language/block/locals"
+      },
+      {
+        "title": "provider",
+        "href": "/language/block/provider"
+      },
+      {
+        "title": "variable",
+        "href": "/language/block/variable"
       }
     ]
   },

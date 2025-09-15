@@ -59,9 +59,10 @@
       { "title": "Overview", "path": "import" },
       { "title": "Import existing resources", "path": "import/usage" },
       {
-        "title": "Reference",
+        "title": "import command reference",
         "href": "/cli/commands/import"
-      }
+      },
+      { "title": "query command reference", "href": "/cli/commands/query" }
     ]
   },
   {
@@ -370,6 +371,7 @@
           { "title": "providers schema", "path": "commands/providers/schema" }
         ]
       },
+      { "title": "query", "path": "commands/query" },
       { "title": "refresh", "path": "commands/refresh" },
       { "title": "show", "path": "commands/show" },
       {
