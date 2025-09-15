@@ -274,7 +274,12 @@
     "routes": [
       {
         "title": "action",
-        "path": "block/action"
+        "path": "block/action",
+        "badge": {
+          "text": "BETA",
+          "type": "outlined",
+          "color": "neutral"
+        }    
       },
       {
         "title": "check",
