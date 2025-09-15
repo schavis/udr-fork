@@ -14,20 +14,10 @@ For organizations with large sets of infrastructure resources, manually identify
 Complete the following steps to find and import resources in bulk:
 
 - Search for resources: Create `list` blocks to search for existing resources.
-- Generate configuration: Use the Terraform command to generate `resource` and `import` blocks for importing the resources. The configuration also includes the [resource identity](#resource-identity). 
-
+- Generate configuration: Use the Terraform command to generate `resource` and `import` blocks for importing the resources. The configuration also includes the [resource identity](/terraform/language/import#resource-identity). 
 - Import resources: Copy the generated configuration into your main.tf file and run a `terraform apply` command to import the resources.
 - After importing resources, you can remove the generated `import` block or keep it as an historical record.
 
-### Resource identity
-
-Terraform uniquely identifies resources according to either the ID assigned by the cloud provider or a collection of specific attributes defined by the provider. For example, the `s3_bucket` resource available in the AWS provider uniquely identifies buckets according to the following attributes:
-
-- `account_id`
-- `bucket`
-- `region`  
-
-Refer to your provider documentation for information about resource identities. 
 
 ## Requirements
 
