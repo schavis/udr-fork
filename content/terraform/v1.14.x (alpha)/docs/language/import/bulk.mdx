@@ -14,9 +14,10 @@ For organizations with large sets of infrastructure resources, manually identify
 Complete the following steps to find and import resources in bulk:
 
 - Search for resources: Create `list` blocks to search for existing resources.
-- Generate configuration: Use the Terraform command to generate `resource` and `import` blocks for importing the resources. The configuration also includes the resource ID.
+- Generate configuration: Use the Terraform command to generate `resource` and `import` blocks for importing the resources. The configuration also includes the [resource identity](#resource-identity). 
+
 - Import resources: Copy the generated configuration into your main.tf file and run a `terraform apply` command to import the resources.
-- After importing resources, you can remove the generated configuration or keep it as an historical record.
+- After importing resources, you can remove the generated `import` block or keep it as an historical record.
 
 ### Resource identity
 
@@ -62,7 +63,7 @@ Add the following arguments to your `list` block:
 
 - `include_resource`: By default, Terraform retrieves only resource identities, but you can set the `include_resource` argument to `true` so that Terraform can also retrieve all available resource attributes. To reference resource attributes retrieved by the list block, you must enable the `include_resource` argument. Setting this argument to `true` may affect performance.  
 
-- `limit`: By default, Terraform retrieves up to 100 resources per query, but you can use the `limit` argument to specify a higher or lower number of results.
+- `limit`: By default, Terraform retrieves up to 100 resources per list block, but you can use the `limit` argument to specify a higher or lower number of results.
 
 The `list` block also supports several Terraform **meta-arguments**, which are arguments built into Terraform configuration language that configure how Terraform creates and manages infrastructure objects. For example, you can use the `count` meta-argument to create multiple instances of the resource list returned by the query. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
 

@@ -71,12 +71,12 @@ The following command loads variable values defined in `my-vars.tfvars`:
 $ terraform query -var-file=my-vars.tfvars
 ```
 
-### Generate inport configuration
+### Generate import configuration
 
 The following command generates `import` and `resource` blocks for the query results to a file in the `/to-import` directory:
 
 ```shell-session
-$ terraform query -generate-config=to-import
+$ terraform query -generate-config=to-import/file.tf
 ```
 
 The following command prints `import` and `resource` blocks for the query results as json:

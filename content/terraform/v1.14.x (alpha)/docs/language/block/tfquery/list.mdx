@@ -16,7 +16,6 @@ A `list` block supports the following configuration:
   - [`provider`](#provider) &nbsp reference | required
   - [`count`](#count) number &nbsp | mutually exclusive with `for_each`
   - [`for_each`](#for_each) &nbsp map or set of strings | mutually exclusive with `count`
-  - [`depends_on`](#depends_on) &nbsp list of references
   - [`include_resource`](#include_resource)  boolean
   - [`limit`](#limit) number | `100`
   - [`config`](#config)  block
@@ -33,7 +32,6 @@ list "<TYPE>" "<LABEL>" {
   for_each [ # `for_each` and `count` are mutually exclusive
     <KEY> = <VALUE>
   ]
-  depends_on = [ <RESOURCE.ADDRESS.EXPRESSION> ]
   include_resource = <false>
   limit = 100
   config {
@@ -90,7 +88,7 @@ The value must be a whole number. You can reference variables or local values an
 
 In blocks where `count` is set, Terraform exposes an additional `count` object. You can reference the object to modify the configuration of each list of query results. The `count` object has an `index` attribute starting from `0`.
 
-To refer to an individual list of query results, use the `<TYPE>.<NAME>[INDEX]` syntax. For example, `aws_instance.server[0]` refers to the first list of query results for the `aws_instance` resource named `server`.
+To refer to an individual list of query results, use the `list.<TYPE>.<NAME>[INDEX]` syntax. For example, `list.aws_instance.server[0]` refers to the first list of query results for the `aws_instance` resource named `server`.
 
 <Tip>
 
@@ -105,31 +103,6 @@ The `count` argument is a meta-argument, which is built into Terraform and contr
 - Data type: Number.
 - Default: None.
 - Example: [Create multiple lists of query results](#create-multiple-lists-of-query-results).
-
-### `depends_on`
-
-The `depends_on` meta-argument specifies an upstream resource that the `list` block  depends on. Terraform must complete all operations on the upstream resource before performing operations on the `list` block containing the `depends_on` argument.
-
-```hcl
-list "<TYPE>" "<LABEL>" {
-  depends_on = [ <reference resource> ]
-}
-```
-
-When a query configuration refers to another resource, Terraform identifies the dependency and creates the upstream resource first. In some cases, you may need Terraform to create a resource before creating a list of query results, even though the objects are configured independently.
-
-Use the `depends_on` argument when the objects do not reference each other. We recommend always including a comment to explain resource dependencies when using a `depends_on` argument.
-
-When using the `depends_on` meta-argument, you can only reference resources or child modules in the same root module. The list cannot include arbitrary expressions. Any values referenced in the `depends_on` list must be known before Terraform begins the operation so that it can evaluate dependencies.
-
-Specifying an entire module in the `depends_on` argument affects the order in which Terraform provisions all of the resources and data sources associated with that module. Refer to [Resource dependencies](/terraform/language/resources/configure#specify-resource-dependencies) and [Data resource dependencies](/terraform/language/data-sources#dependencies) for more information.
-
-The `depends_on` argument is a meta-argument, which is built into Terraform and controls the way that Terraform creates resources. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
-
-#### Summary
-
-- Data type: List.
-- Default: None.
 
 ### `for_each`
 
@@ -184,7 +157,7 @@ The `for_each` argument exposes an `each` object that you can reference within t
 - `each.key`: Map key or list member that corresponds to list.
 - `each.value`: Map value that corresponds to a list.
 
-Use the `<TYPE>.<NAME>[<KEY>]` syntax to access an instance of a resource created using `for_each`. For example, `azurerm_resource_group.rg["a_group"]` refers to a list of query results for the `azurrm_resource_group` resource named `rg` created from the `a_group` key.
+Use the `list.<TYPE>.<NAME>[<KEY>]` syntax to access an instance of a resource created using `for_each`. For example, `list.azurerm_resource_group.rg["a_group"]` refers to a list of query results for the `azurrm_resource_group` resource named `rg` created from the `a_group` key.
 
 The `for_each` argument is a meta-argument, which is built into Terraform and controls the way that Terraform creates resources. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
 
@@ -323,3 +296,22 @@ resource "aws_iam_user" "the-accounts" {
 </Tab>
 
 </Tabs>
+
+### Reference a list block
+
+In the following example, the `include_resource` argument is set to `true` in the `list.concept_pet.animals_with_legs` block. As a result, the query returns complete resource state information to the list of results for `animals_with_legs`. This lets the `list.concept_pet.more_pets` block reference the `length` attribute from `animals_with_legs` as the value for its `count` argument.
+
+```hcl
+list "concept_pet" "animals_with_legs" {
+  provider = concept
+  include_resource = true
+}
+
+list "concept_pet" "more_pets" {
+  provider = concept
+
+  config {
+    count = list.concept_pet.animals_with_legs.data[0].state.length
+  }
+}
+```
