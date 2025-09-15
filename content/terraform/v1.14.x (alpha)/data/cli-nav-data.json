@@ -62,7 +62,15 @@
         "title": "import command reference",
         "href": "/cli/commands/import"
       },
-      { "title": "query command reference", "href": "/cli/commands/query" }
+      { 
+        "title": "query command reference", 
+        "href": "/cli/commands/query",
+        "badge": {
+          "text": "BETA",
+          "type": "outlined",
+          "color": "neutral"
+        } 
+      }
     ]
   },
   {
@@ -281,6 +289,15 @@
       {
         "title": "<code>providers schema</code>",
         "href": "/cli/commands/providers/schema"
+      },
+      {
+        "title": "<code>query</code>",
+        "href": "/cli/commands/query",
+        "badge": {
+          "text": "BETA",
+          "type": "outlined",
+          "color": "neutral"
+        }
       },
       { "title": "<code>refresh</code>", "href": "/cli/commands/refresh" },
       { "title": "<code>show</code>", "href": "/cli/commands/show" },

@@ -195,7 +195,12 @@
         { "title": "Overview", "path": "import"},
         {
           "title": "Import resources in bulk",
-          "path": "import/bulk"
+          "path": "import/bulk",
+          "badge": {
+            "text": "BETA",
+            "type": "outlined",
+            "color": "neutral"
+          }
         },
          { "title": "Import a single resource", "path": "import/single-resource" },
          {
@@ -337,7 +342,12 @@
     "routes": [
       {
         "title": "list",
-        "path": "block/tfquery/list"
+        "path": "block/tfquery/list",
+        "badge": {
+          "text": "BETA",
+          "type": "outlined",
+          "color": "neutral"
+        }
       },
       {
         "title": "locals",
