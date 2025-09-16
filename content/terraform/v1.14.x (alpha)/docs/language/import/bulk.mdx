@@ -21,9 +21,6 @@ Complete the following steps to find and import resources in bulk:
 - After importing resources, you can remove the generated `import` block or keep it as an historical record.
 
 
-## Requirements
-
-Terraform v1.12 or newer is required to uniquely ID resources according the resource identity. For v1.11 and older, Terraform uses the cloud provider ID attribute. 
 
 ## Define a query
 
@@ -63,6 +60,7 @@ The following example queries AWS for `aws_instance` resources that match {. . .
 
 ```hcl
 list "aws_instance" "prod" {
+  provider = aws
   include_resource = true
   limit = 50
   config {

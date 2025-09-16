@@ -338,7 +338,7 @@
     ]
   },
   {
-    "title": "tfquery blocks",
+    "title": "Query blocks",
     "routes": [
       {
         "title": "list",

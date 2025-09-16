@@ -55,19 +55,21 @@ You must set the following arguments for every `list` block:
 
 ### `provider`
 
-The `provider` argument instructs Terraform to use an alternate provider configuration.
+The `provider` argument specifies which provider configuration Terraform uses to query infrastructure.
 
 ```hcl
 list "<TYPE>" "<LABEL>" {
-  provider = <provider>.<alias>
+  provider = <provider>
 }
 ```
 
-Terraform uses the default `provider` configuration to query resources, but you can create multiple provider configurations and use a non-default configuration for specific queries. Refer to the [`provider` block reference](/terraform/language/block/provider) for information about defining alternate provider configurations. 
+Terraform does not implicitly use the default `provider` configuration when querying resources. As a result, the `provider` argument is required. 
+
+You can create multiple provider configurations and use a non-default configuration for specific queries. Refer to the [`provider` block reference](/terraform/language/block/provider) for information about defining alternate provider configurations. 
 
 Use the `<PROVIDER>.<ALIAS>` syntax to reference a provider configuration in the `provider` argument. Refer to [Select an alternate provider configuration](#select-an-alternate-provider-configuration) for an example of how to reference a specific provider configuration.
 
-The `provider` argument is a meta-argument, which is built into Terraform and controls the way that Terraform creates resources. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
+The `provider` argument is a meta-argument, which is built into Terraform and controls the way that Terraform queries resources. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
 
 #### Summary
 
@@ -289,7 +291,7 @@ list "azurerm_resource_group" "rg" {
 The following example creates four lists using a set created with the `toset()` function:
 
 ```hcl
-resource "aws_iam_user" "the-accounts" {
+list "aws_iam_user" "the-accounts" {
    provider = aws
    for_each = toset(["Todd", "James", "Alice", "Dottie"])
 }
