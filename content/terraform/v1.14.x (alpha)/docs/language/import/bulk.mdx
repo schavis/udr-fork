@@ -7,8 +7,6 @@ description: Learn how to query existing infrastructure for unmanaged resources 
 
 You can configure queries that instruct Terraform to search your existing infrastructure for unmanaged resources. Terraform can also generate configuration for importing the resources it finds so that you can import them to your Terraform workspace in bulk. For information about importing single resources or small batches of resources, refer to [Import single resources](/terraform/language/import/single-resource) for instructions.
 
-@include 'beta.mdx'
-
 ## Introduction
 
 For organizations with large sets of infrastructure resources, manually identifying and importing them is tedious and labor intensive, even when using third-party tools or custom scripts. To alleviate this burden, you can write HCL-based queries and run them with the Terraform CLI to retrieve unmanaged resources so that you can import them in bulk. 
@@ -54,15 +52,22 @@ Add the following arguments to your `list` block:
 
 The `list` block also supports several Terraform **meta-arguments**, which are arguments built into Terraform configuration language that configure how Terraform creates and manages infrastructure objects. For example, you can use the `count` meta-argument to create multiple instances of the resource list returned by the query. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
 
-The following example queries AWS for `aws_instance` resources tagged with `prod` and returns complete resource information for the first 50 results:
+In the following example, Terraform applies provder arguments to query for `aws_instance` resources in the `us-east-2` region. The query also filters results prefixed with `prod-` and `stage-` and that are in a `running` state. The `limit` argument, which is not a provider-specific argument, instructs Terraform to return the first 50 results:
 
 ```hcl
 list "aws_instance" "prod" {
   provider = aws
-  include_resource = true
   limit = 50
   config {
-    filter = "prod"
+    region = "us-east-2"
+    filter {
+      name   = "tag:Name"
+      values = ["prod-*", "staging-*"]
+    }
+    filter {
+        name = "instance-state-name"
+        values = ["running"]
+    }
   }
 }
 ```
