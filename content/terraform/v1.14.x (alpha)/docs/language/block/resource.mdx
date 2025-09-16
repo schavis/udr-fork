@@ -353,9 +353,9 @@ The `action_trigger` block specifies a set of arguments that determine which eve
 resource "<TYPE>" "<LABEL>" {
   lifecycle {
     action_trigger {
-      events = [ <EVENT> ]
+      events     = [ <EVENT> ]
       conditions = < true || false >
-      actions = [ action.<TYPE>.<LABEL> ]
+      actions    = [ action.<TYPE>.<LABEL> ]
     }
   }
 }
