@@ -5,7 +5,7 @@ description: Learn how to configure action blocks in Terraform configuration so 
 
 # `action` block reference
 
-The `action` block instructs Terraform to invoke a provider-defined action. Actions are preset operations included with providers that let Terraform perform day-two operations. 
+The `action` block specifies a provider-defined action that you can invoke using the Terraform CLI or during an apply operation. Actions are operations included with providers that let Terraform perform day-two operations. 
 
 @include 'beta.mdx'
 
@@ -25,7 +25,6 @@ The `action` block supports the following configuration:
 The following `action` block includes all supported built-in arguments:
 
 ```hcl
-
 action "<TYPE>" "<LABEL>" {
    config {
       <PROVIDER ARGUMENTS>
@@ -51,13 +50,13 @@ An `action` block supports the following configuration.
 You must set the following arguments for every `action` block:
 
 - `TYPE`: Specifies the type of action to invoke. Refer to the provider documentation for information about the types of actions you can declare.
-- `LABEL`: Specifies a name for the `action` block. Terraform uses this label as part of the unique name for action's set of attributes. The label does not affect the state or the actual infrastructure. Refer to [References to Named Values](/terraform/language/expressions/references) and [Resource naming](/terraform/language/style#resource-naming) for expression syntax and label recommendations.
+- `LABEL`: Specifies a label for the `action` block. Terraform uses this label as part of the unique name for the action as configured by the block. The label does not affect the operation performed by Terraform when a user invokes the action. Refer to [References to Named Values](/terraform/language/expressions/references) and [Resource naming](/terraform/language/style#resource-naming) for expression syntax and label recommendations.
 
 To reference the action in your configuration, you must refer to it using `action.<TYPE>.<LABEL>` syntax.
 
 ### `config`
 
-The `config` block contains configurations made available by the provider. 
+The `config` block sets values for arguments or nested blocks defined by the provider. 
 
 ```hcl
 action "<TYPE>" "<LABEL>" {
@@ -106,9 +105,9 @@ action "<TYPE>" "<LABEL>" {
 
 </Tabs>
 
-The `for_each` meta-argument accepts a map or a set of strings and creates an instance for each item in that map or set. Each instance is associated with a distinct infrastructure object. Terraform creates, updates, or destroys each instance when applying changes to the configuration.
+The `for_each` meta-argument accepts a map or a set of strings and invokes the action once for each item in that map or set. Each invocation is associated with a distinct infrastructure object. 
 
-You can use pure functions, such as `toset()` and `tomap()`, to create a map or set for use in the `for_each` argument. All values must be known whether iterating over the keys of a map or set of strings. Otherwise, Terraform prints an error message that `for_each` has dependencies that it cannot determine before applying the configuration.
+You can use pure functions, such as `toset()` and `tomap()`, to create a map or set for use in the `for_each` argument. All values must be known when Terraform plans your action, whether iterating over the keys of a map or set of strings. Otherwise, Terraform prints an error message that `for_each` has dependencies that it cannot determine before applying the configuration.
 
 Keys in the `for_each` argument cannot be the result of or rely on the result of impure functions, such as `uuid`, `bcrypt`, or `timestamp`, because Terraform defers evaluating impure functions during the main evaluation step.
 
@@ -117,7 +116,7 @@ The `for_each` argument does not implicitly convert lists or tuples to sets. To 
 - [Transform a multi-level nested structure into a flat list](/terraform/language/functions/flatten#flattening-nested-structures-for-for_each).
 - [Combine collections to produce a list of element combinations](/terraform/language/functions/setproduct#finding-combinations-for-for_each).
 
-You cannot use sensitive values, such as [sensitive input variables](/terraform/language/block/variable#sensitive), [sensitive outputs](/terraform/language/block/output#sensitive), or [sensitive resource attributes](/terraform/language/expressions/references#sensitive-resource-attributes), as arguments in `for_each`. Becaseu Terraform uses the value in `for_each` to identify the action instance and always discloses it in UI output, sensitive values are not allowed. Terraform returns an error if you attempt to use sensitive values as `for_each` arguments.
+You cannot use sensitive values, such as [sensitive input variables](/terraform/language/block/variable#sensitive), [sensitive outputs](/terraform/language/block/output#sensitive), or [sensitive resource attributes](/terraform/language/expressions/references#sensitive-resource-attributes), as arguments in `for_each`. Because Terraform uses the value in `for_each` to identify the action instance and always discloses it in UI output, sensitive values are not allowed. Terraform returns an error if you attempt to use sensitive values as `for_each` arguments.
 
 If you transform a value containing sensitive data into an argument for use in `for_each`, be aware that most functions in Terraform will return a sensitive result if given an argument with sensitive content. In many cases, you can achieve similar results with a `for` expression. For example, to call `keys(local.map)` where `local.map` is an object with sensitive values, but non-sensitive keys, you can create a value to pass to `for_each` using `toset([for k,v in local.map : k])`.
 
@@ -128,7 +127,7 @@ The `for_each` argument exposes an `each` object that you can reference within t
 - `each.key`: Map key or list member that corresponds to an instance.
 - `each.value`: Map value that corresponds to an instance.
 
-Use the `<TYPE>.<NAME>[<KEY>]` syntax to access an instance of a resource created using `for_each`. For example, `aws_lambda_invoke.server["a_group"]` refers to an invocation of the `aws_lambda_invoke` action named `server` froma key named `a_group`.
+Use the `<TYPE>.<NAME>[<KEY>]` syntax to access an instance of a resource created using `for_each`. For example, `aws_lambda_invoke.server["a_group"]` refers to an invocation of the `aws_lambda_invoke` action named `server` from a key named `a_group`.
 
 The `for_each` argument is a meta-argument, which is built into Terraform and controls the way that Terraform creates resources. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
 
@@ -156,7 +155,7 @@ To refer to an individual instance of an invocation using the `count` meta-argum
 
 <Tip>
 
-You can use the `count` argument as a conditional. For example, setting a `count = var.creator ? 3 : 0` instructs Terraform to invoke an action three times when a variable named `creator` is set to `true`. Refer to [​​Conditional Expressions](/terraform/language/expressions/conditionals) for more information.
+You can use the `count` argument as a conditional. For example, setting a `count = var.creator ? 3 : 0` instructs Terraform to invoke an action three times when a variable named `creator` is set to `true`. When `creator` is set to `false`, Terraform does not invoke the action. Refer to [​​Conditional Expressions](/terraform/language/expressions/conditionals) for more information.
 
 </Tip>
 
@@ -201,8 +200,8 @@ The following example adds an `aws_lambda_invoke` action. You  can invoke an act
 ```hcl
 action "aws_lambda_invoke" "example" {
   config {
-    values   = var.values
-    timeout  = 3000
+    values  = var.values
+    timeout = 3000
   }
 }
 ```
@@ -228,6 +227,8 @@ You can add a `count` or `for_each` meta-argument to invoke an action multiple t
 <Tabs>
 
 <Tab heading="count">
+
+Terraform invokes the action three times.   
 
 ```hcl
 action "aws_lambda_invocation" "example" {

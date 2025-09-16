@@ -62,7 +62,7 @@ The following options change how the apply command executes and reports on the a
   [Running Terraform in Automation](/terraform/tutorials/automation/automate-terraform?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS) for some
   different approaches.
 
-- `-invoke=action.<TYPE>.<LABEL>`: Specifies a provider action in the configuration file to invoke. 
+- `-invoke=action.<TYPE>.<LABEL>`: Specifies a provider action defined in the configuration to invoke. 
 
 - `-json` - Enables the [machine readable JSON UI][machine-readable-ui] output.
   This implies `-input=false`, so the configuration must have no unassigned
@@ -129,13 +129,13 @@ The following examples show how to use the `terraform apply` command for common 
 The following command sets the `env` input variable to `prod` at runtime: 
 
 ```shell-session
-$ terraform apply -var 'env=prod'
+$ terraform apply -var='env=prod'
 ```
 
 The following command sets input variable values by using a local file named `my-vars.tfvars`: 
 
 ```shell-session
-$ terraform apply -var-file=my-vars.tfvars'
+$ terraform apply -var-file='my-vars.tfvars'
 ``` 
  
 ### Invoke actions
@@ -143,5 +143,5 @@ $ terraform apply -var-file=my-vars.tfvars'
 The following command invokes only the `aws_lambda_invoke` action named `test`:
 
 ```shell-session
-$ terraform apply -invoke=action.aws_lambda_invoke.test
+$ terraform apply -invoke='action.aws_lambda_invoke.test`
 ```

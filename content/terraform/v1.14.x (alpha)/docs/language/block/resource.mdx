@@ -361,7 +361,7 @@ resource "<TYPE>" "<LABEL>" {
 }
 ```
 
-Use the `action_trigger` block to invoke provider actions. The following table describes the arguments you can configure in the `action_trigger` block:
+The `action_trigger` block directs Terraform to automatically invoke actions based on the conditions you specify. The following table describes the arguments you can configure in the `action_trigger` block:
 
 | Argument | Description | Data type | Required |
 | --- | --- | --- | --- |
@@ -1215,7 +1215,7 @@ resource "aws_instance" "web" {
   }
 }
 
-action "ansible_playbook" "provisio" {
+action "ansible_playbook" "provision" {
   #...
 }
 ```
