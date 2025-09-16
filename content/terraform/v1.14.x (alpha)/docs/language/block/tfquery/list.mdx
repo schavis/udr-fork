@@ -303,19 +303,19 @@ list "aws_iam_user" "the-accounts" {
 
 ### Reference a list block
 
-In the following example, the `include_resource` argument is set to `true` in the `list.concept_pet.animals_with_legs` block. As a result, the query returns complete resource state information to the list of results for `animals_with_legs`. This lets the `list.concept_pet.more_pets` block reference the `length` attribute from `animals_with_legs` as the value for its `count` argument.
+In the following example, the `include_resource` argument is set to `true` in the `list.aws_instance.web` block. As a result, the query returns complete resource state information to the list of results for `web`. This lets the `list.aws_instance.web-bu` block reference the `length` attribute from `web` as the value for its `count` argument.
 
 ```hcl
-list "concept_pet" "animals_with_legs" {
-  provider = concept
+list "aws_instance" "web" {
+  provider = aws
   include_resource = true
 }
 
-list "concept_pet" "more_pets" {
+list "aws_instance" "web-bu" {
   provider = concept
 
   config {
-    count = list.concept_pet.animals_with_legs.data[0].state.length
+    count = list.aws_instance.web.data[0].state.length
   }
 }
 ```
