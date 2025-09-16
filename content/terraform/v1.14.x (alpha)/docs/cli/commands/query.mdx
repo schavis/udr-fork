@@ -6,7 +6,7 @@ description: |-
 
 # `terraform query` command
 
-The `terraform query` command queries existing infrastructure for unmanaged resources according to the `tfquery.hcl` file so that you can import them into your Terraform workspace.
+The `terraform query` command queries existing infrastructure for resources according to the `tfquery.hcl` file so that you can import them into your Terraform workspace.
 
 ## Usage
 
@@ -16,7 +16,7 @@ $ terraform query [flags] [options]
 
 ## Description
 
-When you run the `terraform query` command, Terraform searches the current configuration directory for `tfquery.hcl` files so that it can query remote infrastructure for resources that match the defined `list` blocks. Terraform prints the results to the terminal. You also add the `-generate-config-out` flag to generate configuration that you can use to import the resources. Refer to [Import resources in bulk](/terraform/language/import/bulk) for more information.
+When you run the `terraform query` command, Terraform checks the current configuration directory for files with a `.tfquery.hcl` extension. Then, Terraform queries remote infrastructure for resources that match the `list` blocks defined in the query file and prints the results to the terminal. You can also add the `-generate-config-out` flag to generate configuration that you can use to import the resources. Refer to [Import resources in bulk](/terraform/language/import/bulk) for more information.
 
 ## Flags
 
@@ -73,13 +73,13 @@ $ terraform query -var-file=my-vars.tfvars
 
 ### Generate import configuration
 
-The following command generates `import` and `resource` blocks for the query results to a file in the `/to-import` directory:
+The following command generates `import` and `resource` blocks for the query results to a file in the `to-import` directory:
 
 ```shell-session
 $ terraform query -generate-config=to-import/file.tf
 ```
 
-The following command prints `import` and `resource` blocks for the query results as json:
+The following command prints `import` and `resource` blocks for the query results as JSON:
 
 ```shell-session
 $ terraform query -generate-config=file.tf -json
