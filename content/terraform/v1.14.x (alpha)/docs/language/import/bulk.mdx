@@ -54,7 +54,7 @@ Add the following arguments to your `list` block:
 
 The `list` block also supports several Terraform **meta-arguments**, which are arguments built into Terraform configuration language that configure how Terraform creates and manages infrastructure objects. For example, you can use the `count` meta-argument to create multiple instances of the resource list returned by the query. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
 
-The following example queries AWS for `aws_instance` resources that match {. . .} and returns complete resource information for the first 50 results:
+The following example queries AWS for `aws_instance` resources tagged with `prod` and returns complete resource information for the first 50 results:
 
 ```hcl
 list "aws_instance" "prod" {
@@ -62,7 +62,7 @@ list "aws_instance" "prod" {
   include_resource = true
   limit = 50
   config {
-    TBD
+    filter = "prod"
   }
 }
 ```
