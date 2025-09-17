@@ -25,6 +25,12 @@ Click a run to go to its details page. The details page contains the following i
 - A timeline of events related to the run.
 - The output from both the `terraform plan` and `terraform apply` commands, if applicable. This output defaults to visible if the command is currently running and hidden if the command has finished.
 
+### Action runs
+
+@include 'beta.mdx'
+
+If a run invokes an action, HCP Terraform adds the **action:** label and an icon. Actions are preset operations built into providers that let Terraform perform day-two operations. Refer to [Invoke actions](/terraform/language/v1.14.x/invoke-actions) in the Terraform configuration language documentation for more information. 
+
 ## Interacting with Runs
 
 In workspaces where you have [permission to apply runs](/terraform/cloud-docs/users-teams-organizations/permissions#general-workspace-permissions), you can interact with a run at the bottom of its details page.
