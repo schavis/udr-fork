@@ -31,3 +31,7 @@
 
 /content/vault/                                    @hashicorp/vault-education-approvers
 
+# Well-architected Framework
+
+content/well-architected-framework/ @hashicorp/well-architected-education-approvers
+
