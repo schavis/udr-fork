@@ -7,28 +7,15 @@
         "path": ""
     },
     {
-        "title": "Install",
-        "path": "install"
+        "title": "Deploy",
+        "path": "deploy"
     },
     {
         "title": "Authenticate",
-        "path": "authenticate"
+        "path": "prompt"
     },
     {
         "title": "Reference",
-        "routes": [
-            {
-                "title": "tf-migrate prepare",
-                "path": "reference/prepare"
-            },
-            {
-                "title": "tf-migrate execute",
-                "path": "reference/execute"
-            },
-            {
-                "title": "Configuration file reference",
-                "path": "reference/configuration"
-            }
-        ]
+        "path": "reference"
     }
 ]
