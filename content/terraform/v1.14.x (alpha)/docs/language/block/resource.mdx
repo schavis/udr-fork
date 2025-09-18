@@ -1209,7 +1209,7 @@ resource "aws_instance" "web" {
 
   lifecycle {
     action_trigger {
-      events    = ["after_create"]
+      events    = [ after_create ]
       actions   = [action.ansible_playbook.provision]
     }
   }
