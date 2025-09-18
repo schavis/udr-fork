@@ -230,6 +230,15 @@
         "path": "workspaces/configurations"
       },
       {
+        "title": "Import existing resources",
+        "path": "workspaces/import",
+        "badge": {
+          "text": "BETA",
+          "type": "outlined",
+          "color": "neutral"
+        }
+      },
+      {
         "title": "Dynamic Provider Credentials",
         "routes": [
           { "title":  "Overview", "path":  "workspaces/dynamic-provider-credentials" },
