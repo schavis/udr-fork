@@ -222,7 +222,7 @@ action "aws_lambda_invoke" "example" {
       key1 = "value1"
       key2 = "value2"
     })
-    }
+  }
 }
 ```
 
@@ -238,14 +238,14 @@ Terraform invokes the action three times.
 
 ```hcl
 action "aws_lambda_invoke" "example" {
-    count = 3 
-    config {
-      function_name = "my_function"
-      payload = jsonencode({
-        key1 = "value1"
-        key2 = "value2"
-      })
-    }
+  count = 3 
+  config {
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
+  }
 }
 ```
 
