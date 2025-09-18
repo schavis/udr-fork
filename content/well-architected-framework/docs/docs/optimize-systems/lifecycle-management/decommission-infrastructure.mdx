@@ -91,14 +91,16 @@ lifecycle {
 }
 ```
 
-[Consul](/consul) can help you gradually remove resources by directing traffic away from services you are decommissioning. You can use Consul's service discovery and health checking features to monitor the status of services and ensure that dependent services are not affected during the decommissioning process.
+Consul can help you gradually remove resources by directing traffic away from services you are decommissioning. You can use Consul's service discovery and health checking features to monitor the status of services and ensure that dependent services are not affected during the decommissioning process.
 
-If you are using orchestration tools like [Nomad](/nomad) or Kubernetes, you can use their built-in capabilities to drain workloads before decommissioning nodes gracefully. Nomad provides node drain functionality through the `nomad node drain` command, which prevents new scheduling new allocations on a node while safely migrating existing jobs to other available nodes. The Kubernetes `kubectl drain` command safely removes pods from nodes while respecting Pod Disruption Budgets, which ensure that a minimum number of application replicas remain available throughout the process. 
+If you are using orchestration tools like Nomad or Kubernetes, you can use their built-in capabilities to drain workloads before decommissioning nodes gracefully. Nomad provides node drain functionality through the `nomad node drain` command, which prevents new scheduling new allocations on a node while safely migrating existing jobs to other available nodes. The Kubernetes `kubectl drain` command safely removes pods from nodes while respecting Pod Disruption Budgets, which ensure that a minimum number of application replicas remain available throughout the process. 
 
 HashiCorp resources:
 
 - Review the [Zero-downtime deployments](/well-architected-framework/define-and-automate-processes/deploy/zero-downtime-deployments) documentation for strategies on how to redirect traffic and disable functions gradually.
 - Learn how to [manage resource lifecycles with Terraform](/terraform/tutorials/state/resource-lifecycle).
+- [Get up and running with Nomad](/nomad/tutorials/get-started) by learning about scheduling, setting up a cluster, and deploying an example job.
+- [Learn the [fundamentals of Consul](/consul/tutorials).
 
 ## Verify health of infrastructure and applications
 
