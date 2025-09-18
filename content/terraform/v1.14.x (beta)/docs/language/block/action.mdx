@@ -257,15 +257,15 @@ Terraform invokes the action once for each member of the map, resulting in two i
 
 ```hcl
 action "aws_lambda_invoke" "example" {
-   for_each = tomap({
-      a_group       = "eastus"
-      another_group = "westus2"
-   })
+  for_each = tomap({
+    a_group       = "eastus"
+    another_group = "westus2"
+  })
   config {
-      function_name = "my_function"
-      payload = jsonencode({
-        key1 = "value1"
-        key2 = "value2"
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
     })
   }
 }
