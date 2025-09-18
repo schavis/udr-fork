@@ -423,7 +423,7 @@
             "path": "optimize-systems/lifecycle-management/data-management"
           },
           {
-            "title": "Decommission infrastructure",
+            "title": "Decommission resources",
             "path": "optimize-systems/lifecycle-management/decommission-infrastructure"
           }
         ]
