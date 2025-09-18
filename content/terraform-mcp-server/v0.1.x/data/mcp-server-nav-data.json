@@ -11,7 +11,7 @@
         "path": "deploy"
     },
     {
-        "title": "Authenticate",
+        "title": "Prompt",
         "path": "prompt"
     },
     {
