@@ -15,20 +15,6 @@ When you decommission unused resources, you gain the following benefits:
 
 To successfully decommission resources, you need to create a well-defined plan that includes dependency analysis, stakeholder communication, and a gradual removal process. Depending on how your infrastructure implementation is done, either manually or automatically, you may need to adjust your decommissioning approach.
 
-## Find resources to decommission
-
-Before you begin decommissioning resources, you need to identify which resources exist in your environment and determine which ones are candidates for removal. This discovery phase helps you avoid accidentally removing resources that are still in use and ensures you target the right components for decommissioning.
-
-Start by creating an inventory of your infrastructure. Most cloud providers offer resource tagging and billing reports that help identify unused or underutilized resources. Pay particular attention to active resources created for temporary purposes, like testing or proof-of-concepts.
-
-Terraform tracks all infrastructure it manages with state files. You can use the `terraform state list` to see all managed resources and `terraform show` to examine their current configurations. This list of resources will help you identify which resources are still in use and which ones you can decommission.
-
-## Create a communication plan 
-
-Your plan should outline how you will inform stakeholders about the decommissioning process, including timelines and potential impacts. Effective communication prevents surprises and ensures all affected teams can prepare for the changes.
-
-Start by identifying all stakeholders who might be affected by the decommissioning, including development teams, operations staff, end users, and business owners. Create a notification timeline that provides adequate warning. Your communications should explain what resources you are removing, when the decommissioning will occur, and what actions stakeholders need to take.
-
 ## Create a dependency plan
 
 Your plan should analyze which services, applications, or other resources rely on the components you plan to remove. Your plan will lower the risk of unexpected outages by identifying and addressing dependencies before decommissioning.
@@ -49,7 +35,24 @@ You need to install Graphviz on your system to use the `terraform graph` command
 
 HashiCorp resources:
 
-- [Terraform Graph Command](/terraform/docs/cli/commands/graph)
+- [Terraform graph command](/terraform/docs/cli/commands/graph)
+
+## Find resources to decommission
+
+Before you begin decommissioning resources, you need to identify which resources exist in your environment and determine which ones are candidates for removal. This discovery phase helps you avoid accidentally removing resources that are still in use and ensures you target the right components for decommissioning.
+
+Start by creating an inventory of your infrastructure. Most cloud providers offer resource tagging and billing reports that help identify unused or underutilized resources. Pay particular attention to active resources created for temporary purposes, like testing or proof-of-concepts.
+
+Terraform tracks all infrastructure it manages with state files. You can use the `terraform state list` to see all managed resources and `terraform show` to examine their current configurations. This list of resources will help you identify which resources are still in use and which ones you can decommission.
+
+If you're using HCP Terraform, you can use the [workspace explorer](/terraform/cloud-docs/workspaces/explorer) feature to gain visibility into the resources your organization manages with Terraform. The explorer provides a visual representation of your infrastructure, making it easier to identify resources that you no longer need.
+
+
+## Create a communication plan 
+
+Your plan should outline how you will inform stakeholders about the decommissioning process, including timelines and potential impacts. Effective communication prevents surprises and ensures all affected teams can prepare for the changes.
+
+Start by identifying all stakeholders who might be affected by the decommissioning, including development teams, operations staff, end users, and business owners. Create a notification timeline that provides adequate warning. Your communications should explain what resources you are removing, when the decommissioning will occur, and what actions stakeholders need to take.
 
 ## Create backups
 
@@ -72,6 +75,27 @@ resource "aws_instance" "example" {
 }
 ```
 
+You can also use Terraform to create [AWS EBS snapshots](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_snapshot) before decommissioning instances. The following example creates an EBS snapshot of the root volume of an EC2 instance:
+
+```hcl
+resource "aws_ebs_volume" "example" {
+  availability_zone = "us-west-2a"
+  size              = 40
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+
+resource "aws_ebs_snapshot" "example_snapshot" {
+  volume_id = aws_ebs_volume.example.id
+
+  tags = {
+    Name = "HelloWorld_snap"
+  }
+}
+```
+
 ## Gradually remove resources
 
 Implement a phased approach to removing resources instead of doing it all at once. Start by redirecting traffic away from the resource, and monitor user traffic to ensure you don't negatively impact users.
@@ -87,7 +111,7 @@ resource "aws_instance" "example" {
 }
 
 lifecycle {
-    prevent_destroy = true
+  prevent_destroy = true
 }
 ```
 
