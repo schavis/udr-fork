@@ -35,10 +35,10 @@ Your plan should analyze which services, applications, or other resources rely o
 
 If you are using infrastructure as code tools like Terraform, you can use a dependency graph to understand resource relationships. This graph can help you visualize connections between resources and identify potential impacts of removing specific components.
 
-You can create a dependency graph of your Terraform resources by running the following CLI command:
+The following command creates a dependency graph of your Terraform resources:
 
-```bash
-terraform graph -type=plan | dot -Tpng > graph.png
+```shell-session
+$ terraform graph -type=plan | dot -Tpng > graph.png
 ```
 
 <Note>
@@ -55,7 +55,7 @@ HashiCorp resources:
 
 Before decommissioning, confirm that you have backups of any critical data or configurations associated with the resources you are removing. Backups provide a safety net in case you need to roll back changes.
 
-The following are some resources you may want to back up:
+You may want to back up the following resources:
 - Servers in the form of machine images
 - Database snapshots
 - Configuration files
@@ -72,7 +72,7 @@ resource "aws_instance" "example" {
 }
 ```
 
-## Gradual removal of resources
+## Gradually remove resources
 
 Implement a phased approach to removing resources instead of doing it all at once. Start by redirecting traffic away from the resource, and monitor user traffic to ensure you don't negatively impact users.
 
@@ -106,7 +106,7 @@ HashiCorp resources:
 
 After the decommissioning process, verify that the remaining infrastructure and applications are functioning correctly. Monitor system performance and user feedback to ensure that there are no negative impacts.
 
-The following are steps that you should do after decommissioning:
+You should do the following steps after you decomission the resources:
 
 - Validate APIs are functioning.
 - Check application performance.
@@ -124,6 +124,6 @@ External resources:
 
 In this section of Lifecycle management, you learned about decommissioning resources, including why you should plan decommissioning and how to safely execute the process. Decommission resources is part of the [Optimize systems](/well-architected-framework/optimize-systems) pillar.
 
-To learn more about infrastructure and resource management, see the following resource:
+To learn more about infrastructure and resource management, refer to the following resource:
 
 - [Data management](/well-architected-framework/optimize-systems/lifecycle-management/data-management)

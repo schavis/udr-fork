@@ -21,7 +21,7 @@ When you implement data management policies, you gain the following benefits:
 
 You can use Terraform to define and manage lifecycle policies and implement those policies across your organization. You can create Terraform modules to create data management policies for different data types and compliance requirements. These modules can automatically apply appropriate lifecycle rules, storage class transitions, and deletion policies to new or existing storage resources.
 
-The following is an example of using Terraform to [create a data lifecycle policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration#specifying-a-filter-based-on-object-size) to move AWS S3 data to Glacier Instant Retrieval after 365 days:
+The following Terraform configuration defines a [data lifecycle policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration#specifying-a-filter-based-on-object-size) to move AWS S3 data to Glacier Instant Retrieval after 365 days:
 
 ```hcl
 resource "aws_s3_bucket_lifecycle_configuration" "example" {
@@ -46,7 +46,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
 
 Terraform can also tag resources with appropriate retention metadata. These tags can include creation dates, data classifications, and retention periods.
 
-For example, you can use the [tags block](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration#specifying-a-filter-based-on-an-object-tag) with AWS S3 to automatically apply tags to all resources created by Terraform. The S3 lifecycle rule specifies a filter based on a tag key and value. The rule then applies only to a subset of objects with the specific tag.
+For example, you can use the [`tag` block](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration#specifying-a-filter-based-on-an-object-tag) with AWS S3 to automatically apply tags to all resources created by Terraform. The S3 lifecycle rule specifies a filter based on a tag key and value. The rule then applies only to a subset of objects with the specific tag.
 
 ```hcl
 resource "aws_s3_bucket_lifecycle_configuration" "example" {
@@ -72,7 +72,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
 }
 ```
 
-It is important to note that other cloud providers, such as [Google Cloud Platform](https://registry.terraform.io/providers/hashicorp/google/5.0.0/docs/resources/storage_bucket.html#example-usage---life-cycle-settings-for-storage-bucket-objects) and [Microsoft Azure](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_management_policy), offer similar lifecycle management features for their storage services. You can use Terraform to manage lifecycle policies across multiple cloud providers, ensuring consistent data management practices regardless of where your data resides.
+Other cloud providers, such as [Google Cloud Platform](https://registry.terraform.io/providers/hashicorp/google/5.0.0/docs/resources/storage_bucket.html#example-usage---life-cycle-settings-for-storage-bucket-objects) and [Microsoft Azure](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_management_policy), offer similar lifecycle management features for their storage services. You can use Terraform to manage lifecycle policies across multiple cloud providers, ensuring consistent data management practices regardless of where your data resides.
 
 HashiCorp resources:
 
@@ -90,5 +90,5 @@ External resources:
 
 In this section of Lifecycle management, you learned about implementing data management policies, including why you should use lifecycle policies and how to automate policy management with infrastructure as code. Implement data management policies is part of the [Optimize systems](/well-architected-framework/optimize-systems) pillar.
 
-To learn more about infrastructure and resource management, see the following resources:
+To learn more about infrastructure and resource management, refer to the following resources:
 - [Automate infrastructure provisioning](/well-architected-framework/define-and-automate-processes/process-automation/process-automation-workflow)
