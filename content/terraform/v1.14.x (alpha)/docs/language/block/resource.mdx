@@ -99,10 +99,10 @@ resource "<TYPE>" "<LABEL>" {
   lifecycle {
     action_trigger {
       events = [   		# specify one or more lifecycle events as a list 
-        "before_create", 
-        "after_create,
-        "before_update",
-        "after_update"
+        before_create, 
+        after_create,
+        before_update,
+        after_update
       ]
       condition = <EXPRESSSION>
       actions = [ action.<TYPE>.<LABEL> ]

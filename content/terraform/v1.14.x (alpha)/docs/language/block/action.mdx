@@ -50,7 +50,7 @@ You must set the following arguments for every `action` block:
 - `TYPE`: Specifies the type of action to invoke. Refer to the provider documentation for information about the types of actions you can declare.
 - `LABEL`: Specifies a label for the `action` block. Terraform uses this label as part of the unique name for the action as configured by the block. The label does not affect the operation performed by Terraform when a user invokes the action. Refer to [References to Named Values](/terraform/language/expressions/references) and [Resource naming](/terraform/language/style#resource-naming) for expression syntax and label recommendations.
 
-To reference the action in your configuration, you must refer to it using `action.<TYPE>.<LABEL>` syntax.
+Use the `action.<TYPE>.<LABEL>` syntax to reference the action elsewhere in your configuration.
 
 ### `config`
 
