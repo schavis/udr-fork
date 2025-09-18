@@ -48,6 +48,7 @@ You need to install Graphviz on your system to use the `terraform graph` command
 </Note>
 
 HashiCorp resources:
+
 - [Terraform Graph Command](/terraform/docs/cli/commands/graph)
 
 ## Create backups
@@ -90,25 +91,31 @@ lifecycle {
 }
 ```
 
-Consul can help you gradually remove resources by directing traffic away from services you are decommissioning. You can use Consul's service discovery and health checking features to monitor the status of services and ensure that dependent services are not affected during the decommissioning process.
+[Consul](/consul) can help you gradually remove resources by directing traffic away from services you are decommissioning. You can use Consul's service discovery and health checking features to monitor the status of services and ensure that dependent services are not affected during the decommissioning process.
 
-If you are using orchestration tools like Nomad or Kubernetes, you can use their built-in capabilities to drain workloads before decommissioning nodes gracefully. Nomad provides node drain functionality through the `nomad node drain` command, which prevents new scheduling new allocations on a node while safely migrating existing jobs to other available nodes. The Kubernetes `kubectl drain` command safely removes pods from nodes while respecting Pod Disruption Budgets, which ensure that a minimum number of application replicas remain available throughout the process. 
+If you are using orchestration tools like [Nomad](/nomad) or Kubernetes, you can use their built-in capabilities to drain workloads before decommissioning nodes gracefully. Nomad provides node drain functionality through the `nomad node drain` command, which prevents new scheduling new allocations on a node while safely migrating existing jobs to other available nodes. The Kubernetes `kubectl drain` command safely removes pods from nodes while respecting Pod Disruption Budgets, which ensure that a minimum number of application replicas remain available throughout the process. 
 
-Review the [Zero-downtime deployments](/well-architected-framework/define-and-automate-processes/deploy/zero-downtime-deployments) documentation for strategies on how to redirect traffic and disable functions gradually.
+HashiCorp resources:
+
+- Review the [Zero-downtime deployments](/well-architected-framework/define-and-automate-processes/deploy/zero-downtime-deployments) documentation for strategies on how to redirect traffic and disable functions gradually.
+- Learn how to [manage resource lifecycles with Terraform](/terraform/tutorials/state/resource-lifecycle).
 
 ## Verify health of infrastructure and applications
 
 After the decommissioning process, verify that the remaining infrastructure and applications are functioning correctly. Monitor system performance and user feedback to ensure that there are no negative impacts.
 
 The following are steps that you should do after decommissioning:
+
 - Validate APIs are functioning.
 - Check application performance.
 - Monitor system logs for errors.
 
 HashiCorp resources:
+
 - [Learn to setup monitoring agents](/well-architected-framework/define-and-automate-processes/monitor/setup-monitoring-agents) and [dashboards and alerts](/well-architected-framework/define-and-automate-processes/monitor/dashboards-alerts).
 
 External resources:
+
 - AWS [Implement a decommissioning process](https://docs.aws.amazon.com/wellarchitected/latest/framework/cost_decomissioning_resources_implement_process.html)
 
 ## Next steps
@@ -116,4 +123,5 @@ External resources:
 In this section of Lifecycle management, you learned about decommissioning resources, including why you should plan decommissioning and how to safely execute the process. Decommission resources is part of the [Optimize systems](/well-architected-framework/optimize-systems) pillar.
 
 To learn more about infrastructure and resource management, see the following resource:
+
 - [Data management](/well-architected-framework/optimize-systems/lifecycle-management/data-management)

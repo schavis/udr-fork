@@ -75,9 +75,13 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
 It is important to note that other cloud providers, such as [Google Cloud Platform](https://registry.terraform.io/providers/hashicorp/google/5.0.0/docs/resources/storage_bucket.html#example-usage---life-cycle-settings-for-storage-bucket-objects) and [Microsoft Azure](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_management_policy), offer similar lifecycle management features for their storage services. You can use Terraform to manage lifecycle policies across multiple cloud providers, ensuring consistent data management practices regardless of where your data resides.
 
 HashiCorp resources:
+
 - Search the [Terraform Registry](https://registry.terraform.io/browse/providers) for the [cloud](https://registry.terraform.io/browse/providers?category=public-cloud) or [database](https://registry.terraform.io/browse/providers?category=database) provider you use.
 
+- Learn best practices for writing Terraform with the Terraform [style guide](/terraform/language/style).
+
 External resources:
+
 - Cloud storage: [AWS](https://aws.amazon.com/products/storage/), [GCP](https://cloud.google.com/products/storage), and [Azure](https://azure.microsoft.com/en-us/products/category/storage)
 - [Learn how to set the lifecycle configuration for a Google Cloud Bucket](https://cloud.google.com/storage/docs/samples/storage-create-lifecycle-setting-tf) with Terraform.
 - AWS [Enforce data retention policies](https://docs.aws.amazon.com/wellarchitected/latest/framework/cost_decomissioning_resources_data_retention.html)
@@ -87,5 +91,4 @@ External resources:
 In this section of Lifecycle management, you learned about implementing data management policies, including why you should use lifecycle policies and how to automate policy management with infrastructure as code. Implement data management policies is part of the [Optimize systems](/well-architected-framework/optimize-systems) pillar.
 
 To learn more about infrastructure and resource management, see the following resources:
-- [Track infrastructure](/well-architected-framework/optimize-systems/lifecycle-management/track-infrastructure)
 - [Automate infrastructure provisioning](/well-architected-framework/define-and-automate-processes/process-automation/process-automation-workflow)
