@@ -45,7 +45,7 @@ You need to install Graphviz on your system to use the `terraform graph` command
 
 HashiCorp resources:
 
-- [Terraform graph command](/terraform/docs/cli/commands/graph)
+- [Terraform graph command](/terraform/cli/commands/graph)
 
 ## Create a communication plan 
 
@@ -101,7 +101,7 @@ Implement a phased approach to removing resources instead of doing it all at onc
 
 You can use `terraform plan` to preview the changes that will occur when you remove resources from your configuration. This command helps you understand the impact of your changes before applying them.
 
-You can also set safeguards so you only decommission resources when you are ready. You can use Terraform's `lifecycle` block with `prevent_destroy = true` to prevent accidental deletion of critical resources. The [lifecycle](https://www.terraform.io/docs/language/meta-arguments#lifecycle) setting ensures that you won't destroy resources unless you explicitly remove the `prevent_destroy` attribute.
+You can also set safeguards so you only decommission resources when you are ready. You can use Terraform's `lifecycle` block with `prevent_destroy = true` to prevent accidental deletion of critical resources. The [lifecycle](/terraform/language/meta-arguments#lifecycle) setting ensures that you won't destroy resources unless you explicitly remove the `prevent_destroy` attribute.
 
 ```hcl
 resource "aws_instance" "example" {
@@ -123,7 +123,7 @@ HashiCorp resources:
 - Review the [Zero-downtime deployments](/well-architected-framework/define-and-automate-processes/deploy/zero-downtime-deployments) documentation for strategies on how to redirect traffic and disable functions gradually.
 - Learn how to [manage resource lifecycles with Terraform](/terraform/tutorials/state/resource-lifecycle).
 - [Get up and running with Nomad](/nomad/tutorials/get-started) by learning about scheduling, setting up a cluster, and deploying an example job.
-- [Learn the [fundamentals of Consul](/consul/tutorials).
+- Learn the [fundamentals of Consul](/consul/tutorials).
 
 ## Verify health of infrastructure and applications
 
