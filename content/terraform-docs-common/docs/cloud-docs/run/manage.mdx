@@ -29,7 +29,10 @@ Click a run to go to its details page. The details page contains the following i
 
 @include 'beta.mdx'
 
-If a run invokes an action, HCP Terraform adds the **action:** label and an icon. Actions are preset operations built into providers that let Terraform perform day-two operations. Refer to [Invoke an action](/terraform/language/v1.14.x/invoke-actions) in the Terraform configuration language documentation for more information. 
+If a run invokes an action that is triggered as part of a resource lifecycle, HCP Terraform identifies them on the run details page. HCP Terraform indicates how many actions the run invoked and adds **action:** labels to the **Plan** operation output and **Invoked:** labels to the **Apply** operation output.  
+
+Actions are preset operations built into providers that you can invoke to trigger automations outside of Terraform, such as Ansible playbooks and Lambda jobs. Refer to [Invoke an action](/terraform/language/v1.14.x/invoke-actions) in the Terraform configuration language documentation for more information.
+ 
 
 ## Interacting with Runs
 

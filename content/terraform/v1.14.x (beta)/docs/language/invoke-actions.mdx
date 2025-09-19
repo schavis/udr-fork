@@ -61,12 +61,15 @@ In the following example, Terraform invokes the action three times per the `coun
 
 ```hcl
 action "aws_lambda_invoke" "example" {
-    count = 3 
-    provider = aws.alias
-    config {
-        input   = count.index
-        timeout = 3000
-    }
+  count = 3 
+  provider = aws.alias
+  config {
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
+  }
 }
 ```
 
@@ -100,7 +103,7 @@ Refer to the [`terraform apply` command](/terraform/cli/commands/apply) document
 
 Configure an `action_trigger` block and specify the action to run and the events that trigger the action. The `action_trigger` block is a member of the `lifecycle` block nested in a `resource` block. Refer to the [`action_trigger` documentation](/terraform/language/block/resource#action_trigger) for details about configuring the block.
 
-In the following example, Terraform invokes the `action.aws_lambda_invoke.example` action after creating the `aws_lambda_function.example` resource. Terraform also invokes action during a `terraform apply` operation if the `resource` block configuration changes.
+In the following example, Terraform invokes the `action.aws_lambda_invoke.example` action after creating the `aws_lambda_function.example` resource. Terraform also invokes the action during a `terraform apply` operation if the `resource` block configuration changes.
 
 ```hcl
 resource "aws_lambda_function" "example" {
@@ -117,7 +120,7 @@ resource "aws_lambda_function" "example" {
 
 Terraform invokes the action when you run `terraform apply` and are creating the resource for the first time. This is because one of the `event` triggers is `after_create`. 
 
-Terraform also invokes the action if you update the `resource` block configuration and run `terraform apply` again. Terraform doesn't invoke the action if you run the command again without updating the `resource` block configuration. 
+Terraform also updates the resource on `terraform apply` without changes to the configuration when it detects drift in the resource that would trigger an `after_update` action. 
 
 ## View actions in HCP Terraform
 
