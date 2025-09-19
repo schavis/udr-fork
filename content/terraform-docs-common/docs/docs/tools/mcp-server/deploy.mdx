@@ -17,6 +17,16 @@ The Terraform MCP server is a specialized service that provides AI models with a
 - **Local deployment**: Run the server on your workstation using `stdio` mode for direct communication through standard input/output
 - **Remote deployment**: Run the server on a remote instance using `streamable-http` mode for network-based communication
 
+### Secure configuration
+
+Implement the following recommendations to securely deploy the MCP server:
+
+- **Hosting**: We recommend running the MCP Server locally (127.0.0.1) through the STDIO or HTTP Streamable transport protocol to limit the exposure of your Terraform environment to the public. The default transport is set to STDIO. Users deciding to host the service remotely should add additional security controls at the application and network level.
+- **CORS**: By default, the supported CORS mode is strict and the allowed origins are empty. As a result, all cross-origin requests are blocked unless the server is explicitly configured to allow them. Exercise caution when you need to change allowed origins list.
+- **Terraform authentication**: The `TFE_SKIP_VERIFY` option is enabled by default. We recommend keeping the option enabled so that communication with your Terraform environment is encrypted. We also recommend limiting the permissions of the `TFE_TOKEN` used to authenticate as described in the Terraform documentation. Refer to [API tokens](ref) for more information.
+- **Rate limiting**: We recommend setting up global and per-session rate limits to prevent the server or dependent resources from becoming overloaded through excessive requests. 
+- **TLS**: When making your MCP server accessible remotely, we recommend adding a TLS certificate to protect in-transit communication through the wire.
+
 ### Installation methods
 
 Choose from three installation options based on your environment and preferences:
