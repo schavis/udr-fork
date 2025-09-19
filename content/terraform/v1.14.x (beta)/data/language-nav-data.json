@@ -261,6 +261,10 @@
     ]
   },
   {
+    "title": "Invoke actions",
+    "path": "invoke-actions"
+  },
+  {
     "title": "Perform post-apply operations",
     "path": "provisioners",
     "alias": "provisioners"

@@ -5,7 +5,7 @@ description: Learn how to configure action blocks in Terraform configuration so 
 
 # `action` block reference
 
-The `action` block specifies a provider-defined action that you can invoke using the Terraform CLI or during an apply operation. Actions are operations included with providers that let Terraform perform day-two operations. 
+The `action` block specifies a provider-defined action that you can invoke using the Terraform CLI or during an apply operation. Actions are preset operations included with providers that let Terraform perform day-two operations. Refer to [Invoke an action](/terraform/language/invoke-actions) for more information.
 
 ## Configuration model
 
@@ -193,16 +193,22 @@ The following examples show how to write configuration for common use cases.
 
 ### Define an action 
 
-The following example adds an `aws_lambda_invoke` action. You  can invoke an action using the CLI or configure Terraform to invoke the action during a resource lifecycle state.
+The following example adds an `aws_lambda_invoke` action. You  can invoke an action using the CLI or configure Terraform to invoke the action during a resource lifecycle state. Refer to [Invoke an action](/terraform/language/invoke-actions) for instructions on how to invoke actions.
+
 
 ```hcl
 action "aws_lambda_invoke" "example" {
   config {
-    values  = var.values
-    timeout = 3000
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
   }
 }
 ```
+
+The value of the `function_name` argument must be defined elsewhere in the configuration. The argument is available in the AWS `lambda_function` resource. Refer to the [AWS provider documentation](https://registry.terraform.io/providers/hashicorp/aws/6.14.0/docs/resources/lambda_function#basic-function-with-nodejs) for information about provisioning an AWS Lambda function.
 
 ### Select an alternate provider configuration
 
