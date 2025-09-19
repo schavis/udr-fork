@@ -113,8 +113,9 @@ Terraform version 0.11 or later is required to use private modules in HCP Terraf
 ## Use providers and modules in Stack components
 
 Stack components can source providers and modules from the following:
-- GitHub
 - Remote addresses
+  - Git Addresses
+  - HTTP/HTTPS Addresses
 - HCP Terraform private registry
 - Terraform public registry
 
@@ -194,8 +195,7 @@ To source a module from Github, use the following syntax:
 
 ```hcl
 component "my-component" {
-  source = "git::https://github.com/my-cool-gh-org/kube.git"
-  version = "0.1.0"
+  source = "git::https://github.com/my-cool-gh-org/kube.git?ref=0.1.0"
 
   # ...
 }
@@ -209,7 +209,6 @@ To source a module from a remote address, use a URL that points to a `tar.gz` fi
 
 component "my-component" {
   source = "https://example.com/infra/compute?archive=tar.gz"
-  version = "0.1.0"
 
   # ...
 }
