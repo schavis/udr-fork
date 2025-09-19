@@ -1,0 +1,213 @@
+---
+page_title: Workspace Permissions
+description: >-
+  Use the HCP Terraform permission model to manage user access to organizations, projects, and workspaces.
+---
+
+# Workspace permissions
+
+Workspace-level permissions apply to a specific workspace and control what users can do within that workspace.
+
+## Background
+
+To learn how to set permissions for a workspace, refer to [Set roles in HCP Terraform](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles).
+
+If you are in an HCP Terraform organization, you can manage user access and permissions through teams.
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+In HCP Europe organizations, HCP Terraform inherits the groups and roles you set up in the HashiCorp Cloud Platform (HCP). If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
+
+In HCP Europe organizations, HCP roles automatically grant permissions in HCP Terraform, and you can add additional fine-grained roles within HCP Terraform itself. To learn more about HCP roles in projects, refer to [HCP group roles](#hcp-group-roles).
+
+<!-- END: TFC:only name:hcp-eu -->
+
+We recommend following the principle of least privilege when possible, only giving users access to the resources they need for their job function. You can also set permissions at the [organization](/terraform/cloud-docs/users-teams-organizations/permissions/organization) and [project](/terraform/cloud-docs/users-teams-organizations/permissions/project) levels.
+
+Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set at the organization, project, or workspace level. For more details, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
+
+
+
+## Workspace roles
+
+The following table shows the permissions granted by each workspace role. Each role builds upon the previous level, with Admin having the most comprehensive access.
+
+| Permission category | Permission name | [Admin role](#workspace-admin) | [Write role](#write-role) | [Plan role](#plan-role) | [Read role](#read-role) |
+|---------------------|------------|:-----:|:-----:|:----:|:----:|
+| [Run Access](#run-access) | [Read runs](#run-read) | ✅ | ✅ | ✅ | ✅ |
+| | [Plan runs](#run-plan) | ✅ | ✅ | ✅ | ❌ |
+| | [Apply runs](#run-apply) | ✅ | ✅ | ❌ | ❌ |
+| [Variable Access](#variable-access) | [Read variables](#variable-read) | ✅ | ✅ | ✅ | ✅ |
+| | [Read and write variables](#variable-read-write) | ✅ | ✅ | ❌ | ❌ |
+| [State Access](#state-access) | [Read outputs only](#state-read-outputs) | ✅ | ✅ | ✅ | ✅ |
+| | [Read state](#state-read) | ✅ | ✅ | ✅ | ✅ |
+| | [Read and write state](#state-read-write) | ✅ | ✅ | ❌ | ❌ |
+| [Other Controls](#other-controls) | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ✅ | ❌ | ❌ |
+| | [Lock/unlock workspace](#lock-unlock-workspace) | ✅ | ✅ | ❌ | ❌ |
+| | [Manage workspace Run Tasks](#manage-workspace-run-tasks) | ✅ | ❌ | ❌ | ❌ |
+| Admin-Only Permissions | Read and write workspace settings | ✅ | ❌ | ❌ | ❌ |
+| | Set workspace permissions for visible teams | ✅ | ❌ | ❌ | ❌ |
+| | Delete workspace | ✅ | ❌ | ❌ | ❌ |
+
+
+### Workspace admin
+
+Much like the owners team has full control over an organization, each workspace has a special "admin" permissions level that grants full control over the workspace. Members of a team with admin permissions on a workspace are sometimes called "workspace admins" for that workspace.
+
+Admin permissions include the highest level of general permissions for the workspace. There are also some permissions that are only available to workspace admins, which generally involve changing the workspace's settings or setting access levels for other teams.
+
+Workspace admins have all [General Workspace Permissions](#general-workspace-permissions), as well as the ability to do the following tasks:
+
+- Read and write workspace settings. This includes general settings, notification configurations, run triggers, and more.
+- Set or remove workspace permissions for visible teams. Workspace admins cannot view or manage teams with the [**Secret**](/terraform/cloud-docs/users-teams-organizations/teams/manage#team-visibility) visibility option enabled unless they are also organization owners.
+- Delete the workspace
+  - Depending on the [organization's settings](/terraform/cloud-docs/users-teams-organizations/organizations#general), workspace admins may only be able to delete the workspace if it is not actively managing infrastructure. Refer to [Deleting a Workspace With Resources Under Management](/terraform/cloud-docs/workspaces/settings#deleting-a-workspace-with-resources-under-management) for details.
+
+### Write role
+
+The "write" permission set is for people who do most of the day-to-day work of provisioning and modifying managed infrastructure. Write access grants the following workspace permissions:
+
+- Run access - Apply
+- Variable access - Read and write
+- State access - Read and write
+- Other access - Lock/unlock workspace
+- Other access - Download Sentinel mocks
+
+See [General Workspace Permissions][] above for details about specific permissions.
+
+### Plan role
+
+The "plan" permission set is for people who might propose changes to managed infrastructure, but whose proposed changes should be approved before they are applied. Plan access grants the following workspace permissions:
+
+- Run access - Plan
+- Variable access - Read
+- State access - Read
+
+See [General Workspace Permissions][] above for details about specific permissions.
+
+### Read role
+
+The "read" permission set is for people who need to view information about the status and configuration of managed infrastructure in order to do their jobs, but aren't responsible for maintaining that infrastructure. Read access grants the following workspace permissions:
+
+- Run access - Read
+- Variable access - Read
+- State access - Read
+
+See [General Workspace Permissions][] above for details about specific permissions.
+
+### Custom role
+
+Custom permissions let you assign specific, finer-grained permissions to a team than the broader fixed permission sets provide. This enables more task-focused permission sets and tighter control of sensitive information.
+
+You can use custom permissions to assign any of the permissions listed above under [General Workspace Permissions][], with the exception of admin-only permissions.
+
+The minimum custom permissions set for a workspace is the permission to read runs; the only way to grant a team lower access is to not add them to the workspace at all.
+
+Some permissions - such as the runs permission - are tiered: you can assign one permission per category, since higher permissions include all of the capabilities of the lower ones.
+
+
+## Run access
+
+The following table summarizes the available run access permissions for the workspace.
+
+| Permission name | Description |
+|-----------------|-------------|
+| [Read](#run-read) | View information about workspace runs. |
+| [Plan](#run-plan) | Queue Terraform plans in the workspace. |
+| [Apply](#run-apply) | Approve and apply Terraform plans in the workspace. |
+
+### Read <a id="run-read"></a>
+
+Allows users to view information about remote Terraform runs, including the run history, the status of runs, the log output of each stage of a run (plan, apply, cost estimation, policy check), and configuration versions associated with a run.
+
+### Plan <a id="run-plan"></a>
+
+Allows users to queue Terraform plans in a workspace, including both speculative plans and normal plans. Normal plans must be approved by a user with permission to apply runs. This also allows users to comment on runs. This permission implies permission to read.
+
+### Apply <a id="run-apply"></a>
+
+Allows users to approve and apply Terraform plans, causing changes to real infrastructure. This permission implies permission to plan and read.
+
+## Variable access
+
+The following table summarizes the available variable access permissions for the workspace.
+
+| Permission name | Description |
+|-----------------|-------------|
+| [No access](#variable-no-access) | No access to workspace variables. |
+| [Read](#variable-read) | View workspace variables and environment variables. |
+| [Read and write](#variable-read-write) | Edit workspace variables and environment variables. |
+
+### No access <a id="variable-no-access"></a>
+
+No access is granted to the values of Terraform variables and environment variables for the workspace.
+
+### Read <a id="variable-read"></a>
+Allows users to view the values of Terraform variables and environment variables for the workspace. Note that variables marked as sensitive are write-only, and can't be viewed by any user.
+
+### Read and write <a id="variable-read-write"></a>
+
+Allows users to edit the values of variables in the workspace. This permission implies permission to read.
+
+
+## State access
+
+The following table summarizes the available state access permissions for the workspace.
+
+| Permission name | Description |
+|-----------------|-------------|
+| [No access](#state-no-access) | No access to workspace state. |
+| [Read outputs only](#state-read-outputs) | Access public outputs from workspace state. |
+| [Read](#state-read) | Read complete state files from the workspace. |
+| [Read and write](#state-read-write) | Create new state versions in the workspace. |
+
+### No access <a id="state-no-access"></a>
+
+No access is granted to the state file from the workspace.
+
+### Read outputs only <a id="state-read-outputs"></a>
+
+Allows users to access values in the workspace's most recent Terraform state that have been explicitly marked as public outputs.
+
+Output values are often used as an interface between separate workspaces that manage loosely coupled collections of infrastructure, so their contents can be relevant to people who have no direct responsibility for the managed infrastructure but still indirectly use some of its functions.
+
+This permission is required to access the [State Version Outputs](/terraform/cloud-docs/api-docs/state-version-outputs) API endpoint and to use the `terraform output` command or the `terraform_remote_state` data source against the workspace.
+
+### Read <a id="state-read"></a>
+
+Allows users to read complete state files from the workspace. State files are useful for identifying infrastructure changes over time, but often contain sensitive information. This permission implies permission to read outputs only.
+
+### Read and write <a id="state-read-write"></a>
+
+Allows users to directly create new state versions in the workspace. This permission is required for performing local runs when the workspace's execution mode is set to "local". This permission implies permission to read.
+
+This permission is also required to use any of the Terraform CLI's state manipulation and maintenance commands against this workspace, including `terraform import`, `terraform taint`, and the various `terraform state` subcommands.
+
+her controls
+
+The following table summarizes additional control permissions for the workspace.
+
+| Permission name | Description |
+|-----------------|-------------|
+| [Download Sentinel mocks](#download-sentinel-mocks) | Download data from runs for developing Sentinel policies. |
+| [Lock/unlock workspace](#lock-unlock-workspace) | Manually lock the workspace to prevent runs. |
+| [Manage workspace Run Tasks](#manage-workspace-run-tasks) | Associate or dissociate run tasks with the workspace. |
+
+### Download Sentinel mocks
+
+Allows users to download data from runs in the workspace in a format that can be used for developing Sentinel policies. This run data is very detailed, and often contains unredacted sensitive information.
+
+### Lock/unlock workspace
+
+Allows users to manually lock the workspace to temporarily prevent runs. When a workspace's execution mode is set to "local", users must have this permission to perform local CLI runs using the workspace's state.
+
+### Manage workspace Run Tasks
+
+Allows users to associate or dissociate run tasks with the workspace. HCP Terraform creates Run Tasks at the organization level, where you can manually associate or dissociate them with specific workspaces.
+
+
+### Fixed Permission Sets
+
+Fixed permission sets are bundles of specific permissions for workspaces, which you can use to delegate access to workspaces easily.
+
+Each permissions set targets a level of authority and responsibility for a given workspace's infrastructure. A permission set can grant permissions that recipients do not require but offer a balance of simplicity and utility.

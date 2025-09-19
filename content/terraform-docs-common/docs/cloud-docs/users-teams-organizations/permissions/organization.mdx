@@ -1,0 +1,354 @@
+---
+page_title: Organization permissions
+description: >-
+  Learn about the organization permissions that you can grant to let your users interact with your organization's resources and settings.
+---
+
+# Organization permissions
+
+Organization-level permissions apply to all projects<!-- BEGIN: TFC:only name:stacks-tfe -->, Stacks,<!-- END: TFC:only name:stacks-tfe --> and workspaces within an organization.
+
+## Background
+
+To learn how to set permissions for an organization, refer to [Set roles in HCP Terraform](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles).
+
+If you are in an HCP Terraform organization, you can manage user access and permissions through teams.
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+In HCP Europe organizations, HCP Terraform inherits the groups and roles you set up in the HashiCorp Cloud Platform (HCP). If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
+
+In HCP Europe organizations, HCP roles automatically grant permissions in HCP Terraform, and you can add additional fine-grained roles within HCP Terraform itself. To learn more about HCP roles in organizations, refer to [HCP group roles](#hcp-group-roles).
+
+<!-- END: TFC:only name:hcp-eu -->
+
+We recommend following the principle of least privilege when possible, only giving users access to the resources they need for their job function. You can also set permissions at the [project](/terraform/cloud-docs/users-teams-organizations/permissions/project) and [workspace](/terraform/cloud-docs/users-teams-organizations/permissions/workspace) levels.
+
+Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set at the organization, project, or workspace level. For more details, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
+
+## All organization permissions
+
+The following table summarizes the available organization-level permission categories. Click on a specific permission to learn more about what that permission grants.
+
+| Permission Category | Description |
+|---------------------|-------------|
+| [Project permissions](#project-permissions) | Control access to projects across the organization. |
+| [Workspace permissions](#workspace-permissions) | Control access to workspaces across the organization. |
+| [Team permissions](#team-permissions) | Control team management capabilities for the organization.<!-- BEGIN: TFC:only name:hcp-eu --> If you are using an HCP EU organization, refer to [Group permissions](#group-permissions) instead.<!-- END: TFC:only name:hcp-eu --> |
+| [Settings permissions](#settings-permissions) | Control access to governance and infrastructure tools. |
+| [Private registry permissions](#private-registry-permissions) | Control access to the organization's private registry. |
+| [Public registry permissions](#public-registry-permissions) | Control access to the public registry. |
+
+## Project permissions
+
+The following table summarizes the available organization-level permissions for projects. Click on a specific permission name to learn more about that permission level.
+
+| Permission name | Description |
+|---------------------|------------|-------------|
+| [None](#project-none) | No access to projects, and access must be granted individually. |
+| [View all projects](#view-all-projects) | Can view all project names in the organization. |
+| [Manage all projects](#manage-all-projects) | Can create, edit, and delete projects, and manage team access to all projects. |
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+In HCP Europe organizations, you cannot assign **Project permissions** to a group in HCP Terraform. If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
+
+Instead, assign an HCP role that grants **Project permissions** to a group, then HCP Terraform will automatically inherit those permissions. To learn more about which HCP roles grant project permissions, refer to [HCP group roles](#hcp-group-roles).
+
+<!-- END: TFC:only name:hcp-eu -->
+
+### None <a id="project-none"/>
+
+Members do not have access to projects or workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe -->. You can grant permissions to individual projects or workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> through [Project Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-project-level-roles) or [Workspace Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-workspace-level-roles).
+
+### View all projects
+
+Members can view all projects within the organization. This lets users:
+- View project names in a given organization.
+
+### Manage all projects
+
+Members can create and manage all projects and workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> or Stacks<!-- END: TFC:only name:stacks-tfe --> within the organization. In addition to the permissions granted by [“Manage all workspaces”](/terraform/cloud-docs/users-teams-organizations/permissions#manage-all-workspaces), this also lets users:
+- Manage other teams' access to all projects.
+- Create, edit, and delete projects (otherwise only available to organization owners).
+<!-- BEGIN: TFC:only name:stacks-tfe -->
+- Create, read, update, and delete Stacks.
+- Initiate, cancel or apply runs for Stacks.
+<!-- END: TFC:only name:stacks-tfe -->
+- Move workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> between projects.
+
+## Workspace permissions
+
+The following table summarizes the available organization-level permissions for workspaces. Click on a specific permission name to learn more about that permission level.
+
+| Permission name | Description |
+|-----------------|-------------|
+| [None](#workspace-none) | No access to workspaces, and access must be granted individually. |
+| [View all workspaces](#view-all-workspaces) | Can view information about all workspaces. |
+| [Manage all workspaces](#manage-all-workspaces) | Admin permissions on all workspaces, and can create workspaces. |
+
+### None <a id="workspace-none"/>
+
+Members do not have access to projects or workspaces. You can grant permissions to individual projects or workspaces through [Project Permissions](/terraform/cloud-docs/users-teams-organizations/permissions#project-permissions) or [Workspace Permissions](/terraform/cloud-docs/users-teams-organizations/permissions#workspace-permissions).
+
+#### View all workspaces
+
+Members can view all workspaces within the organization. This lets users:
+- View information and features relevant to each workspaces (e.g. runs, state versions, variables).
+
+#### Manage all workspaces
+
+Members can create and manage all workspaces within the organization. This lets users:
+- Perform any action that requires admin permissions in those workspaces.
+- Create new workspaces within the organization's **Default Project**, an action that is otherwise only available to organization owners.
+- Create, update, and delete [Variable Sets](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets).
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+## Group Permissions
+
+**Group permissions** only exist in HCP EU organizations, because you manage user access and permissions with HCP groups and roles. If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
+
+You cannot manually assign **Group permissions** to a group in HCP Terraform. Instead, you must assign an HCP role to that group which grants **Group permissions**, then HCP Terraform automatically inherits those permissions. To learn more about which HCP roles grant group permissions, refer to [HCP group roles](#hcp-group-roles).
+
+<!-- END: TFC:only name:hcp-eu -->
+
+## Team permissions
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+<Note>
+
+Team management permissions are not available in HCP Europe organizations. To learn more, refer to [Group permissions](#group-permissions).
+
+</Note>
+
+<!-- END: TFC:only name:hcp-eu -->
+
+Team permissions are available in standard HCP Terraform organizations.
+
+| Permission name | Description |
+|-----------------|-------------|
+| [Manage Membership](#manage-membership) | Invite/remove users, add/remove users from teams |
+| [Manage Teams](#manage-teams) | Create, update, delete teams and generate tokens |
+| [Manage Organization Access](#manage-organization-access) | Update team organization access settings |
+| [Include Secret Teams](#include-secret-teams) | Access secret teams (modifier for other team permissions) |
+| [Allow Member Token Management](#allow-member-token-management) | Control team token management for team members |
+
+HCP Terraform has three levels of team management permissions: manage membership, manage teams, and manage organization access. Each permission level grants users the ability to perform specific actions and each progressively requires prerequisite permissions.
+
+For example, to grant a user the manage teams permission, that user must already have manage membership permissions. To grant a user the manage organization access permission, a user must have both manage teams and manage membership permissions.
+
+### Manage Membership
+
+Allows members to invite users to the organization, remove users from the organization, and add or remove users from teams within the organization.
+
+This permission grants the ability to view the list of users within the organization, and to view the organization access of other visible teams. It does not permit the creation of teams, the ability to modify the settings of existing teams, or the ability to view secret teams.
+
+In order to modify the membership of a team, a user with Manage Membership permissions must have visibility into the team (i.e. the team must be ["Visible"](/terraform/cloud-docs/users-teams-organizations/teams/manage#team-visibility), or the user must be on the team).
+In order to remove a user from the organization, the holder of this permission must have visibility into all of the teams which the user is a member of.
+
+<Note title="Assign with caution">
+
+Owners of large organizations can use this permission to delegate membership management to another trusted team, and should be granted to only teams of trusted users. Users with this permission are able to add themselves to any visible team, and inherit the permissions of any visible team.
+
+</Note>
+
+### Manage Teams
+
+Allows members to create, update, and delete teams, and generate, and revoke tokens.
+
+This permission grants the ability to update a team's names, SSO IDs, and token management permissions, but does not allow access to organization settings. On its own, this permission does not allow users to create, update, delete, or otherwise access secret teams.
+
+The manage teams permission confers all permissions granted by the manage membership permission.
+
+This permission allows owners of large organizations to delegate team management to another trusted team. You should only grant it to teams of trusted users.
+
+<Note title="Assign with caution">
+
+Users with this permission can update or delete any visible team. Because this permission also confers the manage membership permission, a user with the manage teams permission can add themselves to any visible team.
+
+</Note>
+
+### Manage Organization Access
+
+Allows members to update a team's organization access settings.
+
+On its own, this permission does not allow users to create, update, delete, or otherwise access secret teams. This permission confers all of the permissions granted by the manage teams and manage membership permissions.
+
+This permission allows owners of large organizations to delegate team management to another trusted team. You should only grant it to teams of trusted users.
+
+<Note title="Assign with caution">
+
+Members with this permission can update all organization access settings for any team visible to them.
+
+</Note>
+
+### Include Secret Teams
+
+Allows members access to secret teams at the level permitted by that user's team permissions setting.
+
+This permission acts as a modifier to existing team management permissions. Members with this permission can access secret teams up to the level permitted by other team management permissions. For example, if a user has permission to include secret teams and [manage teams](/terraform/cloud-docs/users-teams-organizations/permissions#manage-teams), that user can create secret teams.
+
+### Allow Member Token Management
+
+Allows owners and members with [manage teams](/terraform/cloud-docs/users-teams-organizations/permissions#manage-teams) permissions to enable and disable team token management for team members. This permission defaults to `true`.
+
+When member token management is enabled, members will be able to perform actions on team tokens, including generating and revoking a team token.
+
+When member token management is disabled, members will be unable to perform actions on team tokens, including generating and revoking a team token.
+
+## Settings permissions
+
+The following permissions control access to governance and infrastructure tools.
+
+| Permission name | Description |
+|-----------------|-------------|
+| [Manage Policies](#manage-policies) | Create, edit, read, list and delete Sentinel policies |
+| [Manage Policy Overrides](#manage-policy-overrides) | Override soft-mandatory policy checks |
+| [Manage Run Tasks](#manage-run-tasks) | Create, edit, and delete run tasks |
+| [Manage version control settings](#manage-version-control-settings) | Manage VCS providers and SSH keys |
+| [Manage Agent Pools](#manage-agent-pools) | Create, edit, and delete agent pools |
+
+### Manage Policies
+
+Allows members to create, edit, read, list and delete the organization's Sentinel policies.
+
+This permission implicitly gives permission to read runs on all workspaces, which is necessary to set enforcement of [policy sets](/terraform/cloud-docs/policy-enforcement/manage-policy-sets).
+
+### Manage Run Tasks
+
+Allows members to create, edit, and delete run tasks on the organization.
+
+### Manage Policy Overrides
+
+Allows members to override soft-mandatory policy checks.
+
+This permission implicitly gives permission to read runs on all workspaces, which is necessary to override policy checks.
+
+### Manage VCS Settings
+
+Allows members to manage the set of [VCS providers](/terraform/cloud-docs/vcs) and [SSH keys](/terraform/cloud-docs/vcs#ssh-keys) available within the organization.
+
+### Manage Agent Pools
+
+Allows members to create, edit, and delete agent pools within their organization.
+
+This permission implicitly grants access to read all workspaces and projects, which is necessary for agent pool management.
+
+## Private registry permissions
+
+The following permissions control access to the organization's [private registry](/terraform/cloud-docs/registry).
+
+| Permission name | Description |
+|-----------------|-------------|
+| [Manage modules](#manage-private-modules) | Publish and delete modules in private registry |
+| [Manage providers](#manage-private-providers) | Publish and delete providers in private registry |
+
+### Manage private modules
+
+Allow members to publish and delete modules in the organization's private registry.
+
+### Manage private providers
+
+Allow members to publish and delete providers in the organization's private registry.
+
+<!-- BEGIN: TFC:only name:public-registry -->
+
+## Public registry permissions
+
+The following permissions control access to providers and modules using an organization's [claimed namespaces](/terraform/cloud-docs/registry/public-namespace) in the [public registry](https://registry.terraform.io/).
+
+| Permission name | Description |
+|-----------------|-------------|
+| [Manage public modules](#manage-public-modules) | Publish and delete modules for the organization in the public registry |
+| [Manage public providers](#manage-public-providers) | Publish and delete providers for the organization in the public registry |
+
+### Manage public modules
+
+Allow members to publish and delete modules for the organization in the public registry.
+
+### Manage public providers
+
+Allow members to publish and delete providers for the organization in the public registry.
+
+<!-- END: TFC:only name:public-registry -->
+
+## Organization owners
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+<Note>
+
+If you are using an HCP Europe organization, there is no organization owners team because you manage users and permissions with HCP groups. To learn more, refer to [HCP group roles](#hcp-group-roles).
+
+</Note>
+
+<!-- END: TFC:only name:hcp-eu -->
+
+Every organization has a special team called the **Owners** team, whose members have the maximum available permissions within the organization. Members of this team are often referred to as "organization owners".
+
+Organization owners have every available permission within the organization. This includes all organization-level permissions, and the highest level of permissions on every workspace<!-- BEGIN: TFC:only name:stacks-tfe --> and Stack<!-- END: TFC:only name:stacks-tfe -->.
+
+There are also some actions within an organization that are only available to owners. These are generally actions that affect the permissions and membership of other teams, or are otherwise fundamental to the organization's security and integrity.
+
+The organization owners team has the following permissions:
+
+| Permission | Description |
+|------------|-------------|
+| [**Manage all projects**](#project-permissions) | Admin permissions on every project. |
+| [**Manage all workspaces**](#workspace-permissions) | Admin permissions on every workspace. |
+| [**Manage Membership**](#team-permissions) | Invite/remove users and manage team membership. |
+| [**Manage Teams**](#team-permissions) | Create, update, delete teams and generate tokens. |
+| [**Manage Organization Access**](#team-permissions) | Update team organization access settings. |
+| [**Include Secret Teams**](#team-permissions) | View and manage all secret teams. |
+| [**Allow Member Token Management**](#team-permissions) | Control team token management for members. |
+| [**Manage Policies**](#settings-permissions) | Create, edit, delete Sentinel policies. |
+| [**Manage Policy Overrides**](#settings-permissions) | Override soft-mandatory policy checks. |
+| [**Manage Run Tasks**](#settings-permissions) | Create, edit, delete run tasks. |
+| [**Manage version control settings**](#settings-permissions) | Manage VCS providers and SSH keys. |
+| [**Manage Agent Pools**](#settings-permissions) | Create, edit, delete agent pools. |
+| [**Manage modules**](#private-registry-permissions) | Publish and delete modules in private registry. |
+| [**Manage providers**](#private-registry-permissions) | Publish and delete providers in private registry. |
+| [**Manage public modules**](#public-registry-permissions) | Publish and delete modules in public registry. Only available in HCP Terraform. |
+| [**Manage public providers**](#public-registry-permissions) | Publish and delete providers in public registry. Only available in HCP Terraform. |
+| **Manage all organization settings** | Control organization-wide settings. Only available for the owners team. |
+| **Manage organization billing** | Control billing and subscriptions. Only available for the owners team, and only available in HCP Terraform. |
+| **Delete organization** | Permanently delete the organization. Only available for the owners team. |
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+## HCP group roles
+
+@include 'eu/org-is-eu.mdx'
+
+In an HCP Europe organization, you manage user access through groups. To learn how to set up groups and assign users to them in HCP, refer to [Groups](/hcp/docs/hcp/iam/groups). You can assign permissions to HCP groups in two ways:
+
+1. [HCP roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-organization-level-roles-for-hcp-europe-organizations) - You can assign HCP roles to groups in the HashiCorp Cloud Platform (HCP), and these roles automatically grant permissions in HCP Terraform.
+2. [HCP Terraform roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-organization-level-roles) - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.
+
+Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set by an HCP or HCP Terraform role.
+
+The following table lists which organization-level permissions each HCP role automatically grants in HCP Terraform:
+
+| HCP Terraform organization permission | Admin | Contributor | Viewer |
+|---------------------------------------|-------|-------------|---------|
+| [Owner-level permissions](#organization-owners) | ✅ | ❌ | ❌ |
+| [View all projects](#view-all-projects) | ✅ | ✅ | ✅ |
+| [Manage all projects](#manage-all-projects) | ✅ | ✅ | ❌ |
+| [View all workspaces](#view-all-workspaces) | ✅ | ✅ | ✅ |
+| [Manage all workspaces](#manage-all-workspaces) | ✅ | ✅ | ❌ |
+| [Manage organization access](#manage-organization-access) | ✅ | ❌ | ❌ |
+| [Include secret groups](#include-secret-groups) | ✅ | ❌ | ❌ |
+| [Manage policies](#manage-policies) | ✅ | ❌ | ❌ |
+| [Manage policy overrides](#manage-policy-overrides) | ✅ | ❌ | ❌ |
+| [Manage run tasks](#manage-run-tasks) | ✅ | ❌ | ❌ |
+| [Manage version control settings](#manage-version-control-settings) | ✅ | ❌ | ❌ |
+| [Manage agent pools](#manage-agent-pools) | ✅ | ❌ | ❌ |
+| [Manage private registry modules](#manage-private-modules) | ✅ | ❌ | ❌ |
+| [Manage private registry providers](#manage-private-providers) | ✅ | ❌ | ❌ |
+| [Manage public registry modules](#manage-public-modules) | ✅ | ❌ | ❌ |
+| [Manage public registry providers](#manage-public-providers) | ✅ | ❌ | ❌ |
+| Members can manage API tokens | ✅ | ✅ | ❌ |
+
+<!-- END: TFC:only name:hcp-eu -->
