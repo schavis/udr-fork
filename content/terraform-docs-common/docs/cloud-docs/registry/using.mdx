@@ -190,8 +190,15 @@ To learn more about specific syntax for providers in components, refer to [`prov
 
 Each `component` block specifies the Terraform module to use as the source for that component.
 
-To source a module from Github, use the following syntax:
-`git::ssh://github.com/<ORGANIZATION_NAME>/repository.git/<SUB-PATH-TO-YOUR-MODULE>`. The following example sources a module named `kube` from a GitHub repository:
+To source a module from a Remote Git address, use the following syntax: 
+`git::<protocol>://<hostname>/<resource-path>.git//path/to/dir?ref=<git reference>`.
+
+Additional Details:
+- Supported protocols are HTTP/HTTPS and SSH.
+- Userinfo is not allowed in the URL (username & password).
+- Valid Refs (`?ref=`) include: Full commit sha, Git Tag, and Branch name.
+
+The following example sources a module named `kube` from a GitHub repository:
 
 ```hcl
 component "my-component" {
