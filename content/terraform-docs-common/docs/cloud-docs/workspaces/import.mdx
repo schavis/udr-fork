@@ -21,6 +21,10 @@ Complete the following steps to import resources into your Terraform state:
 
 After importing the resources to state, you can delete the generated import blocks or archive them as a historical record. 
 
+### HCP Terraform agents
+
+If you environment connects to HCP Terraform using an HCP Terraform agent, you must enable the `query` operation when starting the agent pool. Refer to [Install and run agents](/terraform/cloud-docs/agents/agents) for more information.
+
 ## Define queries
 
 Configure search queries you want to run against your existing infrastructure and copy them to your HCP Terraform workspace. Refer to [Import resources in bulk](/terraform/language/v1.14.x/import/bulk) for instructions on how to define queries. 
@@ -37,13 +41,21 @@ Complete the following steps after defining queries and copying them to your HCP
 1. Click **Search & Import** in the sidebar menu. The page shows previously completed queries, as well as any queries that are in progress. 
 1. Click **New Query** to start a query. 
 
-As the query progresses, HCP Terraform loads the results to the page.  You can perform the following actions in the results area: 
+As the query progresses, HCP Terraform loads the results to the page.  
 
-  - Use the search bar and filters to sort the results.
-  - HCP Terraform indicates the management status of resources returned by the query in the **IaC** column to indicate its status.  Providers may change the definition of a resource identity, but HCP Terraform attempts to store all resource identities captured through provider upgrades. HCP Terraform may list a resource as **Unknown** instead of **Unmanaged** when a resource is applied by one version of a provider but queried by a different version and the identity schema for that resource type changed between versions.
-      - **Managed** indicates that the resource has the same [identity](/terraform/language/import#resource-identity) as a resource applied by a similar provider version.
-      - **Unknown** indicates that Terraform found a resource under management with the same [identity](/terraform/language/import#resource-identity) applied by a similar provider version. 
-      - **Unmanaged** indicates that there are no managed resources of this type or that Terraform can't attribute this resource to a similar provider and Terraform version. 
+## Review queries
+
+In the **IaC** column, HCP Terraform indicates one of the following statuses for resources returned by the query: 
+
+  - **Managed** indicates that the resource has the same [identity](/terraform/language/import#resource-identity) as a resource applied by a similar provider version.
+  - **Unknown** indicates that Terraform found a resource under management with the same [identity](/terraform/language/import#resource-identity) applied by a similar provider version. 
+  - **Unmanaged** indicates that there are no managed resources of this type or that Terraform can't attribute this resource to a similar provider and Terraform version.
+
+Over time, providers may change their [resource identity](/terraform/language/import#resource-identity) definitions, but HCP Terraform attempts to capture all resource identities as providers evolve. When a schema for a resource type changes between versions, however, HCP Terraform may list a resource as **Unknown** instead of **Unmanaged** when a resource is applied by one version of a provider but queried by a different version.
+  
+You can perform the following actions in the results area: 
+
+  - Use the search bar and filters to sort the results. 
   - Click on a resource in the **Resource type** column to view details made available by the provider.
   - Select resources that you want to import to your workspace. Refer to [Generate code](#generate-code) for instructions.
 
