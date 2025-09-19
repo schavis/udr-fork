@@ -10,7 +10,7 @@ HCP Terraform is more powerful when you integrate it with your version control s
 
 - When workspaces are linked to a VCS repository, HCP Terraform can [automatically initiate Terraform runs](/terraform/cloud-docs/workspaces/run/ui) when changes are committed to the specified branch.
 <!-- BEGIN: TFC:only name:stacks-tfe -->
-- When Stacks are linked to a VCS repository, HCP Terraform can [automatically initiate deployment runs](/terraform/cloud-docs/stacks/runs) by fetching configuration changes when they are committed to the specified branch.
+- When Stacks are linked to a VCS repository, HCP Terraform can [automatically initiate deployment runs](/terraform/cloud-docs/stacks/runs) by fetching configuration changes when they are committed to the specified branch. Note that Stacks do not support mono-repos.
 <!-- END: TFC:only name:stacks-tfe -->
 - HCP Terraform makes code review easier by [automatically predicting](/terraform/cloud-docs/workspaces/run/ui#speculative-plans-on-pull-requests) how pull requests will affect infrastructure.
 - Publishing new versions of a [private Terraform module](/terraform/cloud-docs/registry/publish-modules) is as easy as pushing a tag to the module's repository.
@@ -113,9 +113,10 @@ For complete details, click the link for your VCS provider:
 -> **Note:** Alternatively, you can skip the OAuth configuration process and authenticate with a personal access token. This requires using HCP Terraform's API. For details, see [the OAuth Clients API page](/terraform/cloud-docs/api-docs/oauth-clients).
 
 <!-- BEGIN: TFC:only -->
+
 ### Private VCS
 
-You can use self-hosted HCP Terraform Agents to connect HCP Terraform to your private VCS provider, such as GitHub Enterprise, GitLab Enterprise, and BitBucket Data Center. For more information, refer to [Connect to Private VCS Providers](/terraform/cloud-docs/vcs/private).
+You can use self-hosted HCP Terraform Agents to connect HCP Terraform workspaces to your private VCS provider, such as GitHub Enterprise, GitLab Enterprise, and BitBucket Data Center. For more information, refer to [Connect to Private VCS Providers](/terraform/cloud-docs/vcs/private).
 
 <!-- END: TFC:only -->
 
