@@ -1,9 +1,8 @@
 ---
 page_title: /stack-configurations API reference for HCP Terraform
-description: Use the HCP Terraform API's `/stack-configurations` to create and read stack configurations and stack configuration associated objects.
+description: Use the HCP Terraform API's `/stack-configurations` to create and read Stack configurations and Stack configuration associated objects.
+tfc_only: true
 ---
-
-Follow this template to format each API method. There are usually multiple sections like this on a given API endpoint page.
 
 <!-- Boilerplate link references: This entire list should be included at the top of every API page, so that the tables can use short links freely. This SHOULD be all of the status codes we use in HCP Terraform's API; if we need to add more, update the list on every page. -->
 
@@ -39,9 +38,9 @@ Follow this template to format each API method. There are usually multiple secti
 
 [JSON API error object]: http://jsonapi.org/format/#error-objects
 
-# Stack Configurations API
+# Stack configurations API
 
-Stack Configurations represent the infrastructure components that constitute a Stack.
+Stack configurations represent the infrastructure components that constitute a Stack.
 
 ## Overview
 
@@ -49,16 +48,16 @@ The scope of the API includes the following endpoints:
 
 | Method   | Path                                                                             | Action                                                                                                     |
 |----------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `POST`   | `/stacks/:stack_id/stack-configurations`                                         | Call this endpoint to [create a Stack configuration](#create-a-stack-configuration).                       |
-| `POST`   | `/stacks/:stack_id/fetch-latest-from-vcs`                                        | Call this endpoint to [fetch the latest Stack configuration](#fetch-the-latest-stack-configuration).       |
-| `GET`    | `/stacks/:stack_id/stack-configurations`                                         | Call this endpoint to [list Stack configurations](#list-stack-configurations).                             |
-| `GET`    | `/stack-configurations/:stack_configuration_id`                                  | Call this endpoint to [show a Stack configuration](#show-stack-configuration).                             |
+| `POST`   | `/stacks/:stack_id/stack-configurations`                                         | Call this endpoint to [create a Stack configuration](#create-a-Stack-configuration).                       |
+| `POST`   | `/stacks/:stack_id/fetch-latest-from-vcs`                                        | Call this endpoint to [fetch the latest Stack configuration](#fetch-the-latest-Stack-configuration).       |
+| `GET`    | `/stacks/:stack_id/stack-configurations`                                         | Call this endpoint to [list Stack configurations](#list-Stack-configurations).                             |
+| `GET`    | `/stack-configurations/:stack_configuration_id`                                  | Call this endpoint to [show a Stack configuration](#show-Stack-configuration).                             |
 | `GET`    | `/stack-configurations/:stack_configuration_id/stack-deployment-group-summaries` | Call this endpoint to [list Deployment Group Summaries](#list-deployment-group-summaries).           |
-| `GET`    | `/stack-configurations/:stack_configuration_id/stack-diagnostics`                | Call this endpoint to [list Stack configuration diagnostics](#list-stack-configuration-diagnostics).       |
-| `GET`    | `/stack-configurations/:stack_configuration_id/upload-url`                       | Call this endpoint to [fetch Stack configuration upload url](#fetch-stack-configuration-upload-url).       |
-| `GET`    | `/stack-configurations/:stack_configuration_id/source-bundle`                    | Call this endpoint to [fetch Stack configuration source bundle](#fetch-stack-configuration-source-bundle). |
+| `GET`    | `/stack-configurations/:stack_configuration_id/stack-diagnostics`                | Call this endpoint to [list Stack configuration diagnostics](#list-Stack-configuration-diagnostics).       |
+| `GET`    | `/stack-configurations/:stack_configuration_id/upload-url`                       | Call this endpoint to [fetch Stack configuration upload url](#fetch-Stack-configuration-upload-url).       |
+| `GET`    | `/stack-configurations/:stack_configuration_id/source-bundle`                    | Call this endpoint to [fetch Stack configuration source bundle](#fetch-Stack-configuration-source-bundle). |
 
-## Create a Stack Configuration
+## Create a Stack configuration
 
 This endpoint creates an empty Stack configuration for the specified Stack. A configuration file will have to be uploaded to the Stack configurations upload url in order for the Stack prepare job to run and generate plans. This endpoint cannot be used if the Stack is connected to a VCS repo.
 
@@ -67,8 +66,6 @@ This endpoint creates an empty Stack configuration for the specified Stack. A co
 | Parameter   | Description                                   |
 |-------------|-----------------------------------------------|
 | `:stack_id` | The target Stack ID to create a configuration |
-
-If further explanation of this method is needed beyond its title, write it here, after the parameter list. -->
 
 ### Request Body
 
@@ -156,7 +153,7 @@ $ curl\
 }
 ```
 
-## Fetch a Stack Configuration
+## Fetch a Stack configuration
 
 This endpoint creates a Stack configuration for a VCS backed Stack by pulling it from the head of the Stacks branch.
 
@@ -281,7 +278,7 @@ $ curl\
 }
 ```
 
-## Show Stack Configuration
+## Show Stack configuration
 
 `GET /stack-configurations/:stack_configuration_id`
 
@@ -361,7 +358,7 @@ This endpoint lists deployment group summaries for the specified Stack configura
 
 | Parameter   | Description                                                                          |
 |-------------|------------------------------------------------------------------------------------- |
-| `:stack_configuration_id` | The stack configuration id to list the deployment group summaries for. |
+| `:stack_configuration_id` | The Stack configuration id to list the deployment group summaries for. |
 
 ### Query Parameters
 
@@ -370,7 +367,7 @@ This endpoint supports pagination [with standard URL query parameters](/terrafor
 | Parameter      | Description                                                                                   |
 |----------------|-----------------------------------------------------------------------------------------------|
 | `page[number]` | **Optional.** If omitted, the endpoint will return the first page.                            |
-| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 stack configuration summaries per page. |
+| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 Stack configuration summaries per page. |
 
 ### Sample Request
 
@@ -452,7 +449,7 @@ This endpoint supports pagination [with standard URL query parameters](/terrafor
 | Parameter      | Description                                                                                     |
 |----------------|-------------------------------------------------------------------------------------------------|
 | `page[number]` | **Optional.** If omitted, the endpoint will return the first page.                              |
-| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 stack configuration diagnostics per page. |
+| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 Stack configuration diagnostics per page. |
 
 ### Sample Request
 

@@ -1,9 +1,8 @@
 ---
 page_title: /stack-states API reference for HCP Terraform
-description: Use the HCP Terraform API's `/stack-states` to read stack states and state descriptions.
+description: Use the HCP Terraform API's `/stack-states` to read Stack states and state descriptions.
+tfc_only: true
 ---
-
-Follow this template to format each API method. There are usually multiple sections like this on a given API endpoint page.
 
 <!-- Boilerplate link references: This entire list should be included at the top of every API page, so that the tables can use short links freely. This SHOULD be all of the status codes we use in HCP Terraform's API; if we need to add more, update the list on every page. -->
 
@@ -39,15 +38,15 @@ Follow this template to format each API method. There are usually multiple secti
 
 [JSON API error object]: http://jsonapi.org/format/#error-objects
 
-# Stack States API
+# Stack states API
 
-Stack States offer deeper insight into the state of a particular Stack deployment.
+Stack states offer deeper insight into the state of a particular Stack deployment.
 
 | Method   | Path                                         | Action                                                                                                     |
 |----------|----------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `GET`    | `/stacks/:stack_id/stack-states`             | Call this endpoint to [list stack states](#list-stack-states).                                             |
-| `GET`    | `/stack-states/:stack_state_id`              | Call this endpoint to [show a stack state](#show-a-stack-state).                                           |
-| `GET`    | `/stack-states/:stack_state_id/description`  | Call this endpoint to [show a stack state description](#show-a-stack-state-description).                   |
+| `GET`    | `/stacks/:stack_id/stack-states`             | Call this endpoint to [list Stack states](#list-Stack-states).                                             |
+| `GET`    | `/stack-states/:stack_state_id`              | Call this endpoint to [show a Stack state](#show-a-Stack-state).                                           |
+| `GET`    | `/stack-states/:stack_state_id/description`  | Call this endpoint to [show a Stack state description](#show-a-Stack-state-description).                   |
 
 ## List Stack states
 
@@ -66,7 +65,7 @@ This endpoint supports pagination [with standard URL query parameters](/terrafor
 | Parameter      | Description                                                                  |
 |----------------|------------------------------------------------------------------------------|
 | `page[number]` | **Optional.** If omitted, the endpoint will return the first page.           |
-| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 stack states per page. |
+| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 Stack states per page. |
 
 ### Sample Request
 
@@ -160,7 +159,7 @@ This endpoint gets details about a Stack state.
 
 | Parameter         | Description                                   |
 |-------------------|-----------------------------------------------|
-| `:stack_state_id` | The id of the stack state to get details for. |
+| `:stack_state_id` | The id of the Stack state to get details for. |
 
 ### Sample Request
 

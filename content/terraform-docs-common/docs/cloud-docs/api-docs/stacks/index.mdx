@@ -4,8 +4,6 @@ description: Use the HCP Terraform API's `/stacks` to create, read, update, and 
 tfc_only: true
 ---
 
-Follow this template to format each API method. There are usually multiple sections like this on a given API endpoint page.
-
 <!-- Boilerplate link references: This entire list should be included at the top of every API page, so that the tables can use short links freely. This SHOULD be all of the status codes we use in HCP Terraform's API; if we need to add more, update the list on every page. -->
 
 [200]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
@@ -50,16 +48,16 @@ The scope of the API includes the following endpoints:
 
 | Method   | Path                                              | Action                                                                                                     |
 |----------|-------------------------------------------------- |------------------------------------------------------------------------------------------------------------|
-| `POST`   | `/stacks`                                         | Call this endpoint to [create a Stack](#create-a-stack).                                                   |
-| `GET`    | `/organizations/:organization_name/stacks`        | Call this endpoint to [list Stacks](#list-stacks).                                                         |
-| `GET`    | `/stacks/:stack_id`                               | Call this endpoint to [show a Stack](#show-a-stack).                                                       |
-| `GET`    | `/stacks/:stack_id/stack-configuration-summaries` | Call this endpoint to [list Stack configuration summaries](#list-stack-configuration-summaries).           |
-| `PATCH`  | `/stacks/:stack_id`                               | Call this endpoint to [update a Stack](#update-a-stack).                                                   |
-| `DELETE` | `/stacks/:stack_id`                               | Call this endpoint to [delete a Stack](#delete-stack).                                                     |
+| `POST`   | `/stacks`                                         | Call this endpoint to [create a Stack](#create-a-Stack).                                                   |
+| `GET`    | `/organizations/:organization_name/stacks`        | Call this endpoint to [list Stacks](#list-Stacks).                                                         |
+| `GET`    | `/stacks/:stack_id`                               | Call this endpoint to [show a Stack](#show-a-Stack).                                                       |
+| `GET`    | `/stacks/:stack_id/stack-configuration-summaries` | Call this endpoint to [list Stack configuration summaries](#list-Stack-configuration-summaries).           |
+| `PATCH`  | `/stacks/:stack_id`                               | Call this endpoint to [update a Stack](#update-a-Stack).                                                   |
+| `DELETE` | `/stacks/:stack_id`                               | Call this endpoint to [delete a Stack](#delete-Stack).                                                     |
 
 ## Create a Stack
 
-This endpoint creates a stack for an organization.
+This endpoint creates a Stack for an organization.
 
 `POST /stacks`
 
@@ -67,7 +65,7 @@ This endpoint creates a stack for an organization.
 
 | Status  | Response                  | Reason                                                                |
 |---------|---------------------------|-----------------------------------------------------------------------|
-| [201][] | [JSON API document][]     | Successfully created a stack.                                         |
+| [201][] | [JSON API document][]     | Successfully created a Stack.                                         |
 | [404][] | [JSON API error object][] | Not found, or the user is unauthorized to perform this action.        |
 | [422][] | [JSON API error object][] | Malformed request body (e.g., missing attributes, wrong types, etc.). |
 | [500][] | [JSON API error object][] | Internal system failure.                                              |
@@ -89,7 +87,7 @@ Properties without a default value are required.
 | `data.attributes.debugging-mode`                      | boolean | false            | When enabled, plan and apply operations will generate debug level logs. 
 | `data.attributes.vcs-repo`                            | object  |                  | Settings for the Stack's VCS repository.                                                                                                                                                                                                      |
 | `data.attributes.vcs-repo.branch`                     | string  | (nothing)        | The repository branch used by this Stack's configuration. If omitted or submitted as an empty string, this defaults to the repository's default branch (e.g. `main`).                                                                         |
-| `data.attributes.vcs-repo.tags-regex`                 | string  | (previous value) | A regular expression used to match Git tags. HCP Terraform begins preparing a stack configuration when this value is present and a VCS event occurs that contains a matching Git tag for the regular expression.                              |
+| `data.attributes.vcs-repo.tags-regex`                 | string  | (previous value) | A regular expression used to match Git tags. HCP Terraform begins preparing a Stack configuration when this value is present and a VCS event occurs that contains a matching Git tag for the regular expression.                              |
 | `data.attributes.vcs-repo.identifier`                 | string  |                  | A reference to your VCS repository in the format :org/:repo where :org and :repo refer to the organization and repository in your VCS provider.                                                                                               |
 | `data.attributes.vcs-repo.display-identifier`         | string  | (nothing)        | The display identifier for the Stack's VCS repository. For most VCS providers outside of BitBucket Cloud and Azure DevOps, this will match the identifier string.                                                                             |
 | `data.attributes.vcs-repo.repository-http-url`        | string  |                  | The HTTP URL for the repository.                                                                                                                                                                                                              |
@@ -114,7 +112,7 @@ Properties without a default value are required.
         "trigger-disabled": false
       },
       "name": "basic-stack",
-      "description": "Example stack for documentation",
+      "description": "Example Stack for documentation",
       "speculative-enabled": false
     },
     "relationships": {
@@ -149,7 +147,7 @@ $ curl\
     "type": "stacks",
     "attributes": {
       "name": "basic-stack",
-      "description": "Example stack for documentation",
+      "description": "Example Stack for documentation",
       "vcs-repo": {
         "branch": "",
         "tags-regex": null,
@@ -197,7 +195,7 @@ $ curl\
 }
 ```
 
-## List stacks
+## List Stacks
 
 This endpoint lists Stacks in the organization.
 
@@ -207,7 +205,7 @@ This endpoint lists Stacks in the organization.
 
 | Parameter            | Description                                      |
 |----------------------|--------------------------------------------------|
-| `:organization_name` | List all stacks under the specified organization |
+| `:organization_name` | List all Stacks under the specified organization |
 
 ### Query Parameters
 
@@ -216,8 +214,8 @@ This endpoint supports pagination [with standard URL query parameters](/terrafor
 | Parameter      | Description                                                                                                                                                                                                                                                                               |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `page[number]` | **Optional.** If omitted, the endpoint will return the first page.                                                                                                                                                                                                                        |
-| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 stacks per page.                                                                                                                                                                                                               |
-| `sort`         | **Optional.** Allows sorting the returned stacks. Valid values are "name" and "updated-at". Prepending a hyphen to the sort parameter reverses the order. For example, `"-name"` sorts by name in reverse alphabetical order. If omitted, the default sort order is arbitrary but stable. |
+| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 Stacks per page.                                                                                                                                                                                                               |
+| `sort`         | **Optional.** Allows sorting the returned Stacks. Valid values are "name" and "updated-at". Prepending a hyphen to the sort parameter reverses the order. For example, `"-name"` sorts by name in reverse alphabetical order. If omitted, the default sort order is arbitrary but stable. |
 
 ### Available Related Resources
 
@@ -247,7 +245,7 @@ $ curl\
       "type": "stacks",
       "attributes": {
         "name": "basic-stack",
-        "description": "Example stack for documentation",
+        "description": "Example Stack for documentation",
         "vcs-repo": {
           "branch": "",
           "tags-regex": null,
@@ -352,7 +350,7 @@ $ curl\
     "type": "stacks",
     "attributes": {
       "name": "basic-stack",
-      "description": "Example stack for documentation",
+      "description": "Example Stack for documentation",
       "vcs-repo": {
         "branch": "",
         "tags-regex": null,
@@ -412,7 +410,7 @@ This endpoint lists configuration summaries for the specified Stack.
 
 | Parameter   | Description                                       |
 |-------------|---------------------------------------------------|
-| `:stack_id` | The stack id to list configuration summaries for. |
+| `:stack_id` | The Stack id to list configuration summaries for. |
 
 ### Query Parameters
 
@@ -421,7 +419,7 @@ This endpoint supports pagination [with standard URL query parameters](/terrafor
 | Parameter      | Description                                                                                   |
 |----------------|-----------------------------------------------------------------------------------------------|
 | `page[number]` | **Optional.** If omitted, the endpoint will return the first page.                            |
-| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 stack configuration summaries per page. |
+| `page[size]`   | **Optional.** If omitted, the endpoint will return 20 Stack configuration summaries per page. |
 
 ### Sample Request
 
@@ -505,7 +503,7 @@ Properties without a default value are required.
 | `data.attributes.debugging-mode`                      | boolean | false            | When enabled, plan and apply operations will generate debug level logs. 
 | `data.attributes.vcs-repo`                            | object  |                  | Settings for the Stack's VCS repository.                                                                                                                                                                                                      |
 | `data.attributes.vcs-repo.branch`                     | string  | (nothing)        | The repository branch used by this Stack's configuration. If omitted or submitted as an empty string, this defaults to the repository's default branch (e.g. `main`).                                                                         |
-| `data.attributes.vcs-repo.tags-regex`                 | string  | (previous value) | A regular expression used to match Git tags. HCP Terraform begins preparing a stack configuration when this value is present and a VCS event occurs that contains a matching Git tag for the regular expression.                              |
+| `data.attributes.vcs-repo.tags-regex`                 | string  | (previous value) | A regular expression used to match Git tags. HCP Terraform begins preparing a Stack configuration when this value is present and a VCS event occurs that contains a matching Git tag for the regular expression.                              |
 | `data.attributes.vcs-repo.identifier`                 | string  |                  | A reference to your VCS repository in the format :org/:repo where :org and :repo refer to the organization and repository in your VCS provider.                                                                                               |
 | `data.attributes.vcs-repo.display-identifier`         | string  | (nothing)        | The display identifier for the Stack's VCS repository. For most VCS providers outside of BitBucket Cloud and Azure DevOps, this will match the identifier string.                                                                             |
 | `data.attributes.vcs-repo.repository-http-url`        | string  |                  | The HTTP URL for the repository.                                                                                                                                                                                                              |
@@ -612,11 +610,11 @@ This endpoint deletes the specified Stack.
 
 | Parameter   | Description                                                                                                                                    |
 |-------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `:stack_id` | The ID of the Stack to delete. Refer to [List stacks](/terraform/cloud-docs/api-docs#list-stacks) for reference information about finding IDs. |
+| `:stack_id` | The ID of the Stack to delete. Refer to [List Stacks](/terraform/cloud-docs/api-docs#list-stacks) for reference information about finding IDs. |
 
 | Status  | Response                  | Reason                                                  |
 |---------|---------------------------|---------------------------------------------------------|
-| [204][] | No Content                | Successfully deleted the stack                          |
+| [204][] | No Content                | Successfully deleted the Stack                          |
 | [404][] | [JSON API error object][] | Stack not found, or user unauthorized to perform action |
 
 ### Sample Request
