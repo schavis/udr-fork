@@ -44,7 +44,7 @@ Some of HCP Terraform's features are limited to particular paid upgrade plans.
 
 Each higher paid upgrade plan is a strict superset of any lower plans — for example, the **Standard** edition includes all of the features of the **Essentials** edition. The **Premium** edition includes all of the features of the **Standard** and **Essentials** editions. Paid feature callouts in the documentation indicate the _lowest_ edition at which the feature is available, but any higher plans also include that feature.
 
-To learn more about HCP Terraform's paid plans and features, refer to []
+To learn more about HCP Terraform's paid plans and features, refer to the [pricing page](https://www.hashicorp.com/products/terraform/pricing).
 
 Terraform Enterprise generally includes all of HCP Terraform's paid features, plus additional features geared toward large enterprises. However, some features are implemented differently due to the differences between self-hosted and SaaS environments, and some features might be absent due to being impractical or irrelevant in the types of organizations that need Terraform Enterprise. Cloud-only or Enterprise-only features are clearly indicated in documentation.
 
@@ -116,10 +116,10 @@ Stacks can also directly share information with each other Stacks in the same pr
 
 Like other kinds of code, infrastructure-as-code belongs in version control, so HCP Terraform is designed to work directly with your version control system (VCS) provider.
 
-Each workspace or Stack can be linked to a VCS repository that contains its configuration, optionally specifying a branch and subdirectory. By default, HCP Terraform automatically retrieves configuration content from linked repositories, and watches the repository for changes:
+Each workspace can be linked to a VCS repository that contains its configuration, optionally specifying a branch and subdirectory. You can also link Stacks to a VCS repository. By default, HCP Terraform automatically retrieves configuration content from linked repositories, and watches the repository for changes:
 
-- When new commits are merged, VCS-linked workspaces and Stacks automatically run Terraform plans with the new code.
-- When pull requests are opened, linked workspaces run speculative plans with the proposed code changes and post the results as a pull request check; reviewers can see at a glance whether the plan was successful, and can click through to view the proposed changes in detail.
+- When new commits are merged, linked workspaces and Stacks automatically run Terraform plans with the new code.
+- When pull requests are opened, linked workspaces and Stacks run speculative plans with the proposed code changes and post the results as a pull request check; reviewers can see at a glance whether the plan was successful, and can click through to view the proposed changes in detail.
 
 VCS integration is powerful, but optional; if you use an unsupported VCS or want to preserve an existing validation and deployment pipeline, you can use the API or Terraform CLI to upload new configuration versions. You'll still get the benefits of remote execution and HCP Terraform's other features.
 

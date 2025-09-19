@@ -599,7 +599,7 @@
         "title": "Deploy infrastructure",
         "routes": [
           { "title": "Configuration versions", "path": "stacks/deploy/configuration-versions" },
-          { "title": "Review deployment plans", "path": "stacks/deploy/runs" }
+          { "title": "Review deployment runs", "path": "stacks/deploy/runs" }
         ]
       },
         {
@@ -624,7 +624,6 @@
       { "title":  "Kubernetes configuration", "href":  "dynamic-provider-credentials/kubernetes-configuration" },
       { "title":  "HCP configuration", "href":  "dynamic-provider-credentials/hcp-configuration" },
       { "title":  "Manually generating workload identity tokens", "href":  "dynamic-provider-credentials/manual-generation" },
-      { "title":  "Specifying multiple configurations", "href": "dynamic-provider-credentials/specifying-multiple-configurations"},
       {
         "title": "Vault-backed dynamic credentials",
           "routes": [
