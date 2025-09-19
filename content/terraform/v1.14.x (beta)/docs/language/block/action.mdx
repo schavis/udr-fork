@@ -207,7 +207,7 @@ action "aws_lambda_invoke" "example" {
 }
 ```
 
-`my_function` needs to be defined elsewhere in configuration, using the AWS Lambda Function resource. Please refer to the [AWS Provider documentation to provision an AWS Lambda Function](https://registry.terraform.io/providers/hashicorp/aws/6.14.0/docs/resources/lambda_function#basic-function-with-nodejs).
+The value of the `function_name` argument must be defined elsewhere in the configuration. The argument is available in the AWS `lambda_function` resource. Refer to the [AWS provider documentation](https://registry.terraform.io/providers/hashicorp/aws/6.14.0/docs/resources/lambda_function#basic-function-with-nodejs) for information about  provisioning an AWS Lambda function.
 
 ### Select an alternate provider configuration
 
