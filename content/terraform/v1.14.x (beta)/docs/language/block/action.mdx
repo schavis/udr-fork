@@ -193,28 +193,36 @@ The following examples show how to write configuration for common use cases.
 
 ### Define an action 
 
-The following example adds an `aws_lambda_invoke` action. You  can invoke an action using the CLI or configure Terraform to invoke the action during a resource lifecycle state.
+The following example adds an `aws_lambda_invoke` action. You can invoke an action using the CLI or configure Terraform to invoke the action during a resource lifecycle state.
 
 ```hcl
 action "aws_lambda_invoke" "example" {
   config {
-    values  = var.values
-    timeout = 3000
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
   }
 }
 ```
+
+The value of the `function_name` argument must be defined elsewhere in the configuration. The argument is available in the AWS `lambda_function` resource. Refer to the [AWS provider documentation](https://registry.terraform.io/providers/hashicorp/aws/6.14.0/docs/resources/lambda_function#basic-function-with-nodejs) for information about  provisioning an AWS Lambda function.
 
 ### Select an alternate provider configuration
 
 The following example configures Terraform to apply the `aws.alias` provider configuration when invoking the action:
 
 ```hcl
-action "aws_lambda_invocation" "example" {
-    provider = aws.alias
-    config {
-        input   = count.index
-        timeout = 3000
-    }
+action "aws_lambda_invoke" "example" {
+  provider = aws.alias
+  config {
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
+  }
 }
 ```
 
@@ -229,12 +237,15 @@ You can add a `count` or `for_each` meta-argument to invoke an action multiple t
 Terraform invokes the action three times.   
 
 ```hcl
-action "aws_lambda_invocation" "example" {
-    count = 3 
-    config {
-        input   = count.index
-        timeout = 3000
-    }
+action "aws_lambda_invoke" "example" {
+  count = 3 
+  config {
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
+  }
 }
 ```
 
@@ -245,15 +256,18 @@ action "aws_lambda_invocation" "example" {
 Terraform invokes the action once for each member of the map, resulting in two invocations.   
 
 ```hcl
-action "aws_lambda_invocation" "example" {
-   for_each = tomap({
-      a_group       = "eastus"
-      another_group = "westus2"
-   })
-   config {
-      input   = count.index
-       timeout = 3000
-   }
+action "aws_lambda_invoke" "example" {
+  for_each = tomap({
+    a_group       = "eastus"
+    another_group = "westus2"
+  })
+  config {
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
+  }
 }
 ```
 
