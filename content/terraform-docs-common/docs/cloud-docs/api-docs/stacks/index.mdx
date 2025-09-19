@@ -40,7 +40,7 @@ tfc_only: true
 
 # Stacks API
 
-Stacks represent collections of components, replicated across one or more deployments.
+Stacks represent collections of components, replicated across one or more deployments. To learn more, refer to the [Stacks overview](/terraform/cloud-docs/stacks).
 
 ## Overview
 
@@ -61,7 +61,7 @@ This endpoint creates a Stack for an organization.
 
 `POST /stacks`
 
--> **Note:** Stack create access is restricted to users who maintain the specified project, the owners team, teams with the "Manage all projects" permission, and the [organization API token](/terraform/cloud-docs/users-teams-organizations/api-tokens#organization-api-tokens).
+The ability to create Stacks is restricted to users with **Maintain** project permissions, teams with the [**Manage all projects** permission](terraform/cloud-docs/users-teams-organizations/permissions), and the [organization API token](/terraform/cloud-docs/users-teams-organizations/api-tokens#organization-api-tokens).
 
 | Status  | Response                  | Reason                                                                |
 |---------|---------------------------|-----------------------------------------------------------------------|
