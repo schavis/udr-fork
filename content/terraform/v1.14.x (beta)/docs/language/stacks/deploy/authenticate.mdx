@@ -191,8 +191,8 @@ provider "aws" "this" {
   config {
     region = var.region
     assume_role_with_web_identity {
-      role_arn           = var.aws_role
-      web_identity_token = var.aws_token
+      role_arn           = var.role_arn
+      web_identity_token = var.identity_token
     }
   }
 }
