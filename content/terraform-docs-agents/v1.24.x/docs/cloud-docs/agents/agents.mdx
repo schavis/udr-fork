@@ -97,7 +97,7 @@ RUN echo 'tfc-agent ALL=NOPASSWD: /usr/bin/apt-get , /usr/bin/apt' >> /etc/sudoe
 
 USER tfc-agent
 ```
- 
+
 The above customized Dockerfile lets an agent install additional software using `sudo apt-get`.
 
 ### Single-execution mode
@@ -130,15 +130,15 @@ If a provider does not support your agent’s architecture, the following error 
 ```plaintext
 Error: Incompatible provider version
 
-Provider registry.terraform.io/<namespace>/<name_version> does not have a 
+Provider registry.terraform.io/<namespace>/<name_version> does not have a
 package available for your current platform, <os_architecture>.
 
-Provider releases are separate from Terraform CLI releases, so not all 
-providers are available for all platforms. Other versions of this provider 
+Provider releases are separate from Terraform CLI releases, so not all
+providers are available for all platforms. Other versions of this provider
 may have different platforms supported.
 ```
 
-You can call the [Terraform provider registry API](/terraform/internals/provider-registry-protocol#list-available-versions) to confirm the architectures available for a provider. 
+You can call the [Terraform provider registry API](/terraform/internals/provider-registry-protocol#list-available-versions) to confirm the architectures available for a provider.
 
 Sample request:
 
@@ -177,7 +177,7 @@ Sample response:
 
 <!--
   ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
-  WARNING: This the CLI options section is auto-generated during agent release process. 
+  WARNING: This the CLI options section is auto-generated during agent release process.
   Do not edit this section directly as your changes will be overwritten.
   ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 -->
@@ -308,7 +308,7 @@ Sample response:
 
 
 * `-request-forwarding`:
-    Enable handling of forwarded HTTP requests. Enable this option only if you 
+    Enable handling of forwarded HTTP requests. Enable this option only if you
     are using product features which require it.
 
     Default: `false`
@@ -331,4 +331,3 @@ Sample response:
 
 * `-v`:
     Display the version and exit.
-
