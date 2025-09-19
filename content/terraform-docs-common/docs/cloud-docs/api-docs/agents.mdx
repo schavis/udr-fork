@@ -38,9 +38,9 @@ description: >-
 
 # Agents and agent pools API reference
 
-An Agent Pool represents a group of Agents, often related to one another by sharing a common network segment or purpose.
-A workspace<!-- BEGIN: TFC:only name:stacks-tfe --> or Stack<!-- END: TFC:only name:stacks-tfe --> may be configured to use one of the organization's agent pools to run remote operations with isolated,
-private, or on-premises infrastructure.
+An Agent Pool represents a group of Agents, often related to one another by sharing a common network segment or purpose. A workspace or Stack may be configured to use one of the organization's agent pools to run remote operations with isolated, private, or on-premises infrastructure.
+
+Terraform Enterprise does not currently support Stacks, so any references to Stacks in the following API endpoints only apply to HCP Terraform.
 
 <!-- BEGIN: TFC:only name:pnp-callout -->
 @include 'tfc-package-callouts/agents.mdx'
@@ -72,7 +72,7 @@ This endpoint supports pagination [with standard URL query parameters](/terrafor
 | `page[number]`                     | **Optional.** If omitted, the endpoint will return the first page.                                                                                                                                                                                                                                                          |
 | `page[size]`                       | **Optional.** If omitted, the endpoint will return 20 agent pools per page.                                                                                                                                                                                                                                                 |
 | `filter[allowed_workspaces][name]` | **Optional.** Filters agent pools to those associated with the given workspace. The workspace must have permission to use the agent pool. Refer to [Scoping Agent Pools to Specific Workspaces](/terraform/cloud-docs/agents#scope-an-agent-pool-to-specific-workspaces). |
-| `filter[allowed_stacks][name]`     | **Optional.** Filters agent pools to those associated with the given stack. The stack must have permission to use the agent pool. Refer to [Scoping Agent Pools to Specific Stacks](/terraform/cloud-docs/agents#scope-an-agent-pool-to-specific-stacks). |
+| `filter[allowed_stacks][name]`     | **Optional.** Filters agent pools to those associated with the given Stack. The Stack must have permission to use the agent pool. Only available in HCP Terraform, refer to [Scope agent pools](/terraform/cloud-docs/agents#scope-an-agent-pool) to learn more. |
 | `filter[allowed_projects][name]`   | **Optional.** Filters agent pools to those associated with the given project. The project must have permission to use the agent pool. Refer to [Scoping Agent Pools to Specific Projects](/terraform/cloud-docs/agents#scope-an-agent-pool-to-specific-projects). |
 
 
@@ -502,14 +502,14 @@ Properties without a default value are required.
 | `data.attributes.organization-scoped`             | bool   | true    | The scope of the agent pool. If true, all workspaces in the organization can use the agent pool.                                                                                          |
 | `data.relationships.allowed-workspaces.data.type` | string |         | Must be `"workspaces"`.                                                                                                                                                                    |
 | `data.relationships.allowed-workspaces.data.id`   | string |         | The ID of the workspace that has permission to use the agent pool. Refer to [Scoping Agent Pools to Specific Workspaces](/terraform/cloud-docs/agents#scope-an-agent-pool-to-specific-workspaces).  |
-| `data.relationships.allowed-stacks.data.type` | string |         | Must be `"stacks"`.                                                                                                                                                                    |
-| `data.relationships.allowed-stacks.data.id`   | string |         | The ID of the stack that has permission to use the agent pool. Refer to [Scoping Agent Pools to Specific Stacks](/terraform/cloud-docs/agents#scope-an-agent-pool-to-specific-stacks).  |
+| `data.relationships.allowed-stacks.data.type` | string |         | Must be `"stacks"`. Only available in HCP Terraform.                                                                                                                                                                   |
+| `data.relationships.allowed-stacks.data.id`   | string |         | The ID of the stack that has permission to use the agent pool. Only available in HCP Terraform, refer to [Scope agent pools](/terraform/cloud-docs/agents#scope-an-agent-pool) to learn more.  |
 | `data.relationships.allowed-projects.data.type`   | string |         | Must be `"projects"`. Refer to [Scoping Agent Pools to Specific Projects](/terraform/cloud-docs/agents#scope-an-agent-pool-to-specific-projects). |
 | `data.relationships.allowed-projects.data.id`     | string |         | The ID of the project that has permission to use the agent pool.  |
 | `data.relationships.excluded-workspaces.data.type`   | string |         | Must be `"workspaces"`.                                                                                                                                                                    |
 | `data.relationships.excluded-workspaces.data.id`     | string |         | The ID of the workspace that is excluded from the scope of the agent pool.  |
-| `data.relationships.excluded-stacks.data.type`   | string |         | Must be `"stacks"`.                                                                                                                                                                    |
-| `data.relationships.excluded-stacks.data.id`     | string |         | The ID of the stack that is excluded from the scope of the agent pool.  |
+| `data.relationships.excluded-stacks.data.type`   | string |         | Must be `"stacks"`. Only available in HCP Terraform.                                                                                                                         |
+| `data.relationships.excluded-stacks.data.id`     | string |         | The ID of the Stack that is excluded from the scope of the agent pool. Only available in HCP Terraform.   |
 
 ### Sample Payload
 
@@ -683,14 +683,14 @@ Properties without a default value are required.
 | `data.attributes.organization-scoped`             | bool   | true             | The scope of the agent pool. If true, all workspaces in the organization can use the agent pool.                                                                                          |
 | `data.relationships.allowed-workspaces.data.type` | string |                  | Must be `"workspaces"`.                                                                                                                                                                   |
 | `data.relationships.allowed-workspaces.data.id`   | string |                  | The ID of the workspace that has permission to use the agent pool. Refer to [Scoping Agent Pools to Specific Workspaces](/terraform/cloud-docs/agents#scope-an-agent-pool-to-specific-workspaces). |
-| `data.relationships.allowed-stacks.data.type` | string |                  | Must be `"stacks"`.                                                                                                                                                                   |
-| `data.relationships.allowed-stacks.data.id`   | string |                  | The ID of the stack that has permission to use the agent pool. Refer to [Scoping Agent Pools to Specific Stacks](/terraform/cloud-docs/agents#scope-an-agent-pool-to-specific-stacks). |
+| `data.relationships.allowed-stacks.data.type` | string |                  | Must be `"stacks"`. Only available in HCP Terraform.                                                                                                                                                                   |
+| `data.relationships.allowed-stacks.data.id`   | string |                  | The ID of the Stack that has permission to use the agent pool. Only available in HCP Terraform, refer to [Scope agent pools](/terraform/cloud-docs/agents#scope-an-agent-pool) to learn more. |
 | `data.relationships.allowed-projects.data.type`   | string |                  | Must be `"projects"`. Refer to [Scoping Agent Pools to Specific Projects](/terraform/cloud-docs/agents#scope-an-agent-pool-to-specific-projects). |
 | `data.relationships.allowed-projects.data.id`     | string |                  | The ID of the project that has permission to use the agent pool. |
 | `data.relationships.excluded-workspaces.data.type`   | string |         | Must be `"workspaces"`.                                                                                                                                                                    |
 | `data.relationships.excluded-workspaces.data.id`     | string |         | The ID of the workspace that is excluded from the scope of the agent pool.  |
-| `data.relationships.excluded-stacks.data.type`   | string |         | Must be `"stacks"`.                                                                                                                                                                    |
-| `data.relationships.excluded-stacks.data.id`     | string |         | The ID of the stack that is excluded from the scope of the agent pool.  |
+| `data.relationships.excluded-stacks.data.type`   | string |         | Must be `"stacks"`. Only available in HCP Terraform.                                                                                                                                                                    |
+| `data.relationships.excluded-stacks.data.id`     | string |         | The ID of the Stack that is excluded from the scope of the agent pool. Only available in HCP Terraform.  |
 
 ### Sample Payload
 
@@ -870,4 +870,4 @@ The GET endpoints above can optionally return related resources, if requested wi
 | Resource Name  | Description                                 |
 | -------------- | ------------------------------------------- |
 | `workspaces`   | The workspaces attached to this agent pool. |
-| `stacks`       | The stacks attached to this agent pool.     |
+| `stacks`       | The Stacks attached to this agent pool. Only available in HCP Terraform.     |
