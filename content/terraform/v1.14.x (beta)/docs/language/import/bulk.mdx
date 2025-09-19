@@ -22,6 +22,20 @@ Complete the following steps to find and import resources in bulk:
 
 Terraform v1.12 or newer is required to check the discovered resources' identities, which lets HCP Terraform find resources in other workspaces.
 
+### Supported providers
+
+Verify that the resource type you want to search for is supported. For the initial beta release, you can use `list` blocks to query for the following resource types. This list may change. Refer to your provider documentation for the most up-to-date information.
+
+#### AWS provider
+
+- [`aws_batch_job_queue`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/batch_job_queue)
+- [`aws_cloudwatch_log_group`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/cloudwatch_log_group)
+- [`aws_iam_role`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)
+- [`aws_instance`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance)
+
+#### AWS CC provider
+
+All resources in this provider support `list` blocks. Refer to the [docmentation](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs) for more information.
 
 ## Define a query
 
