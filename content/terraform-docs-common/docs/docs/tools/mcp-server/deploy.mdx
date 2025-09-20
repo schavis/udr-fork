@@ -42,7 +42,7 @@ Choose from three installation options based on your environment and preferences
 Docker provides the most reliable and consistent way to run the Terraform MCP server across different environments.
 
 1. Start Docker on your system.
-1. Integrate with your AI client:
+1. Integrate with your AI assistant.
 
 <Tabs>
 
@@ -53,28 +53,15 @@ Docker provides the most reliable and consistent way to run the Terraform MCP se
 1. Verify MCP support enabled, refer to the [VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) for more information.
 1. To use the MCP server in all workspaces, add the following configuration to your user settings JSON file:
 
-  ```json
-  {
-    "mcp": {
-      "servers": {
-        "terraform": {
-          "command": "docker",
-          "args": [
-            "run",
-            "-i",
-            "--rm",
-            "hashicorp/terraform-mcp-server"
-          ]
-        }
-      }
-    }
-  }
-  ```
 
-  Alternatively, to use the server in a specific workspace, create an `mcp.json` file with the following configuration in your workspace's `.vscode` directory:
+<table>
+<tr><th>Version 0.3.0+ or greater</th><th>Version 0.2.3 or lower</th></tr>
+<tr valign=top>
+<td>
 
-  ```json
-  {
+```json
+{
+  "mcp": {
     "servers": {
       "terraform": {
         "command": "docker",
@@ -82,12 +69,114 @@ Docker provides the most reliable and consistent way to run the Terraform MCP se
           "run",
           "-i",
           "--rm",
-          "hashicorp/terraform-mcp-server"
+          "-e", "${input:tfe_token}",
+          "-e", "${input:tfe_hostname}",
+          "hashicorp/terraform-mcp-server:0.3.0"
+        ]
+      }
+    },
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "tfe_token",
+        "description": "Terraform API Token",
+        "password": true
+      },
+      {
+        "type": "promptString",
+        "id": "tfe_hostname",
+        "description": "Terraform Hostname",
+        "password": false
+      }
+    ]
+  }
+}
+```
+</td>
+<td>
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "terraform": {
+        "command": "docker",
+        "args": [
+          "run",
+          "-i",
+          "--rm",
+          "hashicorp/terraform-mcp-server:0.2.3"
         ]
       }
     }
   }
-  ```
+}
+```
+
+</td>
+</tr>
+</table>
+
+Alternatively, to use the server in a specific workspace, create an `mcp.json` file with the following configuration in your workspace's `.vscode` directory:
+
+<table>
+<tr><th>Version 0.3.0+ or greater</th><th>Version 0.2.3 or lower</th></tr>
+<tr valign=top>
+<td>
+
+```json
+{
+  "servers": {
+    "terraform": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e", "${input:tfe_token}",
+        "-e", "${input:tfe_hostname}",
+        "hashicorp/terraform-mcp-server:0.3.0"
+      ]
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "tfe_token",
+      "description": "Terraform API Token",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "tfe_hostname",
+      "description": "Terraform hostname",
+      "password": false
+    }
+  ]
+}
+```
+
+</td>
+<td>
+
+```json
+{
+  "servers": {
+    "terraform": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "hashicorp/terraform-mcp-server:0.2.3"
+      ]
+    }
+  }
+}
+```
+</td>
+</tr>
+</table>
 
 1. Verify the integration by opening the chat interface and selecting **Agent** from the mode settings.
 1. Click the tools icon to verify that Terraform MCP server tools appear in the available tools list.
@@ -98,29 +187,14 @@ Docker provides the most reliable and consistent way to run the Terraform MCP se
 1. Verify [Cursor](https://www.cursor.com) is installed.
 1. Verify the MCP support configured, refer to [Cursor's MCP documentation](https://docs.cursor.com/context/model-context-protocol#configuring-mcp-servers) for more information.    
 1. To use the MCP server in all workspaces, add the following configuration to your user settings JSON file:
+<table>
+<tr><th>Version 0.3.0+ or greater</th><th>Version 0.2.3 or lower</th></tr>
+<tr valign=top>
+<td>
 
-  ```json
-  {
-    "mcp": {
-      "servers": {
-        "terraform": {
-          "command": "docker",
-          "args": [
-            "run",
-            "-i",
-            "--rm",
-            "hashicorp/terraform-mcp-server"
-          ]
-        }
-      }
-    }
-  }
-  ```
-
-  Alternatively, to use the server in a specific workspace, create an `mcp.json` file with the following configuration in your workspace's `.vscode` directory:
-
-  ```json
-  {
+```json
+{
+  "mcp": {
     "servers": {
       "terraform": {
         "command": "docker",
@@ -128,12 +202,49 @@ Docker provides the most reliable and consistent way to run the Terraform MCP se
           "run",
           "-i",
           "--rm",
-          "hashicorp/terraform-mcp-server"
+          "-e", "${input:tfe_token}",
+          "-e", "${input:tfe_hostname}",
+          "hashicorp/terraform-mcp-server:0.3.0"
+        ]
+      }
+    },
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "tfe_token",
+        "description": "Terraform API Token",
+        "password": true
+      },
+      {
+        "type": "promptString",
+        "id": "tfe_hostname",
+        "description": "Terraform Hostname",
+        "password": false
+      }
+    ]
+  }
+}
+```
+</td>
+<td>
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "terraform": {
+        "command": "docker",
+        "args": [
+          "run",
+          "-i",
+          "--rm",
+          "hashicorp/terraform-mcp-server:0.2.3"
         ]
       }
     }
   }
-  ```
+}
+```
 
 1. Verify the installation by opening the chat pane and selecting **Chat Settings** from the ellipses menu.
 1. Choose **Agent** from the **Default new chat mode** drop-down menu.
@@ -146,23 +257,64 @@ Docker provides the most reliable and consistent way to run the Terraform MCP se
 1. Verify MCP support is configured, refer to [Claude Desktop's MCP documentation](https://modelcontextprotocol.io/quickstart/user) for more information.    
 1. Create or edit the `mcp.json` file and add the following configuration:
 
-  ```json
-  {
-    "mcpServers": {
-      "servers": {
-        "hcp-terraform": {
-          "command": "docker",
-          "args": [
-            "run",
-            "-i",
-            "--rm",
-            "hashicorp/terraform-mcp-server"
-          ]
-        }
+<table>
+<tr><th>Version 0.3.0+ or greater</th><th>Version 0.2.3 or lower</th></tr>
+<tr valign=top>
+<td>
+
+```json
+{
+  "mcpServers": {
+    "servers": {
+      "terraform": {
+        "command": "docker",
+        "args": [
+          "run",
+          "-i",
+          "--rm",
+          "-e", "${input:tfe_token}",
+          "-e", "${input:tfe_hostname}",
+          "hashicorp/terraform-mcp-server:0.3.0"
+        ]
+      }
+    },
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "tfe_token",
+        "description": "Terraform API Token",
+        "password": true
+      },
+      {
+        "type": "promptString",
+        "id": "tfe_hostname",
+        "description": "Terraform Hostname",
+        "password": false
+      }
+    ]
+  }
+}
+```
+</td>
+<td>
+
+```json
+{
+  "mcpServers": {
+    "servers": {
+      "terraform": {
+        "command": "docker",
+        "args": [
+          "run",
+          "-i",
+          "--rm",
+          "hashicorp/terraform-mcp-server:0.2.3"
+        ]
       }
     }
   }
-  ```
+}
+```
 
 1. Verify the integration by opening the chat pane and clicking the **search and tools** slider icon.
 1. Click **terraform-mcp-server** to verify that all tools are enabled and accessible. Refer to the [tools reference](/terraform/docs/tools/mcp-server/reference#available-tools) for more information.
@@ -174,17 +326,58 @@ Docker provides the most reliable and consistent way to run the Terraform MCP se
 1. Verify MCP support is configured, refer to [Amazon Q's MCP documentation](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/qdev-mcp.html) for more information.    
 1. Create or edit the `mcp.json` file with the following configuration:
 
+<table>
+<tr><th>Version 0.3.0+ or greater</th><th>Version 0.2.3 or lower</th></tr>
+<tr valign=top>
+<td>
+
 ```json
 {
   "mcpServers": {
     "servers": {
-      "hcp-terraform": {
+      "terraform": {
         "command": "docker",
         "args": [
           "run",
           "-i",
           "--rm",
-          "hashicorp/terraform-mcp-server"
+          "-e", "${input:tfe_token}",
+          "-e", "${input:tfe_hostname}",
+          "hashicorp/terraform-mcp-server:0.3.0"
+        ]
+      }
+    },
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "tfe_token",
+        "description": "Terraform API Token",
+        "password": true
+      },
+      {
+        "type": "promptString",
+        "id": "tfe_hostname",
+        "description": "Terraform Hostname",
+        "password": false
+      }
+    ]
+  }
+}
+```
+</td>
+<td>
+
+```json
+{
+  "mcpServers": {
+    "servers": {
+      "terraform": {
+        "command": "docker",
+        "args": [
+          "run",
+          "-i",
+          "--rm",
+          "hashicorp/terraform-mcp-server:0.2.3"
         ]
       }
     }
@@ -204,18 +397,45 @@ The compiled binary option provides a lightweight installation without Docker de
 
   <CodeBlockConfig highlight="5">
 
-  ```json
-  {
-    "mcp": {
-      "servers": {
-        "terraform": {
-          "command": "/path/to/terraform-mcp-server",
-          "args": ["stdio"]
+    <table>
+    <tr><th>Version 0.3.0+ or greater</th><th>Version 0.2.3 or lower</th></tr>
+    <tr valign=top>
+    <td>
+
+    ```json
+    {
+      "mcp": {
+        "servers": {
+          "terraform": {
+            "type": "stdio",
+            "command": "/path/to/terraform-mcp-server",
+            "env": {
+              "TFE_TOKEN": "<<TFE_TOKEN_HERE>>"
+            },
+          }
         }
       }
     }
-  }
-  ```
+    ```
+
+    </td>
+    <td>
+
+    ```json
+    {
+      "mcp": {
+        "servers": {
+          "terraform": {
+            "type": "stdio",
+            "command": "/path/to/terraform-mcp-server"
+          }
+        }
+      }
+    }
+    ```
+    </td>
+    </tr>
+    </table>
 
   </CodeBlockConfig>
 
