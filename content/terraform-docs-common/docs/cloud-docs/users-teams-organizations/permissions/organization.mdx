@@ -68,7 +68,7 @@ Members can view all projects within the organization. This lets users:
 
 ### Manage all projects
 
-Members can create and manage all projects and workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> or Stacks<!-- END: TFC:only name:stacks-tfe --> within the organization. In addition to the permissions granted by [“Manage all workspaces”](/terraform/cloud-docs/users-teams-organizations/permissions#manage-all-workspaces), this also lets users:
+Members can create and manage all projects and workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> or Stacks<!-- END: TFC:only name:stacks-tfe --> within the organization. In addition to the permissions granted by [“Manage all workspaces”](#manage-all-workspaces), this also lets users:
 - Manage other teams' access to all projects.
 - Create, edit, and delete projects (otherwise only available to organization owners).
 <!-- BEGIN: TFC:only name:stacks-tfe -->
@@ -89,7 +89,7 @@ The following table summarizes the available organization-level permissions for 
 
 ### None <a id="workspace-none"/>
 
-Members do not have access to projects or workspaces. You can grant permissions to individual projects or workspaces through [Project Permissions](/terraform/cloud-docs/users-teams-organizations/permissions#project-permissions) or [Workspace Permissions](/terraform/cloud-docs/users-teams-organizations/permissions#workspace-permissions).
+Members do not have access to projects or workspaces. You can grant permissions to individual projects or workspaces through [Project Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project) or [Workspace Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/workspace).
 
 #### View all workspaces
 
@@ -188,11 +188,11 @@ Members with this permission can update all organization access settings for any
 
 Allows members access to secret teams at the level permitted by that user's team permissions setting.
 
-This permission acts as a modifier to existing team management permissions. Members with this permission can access secret teams up to the level permitted by other team management permissions. For example, if a user has permission to include secret teams and [manage teams](/terraform/cloud-docs/users-teams-organizations/permissions#manage-teams), that user can create secret teams.
+This permission acts as a modifier to existing team management permissions. Members with this permission can access secret teams up to the level permitted by other team management permissions. For example, if a user has permission to include secret teams and [manage teams](#manage-teams), that user can create secret teams.
 
 ### Allow Member Token Management
 
-Allows owners and members with [manage teams](/terraform/cloud-docs/users-teams-organizations/permissions#manage-teams) permissions to enable and disable team token management for team members. This permission defaults to `true`.
+Allows owners and members with [manage teams](#manage-teams) permissions to enable and disable team token management for team members. This permission defaults to `true`.
 
 When member token management is enabled, members will be able to perform actions on team tokens, including generating and revoking a team token.
 

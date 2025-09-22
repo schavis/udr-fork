@@ -28,7 +28,7 @@ The [legacy API](/terraform/cloud-docs/api-docs/team-tokens#legacy-team-tokens-a
 
 The [current team token API](/terraform/cloud-docs/api-docs/team-tokens#team-tokens-api-reference) supports multiple team tokens, and adding new tokens does not invalidate older ones.
 
-Owners and users with [manage teams](/terraform/cloud-docs/users-teams-organizations/permissions#manage-teams) permissions have the ability to enable and disable team token management for a team, which limits the actions that team members can take on a team token. Refer to [Allow Member Token Management](/terraform/cloud-docs/users-teams-organizations/permissions#allow-member-token-management) for more information.
+Owners and users with [manage teams](/terraform/cloud-docs/users-teams-organizations/permissions/organization#manage-teams) permissions have the ability to enable and disable team token management for a team, which limits the actions that team members can take on a team token. Refer to [Allow Member Token Management](/terraform/cloud-docs/users-teams-organizations/permissions/organization#allow-member-token-management) for more information.
 
 Team API tokens are designed for performing API operations on workspaces. They have the same access level to the workspaces the team has access to. For example, if a team has permission to apply runs on a workspace, the team's token can create runs and configuration versions for that workspace via the API. ([More about permissions.](/terraform/cloud-docs/users-teams-organizations/permissions))
 
