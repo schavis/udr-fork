@@ -193,8 +193,7 @@ The following examples show how to write configuration for common use cases.
 
 ### Define an action 
 
-The following example adds an `aws_lambda_invoke` action. You  can invoke an action using the CLI or configure Terraform to invoke the action during a resource lifecycle state. Refer to [Invoke an action](/terraform/language/invoke-actions) for instructions on how to invoke actions.
-
+The following example adds an `aws_lambda_invoke` action. You can invoke an action using the CLI or configure Terraform to invoke the action during a resource lifecycle state. Refer to [Invoke an action](/terraform/language/invoke-actions) for instructions on how to invoke actions.
 
 ```hcl
 action "aws_lambda_invoke" "example" {
@@ -215,12 +214,15 @@ The `function_name` argument must reference an existing AWS Lambda function by n
 The following example configures Terraform to apply the `aws.alias` provider configuration when invoking the action:
 
 ```hcl
-action "aws_lambda_invocation" "example" {
-    provider = aws.alias
-    config {
-        input   = count.index
-        timeout = 3000
-    }
+action "aws_lambda_invoke" "example" {
+  provider = aws.alias
+  config {
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
+  }
 }
 ```
 
@@ -235,12 +237,15 @@ You can add a `count` or `for_each` meta-argument to invoke an action multiple t
 Terraform invokes the action three times.   
 
 ```hcl
-action "aws_lambda_invocation" "example" {
-    count = 3 
-    config {
-        input   = count.index
-        timeout = 3000
-    }
+action "aws_lambda_invoke" "example" {
+  count = 3 
+  config {
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
+  }
 }
 ```
 
@@ -251,15 +256,18 @@ action "aws_lambda_invocation" "example" {
 Terraform invokes the action once for each member of the map, resulting in two invocations.   
 
 ```hcl
-action "aws_lambda_invocation" "example" {
-   for_each = tomap({
-      a_group       = "eastus"
-      another_group = "westus2"
-   })
-   config {
-      input   = count.index
-       timeout = 3000
-   }
+action "aws_lambda_invoke" "example" {
+  for_each = tomap({
+    a_group       = "eastus"
+    another_group = "westus2"
+  })
+  config {
+    function_name = "my_function"
+    payload = jsonencode({
+      key1 = "value1"
+      key2 = "value2"
+    })
+  }
 }
 ```
 
