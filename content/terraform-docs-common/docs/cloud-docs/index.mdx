@@ -23,36 +23,30 @@ Organizations with advanced security and compliance needs can purchase [Terrafor
 
 Refer to the [Terraform Enterprise Documentation](/terraform/enterprise) for requirements, reference architectures, and installation instructions.
 
-
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
-
-{/* THIS IS STILL WIP - ignore for reviewing for now */}
 ## Use HCP Terraform in Europe
 
-The HashiCorp Cloud Platform (HCP) supports managing infrastructure in the Europe region. With HCP EU, your resources are hosted, managed, and billed separately to meet European data residency requirements. HCP Terraform is available in HCP EU, letting you manage Terraform resources in Europe with familiar workflows while adhering to additional [data and privacy regulations](https://www.hashicorp.com/en/trust/eu).
+The HashiCorp Cloud Platform (HCP) supports managing infrastructure in Europe. With HCP EU, your resources are hosted, managed, and billed separately to meet European data residency requirements. HCP Terraform is available in HCP EU, letting you manage Terraform resources in Europe with familiar workflows while adhering to additional data and privacy regulations. To learn more, refer to [HCP EU region and data governance](https://www.hashicorp.com/en/trust/eu).
 
-You must create a new HCP account and organization to use HCP Europe. You cannot connect or migrate existing HCP Terraform accounts or organizations to HCP Europe. To learn more about HCP Europe benefits, accounts, availability, and billing, refer to the [HCP Europe documentation](/hcp/docs/hcp/europe).
+You must create a new HCP account and organization to use HCP Europe. You cannot connect or migrate existing HCP Terraform accounts or organizations to HCP Europe.
 
 To get started with HCP Terraform in the EU region, sign up on the HCP EU portal: <https://eu.cloud.hashicorp.com>.
 
-In HCP EU, the HCP platform manages organizations, projects, permissions, and groups of users. In HCP EU organizations, you can configure the following:
+To learn more about HCP Europe and creating a new account, refer to the [HCP Europe documentation](/hcp/docs/hcp/europe).
+
+In HCP EU, you can administrate HCP Terraform though the HCP platform. HCP Terraform inherits the organizations, projects, and groups of users that you set up in HCP.
+
+In HCP EU organizations you configure the following in the HCP platform, then HCP Terraform inherits those settings:
 
 - [Organizations](/hcp/docs/hcp/admin/orgs)
 - [Projects](/hcp/docs/hcp/admin/projects)
 - [Groups](/hcp/docs/hcp/iam/groups)
 - [Users](/hcp/docs/hcp/iam/users)
-- [HCP roles](/hcp/docs/hcp/iam/access-management#roles-permissions)
+- [HCP organization and project roles for groups](/hcp/docs/hcp/iam/access-management#roles-permissions)
 
-HCP Terraform inherits the settings of organizations, projects, groups and user roles from HCP.
+To learn more about setting up permissions for HCP EU organizations, refer to [Set roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles).
 
-In HCP Terraform you can further adjust Terraform-specific settings for the following:
-- Organization settings
-- User permissions
-- HCP Terraform plans
-- Workspaces
-
-To learn about the available organization settings, refer to [Organizations in HCP](/hcp/docs/hcp/admin/orgs).
-
+{/* TODO: decide if I want one HCP EU page */}
 
 <!-- END: TFC:only name:hcp-eu -->
