@@ -812,12 +812,12 @@
         "path": "api-docs/state-version-outputs"
       },
   { "title": "Subscriptions", "path": "api-docs/subscriptions" },
-  { "title": "Stacks",
+  { "title": "Stacks", "path": "api-docs/stacks/index",
   "routes": [
-    { "title": "Manage Stacks", "path": "api-docs/stacks" },
+    { "title": "Manage Stacks", "path": "api-docs/stacks/index" },
     { "title": "Configurations", "path": "api-docs/stacks/configurations" },
     { "title": "Deployments", "path": "api-docs/stacks/deployments" },
-    { "title": "State", "path": "api-docs/stacks/states" },
+    { "title": "State", "path": "api-docs/stacks/states" }
     ]
   },
   { "title": "Team membership", "path": "api-docs/team-members" },
