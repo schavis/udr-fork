@@ -43,13 +43,11 @@ Defaults to `false`.
 
 ### `TFE_ATLAS_WEB_WORKER_COUNT`
 
-Sets a fixed number of web worker processes for the Atlas Rails application.
+Number of web worker processes for the Atlas Rails application.
 
-By default, Terraform Enterprise automatically scales web workers based on CPU cores (CPU count ÷ 2, minimum 1, maximum 10). Use this setting when you need predictable resource allocation or have determined an optimal worker count for your workload.
+Higher values can improve response times under heavy load but increase memory usage.
 
-Higher values can improve response times under heavy load but increase memory usage. 
-
-Defaults to automatic scaling (CPU count ÷ 2, minimum 1, maximum 10).
+Must be between `1` and `10`. Defaults to CPU count ÷ 2 (minimum 1, maximum 10). 
 
 ## Atlas database tuning
 
