@@ -1,6 +1,6 @@
 ---
 page_title: Import existing resources to state
-description: Learn how to review search results from queries on existing infrastructure resources so that you can import them to your Terraform state
+description: Learn how to use queries to find unmanaged infrastructure and import it into Terraform
 tfc_only: true
 ---
 
@@ -8,14 +8,14 @@ tfc_only: true
 
 @include 'beta.mdx'
 
-You can run queries defined in HCL against your existing infrastructure to search for resources that are not yet managed by Terraform. HCP Terraform presents query results so that you can import the resources to state and begin managing them as code. 
+You can define queries in your Terraform configuration to search for resources that are not yet managed by Terraform. HCP Terraform presents query results so that you can import the resources to state and begin managing them as code. 
 
 ## Overview
 
 Complete the following steps to import resources into your Terraform state:
 
 1. **Define queries**: Add `list` blocks to your Terraform configuration and copy them to your workspace in HCP Terraform. Refer to [Import resources in bulk](/terraform/language/v1.14.x/import/bulk) for more information.
-1. **Run the queries**: You can run queries in the HCP Terraform UI or by running the Terraform CLI on a remote workstation.
+1. **Run the queries**: You can run queries in the HCP Terraform UI or run the Terraform CLI on your local workstation.
 1. **Generate code**: HCP Terraform generates `import` and `resource` blocks for the resources it discovers.
 1. **Apply the configuration**: Copy the generated code to your Terraform configuration and run it to finish importing the resources.
 
@@ -23,15 +23,15 @@ After importing the resources to state, you can delete the generated import bloc
 
 ### HCP Terraform agents
 
-If you environment connects to HCP Terraform using an HCP Terraform agent, you must enable the `query` operation when starting the agent pool. Refer to [Install and run agents](/terraform/cloud-docs/agents/agents) for more information.
+If you use HCP Terraform agents for your runs, you must enable the `query` operation when starting the agent pool. Refer to [Install and run agents](/terraform/cloud-docs/agents/agents) for more information.
 
 ## Define queries
 
-Configure search queries you want to run against your existing infrastructure and copy them to your HCP Terraform workspace. Refer to [Import resources in bulk](/terraform/language/v1.14.x/import/bulk) for instructions on how to define queries. 
+Add `list` blocks to your workspace's Terraform configuration to create search queries you want to run against your existing infrastructure. Refer to [Import resources in bulk](/terraform/language/v1.14.x/import/bulk) for instructions on how to define queries. 
 
-If HCP Terraform is connected to your VCS, you check the configurations into your repository so that Terraform can access them. Refer to [Connect to VCS](/terraform/cloud-docs/vcs) for more information.
+If HCP Terraform is connected to your VCS, commit the changes to version control. 
 
-You can also connect your remote workstation to HCP Terraform and copy the configurations to your workspace using the Terraform CLI. Refer to [Connect to HCP Terraform](/terraform/cli/cloud/settings) for instructions.
+You can also connect your local workstation to HCP Terraform and use the CLI to copy the configurations to your HCP Terraform workspace. Refer to [Connect to HCP Terraform](/terraform/cli/cloud/settings) for instructions.
 
 ## Run queries
 
