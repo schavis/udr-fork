@@ -125,7 +125,7 @@ You can set the following environment variables to configure the server behavior
 
 | Variable                  | Description                                                                  | Default                      |
 |---------------------------|------------------------------------------------------------------------------|------------------------------|
-| `TFE_ADDRESS`             | HCP Terraform or TFE address                                                 | `"https://app.terraform.io"` |
+| `TFE_ADDRESS`             | HCP Terraform or Terraform Enterprise address                                                 | `"https://app.terraform.io"` |
 | `TFE_TOKEN`               | Terraform Enterprise API token                                               | `""` (empty)                 |
 | `TFE_SKIP_TLS_VERIFY`     | Skip HCP Terraform or Terraform Enterprise TLS verification                  | `false`                      |
 | `TRANSPORT_MODE`          | Set to `streamable-http` to enable HTTP transport (legacy `http`)            | `stdio`                      |
@@ -139,26 +139,30 @@ You can set the following environment variables to configure the server behavior
 | `MCP_RATE_LIMIT_SESSION`  | Per-session rate limit (format: `rps:burst`)                                 | `5:10`                       |
 | `ENABLE_TF_OPERATIONS`    | Enable destructive Terraform operations                                      | `false`                      |
 
-## Tool behavior notes
-
-### Run type options
+## Run type options
 
 The `create_run` tool supports the following run types by default:
-- `plan_and_apply` - Creates a plan and applies it if approved
-- `refresh_state` - Refreshes the state without making changes
-- `plan_only` - Creates a plan without applying
-- `allow_empty_apply` - Allows applying when no changes are detected
+
+- `plan_and_apply`: Creates a plan and applies it if approved
+- `refresh_state`: Refreshes the state without making changes
+- `plan_only`: Creates a plan without applying
+- `allow_empty_apply`: Allows applying when no changes are detected
 
 When `ENABLE_TF_OPERATIONS` is set to `true`, the following additional options become available:
-- `auto_approve` - Automatically approves and applies the plan
-- `is_destroy` - Creates a destroy plan to remove infrastructure
+
+- `auto_approve`: Automatically approves and applies the plan
+- `is_destroy`: Creates a destroy plan to remove infrastructure
 
 ### Destructive operations
 
 Several tools perform destructive operations that can modify or delete infrastructure resources. These tools are disabled by default and require setting `ENABLE_TF_OPERATIONS=true`:
 
-- `action_run` - Can apply or destroy infrastructure
-- `delete_workspace_safely` - Permanently deletes workspaces
+- `action_run`: Can apply or destroy infrastructure
+- `delete_workspace_safely`: Permanently deletes workspaces
 - Additional run type options in `create_run`
 
+<Warning>
+
 When enabled, use these tools with caution as they can permanently modify or destroy infrastructure resources.
+
+</Warning>
