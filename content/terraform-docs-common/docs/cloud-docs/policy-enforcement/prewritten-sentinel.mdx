@@ -13,7 +13,7 @@ Pre-written Sentinel policy libraries streamline your compliance processes and e
 
 Complete the following steps to implement pre-written Sentinel policies in your workspaces:
 
-1. Obtain the policies you want to implement. Download policies directly into your repository or create a fork of the HashiCorp repositories. Alternatively, you can add the Terraform module to your configuration, which acquires the policies and connects them to your workspaces in a single step.
+1. Obtain the policies you want to implement. Download policies directly into your repository or create a fork of the HashiCorp repositories. 
 1. Connect policies to your workspace. After you download policies or fork policy repositories, you must connect them to your HCP Terraform or Terraform Enterprise workspaces.
 
 Refer to the [Sentinel documentation](/sentinel/docs) for information about the Sentinel language. 
@@ -42,7 +42,6 @@ Refer to the [pre-written policy library reference](/terraform/cloud-docs/policy
 
 - **Download policies from the registry**: Use this method if you want to assemble custom policy sets without customizing policies.  
 - **Fork the HashiCorp policy GitHub repository**: Use this method if you intend to customize the policies. 
-- **Add the Terraform module to your configuration**: Use this method to implement specific versions of the policies as-is. This method also connects the policies to workspaces in the Terraform configuration file instead of connecting them as a separate step.
 
 <Tabs>
 
@@ -68,52 +67,17 @@ You can create forks of the following repositories:
 
 - [`policy-library-CIS-Policy-Set-for-AWS-Terraform`](https://github.com/hashicorp/policy-library-CIS-Policy-Set-for-AWS-Terraform)
 - [`policy-library-FSBP-Policy-Set-for-AWS-Terraform`](https://github.com/hashicorp/policy-library-FSBP-Policy-Set-for-AWS-Terraform/)
+- [`policy-library-NIST-Policy-Set-for-AWS-Terraform`](https://github.com/hashicorp/policy-library-NIST-Policy-Set-for-AWS-Terraform)
 
 Each repository contains a `sentinel.hcl` file that defines an example policy set using the policies included in the library. Modify the `sentinel.hcl` file to customize your policy set. Refer to [Sentinel Policy Set VCS Repositories](/terraform/cloud-docs/policy-enforcement/manage-policy-sets/sentinel-vcs) for additional information.
 
 After forking the repository, complete the instructions for [connecting the policies to your workspace](#connect-policies-to-your-workspace).
 
 </Tab>
-<Tab heading="Terraform module">
 
-This method enables you to connect the policies to workspaces in the Terraform configuration file. As a result, you can skip the instructions described in [Connect policies to your workspaces](#connect-policies-to-your-workspaces). 
-
-By default, the module supports policies stored in the following repositories:
-
-- [`policy-library-CIS-Policy-Set-for-AWS-Terraform`](https://github.com/hashicorp/policy-library-CIS-Policy-Set-for-AWS-Terraform)
-- [`policy-library-FSBP-Policy-Set-for-AWS-Terraform`](https://github.com/hashicorp/policy-library-FSBP-Policy-Set-for-AWS-Terraform/) 
-
-Refer to the instructions in the [terraform-AWS-Prewritten-Policy-Set](https://github.com/hashicorp/terraform-AWS-Prewritten-Policy-Set/tree/main) GitHub repository for additional information about using the module, including how to modify or extend the default repositories.
-
-1. Go to the [module in the Terraform registry](https://registry.terraform.io/modules/hashicorp/Prewritten-Policy-Set/AWS/latest) and copy the code generated in the **Provision Instructions** tile.	 
-1. Set the `TFE_TOKEN` environment variable to your HCP Terraform or Terraform Enterprise API token. You can use your token or an organization token. 
-1. Add the `module` block to your Terraform configuration and define the following arguments: 
-   - `source`: Specify the path to the module you downloaded.
-   - `tfe_organization`: Specify the name of your organization on Terraform Enterprise or HCP Terraform.
-   - `policy_set_workspace_names`: Specify a list of workspace names that you want to apply the policies to.
-   - `name`: Specifies a name for your policy set. 
-
-   The following example configuration applies invokes the module for `target_workspace_1`:
-
-   ```hcl
-   module "policy_set" {
-      source = "./prewritten-policy"
-      name                             = "<your-policy-set>"
-      tfe_organization                 = "<your-organization>"
-      policy_set_workspace_names       = ["target_workspace_1"]
-      name                             = "<name-for-your-policy-set>"
-   }
-   ```
-
-1. Run `terraform plan` to view the plan.
-1. Run `terraform apply` to apply the changes. After running the command, Terraform will evaluate Sentinel policies for each following run of the workspaces you specified.
-
-</Tab>
 </Tabs>
 
 ## Connect policies to your workspace
-
-Skip this step if you [added the Terraform module](#add-the-terraform-module-to-your-configuration) to your configuration. When you use the module, the `policy_set_workspace_names` argument instructs Terraform to connect the policies to the HCP Terraform workspaces specified in the configuration. 
 
 1. Sign in to [HCP Terraform](https://app.terraform.io/) or Terraform Enterprise and navigate to the organization with workspaces you want to connect policies to.
 1. Choose **Settings** from the sidebar.
