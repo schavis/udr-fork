@@ -35,7 +35,7 @@ HCP Terraform creates a new configuration version each time any of the following
 
 ## Stack deployment runs
 
-Each configuration version creates a deployment run for every deployment of your Stack to implement the changes in that version. A deployment run consists of the steps that Terraform can perform to update that deployment to match the associated configuration version. A single run can include many plans and apply cycles, and a successful run ends with an empty plan to reflect that deployments have executed all downstream changes.
+Each configuration version creates a deployment run for every deployment of your Stack to implement the changes in that version. A deployment run consists of the steps that Terraform can perform to update that deployment to match the associated configuration version. A single run can include many plan and apply cycles, and a successful run ends with an empty plan to reflect that deployments have executed all downstream changes.
 
 The goal of deployment runs is to apply a configuration version to every deployment in the Stack. When all deployments successfully match the same Stack configuration, the Stack achieves convergence.
 
@@ -66,7 +66,7 @@ While a deployment holds a state lock, other runs for that deployment must wait.
 - Fails and stops execution
 - Gets manually canceled by an operator
 
-After the running deployment releases its lock, the next approved run in the queue can acquire the lock and begin its execution. To learn more state for deployments in a Stack, refer to [State for Stacks](/terraform/cloud-docs/stacks/state).
+After the running deployment releases its lock, the next approved run in the queue can acquire the lock and begin its execution. To learn more about state for deployments in a Stack, refer to [State for Stacks](/terraform/cloud-docs/stacks/state).
 
 ### Deployment run modes
 

@@ -120,7 +120,7 @@ To create a variable set:
 1. Choose a variable set scope:
    - Organization-owned
       - **Apply globally:** HCP Terraform automatically applies this global variable set to all existing and future workspaces.
-      - **Apply to specific projects, workspaces, or<!-- BEGIN: TFC:only name:stacks-tfe --> Stacks<!-- END: TFC:only name:stacks-tfe -->:** Use the text fields to search for and select workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> ,Stacks,<!-- END: TFC:only name:stacks-tfe --> and projects to apply this variable set to. This affects all current and future workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> for any selected projects. After creation, users can also [add this variable set to their workspaces](#apply-or-remove-variable-sets-from-inside-a-workspace).
+      - **Apply to specific projects<!-- BEGIN: TFC:only name:stacks-tfe -->, Stacks,<!-- END: TFC:only name:stacks-tfe --> or workspaces:** Use the text fields to search for and select workspaces<!-- BEGIN: TFC:only name:stacks-tfe -->, Stacks,<!-- END: TFC:only name:stacks-tfe --> and projects to apply this variable set to. This affects all current and future workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> for any selected projects. After creation, users can also [add this variable set to their workspaces](#apply-or-remove-variable-sets-from-inside-a-workspace).
    - Project-owned
       - **Apply to the entire project:** HCP Terraform automatically applies this variable set to all existing and future workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in the project.
       - **Apply to specific workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in the project:** Use the text fields to search for and select workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> to apply this variable set to. After creation, users can also [add this variable set to their workspaces](#apply-or-remove-variable-sets-from-inside-a-workspace).
@@ -145,7 +145,7 @@ To edit or remove a variable set:
 
 ### Delete variable sets
 
-Deleting a variable set can be a disruptive action, especially if the variables are required to execute runs. We recommend informing organization, project, <!-- BEGIN: TFC:only name:stacks-tfe --> ,Stack,<!-- END: TFC:only name:stacks-tfe --> and workspace owners before removing a variable set.
+Deleting a variable set can be a disruptive action, especially if the variables are required to execute runs. We recommend informing organization, project<!-- BEGIN: TFC:only name:stacks-tfe --> ,Stack,<!-- END: TFC:only name:stacks-tfe --> and workspace owners before removing a variable set.
 
 To delete a variable set:
 
