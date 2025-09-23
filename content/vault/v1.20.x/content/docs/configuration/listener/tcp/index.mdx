@@ -310,9 +310,11 @@ default value in the `"/sys/config/ui"` [API endpoint](/vault/api-docs/system/co
   payload. Limiting object depth mitigates the risk of stack exhaustion from
   deeply nested objects, which could lead to a Denial of Service (DoS).
 
-- `max_json_string_value_length` `(int: 1048576)` – Defines the maximum allowed length in bytes
-  for a single string value within a JSON payload. This is a critical defense against excessive memory
-  allocation attacks where a client might send a very large string to exhaust server memory. Defaults to 1MB.
+- `max_json_string_value_length` `(int: 1048576)` – Defines the maximum allowed
+  length in bytes for a single string value within a JSON payload. Limiting
+  string length provides a critical defense against excessive memory allocation
+  attacks where a client might send a very large string to exhaust server memory.
+  Defaults to 1MB.
 
 - `max_json_object_entry_count` `(int: 10000)` – Sets the maximum number of key-value pairs
   allowed in a single JSON object. This helps mitigate hash-collision Denial of Service (HashDoS)
