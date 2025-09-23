@@ -5,6 +5,10 @@ description: Centralize identity management to manage access and improve securit
 
 # Centralize identity management
 
+Designing and planning policies to manage access is one part of a complete identity
+and access management strategy. Another key part of that strategy is to
+centralize identity management so you can enforce those policies effectively.
+
 There are several ways to grant access to systems. Most systems have built in
 identity solutions that allow you to create local users and groups. Those users
 and groups only have access to that specific system. While this approach may
@@ -37,9 +41,14 @@ with a single set of credentials. This approach reduces the risk of password
 fatigue and improves security by reducing the number of passwords that users
 need to remember.
 
-HashiCorp tools and services integrate with several identity providers natively or through
-OIDC. In addition to authenticating to HashiCorp tools and services, you can
-also use HashiCorp's Vault to act as an OIDC provider for other systems.
+You can deploy HashiCorp Vault to act as an OIDC provider for other systems.
+This gives you complete control over your identity management workflow and
+allows you to expose the OIDC provider based on your security requirements.
+
+Most HashiCorp tools and services like the [HashiCorp Cloud
+Platform](https://portal.cloud.hashicorp.com/sign-in), HCP Terraform, Boundary,
+and Vault integrate with third party identity providers natively or through
+OIDC.
 
 HashiCorp resources:
 
@@ -52,6 +61,19 @@ External resources:
 
 ## Next steps
 
+
+Following these documents in order ensures a logical progression through the key
+concepts and best practices, helping you build a strong foundation to build your
+identity and access management program.
+
+- [Define access requirements](/well-architected-framework/secure-systems/identity-access-management/define-access-requirements)
+- [Grant least privilege](/well-architected-framework/secure-systems/identity-access-management/grant-least-privilege)
+- [Create permissions and guardrails](/well-architected-framework/secure-systems/identity-access-management/create-permissions-guardrails)
+- **Centralize identity management (this document)**
+- [Implement strong sign-in workflows](/well-architected-framework/secure-systems/identity-access-management/implement-strong-sign-in-workflows)
+- [Use dynamic credentials](/well-architected-framework/secure-systems/identity-access-management/use-dynamic-credentials)
+- [Manage access lifecycle](/well-architected-framework/secure-systems/identity-access-management/manage-access-lifecycle)
+
 In this section of **Identity and access management** you learned the benefits
 of centralizing identity management. Identity and access management is part of the
-[secure systems](/well-architected-framework/secure-systems) pillar.
+[Secure systems](/well-architected-framework/secure-systems) pillar.
