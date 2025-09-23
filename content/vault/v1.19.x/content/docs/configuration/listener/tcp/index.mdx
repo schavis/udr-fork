@@ -323,9 +323,10 @@ default value in the `"/sys/config/ui"` [API endpoint](/vault/api-docs/system/co
   consumption when processing large lists.
 
 - `max_json_token` `(int: 500000)` – Sets the maximum total number of tokens
-  (e.g., keys, values, braces, brackets) permitted in a single JSON payload. This acts as an overall
-  complexity limit, providing a safeguard against attacks that use a huge number of small elements
-  to exhaust CPU and memory.
+  (e.g., keys, values, braces, brackets) permitted in a single JSON payload.
+  Setting a limit on tokens acts as an overall complexity limit to provide a
+  safeguard against attacks that use a huge number of small elements to exhaust
+  CPU and memory.
 
 ### `telemetry` parameters
 
