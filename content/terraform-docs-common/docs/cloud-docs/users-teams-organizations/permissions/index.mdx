@@ -6,11 +6,11 @@ description: >-
 
 # Permissions overview
 
-In HCP Terraform organizations, you control user access by collecting users into teams and assigning those teams permissions. To perform an action within an HCP Terraform organization, users must belong to a team that has the appropriate permissions.
+In **HCP Terraform organizations, you control user access by collecting users into **teams** and assigning those teams permissions. To perform an action within an HCP Terraform organization, users must belong to a team that has the appropriate permissions.
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
-If you are in a HashiCorp Cloud Platform (HCP) Europe organization, you can manage user access and permissions through HCP groups and roles and then further refine those permissions with HCP Terraform roles. To learn more, refer to [HCP group roles and HCP Terraform permissions](#hcp-group-roles-and-hcp-terraform-permissions).
+If you are in a HashiCorp Cloud Platform (HCP) Europe organization, you can manage user access and permissions through HCP **groups** and roles and then further refine those permissions with HCP Terraform roles. To learn more, refer to [HCP group roles and HCP Terraform permissions](#hcp-group-roles-and-hcp-terraform-permissions).
 
 <!-- END: TFC:only name:hcp-eu -->
 
@@ -23,7 +23,7 @@ The HCP Terraform permissions model is split into three levels. You can set perm
 
 Each permission level is additive, granting a user the highest level of permissions possible, regardless of which level set that permission. A team's **effective permissions** is the sum of the permissions that team has from every permission level.
 
-The level at which you grant a permission does not matter, it is level of access that a permission grants that determines what a user can do. 
+The scope for which you grant a permission does not matter, it is level of access that the permission grants that determines what a user can do.
 
 For example, if a team has **Manage all workspaces** permissions at the organization level, and  **Read** permission at the workspace-level, then that team has **Manage all workspaces** permissions for that workspace. HCP Terraform grants **Manage all workspaces** permissions on that workspace, because it is the most permissive.
 

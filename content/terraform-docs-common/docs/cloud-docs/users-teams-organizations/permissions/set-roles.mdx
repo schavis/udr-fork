@@ -14,13 +14,22 @@ Roles in HCP Terraform define the permissions that users have at different level
 
 ## Background
 
-If you are in an HCP Terraform organization, you can manage user access and permissions through teams.
+If you are in an HCP Terraform organization, you can manage user access and permissions through **teams**.
 
 > **Hands-on:** Try the [Manage Permissions in HCP Terraform](/terraform/tutorials/cloud/cloud-permissions?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS) tutorial.
 
+Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was<!-- BEGIN: TFC:only name:hcp-eu --> set by an HCP or HCP Terraform role, or whether the role was<!-- END: TFC:only name:hcp-eu --> set by an organization, project, or workspace. To learn more, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
+
+The following sections explain how to set roles at each permission level:
+- [Set organization-level roles](#set-organization-level-roles)
+- [Set project-level roles](#set-project-level-roles)
+- [Set workspace-level roles](#set-workspace-level-roles)
+
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
-In an HashiCorp Cloud Platform (HCP) Europe organization, you manage user access through groups.
+### HCP Europe organizations
+
+In an HashiCorp Cloud Platform (HCP) Europe organization, you manage user access through **groups**.
 
 @include 'eu/org-is-eu.mdx'
 
@@ -29,20 +38,14 @@ To learn how to set up groups and assign users to them in HCP, refer to [Groups]
 1. HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
 2. HCP Terraform roles - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.
 
-<!-- END: TFC:only name:hcp-eu -->
-
-Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was<!-- BEGIN: TFC:only name:hcp-eu --> set by an HCP or HCP Terraform role, or whether the role was<!-- END: TFC:only name:hcp-eu --> set by an organization, project, or workspace. To learn more, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
-
-The following sections explain how to set roles<!-- BEGIN: TFC:only name:hcp-eu --> for the different kinds of organizations<!-- END: TFC:only name:hcp-eu --> at each permission level:
-- [Set organization-level roles](#set-organization-level-roles)
-<!-- BEGIN: TFC:only name:hcp-eu -->
+The following sections explain how to set roles at each permission level:
 - [Set organization-level roles for HCP Europe organizations](#set-organization-level-roles-for-hcp-europe-organizations)
-<!-- END: TFC:only name:hcp-eu -->
-- [Set project-level roles](#set-project-level-roles)
-<!-- BEGIN: TFC:only name:hcp-eu -->
 - [Set project-level roles for HCP Europe organizations](#set-project-level-roles-for-hcp-europe-organizations)
+- [Set workspace-level roles for HCP Europe organizations](#set-workspace-level-roles-for-hcp-europe-organizations)
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
 <!-- END: TFC:only name:hcp-eu -->
-- [Set workspace-level roles](#set-workspace-level-roles)
 
 ## Set organization-level roles
 
@@ -58,7 +61,7 @@ To set organization-level permissions for a team, perform the following steps:
 1. Click **Teams**, then select the team name from the list.
 1. Assign specific permissions to apply across your organization.
 
-For more information about what each permission grants, refer to [Organization permissions](/terraform/cloud-docs/).
+For more information about what each permission grants, refer to [Organization permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization).
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
