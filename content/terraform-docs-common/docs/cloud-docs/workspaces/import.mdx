@@ -8,13 +8,13 @@ tfc_only: true
 
 @include 'beta.mdx'
 
-You can define queries in your Terraform configuration to search for resources that are not yet managed by Terraform. HCP Terraform presents query results so that you can use the UI to import the resources and begin managing them as code. For instructions on importing single resources or small batches of resources on your local workstation, refer to [Import an existing resource](/terraform/language/import/single-resource). 
+You can define queries in your Terraform configuration to search for resources that are not yet managed by Terraform. HCP Terraform presents query results so that you can use the UI to import the resources and begin managing them as code. Use this workflow to import large batches of resources. For instructions on importing single resources or small batches of resources on your local workstation, refer to [Import an existing resource](/terraform/language/import/single-resource). 
 
 ## Overview
 
 You can use search functionality in [UI and VCS-driven](/terraform/cloud-docs/run/ui) and [CLI-driven](/terraform/cloud-docs/run/cli) workspaces. Complete the following steps to search for resources and import them into your Terraform state:
 
-1. **Define queries**: Add `list` blocks to your Terraform configuration and copy them to your workspace in HCP Terraform. Refer to [Import resources in bulk](/terraform/language/v1.14.x/import/bulk) for more information.
+1. **Define queries**: Add `list` blocks to your Terraform configuration. If you are using the VCS-driven workflow, commit this change and push it to the repository associated with your workspace in HCP Terraform. Refer to [Import resources in bulk](/terraform/language/v1.14.x/import/bulk) for more information.
 1. **Run the queries**: You can run queries in the HCP Terraform UI or run the Terraform CLI on your local workstation.
 1. **Generate code**: HCP Terraform generates `import` and `resource` blocks for the resources it discovers.
 1. **Apply the configuration**: Copy the generated code to your Terraform configuration and run it to finish importing the resources.
@@ -29,7 +29,7 @@ Add `list` blocks to your workspace's Terraform configuration to create search q
 
 If HCP Terraform is connected to your VCS, commit the configuration to version control. 
 
-You can also connect your local workstation to HCP Terraform and use the CLI to copy the configuration to your HCP Terraform workspace. Refer to [Connect to HCP Terraform](/terraform/cli/cloud/settings) for instructions.
+You can also connect your local workstation to HCP Terraform with the CLI-driven workflow and use the Terraform CLI to perform operations in your HCP Terraform workspace. Refer to [Connect to HCP Terraform](/terraform/cli/cloud/settings) for instructions.
 
 ## Run queries
 
@@ -53,7 +53,7 @@ Over time, providers may change their [resource identity](/terraform/language/im
   
 You can perform the following actions in the results area: 
 
-  - Use the search bar and filters to sort the results. 
+  - Use the search bar and filters to sort and filter the results. 
   - Click on a resource in the **Resource type** column to view details made available by the provider.
   - Select resources that you want to import to your workspace. Refer to [Generate code](#generate-code) for instructions.
 
