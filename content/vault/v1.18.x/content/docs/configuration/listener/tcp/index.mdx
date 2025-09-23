@@ -322,9 +322,10 @@ default value in the `"/sys/config/ui"` [API endpoint](/vault/api-docs/system/co
   and prevents general resource exhaustion from objects with an excessive number
   of entries.
 
-- `max_json_array_element_count` `(int: 10000)` – Determines the maximum number of elements
-  permitted in a single JSON array. This prevents a single request from causing excessive memory
-  consumption when processing large lists.
+- `max_json_array_element_count` `(int: 10000)` – Determines the maximum number
+  of elements permitted in a single JSON array. Limiting the number of array
+  elements prevents a single request from causing excessive memory consumption
+  when processing large lists.
 
 - `max_json_token` `(int: 500000)` – Sets the maximum total number of tokens
   (e.g., keys, values, braces, brackets) permitted in a single JSON payload.
