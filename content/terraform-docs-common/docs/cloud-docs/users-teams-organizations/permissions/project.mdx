@@ -14,17 +14,19 @@ To learn how to set permissions for a project, refer to [Set roles in HCP Terraf
 
 If you are in an HCP Terraform organization, you can manage user access and permissions through teams.
 
-<!-- BEGIN: TFC:only name:hcp-eu -->
-
-In HCP Europe organizations, HCP Terraform inherits the groups and roles you set up in the HashiCorp Cloud Platform (HCP). If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
-
-In HCP Europe organizations, HCP roles automatically grant permissions in HCP Terraform, and you can add additional fine-grained roles within HCP Terraform itself. To learn more about HCP roles in projects, refer to [HCP group roles](#hcp-group-roles).
-
-<!-- END: TFC:only name:hcp-eu -->
-
 We recommend following the principle of least privilege when possible, only giving users access to the resources they need for their job function. You can also set permissions at the [organization](/terraform/cloud-docs/users-teams-organizations/permissions/organization) and [workspace](/terraform/cloud-docs/users-teams-organizations/permissions/workspace) levels.
 
 Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set at the organization, project, or workspace level. For more details, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+<Note>
+
+@include 'eu/permissions.mdx'
+
+</Note>
+
+<!-- END: TFC:only name:hcp-eu -->
 
 ## Project roles and permissions
 
@@ -54,10 +56,9 @@ The following table shows the permissions granted by each project role. Each rol
 | | [Lock and unlock workspaces](#lock-unlock-workspaces) | ✅ | ✅ | ✅ | ❌ |
 | | [Manage workspace Run Tasks](#manage-workspace-run-tasks) | ✅ | ❌ | ❌ | ❌ |
 
-
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
-If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization. In an HCP Europe organization, you can grant permissions through HCP and HCP Terraform roles. To learn more about assigning permissions in HCP Europe organizations, refer to [HCP group roles](#hcp-group-roles).
+In an HCP Europe organization, you can grant permissions at the project-level through both HCP and HCP Terraform roles. To learn more about assigning permissions in HCP Europe organizations, refer to [HCP group roles](#hcp-group-roles).
 
 <!-- END: TFC:only name:hcp-eu -->
 
@@ -127,9 +128,11 @@ The following table summarizes the available project access permissions. Click o
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
-In HCP Europe organizations, you cannot assign **Project access** to a group in HCP Terraform. If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
+<Note>
 
-Instead, assign an HCP role that grants **Project access** to that group, then HCP Terraform will automatically inherit those permissions. To learn more about which HCP roles grant project access, refer to [HCP group roles](#hcp-group-roles).
+In HCP Europe organizations, you cannot assign **Project access** to a group in HCP Terraform. Instead, assign an HCP role that grants **Project access** to that group, then HCP Terraform automatically inherits those permissions. To learn more about which HCP roles grant project access, refer to [HCP group roles](#hcp-group-roles).
+
+</Note>
 
 <!-- END: TFC:only name:hcp-eu -->
 
@@ -171,6 +174,8 @@ Depending on the [organization's settings](/terraform/cloud-docs/users-teams-org
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
 ## Group management
+
+In HashiCorp Cloud Platform (HCP) Europe organizations, you manage user access through HCP groups, and use group management permissions instead of team management permissions.
 
 The following table summarizes the available group management permissions for the project.
 
@@ -332,9 +337,9 @@ Allows users to associate or dissociate run tasks with workspaces within the pro
 
 ## HCP group roles
 
-@include 'eu/org-is-eu.mdx'
+In an HCP Europe organization, you manage user access through groups. To learn how to set up groups and assign users to them in HCP, refer to [Groups](/hcp/docs/hcp/iam/groups). To learn more, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
 
-In an HCP Europe organization, you manage user access through groups. To learn how to set up groups and assign users to them in HCP, refer to [Groups](/hcp/docs/hcp/iam/groups). You can assign permissions to HCP groups in two ways:
+You can assign permissions to HCP groups in two ways:
 
 1. [HCP roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-project-level-roles-for-hcp-europe-organizations) - You can assign HCP roles to groups in the HashiCorp Cloud Platform (HCP), and these roles automatically grant permissions in HCP Terraform.
 2. [HCP Terraform roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-project-level-roles) - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.

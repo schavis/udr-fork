@@ -14,17 +14,19 @@ To learn how to set permissions for an organization, refer to [Set roles in HCP 
 
 If you are in an HCP Terraform organization, you can manage user access and permissions through teams.
 
-<!-- BEGIN: TFC:only name:hcp-eu -->
-
-In HCP Europe organizations, HCP Terraform inherits the groups and roles you set up in the HashiCorp Cloud Platform (HCP). If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
-
-In HCP Europe organizations, HCP roles automatically grant permissions in HCP Terraform, and you can add additional fine-grained roles within HCP Terraform itself. To learn more about HCP roles in organizations, refer to [HCP group roles](#hcp-group-roles).
-
-<!-- END: TFC:only name:hcp-eu -->
-
 We recommend following the principle of least privilege when possible, only giving users access to the resources they need for their job function. You can also set permissions at the [project](/terraform/cloud-docs/users-teams-organizations/permissions/project) and [workspace](/terraform/cloud-docs/users-teams-organizations/permissions/workspace) levels.
 
 Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set at the organization, project, or workspace level. For more details, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+<Note>
+
+@include 'eu/permissions.mdx'
+
+</Note>
+
+<!-- END: TFC:only name:hcp-eu -->
 
 ## All organization permissions
 
@@ -51,9 +53,11 @@ The following table summarizes the available organization-level permissions for 
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
-In HCP Europe organizations, you cannot assign **Project permissions** to a group in HCP Terraform. If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
+<Note>
 
-Instead, assign an HCP role that grants **Project permissions** to a group, then HCP Terraform will automatically inherit those permissions. To learn more about which HCP roles grant project permissions, refer to [HCP group roles](#hcp-group-roles).
+In HCP Europe organizations, you cannot assign **Project permissions** to a group in HCP Terraform. Instead, assign an HCP role that grants **Project permissions** to a group, then HCP Terraform automatically inherits those permissions. To learn more about which HCP roles grant which permissions, refer to [HCP group roles](#hcp-group-roles).
+
+</Note>
 
 <!-- END: TFC:only name:hcp-eu -->
 
@@ -107,7 +111,7 @@ Members can create and manage all workspaces within the organization. This lets 
 
 ## Group Permissions
 
-**Group permissions** only exist in HCP EU organizations, because you manage user access and permissions with HCP groups and roles. If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
+In HashiCorp Cloud Platform (HCP) Europe organizations, you manage user access through HCP groups, and use group permissions instead of team permissions. To learn more, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
 
 You cannot manually assign **Group permissions** to a group in HCP Terraform. Instead, you must assign an HCP role to that group which grants **Group permissions**, then HCP Terraform automatically inherits those permissions. To learn more about which HCP roles grant group permissions, refer to [HCP group roles](#hcp-group-roles).
 
@@ -119,7 +123,7 @@ You cannot manually assign **Group permissions** to a group in HCP Terraform. In
 
 <Note>
 
-Team management permissions are not available in HCP Europe organizations. To learn more, refer to [Group permissions](#group-permissions).
+Team permissions are not available in HCP Europe organizations. To learn more, refer to [Group permissions](#group-permissions).
 
 </Note>
 
@@ -280,7 +284,7 @@ Allow members to publish and delete providers for the organization in the public
 
 <Note>
 
-If you are using an HCP Europe organization, there is no organization owners team because you manage users and permissions with HCP groups. To learn more, refer to [HCP group roles](#hcp-group-roles).
+If you are using an HCP Europe organization, there is no organization owners team because you manage users with HCP groups. To learn more, refer to [HCP group roles](#hcp-group-roles).
 
 </Note>
 
@@ -320,9 +324,9 @@ The organization owners team has the following permissions:
 
 ## HCP group roles
 
-@include 'eu/org-is-eu.mdx'
+In an HCP Europe organization, you manage user access through groups. To learn how to set up groups and assign users to them in HCP, refer to [Groups](/hcp/docs/hcp/iam/groups). To learn more about HCP Terraform in Europe, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
 
-In an HCP Europe organization, you manage user access through groups. To learn how to set up groups and assign users to them in HCP, refer to [Groups](/hcp/docs/hcp/iam/groups). You can assign permissions to HCP groups in two ways:
+You can assign permissions to HCP groups in two ways:
 
 1. [HCP roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-organization-level-roles-for-hcp-europe-organizations) - You can assign HCP roles to groups in the HashiCorp Cloud Platform (HCP), and these roles automatically grant permissions in HCP Terraform.
 2. [HCP Terraform roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-organization-level-roles) - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.

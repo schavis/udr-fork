@@ -14,18 +14,19 @@ To learn how to set permissions for a workspace, refer to [Set roles in HCP Terr
 
 If you are in an HCP Terraform organization, you can manage user access and permissions through teams.
 
-<!-- BEGIN: TFC:only name:hcp-eu -->
-
-In HCP Europe organizations, HCP Terraform inherits the groups and roles you set up in the HashiCorp Cloud Platform (HCP). If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
-
-In HCP Europe organizations, HCP roles automatically grant permissions in HCP Terraform, and you can add additional fine-grained roles within HCP Terraform itself. To learn more about HCP roles in projects, refer to [HCP group roles](#hcp-group-roles).
-
-<!-- END: TFC:only name:hcp-eu -->
-
 We recommend following the principle of least privilege when possible, only giving users access to the resources they need for their job function. You can also set permissions at the [organization](/terraform/cloud-docs/users-teams-organizations/permissions/organization) and [project](/terraform/cloud-docs/users-teams-organizations/permissions/project) levels.
 
 Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set at the organization, project, or workspace level. For more details, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
 
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+<Note>
+
+@include 'eu/permissions.mdx'
+
+</Note>
+
+<!-- END: TFC:only name:hcp-eu -->
 
 
 ## Workspace roles
@@ -211,3 +212,34 @@ Allows users to associate or dissociate run tasks with the workspace. HCP Terraf
 Fixed permission sets are bundles of specific permissions for workspaces, which you can use to delegate access to workspaces easily.
 
 Each permissions set targets a level of authority and responsibility for a given workspace's infrastructure. A permission set can grant permissions that recipients do not require but offer a balance of simplicity and utility.
+
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+## HCP group roles
+
+In an HCP Europe organization, you manage user access through groups. To learn how to set up groups and assign users to them in HCP, refer to [Groups](/hcp/docs/hcp/iam/groups). To learn more about HCP Terraform in Europe, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
+
+You can assign permissions to HCP groups in two ways:
+
+1. [HCP roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-workspace-level-roles-for-hcp-europe-organizations) - You can assign HCP roles to groups in the HashiCorp Cloud Platform (HCP), and these roles automatically grant permissions in HCP Terraform.
+2. [HCP Terraform roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-workspace-level-roles) - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.
+
+Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set by an HCP or HCP Terraform role.
+
+The following table shows which workspace-level permissions each HCP role automatically grants in HCP Terraform:
+
+| Permission Category | HCP Terraform workspace permission | Admin | Contributor | Viewer |
+|---------------------|-----------------------------------|-------|-------------|---------|
+| **[Run Access](#run-access)** | [Read runs](#run-read) | ✅ | ✅ | ✅ |
+| | [Plan runs](#run-plan) | ✅ | ✅ | ❌ |
+| | [Apply runs](#run-apply) | ✅ | ✅ | ❌ |
+| **[Variable Access](#variable-access)** | [Read variables](#variable-read) | ✅ | ✅ | ✅ |
+| | [Read and write variables](#variable-read-write) | ✅ | ✅ | ❌ |
+| **[State Access](#state-access)** | [Read outputs only](#state-read-outputs) | ✅ | ✅ | ✅ |
+| | [Read state](#state-read) | ✅ | ✅ | ✅ |
+| | [Read and write state](#state-read-write) | ✅ | ✅ | ❌ |
+| **[Other Controls](#other-controls)** | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ✅ | ❌ |
+| | [Lock/unlock workspace](#lock-unlock-workspace) | ✅ | ✅ | ❌ |
+| | [Manage workspace Run Tasks](#manage-workspace-run-tasks) | ✅ | ✅ | ❌ |
+
+<!-- END: TFC:only name:hcp-eu -->

@@ -30,6 +30,10 @@
     "path": "migrate"
   },
   {
+    "title": "HCP Terraform in Europe",
+    "path": "europe"
+  },
+  {
     "title": "Manage access and organizations",
     "routes": [
   { "title": "Users", "path": "users-teams-organizations/users" },
