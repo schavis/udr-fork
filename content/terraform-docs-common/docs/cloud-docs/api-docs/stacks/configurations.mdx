@@ -4,13 +4,13 @@ description: Use the HCP Terraform API's `/stack-configurations` to create and r
 tfc_only: true
 ---
 
-<!-- Boilerplate link references: This entire list should be included at the top of every API page, so that the tables can use short links freely. This SHOULD be all of the status codes we use in HCP Terraform's API; if we need to add more, update the list on every page. -->
-
 [200]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
 
 [201]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
 
 [202]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/202
+
+[302]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302
 
 [204]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204
 
@@ -38,7 +38,7 @@ tfc_only: true
 
 [JSON API error object]: http://jsonapi.org/format/#error-objects
 
-# Stack configurations API
+# Stack configurations API reference
 
 A Stack configuration version is a snapshot of all of the pieces that make up your Stack. To learn more about what makes up a Stack configuration version, refer to [Configuration versions](/terraform/cloud-docs/stacks/deploy/configuration-versions).
 
@@ -48,18 +48,18 @@ The scope of the API includes the following endpoints:
 
 | Method   | Path                                                                             | Action                                                                                                     |
 |----------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `POST`   | `/stacks/:stack_id/stack-configurations`                                         | Call this endpoint to [create a Stack configuration](#create-a-Stack-configuration).                       |
-| `POST`   | `/stacks/:stack_id/fetch-latest-from-vcs`                                        | Call this endpoint to [fetch the latest Stack configuration](#fetch-the-latest-Stack-configuration).       |
-| `GET`    | `/stacks/:stack_id/stack-configurations`                                         | Call this endpoint to [list Stack configurations](#list-Stack-configurations).                             |
-| `GET`    | `/stack-configurations/:stack_configuration_id`                                  | Call this endpoint to [show a Stack configuration](#show-Stack-configuration).                             |
+| `POST`   | `/stacks/:stack_id/stack-configurations`                                         | Call this endpoint to [create a Stack configuration](#create-a-stack-configuration).                       |
+| `POST`   | `/stacks/:stack_id/fetch-latest-from-vcs`                                        | Call this endpoint to [fetch the latest Stack configuration](#fetch-the-latest-stack-configuration).       |
+| `GET`    | `/stacks/:stack_id/stack-configurations`                                         | Call this endpoint to [list Stack configurations](#list-stack-configurations).                             |
+| `GET`    | `/stack-configurations/:stack_configuration_id`                                  | Call this endpoint to [show a Stack configuration](#show-stack-configuration).                             |
 | `GET`    | `/stack-configurations/:stack_configuration_id/stack-deployment-group-summaries` | Call this endpoint to [list Deployment Group Summaries](#list-deployment-group-summaries).           |
-| `GET`    | `/stack-configurations/:stack_configuration_id/stack-diagnostics`                | Call this endpoint to [list Stack configuration diagnostics](#list-Stack-configuration-diagnostics).       |
-| `GET`    | `/stack-configurations/:stack_configuration_id/upload-url`                       | Call this endpoint to [fetch Stack configuration upload url](#fetch-Stack-configuration-upload-url).       |
-| `GET`    | `/stack-configurations/:stack_configuration_id/source-bundle`                    | Call this endpoint to [fetch Stack configuration source bundle](#fetch-Stack-configuration-source-bundle). |
+| `GET`    | `/stack-configurations/:stack_configuration_id/stack-diagnostics`                | Call this endpoint to [list Stack configuration diagnostics](#list-stack-configuration-diagnostics).       |
+| `GET`    | `/stack-configurations/:stack_configuration_id/upload-url`                       | Call this endpoint to [fetch Stack configuration upload url](#fetch-stack-configuration-upload-url).       |
+| `GET`    | `/stack-configurations/:stack_configuration_id/source-bundle`                    | Call this endpoint to [fetch Stack configuration source bundle](#fetch-stack-configuration-source-bundle). |
 
 ## Create a Stack configuration
 
-This endpoint creates an empty Stack configuration for the specified Stack. A configuration file will have to be uploaded to the Stack configurations upload url in order for the Stack prepare job to run and generate plans. This endpoint cannot be used if the Stack is connected to a VCS repo.
+This endpoint creates an empty Stack configuration for the specified Stack. You will have to upload a configuration file to the Stack configurations upload URL to let the Stack prepare a job to run and generate plans. This endpoint cannot be used if the Stack is connected to a VCS repo.
 
 `POST /stacks/:stack_id/stack-configurations`
 
@@ -155,7 +155,7 @@ $ curl\
 
 ## Fetch a Stack configuration
 
-This endpoint creates a Stack configuration for a VCS backed Stack by pulling it from the head of the Stacks branch.
+This endpoint creates a Stack configuration for a VCS-backed Stack by pulling it from the head of the Stack's branch.
 
 `POST /stacks/:stack_id/fetch-latest-from-vcs`
 
@@ -542,7 +542,7 @@ $ curl\
 
 `GET /stack-configurations/:stack_configuration_id/upload-url`
 
-This endpoint fetches the Stack configuration upload url. This url is used to upload a raw configuration file for a manually created Stack configuration.
+This endpoint fetches the Stack configuration upload url. Use this URL to upload a raw configuration file for a manually created Stack configuration.
 
 | Parameter                 | Description                                             |
 |---------------------------|---------------------------------------------------------|
@@ -583,4 +583,3 @@ This endpoint redirects to the download URL for a Stack configuration source bun
 |---------|---------------------------|-----------------------------------------------------------------------|
 | [302][] | HTTP Redirect             | Successfully redirect client to temporary source bundle download URL  |
 | [404][] | [JSON API error object][] | Stack configuration not found, or user unauthorized to perform action |
-

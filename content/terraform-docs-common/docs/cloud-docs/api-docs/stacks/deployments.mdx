@@ -4,8 +4,6 @@ description: Use the HCP Terraform API's `/stack-deployments` to consume and pro
 tfc_only: true
 ---
 
-<!-- Boilerplate link references: This entire list should be included at the top of every API page, so that the tables can use short links freely. This SHOULD be all of the status codes we use in HCP Terraform's API; if we need to add more, update the list on every page. -->
-
 [200]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
 
 [201]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
@@ -38,18 +36,22 @@ tfc_only: true
 
 [JSON API error object]: http://jsonapi.org/format/#error-objects
 
-# Stack deployments API
+# Stack deployments API reference
 
 You can create Stack deployments in a Stack's `deployment.tfdeploy.hcl` file. A deployment consists of a deployment group, at least one deployment run, and at least one deployment step. To learn more, refer to [Define deployment configuration](/terraform/language/stacks/deploy/config).
+
+## Overview
+
+The scope of the API includes the following endpoints:
 
 | Method   | Path                                                                                                 | Action                                                                                                     |
 |----------|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
 | `GET`    | `/stacks/:stack_id/stack-deployments`                                                                | Call this endpoint to [list Stack deployments](#list-stack-deployments).                                   |
 | `GET`    | `/stack-configurations/:stack_configuration_id/stack-deployment-groups`                              | Call this endpoint to [list Stack deployment groups](#list-stack-deployment-groups).                       |
 | `GET`    | `/stack-configurations/:stack_configuration_id/stack-deployment-groups/:stack_deployment_group_name` | Call this endpoint to [show a Stack deployment group by name](#show-a-stack-deployment-group-by-name).     |
-| `GET`    | `/stack-deployment-groups/:stack_deployment_group_id`                                                | Call this endpoint to [show a Stack deployment group by id](#show-a-stack-deployment-group-by-id).         |
-| `GET`    | `/stack-deployment-groups/:stack_deployment_group_id/stack-deployment-runs`                          | Call this endpoint to [list Stack deployment runs](#list-stack-deployment-runs).                           |
-| `GET`    | `/stacks/:stack_id/stack-deployments/:deployment_name/stack-deployment-runs`                         | Call this endpoint to [list deployment runs for a deployment name](#list-stack-deployments).                                   |
+| `GET`    | `/stack-deployment-groups/:stack_deployment_group_id`                                                | Call this endpoint to [show a Stack deployment group by ID](#show-a-stack-deployment-group-by-id).         |
+| `GET`    | `/stack-deployment-groups/:stack_deployment_group_id/stack-deployment-runs`                          | Call this endpoint to [list Stack deployment runs](#list-stack-deployment-runs-in-a-configuration).                           |
+| `GET`    | `/stacks/:stack_id/stack-deployments/:deployment_name/stack-deployment-runs`                         | Call this endpoint to [list deployment runs for a deployment group](#list-stack-deployment-runs-in-a-group).                                   |
 | `GET`    | `/stack-deployment-runs/:stack_deployment_run_id`                                                    | Call this endpoint to [show a Stack deployment run](#show-a-stack-deployment-run).                         |
 | `GET`    | `/stack-deployment-runs/:stack_deployment_run_id/stack-deployment-steps`                             | Call this endpoint to [list Stack deployment steps](#list-stack-deployment-steps).                         |
 | `GET`    | `/stack-deployment-steps/:stack_deployment_step_id`                                                  | Call this endpoint to [show a Stack deployment step](#show-a-stack-deployment-step).                       |
@@ -306,9 +308,9 @@ $ curl\
 }
 ```
 
-## Show a Stack deployment group by id
+## Show a Stack deployment group by ID
 
-This endpoint gets details about a Stack deployment group by Id
+This endpoint gets details about a Stack deployment group by ID.
 
 `GET /stack-deployment-groups/:stack_deployment_group_id`
 

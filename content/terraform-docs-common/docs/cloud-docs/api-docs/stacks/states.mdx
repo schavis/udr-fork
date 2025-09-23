@@ -4,8 +4,6 @@ description: Use the HCP Terraform API's `/stack-states` to read Stack states an
 tfc_only: true
 ---
 
-<!-- Boilerplate link references: This entire list should be included at the top of every API page, so that the tables can use short links freely. This SHOULD be all of the status codes we use in HCP Terraform's API; if we need to add more, update the list on every page. -->
-
 [200]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
 
 [201]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
@@ -13,6 +11,8 @@ tfc_only: true
 [202]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/202
 
 [204]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204
+
+[307]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307
 
 [400]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
 
@@ -38,15 +38,19 @@ tfc_only: true
 
 [JSON API error object]: http://jsonapi.org/format/#error-objects
 
-# Stack states API
+# Stack states API reference
 
 Stack states offer deeper insight into the state of a particular Stack deployment.
 
+## Overview
+
+The scope of the API includes the following endpoints:
+
 | Method   | Path                                         | Action                                                                                                     |
 |----------|----------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `GET`    | `/stacks/:stack_id/stack-states`             | Call this endpoint to [list Stack states](#list-Stack-states).                                             |
-| `GET`    | `/stack-states/:stack_state_id`              | Call this endpoint to [show a Stack state](#show-a-Stack-state).                                           |
-| `GET`    | `/stack-states/:stack_state_id/description`  | Call this endpoint to [show a Stack state description](#show-a-Stack-state-description).                   |
+| `GET`    | `/stacks/:stack_id/stack-states`             | Call this endpoint to [list Stack states](#list-stack-states).                                             |
+| `GET`    | `/stack-states/:stack_state_id`              | Call this endpoint to [show a Stack state](#show-a-stack-state).                                           |
+| `GET`    | `/stack-states/:stack_state_id/description`  | Call this endpoint to [show a Stack state description](#show-a-stack-state-description).                   |
 
 ## List Stack states
 
@@ -56,7 +60,7 @@ This endpoint lists states for a Stack.
 
 | Parameter   | Description                                                |
 |-------------|------------------------------------------------------------|
-| `:stack_id` | The id of the Stack for which the states are being listed. |
+| `:stack_id` | The ID of the Stack to list the states of. |
 
 ### Query Parameters
 
@@ -153,13 +157,13 @@ $ curl\
 
 ## Show a Stack state
 
-This endpoint gets details about a Stack state.
+This endpoint lists details about a Stack state.
 
 `GET /stack_states/:stack_state_id`
 
 | Parameter         | Description                                   |
 |-------------------|-----------------------------------------------|
-| `:stack_state_id` | The id of the Stack state to get details for. |
+| `:stack_state_id` | The ID of the Stack state to get details for. |
 
 ### Sample Request
 
@@ -228,13 +232,13 @@ $ curl\
 
 ## Show a Stack state description
 
-This endpoint redirects to a download url for a Stack state description.
+This endpoint redirects to a download URL for a Stack state description.
 
 `GET /stack-states/:stack_state_id/description`
 
 | Parameter         | Description                                                       |
 |-------------------|-------------------------------------------------------------------|
-| `:stack_state_id` | The id of the Stack state to get the Stack state description for. |
+| `:stack_state_id` | The ID of the Stack state to get a description for. |
 
 
 | Status  | Response                  | Reason                                                             |

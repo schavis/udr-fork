@@ -812,9 +812,8 @@
         "path": "api-docs/state-version-outputs"
       },
   { "title": "Subscriptions", "path": "api-docs/subscriptions" },
-  { "title": "Stacks", "path": "api-docs/stacks/index",
-  "routes": [
-    { "title": "Manage Stacks", "path": "api-docs/stacks/index" },
+  { "title": "Stacks", "routes": [
+    { "title": "Manage Stacks", "path": "api-docs/stacks" },
     { "title": "Configurations", "path": "api-docs/stacks/configurations" },
     { "title": "Deployments", "path": "api-docs/stacks/deployments" },
     { "title": "State", "path": "api-docs/stacks/states" }
