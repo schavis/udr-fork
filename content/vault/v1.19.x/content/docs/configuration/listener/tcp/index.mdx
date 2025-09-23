@@ -306,9 +306,9 @@ default value in the `"/sys/config/ui"` [API endpoint](/vault/api-docs/system/co
   a lightweight container can increase the risk that a large, complex JSON
   payload could exhaust the available resources.
 
-- `max_json_depth` `(int: 500)` – Specifies the maximum nesting depth of a JSON payload.
-  This is a security control to mitigate the risk of stack exhaustion from deeply nested
-  objects, which could lead to a Denial of Service (DoS).
+- `max_json_depth` `(int: 500)` – Specifies the maximum nesting depth of a JSON
+  payload. Limiting object depth mitigates the risk of stack exhaustion from
+  deeply nested objects, which could lead to a Denial of Service (DoS).
 
 - `max_json_string_value_length` `(int: 1048576)` – Defines the maximum allowed length in bytes
   for a single string value within a JSON payload. This is a critical defense against excessive memory
