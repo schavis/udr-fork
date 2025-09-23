@@ -71,7 +71,7 @@ Set the `TFE_TOKEN` environment variable to your HCP Terraform or Terraform Ente
             "-i",
             "--rm",
             "-e", "${input:tfe_token}",
-            "-e", "${input:tfe_hostname}",
+            "-e", "${input:tfe_address}",
             "hashicorp/terraform-mcp-server:0.3.0"
           ]
         }
@@ -85,8 +85,8 @@ Set the `TFE_TOKEN` environment variable to your HCP Terraform or Terraform Ente
         },
         {
           "type": "promptString",
-          "id": "tfe_hostname",
-          "description": "Terraform Hostname",
+          "id": "tfe_address",
+          "description": "Terraform Address",
           "password": false
         }
       ]
@@ -106,7 +106,7 @@ Set the `TFE_TOKEN` environment variable to your HCP Terraform or Terraform Ente
           "-i",
           "--rm",
           "-e", "${input:tfe_token}",
-          "-e", "${input:tfe_hostname}",
+          "-e", "${input:tfe_address}",
           "hashicorp/terraform-mcp-server:0.3.0"
         ]
       }
@@ -120,8 +120,8 @@ Set the `TFE_TOKEN` environment variable to your HCP Terraform or Terraform Ente
       },
       {
         "type": "promptString",
-        "id": "tfe_hostname",
-        "description": "Terraform hostname",
+        "id": "tfe_address",
+        "description": "Terraform Address",
         "password": false
       }
     ]
@@ -146,24 +146,12 @@ Set the `TFE_TOKEN` environment variable to your HCP Terraform or Terraform Ente
             "run",
             "-i",
             "--rm",
-            "-e", "${input:tfe_token}",
-            "-e", "${input:tfe_hostname}",
+            "-e", "<<TFE_ADDRESS_HERE>>",
+            "-e", "<<TFE_TOKEN_HERE>>",
             "hashicorp/terraform-mcp-server:0.3.0"
           ]
         }
-      },
-      "inputs": [
-        {
-          "id": "tfe_token",
-          "description": "Terraform API Token",
-          "password": true
-        },
-        {
-          "id": "tfe_hostname",
-          "description": "Terraform Hostname",
-          "password": false
-        }
-      ]
+      }
     }
   }
   ```
@@ -190,24 +178,12 @@ Set the `TFE_TOKEN` environment variable to your HCP Terraform or Terraform Ente
             "run",
             "-i",
             "--rm",
-            "-e", "${input:tfe_token}",
-            "-e", "${input:tfe_hostname}",
+            "-e", "<<TFE_ADDRESS_HERE>>",
+            "-e", "<<TFE_TOKEN_HERE>>",
             "hashicorp/terraform-mcp-server:0.3.0"
           ]
         }
-      },
-      "inputs": [
-        {
-          "id": "tfe_token",
-          "description": "Terraform API Token",
-          "password": true
-        },
-        {
-          "id": "tfe_hostname",
-          "description": "Terraform Hostname",
-          "password": false
-        }
-      ]
+      }
     }
   }
   ```
@@ -233,24 +209,12 @@ Set the `TFE_TOKEN` environment variable to your HCP Terraform or Terraform Ente
             "run",
             "-i",
             "--rm",
-            "-e", "${input:tfe_token}",
-            "-e", "${input:tfe_hostname}",
+            "-e", "<<TFE_ADDRESS_HERE>>",
+            "-e", "<<TFE_TOKEN_HERE>>",
             "hashicorp/terraform-mcp-server:0.3.0"
           ]
         }
-      },
-      "inputs": [
-        {
-          "id": "tfe_token",
-          "description": "Terraform API Token",
-          "password": true
-        },
-        {
-          "id": "tfe_hostname",
-          "description": "Terraform Hostname",
-          "password": false
-        }
-      ]
+      }
     }
   }
   ```
