@@ -299,9 +299,11 @@ default value in the `"/sys/config/ui"` [API endpoint](/vault/api-docs/system/co
   attacks where a client might send a very large string to exhaust server memory.
   Defaults to 1MB.
 
-- `max_json_object_entry_count` `(int: 10000)` – Sets the maximum number of key-value pairs
-  allowed in a single JSON object. This helps mitigate hash-collision Denial of Service (HashDoS)
-  attacks and prevents general resource exhaustion from objects with an excessive number of entries.
+- `max_json_object_entry_count` `(int: 10000)` – Sets the maximum number of
+  key-value pairs allowed in a single JSON object. Limiting the entry count on
+  JSON objects helps mitigate hash-collision Denial of Service (HashDoS) attacks
+  and prevents general resource exhaustion from objects with an excessive number
+  of entries.
 
 - `max_json_array_element_count` `(int: 10000)` – Determines the maximum number of elements
   permitted in a single JSON array. This prevents a single request from causing excessive memory
