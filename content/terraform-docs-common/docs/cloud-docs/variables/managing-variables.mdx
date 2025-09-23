@@ -174,7 +174,7 @@ To remove a variable set from within a workspace:
 
 ## Variable sets and Stacks
 
-In Stacks, you can use the [`store` block](/terraform/language/block/stack/deploy/store) to access variable sets. Your Stack must be able to access the variable set you are targeting, by giving your Stack's project access, or by making the variable set globally available.
+In Stacks, you can use the [`store` block](/terraform/language/block/stack/tfdeploy/store) to access variable sets. Your Stack must be able to access the variable set you are targeting, by giving your Stack's project access, or by making the variable set globally available.
 
 You can then reference a variable set in your deployment configuration, `<NAME>.tfdeploy.hcl`, using the `store` block. In the following example, the `store` block can access [Terraform variable values](/terraform/cloud-docs/variables#terraform-variables) in a variable set named `"Database passwords"`:
 

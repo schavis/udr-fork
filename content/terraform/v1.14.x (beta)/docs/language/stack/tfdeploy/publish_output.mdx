@@ -15,7 +15,7 @@ The `publish_output` block requires Terraform version 1.10.0-alpha20241009 or hi
 
 </Note>
 
-The `publish_output` block specifies a value to export from your current Stack, which other Stacks in the same project can consume using [`upstream_input`](/terraform/language/stacks/deploy/upstream_input) blocks. Declare a `publish_output` block for each value you want to export from your Stack deployments. If the output value of a Stack changes after a run, HCP Terraform automatically triggers runs for any Stacks that depend on those outputs.
+The `publish_output` block specifies a value to export from your current Stack, which other Stacks in the same project can consume using [`upstream_input`](/terraform/language/stacks/tfdeploy/upstream_input) blocks. Declare a `publish_output` block for each value you want to export from your Stack deployments. If the output value of a Stack changes after a run, HCP Terraform automatically triggers runs for any Stacks that depend on those outputs.
 
 To learn more and review examples, refer to [Pass data between Stacks](/terraform/language/stacks/deploy/pass-data).
 
