@@ -8,11 +8,11 @@ tfc_only: true
 
 @include 'beta.mdx'
 
-You can define queries in your Terraform configuration to search for resources that are not yet managed by Terraform. HCP Terraform presents query results so that you can import the resources to state and begin managing them as code. 
+You can define queries in your Terraform configuration to search for resources that are not yet managed by Terraform. HCP Terraform presents query results so that you can use the UI to import the resources and begin managing them as code. For instructions on importing single or small batches of resources on your local workstation, refer to [Import an existing resource](/terraform/language/import/single-resource). 
 
 ## Overview
 
-Complete the following steps to import resources into your Terraform state:
+You can use search functionality in [UI and VCS-driven](/terraform/cloud-docs/run/ui) and [CLI-driven](/terraform/cloud-docs/run/cli) workspaces. Complete the following steps to search for resources and import them into your Terraform state:
 
 1. **Define queries**: Add `list` blocks to your Terraform configuration and copy them to your workspace in HCP Terraform. Refer to [Import resources in bulk](/terraform/language/v1.14.x/import/bulk) for more information.
 1. **Run the queries**: You can run queries in the HCP Terraform UI or run the Terraform CLI on your local workstation.

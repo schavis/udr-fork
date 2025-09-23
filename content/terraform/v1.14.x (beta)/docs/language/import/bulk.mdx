@@ -146,7 +146,9 @@ The following example generates configuration to the working directory:
 ```shell-session
 $ terraform query -generate-config-out=generated.tf
 ```
- 
+
+Even when connected to HCP Terraform or Terraform Enterprise, Terraform creates the `generated.tf` file and stores it on the local workstation when running the `terraform query` command with the `-generate-config-out` flag.
+
 After generating the results file, you must remove the file before rerunning the command to generate a new results file. Rerunning the command when a `generated.tf` already exists at the specified path results in an error. 
 
 ## Import resources
@@ -155,4 +157,4 @@ Copy the `import` and `resource` blocks from the `generated.tf` file to your `ma
   
 ## Next steps
 
-After importing your resources, you can discard the query configuration file and the `generated.tf` file, but you can archive them to maintain a historical record of the import.
+You can discard the `generated.tf` file after importing your resources. You can either remove `import` blocks after you've imported them or leave them in your configuration as a record of the resource's origin for future module maintainers. For more information on maintaining configurations over time, refer to [Refactoring](/terraform/language/modules/develop/refactoring). 
