@@ -20,8 +20,8 @@ The `deployment` block defines how to deploy your Stack's infrastructure. Each d
 Each Stack requires at least one `deployment` block, and you can add additional `deployment` blocks every time you want to deploy your Stack's infrastructure again with different input values. To learn more, refer to [Define deployment configuration](/terraform/language/stacks/deploy/config).
 
 In addition to the `deployment` block, you can define the following configuration blocks in a `tfdeploy.hcl` file:
-- Use the [`deployment_auto_approve`](/terraform/language/block/stack/tfdeploy/deployment-auto-group ) block to define rules that automatically approve deployment plans based on specific conditions.
-- Use the [`deployment_group`](/terraform/language/block/stack/tfdeploy/deployment-auto-group ) block to assign `deployment_auto_approve` rules to specific deployments.
+- Use the [`deployment_auto_approve`](/terraform/language/block/stack/tfdeploy/deployment_auto_approve) block to define rules that automatically approve deployment plans based on specific conditions.
+- Use the [`deployment_group`](/terraform/language/block/stack/tfdeploy/deployment_group) block to assign `deployment_auto_approve` rules to specific deployments.
 - Use the [`identity_token`](/terraform/language/block/stack/tfdeploy/identity_token) block to authenticate a deployment with a provider configuration using OIDC.
 - Use the [`store`](/terraform/language/block/stack/tfdeploy/store) block to define key-value secrets in your deployment configuration and use existing variable sets in HCP Terraform.
 - Use the [`locals`](/terraform/language/block/locals) block to define local values that you can reuse within your deployment configuration.
