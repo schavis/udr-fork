@@ -100,7 +100,7 @@ You can grant teams various permissions on workspaces. Refer to [Workspace Permi
 
 HCP Terraform uses the most permissive permission level from your teams to determine what actions you can take on a particular resource. For example, if you belong to a team that only has permission to read runs for a workspace and another team with admin access to that workspace, HCP Terraform grants you admin access.
 
-HCP Terraform grants the most permissive permissions regardless of whether an organization, project, team, or workspace set those permissions. For example, if a team has permission to read runs for a given workspace and has permission to manage that workspace through the organization, then members of that team can manage that workspace. Refer to [organization permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization) and [project permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project) for additional information.
+HCP Terraform grants the most permissive permissions regardless of whether an organization, project, team, or workspace set those permissions. For example, if a team has permission to read runs for a given workspace and has permission to manage that workspace through the organization, then members of that team can manage that workspace. Refer to [organization permissions](/terraform/cloud-docs/users-teams-organizations/permissions#organization-permissions) and [project permissions](/terraform/cloud-docs/users-teams-organizations/permissions#project-permissions) for additional information.
 
 Another example is when a team has permission at the organization-level to read runs for all workspaces and admin access to a specific workspace. HCP Terraform grants the more permissive admin permissions to that workspace.
 
@@ -112,7 +112,7 @@ To manage team permissions on a workspace:
 
 ## Manage project access
 
-You can grant teams permissions to manage a project and the<!-- BEGIN: TFC:only name:stacks-tfe --> Stacks and<!-- END: TFC:only name:stacks-tfe --> workspaces that belong to it. Refer to [Project Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project) for details.
+You can grant teams permissions to manage a project and the<!-- BEGIN: TFC:only name:stacks-tfe --> Stacks and<!-- END: TFC:only name:stacks-tfe --><!-- BEGIN: TFC:only name:stacks-tfe --> Stacks and<!-- END: TFC:only name:stacks-tfe --> workspaces that belong to it. Refer to [Project Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project) for details.
 
 ## Manage organization access
 

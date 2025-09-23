@@ -105,7 +105,7 @@ deployment "production" {
 
 </CodeBlockConfig>
 
-The `production` deployment can now reference values from the variable set with the ID of `varset-abc123456`, making them available to that deployment’s components and providers. To learn more about the `store` block, refer to the [`store` block reference](/terraform/language/block/stack/deploy/store).
+The `production` deployment can now reference values from the variable set with the ID of `varset-abc123456`, making them available to that deployment’s components and providers. To learn more about the `store` block, refer to the [`store` block reference](/terraform/language/block/stack/tfdeploy/store).
 
 The `identity_token` block tells HCP Terraform to generate a JSON Web Token (JWT) for that deployment’s components to authenticate to providers using OIDC. For example, you can set up your deployment to authenticate with the AWS provider using a particular role ARN.
 
@@ -145,7 +145,7 @@ provider "aws" "this" {
 
 </CodeBlockConfig>
 
-To learn more about the `identity_token` block, refer to the [`identity_token` block reference](/terraform/language/block/stack/deploy/identity_token). For more details on authentication in Stacks, refer to [Authenticate a Stack](/terraform/language/stacks/deploy/authenticate).
+To learn more about the `identity_token` block, refer to the [`identity_token` block reference](/terraform/language/block/stack/tfdeploy/identity_token). For more details on authentication in Stacks, refer to [Authenticate a Stack](/terraform/language/stacks/deploy/authenticate).
 
 ## Automatically approve deployment runs
 

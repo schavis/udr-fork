@@ -30,10 +30,6 @@
     "path": "migrate"
   },
   {
-    "title": "HCP Terraform in Europe",
-    "path": "europe"
-  },
-  {
     "title": "Manage access and organizations",
     "routes": [
   { "title": "Users", "path": "users-teams-organizations/users" },
@@ -86,6 +82,12 @@
           { "title": "Workspace permissions", "path": "users-teams-organizations/permissions/workspace" }
         ]
       },
+      {
+  "title": "Two-factor authentication",
+  "title": "Permissions",
+        "path": "users-teams-organizations/permissions"
+      },
+
       {
   "title": "Two-factor authentication",
         "path": "users-teams-organizations/2fa"
@@ -820,6 +822,13 @@
         "path": "api-docs/state-version-outputs"
       },
   { "title": "Subscriptions", "path": "api-docs/subscriptions" },
+  { "title": "Stacks", "routes": [
+    { "title": "Manage Stacks", "path": "api-docs/stacks" },
+    { "title": "Configurations", "path": "api-docs/stacks/configurations" },
+    { "title": "Deployments", "path": "api-docs/stacks/deployments" },
+    { "title": "State", "path": "api-docs/stacks/states" }
+    ]
+  },
   { "title": "Team membership", "path": "api-docs/team-members" },
   { "title": "Team tokens", "path": "api-docs/team-tokens" },
   { "title": "Teams", "path": "api-docs/teams" },
