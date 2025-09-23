@@ -297,7 +297,14 @@ default value in the `"/sys/config/ui"` [API endpoint](/vault/api-docs/system/co
 - `disable_replication_status_endpoints` `(bool: false)` - Disables replication
   status endpoints for the configured listener when set to `true`.
 
-  ~> **Warning**: The JSON parsing limits (`max_json_depth`, `max_json_token`, etc.) are related, and their default values are intentionally permissive to support a wide range of use cases. These limits are resource-constrained, primarily by available RAM and CPU. Operators should tune these values down from the defaults to match their specific application needs and the resources available to their Vault cluster. Running with permissive defaults in a low-resource environment (such as a lightweight container) increases the risk that a large, complex JSON payload could cause resource exhaustion.
+  The JSON parsing limits like `max_json_depth` and `max_json_token` have
+  intentionally permissive defaults to suport a wide range of use cases. The
+  primary constraints on parsing limits are available RAM and CPU. We recommend
+  tuning your JSON parsing limits down from the defaults to match your specific
+  application needs and available resourcess. Due to the way the parsing limits
+  interact, running with permissive defaults in a low-resource environment like
+  a lightweight container can increase the risk that a large, complex JSON
+  payload could exhaust the available resources.
 
 - `max_json_depth` `(int: 500)` – Specifies the maximum nesting depth of a JSON payload.
   This is a security control to mitigate the risk of stack exhaustion from deeply nested
