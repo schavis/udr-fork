@@ -9,6 +9,14 @@ tfc_only: true
 
 HCP Terraform offers [multiple plans](https://www.hashicorp.com/products/terraform/pricing) with increasing benefits to match your business scale. This page describes the flat rate per managed resource per hour for Essentials Edition users on pay-as-you-go billing. Additional options are available such as greater discounts at larger scale with contracted plans. [Contact Sales](https://www.hashicorp.com/contact-sales) for additional information.
 
+<Note>
+
+HCP Europe organizations does not support manually changing HCP Terraform plans.
+
+@include 'eu/billing.mdx'
+
+</Note>
+
 ## What is a Managed Resource?
 
 A “Managed Resource” or “Resources Under Management (RUM)” is a resource in a HCP-Terraform-managed state file where `mode = "managed"`. HCP Terraform counts a resource as part of this count starting from the first `terraform plan` or `terraform apply` operation on the resource. HCP Terraform does not include resources defined as a `null_resource` or `terraform_data` resource in the total managed resource count.

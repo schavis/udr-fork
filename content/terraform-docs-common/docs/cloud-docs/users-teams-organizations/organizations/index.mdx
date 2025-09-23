@@ -14,11 +14,27 @@ description: >-
 
 This topic provides overview information about how to create and manage organizations in HCP Terraform and Terraform Enterprise. An organization contains one or more projects.
 
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+If you are in an HashiCorp Cloud Platform (HCP) Europe organization, you create and administer your organization, projects, and groups of users on the HCP platform.
+
+@include 'eu/org-is-eu.mdx'
+
+To learn how to create and manage an organization in HCP, refer to [Organizations](/hcp/docs/hcp/admin/orgs). HCP Terraform inherits your organization and SSO settings from HCP, and you can further tweak your organization's settings in HCP Terraform.
+
+<!-- END: TFC:only name:hcp-eu -->
+
 ## Requirements
 
-The **admin** permission preset must be enabled on your profile to create and manage organizations in the HCP Terraform UI. Refer to [Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization) for additional information.
+The **Admin** permission preset must be enabled on your profile to create and manage organizations in the HCP Terraform UI. Refer to [Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization) for additional information.
 
 ## API and Terraform Enterprise Provider
+
+<Note>
+
+To learn how to create and manage an organization in HCP, refer to [Organizations](/hcp/docs/hcp/admin/orgs).
+
+</Note>
 
 In addition to the HCP Terraform UI, you can use the following methods to manage organizations:
 - [Organizations API](/terraform/cloud-docs/api-docs/organizations)

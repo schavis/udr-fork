@@ -10,7 +10,17 @@ You can grant team management abilities to members of teams with either one of t
 
 [Organization owners](/terraform/cloud-docs/users-teams-organizations/teams#the-owners-team) can also create teams, assign team permissions, or view the full list of teams. Other users can view any teams marked as visible within the organization, plus any secret teams they are members of. Refer to [Team Visibility](#team-visibility) for details.
 
-To manage teams, perform the following steps:
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+If you are in an HashiCorp Cloud Platform (HCP) Europe organization, you manage user access through groups. To learn how to set up groups and assign users to them in HCP, refer to [Groups](/hcp/docs/hcp/iam/groups). To learn how to assign roles to your groups, refer to [Set roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles).
+
+@include 'eu/org-is-eu.mdx'
+
+<!-- END: TFC:only name:hcp-eu -->
+
+## Manage a team
+
+To manage a team, perform the following steps:
 
 1. Sign in to [HCP Terraform](https://app.terraform.io/) or Terraform Enterprise and navigate to the organization where you want to manage teams.
 1. Choose **Settings** from the sidebar, then **Teams**. The **Team Management** page appears, containing a list of all teams within the organization.
