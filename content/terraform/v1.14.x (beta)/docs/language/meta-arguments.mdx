@@ -193,7 +193,7 @@ The `lifecycle` block accepts a rule that customizes how Terraform performs the 
 
 | Rule | Description | Terraform block |
 | --- | --- | --- |
-| `action_trigger` | Terraform runs the configured action when the specified conditions are met. | `resource` |
+| `action_trigger` | Terraform runs the configured action when the specified conditions are met. Refer to [Invoke an action](/terraform/language/invoke-actions) for details. | `resource` |
 | `create_before_destroy` | Terraform creates a replacement resource before destroying the current resource. | `resource` |
 | `prevent_destroy` | Terraform rejects operations to destroy the resource and returns an error. | `resource` |
 | `ignore_changes` | Specifies a list of resource attributes that Terraform ignores changes to. Otherwise, Terraform attempts to update the actual resource to match the configuration. | `resource` |
