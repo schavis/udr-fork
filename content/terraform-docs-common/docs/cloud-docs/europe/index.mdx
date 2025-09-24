@@ -1,15 +1,15 @@
 ---
 page_title: HCP Terraform in Europe
 description: >-
-  HCP Terraform is available in HCP EU, letting you manage Terraform resources in Europe with familiar workflows while adhering to additional data and privacy regulations
+  HCP Terraform is available in HCP Europe, letting you manage Terraform resources in Europe with familiar workflows while adhering to additional data and privacy regulations
 tfc_only: true
 ---
 
 # Use HCP Terraform in Europe
 
-The HashiCorp Cloud Platform (HCP) supports managing infrastructure in Europe. With HCP EU, your resources are hosted, managed, and billed separately to meet [European data residency requirements](https://www.hashicorp.com/en/trust/privacy/hcp-data-privacy).
+The HashiCorp Cloud Platform (HCP) supports managing infrastructure in Europe. With HCP Europe, your resources are hosted, managed, and billed separately to meet [European data residency requirements](https://www.hashicorp.com/en/trust/privacy/hcp-data-privacy).
 
-HCP Terraform is available in HCP EU, letting you manage Terraform resources in Europe with familiar workflows while adhering to additional data and privacy regulations. To learn more, refer to [HCP EU region and data governance](https://www.hashicorp.com/en/trust/eu).
+HCP Terraform is available in HCP Europe, letting you manage Terraform resources in Europe with familiar workflows while adhering to additional data and privacy regulations. To learn more, refer to [HCP EU region and data governance](https://www.hashicorp.com/en/trust/eu).
 
 To learn more about HCP Europe, refer to the [HCP Europe documentation](/hcp/docs/hcp/europe).
 
@@ -17,9 +17,11 @@ To learn more about HCP Europe, refer to the [HCP Europe documentation](/hcp/doc
 
 If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HCP Europe organization.
 
-In HCP EU, you can administrate HCP Terraform through the HCP platform. HCP Terraform inherits the organization, projects, and groups of users that you set up in HCP.
+In HCP Europe, your account, organization, projects, and workspaces are separate from your HCP Terraform resources in other regions. HCP Terraform also calculates billing separately for Terraform resources in HCP Europe.
 
-In HCP EU organizations, you configure the following in the HCP platform:
+In HCP Europe, you administrate HCP Terraform through the HCP platform. HCP Terraform inherits the organization, projects, and groups of users that you set up in HCP.
+
+In HCP Europe organizations, you configure the following in the HCP platform:
 
 - [Organizations](/hcp/docs/hcp/admin/orgs)
 - [Projects](/hcp/docs/hcp/admin/projects)
@@ -33,18 +35,22 @@ HCP Europe organizations do not support **teams**, but you can manage user acces
 
 You must create a new HCP account and organization to use HCP Europe. You cannot connect or migrate existing HCP Terraform accounts or organizations to HCP Europe.
 
-To get started with HCP Terraform in the EU region, sign up on the HCP EU portal: <https://eu.cloud.hashicorp.com>.
+To get started with HCP Terraform in the EU region, sign up on the HCP Europe portal: <https://eu.cloud.hashicorp.com>.
 
 To learn more about HCP Europe and creating a new account, refer to the [HCP Europe documentation](/hcp/docs/hcp/europe). To learn about the available billing and plan options, [contact sales](https://www.hashicorp.com/en/contact-sales).
 
 ## Limitations
 
 The following features are not available in HCP Europe organizations:
-- Flex and pay-as-you-go billing.
+- Using Flex or pay-as-you-go billing.
 - Manually changing HCP Terraform plans. To learn about the available billing and plan options, [contact sales](https://www.hashicorp.com/en/contact-sales).
-- The [ServiceNow integration](/terraform/cloud-docs/integrations/service-now/service-catalog-terraform).
-- The [HCP CLI](/hcp/docs/cli).
-- [Terraform provider](https://registry.terraform.io/providers/hashicorp/tfe/latest) workflows.
-- The [`tf-migrate` CLI](https://developer.hashicorp.com/terraform/migrate) tool.
+- Using [public registry namespaces](/terraform/cloud-docs/users-teams-organizations/organizations/public-namespace) to share private modules with other organizations.
+- Using the [ServiceNow integration](/terraform/cloud-docs/integrations/service-now/service-catalog-terraform).
+- Using the [HCP CLI](/hcp/docs/cli).
+- Using [Terraform provider](https://registry.terraform.io/providers/hashicorp/tfe/latest) workflows.
+- Using the [`tf-migrate` CLI](https://developer.hashicorp.com/terraform/migrate) tool.
 - Setting [execution mode](/terraform/cloud-docs/projects/manage#change-the-execution-mode) at the project level. Instead, set execution mode at the organization or workspace levels.
-- You cannot use the HCP Terraform APIs with [HCP service principals](/hcp/docs/hcp/iam/service-principal).
+- HCP Terraform does not support [HCP service principals](/hcp/docs/hcp/iam/service-principal).
+- Deleting an organization. [Contact HCP support](/hcp/docs/hcp/admin/support) to delete an HCP Europe organization.
+- Creating more than 100 projects in an HCP organization. [Contact HCP support](/hcp/docs/hcp/admin/support) to increase your project limit.
+- Deleting a project without deleting its workspaces first.

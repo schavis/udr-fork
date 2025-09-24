@@ -7,6 +7,10 @@ description: Learn how to set up the ServiceNow Service Catalog integration for 
 
 -> **Integration version:**  v2.8.1
 
+<!-- BEGIN: TFC:only name:pnp-callout -->
+@include 'tfc-package-callouts/servicenow-catalog.mdx'
+<!-- END: TFC:only name:pnp-callout -->
+
 The Terraform ServiceNow Service Catalog integration enables your end-users to
 provision self-serve infrastructure via ServiceNow. By connecting ServiceNow to
 HCP Terraform, this integration lets ServiceNow users order Service Items,
@@ -15,9 +19,16 @@ configurations hosted in VCS repositories or as [no-code
 modules](/terraform/cloud-docs/workspaces/no-code-provisioning/module-design) for
 self-service provisioning.
 
-<!-- BEGIN: TFC:only name:pnp-callout -->
-@include 'tfc-package-callouts/servicenow-catalog.mdx'
-<!-- END: TFC:only name:pnp-callout -->
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+<Note>
+
+In HashiCorp Cloud Platform (HCP) Europe organizations, you cannot use any ServiceNow integrations. To learn more about HCP Europe, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
+
+</Note>
+
+<!-- END: TFC:only name:hcp-eu -->
+
 
 ## Summary of the Setup Process
 

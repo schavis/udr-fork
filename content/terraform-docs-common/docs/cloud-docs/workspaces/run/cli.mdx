@@ -52,6 +52,22 @@ To enable the CLI-driven workflow, you must:
 
 1. Run `terraform login` to authenticate with HCP Terraform. Alternatively, you can manually configure credentials in the CLI config file or through environment variables. Refer to [CLI Configuration](/terraform/cli/config/config-file#environment-variable-credentials) for details.
 
+    <!-- BEGIN: TFC:only name:hcp-eu -->
+
+    <Note>
+
+    If you are in an HCP Europe organization, login to the HCP Europe environment by specifying the hostname:
+
+    ```shell-session
+    $ terraform login app.terraform.io/eu
+    ```
+
+    To learn more about HCP Europe, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
+
+    </Note>
+
+    <!-- END: TFC:only name:hcp-eu -->
+
 1. Add the `cloud` block to your Terraform configuration. You can define its arguments directly in your configuration file or supply them through environment variables, which can be useful for [non-interactive workflows](#non-interactive-workflows). Refer to [Using HCP Terraform](/terraform/cli/cloud) for configuration details.
 
    The following example shows how to map CLI workspaces to HCP Terraform workspaces with a specific tag.
