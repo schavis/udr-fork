@@ -24,7 +24,7 @@ To monitor actions in HCP Terraform, you must configure a connection to HCP Terr
 
 Add an `action` block to your Terraform configuration and specify the type and a label as inline arguments. The type of action depends on your provider. Refer to your provider documentation for details about available actions.
 
-The following example declares an `aws_lambda_invoke` action named `example`:
+The following example declares an `aws_lambda_invoke` action labeled `example`:
 
 ```hcl
 action "aws_lambda_invoke" "example" {
@@ -54,9 +54,9 @@ Refer to the [AWS provider documentation](https://registry.terraform.io/provider
 
 ### Configure Terraform meta-arguments
 
-You can use some Terraform meta-argments in `action` blocks.  Meta-arguments are built into Terraform and control how Terraform creates resources. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
+You can use some Terraform meta-argments in `action` blocks. Meta-arguments are built into Terraform and control how Terraform creates resources. Refer to [Meta-arguments](/terraform/language/meta-arguments) for more information.
 
-In the following example, Terraform invokes the action three times per the `count` meta-argment. It also uses the provider configuration reference with `aws.alias` per the `provider` meta-argument. Refer to the [`action` block reference](/terraform/language/block/action) for information about all meta-arguments supported in the `action` block. 
+In the following example, Terraform creates three instances of the action because the `count` meta-argument is set to `3`. It also uses the provider configuration reference with `aws.alias` per the `provider` meta-argument. Refer to the [`action` block reference](/terraform/language/block/action) for information about all meta-arguments supported in the `action` block. 
 
 
 ```hcl
@@ -83,7 +83,7 @@ When you invoke an action using the CLI, Terraform runs only the action and excl
 
 Add the `-invoke` flag and specify the address of an action when running the `terraform plan` or `terraform apply` command. 
 
-The following example creates a plan to model the `aws_lambda_invocation.example` action:
+The following example creates a plan for invoking the `aws_lambda_invocation.example` action:
 
 ```shell-session
 $ terraform plan -invoke=action.aws_lambda_invoke.example
@@ -101,7 +101,7 @@ Refer to the [`terraform apply` command](/terraform/cli/commands/apply) document
 
 ### Trigger an action when applying a configuration
 
-Configure an `action_trigger` block and specify the action to run and the events that trigger the action. The `action_trigger` block is a member of the `lifecycle` block nested in a `resource` block. Refer to the [`action_trigger` documentation](/terraform/language/block/resource#action_trigger) for details about configuring the block.
+To trigger an action on resource lifecycle events, such as creating or destroying a resource, configure an `action_trigger` block and specify the action to run and the events that trigger the action. The `action_trigger` block is a member of the `lifecycle` block nested in a `resource` block. Refer to the [`action_trigger` documentation](/terraform/language/block/resource#action_trigger) for details about configuring the block.
 
 In the following example, Terraform invokes the `action.aws_lambda_invoke.example` action after creating the `aws_lambda_function.example` resource. Terraform also invokes the action during a `terraform apply` operation if the `resource` block configuration changes.
 
@@ -120,7 +120,7 @@ resource "aws_lambda_function" "example" {
 
 Terraform invokes the action when you run `terraform apply` and are creating the resource for the first time. This is because one of the `event` triggers is `after_create`. 
 
-Terraform also updates the resource on `terraform apply` without changes to the configuration when it detects drift in the resource that would trigger an `after_update` action. 
+Because the  `event` argument includes `after_update`, Terraform also updates the resource on `terraform apply`, even without changes to the configuration, when it detects drift in the resource. 
 
 ## View actions in HCP Terraform
 
