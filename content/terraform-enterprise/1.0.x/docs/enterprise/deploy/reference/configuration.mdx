@@ -47,7 +47,7 @@ Number of web worker processes for the Atlas Rails application.
 
 Higher values can improve response times under heavy load but increase memory usage.
 
-Must be between `1` and `10`. Defaults to CPU count ÷ 2 (minimum 1, maximum 10). 
+The minimum is `1` and  the maximum is `10`. Defaults to CPU count ÷ 2. 
 
 ## Atlas database tuning
 
@@ -83,11 +83,11 @@ Defaults to `false`.
 
 Cron expression for scheduled Puma process rotation when `TFE_ATLAS_ROTATE_ENABLED` is `true`.
 
-Use standard cron syntax. For example, `0 2 * * *` restarts workers daily at 2 AM. 
+Use standard cron syntax. For example, `0 2 * * *` restarts workers daily at 2:00 AM. 
 
 ### `TFE_ATLAS_ROTATE_MEMORY_THRESHOLD`
 
-Memory threshold that triggers automatic Puma process rotation. Specify using human-readable format (e.g., `4GB`, `2048MB`).
+Memory threshold that triggers automatic Puma process rotation. Specify using human-readable format, for example `4GB`, `2048MB`.
 
 When total memory usage of all Puma processes exceeds this threshold, workers restart. This prevents out-of-memory conditions and maintains consistent performance.
 
@@ -97,9 +97,9 @@ Minimum threshold is `2GB`. Only takes effect when `TFE_ATLAS_ROTATE_ENABLED` is
 
 Disables the dedicated Sidekiq worker pool that processes critical and high-priority background jobs.
 
-Terraform Enterprise runs two Sidekiq worker pools: one for all job queues and another exclusively for critical jobs. This ensures important operations aren't delayed by lower-priority work.
+Terraform Enterprise runs two Sidekiq worker pools. One pool is for all job queues and the second is exclusively for critical jobs. This ensures important operations aren't delayed by lower-priority work.
 
-**This is an emergency setting. Only enable when directed by HashiCorp support.**
+This is an emergency setting. Only enable when directed by HashiCorp support.
 
 Defaults to `false`.
 
