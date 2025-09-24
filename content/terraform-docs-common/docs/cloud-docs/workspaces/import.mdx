@@ -24,13 +24,19 @@ You can use search functionality in [UI and VCS-driven](/terraform/cloud-docs/ru
 
 If you use HCP Terraform agents for your runs, you must enable the `query` operation when starting the agent pool. Refer to [Install and run agents](/terraform/cloud-docs/agents/agents) for more information.
 
+## Requirements
+
+You must enable Terraform 1.14.0-beta or newer for your workspace to access the **Search & Import** page. Refer to the [general workspace settings documentation](/terraform/cloud-docs/workspaces/settings#general) for more information about changing workspace settings.
+
+HCP Terraform identifies resources managed by other workspaces when the workspace uses Terraform v1.12 and newer.  
+
 ## Define queries
 
 Add `list` blocks to your workspace's Terraform configuration to create search queries you want to run against your existing infrastructure. Refer to [Import resources in bulk](/terraform/language/v1.14.x/import/bulk) for instructions on how to define queries. 
 
 If HCP Terraform is connected to your VCS, commit the configuration to version control. 
 
-You can also connect your local workstation to HCP Terraform with the CLI-driven workflow and use the Terraform CLI to perform operations in your HCP Terraform workspace. Refer to [Connect to HCP Terraform](/terraform/cli/cloud/settings) for instructions.
+You can also connect your local workstation to HCP Terraform with the CLI-driven workflow and use the Terraform CLI to perform operations in your HCP Terraform workspace. Refer to [Connect to HCP Terraform](/terraform/cli/cloud/settings) for instructions. 
 
 ## Run queries
 
