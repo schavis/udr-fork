@@ -87,17 +87,11 @@
         ]
       },
       {
-  "title": "Two-factor authentication",
-  "title": "Permissions",
-        "path": "users-teams-organizations/permissions"
-      },
-
-      {
-  "title": "Two-factor authentication",
+        "title": "Two-factor authentication",
         "path": "users-teams-organizations/2fa"
       },
       {
-  "title": "API tokens",
+        "title": "API tokens",
         "path": "users-teams-organizations/api-tokens"
       },
       {

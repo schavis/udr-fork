@@ -8,15 +8,15 @@ description: >-
 
 Roles in HCP Terraform define the permissions that users have at different levels of your organization. You can assign roles at the organization, project, and workspace levels to control user access and the actions they can take.
 
+> **Hands-on:** Try the [Manage Permissions in HCP Terraform](/terraform/tutorials/cloud/cloud-permissions?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS) tutorial.
+
+## Background
+
 <!-- BEGIN: TFC:only name:pnp-callout -->
 @include 'tfc-package-callouts/team-management.mdx'
 <!-- END: TFC:only name:pnp-callout -->
 
-## Background
-
 If you are in an HCP Terraform organization, you can manage user access and permissions through **teams**.
-
-> **Hands-on:** Try the [Manage Permissions in HCP Terraform](/terraform/tutorials/cloud/cloud-permissions?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS) tutorial.
 
 Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set by an organization, project, or workspace. To learn more, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
 
@@ -29,12 +29,12 @@ The following sections explain how to set roles at each permission level:
 
 ### HCP Europe organizations
 
-In an HashiCorp Cloud Platform (HCP) Europe organization, you manage user access through **groups**. To learn more, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
+In an HashiCorp Cloud Platform (HCP) Europe organization, you manage user access through **groups**. To learn more about HCP EU, refer to [Use HCP Terraform in Europe](/terraform/cloud-docs/europe).
 
 To learn how to set up groups and assign users to them in HCP, refer to [Groups](/hcp/docs/hcp/iam/groups). You can assign permissions to groups in two ways:
 
-1. HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
-2. HCP Terraform roles - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.
+- HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
+- HCP Terraform roles - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.
 
 Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set by an HCP or HCP Terraform role, or whether the role was set by an organization, project, or workspace. To learn more, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
 
@@ -69,12 +69,12 @@ For more information about what each permission grants, refer to [Organization p
 
 ## Set organization-level roles for HCP Europe organizations
 
-If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If not, refer to [Set organization-level roles](#set-organization-level-roles).
+If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set organization-level roles](#set-organization-level-roles).
 
 If you are in an HCP Europe organization, HCP Terraform inherits the groups and roles you define in HCP. To learn about creating groups and managing users, refer to [HCP Groups](/hcp/docs/hcp/iam/groups). You can assign organization-level permissions to groups in two ways:
 
-1. HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
-2. HCP Terraform roles - Assign additional permissions to refine access to the organization in HCP Terraform.
+- HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
+- HCP Terraform roles - Assign additional permissions to refine access to the organization in HCP Terraform.
 
 To add a new organization-level role for your group in HCP Terraform, perform the following steps:
 1. Navigate to your organization in HCP Terraform EU, your URL must include `app.eu.terraform.io`.
@@ -112,19 +112,18 @@ For more information about each permission, refer to [Project permissions](/terr
 
 ## Set project-level roles for HCP Europe organizations
 
-If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If not, refer to [Set project-level roles](#set-project-level-roles).
+If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set project-level roles](#set-project-level-roles).
 
 If you are in an HCP Europe organization, HCP Terraform inherits the groups and roles you define in HCP. To learn about creating groups and managing users, refer to [HCP Groups](/hcp/docs/hcp/iam/groups). You can assign project-level roles to groups in two ways:
 
-1. HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
-2. HCP Terraform roles - Assign additional permissions to refine access to the project in HCP Terraform.
+- HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
+- HCP Terraform roles - Assign additional permissions to refine access to the project in HCP Terraform.
 
 To add a new project-level role for your group in HCP Terraform, perform the following steps:
 1. Navigate to your organization in HCP Terraform EU, your URL must include `app.eu.terraform.io`.
 1. Select a project from the list.
 1. Select **Settings**, then **Role assignments** from the side navigation.
-1. Click **+ Add new assignment**.
-1. Select a role and a group to assign, then click **Assign role**.
+1. Click **+ Add new assignment**, select a role and a group, then click **Assign role**.
 1. Alternatively, expand the ellipsis next to a group, select **View project-level permissions**, select **Manage roles**, and then click **Edit Terraform Roles**.
     - To manage your HCP project role, you can alternatively select **Manage roles on HCP** to navigate to HCP.
 
@@ -158,12 +157,12 @@ For more information about each permission, refer to [Workspaces permissions](/t
 
 ## Set workspace-level roles for HCP Europe organizations
 
-If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If not, refer to [Set workspace-level roles](#set-project-level-roles).
+If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set workspace-level roles](#set-project-level-roles).
 
 If you are in an HCP Europe organization, HCP Terraform inherits the groups and roles you define in HCP. To learn about creating groups and managing users, refer to [HCP Groups](/hcp/docs/hcp/iam/groups). You can assign roles to groups in two ways:
 
-1. HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
-2. HCP Terraform roles - Assign additional permissions to refine access to the project in HCP Terraform.
+- HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
+- HCP Terraform roles - Assign additional permissions to refine access to the project in HCP Terraform.
 
 To add a new workspace-level role for your group in HCP Terraform, perform the following steps:
 1. Navigate to your organization in HCP Terraform EU, your URL must include `app.eu.terraform.io`.

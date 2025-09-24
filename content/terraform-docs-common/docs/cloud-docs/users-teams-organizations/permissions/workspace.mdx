@@ -35,18 +35,18 @@ The following table shows the permissions granted by each workspace role. Each r
 
 | Permission category | Permission name | [Admin role](#workspace-admin) | [Write role](#write-role) | [Plan role](#plan-role) | [Read role](#read-role) |
 |---------------------|------------|:-----:|:-----:|:----:|:----:|
-| [Run Access](#run-access) | [Read runs](#run-read) | ✅ | ✅ | ✅ | ✅ |
+| [Run access](#run-access) | [Read runs](#run-read) | ✅ | ✅ | ✅ | ✅ |
 | | [Plan runs](#run-plan) | ✅ | ✅ | ✅ | ❌ |
 | | [Apply runs](#run-apply) | ✅ | ✅ | ❌ | ❌ |
-| [Variable Access](#variable-access) | [Read variables](#variable-read) | ✅ | ✅ | ✅ | ✅ |
+| [Variable access](#variable-access) | [Read variables](#variable-read) | ✅ | ✅ | ✅ | ✅ |
 | | [Read and write variables](#variable-read-write) | ✅ | ✅ | ❌ | ❌ |
-| [State Access](#state-access) | [Read outputs only](#state-read-outputs) | ✅ | ✅ | ✅ | ✅ |
+| [State access](#state-access) | [Read outputs only](#state-read-outputs) | ✅ | ✅ | ✅ | ✅ |
 | | [Read state](#state-read) | ✅ | ✅ | ✅ | ✅ |
 | | [Read and write state](#state-read-write) | ✅ | ✅ | ❌ | ❌ |
-| [Other Controls](#other-controls) | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ✅ | ❌ | ❌ |
+| [Other controls](#other-controls) | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ✅ | ❌ | ❌ |
 | | [Lock/unlock workspace](#lock-unlock-workspace) | ✅ | ✅ | ❌ | ❌ |
 | | [Manage workspace Run Tasks](#manage-workspace-run-tasks) | ✅ | ❌ | ❌ | ❌ |
-| Admin-Only Permissions | Read and write workspace settings | ✅ | ❌ | ❌ | ❌ |
+| [Admin-only permissions](#workspace-admin) | Read and write workspace settings | ✅ | ❌ | ❌ | ❌ |
 | | Set workspace permissions for visible teams | ✅ | ❌ | ❌ | ❌ |
 | | Delete workspace | ✅ | ❌ | ❌ | ❌ |
 
@@ -57,7 +57,7 @@ Much like the owners team has full control over an organization, each workspace 
 
 Admin permissions include the highest level of general permissions for the workspace. There are also some permissions that are only available to workspace admins, which generally involve changing the workspace's settings or setting access levels for other teams.
 
-Workspace admins have all [General Workspace Permissions](#general-workspace-permissions), as well as the ability to do the following tasks:
+Workspace admins have all [workspace permissions](#workspace-permissions), as well as the ability to do the following:
 
 - Read and write workspace settings. This includes general settings, notification configurations, run triggers, and more.
 - Set or remove workspace permissions for visible teams. Workspace admins cannot view or manage teams with the [**Secret**](/terraform/cloud-docs/users-teams-organizations/teams/manage#team-visibility) visibility option enabled unless they are also organization owners.
@@ -74,7 +74,7 @@ The "write" permission set is for people who do most of the day-to-day work of p
 - Other access - Lock/unlock workspace
 - Other access - Download Sentinel mocks
 
-See [General Workspace Permissions][] above for details about specific permissions.
+Refer to [Workspace roles](#workspace-roles) for details about specific permissions.
 
 ### Plan role
 
@@ -84,7 +84,7 @@ The "plan" permission set is for people who might propose changes to managed inf
 - Variable access - Read
 - State access - Read
 
-See [General Workspace Permissions][] above for details about specific permissions.
+Refer to [Workspace roles](#workspace-roles) for details about specific permissions.
 
 ### Read role
 
@@ -94,13 +94,13 @@ The "read" permission set is for people who need to view information about the s
 - Variable access - Read
 - State access - Read
 
-See [General Workspace Permissions][] above for details about specific permissions.
+Refer to [Workspace roles](#workspace-roles) for details about specific permissions.
 
 ### Custom role
 
 Custom permissions let you assign specific, finer-grained permissions to a team than the broader fixed permission sets provide. This enables more task-focused permission sets and tighter control of sensitive information.
 
-You can use custom permissions to assign any of the permissions listed above under [General Workspace Permissions][], with the exception of admin-only permissions.
+You can use custom permissions to assign any of the permissions listed under [workspace roles](#workspace-roles), with the exception of admin-only permissions.
 
 The minimum custom permissions set for a workspace is the permission to read runs; the only way to grant a team lower access is to not add them to the workspace at all.
 
@@ -221,8 +221,8 @@ In an HCP Europe organization, you manage user access through groups. To learn h
 
 You can assign permissions to HCP groups in two ways:
 
-1. [HCP roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-workspace-level-roles-for-hcp-europe-organizations) - You can assign HCP roles to groups in the HashiCorp Cloud Platform (HCP), and these roles automatically grant permissions in HCP Terraform.
-2. [HCP Terraform roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-workspace-level-roles) - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.
+- [HCP roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-workspace-level-roles-for-hcp-europe-organizations) - You can assign HCP roles to groups in the HashiCorp Cloud Platform (HCP), and these roles automatically grant permissions in HCP Terraform.
+- [HCP Terraform roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-workspace-level-roles) - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.
 
 Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set by an HCP or HCP Terraform role.
 
@@ -230,16 +230,16 @@ The following table shows which workspace-level permissions each HCP role automa
 
 | Permission Category | HCP Terraform workspace permission | Admin | Contributor | Viewer |
 |---------------------|-----------------------------------|-------|-------------|---------|
-| **[Run Access](#run-access)** | [Read runs](#run-read) | ✅ | ✅ | ✅ |
+| [Run access](#run-access) | [Read runs](#run-read) | ✅ | ✅ | ✅ |
 | | [Plan runs](#run-plan) | ✅ | ✅ | ❌ |
 | | [Apply runs](#run-apply) | ✅ | ✅ | ❌ |
-| **[Variable Access](#variable-access)** | [Read variables](#variable-read) | ✅ | ✅ | ✅ |
+| [Variable access](#variable-access) | [Read variables](#variable-read) | ✅ | ✅ | ✅ |
 | | [Read and write variables](#variable-read-write) | ✅ | ✅ | ❌ |
-| **[State Access](#state-access)** | [Read outputs only](#state-read-outputs) | ✅ | ✅ | ✅ |
+| [State access](#state-access) | [Read outputs only](#state-read-outputs) | ✅ | ✅ | ✅ |
 | | [Read state](#state-read) | ✅ | ✅ | ✅ |
 | | [Read and write state](#state-read-write) | ✅ | ✅ | ❌ |
-| **[Other Controls](#other-controls)** | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ✅ | ❌ |
+| [Other controls](#other-controls) | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ✅ | ❌ |
 | | [Lock/unlock workspace](#lock-unlock-workspace) | ✅ | ✅ | ❌ |
-| | [Manage workspace Run Tasks](#manage-workspace-run-tasks) | ✅ | ✅ | ❌ |
+| | [Manage workspace run tasks](#manage-workspace-run-tasks) | ✅ | ✅ | ❌ |
 
 <!-- END: TFC:only name:hcp-eu -->
