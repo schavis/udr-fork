@@ -516,3 +516,16 @@ filters you have two options:
 
 1. Spread them out among the nodes of the Vault cluster.
 1. Only subscribe to events on the active node of the cluster.
+
+### Full seal rewraps occur on DR/PR failover with multi-seal enabled ((#multi-seal-rewrap)) <EnterpriseAlert inline="true" />
+
+| Change      | Affected versions                              | Fixed version |
+|-------------|------------------------------------------------|---------------|
+| Known issue | 1.20.x+ent, 1.19.x+ent, 1.18.x+ent, 1.16.x+ent | None          |
+
+When failing over to a DR or performance cluster with `enable_multiseal = true`, a full rewrap occurs. This
+can lead to performance degradation until the rewrap operation completes.
+
+#### Recommendation
+
+No workaround is available at this time, short of disabling multi-seal support.
