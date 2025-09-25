@@ -33,6 +33,10 @@ Verify that the resource type you want to search for is supported. For the initi
 - [`aws_iam_role`](https://github.com/hashicorp/terraform-provider-aws/blob/main/website/docs/list-resources/iam_role.html.markdown)
 - [`aws_instance`](https://github.com/hashicorp/terraform-provider-aws/blob/main/website/docs/list-resources/instance.html.markdown)
 
+#### AWS CC provider
+
+All resources in this provider support `list` blocks. Because this provider is fully generated and doesn't accept provider-specific configurations, you can omit the `config` block when defining queries for AWS CC resources.  
+
 ## Define a query
 
 To search for resources, you must create a standard `.tf` configuration and a `.tfquery.hcl` configuration. 
