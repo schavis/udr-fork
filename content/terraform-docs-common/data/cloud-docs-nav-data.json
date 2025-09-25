@@ -296,6 +296,16 @@
         ]
       },
       {
+        "title": "Import existing resources",
+        "path": "workspaces/import",
+        "badge": {
+          "text": "BETA",
+          "type": "outlined",
+          "color": "neutral"
+
+        }
+      },
+      {
         "title": "Policy enforcement",
         "routes": [
           {
@@ -444,20 +454,20 @@
       {
         "title": "Terraform runs",
         "routes": [
-          { "title": "Remote operations", "href": "run/remote-operations" },
-          { "title": "Viewing and managing runs", "href": "run/manage" },
-          { "title": "Run states and stages", "href": "run/states" },
-          { "title": "Run modes and options", "href": "run/modes-and-options" },
-          { "title": "UI/VCS-driven runs", "href": "run/ui" },
-          { "title": "API-driven runs", "href": "run/api" },
-          { "title": "CLI-driven runs", "href": "run/cli" },
+          { "title": "Remote operations", "path": "workspaces/run/remote-operations" },
+          { "title": "Viewing and managing runs", "path": "workspaces/run/manage" },
+          { "title": "Run states and stages", "path": "workspaces/run/states" },
+          { "title": "Run modes and options", "path": "workspaces/run/modes-and-options" },
+          { "title": "UI/VCS-driven runs", "path": "workspaces/run/ui" },
+          { "title": "API-driven runs", "path": "workspaces/run/api" },
+          { "title": "CLI-driven runs", "path": "workspaces/run/cli" },
           {
             "title": "The run environment",
-            "href": "run/run-environment"
+            "path": "workspaces/run/run-environment"
           },
           {
             "title": "Installing software",
-            "href": "run/install-software"
+            "path": "workspaces/run/install-software"
           }
         ]
       },
