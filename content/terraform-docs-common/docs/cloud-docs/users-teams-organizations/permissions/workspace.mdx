@@ -27,13 +27,13 @@ If you are in an HCP Terraform organization, you can manage user access and perm
 <!-- END: TFC:only name:hcp-eu -->
 
 
-## Workspace permissions
+## Workspace roles and permissions
 
 A role is a preselected set of permissions that you can assign to a team<!-- BEGIN: TFC:only name:hcp-eu --> or group<!-- END: TFC:only name:hcp-eu -->.
 
 The following table shows the permissions granted by each workspace role. Each role builds upon the previous level, with **Admin** granting the most comprehensive access.
 
-| Permission category | Permission name | [Admin](#workspace-admin) | [Write](#write-role) | [Plan](#plan-role) | [Read](#read-role) |
+| Permission category | Permission name | [Admin](#workspace-admin) | [Write](#workspace-write) | [Plan](#workspace-plan) | [Read](#workspace-read) |
 |---------------------|------------|:-----:|:-----:|:----:|:----:|
 | [Run access](#run-access) | [Read runs](#run-read) | ✅ | ✅ | ✅ | ✅ |
 | | [Plan runs](#run-plan) | ✅ | ✅ | ✅ | ❌ |
@@ -56,50 +56,50 @@ Much like the owners team has full control over an organization, each workspace 
 
 Admin permissions include the highest level of general permissions for the workspace. There are also some permissions that are only available to workspace admins, which generally involve changing the workspace's settings or setting access levels for other teams.
 
-Workspace admins have all [workspace permissions](#workspace-permissions), as well as the ability to do the following:
+Workspace admins have all other [workspace permissions](#workspace-roles-and-permissions), as well as the ability to do the following:
 
 - Read and write workspace settings. This includes general settings, notification configurations, run triggers, and more.
 - Set or remove workspace permissions for visible teams. Workspace admins cannot view or manage teams with the [**Secret**](/terraform/cloud-docs/users-teams-organizations/teams/manage#team-visibility) visibility option enabled unless they are also organization owners.
 - Delete the workspace
   - Depending on the [organization's settings](/terraform/cloud-docs/users-teams-organizations/organizations#general), workspace admins may only be able to delete the workspace if it is not actively managing infrastructure. Refer to [Deleting a Workspace With Resources Under Management](/terraform/cloud-docs/workspaces/settings#deleting-a-workspace-with-resources-under-management) for details.
 
-### Write role
+### Workspace write
 
 The **Write** permission set is for people who do most of the day-to-day work of provisioning and modifying managed infrastructure. Write access grants the following workspace permissions:
 
-- Run access - Apply
-- Variable access - Read and write
-- State access - Read and write
-- Other access - Lock/unlock workspace
-- Other access - Download Sentinel mocks
+- Plan and apply workspace runs.
+- Read and write the workspace has access to.
+- Read and write to the state of a workspace.
+- Lock and unlock the workspace.
+- Download Sentinel mocks.
 
-Refer to [Workspace roles](#workspace-roles) for details about specific permissions.
+Refer to [Workspace roles and permissions](#workspace-roles-and-permissions) for details about specific permissions.
 
-### Plan role
+### Workspace plan
 
 The **Plan** permission set is for people who might propose changes to managed infrastructure, but whose proposed changes should be approved before they are applied. Plan access grants the following workspace permissions:
 
-- Run access - Plan
-- Variable access - Read
-- State access - Read
+- Plan workspace runs.
+- Read variables the workspace has access to.
+- Read the state of a workspace.
 
-Refer to [Workspace roles](#workspace-roles) for details about specific permissions.
+Refer to [Workspace roles and permissions](#workspace-roles-and-permissions) for details about specific permissions.
 
-### Read role
+### Workspace read
 
 The **Read** permission set is for people who need to view information about the status and configuration of managed infrastructure in order to do their jobs, but aren't responsible for maintaining that infrastructure. Read access grants the following workspace permissions:
 
-- Run access - Read
-- Variable access - Read
-- State access - Read
+- Read workspace runs.
+- Read variables the workspace has access to.
+- Read the state of a workspace.
 
-Refer to [Workspace roles](#workspace-roles) for details about specific permissions.
+Refer to [Workspace roles and permissions](#workspace-roles-and-permissions) for details about specific permissions.
 
-### Custom role
+### Workspace custom role
 
-Custom permission sets let you assign specific, finer-grained permissions to a team than the broader fixed permission sets provide. This enables more task-focused permission sets and tighter control of sensitive information.
+Custom permission sets let you assign a custom role with fine-grained permissions. Creating a custom role lets you create a task-focused permission set with a tighter control of sensitive information.
 
-You can use custom permissions to assign any of the permissions listed under [workspace roles](#workspace-roles), with the exception of admin-only permissions. The minimum custom permissions set for a workspace is the permission to read runs.
+You can use custom permissions to assign any of the permissions listed under [workspace roles and permissions](#workspace-roles-and-permissions), except admin-only permissions.
 
 ## Run access
 
@@ -199,13 +199,6 @@ Allows users to manually lock the workspace to temporarily prevent runs. When a 
 ### Manage workspace Run Tasks
 
 Allows users to associate or dissociate run tasks with the workspace. HCP Terraform creates Run Tasks at the organization level, where you can manually associate or dissociate them with specific workspaces.
-
-
-### Fixed Permission Sets
-
-Fixed permission sets are bundles of specific permissions for workspaces, which you can use to delegate access to workspaces easily.
-
-Each permissions set targets a level of authority and responsibility for a given workspace's infrastructure. A permission set can grant permissions that recipients do not require but offer a balance of simplicity and utility.
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
