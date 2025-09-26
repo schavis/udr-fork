@@ -29,7 +29,9 @@ If you are in an HCP Terraform organization, you can manage user access and perm
 
 ## Workspace permissions
 
-A role is a preselected set of permissions that you can assign to a team<!-- BEGIN: TFC:only name:hcp-eu --> or group<!-- END: TFC:only name:hcp-eu -->.The following table shows the permissions granted by each workspace role. Each role builds upon the previous level, with **Admin** having the most comprehensive access.
+A role is a preselected set of permissions that you can assign to a team<!-- BEGIN: TFC:only name:hcp-eu --> or group<!-- END: TFC:only name:hcp-eu -->.
+
+The following table shows the permissions granted by each workspace role. Each role builds upon the previous level, with **Admin** granting the most comprehensive access.
 
 | Permission category | Permission name | [Admin](#workspace-admin) | [Write](#write-role) | [Plan](#plan-role) | [Read](#read-role) |
 |---------------------|------------|:-----:|:-----:|:----:|:----:|
@@ -50,7 +52,7 @@ A role is a preselected set of permissions that you can assign to a team<!-- BEG
 
 ### Workspace admin
 
-Much like the owners team has full control over an organization, each workspace has a special "admin" permissions level that grants full control over the workspace. Members of a team with admin permissions on a workspace are sometimes called "workspace admins" for that workspace.
+Much like the owners team has full control over an organization, each workspace has a special **Admin** permissions set that grants full control over the workspace. Members of a team with admin permissions on a workspace are sometimes called "workspace admins" for that workspace.
 
 Admin permissions include the highest level of general permissions for the workspace. There are also some permissions that are only available to workspace admins, which generally involve changing the workspace's settings or setting access levels for other teams.
 
@@ -63,7 +65,7 @@ Workspace admins have all [workspace permissions](#workspace-permissions), as we
 
 ### Write role
 
-The "write" permission set is for people who do most of the day-to-day work of provisioning and modifying managed infrastructure. Write access grants the following workspace permissions:
+The **Write** permission set is for people who do most of the day-to-day work of provisioning and modifying managed infrastructure. Write access grants the following workspace permissions:
 
 - Run access - Apply
 - Variable access - Read and write
@@ -75,7 +77,7 @@ Refer to [Workspace roles](#workspace-roles) for details about specific permissi
 
 ### Plan role
 
-The "plan" permission set is for people who might propose changes to managed infrastructure, but whose proposed changes should be approved before they are applied. Plan access grants the following workspace permissions:
+The **Plan** permission set is for people who might propose changes to managed infrastructure, but whose proposed changes should be approved before they are applied. Plan access grants the following workspace permissions:
 
 - Run access - Plan
 - Variable access - Read
@@ -85,7 +87,7 @@ Refer to [Workspace roles](#workspace-roles) for details about specific permissi
 
 ### Read role
 
-The "read" permission set is for people who need to view information about the status and configuration of managed infrastructure in order to do their jobs, but aren't responsible for maintaining that infrastructure. Read access grants the following workspace permissions:
+The **Read** permission set is for people who need to view information about the status and configuration of managed infrastructure in order to do their jobs, but aren't responsible for maintaining that infrastructure. Read access grants the following workspace permissions:
 
 - Run access - Read
 - Variable access - Read
@@ -95,14 +97,9 @@ Refer to [Workspace roles](#workspace-roles) for details about specific permissi
 
 ### Custom role
 
-Custom permissions let you assign specific, finer-grained permissions to a team than the broader fixed permission sets provide. This enables more task-focused permission sets and tighter control of sensitive information.
+Custom permission sets let you assign specific, finer-grained permissions to a team than the broader fixed permission sets provide. This enables more task-focused permission sets and tighter control of sensitive information.
 
-You can use custom permissions to assign any of the permissions listed under [workspace roles](#workspace-roles), with the exception of admin-only permissions.
-
-The minimum custom permissions set for a workspace is the permission to read runs; the only way to grant a team lower access is to not add them to the workspace at all.
-
-Some permissions - such as the runs permission - are tiered: you can assign one permission per category, since higher permissions include all of the capabilities of the lower ones.
-
+You can use custom permissions to assign any of the permissions listed under [workspace roles](#workspace-roles), with the exception of admin-only permissions. The minimum custom permissions set for a workspace is the permission to read runs.
 
 ## Run access
 

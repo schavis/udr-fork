@@ -30,7 +30,7 @@ If you are in an HCP Terraform organization, you can manage user access and perm
 
 A role is a preselected set of permissions that you can assign to a team<!-- BEGIN: TFC:only name:hcp-eu --> or group<!-- END: TFC:only name:hcp-eu -->.
 
-The following table shows the permissions granted by each project role. Each role builds upon the previous level, with Admin having the most comprehensive access.
+The following table shows the permissions granted by each project role. Each role builds upon the previous level, with **Admin** granting the most comprehensive access.
 
 | Permission category | Permission | [Admin](#project-admin) | [Maintain](#project-maintain) | [Write](#project-write) | [Read](#project-read) |
 |---------------------|------------|:-----:|:--------:|:-----:|:----:|
@@ -260,7 +260,7 @@ Allows users to view the values of Terraform variables and environment variables
 
 ### Read and write <a id="variable-read-write"></a>
 
-Allows users to read and edit the values of variables in workspaces within the project. 
+Allows users to read and edit the values of variables in workspaces within the project.
 
 ## Variable set access
 
@@ -286,7 +286,7 @@ Allows users to read, create, update, and delete variable sets owned by the proj
 
 ## State access
 
-The following table summarizes the available state access permissions for workspaces within the project. Refer to [State](/terraform/language/state) to learn about state in Terraform.  
+The following table summarizes the available state access permissions for workspaces within the project. Refer to [State](/terraform/language/state) to learn about state in Terraform.
 
 | Permission name | Description |
 |-----------------|-------------|
@@ -324,7 +324,7 @@ The following table summarizes additional control permissions for the project.
 
 Allows users to download data from runs in workspaces within the project in a format that can be used for developing Sentinel policies. This run data is very detailed, and often contains unredacted sensitive information.
 
-Refer to [Generate mock Sentinel data with Terraform](/terraform/cloud-docs/workspaces/policy-enforcement/test-sentinel) for more information about Sentinel mocks. 
+Refer to [Generate mock Sentinel data with Terraform](/terraform/cloud-docs/workspaces/policy-enforcement/test-sentinel) for more information about Sentinel mocks.
 
 ### Lock/unlock workspaces
 
@@ -334,7 +334,7 @@ Refer to [Workspace settings](/terraform/cloud-docs/workspaces/settings) for inf
 
 ### Manage workspace Run Tasks
 
-Allows users to associate or dissociate run tasks with workspaces within the project. HCP Terraform creates run tasks at the organization level, where you can manually associate or dissociate them with specific workspaces. Refer to [Set up run task integrations](/terraform/cloud-docs/integrations/run-tasks) for more information about run tasks. 
+Allows users to associate or dissociate run tasks with workspaces within the project. HCP Terraform creates run tasks at the organization level, where you can manually associate or dissociate them with specific workspaces. Refer to [Set up run task integrations](/terraform/cloud-docs/integrations/run-tasks) for more information about run tasks.
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
