@@ -34,27 +34,27 @@ The following table shows the permissions granted by each project role. Each rol
 
 | Permission Category | Permission | [Admin role](#project-admin) | [Maintain role](#project-maintain) | [Write role](#project-write) | [Read role](#project-read) |
 |---------------------|------------|:-----:|:--------:|:-----:|:----:|
-| [Project Access](#project-access) | [Read project](#project-read) | ✅ | ✅ | ✅ | ✅ |
+| [Project access](#project-access) | [Read project](#project-read) | ✅ | ✅ | ✅ | ✅ |
 | | [Update project settings](#project-update) | ✅ | ❌ | ❌ | ❌ |
 | | [Delete project](#project-delete) | ✅ | ❌ | ❌ | ❌ |
-| [Workspace Management](#workspace-management) | [Create workspaces](#create-workspaces) | ✅ | ✅ | ❌ | ❌ |
+| [Workspace management](#workspace-management) | [Create workspaces](#create-workspaces) | ✅ | ✅ | ❌ | ❌ |
 | | [Move workspaces](#move-workspaces) | ✅ | ❌ | ❌ | ❌ |
 | | [Delete workspaces](#delete-workspaces) | ✅ | ✅ | ❌ | ❌ |
-| [Group Management](#group-management) | [Manage team permissions](#group-manage) | ✅ | ❌ | ❌ | ❌ |
+| [Group management](#group-management) | [Manage team permissions](#group-manage) | ✅ | ❌ | ❌ | ❌ |
 | | [Read team assignments](#group-read) | ✅ | ❌ | ❌ | ❌ |
 | [Run Access](#run-access) | [Apply runs](#run-apply) | ✅ | ✅ | ✅ | ❌ |
 | | [Plan runs](#run-plan) | ✅ | ✅ | ✅ | ❌ |
 | | [Read runs](#run-read) | ✅ | ✅ | ✅ | ✅ |
-| [Variable Access](#variable-access) | [Read and write variables](#variable-read-write) | ✅ | ✅ | ✅ | ❌ |
+| [Variable access](#variable-access) | [Read and write variables](#variable-read-write) | ✅ | ✅ | ✅ | ❌ |
 | | [Read variables](#variable-read) | ✅ | ✅ | ✅ | ✅ |
-| [Variable Set Access](#variable-set-access) | [Manage variable sets](#variable-set-manage) | ✅ | ❌ | ❌ | ❌ |
+| [Variable set access](#variable-set-access) | [Manage variable sets](#variable-set-manage) | ✅ | ❌ | ❌ | ❌ |
 | | [Read variable sets](#variable-set-read) | ✅ | ❌ | ❌ | ❌ |
-| [State Access](#state-access) | [Read and write state](#state-read-write) | ✅ | ✅ | ✅ | ❌ |
+| [State access](#state-access) | [Read and write state](#state-read-write) | ✅ | ✅ | ✅ | ❌ |
 | | [Read state](#state-read) | ✅ | ✅ | ✅ | ✅ |
 | | [Read outputs only](#state-read-outputs) | ✅ | ✅ | ✅ | ✅ |
-| [Other Controls](#other-controls) | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ✅ | ✅ | ❌ |
+| [Other controls](#other-controls) | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ✅ | ✅ | ❌ |
 | | [Lock and unlock workspaces](#lock-unlock-workspaces) | ✅ | ✅ | ✅ | ❌ |
-| | [Manage workspace Run Tasks](#manage-workspace-run-tasks) | ✅ | ❌ | ❌ | ❌ |
+| | [Manage workspace run tasks](#manage-workspace-run-tasks) | ✅ | ❌ | ❌ | ❌ |
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
@@ -350,24 +350,24 @@ The following table lists which project-level permissions each HCP role automati
 
 | Permission Category | HCP Terraform permission name | Admin role | Contributor role | Viewer |
 |---------------------|----------------------------------|-------|-------------|---------|
-| **[Project access](#project-access)** | [Read project](#project-read) | ✅ | ✅ | ✅ |
+| [Project access](#project-access) | [Read project](#project-read) | ✅ | ✅ | ✅ |
 | | [Update project](#project-update) | ✅ | ❌ | ❌ |
 | | [Delete project](#project-delete) | ✅ | ❌ | ❌ |
-| **[Workspace management](#workspace-management)** | [Create workspaces](#create-workspaces) | ✅ | ❌ | ❌ |
+| [Workspace management](#workspace-management) | [Create workspaces](#create-workspaces) | ✅ | ❌ | ❌ |
 | | [Move workspaces](#move-workspaces) | ✅ | ❌ | ❌ |
 | | [Delete workspaces](#delete-workspaces) | ✅ | ❌ | ❌ |
-| **[Group management](#group-management)** | [Manage teams](#group-manage) | ✅ | ❌ | ❌ |
-| **[Run access](#run-access)** | [Apply runs](#run-apply) | ✅ | ❌ | ❌ |
+| [Group management](#group-management) | [Manage teams](#group-manage) | ✅ | ❌ | ❌ |
+| [Run access](#run-access) | [Apply runs](#run-apply) | ✅ | ❌ | ❌ |
 | | [Plan runs](#run-plan) | ✅ | ❌ | ❌ |
 | | [Read runs](#run-read) | ✅ | ❌ | ✅ |
-| **[Variable access](#variable-access)** | [Read and write variables](#variable-read-write) | ✅ | ❌ | ❌ |
+| [Variable access](#variable-access) | [Read and write variables](#variable-read-write) | ✅ | ❌ | ❌ |
 | | [Read variables](#variable-read) | ✅ | ❌ | ✅ |
-| **[Variable set access](#variable-set-access)** | [Manage variable sets](#variable-set-manage) | ✅ | ❌ | ❌ |
+| [Variable set access](#variable-set-access) | [Manage variable sets](#variable-set-manage) | ✅ | ❌ | ❌ |
 | | [Read variable sets](#variable-set-read) | ✅ | ❌ | ❌ |
-| **[State access](#state-access)** | [Read and write state](#state-read-write) | ✅ | ❌ | ❌ |
+| [State access](#state-access) | [Read and write state](#state-read-write) | ✅ | ❌ | ❌ |
 | | [Read state](#state-read) | ✅ | ❌ | ✅ |
-| **[Other controls](#other-controls)** | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ❌ | ❌ |
+| [Other controls](#other-controls) | [Download Sentinel mocks](#download-sentinel-mocks) | ✅ | ❌ | ❌ |
 | | [Lock/unlock workspaces](#lock-unlock-workspaces) | ✅ | ❌ | ❌ |
-| | [Manage workspace Run Tasks](#manage-workspace-run-tasks) | ✅ | ❌ | ❌ |
+| | [Manage workspace run tasks](#manage-workspace-run-tasks) | ✅ | ❌ | ❌ |
 
 <!-- END: TFC:only name:hcp-eu -->
