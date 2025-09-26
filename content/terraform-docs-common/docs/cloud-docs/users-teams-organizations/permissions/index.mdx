@@ -6,7 +6,7 @@ description: >-
 
 # Permissions overview
 
-To control access in HCP Terraform organizations, add users to a **team** and grant the team permissions to perform actions, such as creating or updating one or more projects or workspaces. 
+To control access in HCP Terraform organizations, add users to a **team** and grant the team permissions to perform actions, such as creating or updating one or more projects or workspaces.
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
@@ -16,18 +16,18 @@ If you are in a HashiCorp Cloud Platform (HCP) Europe organization, you can mana
 
 ## Effective permissions
 
-The HCP Terraform permissions model is split into three levels. You can set permissions at the following scopes:
+The HCP Terraform permissions model is split into three scopes. You can set permissions at the following scopes:
 - [Organization permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization)
 - [Project permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project)
 - [Workspace permissions](/terraform/cloud-docs/users-teams-organizations/permissions/workspace)
 
-Each permission level is additive, granting a user the highest level of permissions possible, regardless of which scope set that permission. A team's **effective permissions** is the sum of the permissions that team has from every permission level.
+Each permission is additive, granting a user the highest level of permissions possible, regardless of which scope set that permission. A team's **effective permissions** is the sum of the permissions that team has from every permission level.
 
 The scope that you grant a permission does not matter, the level of access that the permission grants determines what a user can do.
 
 For example, a team has [**Manage all workspaces**](/terraform/cloud-docs/users-teams-organizations/permissions/organization#manage-all-workspaces) permission for an organization, and the [**Read**](/terraform/cloud-docs/users-teams-organizations/permissions/workspace#read-role) role in a workspace, then the team has **Manage all workspaces** permissions for the workspace. HCP Terraform grants **Manage all workspaces** on that workspace because it is the most permissive level of access.
 
-Conversely, a team's organization permission does not override their workspace permission. For example, the [**View all workspaces**](/terraform/cloud-docs/users-teams-organizations/permissions/organization#view-all-workspaces) permission set for an organization does not override the [**Write**](/terraform/cloud-docs/users-teams-organizations/permissions/workspace#write-role) role set on a specific workspace. 
+Conversely, a team's organization permission does not override their workspace permission. For example, the [**View all workspaces**](/terraform/cloud-docs/users-teams-organizations/permissions/organization#view-all-workspaces) permission set for an organization does not override the [**Write**](/terraform/cloud-docs/users-teams-organizations/permissions/workspace#write-role) role set on a specific workspace.
 
 We recommend following the principle of least privilege when configuring permissions. Only grant users the permissions necessary to access the resources they need for their job function.
 
