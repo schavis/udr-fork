@@ -80,7 +80,7 @@
         "title": "Set permissions",
         "routes": [
           {"title": "Overview","path": "users-teams-organizations/permissions"},
-          {"title": "Set permissions with roles","path": "users-teams-organizations/permissions/set-roles"},
+          {"title": "Set permissions","path": "users-teams-organizations/permissions/set-permissions"},
           { "title": "Organization permissions", "path": "users-teams-organizations/permissions/organization" },
           { "title": "Project permissions", "path": "users-teams-organizations/permissions/project" },
           { "title": "Workspace permissions", "path": "users-teams-organizations/permissions/workspace" }

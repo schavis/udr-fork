@@ -61,7 +61,7 @@ In HCP Europe organizations, you cannot assign **Project permissions** to a grou
 
 ### None <a id="project-none"/>
 
-Members do not have access to projects or workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe -->. You can grant permissions to individual projects or workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> through [Project Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-project-level-roles) or [Workspace Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-workspace-level-roles).
+Members do not have access to projects or workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe -->. You can grant permissions to individual projects or workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> through [Project Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/set-permissions#set-project-level-roles) or [Workspace Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/set-permissions#set-workspace-level-roles).
 
 ### View all projects
 
@@ -136,15 +136,15 @@ Team permissions are available in standard HCP Terraform organizations.
 | [Include Secret Teams](#include-secret-teams) | Access and modify secret teams  |
 | [Allow Member Token Management](#allow-member-token-management) | Control team token management for team members |
 
-You can enable the following team management permissions in HCP Terraform: 
+You can enable the following team management permissions in HCP Terraform:
 
 - **Manage membership**
-- **Manage teams** 
+- **Manage teams**
 - **Manage organization access**
 
 Each permission level grants users the ability to perform specific actions and each progressively requires prerequisite permissions.
 
-For example, you must have the **Manage teams** permission to grant another user the **Manage teams** permission, and that user must already have **Manage membership** permissions. To grant a user **Manage organization access**, a user must already have **Manage membership** and **Manage teams** permissions. 
+For example, you must have the **Manage teams** permission to grant another user the **Manage teams** permission, and that user must already have **Manage membership** permissions. To grant a user **Manage organization access**, a user must already have **Manage membership** and **Manage teams** permissions.
 
 ### Manage membership
 
@@ -329,8 +329,8 @@ In an HCP Europe organization, you manage user access through groups. To learn h
 
 You can assign permissions to HCP groups in two ways:
 
-- [HCP roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-organization-level-roles-for-hcp-europe-organizations) - You can assign HCP roles to groups in the HashiCorp Cloud Platform (HCP), and these roles automatically grant permissions in HCP Terraform.
-- [HCP Terraform roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles#set-organization-level-roles) - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.
+- [HCP roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-permissions#set-organization-level-roles-for-hcp-europe-organizations) - You can assign HCP roles to groups in the HashiCorp Cloud Platform (HCP), and these roles automatically grant permissions in HCP Terraform.
+- [HCP Terraform roles](/terraform/cloud-docs/users-teams-organizations/permissions/set-permissions#set-organization-level-roles) - Assign additional permissions at the organization, project, and workspace level to further refine group access in HCP Terraform.
 
 Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set by an HCP or HCP Terraform role.
 
