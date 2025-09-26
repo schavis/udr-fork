@@ -10,13 +10,11 @@ Organization-level permissions apply to all projects<!-- BEGIN: TFC:only name:st
 
 ## Background
 
-To learn how to set permissions for an organization, refer to [Set roles in HCP Terraform](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles).
-
-If you are in an HCP Terraform organization, you can manage user access and permissions through teams.
-
-We recommend following the principle of least privilege when possible, only giving users access to the resources they need for their job function. You can also set permissions at the [project](/terraform/cloud-docs/users-teams-organizations/permissions/project) and [workspace](/terraform/cloud-docs/users-teams-organizations/permissions/workspace) levels.
-
-Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set at the organization, project, or workspace level. For more details, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
+If you are in an HCP Terraform organization, you can manage user access and permissions through teams. Refer to the following topics for information about setting permissions in HCP Terraform:
+- [Set permissions](/terraform/cloud-docs/users-teams-organizations/permissions/set-roles)
+- [Project permissions reference](/terraform/cloud-docs/users-teams-organizations/permissions/project)
+- [Workspace permissions reference](/terraform/cloud-docs/users-teams-organizations/permissions/workspace)
+- [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions) provides information about competing permissions.
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
@@ -32,7 +30,7 @@ Each permission a user is granted is additive. HCP Terraform grants a user the h
 
 The following table summarizes the available organization-level permission categories. Click on a specific permission to learn more about what that permission grants.
 
-| Permission Category | Description |
+| Permission category | Description |
 |---------------------|-------------|
 | [Project permissions](#project-permissions) | Control access to projects across the organization. |
 | [Workspace permissions](#workspace-permissions) | Control access to workspaces across the organization. |
@@ -74,10 +72,10 @@ Members can view all projects within the organization. This lets users:
 
 Members can create and manage all projects and workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> or Stacks<!-- END: TFC:only name:stacks-tfe --> within the organization. In addition to the permissions granted by [“Manage all workspaces”](#manage-all-workspaces), this also lets users:
 - Manage other teams' access to all projects.
-- Create, edit, and delete projects (otherwise only available to organization owners).
+- Create, edit, and delete projects  that are otherwise only available to organization owners.
 <!-- BEGIN: TFC:only name:stacks-tfe -->
 - Create, read, update, and delete Stacks.
-- Initiate, cancel or apply runs for Stacks.
+- Initiate, cancel, or apply runs for Stacks.
 <!-- END: TFC:only name:stacks-tfe -->
 - Move workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> between projects.
 
@@ -89,7 +87,7 @@ The following table summarizes the available organization-level permissions for 
 |-----------------|-------------|
 | [None](#workspace-none) | No access to workspaces, and access must be granted individually. |
 | [View all workspaces](#view-all-workspaces) | Can view information about all workspaces. |
-| [Manage all workspaces](#manage-all-workspaces) | Admin permissions on all workspaces, and can create workspaces. |
+| [Manage all workspaces](#manage-all-workspaces) | Admin permissions on all workspaces and can create workspaces. |
 
 ### None <a id="workspace-none"/>
 
@@ -97,15 +95,14 @@ Members do not have access to projects or workspaces. You can grant permissions 
 
 #### View all workspaces
 
-Members can view all workspaces within the organization. This lets users:
-- View information and features relevant to each workspaces (e.g. runs, state versions, variables).
+Members can view all workspaces within the organization. This lets users view information and features relevant to each workspaces, such as runs, state versions, variables.
 
 #### Manage all workspaces
 
-Members can create and manage all workspaces within the organization. This lets users:
-- Perform any action that requires admin permissions in those workspaces.
-- Create new workspaces within the organization's **Default Project**, an action that is otherwise only available to organization owners.
-- Create, update, and delete [Variable Sets](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets).
+Members can create and manage all workspaces within the organization. This lets users perform the following actions:
+- Any action that requires admin permissions in those workspaces.
+- Create new workspaces within the organization's **Default Project**, which is an action that is otherwise only available to organization owners.
+- Create, update, and delete [variable sets](/terraform/cloud-docs/workspaces/variables/managing-variables#variable-sets).
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
@@ -133,34 +130,40 @@ Team permissions are available in standard HCP Terraform organizations.
 
 | Permission name | Description |
 |-----------------|-------------|
-| [Manage Membership](#manage-membership) | Invite/remove users, add/remove users from teams |
-| [Manage Teams](#manage-teams) | Create, update, delete teams and generate tokens |
+| [Manage Membership](#manage-membership) | Invite, remove, and add users to the team |
+| [Manage Teams](#manage-teams) | Create, update, delete teams and [generate tokens](/terraform/cloud-docs/users-teams-organizations/api-tokens#team-api-tokens) |
 | [Manage Organization Access](#manage-organization-access) | Update team organization access settings |
-| [Include Secret Teams](#include-secret-teams) | Access secret teams (modifier for other team permissions) |
+| [Include Secret Teams](#include-secret-teams) | Access and modify secret teams  |
 | [Allow Member Token Management](#allow-member-token-management) | Control team token management for team members |
 
-HCP Terraform has three levels of team management permissions: manage membership, manage teams, and manage organization access. Each permission level grants users the ability to perform specific actions and each progressively requires prerequisite permissions.
+You can enable the following team management permissions in HCP Terraform: 
 
-For example, to grant a user the manage teams permission, that user must already have manage membership permissions. To grant a user the manage organization access permission, a user must have both manage teams and manage membership permissions.
+- **Manage membership**
+- **Manage teams** 
+- **Manage organization access**
 
-### Manage Membership
+Each permission level grants users the ability to perform specific actions and each progressively requires prerequisite permissions.
+
+For example, you must have the **Manage teams** permission to grant another user the **Manage teams** permission, and that user must already have **Manage membership** permissions. To grant a user **Manage organization access**, a user must already have **Manage membership** and **Manage teams** permissions. 
+
+### Manage membership
 
 Allows members to invite users to the organization, remove users from the organization, and add or remove users from teams within the organization.
 
 This permission grants the ability to view the list of users within the organization, and to view the organization access of other visible teams. It does not permit the creation of teams, the ability to modify the settings of existing teams, or the ability to view secret teams.
 
-In order to modify the membership of a team, a user with Manage Membership permissions must have visibility into the team (i.e. the team must be ["Visible"](/terraform/cloud-docs/users-teams-organizations/teams/manage#team-visibility), or the user must be on the team).
+In order to modify the membership of a team, the user must be a member of a team with the **Manage membership** permissions enabled and the [**Visible**](/terraform/cloud-docs/users-teams-organizations/teams/manage#team-visibility) setting must be enabled for the team. The user can also be a member of the team if the **Visible** setting is disabled.
 In order to remove a user from the organization, the holder of this permission must have visibility into all of the teams which the user is a member of.
 
 <Note title="Assign with caution">
 
-Owners of large organizations can use this permission to delegate membership management to another trusted team, and should be granted to only teams of trusted users. Users with this permission are able to add themselves to any visible team, and inherit the permissions of any visible team.
+Owners of large organizations can use this permission to delegate membership management to another trusted team and should only grant this permission to teams of trusted users. Users with this permission are able to add themselves to any visible team and inherit the permissions of any visible team.
 
 </Note>
 
-### Manage Teams
+### Manage teams
 
-Allows members to create, update, and delete teams, and generate, and revoke tokens.
+Allows members to create, update, and delete teams. It also lets members generate and revoke tokens.
 
 This permission grants the ability to update a team's names, SSO IDs, and token management permissions, but does not allow access to organization settings. On its own, this permission does not allow users to create, update, delete, or otherwise access secret teams.
 
@@ -174,7 +177,7 @@ Users with this permission can update or delete any visible team. Because this p
 
 </Note>
 
-### Manage Organization Access
+### Manage organization access
 
 Allows members to update a team's organization access settings.
 
@@ -188,13 +191,13 @@ Members with this permission can update all organization access settings for any
 
 </Note>
 
-### Include Secret Teams
+### Include secret teams
 
 Allows members access to secret teams at the level permitted by that user's team permissions setting.
 
-This permission acts as a modifier to existing team management permissions. Members with this permission can access secret teams up to the level permitted by other team management permissions. For example, if a user has permission to include secret teams and [manage teams](#manage-teams), that user can create secret teams.
+This permission modifies existing team management permissions. Members with this permission can access secret teams up to the level permitted by other team management permissions. For example, if a user has permission to include secret teams and [manage teams](#manage-teams), that user can create secret teams.
 
-### Allow Member Token Management
+### Allow member token management
 
 Allows owners and members with [manage teams](#manage-teams) permissions to enable and disable team token management for team members. This permission defaults to `true`.
 
@@ -214,7 +217,7 @@ The following permissions control access to governance and infrastructure tools.
 | [Manage version control settings](#manage-version-control-settings) | Manage VCS providers and SSH keys |
 | [Manage Agent Pools](#manage-agent-pools) | Create, edit, and delete agent pools |
 
-### Manage Policies
+### Manage policies
 
 Allows members to create, edit, read, list and delete the organization's Sentinel policies.
 
@@ -290,9 +293,7 @@ If you are using an HCP Europe organization, there is no organization owners tea
 
 <!-- END: TFC:only name:hcp-eu -->
 
-Every organization has a special team called the **Owners** team, whose members have the maximum available permissions within the organization. Members of this team are often referred to as "organization owners".
-
-Organization owners have every available permission within the organization. This includes all organization-level permissions, and the highest level of permissions on every workspace<!-- BEGIN: TFC:only name:stacks-tfe --> and Stack<!-- END: TFC:only name:stacks-tfe -->.
+Every organization has an **Owners** team whose members have the maximum available permissions within the organization. This includes all organization-level permissions and the highest level of permissions on every workspace<!-- BEGIN: TFC:only name:stacks-tfe --> and Stack<!-- END: TFC:only name:stacks-tfe -->.
 
 There are also some actions within an organization that are only available to owners. These are generally actions that affect the permissions and membership of other teams, or are otherwise fundamental to the organization's security and integrity.
 
@@ -302,7 +303,7 @@ The organization owners team has the following permissions:
 |------------|-------------|
 | [**Manage all projects**](#project-permissions) | Admin permissions on every project. |
 | [**Manage all workspaces**](#workspace-permissions) | Admin permissions on every workspace. |
-| [**Manage Membership**](#team-permissions) | Invite/remove users and manage team membership. |
+| [**Manage membership**](#team-permissions) | Invite/remove users and manage team membership. |
 | [**Manage Teams**](#team-permissions) | Create, update, delete teams and generate tokens. |
 | [**Manage Organization Access**](#team-permissions) | Update team organization access settings. |
 | [**Include Secret Teams**](#team-permissions) | View and manage all secret teams. |
