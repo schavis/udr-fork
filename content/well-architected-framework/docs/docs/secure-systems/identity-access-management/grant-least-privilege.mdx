@@ -5,7 +5,7 @@ description: Write identity and access management (IAM) policies that follow the
 
 # Grant least privilege
 
-Writing policies is one part of a complete identity and access management
+Writing policies is part of a complete identity and access management
 strategy. Policies should follow the principle of least privilege. 
 
 Once you have identified and collected security requirements to aid in [defining
@@ -39,11 +39,7 @@ While most regulations do not have explicit requirements for least privilege,
 they do require controls that show you have a strong identity and access
 management program.
 
-Consider conventional virtual private network (VPN) solutions; a user connects to
-the VPN and has access to the entire network. If that user’s credentials are
-compromised, an attacker can access everything on the network. A VPN is
-generally unable to follow least privilege because it provides broad access to
-the network.
+Consider conventional virtual private network (VPN) solutions, where a user connects to the VPN and gains access to the entire network. If a user’s credentials are compromised, an attacker can access all data on the network. A VPN is generally unable to follow the principle of least privilege because it provides broad access to the network.
 
 In contrast, a zero trust model with least privilege ensures that users
 have access to the specific resources they need. If a user’s credentials become
@@ -55,10 +51,9 @@ and used that information to write documentation that follows least privilege.
 Some examples of documentation at this stage include:
 
 - Software engineers do not have access to production.
-- Site reliability engineers have access to production, but not on
-  a permanent basis.
+- Site reliability engineers have access to production, but not permanently.
 - Access to production requires approval and multi-factor authentication (MFA)
-- Logging enabled and monitored for access to production.
+- Logging is enabled and monitored for access to production.
 - Centralized authentication and authorization for all services.
 
 HashiCorp tools and services like [Vault](/vault/tutorials/get-started) and
@@ -93,7 +88,7 @@ identity and access management program.
 - [Use dynamic credentials](/well-architected-framework/secure-systems/identity-access-management/use-dynamic-credentials)
 - [Manage access lifecycle](/well-architected-framework/secure-systems/identity-access-management/manage-access-lifecycle)
 
-In this section of **Identity and access management**, you learned the importance
+In this section of Identity and access management, you learned the importance
 of using least privilege in your policies governing access requirements.
 Identity and access management is part of the [Secure
 systems](/well-architected-framework/secure-systems) pillar.
