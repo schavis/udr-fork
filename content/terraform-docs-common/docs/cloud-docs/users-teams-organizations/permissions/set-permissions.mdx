@@ -61,7 +61,8 @@ To set organization-level permissions for a team, perform the following steps:
 
 1. Navigate to your organization's **Settings** page.
 1. Click **Teams**, then select the team name from the list.
-1. Assign specific permissions to apply across your organization.
+1. Assign the permissions you want to grant team members across your organization.
+1. Click **Update team organization access** to save the permissions.
 
 For more information about what each permission grants, refer to [Organization permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization).
 
@@ -77,11 +78,18 @@ If you are in an HCP Europe organization, HCP Terraform inherits the groups and 
 - HCP Terraform roles - Assign additional permissions to refine access to the organization in HCP Terraform.
 
 To add a new organization-level role for your group in HCP Terraform, perform the following steps:
-1. Navigate to your organization in HCP Terraform EU, your URL must include `app.eu.terraform.io`.
+
+1. Navigate to your organization in HCP Terraform EU. Your URL must include `app.eu.terraform.io`.
 1. Select **Settings**, then **Role assignments** in the side navigation.
-1. Click **+ Add new assignment**, select a group to assign a Terraform role to, then click **Select group**.
-1. Alternatively, expand the ellipsis next to a group, select **View organization-level permissions**, select **Manage roles**, and then click **Edit Terraform Roles**.
-    - To manage your HCP organization role, you can alternatively select **Manage roles on HCP** to navigate to HCP.
+1. Click **+ Add new assignment**. 
+1. Select a group to assign a Terraform role to, then click **Select group**.
+1. Alternatively, open the ellipses menu for a group and complete the following steps:
+
+    1. Select **View organization-level permissions**.
+    1. Select **Manage roles**.
+    1. Click **Edit Terraform Roles**.
+    
+    To manage your HCP organization role, you can alternatively select **Manage roles on HCP** to navigate to HCP.
 
 To learn more about using roles and HCP groups, refer to [HCP group roles and HCP Terraform permissions](/terraform/cloud-docs/users-teams-organizations/permissions#hcp-group-roles-and-hcp-terraform-permissions). To learn about the specific permissions you can assign to organizations in HCP Terraform, refer to [Organization permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization).
 
@@ -104,7 +112,8 @@ To set project-level permissions for a team, perform the following steps:
 1. Navigate to your organization's **Projects** page.
 1. Select a project from the list, then select **Settings** in the side navigation.
 1. Click **Team access**, and select the team name from the list or click **+ Add team** to add a new team assignment.
-1. Assign specific permissions to that team to apply across your project.
+1. Choose one of the preset roles, or set individual permissions to create a custom role.
+1. Click **Assign  permissions** to save the settings.
 
 For more information about each permission, refer to [Project permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project).
 
@@ -114,18 +123,24 @@ For more information about each permission, refer to [Project permissions](/terr
 
 If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set project-level permissions](#set-project-level-permissions).
 
-If you are in an HCP Europe organization, HCP Terraform inherits the groups and roles you define in HCP. To learn about creating groups and managing users, refer to [HCP Groups](/hcp/docs/hcp/iam/groups). You can assign project-level roles to groups in two ways:
+If you are in an HCP Europe organization, HCP Terraform inherits the groups and roles you define in HCP. To learn about creating groups and managing users, refer to [HCP Groups](/hcp/docs/hcp/iam/groups). You can assign project-level roles to groups in the following ways:
 
-- HCP roles - You can assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
-- HCP Terraform roles - Assign additional permissions to refine access to the project in HCP Terraform.
+- HCP roles: Assign HCP roles to groups in HCP, and those roles automatically grant permissions in HCP Terraform.
+- HCP Terraform roles: Assign additional permissions to refine access to the project in HCP Terraform.
 
 To add a new project-level role for your group in HCP Terraform, perform the following steps:
-1. Navigate to your organization in HCP Terraform EU, your URL must include `app.eu.terraform.io`.
+1. Navigate to your organization in HCP Terraform EU. Your URL must include `app.eu.terraform.io`.
 1. Select a project from the list.
 1. Select **Settings**, then **Role assignments** from the side navigation.
-1. Click **+ Add new assignment**, select a role and a group, then click **Assign role**.
-1. Alternatively, expand the ellipsis next to a group, select **View project-level permissions**, select **Manage roles**, and then click **Edit Terraform Roles**.
-    - To manage your HCP project role, you can alternatively select **Manage roles on HCP** to navigate to HCP.
+1. Click **+ Add new assignment**.
+1. Select a role and a group, then click **Assign role**.
+1. Alternatively, open the ellipses menu for a group and complete the following steps:
+
+    1. Select **View project-level permissions**.
+    1. Select **Manage roles**. 
+    1. Click **Edit Terraform Roles**.
+    
+    To manage your HCP project role, you can alternatively select **Manage roles on HCP** to navigate to HCP.
 
 To learn more about using roles and HCP groups, refer to [HCP group roles and HCP Terraform permissions](/terraform/cloud-docs/users-teams-organizations/permissions#hcp-group-roles-and-hcp-terraform-permissions). To learn about the specific permissions you can assign to projects in HCP Terraform, refer to [Project permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project).
 
@@ -149,7 +164,8 @@ To set workspace-level permissions for a team, perform the following steps:
 1. Navigate to your organization's **Workspaces** page.
 1. Select a workspace from the list, then select **Settings** in the side navigation.
 1. Click **Team access**, and select the team name from the list or click **+ Add team and permissions** to add a new team assignment.
-1. Assign specific permissions to that team to apply across your workspace.
+1. Choose one of the preset roles, or set individual permissions to create a custom role.
+1. Click **Assign  permissions** to save the settings.
 
 For more information about each permission, refer to [Workspaces permissions](/terraform/cloud-docs/users-teams-organizations/permissions/workspaces).
 
