@@ -130,11 +130,11 @@ Team permissions are available in standard HCP Terraform organizations.
 
 | Permission name | Description |
 |-----------------|-------------|
-| [Manage Membership](#manage-membership) | Invite, remove, and add users to the team |
-| [Manage Teams](#manage-teams) | Create, update, delete teams and [generate tokens](/terraform/cloud-docs/users-teams-organizations/api-tokens#team-api-tokens) |
-| [Manage Organization Access](#manage-organization-access) | Update team organization access settings |
-| [Include Secret Teams](#include-secret-teams) | Access and modify secret teams  |
-| [Allow Member Token Management](#allow-member-token-management) | Control team token management for team members |
+| [Manage membership](#manage-membership) | Invite, remove, and add users to the team |
+| [Manage teams](#manage-teams) | Create, update, delete teams and [generate tokens](/terraform/cloud-docs/users-teams-organizations/api-tokens#team-api-tokens) |
+| [Manage organization access](#manage-organization-access) | Update team organization access settings |
+| [Include secret teams](#include-secret-teams) | Access and modify secret teams  |
+| [Allow member token management](#allow-member-token-management) | Control team token management for team members |
 
 You can enable the following team management permissions in HCP Terraform:
 
@@ -211,11 +211,11 @@ The following permissions control access to governance and infrastructure tools.
 
 | Permission name | Description |
 |-----------------|-------------|
-| [Manage Policies](#manage-policies) | Create, edit, read, list and delete Sentinel policies |
-| [Manage Policy Overrides](#manage-policy-overrides) | Override soft-mandatory policy checks |
-| [Manage Run Tasks](#manage-run-tasks) | Create, edit, and delete run tasks |
+| [Manage policies](#manage-policies) | Create, edit, read, list and delete Sentinel policies |
+| [Manage policy overrides](#manage-policy-overrides) | Override soft-mandatory policy checks |
+| [Manage run tasks](#manage-run-tasks) | Create, edit, and delete run tasks |
 | [Manage version control settings](#manage-version-control-settings) | Manage VCS providers and SSH keys |
-| [Manage Agent Pools](#manage-agent-pools) | Create, edit, and delete agent pools |
+| [Manage agent pools](#manage-agent-pools) | Create, edit, and delete agent pools |
 
 ### Manage policies
 
@@ -223,21 +223,21 @@ Allows members to create, edit, read, list and delete the organization's Sentine
 
 This permission implicitly gives permission to read runs on all workspaces, which is necessary to set enforcement of [policy sets](/terraform/cloud-docs/policy-enforcement/manage-policy-sets).
 
-### Manage Run Tasks
+### Manage run tasks
 
 Allows members to create, edit, and delete run tasks on the organization.
 
-### Manage Policy Overrides
+### Manage policy overrides
 
 Allows members to override soft-mandatory policy checks.
 
 This permission implicitly gives permission to read runs on all workspaces, which is necessary to override policy checks.
 
-### Manage VCS Settings
+### Manage VCS settings
 
 Allows members to manage the set of [VCS providers](/terraform/cloud-docs/vcs) and [SSH keys](/terraform/cloud-docs/vcs#ssh-keys) available within the organization.
 
-### Manage Agent Pools
+### Manage agent pools
 
 Allows members to create, edit, and delete agent pools within their organization.
 
