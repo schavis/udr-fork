@@ -6,7 +6,7 @@ description: >-
 
 # Set permissions
 
-Roles in HCP Terraform define the permissions that users have at different levels of your organization. You can assign roles at the organization, project, and workspace levels to control user access and the actions they can take.
+In HCP Terraform you can set individual permissions and sets of permissions to control what your organization members do. You can assign permissions at the organization, project, and workspace levels to control user access and the actions they can take.
 
 > **Hands-on:** Try the [Manage Permissions in HCP Terraform](/terraform/tutorials/cloud/cloud-permissions?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS) tutorial.
 
@@ -20,10 +20,10 @@ If you are in an HCP Terraform organization, you can manage user access and perm
 
 Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set by an organization, project, or workspace. To learn more, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
 
-The following sections explain how to set roles at each permission level:
-- [Set organization-level roles](#set-organization-level-roles)
-- [Set project-level roles](#set-project-level-roles)
-- [Set workspace-level roles](#set-workspace-level-roles)
+The following sections explain how to set permissions in HCP Terraform:
+- [Set organization-level permissions](#set-organization-level-permissions)
+- [Set project-level permissions](#set-project-level-permissions)
+- [Set workspace-level permissions](#set-workspace-level-permissions)
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
@@ -38,14 +38,14 @@ To learn how to set up groups and assign users to them in HCP, refer to [Groups]
 
 Each permission a user is granted is additive. HCP Terraform grants a user the highest permissions possible, regardless of whether that permission was set by an HCP or HCP Terraform role, or whether the role was set by an organization, project, or workspace. To learn more, refer to [Effective permissions](/terraform/cloud-docs/users-teams-organizations/permissions#effective-permissions).
 
-The following sections explain how to set roles at each permission level:
+The following sections explain how to set permissions in HCP Terraform:
 - [Set organization-level roles for HCP Europe organizations](#set-organization-level-roles-for-hcp-europe-organizations)
 - [Set project-level roles for HCP Europe organizations](#set-project-level-roles-for-hcp-europe-organizations)
 - [Set workspace-level roles for HCP Europe organizations](#set-workspace-level-roles-for-hcp-europe-organizations)
 
 <!-- END: TFC:only name:hcp-eu -->
 
-## Set organization-level roles
+## Set organization-level permissions
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
@@ -69,7 +69,7 @@ For more information about what each permission grants, refer to [Organization p
 
 ## Set organization-level roles for HCP Europe organizations
 
-If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set organization-level roles](#set-organization-level-roles).
+If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set organization-level permissions](#set-organization-level-permissions.
 
 If you are in an HCP Europe organization, HCP Terraform inherits the groups and roles you define in HCP. To learn about creating groups and managing users, refer to [HCP Groups](/hcp/docs/hcp/iam/groups). You can assign organization-level permissions to groups in two ways:
 
@@ -87,7 +87,7 @@ To learn more about using roles and HCP groups, refer to [HCP group roles and HC
 
 <!-- END: TFC:only name:hcp-eu -->
 
-## Set project-level roles
+## Set project-level permissions
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
@@ -112,7 +112,7 @@ For more information about each permission, refer to [Project permissions](/terr
 
 ## Set project-level roles for HCP Europe organizations
 
-If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set project-level roles](#set-project-level-roles).
+If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set project-level permissions](#set-project-level-permissions).
 
 If you are in an HCP Europe organization, HCP Terraform inherits the groups and roles you define in HCP. To learn about creating groups and managing users, refer to [HCP Groups](/hcp/docs/hcp/iam/groups). You can assign project-level roles to groups in two ways:
 
@@ -131,7 +131,7 @@ To learn more about using roles and HCP groups, refer to [HCP group roles and HC
 
 <!-- END: TFC:only name:hcp-eu -->
 
-## Set workspace-level roles
+## Set workspace-level permissions
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
@@ -157,7 +157,7 @@ For more information about each permission, refer to [Workspaces permissions](/t
 
 ## Set workspace-level roles for HCP Europe organizations
 
-If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set workspace-level roles](#set-project-level-roles).
+If your URL includes `portal.cloud.eu.hashicorp` or `app.eu.terraform.io`, then you are in an HashiCorp Cloud Platform (HCP) Europe organization. If you are not in an HCP Europe organization, refer to [Set workspace-level permissions](#set-project-level-permissions).
 
 If you are in an HCP Europe organization, HCP Terraform inherits the groups and roles you define in HCP. To learn about creating groups and managing users, refer to [HCP Groups](/hcp/docs/hcp/iam/groups). You can assign roles to groups in two ways:
 
