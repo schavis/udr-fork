@@ -64,7 +64,7 @@ In an HCP Europe organization, you can grant permissions at the project-level th
 
 ### Project admin
 
-Each project has an **Admin** permission level that grants permissions for the project, and the workspaces<!-- BEGIN: TFC:only name:stacks-tfe -->and Stacks<!-- END: TFC:only name:stacks-tfe --> that belong to that project.
+Each project has a group of permissions under the **Admin** role. This role grants permissions for the project and the workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> that belong to that project.
 
 Members of teams with **Admin** permissions for a project have [general workspace permissions](#workspace-permissions) for every workspace<!-- BEGIN: TFC:only name:stacks-tfe -->, as well as **Admin** access for every Stack,<!-- END: TFC:only name:stacks-tfe --> in the project, and the ability to do the following:
 - Read and update project settings.
@@ -75,26 +75,26 @@ Members of teams with **Admin** permissions for a project have [general workspac
   - Create, read, update, and delete workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in this project.
   - Initiate, cancel, or apply runs for workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in the project.
 
-#### Project maintain
+### Project maintain
 
-The **Maintain** permission is for users who need to manage existing infrastructure in a single project, while also granting the ability to create new workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in that project. **Maintain** access grants full control of everything in the project, including the following permissions:
+Assign the **Maintain** role when users are responsible for managing existing infrastructure in a single project. The role also grants the ability to create new workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in that project. **Maintain** access grants full control of everything in the project, including the following permissions:
 - Read the project name.
 - Admin access for all workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in this project, including the ability to:
   - Create, read, update, and delete workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in this project.
   - Initiate, cancel, or apply runs for workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in the project.
 
 
-#### Project write
+### Project write
 
-The **Write** permission set is for people who do most of the day-to-day work of provisioning and modifying managed infrastructure. **Write** access grants the following permissions:
+Assign the **Write** role when users are responsible for most of the day-to-day work of provisioning and modifying managed infrastructure. **Write** access grants the following permissions:
 - Read the project name.
 - Write access for all workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in this project, including the ability to:
   - Read workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in this project.
   - Initiate, cancel, or apply runs for workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in the project.
 
-#### Project read
+### Project read
 
-The **Read** permission set is for people who need to view information about the status and configuration of managed infrastructure for their job function, but are not responsible for maintaining that infrastructure. **Read** access grants the permissions to:
+Assign the **Read** role to users who need to view information about the status and configuration of managed infrastructure but are not responsible for maintaining that infrastructure. **Read** access grants the permissions to:
 - Read the project name.
 - Read access for all workspaces<!-- BEGIN: TFC:only name:stacks-tfe --> and Stacks<!-- END: TFC:only name:stacks-tfe --> in this project.
 
@@ -114,7 +114,6 @@ Stacks do not support custom group permissions.
 
 You can create a set of custom permissions using any of the permissions listed in the [Project roles and permissions](#project-roles-and-permissions) table.
 
-Some permissions, such as the project access permission, are tiered. You can only assign one permission per category because higher-level permissions include the capabilities of lower levels.
 
 ## Project access
 
@@ -217,7 +216,7 @@ Allows users to see teams assigned to the project for visible teams.
 
 ### Manage <a id="team-manage"></a>
 
-Allows users to set or remove project permissions for visible teams. Project admins can not view or manage [secret teams](/terraform/cloud-docs/users-teams-organizations/teams/manage#team-visibility) unless they are also organization owners.
+Allows users to set or remove project permissions for visible teams. Project admins can not view or manage teams with **Visibility** set to **Secret** in their team settings unless they are also organization owners. Refer to [Team visiblity](/terraform/cloud-docs/users-teams-organizations/teams/manage#team-visibility) for more information.
 
 ## Run access
 
@@ -243,7 +242,7 @@ Allows users to approve and apply Terraform plans, causing changes to real infra
 
 ## Variable access
 
-The following table summarizes the available variable access permissions for workspaces within the project.
+The following table summarizes the available variable access permissions for workspaces within the project. Refer to [Manage variables and variable sets](/terraform/cloud-docs/variables/managing-variables) for more information about variables.
 
 | Permission name | Description |
 |-----------------|-------------|
@@ -257,15 +256,15 @@ No access is granted to the values of Terraform variables and environment variab
 
 ### Read <a id="variable-read"></a>
 
-Allows users to view the values of Terraform variables and environment variables for workspaces within the project. Note that variables marked as sensitive are write-only, and can't be viewed by any user.
+Allows users to view the values of Terraform variables and environment variables for workspaces within the project. Note that variables marked as sensitive are write-only and can't be viewed by any user.
 
 ### Read and write <a id="variable-read-write"></a>
 
-Allows users to edit the values of variables in workspaces within the project. This permission implies permission to read.
+Allows users to read and edit the values of variables in workspaces within the project. 
 
 ## Variable set access
 
-The following table summarizes the available variable set access permissions for the project.
+The following table summarizes the available permissions for creating and managing sets of variables in the project. Refer to [Manage variables and variable sets](/terraform/cloud-docs/variables/managing-variables) for more information about variable sets.
 
 | Permission name | Description |
 |-----------------|-------------|
@@ -275,7 +274,7 @@ The following table summarizes the available variable set access permissions for
 
 ### None <a id="variable-set-none"></a>
 
-No access to variable sets owned by the project. However, users with Variable access permissions can view variable sets applied to this project and its workspaces.
+No access to variable sets owned by the project, but users can view variable sets that have been applied to the project and its workspaces if their **Variable access** permission is set to **Read** or **Read and write** .
 
 ### Read <a id="variable-set-read"></a>
 
@@ -283,11 +282,11 @@ Allows users to view variable sets owned by this project.
 
 ### Manage <a id="variable-set-manage"></a>
 
-Allows users to create, update, and delete variable sets owned by the project. This permission implies permission to read.
+Allows users to read, create, update, and delete variable sets owned by the project.
 
 ## State access
 
-The following table summarizes the available state access permissions for workspaces within the project.
+The following table summarizes the available state access permissions for workspaces within the project. Refer to [State](/terraform/language/state) to learn about state in Terraform.  
 
 | Permission name | Description |
 |-----------------|-------------|
@@ -325,13 +324,17 @@ The following table summarizes additional control permissions for the project.
 
 Allows users to download data from runs in workspaces within the project in a format that can be used for developing Sentinel policies. This run data is very detailed, and often contains unredacted sensitive information.
 
+Refer to [Generate mock Sentinel data with Terraform](/terraform/cloud-docs/workspaces/policy-enforcement/test-sentinel) for more information about Sentinel mocks. 
+
 ### Lock/unlock workspaces
 
-Allows users to manually lock workspaces within the project to temporarily prevent runs. When a workspace's execution mode is set to "local", users must have this permission to perform local CLI runs using the workspace's state.
+Allows users to manually lock workspaces within the project to temporarily prevent runs. When a workspace's execution mode is set to **Local**, enable the **Lock/unlock workspaces** permission to perform local CLI runs using the workspace's state.
 
-### Manage workspace run tasks
+Refer to [Workspace settings](/terraform/cloud-docs/workspaces/settings) for information about execution modes and locking workspaces.
 
-Allows users to associate or dissociate run tasks with workspaces within the project. HCP Terraform creates Run Tasks at the organization level, where you can manually associate or dissociate them with specific workspaces.
+### Manage workspace Run Tasks
+
+Allows users to associate or dissociate run tasks with workspaces within the project. HCP Terraform creates run tasks at the organization level, where you can manually associate or dissociate them with specific workspaces. Refer to [Set up run task integrations](/terraform/cloud-docs/integrations/run-tasks) for more information about run tasks. 
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
