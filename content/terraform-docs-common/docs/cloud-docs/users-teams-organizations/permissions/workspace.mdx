@@ -58,7 +58,7 @@ Admin permissions include the highest level of general permissions for the works
 
 Workspace admins have all other [workspace permissions](#workspace-roles-and-permissions), as well as the ability to do the following:
 
-- Read and write workspace settings. This includes general settings, notification configurations, run triggers, and more.
+- Read and write workspace settings, such as general settings, notification configurations, and run triggers.
 - Set or remove workspace permissions for visible teams. Workspace admins cannot view or manage teams with the [**Secret**](/terraform/cloud-docs/users-teams-organizations/teams/manage#team-visibility) visibility option enabled unless they are also organization owners.
 - Delete the workspace
   - Depending on the [organization's settings](/terraform/cloud-docs/users-teams-organizations/organizations#general), workspace admins may only be able to delete the workspace if it is not actively managing infrastructure. Refer to [Deleting a Workspace With Resources Under Management](/terraform/cloud-docs/workspaces/settings#deleting-a-workspace-with-resources-under-management) for details.
@@ -113,19 +113,19 @@ The following table summarizes the available run access permissions for the work
 
 ### Read <a id="run-read"></a>
 
-Allows users to view information about remote Terraform runs, including the run history, the status of runs, the log output of each stage of a run (plan, apply, cost estimation, policy check), and configuration versions associated with a run.
+Allows users to view information about remote Terraform runs. Users can view run history, the status of runs, configuration versions associated with a run, and the log output of each stage of a run. Refer to [Run states and stages](/terraform/cloud-docs/workspaces/run/states) for more information.
 
 ### Plan <a id="run-plan"></a>
 
-Allows users to queue Terraform plans in a workspace, including both speculative plans and normal plans. Normal plans must be approved by a user with permission to apply runs. This also allows users to comment on runs. This permission implies permission to read.
+Allows users to read, queue, and comment on Terraform plans in a workspace. Regular plans require approval from a user with permission to apply runs.
 
 ### Apply <a id="run-apply"></a>
 
-Allows users to approve and apply Terraform plans, causing changes to real infrastructure. This permission implies permission to plan and read.
+Allows users to read, plan, approve, and apply Terraform plans. Granting this permission allows team members to change real infrastructure. 
 
 ## Variable access
 
-The following table summarizes the available variable access permissions for the workspace.
+The following table summarizes the available permissions for accessing workspace variables.
 
 | Permission name | Description |
 |-----------------|-------------|
@@ -138,11 +138,11 @@ The following table summarizes the available variable access permissions for the
 No access is granted to the values of Terraform variables and environment variables for the workspace.
 
 ### Read <a id="variable-read"></a>
-Allows users to view the values of Terraform variables and environment variables for the workspace. Note that variables marked as sensitive are write-only, and can't be viewed by any user.
+Allows users to view the values of Terraform variables and environment variables for the workspace. Note that variables marked as sensitive are write-only and can't be viewed by any user.
 
 ### Read and write <a id="variable-read-write"></a>
 
-Allows users to edit the values of variables in the workspace. This permission implies permission to read.
+Allows users to read and edit the values of variables in the workspace. 
 
 
 ## State access
@@ -162,11 +162,15 @@ No access is granted to the state file from the workspace.
 
 ### Read outputs only <a id="state-read-outputs"></a>
 
-Allows users to access values in the workspace's most recent Terraform state that have been explicitly marked as public outputs.
+Allows users to access values in the workspace's most recent Terraform state that have been explicitly marked as public outputs. Refer to [Define outputs to expose module data](/terraform/language/parameterize#define-outputs-to-expose-module-data) to learn more.
 
-Output values are often used as an interface between separate workspaces that manage loosely coupled collections of infrastructure, so their contents can be relevant to people who have no direct responsibility for the managed infrastructure but still indirectly use some of its functions.
+Configuration authors often use output values to interface with other workspaces that manage loosely-coupled collections of infrastructure. Making output values readable lets people who have no direct responsibility for the managed infrastructure in one workspace still indirectly use some of its functions in their workspaces.
 
-This permission is required to access the [State Version Outputs](/terraform/cloud-docs/api-docs/state-version-outputs) API endpoint and to use the `terraform output` command or the `terraform_remote_state` data source against the workspace.
+This permission is required to use the following features:
+
+ - Call the [`/state-versions` API endpoint](/terraform/cloud-docs/api-docs/state-version-outputs) 
+ - Run the [`terraform output` command](/terraform/cli/commands/output)
+ - Use the [`terraform_remote_state` data source](/terraform/language/state/remote-state-data) against the workspace.
 
 ### Read <a id="state-read"></a>
 
@@ -174,11 +178,11 @@ Allows users to read complete state files from the workspace. State files are us
 
 ### Read and write <a id="state-read-write"></a>
 
-Allows users to directly create new state versions in the workspace. This permission is required for performing local runs when the workspace's execution mode is set to "local". This permission implies permission to read.
+Allows users to read and directly create new state versions in the workspace. This permission is required for performing local runs when the workspace's execution mode is set to **Local**. 
 
-This permission is also required to use any of the Terraform CLI's state manipulation and maintenance commands against this workspace, including `terraform import`, `terraform taint`, and the various `terraform state` subcommands.
+This permission is also required to use any of the [Terraform CLI's state manipulation and maintenance commands](/terraform/cli/state) against this workspace, including `terraform import`, `terraform taint`, and the various `terraform state` subcommands.
 
-her controls
+### Other controls
 
 The following table summarizes additional control permissions for the workspace.
 
@@ -190,15 +194,15 @@ The following table summarizes additional control permissions for the workspace.
 
 ### Download Sentinel mocks
 
-Allows users to download data from runs in the workspace in a format that can be used for developing Sentinel policies. This run data is very detailed, and often contains unredacted sensitive information.
+Allows users to download data from runs in the workspace in a format that you can use for developing Sentinel policies. This run data from Sentinel mocks is detailed and may contain unredacted sensitive information.
 
 ### Lock/unlock workspace
 
-Allows users to manually lock the workspace to temporarily prevent runs. When a workspace's execution mode is set to "local", users must have this permission to perform local CLI runs using the workspace's state.
+Allows users to manually lock the workspace to temporarily prevent runs. When a workspace's execution mode is set to **Local**, you must grant this permission so that team members can perform local CLI runs using the workspace's state.
 
 ### Manage workspace Run Tasks
 
-Allows users to associate or dissociate run tasks with the workspace. HCP Terraform creates Run Tasks at the organization level, where you can manually associate or dissociate them with specific workspaces.
+Allows users to associate or dissociate run tasks with the workspace. HCP Terraform creates run tasks at the organization level, where you can manually associate or dissociate them with specific workspaces.
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
