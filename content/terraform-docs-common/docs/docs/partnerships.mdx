@@ -114,13 +114,12 @@ All Terraform providers listed as Partner must contain one of the following open
 In order to qualify for the Partner Premier tag on the Terraform Registry, in addition to all of the requirements for the Partner Tag listed below, one technical **and** one feature requirement listed below must be met:
 
 **Technical:**
-- Include an SBOM for the provider using [Syft](https://github.com/anchore/syft), the [CycloneDX Generator](https://github.com/CycloneDX/cdxgen), or other SBOM generation tool.
+- Include a Software Bill of Materials (SBOM) for the provider using [Syft](https://github.com/anchore/syft), the [CycloneDX Generator](https://github.com/CycloneDX/cdxgen), or other SBOM generation tool.
 
 **Feature:**
-- [Terraform Checks](https://developer.hashicorp.com/terraform/language/validate) for resource validation.
 - [Ephemeral Resources](https://developer.hashicorp.com/terraform/plugin/framework/ephemeral-resources) if applicable as a security best practice
-- [Terraform Search](TBD)
-- [Terraform Actions](TBD)
+- [Terraform Search](https://developer.hashicorp.com/terraform/language/v1.14.x/import/bulk)
+- [Terraform Actions](https://developer.hashicorp.com/terraform/language/v1.14.x/invoke-actions)
 
 Technology partners that qualify for the Partner Premier tag enjoy additional partner benefits, such as co-marketing support and opportunities, technical support and resources, roadmap sharing, access to provider development workshops, and exclusive design input into the future of Terraform as a product, in addition to other perks.
 
