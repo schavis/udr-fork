@@ -13,13 +13,24 @@ environment and reduces the risk of unauthorized access.
 
 ## What is access lifecycle management
 
-Access lifecycle management is the process of managing user accounts and their access permissions throughout their lifecycle, from creation to deprovisioning. The management includes onboarding new users, modifying access as roles change, and removing access when it is no longer needed.
+Access lifecycle management is the process of managing user accounts and their
+access permissions throughout their lifecycle, from creation to deprovisioning.
+The management includes onboarding new users, modifying access as roles change,
+and removing access when it is no longer needed.
 
 ## Why manage access lifecycle
 
-Failing to manage identity and access for users and services can lead to incidents, whether malicious or accidental. For example, if a user leaves the organization or changes roles and their account is not deprovisioned, they may still have access to systems and data to which they are not authorized.
+Failing to manage identity and access for users and services can lead to
+incidents, whether malicious or accidental. For example, if a user leaves the
+organization or changes roles and their account is not deprovisioned, they may
+still have access to systems and data to which they are not authorized.
 
-A publishing company in the 2000s let go of one of its system administrators but failed to deprovision their account in an email system that they had not securely managed. The former employee logged in and forwarded thousands of spam emails to employees, causing a significant disruption to their day. By properly managing accounts from creation through deletion, you can avoid incidents caused by unauthorized access.
+A publishing company in the 2000s let go of one of its system administrators but
+failed to deprovision their account in an email system that they had not
+securely managed. The former employee logged in and forwarded thousands of spam
+emails to employees, causing a significant disruption to their day. By properly
+managing accounts from creation through deletion, you can avoid incidents caused
+by unauthorized access.
 
 By [centralizing identity
 management](/well-architected-framework/secure-systems/identity-access-management/centralize-identity-management),
@@ -48,6 +59,30 @@ secrets](/well-architected-framework/secure-systems/secrets/store-static-secrets
 and [rotating
 secrets](/well-architected-framework/secure-systems/secrets/rotate-secrets)
 builds a strong security foundation for your organization.
+
+HashiCorp Vault fundamentally changes how you manage access lifecycle by
+eliminating long-lived credentials:
+
+- **Dynamic secrets** - Instead of creating permanent credentials during user
+  onboarding, Vault generates temporary credentials on-demand when users need
+  access. These credentials automatically expire, removing the need for manual
+  deprovisioning in many scenarios.
+- **Lease management** - Every secret issued by Vault has an associated lease.
+  When a user’s employment ends or their role changes, revoking their Vault
+  token automatically revokes all associated dynamic credentials across
+  databases, cloud providers, and other systems.
+
+HashiCorp Boundary enforces access lifecycle through just-in-time access
+patterns:
+
+- **Session-based access** - Rather than granting permanent access to
+  infrastructure, Boundary creates temporary sessions. When a session ends,
+  access automatically terminates.
+- **Time-limited targets** - Configure targets with expiration times to
+  automatically deprovision access to specific systems after a defined period.
+- **Identity integration** - Connect Boundary to your identity provider so that
+  when you deprovision a user from the identity provider, they lose the ability to
+  create new sessions to infrastructure resources.
 
 HashiCorp resources:
 

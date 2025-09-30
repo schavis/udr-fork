@@ -39,7 +39,11 @@ While most regulations do not have explicit requirements for least privilege,
 they do require controls that show you have a strong identity and access
 management program.
 
-Consider conventional virtual private network (VPN) solutions, where a user connects to the VPN and gains access to the entire network. If a user’s credentials are compromised, an attacker can access all data on the network. A VPN is generally unable to follow the principle of least privilege because it provides broad access to the network.
+Consider conventional virtual private network (VPN) solutions, where a user
+connects to the VPN and gains access to the entire network. If a user’s
+credentials are compromised, an attacker can access all data on the network. A
+VPN is generally unable to follow the principle of least privilege because it
+provides broad access to the network.
 
 In contrast, a zero trust model with least privilege ensures that users
 have access to the specific resources they need. If a user’s credentials become
@@ -53,13 +57,26 @@ Some examples of documentation at this stage include:
 - Software engineers do not have access to production.
 - Site reliability engineers have access to production, but not permanently.
 - Access to production requires approval and multi-factor authentication (MFA)
-- Logging is enabled and monitored for access to production.
+- Logging enabled and monitoring access to production.
 - Centralized authentication and authorization for all services.
 
 HashiCorp tools and services like [Vault](/vault/tutorials/get-started) and
 [Boundary](/boundary/tutorials/get-started-hcp) allow you to implement least
 privilege access controls, while Terraform helps you manage the policies for
 Vault and Boundary.
+
+With Vault and Boundary, you can provision dynamic credentials allowing users to
+remotely access systems without managing long-lived credentials. When the
+session is complete, Vault revokes the credentials, reducing the risk of
+compromise.
+
+Boundary also allows you to provide access to the specific systems and
+services that users need access to, eliminating access to the entire network
+like conventional VPN solutions do.
+
+Terraform helps you manage the policies for Vault and Boundary, allowing you to
+define, update, and enforce policies as code. This approach ensures that your
+policies are consistent, auditable, and can be version controlled.
 
 HashiCorp resources:
 
