@@ -15,9 +15,9 @@ you can use that information to write identity and access management (IAM) polic
 ## What is least privilege
 
 Least privilege means that users, applications, and systems have the minimum
-permissions necessary to perform their required tasks. This approach reduces the risk
-of unauthorized access or actions that can compromise the security of your systems
-and [secure
+permissions necessary to perform their required tasks. Following the princple of
+least privilege reduces the risk of unauthorized access or actions that can
+compromise the security of your systems and [secure
 data](/well-architected-framework/secure-systems/data/classify-data).
 
 <VideoEmbed url="https://www.youtube.com/watch?v=PTqVlftfK_U"/>
@@ -50,9 +50,9 @@ have access to the specific resources they need. If a user’s credentials becom
 compromised using least privilege policies, the attacker can access just the
 limited set of resources defined in the policy, reducing the potential damage.
 
-At this stage, you should have identified and collected the access requirements,
+You have now identified and collected the access requirements,
 and used that information to write documentation that follows least privilege.
-Some examples of documentation at this stage include:
+Some examples of documentation to write include:
 
 - Software engineers do not have access to production.
 - Site reliability engineers have access to production, but not permanently.
@@ -75,8 +75,9 @@ services that users need access to, eliminating access to the entire network
 like conventional VPN solutions do.
 
 Terraform helps you manage the policies for Vault and Boundary, allowing you to
-define, update, and enforce policies as code. This approach ensures that your
-policies are consistent, auditable, and can be version controlled.
+define, update, and enforce policies as code. Using automation to manage
+policies ensures that your policies are consistent, auditable, and can be
+version controlled.
 
 HashiCorp resources:
 

@@ -12,7 +12,7 @@ policies.
 
 Creating policies and enforcing guardrails is the process of translating
 requirements into policies that define what users, applications, and systems can
-do. This process involves converting the requirements for each
+do. Writing effective permissions involves converting the requirements for each
 role or function within your organization when you [defined your access
 requirements](/well-architected-framework/secure-systems/identity-access-management/define-access-requirements)
 into policies for your systems.
@@ -39,10 +39,11 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO readonly_user;
 
 </CodeBlockConfig>
 
-The PostgreSQL role `readonly_user` with this permission can select data from
+The PostgreSQL role `readonly_user` with the `SELECT` permission can select data from
 tables, but not write or modify data.
 
-This AWS IAM policy allows read-only access to download files from the "company-reports" S3 bucket.
+An example AWS IAM policy that follows least privilege allows read-only access
+to download files from the "company-reports" S3 bucket.
 
 ```json
 {
@@ -81,9 +82,9 @@ like Active Directory may require scripting the policies in other languages like
 PowerShell to create Group Policy Objects (GPOs).
 
 Terraform helps you manage your policies for supported tools and services,
-allowing you to define, update, and enforce policies as code. This approach
-ensures that your policies are consistent, auditable, and can be version
-controlled.
+allowing you to define, update, and enforce policies as code. Using automation
+to manage policies ensures that your policies are consistent, auditable, and can
+be version controlled.
 
 HashiCorp resources:
 
