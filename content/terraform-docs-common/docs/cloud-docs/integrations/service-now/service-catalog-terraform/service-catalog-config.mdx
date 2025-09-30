@@ -250,8 +250,7 @@ Workspace tags have a 255 character limit and can contain letters, numbers, colo
 ## Approval Flow
 
 Version 2.9.0 introduces an approval step in the flow that ensures requests are reviewed and authorized before resources can be created.
-This new feature gives customers more control over their customized solutions. The overall idea is simple to our exisiting catalog items, resources are ordered, a terraform run is queued (speculative plan) and the flow is paused at this stage for the approver 
-to review the request and the plan in HCP Terraform. Upon approval, the plan is applied. However, if it is rejected, the plan will not be applied.
+You can add an approval steps to your existing catalog items. When a user orders resources, HCP Terraform runs a speculative plan, then pauses the flow and waits for the approver to review the request and the plan in HCP Terraform. If the approver approves the plan approval, HCP Terraform starts another run to apply it.
 
 You can use this workflow with the following catalog items: 
 
