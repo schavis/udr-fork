@@ -7,6 +7,10 @@ description: Learn how to set up the ServiceNow Service Catalog integration for 
 
 -> **Integration version:**  v2.8.1
 
+<!-- BEGIN: TFC:only name:pnp-callout -->
+@include 'tfc-package-callouts/servicenow-catalog.mdx'
+<!-- END: TFC:only name:pnp-callout -->
+
 The Terraform ServiceNow Service Catalog integration enables your end-users to
 provision self-serve infrastructure via ServiceNow. By connecting ServiceNow to
 HCP Terraform, this integration lets ServiceNow users order Service Items,
@@ -15,9 +19,16 @@ configurations hosted in VCS repositories or as [no-code
 modules](/terraform/cloud-docs/workspaces/no-code-provisioning/module-design) for
 self-service provisioning.
 
-<!-- BEGIN: TFC:only name:pnp-callout -->
-@include 'tfc-package-callouts/servicenow-catalog.mdx'
-<!-- END: TFC:only name:pnp-callout -->
+<!-- BEGIN: TFC:only name:hcp-eu -->
+
+<Note>
+
+@include 'eu/integrations.mdx'
+
+</Note>
+
+<!-- END: TFC:only name:hcp-eu -->
+
 
 ## Summary of the Setup Process
 
@@ -110,7 +121,7 @@ Terraform.
    **Save the organization name for later.**
 2. [Create a team](/terraform/cloud-docs/users-teams-organizations/teams) for that
    organization called "ServiceNow", and ensure that it has [permission to
-   manage workspaces](/terraform/cloud-docs/users-teams-organizations/permissions#manage-all-workspaces).
+   manage workspaces](/terraform/cloud-docs/users-teams-organizations/permissions/organization#manage-all-workspaces).
    You do not need to add any users to this team.
    [permissions-citation]: #intentionally-unused---keep-for-maintainers
 3. On the "ServiceNow" team's settings page, generate a [team API
