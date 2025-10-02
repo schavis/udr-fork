@@ -191,7 +191,7 @@ The Terraform integration program also provides solutions for auditing and cost 
 
 ![Terraform Run Phases](/img/docs/terraform-run-phases.png)
 
-[Run tasks](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/settings/run-tasks) as mentioned earlier allow HCP Terraform or Terraform Enterprise to execute tasks in external systems at certain points in the HCP Terraform run lifecycle. Specifically, HCP Terraform and Terraform Enterprise users can add and execute these tasks during the pre-plan, post-plan, pre-apply, and post-apply run stages. To execute a run task, Terraform sends an API payload to the external system. This payload contains a collection of run-related information and a callback URL that the external system can use to send updates back to HCP Terraform or Terraform Enterprise.
+[Run tasks](/terraform/cloud-docs/workspaces/settings/run-tasks) allow HCP Terraform and Terraform Enterprise to execute tasks in external systems at certain points in the HCP Terraform run lifecycle. Specifically, HCP Terraform and Terraform Enterprise users can add and execute these tasks during the pre-plan, post-plan, pre-apply, and post-apply run stages. To execute a run task, Terraform sends an API payload to the external system. This payload contains a collection of run-related information and a callback URL that the external system can use to send updates back to HCP Terraform or Terraform Enterprise.
 
 The external system can then use this run information and respond back to Terraform with a passed or failed status. Terraform uses this status response to determine if a run should proceed, based on the task's enforcement settings within a workspace.
 
