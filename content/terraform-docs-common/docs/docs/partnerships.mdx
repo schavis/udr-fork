@@ -178,7 +178,7 @@ Modules published by a HashiCorp technology partner can also be tagged with the 
   - Changelog: Documents changes and updates to the module over time.
 - The module’s documentation should also clearly describe the module’s purpose, usage, inputs, outputs, and any prerequisites or dependencies listed in the README.md file. We recommend automating this process through [terraform-docs.io](https://terraform-docs.io/). Any resources used in the module should also adopt ephemeral resources, as applicable to the use case.
 
-## HCP Terraform & Terraform Enterprise Integrations
+## HCP Terraform and Terraform Enterprise Integrations
 
 Our partnerships with leading technology providers offer a comprehensive suite of integrations for Terraform workflows. Our ecosystem is designed to enhance every stage of the infrastructure lifecycle, including: 
 
@@ -189,7 +189,7 @@ Our partnerships with leading technology providers offer a comprehensive suite o
 
 The Terraform integration program also provides solutions for auditing and cost management to maintain compliance and financial efficiency, streamline user access with SSO, and gain deep visibility into your deployment through observability and monitoring. Lastly, our advanced integrations with AI and multi-cloud platform tools automate complex tasks and simplify multi-cloud management, making infrastructure operations smarter and increasingly efficient.
 
-![Terraform Run Phases](/img/docs/Terraform Run Phases.png)
+![Terraform Run Phases](/img/docs/terraform-run-phases.png)
 
 [Run tasks](/terraform/cloud-docs/workspaces/settings/run-tasks) allow HCP Terraform and Terraform Enterprise to execute tasks in external systems at certain points in the HCP Terraform run lifecycle. Specifically, HCP Terraform and Terraform Enterprise users can add and execute these tasks during the pre-plan, post-plan, pre-apply, and post-apply run stages. To execute a run task, Terraform sends an API payload to the external system. This payload contains a collection of run-related information and a callback URL that the external system can use to send updates back to HCP Terraform or Terraform Enterprise.
 
