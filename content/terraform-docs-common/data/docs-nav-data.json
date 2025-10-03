@@ -19,9 +19,5 @@
     "title": "Terraform Tools", 
     "path": "tools"    
   },
-  {
-    "title": "Terraform MCP Server",
-    "path": "mcp-server"
-  },
   { "title": "Glossary", "path": "glossary" }
 ]
