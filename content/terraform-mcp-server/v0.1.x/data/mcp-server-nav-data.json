@@ -1,6 +1,6 @@
 [
     {
-        "heading": "Use Terraform MCP Server"
+        "heading": "Terraform MCP Server"
     },
     {
         "title": "Overview",
@@ -13,6 +13,10 @@
     {
         "title": "Prompt",
         "path": "prompt"
+    },
+    {
+        "title": "Security",
+        "path": "security"
     },
     {
         "title": "Reference",

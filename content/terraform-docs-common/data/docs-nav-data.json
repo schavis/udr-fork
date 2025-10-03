@@ -17,12 +17,11 @@
     },
   { 
     "title": "Terraform Tools", 
-    "routes": [
-      {
-        "title": "Overview",
-        "path": "tools" 
-      }
-    ]
+    "path": "tools"    
+  },
+  {
+    "title": "Terraform MCP Server",
+    "path": "mcp-server"
   },
   { "title": "Glossary", "path": "glossary" }
 ]
