@@ -1,4 +1,4 @@
-name: 🥌 Create GA PR
+name: ✅ Create GA PR
 run-name: Create GA PR [${{ github.actor }}]
 
 permissions: 
@@ -9,7 +9,7 @@ on:
     inputs:
       targetVersion:
         required: true
-        description: Version folder name
+        description: Preview version (e.g., "1.21.x")
       folderTag:
         required: true
         default: 'rc'
@@ -20,8 +20,8 @@ on:
 
 env:
   prBranch: "${{ github.event.inputs.product }}/${{ github.event.inputs.targetVersion }}-to-ga"
-  oldFolder: "content/${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}.x (${{ github.event.inputs.folderTag }})"
-  newFolder: "content/${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}.x"
+  oldFolder: "content/${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }} (${{ github.event.inputs.folderTag }})"
+  newFolder: "content/${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}"
 
 
 jobs:
@@ -31,27 +31,24 @@ jobs:
     env:
       GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Set branch name
-        run: |
-
-      - name: Checkout repo
+      - name: Check out main
         uses: actions/checkout@v4
 
       - name: Create PR branch
         id: create-branch
-        uses: peterjgrainger/action-create-branch@v2.0.1
+        uses: peterjgrainger/action-create-branch@v2.2.0
         with:
-          branch: ${{ github.env.prBranch }}
+          branch: refs/heads/${{ github.env.prBranch }}
 
   update-folder:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Checkout new branch
+      - name: Check out PR branch (${{ github.env.prBranch }})
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.env.prBranch }}
+          ref: refs/heads/${{ github.env.prBranch }}
 
       - name: Update folder name
         run: |
