@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: BUSL-1.1
+
+>>>>>>> f7906456760b1ab8ddf2144569240696fd78059a
 # Add a Terraform label to changes under the related folders:
 #
 # Folder                      | Labels
@@ -25,14 +31,22 @@ Terraform agents:
 - any:
   - changed-files:
     - any-glob-to-any-file: [
+<<<<<<< HEAD
         'content/terraform/**'
+=======
+        'content/terraform-docs-agents/**'
+>>>>>>> f7906456760b1ab8ddf2144569240696fd78059a
       ]
 
 HCP Terraform:
 - any:
   - changed-files:
     - any-glob-to-any-file: [
+<<<<<<< HEAD
         'content/terraform/**'
+=======
+        'content/terraform-docs-common/**'
+>>>>>>> f7906456760b1ab8ddf2144569240696fd78059a
       ]
 
 Terraform Enterprise:
@@ -42,11 +56,25 @@ Terraform Enterprise:
         'content/terraform-enterprise/**'
       ]
 
+<<<<<<< HEAD
+=======
+Terraform MCP Server:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: [
+        'content/terraform-mcp-server/**'
+      ]
+
+>>>>>>> f7906456760b1ab8ddf2144569240696fd78059a
 Terraform migrate:
 - any:
   - changed-files:
     - any-glob-to-any-file: [
+<<<<<<< HEAD
         'content/terraform-docs-common/**'
+=======
+        'content/terraform-migrate/**'
+>>>>>>> f7906456760b1ab8ddf2144569240696fd78059a
       ]
 
 TF Plugin Framework:
@@ -67,7 +95,13 @@ TF Plugin Framework:
 Vault:
 - any:
   - changed-files:
+<<<<<<< HEAD
     - any-glob-to-any-file: ['content/vault/**']
+=======
+    - any-glob-to-any-file: [
+        'content/vault/**'
+      ]
+>>>>>>> f7906456760b1ab8ddf2144569240696fd78059a
 
 Vault IC:
 - any:
@@ -88,4 +122,23 @@ Vault IC:
 WAF:
 - any:
   - changed-files:
+<<<<<<< HEAD
     - any-glob-to-any-file: ['content/well-architected-framework/**']
+=======
+    - any-glob-to-any-file: [
+        'content/well-architected-framework/**'
+      ]
+
+# Add 'Sentinel' label to changes under 'content/sentinel'
+#
+# Label           | Rule
+# --------------- | ------------------------------------------------------------
+# Sentinel        | Default; applies to all doc updates
+
+Sentinel:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: [
+        'content/sentinel/**'
+      ]
+>>>>>>> f7906456760b1ab8ddf2144569240696fd78059a
