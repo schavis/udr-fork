@@ -41,7 +41,7 @@ jobs:
         id: create-branch
         uses: peterjgrainger/action-create-branch@v2.2.0
         with:
-          branch: "refs/heads/${{ github.env.prBranch }}"
+          branch: "refs/head/${{ github.env.prBranch }}"
 
   update-folder:
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
       - name: Check out PR branch (${{ github.env.prBranch }})
         uses: actions/checkout@v4
         with:
-          ref: "refs/heads/${{ github.env.prBranch }}"
+          ref: "refs/head/${{ github.env.prBranch }}"
 
       - name: Update folder name
         run: |
