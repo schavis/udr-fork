@@ -18,7 +18,7 @@ on:
         description: Preview dog tag ('rc' or 'beta')
       product:
         required: true
-        default: 'rc'
+        default: 'vault'
         description: Product slug
 
 env:
@@ -39,7 +39,7 @@ jobs:
 
       - name: Create PR branch
         id: create-branch
-        uses: peterjgrainger/action-create-branch@v2.2.0  esource not accessible by integration
+        uses: peterjgrainger/action-create-branch@v2.2.0
         with:
           branch: "refs/heads/${{ github.env.prBranch }}"
 
