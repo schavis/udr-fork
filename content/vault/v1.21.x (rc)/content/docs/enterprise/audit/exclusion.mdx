@@ -1,0 +1,112 @@
+---
+layout: docs
+page_title: Exclusion syntax for audit data
+description: >-
+  Learn about the behavior and syntax for excluding audit data in Vault Enterprise.
+---
+
+# Exclusion syntax for audit data
+
+@include 'alerts/enterprise-only.mdx'
+
+As of Vault 1.18.0, you can enable audit devices with an `exclude` option to exclude
+specific fields in an audit entry that is written to a particular audit log, and fine-tune
+your auditing process.
+
+<Warning title="Proceed with caution">
+
+  Excluding audit entry fields is an advanced feature. Use of exclusion settings
+  could lead to missing data in your audit logs.
+
+  **Always** test your audit configuration in a non-production environment
+  before deploying exclusions to production. Read the
+  [Vault security model](/vault/docs/internals/security) and
+  [filtering overview](/vault/docs/concepts/filtering) to familiarize yourself
+  with Vault auditing and filtering basics before enabling audit devices that use
+  exclusions.
+
+</Warning>
+
+Once you enable an audit device with exclusions, every audit entry Vault sends to
+that audit device is compared to an (optional) condition in the form of a predicate expression.
+Vault checks exclusions before writing to the audit log for a device. Vault modifies
+any audit entries that match the exclusion expression to remove the fields
+specified for that condition. You can specify multiple sets of condition and field
+combinations for an individual audit device.
+
+When you enable audit devices that use exclusion, the behavior of any existing audit
+device and the behavior of new audit devices that **do not** use exclusion remains
+unchanged.
+
+## `exclude` option
+
+The value provided with the `exclude` option must be a parsable JSON array (i.e. JSON or
+an escaped JSON string) of exclusion objects.
+
+### Exclusion object
+
+- `condition` `(string: <optional>)` - predicate expression using
+  [filtering syntax](/vault/docs/concepts/filtering). When matched, Vault removes
+  the values identified by `fields`.
+- `fields` `(string[] <required>)` - collection of fields in the audit entry to exclude,
+identified using [JSON pointer](https://tools.ietf.org/html/rfc6901) syntax.
+
+```json
+[
+  {
+    "condition": "",
+    "fields": [ "" ]
+  }
+]
+```
+
+Vault always compares exclusion conditions against the original, immutable audit
+entry (the 'golden source'). As a result, evaluating a given condition does not
+affect the evaluation of subsequent conditions.
+
+### Exclusion examples
+
+#### Exclude response data (when present)
+
+Exclude the response `data` field from any audit entry that contains it:
+
+```json
+[
+  {
+    "fields": [ "/response/data" ]
+  }
+]
+```
+
+#### Exclude request data (when present) for transit mounts
+
+Exclude the request `data` field for audit entries with a mount type of `transit`:
+
+```json
+[
+  {
+    "condition": "\"/request/mount_type\" == transit",
+    "fields": [ "/request/data" ]
+  }
+]
+```
+#### Multiple exclusions
+
+Use multiple JSON objects to exclude:
+
+* `data` from both the request and response when the mount type is `transit`.
+* `entity_id` from requests where the `/auth/client_token` starts with `hmac`
+  followed by at least one other character.
+
+```json
+[
+  {
+    "condition": "\"/request/mount_type\" == transit",
+    "fields": [ "/request/data", "/response/data" ]
+  },
+  {
+    "condition":  "\"/auth/client_token\" matches \"hmac.+\"",
+    "fields": [ "/auth/entity_id" ]
+  }
+]
+```

@@ -1,0 +1,92 @@
+name: 🥌 Create GA PR
+run-name: Create GA PR [${{ github.actor }}]
+
+permissions: 
+  pull-requests: write
+
+on: 
+  workflow_dispatch:
+    inputs:
+      targetVersion:
+        required: true
+        description: Version folder name
+      folderTag:
+        required: true
+        default: 'rc'
+        description: Preview dog tag ('rc' or 'beta')
+      product:
+        required: true
+        description: Product slug
+
+env:
+  prBranch: "${{ github.event.inputs.product }}/${{ github.event.inputs.targetVersion }}-to-ga"
+  oldFolder: "content/${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}.x (${{ github.event.inputs.folderTag }})"
+  newFolder: "content/${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}.x"
+
+
+jobs:
+
+  create-branch:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Set branch name
+        run: |
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Create PR branch
+        id: create-branch
+        uses: peterjgrainger/action-create-branch@v2.0.1
+        with:
+          branch: ${{ github.env.prBranch }}
+
+  update-folder:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout new branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.env.prBranch }}
+
+      - name: Update folder name
+        run: |
+          mv "${{ github.env.oldFolder }}" "${{ github.env.newFolder }}"
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Remove preview tag from v${{ github.event.inputs.targetVersion }}.x"
+          branch: ${{ github.env.prBranch }}
+
+  create-pr:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
+      prTitle:     "[PUBLISH GA] Mark ${{ github.event.inputs.targetVersion }} GA"
+      prBody: |
+        🚧 \`${{ github.repository }}\` publication PR
+
+        **Triggered by**: @${{ github.actor }} with a Github action
+        **Preview folder**: \`${{ github.event.inputs.releaseBranch }}\`
+        **New folder**:   \`${{ github.event.inputs.mergeTarget }}\`
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.env.prBranch }}
+          fetch-depth: 0
+      - name: Create pull request
+        run: |
+          gh pr create                          \
+            --base  main                        \
+            --head  ${{ github.env.prBranch }}  \
+            --title "${{ env.prTitle }}"        \
+            --body  "${{ env.prBody }}"
+      - name: Wrap-up
+        run: |
+          echo "🍏 Final job status:  ${{ job.status }}"
