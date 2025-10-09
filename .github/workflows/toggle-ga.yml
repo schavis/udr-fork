@@ -3,6 +3,7 @@ run-name: Create GA PR [${{ github.actor }}]
 
 permissions: 
   pull-requests: write
+  contents: write
 
 on: 
   workflow_dispatch:
@@ -10,12 +11,14 @@ on:
       targetVersion:
         required: true
         description: Preview version (e.g., "1.21.x")
+        default: '1.21.x'
       folderTag:
         required: true
         default: 'rc'
         description: Preview dog tag ('rc' or 'beta')
       product:
         required: true
+        default: 'rc'
         description: Product slug
 
 env:
@@ -36,7 +39,7 @@ jobs:
 
       - name: Create PR branch
         id: create-branch
-        uses: peterjgrainger/action-create-branch@v2.2.0
+        uses: peterjgrainger/action-create-branch@v2.2.0  esource not accessible by integration
         with:
           branch: "refs/heads/${{ github.env.prBranch }}"
 
