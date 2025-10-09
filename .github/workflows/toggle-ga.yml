@@ -74,8 +74,8 @@ jobs:
         🚧 \`${{ github.repository }}\` publication PR
 
         **Triggered by**: @${{ github.actor }} with a Github action
-        **Preview folder**: \`${{ github.event.inputs.releaseBranch }}\`
-        **New folder**:   \`${{ github.event.inputs.mergeTarget }}\`
+        **Preview folder**: \`${{ env.oldFolder }}\`
+        **New folder**:   \`${{ env.newFolder }}\`
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
