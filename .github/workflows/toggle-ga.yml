@@ -1,4 +1,4 @@
-name: ✅ Create GA PR
+name: 📁 Create GA PR
 run-name: Create GA PR [${{ github.actor }}]
 
 permissions: 
