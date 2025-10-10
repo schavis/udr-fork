@@ -45,12 +45,12 @@ jobs:
       - name: Update preview folder
         working-directory: ./content/${{ github.event.inputs.product }}
         run: |
-          git pull
+          git pull origin main
           git checkout -B "${{ env.prBranch }}"
           mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
           git add .
           git commit -m "Rename ${{ env.oldFolder }}"
-          git push -u origin "${{ env.prBranch }}"
+          git push --force -u origin "${{ env.prBranch }}"
 
   create-pr:
     runs-on: ubuntu-latest
