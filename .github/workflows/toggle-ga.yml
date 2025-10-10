@@ -36,10 +36,13 @@ jobs:
     steps:
       - name: Check out main
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Update preview folder
         working-directory: ./content/${{ github.event.inputs.product }}
         run: |
+          git pull
           git checkout -B "${{ env.prBranch }}"
           mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
       - name: Commit and push changes
