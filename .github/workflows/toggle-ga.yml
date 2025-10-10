@@ -58,6 +58,7 @@ jobs:
       - name: Update folder name
         #working-directory: /content
         run: |
+          pwd
           mv "${{ env.oldFolder }}" "${{ env.newFolder }}"
 
       - name: Commit and push changes
