@@ -45,11 +45,8 @@ jobs:
           git pull
           git checkout -B "${{ env.prBranch }}"
           mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Remove preview tag from ${{ env.oldFolder }}"
-          branch: ${{ env.prBranch }}
+          git commit -m "Rename ${{ env.oldFolder }}"
+          git push
 
   create-pr:
     runs-on: ubuntu-latest
