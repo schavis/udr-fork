@@ -23,8 +23,8 @@ on:
 
 env:
   prBranch: "${{ github.event.inputs.product }}/${{ github.event.inputs.targetVersion }}-to-ga"
-  oldFolder: "/content/${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }} (${{ github.event.inputs.folderTag }})"
-  newFolder: "/content/${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}"
+  oldFolder: "${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }} (${{ github.event.inputs.folderTag }})"
+  newFolder: "${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}"
 
 
 jobs:
@@ -58,8 +58,7 @@ jobs:
       - name: Update folder name
         working-directory: ./content
         run: |
-          ls
-         # mv "${{ env.oldFolder }}" "${{ env.newFolder }}"
+         mv "${{ env.oldFolder }}" "${{ env.newFolder }}"
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
