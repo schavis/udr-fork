@@ -48,6 +48,7 @@ jobs:
           git pull
           git checkout -B "${{ env.prBranch }}"
           mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
+          git add .
           git commit -m "Rename ${{ env.oldFolder }}"
           git push
 
