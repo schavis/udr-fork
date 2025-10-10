@@ -50,7 +50,7 @@ jobs:
     env:
       GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Check out PR branch (${{ env.prBranch }})
+      - name: "Check out PR branch (${{ env.prBranch }})"
         uses: actions/checkout@v4
         with:
           ref: ${{ env.prBranch }}
@@ -75,8 +75,8 @@ jobs:
         🚧 \`${{ github.repository }}\` publication PR
 
         **Triggered by**: @${{ github.actor }} with a Github action
-        **Preview folder**: \`?"${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }} (${{ github.event.inputs.folderTag }})"\`
-        **New folder**:   \`?${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}\`
+        **Preview folder**: \`${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }} (${{ github.event.inputs.folderTag }})\`
+        **New folder**:   \`${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}\`
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -85,10 +85,10 @@ jobs:
           fetch-depth: 0
       - name: Create pull request
         run: |
-          gh pr create                          \
-            --base  main                        \
-            --head  ${{ env.prBranch }}  \
-            --title "${{ env.prTitle }}"        \
+          gh pr create                    \
+            --base  main                  \
+            --head  ${{ env.prBranch }}   \
+            --title "${{ env.prTitle }}"  \
             --body  "${{ env.prBody }}"
       - name: Wrap-up
         run: |
