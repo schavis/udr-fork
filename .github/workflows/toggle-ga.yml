@@ -56,7 +56,7 @@ jobs:
           ref: ${{ env.prBranch }}
 
       - name: Update folder name
-        working-directory: /content
+        working-directory: ./content
         run: |
           ls
          # mv "${{ env.oldFolder }}" "${{ env.newFolder }}"
