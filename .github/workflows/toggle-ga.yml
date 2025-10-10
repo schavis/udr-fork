@@ -29,7 +29,7 @@ env:
 
 jobs:
 
-  create-branch:
+  update-folder:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
@@ -37,34 +37,26 @@ jobs:
       - name: Check out main
         uses: actions/checkout@v4
 
-      - name: Create PR branch
+      - name: Update preview folder
+        working-directory: ./content/${{ github.event.inputs.product }}
         run: |
           git checkout -B "${{ env.prBranch }}"
-        id: create-branch
+          mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
+          ls
+        #id: create-branch
         #uses: peterjgrainger/action-create-branch@v2.2.0
         #with:
         #  branch: ${{ env.prBranch }}
-
-  update-folder:
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - name: "Check out PR branch (${{ env.prBranch }})"
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ env.prBranch }}
-
-      - name: Update folder name
-        working-directory: ./content/${{ github.event.inputs.product }}
-        run: |
-          ls
-          mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
+#      - name: Update folder name
+#        working-directory: ./content/${{ github.event.inputs.product }}
+#        run: |
+#          ls
+#          mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Remove preview tag from v${{ github.event.inputs.targetVersion }}.x"
+          commit_message: "Remove preview tag from ${{ env.oldFolder }}"
           branch: ${{ env.prBranch }}
 
   create-pr:
