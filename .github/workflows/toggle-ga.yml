@@ -71,13 +71,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN:   ${{ secrets.GITHUB_TOKEN }}
-      prTitle:     "[PUBLISH GA] Mark ${{ github.event.inputs.targetVersion }} GA"
+      prTitle:     "[PUBLISH GA] Convert ${{ github.event.inputs.targetVersion }} to GA"
       prBody: |
         🚧 \`${{ github.repository }}\` publication PR
 
         **Triggered by**: @${{ github.actor }} with a Github action
-        **Preview folder**: \`"${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }} (${{ github.event.inputs.folderTag }})"\`
-        **New folder**:   \`${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}\`
+        **Preview folder**: \`?"${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }} (${{ github.event.inputs.folderTag }})"\`
+        **New folder**:   \`?${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}\`
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
