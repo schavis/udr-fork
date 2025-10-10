@@ -50,7 +50,7 @@ jobs:
           mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
           git add .
           git commit -m "Rename ${{ env.oldFolder }}"
-          git push
+          git push -u origin "${{ env.prBranch }}"
 
   create-pr:
     runs-on: ubuntu-latest
