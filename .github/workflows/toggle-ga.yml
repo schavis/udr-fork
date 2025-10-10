@@ -42,17 +42,6 @@ jobs:
         run: |
           git checkout -B "${{ env.prBranch }}"
           mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
-          ls
-        #id: create-branch
-        #uses: peterjgrainger/action-create-branch@v2.2.0
-        #with:
-        #  branch: ${{ env.prBranch }}
-#      - name: Update folder name
-#        working-directory: ./content/${{ github.event.inputs.product }}
-#        run: |
-#          ls
-#          mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
-
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
