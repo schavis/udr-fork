@@ -23,8 +23,8 @@ on:
 
 env:
   prBranch: "${{ github.event.inputs.product }}/${{ github.event.inputs.targetVersion }}-to-ga"
-  oldFolder: "${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }} (${{ github.event.inputs.folderTag }})"
-  newFolder: "${{ github.event.inputs.product }}/v${{ github.event.inputs.targetVersion }}"
+  oldFolder: "v${{ github.event.inputs.targetVersion }} (${{ github.event.inputs.folderTag }})"
+  newFolder: "v${{ github.event.inputs.targetVersion }}"
 
 
 jobs:
@@ -56,7 +56,7 @@ jobs:
           ref: ${{ env.prBranch }}
 
       - name: Update folder name
-        working-directory: ./content
+        working-directory: ./content/${{ github.event.inputs.product }}
         run: |
           ls
           mv "./${{ env.oldFolder }}" "./${{ env.newFolder }}"
