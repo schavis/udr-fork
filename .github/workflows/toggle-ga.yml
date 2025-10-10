@@ -56,10 +56,10 @@ jobs:
           ref: ${{ env.prBranch }}
 
       - name: Update folder name
-        #working-directory: /content
+        working-directory: /content
         run: |
-          pwd
-          mv "${{ env.oldFolder }}" "${{ env.newFolder }}"
+          ls
+         # mv "${{ env.oldFolder }}" "${{ env.newFolder }}"
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
