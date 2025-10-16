@@ -6,8 +6,8 @@
 name: 🏷️ Label content PRs
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened] # Trigger on these events
+  pull_request_target:
+    types: [opened, synchronize, reopened]
 
 jobs:
 
