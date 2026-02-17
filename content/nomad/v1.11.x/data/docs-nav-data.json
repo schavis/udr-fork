@@ -16,7 +16,12 @@
       {
         "title": "Overview",
         "path": "k8s-nomad"
+      },
+      {
+        "title": "Turn manifests into jobspecs",
+        "path": "k8s-nomad"        
       }
+    ]
   },
   {
     "title": "Use cases",
