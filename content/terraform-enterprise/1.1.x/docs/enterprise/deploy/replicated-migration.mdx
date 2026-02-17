@@ -4,7 +4,7 @@ description: >-
   Learn how to migrate your Terraform Enterprise installation from Replicated to another supported runtime environment.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-10-15T15:59:29+00:00
-last_modified: 2026-02-17T22:54:45.000Z
+last_modified: 2026-02-17T23:00:31.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -646,8 +646,7 @@ We recommend deploying Terraform Enterprise to the same host as your current Rep
    If you do not have a CA certificates bundle, place your TLS certificate (`cert.pem`) inside `bundle.pem` instead.
    Add your certificates to a folder on your host.
 
-   If you cannot access your certificate, key, or bundle file, you can retrieve them from the Replicated Terraform Enterprise container.
-   Run the following command to list the certificate paths in the container:
+   If you cannot access your certificate, key, or bundle file, you can retrieve them from the Replicated Terraform Enterprise container. Run the following command to list the certificate paths in the container:
 
    ```sh
    docker exec terraform-enterprise tfectl app config --unredacted | jq '{cert: .tls.cert_file, key: .tls.key_file, bundle: .tls.ca_bundle_file}'
