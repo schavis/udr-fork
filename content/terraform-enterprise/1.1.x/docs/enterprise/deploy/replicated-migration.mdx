@@ -4,7 +4,7 @@ description: >-
   Learn how to migrate your Terraform Enterprise installation from Replicated to another supported runtime environment.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-10-15T15:59:29+00:00
-last_modified: 2026-02-17T22:25:54.000Z
+last_modified: 2026-02-17T22:43:14.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -443,13 +443,13 @@ To make migration smoother and faster, we recommend using the same host(s) as yo
 1. Log into the registry and then use the `docker` command to pull the `terraform-enterprise` image version.
 
    ```shell-session
-   $ cat <PATH_TO_HASHICORP_LICENSE_FILE> | docker login --username terraform images.releases.hashicorp.com --password-stdin
+   $ cat <PATH_TO_HASHICORP_LICENSE_FILE> | sudo docker login --username terraform images.releases.hashicorp.com --password-stdin
    ```
 
    When prompted for a password, use the contents of your HashiCorp license file as your password.
 
    ```shell-session
-   $ docker pull images.releases.hashicorp.com/hashicorp/terraform-enterprise:<vYYYYMM-#>
+   $ sudo docker pull images.releases.hashicorp.com/hashicorp/terraform-enterprise:<vYYYYMM-#>
    ```
 
 1. Optionally create a new systemd service for Terraform Enterprise. Refer to [Manage the Docker service](/terraform/enterprise/deploy/docker#manage-the-docker-service) for instructions.
@@ -468,7 +468,7 @@ Next, you can stop Replicated and migrate your Terraform Enterprise installation
    If you are operating Terraform in active-active mode then complete this step on all Terraform Enterprise hosts before continuing.
 1. Start (and enable on start up) the Docker Compose based Terraform Enterprise.
    ```shell-session
-   $ systemctl enable --now terraform-enterprise
+   $ sudo systemctl enable --now terraform-enterprise
    ```
    If you are operating Terraform in active-active mode then complete this step on all Terraform Enterprise hosts before continuing.
 1. Check the status of your service with `systemctl status terraform-enterprise`, or use `docker ps` to find your container's name then run `docker logs [name]`. You can also run `curl https://[hostname]/_health_check` to check the health check endpoint. Terraform Enterprise should now be running using Docker Compose, so your Replicated services can be shut down and disabled.
@@ -476,18 +476,18 @@ Next, you can stop Replicated and migrate your Terraform Enterprise installation
 1. Shut down Replicated.
 
    ```shell-session
-   $ systemctl disable --now replicated replicated-ui replicated-operator
+   $ sudo systemctl disable --now replicated replicated-ui replicated-operator
    ```
 
 1. Next, stop and remove the unnecessary Replicated containers.
    ```shell-session
-   $ docker stop replicated-premkit
+   $ sudo docker stop replicated-premkit
    ```
    ```shell-session
-   $ docker stop replicated-statsd
+   $ sudo docker stop replicated-statsd
    ```
    ```shell-session
-   $ docker rm -f replicated replicated-ui replicated-operator replicated-premkit replicated-statsd retraced-api retraced-processor retraced-cron retraced-nsqd retraced-postgres
+   $ sudo docker rm -f replicated replicated-ui replicated-operator replicated-premkit replicated-statsd retraced-api retraced-processor retraced-cron retraced-nsqd retraced-postgres
    ```
 
 -> **Note**: Some of the `docker stop` commands may return “Container not found” errors because not every Replicated install has every container.
