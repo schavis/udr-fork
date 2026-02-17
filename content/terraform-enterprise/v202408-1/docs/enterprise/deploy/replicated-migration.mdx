@@ -3,8 +3,8 @@ page_title: Migrate from Replicated to another runtime
 description: >-
   Learn how to migrate your Terraform Enterprise installation from Replicated to another supported runtime environment.
 # START AUTO GENERATED METADATA, DO NOT EDIT
-created_at: 2023-01-01T00:00:00.000Z
-last_modified: 2023-01-01T00:00:00.000Z
+created_at: 2025-05-28T07:56:28-04:00
+last_modified: 2026-02-17T23:32:07.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -54,8 +54,11 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
 
    In both cases, we recommend backing up the environment variables of the Terraform Enterprise Docker container so that you can refer to them when configuring your target runtime.
 
+   -> **Note**: Throughout this guide, we use `terraform-enterprise` as the container name, which is the default for Replicated installations. If your container has a different name, adjust the commands accordingly. You can find your container name with: `sudo docker ps | grep terraform-enterprise`
+
+   Back up the environment variables:
    ```shell-session
-   $ docker exec terraform-enterprise env > env.txt
+   $ sudo docker exec terraform-enterprise env | sudo tee env.txt > /dev/null
    ```
 
 ### Upgrade your existing Terraform Enterprise installation
@@ -78,7 +81,51 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
       ```shell-session
       $ tfe-admin health-check
       ```
+
+      -> **Note:** If `tfe-admin health-check` fails with `sh: /root/ptfe-health-check: not found`, try running `replicated admin health-check` instead. If neither command works, refer to [tfe-admin health-check command fails](https://support.hashicorp.com/hc/en-us/articles/6053728286483-tfe-admin-health-check-command-fails-with-sh-root-ptfe-health-check-not-found) for additional troubleshooting. This issue is resolved in v202205-1 and later. **We recommend upgrading to the latest version if possible.**
+
    1. Do a `terraform plan` and a `terraform apply`.
+
+### Prepare TLS certificates
+
+-> **Note**: Have your TLS certificates ready before stopping Replicated. This ensures a smooth migration without delays.
+
+1. Create the directory structure for Terraform Enterprise:
+   ```shell-session
+   $ sudo mkdir -p /etc/terraform-enterprise/certs
+   ```
+
+1. Copy your existing Replicated TLS certificates to the staging location:
+
+   Retrieve the certificate paths from the container:
+   ```shell-session
+   $ sudo docker exec terraform-enterprise tfectl app config --unredacted | jq '{cert: .tls.cert_file, key: .tls.key_file, bundle: .tls.ca_bundle_file}'
+   ```
+   
+   The output will show the certificate paths in the container. Depending on your setup, the file paths may differ from the following example:
+   ```json
+   {
+     "cert": "/etc/ssl/private/terraform-enterprise/cert.pem",
+     "key": "/etc/ssl/private/terraform-enterprise/key.pem",
+     "bundle": "/etc/ssl/private/terraform-enterprise/bundle.pem"
+   }
+   ```
+   
+   Use the paths from the output above to copy your certificates from the container to the host:
+   ```shell-session
+   $ sudo docker cp terraform-enterprise:/etc/ssl/private/terraform-enterprise/cert.pem /etc/terraform-enterprise/certs/
+   $ sudo docker cp terraform-enterprise:/etc/ssl/private/terraform-enterprise/key.pem /etc/terraform-enterprise/certs/
+   $ sudo docker cp terraform-enterprise:/etc/ssl/private/terraform-enterprise/bundle.pem /etc/terraform-enterprise/certs/
+   ```
+
+1. Verify your certificates are in place:
+   ```shell-session
+   $ ls -l /etc/terraform-enterprise/certs/
+   ```
+
+### Prepare HashiCorp license file
+
+Contact your HashiCorp account manager to acquire a Flexible Deployment Options (FDO) license. This license is different from your existing Replicated license (.rli file). Store the license in `/etc/terraform-enterprise/license.hclic`.
 
 ## Mounted disk to Docker
 
@@ -105,6 +152,12 @@ for instructions.
 Docker should already be installed for you because Replicated is installed on this host. You may still need to install Docker Compose if you have not already.
 Refer to [Docker Engine Requirements](/terraform/enterprise/deploy/replicated/requirements/docker_engine) for more information.
 
+Verify your Docker and Docker Compose versions:
+```shell-session
+$ sudo docker version
+$ sudo docker compose version
+```
+
 If you cannot upgrade Docker Engine or install in a supported Docker configuration then install and migrate Terraform Enterprise to a different runtime.
 
 #### Step 4: Generate Docker Compose configuration
@@ -117,11 +170,15 @@ We fixed this issue in v202410-1. Refer to the [v202410-1 release notes](/terraf
 
 To convert your existing configuration into a Docker Compose format on your current Terraform Enterprise installation (Replicated), follow these steps:
 1. Create a `/etc/terraform-enterprise` directory.
+   ```shell-session
+   $ sudo mkdir -p /etc/terraform-enterprise
+   ```
 1. Generate the Docker Compose configuration and save it to `/etc/terraform-enterprise/docker-compose.yml` using the following command:
-```shell-session
-sudo docker exec terraform-enterprise tfectl app config --format docker > /etc/terraform-enterprise/docker-compose.yml
-```
-Your saved output should resemble the configuration file in [the example `disk` mode configuration](/terraform/enterprise/deploy/docker#example-disk-mode-configuration). Incorporate the saved output values into this configuration file to ensure correctness.
+   ```shell-session
+   $ sudo docker exec terraform-enterprise tfectl app config --format docker | sudo tee /etc/terraform-enterprise/docker-compose.yml > /dev/null
+   ```
+
+   Your saved output should resemble the configuration file in [the example `disk` mode configuration](/terraform/enterprise/deploy/docker#example-disk-mode-configuration). Incorporate the saved output values into this configuration file to ensure correctness.
 
 Terraform Enterprise may generate a configuration that contains errors.  Manually review the configuration to verify that it is complete and accurate.
 
