@@ -11,6 +11,14 @@
     "path": "quickstart"
   },
   {
+    "title": "Kubernetes compared to Nomad",
+    "routes": [
+      {
+        "title": "Overview",
+        "path": "k8s-nomad"
+      }
+  },
+  {
     "title": "Use cases",
     "path": "use-cases"
   },
