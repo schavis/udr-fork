@@ -4,7 +4,7 @@ description: >-
   Learn how to migrate your Terraform Enterprise installation from Replicated to another supported runtime environment.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-10-15T15:59:29+00:00
-last_modified: 2026-02-17T22:48:00.000Z
+last_modified: 2026-02-17T22:54:45.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -139,7 +139,7 @@ If at any point you need to revert your settings, see [the rollback steps](/terr
 
 #### Step 1: Backup your data tier
 
-~> **Important**: Back up your Terraform Enterprise data tier before proceeding. **If your organization has established backup procedures, you must follow those instead of the commands below.**
+~> **Important**: Back up your Terraform Enterprise data tier before proceeding. **If your organization has established backup procedures, follow those instead of the commands below.**
 
 Refer to the [backup data tier guide](#back-up-data-tier) under the prerequisites section for recommended best practices and patterns.
 
@@ -646,18 +646,11 @@ We recommend deploying Terraform Enterprise to the same host as your current Rep
    If you do not have a CA certificates bundle, place your TLS certificate (`cert.pem`) inside `bundle.pem` instead.
    Add your certificates to a folder on your host.
 
-   If you cannot access your certificate, key, or bundle file, you can retrieve them from the Replicated Terraform Enterprise container. Run the following command to find your container name:
+   If you cannot access your certificate, key, or bundle file, you can retrieve them from the Replicated Terraform Enterprise container.
+   Run the following command to list the certificate paths in the container:
 
    ```sh
-   docker ps | grep terraform-enterprise
-   ```
-   
-   The container name is typically `terraform-enterprise` for Replicated installations. Use this name from the output in the following commands.
-   
-   Retrieve the certificate paths:
-
-   ```sh
-   docker exec <CONTAINER_NAME> tfectl app config --unredacted | jq '{cert: .tls.cert_file, key: .tls.key_file, bundle: .tls.ca_bundle_file}'
+   docker exec terraform-enterprise tfectl app config --unredacted | jq '{cert: .tls.cert_file, key: .tls.key_file, bundle: .tls.ca_bundle_file}'
    ```
 
    Depending on your setup, the file paths may differ from the following example output:
@@ -673,9 +666,9 @@ We recommend deploying Terraform Enterprise to the same host as your current Rep
    You can then copy the files from the container into the host.
 
    ```sh
-   docker cp <CONTAINER_NAME>:/etc/ssl/private/terraform-enterprise/cert.pem <PATH_TO_CERTS_ON_HOST>/cert.pem
-   docker cp <CONTAINER_NAME>:/etc/ssl/private/terraform-enterprise/key.pem <PATH_TO_CERTS_ON_HOST>/key.pem
-   docker cp <CONTAINER_NAME>:/etc/ssl/private/terraform-enterprise/bundle.pem <PATH_TO_CERTS_ON_HOST>/bundle.pem
+   docker cp terraform-enterprise:/etc/ssl/private/terraform-enterprise/cert.pem <PATH_TO_CERTS_ON_HOST>/cert.pem
+   docker cp terraform-enterprise:/etc/ssl/private/terraform-enterprise/key.pem <PATH_TO_CERTS_ON_HOST>/key.pem
+   docker cp terraform-enterprise:/etc/ssl/private/terraform-enterprise/bundle.pem <PATH_TO_CERTS_ON_HOST>/bundle.pem
    ```
 
 1. Next, backup your Replicated configuration.
