@@ -4,7 +4,7 @@ description: >-
   Learn how to migrate your Terraform Enterprise installation from Replicated to another supported runtime environment.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-08-11T21:14:21-07:00
-last_modified: 2026-02-17T23:32:06.000Z
+last_modified: 2026-02-18T00:05:03.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -17,7 +17,7 @@ This topic describes how to migrate Terraform Enterprise instances from Replicat
 The target runtime must host instances on the same version of Terraform Enterprise as the instances hosted in Replicated. You cannot combine an application upgrade and migration. Upgrade your current installation of Terraform Enterprise to the latest version before proceeding with your migration. Use the same procedure to migrate from Replicated to all other supported runtimes:
 
 1. Back up your Terraform Enterprise data tier, which includes the PostgreSQL database and object storage.
-1. Upgrade your existing Replicated installation to `v202309-1` or later. 
+1. Upgrade your existing Replicated installation to `v202309-1` or later.
 1. Deploy the same version of Terraform Enterprise to your new runtime.
 1. Migrate your data tier to your new installation.
 
@@ -27,7 +27,7 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
 
    - Refer to the [Migrate Terraform Enterprise from Replicated to Docker Engine](https://www.hashicorp.com/resources/video-migrate-terraform-enterprise-from-replicated-to-docker-engine) video for a comprehensive walkthrough that describes how to migrate to a Docker runtime.
    - [Migrating using mounted disk operational mode to Docker runtime](#mounted-disk-to-docker)
-   - [Migrating using external services operational mode to Docker runtime](#external-services-to-docker)
+   - [Migrating using external services operational mode to Docker runtime](#external-services-or-active-active-to-docker)
 
 - Kubernetes
 
@@ -41,9 +41,9 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
    - [Migrating using mounted disk to Nomad](#mounted-disk-to-nomad)
    - [Migrating using external services or Active/Active to Nomad](#external-services-or-active-active-to-nomad)
 
-
-
 ## Prerequisites
+
+@include 'software-compatibility-report.mdx'
 
 ### Back up data tier
 
@@ -139,8 +139,31 @@ If at any point you need to revert your settings, see [the rollback steps](/terr
 
 #### Step 1: Backup your data tier
 
-We always recommend backing up your data tier before conducting any maintenance or migration. See the backup data guide under the [prerequisites](#prerequisites) section for a detailed
-guide on how to move forward with the backup process.
+~> **Important**: Back up your Terraform Enterprise data tier before proceeding. **If your organization has established backup procedures, follow those instead of the commands below.**
+
+Refer to the [backup data tier guide](#back-up-data-tier) under the prerequisites section for recommended best practices and patterns.
+
+The following commands provide a basic archive approach only and are not recommended for production use. This method does not follow backup best practices and should only be used if you have no other backup procedures in place. You proceed at your own risk. Ensure you validate the backup is complete and stored in a secure, redundant location before proceeding with migration.
+
+1. Retrieve your mounted disk path:
+
+   ```shell-session
+   $ replicatedctl app-config export --template '{{ .disk_path.Value }}' | tr -d '\r'
+   ```
+
+1. We will refer to this path as the `${DISK_PATH}` going forward. Next, archive your mounted disk data:
+
+   ```shell-session
+   $ sudo tar -zcvf data.tar.gz -C ${DISK_PATH} aux postgres
+   ```
+
+1. Copy your `data.tar.gz` archive to a safe place.
+
+1. Back up the environment variables:
+
+   ```shell-session
+   $ sudo docker exec terraform-enterprise env | sudo tee env.txt > /dev/null
+   ```
 
 #### Step 2: Upgrade Terraform Enterprise
 

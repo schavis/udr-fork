@@ -4,13 +4,13 @@ description: >-
   Learn how to migrate your Terraform Enterprise installation from Replicated to another supported runtime environment.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-05-28T07:56:28-04:00
-last_modified: 2026-02-17T23:32:08.000Z
+last_modified: 2026-02-18T00:05:04.000Z
 # END AUTO GENERATED METADATA
 ---
 
 # Migrate from Replicated to another runtime
 
-This topic describes how to migrate Terraform Enterprise instances from Replicated to another runtime environment.
+This topic describes how to migrate Terraform Enterprise instances from Replicated to another runtime environment. 
 
 ## Overview
 
@@ -18,7 +18,7 @@ The target runtime must host instances on the same version of Terraform Enterpri
 
 1. Back up your Terraform Enterprise data tier, which includes the PostgreSQL database and object storage.
 1. Upgrade your existing Replicated installation to `v202309-1` or later.
-1. Deploy the same version Terraform Enterprise to your new runtime.
+1. Deploy the same version of Terraform Enterprise to your new runtime.
 1. Migrate your data tier to your new installation.
 
 The migration paths are specific to the [operational mode](/terraform/enterprise/deploy/configuration/storage/configure-mode) of your existing Terraform Enterprise installation and the runtime environment you want to migrate to.
@@ -27,7 +27,7 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
 
    - Refer to the [Migrate Terraform Enterprise from Replicated to Docker Engine](https://www.hashicorp.com/resources/video-migrate-terraform-enterprise-from-replicated-to-docker-engine) video for a comprehensive walkthrough that describes how to migrate to a Docker runtime.
    - [Migrating using mounted disk operational mode to Docker runtime](#mounted-disk-to-docker)
-   - [Migrating using external services operational mode to Docker runtime](#external-services-to-docker)
+   - [Migrating using external services operational mode to Docker runtime](#external-services-or-active-active-to-docker)
 
 - Kubernetes
 
@@ -41,9 +41,9 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
    - [Migrating using mounted disk to Nomad](#mounted-disk-to-nomad)
    - [Migrating using external services or Active/Active to Nomad](#external-services-or-active-active-to-nomad)
 
-
-
 ## Prerequisites
+
+@include 'software-compatibility-report.mdx'
 
 ### Back up data tier
 
@@ -143,6 +143,28 @@ If at any point you need to revert your settings, see [the rollback steps](/terr
 
 Refer to the [backup data tier guide](#back-up-data-tier) under the prerequisites section for recommended best practices and patterns.
 
+The following commands provide a basic archive approach only and are not recommended for production use. This method does not follow backup best practices and should only be used if you have no other backup procedures in place. You proceed at your own risk. Ensure you validate the backup is complete and stored in a secure, redundant location before proceeding with migration.
+
+1. Retrieve your mounted disk path:
+
+   ```shell-session
+   $ replicatedctl app-config export --template '{{ .disk_path.Value }}' | tr -d '\r'
+   ```
+
+1. We will refer to this path as the `${DISK_PATH}` going forward. Next, archive your mounted disk data:
+
+   ```shell-session
+   $ sudo tar -zcvf data.tar.gz -C ${DISK_PATH} aux postgres
+   ```
+
+1. Copy your `data.tar.gz` archive to a safe place.
+
+1. Back up the environment variables:
+
+   ```shell-session
+   $ sudo docker exec terraform-enterprise env | sudo tee env.txt > /dev/null
+   ```
+
 #### Step 2: Upgrade Terraform Enterprise
 
 Upgrade your Replicated-hosted Terraform Enterprise installation to [v202309-1](/terraform/enterprise/releases/2023/v202309-1) or later. Refer to [Upgrading](/terraform/enterprise/deploy/replicated/administration/infrastructure/upgrades)
@@ -163,6 +185,12 @@ If you cannot upgrade Docker Engine or install in a supported Docker configurati
 
 #### Step 4: Generate Docker Compose configuration
 
+Docker Compose configurations generated on releases older than v202410-1 may contain formatting errors. Terraform Enterprise may format passwords or secrets that contain special characters incorrectly if your configuration contains double quotation marks instead of single quotation marks. 
+
+To address this issue, you can manually replace double quotation marks with single quotation marks around secrets in your compose configuration.
+
+We fixed this issue in v202410-1. Refer to the [v202410-1 release notes](/terraform/enterprise/releases/2024/v202410-1) for additional information. 
+
 To convert your existing configuration into a Docker Compose format on your current Terraform Enterprise installation (Replicated), follow these steps:
 1. Create a `/etc/terraform-enterprise` directory.
    ```shell-session
@@ -181,8 +209,29 @@ Terraform Enterprise may generate a configuration that contains errors.  Manuall
 
 To make migration smoother and faster, we recommend using the same host as your current Replicated instance.
 
+-> **Note**: If you want to use a separate host for your new docker-based Terraform Enterprise, we can provide alternative steps. [Reach out to support for assistance](/terraform/enterprise/deploy/troubleshoot/contact-support).
 
 1. Review the configuration file from the previous step. Update any values as needed before moving on to the next step. Pay special attention to placeholder values enclosed in `<>`, such as `image` and `TFE_LICENSE`, and replace them with your actual values.
+
+   View the generated compose file:
+   ```shell-session
+   $ cat /etc/terraform-enterprise/docker-compose.yml
+   ```
+
+   Reference your backed up environment variables for configuration values:
+   ```shell-session
+   $ cat env.txt
+   ```
+
+   Edit the compose file (use your preferred editor):
+   ```shell-session
+   $ sudo nano /etc/terraform-enterprise/docker-compose.yml
+   ```
+
+   Validate the compose file syntax after making changes:
+   ```shell-session
+   $ sudo docker compose -f /etc/terraform-enterprise/docker-compose.yml config
+   ```
 
    Alternatively, you can use the [mounted disk example](/terraform/enterprise/deploy/docker#example-disk-mode-configuration) as a starting point and adjust it to fit your environment.
 
@@ -274,7 +323,7 @@ Next, you can stop Replicated and migrate your Terraform Enterprise installation
 
 #### Step 7: Validate migration success
 
-Finally, test that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use those instead of doing the following steps.
+Finally, test that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use those instead of doing the following steps. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
 
 1. Execute a plan and apply it from the CLI, testing several subsystems. Ensuring that proxies are correctly configured, certificates are properly configured, and the instance can download Terraform binaries and execute runs.
 1. Execute a plan and apply it from VCS, testing that webhooks are working and certificates are in place on both sides.
@@ -300,11 +349,13 @@ In the unlikely event you encounter issues and need to roll back, you can revert
    $ replicatedctl app start
    ```
 
-## External services to Docker
+## External services or Active Active to Docker
 
 Before proceeding with this migration guide, make sure you meet all the [prerequisites](#prerequisites) and that a Flexible
 Deployment Options license file has been provided by your HashiCorp business partner.
 Do not proceed with this guide if any of the prerequisites are not fulfilled.
+
+When Terraform Enterprise is operating in `active-active` mode, you can scale directly up to your target number of nodes after the migration is complete. You do not need to scale to one node before scaling to all nodes.
 
 If at any point you need to revert your settings, see [the rollback steps](/terraform/enterprise/deploy/replicated-migration#external-services-rollback-steps).
 
@@ -324,14 +375,22 @@ for instructions.
 
 Docker should already be installed for you because Replicated is installed on this host. You may still need to install Docker Compose if you have not already.
 See the [Docker Engine Requirements](/terraform/enterprise/deploy/replicated/requirements/docker_engine) for more information.
+
 Verify your Docker and Docker Compose versions:
 ```shell-session
 $ sudo docker version
 $ sudo docker compose version
 ```
+
 If you cannot upgrade Docker Engine or install in a supported Docker configuration then install and migrate Terraform Enterprise to a different runtime.
 
 #### Step 4: Generate Docker Compose configuration
+
+Docker Compose configurations generated on releases older than v202410-1 may contain formatting errors. Terraform Enterprise may format passwords or secrets that contain special characters incorrectly if your configuration contains double quotation marks instead of single quotation marks. 
+
+To address this issue, you can manually replace double quotation marks with single quotation marks around secrets in your compose configuration.
+
+We fixed this issue in v202410-1. Refer to the [v202410-1 release notes](/terraform/enterprise/releases/2024/v202410-1) for additional information. 
 
 To convert your existing configuration into a Docker Compose format on your current Terraform Enterprise installation (Replicated), follow these steps:
 1. Create a directory at `/etc/terraform-enterprise`.
@@ -347,15 +406,18 @@ Terraform Enterprise may generate a configuration that contains errors.  Manuall
 
 #### Step 5: Prepare the host and install
 
-To make migration smoother and faster, we recommend using the same host as your current Replicated instance.
+To make migration smoother and faster, we recommend using the same host(s) as your current Replicated instance.
 
+-> **Note**: If you want to use a separate host for your new docker-based Terraform Enterprise, we can provide alternative steps. [Reach out to support for assistance](/terraform/enterprise/deploy/troubleshoot/contact-support).
 
 1. Complete the instructions for creating and applying TLS certificates. Refer to [Create TLS certificates](/terraform/enterprise/deploy/prepare-host#create-tls-certificates) and [Set up installation folders and files](/terraform/enterprise/deploy/docker#set-up-installation-folders-and-files) for instructions.
 1. Review the configuration file from previous step. Update any values as needed before moving on to the next step. Pay special attention to placeholder values enclosed in `<>`, such as `image` and `TFE_LICENSE`, and replace them with your actual values.
 
-   Alternatively, you can use the [external services installation instructions for Docker deployments](/terraform/enterprise/deploy/docker#example-external-mode-configuration) as a starting point and adjust it to fit your environment.
+   Alternatively, you can use the [external services installation instructions for Docker deployments](/terraform/enterprise/deploy/docker#example-external-mode-configuration) or the [active-active installation instructions for Docker deployments](/terraform/enterprise/deploy/docker#example-active-active-mode-configuration) as a starting point and adjust it to fit your environment.
 
    Update, verify, and remove any unsuitable configuration variables that don't match the reality of your current Terraform Enterprise deployment. For a comprehensive list of available configuration settings, refer to the [Configuration Reference](/terraform/enterprise/deploy/reference/configuration).
+
+   If you are operating Terraform in active-active mode then ensure that port 8201 is added to the exported docker ports to enable high availability requests from Vault.
 
    To quickly identify many of the required configuration values, inspect the existing Terraform Enterprise application using the `replicatedctl app-config export` command.
 
@@ -373,6 +435,7 @@ To make migration smoother and faster, we recommend using the same host as your 
 
 1. Optionally create a new systemd service for Terraform Enterprise. Refer to [Manage the Docker service](/terraform/enterprise/deploy/docker#manage-the-docker-service) for instructions.
 
+   -> **Note**: If you want to use a separate host for your new Docker-based Terraform Enterprise deployment, [contact HashiCorp support](/terraform/enterprise/deploy/troubleshoot/contact-support) for assistance.
 
 #### Step 6: Stop Replicated and migrate
 
@@ -383,10 +446,12 @@ Next, you can stop Replicated and migrate your Terraform Enterprise installation
    ```shell-session
    $ replicatedctl app stop
    ```
+   If you are operating Terraform in active-active mode then complete this step on all Terraform Enterprise hosts before continuing.
 1. Start (and enable on start up) the Docker Compose based Terraform Enterprise.
    ```shell-session
    $ sudo systemctl enable --now terraform-enterprise
    ```
+   If you are operating Terraform in active-active mode then complete this step on all Terraform Enterprise hosts before continuing.
 1. Check the status of your service with `systemctl status terraform-enterprise`, or use `docker ps` to find your container's name then run `docker logs [name]`. You can also run `curl https://[hostname]/_health_check` to check the health check endpoint. Terraform Enterprise should now be running using Docker Compose, so your Replicated services can be shut down and disabled.
 
 1. Shut down Replicated.
@@ -410,7 +475,7 @@ Next, you can stop Replicated and migrate your Terraform Enterprise installation
 
 #### Step 7: Validate migration success
 
-Finally, test that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, f those instead of doing the following steps.
+Finally, test that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, execute those instead of doing the following steps. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
 
 1. Execute a plan and apply it from the CLI, testing several subsystems. Ensuring that proxies are correctly configured, certificates are properly configured, and the instance can download Terraform binaries and execute runs.
 1. Execute a plan and apply it from VCS, testing that webhooks are working and certificates are in place on both sides.
@@ -419,7 +484,7 @@ Finally, test that your new Terraform Enterprise installation works properly. If
 1. (_Optional_) Execute a plan and apply it with Sentinel and cost estimation, ensuring run tasks and cost estimation work.
 1. (_Optional_) Execute a plan and apply it on a workspace that uses an agent pool, testing that external agents can connect and run jobs successfully.
 
-#### External Services rollback steps
+#### External Services or Active Active rollback steps
 
 In the unlikely event you encounter issues and need to roll back, you can revert back to Terraform Enterprise (Replicated) using the following commands.
 
@@ -427,6 +492,7 @@ In the unlikely event you encounter issues and need to roll back, you can revert
    ```shell-session
    $ systemctl disable --now terraform-enterprise
    ```
+   If you are operating Terraform in active-active mode then complete this step on all Terraform Enterprise hosts before continuing.
 1. Start and enable Replicated.
    ```shell-session
    $ systemctl enable --now replicated replicated-ui replicated-operator
@@ -435,10 +501,11 @@ In the unlikely event you encounter issues and need to roll back, you can revert
    ```shell-session
    $ replicatedctl app start
    ```
+   If you are operating Terraform in active-active mode then complete this step on all Terraform Enterprise hosts before continuing.
 
 ## Mounted disk to Cloud-managed Kubernetes
 
-You must provide an external PostgreSQL database server, external object storage, and external Redis storage. Refer to the [prerequisites for deploying to Kubernetes](/terraform/enterprise/deploy/kubernetes#prerequisites) for additional information.
+You must provide an external PostgreSQL database server, external object storage, and external Redis storage. Refer to the [prerequisites for deploying to Kubernetes](/terraform/enterprise/deploy/kubernetes#prerequisites) for additional information. 
 
 If you currently use the [mounted disk operational mode](/terraform/enterprise/operational-modes#operational-modes) for Terraform Enterprise on Replicated, you do not meet the above requirements.
 You must first [migrate to external services mode](/terraform/enterprise/deploy/replicated/administration/infrastructure/mounted-to-external-migration), and then follow the external services to Kubernetes migration guide as well as deploy an external Redis server.
@@ -448,7 +515,7 @@ At a high level, this process involves:
 1. [Restoring your data to external services](/terraform/tutorials/recommended-patterns/pattern-recovery).
 1. Testing that the external services migration succeeded.
 1. Deploying external redis.
-1. Follow the guide for [External Services to Kubernetes migration](/terraform/enterprise/deploy/replicated-migration#external-services-or-active-active-to-cloud-managed-kubernetes).
+1. Follow the guide for [External Services to Kubernetes migration](#external-services-or-active-active-to-cloud-managed-kubernetes).
 
 Contact your HashiCorp account representative or HashiCorp support if you have additional questions.
 
@@ -461,6 +528,8 @@ If you are currently operating Terraform Enterprise in `active-active` mode, the
 Before proceeding with this migration guide, make sure you meet all the [prerequisites](#prerequisites) and that a Flexible
 Deployment Options license file has been provided by your HashiCorp business partner.
 Do not proceed with this guide if any of the prerequisites are not fulfilled.
+
+When Terraform Enterprise is operating in `active-active` mode, you can scale directly up to your target number of nodes after the migration is complete. You do not need to scale to one node before scaling to all nodes.
 
 If at any point you need to revert your settings, see [the rollback steps](/terraform/enterprise/deploy/replicated-migration#kubernetes-rollback-steps).
 
@@ -517,7 +586,7 @@ for instructions.
 
 #### Step 3: Validate migration success
 
-Finally, test that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use those instead of doing the following steps. You should
+Finally, test that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use those instead of doing the following steps. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production. You should
 be able to log in to your new Terraform Enterprise installation with the credentials previously used for your Replicated installation.
 
 1. Execute a plan and apply it from the CLI, testing several subsystems. Ensuring that proxies are correctly configured, certificates are properly configured, and the instance can download Terraform binaries and execute runs.
@@ -558,10 +627,13 @@ Complete the following steps to migrate from Replicated to Podman.
 
 The minimum Terraform Enterprise version necessary for Podman is [v202404-1](/terraform/enterprise/releases/2024/v202404-1).
 
+When Terraform Enterprise is operating in `active-active` mode, you can scale directly up to your target number of nodes after the migration is complete. You do not need to scale to one node before scaling to all nodes.
+
 #### Step 1: Prepare the host
 
 We recommend deploying Terraform Enterprise to the same host as your current Replicated instance.
 
+[Contact HashiCorp support](/terraform/enterprise/deploy/troubleshoot/contact-support) for assistance migrating your Terraform Enterprise installation to a separate host.
 
 1. We recommend reusing your Replicated certificate to minimize the upgrade's effect on your other stack components.
 
@@ -605,7 +677,7 @@ We recommend deploying Terraform Enterprise to the same host as your current Rep
    replicatedctl app-config export > replicated-app-config.backup.json
    ```
 
-1. Create a yaml file based on the template for your current operational mode:
+1. Create a yaml file based on the template for your current operational mode: 
      - [Mounted Disk operational mode Kubernetes YAML example](/terraform/enterprise/deploy/podman#example-disk-mode-configuration).
      - [External operational mode Kubernetes YAML example](/terraform/enterprise/deploy/podman#example-external-mode-configuration).
      - [Active/Active operational mode Kubernetes YAML example](/terraform/enterprise/deploy/podman#example-active-active-mode-configuration).
@@ -664,7 +736,7 @@ Follow the [Podman installation guide](/terraform/enterprise/deploy/podman).
 1.  Create a Terraform Enterprise pod by running the following command:
 
     ```shell-session
-    $ podman play kube <path_to_YAML_file>
+    $ podman kube play <path_to_YAML_file>
     ```
 
 1.  In a separate terminal session, you can monitor the logs by running the following command:
@@ -681,7 +753,7 @@ Follow the [Podman installation guide](/terraform/enterprise/deploy/podman).
 
 #### Step 6: Validate migration success
 
-Complete the following steps to verify that your new Terraform Enterprise installation works as expected. Alternatively, you can execute your existing suite of release acceptance tests.
+Complete the following steps to verify that your new Terraform Enterprise installation works as expected. Alternatively, you can execute your existing suite of release acceptance tests. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
 
 1. Execute a plan and apply it from the CLI to test several subsystems. This step ensures that proxies are correctly configured, certificates are properly configured, and that the instance can download Terraform binaries and execute runs.
 1. Execute a plan and apply it from version control to test that webhooks are working and certificates are in place on both sides.
@@ -697,7 +769,7 @@ Complete the following steps to revert to a Replicated deployment.
 1. Stop Terraform Enterprise on Podman.
 
    ```shell-session
-   $ podman play kube <path_to_YAML_file> --down
+   $ podman kube down <path_to_YAML_file>
    ```
 
 2. Remove Podman.
@@ -716,11 +788,11 @@ Complete the following steps to revert to a Replicated deployment.
 
 ## Mounted disk to Nomad
 
-You must provide an external PostgreSQL database server, external object storage, and external Redis storage. Refer to the [prerequisites for deploying to Nomad](/terraform/enterprise/deploy/nomad#prerequisites) for additional information.
+You must provide an external PostgreSQL database server, external object storage, and external Redis storage. Refer to the [prerequisites for deploying to Nomad](/terraform/enterprise/deploy/nomad#prerequisites) for additional information. 
 
-You must complete additional steps to migrate a Terraform Enterprise deployment on Replicated in [`disk` mode](/terraform/enterprise/deploy/configuration/storage/configure-mode):
+You must complete additional steps to migrate a Terraform Enterprise deployment on Replicated in [`disk` mode](/terraform/enterprise/deploy/configuration/storage/configure-mode#disk): 
 
-1. [Migrate your Replicated deployment to `external` mode](/terraform/enterprise/deploy/replicated/administration/infrastructure/mounted-to-external-migration)
+1. [Migrate your Replicated deployment to `external` mode](/terraform/enterprise/deploy/replicated/administration/infrastructure/mounted-to-external-migration) 
 1. Verify that the migration succeeded.
 1. Deploy an external Redis server.
 
@@ -775,6 +847,8 @@ The existing version of Terraform Enterprise must be able to run on non-Replicat
 
 #### Step 4: Migrate to Nomad
 
+When Terraform Enterprise is operating in `active-active` mode, you can scale directly up to your target number of nodes after the migration is complete. You do not need to scale to one node before scaling to all nodes.
+
 1. Stop your Replicated installation by executing the following command:
 
    ```shell-session
@@ -791,8 +865,8 @@ The existing version of Terraform Enterprise must be able to run on non-Replicat
 
 #### Step 5: Validate migration success
 
-Verify that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use them instead of completing the following steps. You should
-be able to log in to your new Terraform Enterprise installation with the credentials previously used for your Replicated installation.
+Verify that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use them instead of completing the following steps. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production. You should
+be able to log in to your new Terraform Enterprise installation with the credentials previously used for your Replicated installation. 
 
 1. Execute a plan and apply it from the CLI, testing several subsystems. Ensuring that proxies are correctly configured, certificates are properly configured, and the instance can download Terraform binaries and execute runs.
 1. Execute a plan and apply it from VCS, testing that webhooks are working and certificates are in place on both sides.
