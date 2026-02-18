@@ -60,7 +60,7 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 | Metric                               | Description                                                                                                          | Unit    | Type   |
 |--------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------|--------|
 | `consul.autopilot.failure_tolerance` | Tracks the number of voting servers that the cluster can lose while continuing to function.                          | servers | gauge  | 
-| `consul.autopilot.healthy`           | Tracks the overall health of the local server cluster. 1 if all servers are healthy, 0 if one or more are unhealthy. | health  | gauge  |
+| `consul.autopilot.healthy`           | Tracks the overall health of the local server cluster. `1` if all servers are healthy, `0` if one or more are unhealthy. | health  | gauge  |
 
 
 ## Cache metrics
@@ -97,7 +97,7 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 | `consul.kvs.apply`                        | Measures the time it takes to complete an update to the KV store.                           | ms      | summary |
 
 
-## Client metrics
+## Client agent metrics
 
 | Metric                                                | Description                                                                                                                        | Unit     | Type    |
 |-------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|----------|---------|
@@ -275,6 +275,8 @@ Most of these metrics are duplicated from the Golang metrics.
 
 
 ## Intentions metrics
+
+The finite-state-machine captures the behavior of the Raft index. These metrics measure the amount of time it takes to apply a given event to the FSM.
 
 | Metric                          | Description                                                                                 | Unit   | Type    |
 |---------------------------------|---------------------------------------------------------------------------------------------|--------|---------|
