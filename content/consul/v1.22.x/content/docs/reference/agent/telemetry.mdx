@@ -19,7 +19,7 @@ For information about service mesh traffic metrics, refer to [Observe service me
 
 | Metric                                      | Description                                                                                    | Unit         | Type    |
 |---------------------------------------------|------------------------------------------------------------------------------------------------|--------------|---------|
-| `consul.acl.blocked.check.deregistration`   | Increments whenever a deregistration fails for a check (blocked by an ACL).                    | requests     | counter |
+| `consul.acl.blocked.check.deregistration`   | Increments whenever a deregistration fails for a check because Consul ACL blocked it.                    | requests     | counter |
 | `consul.acl.blocked.check.registration`     | Increments whenever a registration fails for a check (blocked by an ACL).                      | requests     | counter |
 | `consul.acl.blocked.node.registration`      | Increments whenever a registration fails for a node (blocked by an ACL).                       | requests     | counter |
 | `consul.acl.blocked.service.deregistration` | Increments whenever a deregistration fails for a service (blocked by an ACL).                  | requests     | counter |
@@ -72,11 +72,11 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 | `consul.cache.evict_expired`        | Counts the number of expired entries that are evicted.                                | entries            | counter |  
 | `consul.cache.fetch_error`          | Counts the number of failed fetches by the cache.                                     | failed fetches     | counter |  
 | `consul.cache.fetch_success`        | Counts the number of successful fetches by the cache.                                 | successful fetches | counter |  
-| `consul.consul.cache.bypass`        | Deprecated - please use `cache.bypass` instead.                                       | requests           | counter |  
-| `consul.consul.cache.entries_count` | Deprecated - please use `cache.entries_count` instead.                                | entries            | gauge   |
-| `consul.consul.cache.evict_expired` | Deprecated - please use `cache.evict_expired` instead.                                | entries            | counter |  
-| `consul.consul.cache.fetch_error`   | Deprecated - please use `cache.fetch_error` instead.                                  | failed fetches     | counter |  
-| `consul.consul.cache.fetch_success` | Deprecated - please use `cache.fetch_success` instead.                                | successful fetches | counter |  
+| `consul.consul.cache.bypass`        | Deprecated. Use `cache.bypass` instead.                                       | requests           | counter |  
+| `consul.consul.cache.entries_count` | Deprecated. Use `cache.entries_count` instead.                                | entries            | gauge   |
+| `consul.consul.cache.evict_expired` | Deprecated. Use `cache.evict_expired` instead.                                | entries            | counter |  
+| `consul.consul.cache.fetch_error`   | Deprecated. Use `cache.fetch_error` instead.                                  | failed fetches     | counter |  
+| `consul.consul.cache.fetch_success` | Deprecated. Use `cache.fetch_success` instead.                                | successful fetches | counter |  
 
 
 ## Catalog and KV store metrics

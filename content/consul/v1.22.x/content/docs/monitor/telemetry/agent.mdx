@@ -72,8 +72,7 @@ Telemetry information is also retrievable with the [metrics API endpoint](/consu
 By default, all metric names of gauge type use the hostname of the Consul agent as a prefix. For example,  `consul.<hostname>.server.isLeader`. 
 To disable prefixing the hostname, set `telemetry.disable_hostname=true` in the [agent configuration](/consul/docs/reference/agent/configuration-file/telemetry).
 
-Additionally, if the [`telemetry` configuration options](/consul/docs/reference/agent/configuration-file/telemetry)
-are provided, the telemetry information will be streamed to a [statsite](http://github.com/armon/statsite) or [statsd](http://github.com/etsy/statsd) server where it can be aggregated and flushed to Graphite or any other metrics store.
+You can also send Consul telemetry to a [statsite](http://github.com/armon/statsite) or [statsd](http://github.com/etsy/statsd) server where it can be aggregated and flushed to Graphite or any other metrics store. Configure [`telemetry` parameters in the agent configuration](/consul/docs/reference/agent/configuration-file/telemetry) to use this option.
 
 A [Grafana dashboard](https://grafana.com/grafana/dashboards/13396), maintained by the Consul team, is also available. The dashboard helps display these metrics for easy visualization and can be used as a starting point to create your own dashboards.
 
