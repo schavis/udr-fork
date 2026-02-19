@@ -5,7 +5,7 @@ description: >-
   Configure agent telemetry to collect operations metrics you can use to debug and observe Consul behavior and performance. Learn about configuration options, the metrics you can collect, and why they're important.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-05T11:02:51-05:00
-last_modified: 2026-02-17T15:55:19.000Z
+last_modified: 2026-02-19T16:14:16.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -87,6 +87,19 @@ The following documentation and tutorials provide additional examples of the tel
 These are some of the most important metrics that can help you understand the health of your cluster at a glance. 
 For a full list of metrics emitted by Consul, refer to the [Telemetry reference documentation](/consul/docs/reference/agent/telemetry).
 
+- [Transaction timing](#transaction-timing) metrics, to monitor Consul write performances.
+- [Leadership changes](#leadership-changes) metrics, to monitor Consul datacenter stability.
+- [Certificate Authority expiration](#certificate-authority-expiration) metrics, to keep track of CA expiration and to plan certificate rotation.
+- [Autopilot](#autopilot) metrics, to monitor the overall health of your cluster.
+- [Memory usage](#memory-usage) metrics, to monitor Consul resource usage. 
+- [Garbage collection](#garbage-collection) metrics, to monitor for time spent in garbage collection.
+- [Network activity](#network-activity-rpc-count) metrics, to measure the load created from a Consul agent.
+- [Raft thread saturation](#raft-thread-saturation) metrics, to measure how much capacity a Consul server has to accept additional write load.
+- [Raft replication capacity issues](#raft-replication-capacity-issues) metrics, to monitor the health and capacity of raft replication on servers
+- [License expiration](#license-expiration) metrics, <EnterpriseAlert inline /> to monitor license validity.
+- [WAL logstore performance](#wal-logstore-performance) metrics, to monitor WAL backend performances.
+- [Bolt DB performance](#bolt-db-performance) metrics, to monitor Bolt DB performances.
+
 ### Transaction timing
 
 | Metric Name              | Description                                                                                                     | Unit                         | Type    |
@@ -113,7 +126,7 @@ For a full list of metrics emitted by Consul, refer to the [Telemetry reference 
 
 **What to look for:** For a healthy cluster, you're looking for a `lastContact` lower than 200ms, `leader` > 0 and `candidate` == 0. Deviations from this might indicate flapping leadership.
 
-### Certificate Authority Expiration
+### Certificate Authority expiration
 
 | Metric Name                            | Description                                                                     | Unit    | Type  |
 | :------------------------------------- | :------------------------------------------------------------------------------ | :------ | :---- |
@@ -173,7 +186,7 @@ For more information, see [GH-4734](https://github.com/hashicorp/consul/issues/4
 </Note>
 
 
-### Network activity - RPC Count
+### Network activity - RPC count
 
 | Metric Name                  | Description                                                                           | Unit     | Type    |
 | :--------------------------- | :------------------------------------------------------------------------------------ | :------- | :------ |
@@ -185,7 +198,7 @@ For more information, see [GH-4734](https://github.com/hashicorp/consul/issues/4
 
 **What to look for:** Sudden large changes to the `consul.client.rpc` metrics (greater than 50% deviation from baseline). `consul.client.rpc.exceeded` or `consul.client.rpc.failed` count > 0, as it implies that an agent is being rate-limited or fails to make an RPC request to a Consul server.
 
-### Raft Thread Saturation
+### Raft thread saturation
 
 | Metric Name                          | Description                                                                                                              | Unit       | Type   |
 | :----------------------------------- | :----------------------------------------------------------------------------------------------------------------------- | :--------- | :----- |
@@ -202,7 +215,7 @@ These metrics are approximate, and under extremely heavy load they do not give a
 
 </Note>
 
-### Raft Replication Capacity Issues
+### Raft replication capacity issues
 
 | Metric Name                             | Description                                                                                            | Unit     | Type    |
 | :-------------------------------------- | :----------------------------------------------------------------------------------------------------- | :------- | :------ |
@@ -249,7 +262,7 @@ Graphing `consul.raft.leader.oldestLogAge` on the same axes as the other two met
 
 Note that if servers don't restart often, then the snapshot could have grown significantly since the last restore happened so last restore times might not reflect what would happen if an agent restarts now.
 
-### License Expiration <EnterpriseAlert inline />
+### License expiration <EnterpriseAlert inline />
 
 | Metric Name                       | Description                                                      | Unit  | Type  |
 | :-------------------------------- | :--------------------------------------------------------------- | :---- | :---- |
@@ -263,7 +276,6 @@ Note that if servers don't restart often, then the snapshot could have grown sig
 
 The WAL LogStore replaced BoltDB as the backend used in previous versions of Consul. 
 Refer to [Persistent data backend architecture](/consul/docs/architecture/backend) for more information.
-
 
 | Metric Name                                | Description                                                                     | Unit  | Type  |
 | :----------------------------------------- | :------------------------------------------------------------------------------ | :---- | :---- |
@@ -287,8 +299,7 @@ Refer to [Persistent data backend architecture](/consul/docs/architecture/backen
 **What to look for:** The primary thing to look for are increases in the `consul.raft.wal.last_segment_age_seconds` times. 
 Combining this information with the values of `consul.raft.commitTime`, `consul.raft.rpc.installSnapshot`, and `consul.raft.leader.dispatchLog` should provide you with an overview of the logstore performances.
 
-
-### Bolt DB Performance
+### Bolt DB performance
 
 | Metric Name                        | Description                                                      | Unit  | Type  |
 | :--------------------------------- | :--------------------------------------------------------------- | :---- | :---- |
@@ -296,7 +307,6 @@ Combining this information with the values of `consul.raft.commitTime`, `consul.
 | `consul.raft.boltdb.logsPerBatch`  | Measures the number of logs being written per batch to the db. | logs | sample |
 | `consul.raft.boltdb.storeLogs`     | Measures the amount of time spent writing logs to the db. | ms | timer |
 | `consul.raft.boltdb.writeCapacity` | Theoretical write capacity in terms of the number of logs that can be written per second. Each sample outputs what the capacity would be if future batched log write operations were similar to this one. This similarity encompasses 4 things: batch size, byte size, disk performance and boltdb performance. While none of these will be static and its highly likely individual samples of this metric will vary, aggregating this metric over a larger time window should provide a decent picture into how this BoltDB store can perform | logs/second  | sample |
-
 
 ** Requirements: **
 * Consul 1.11.0+

@@ -5,7 +5,7 @@ description: >-
   Configure agent telemetry to collect operations metrics you can use to debug and observe Consul behavior and performance. Learn about configuration options, the metrics you can collect, and why they're important.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-05T11:02:51-05:00
-last_modified: 2026-02-17T15:55:20.000Z
+last_modified: 2026-02-19T16:14:17.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -16,6 +16,8 @@ This page provides reference information for Consul agent events and the metrics
 For information about service mesh traffic metrics, refer to [Observe service mesh telemetry](/consul/docs/observe).
 
 ## ACL metrics
+
+Metrics related to the [ACL subsystem](/consul/docs/secure/acl) that measure times needed for ACL operations as well as blocked operations.
 
 | Metric                                      | Description                                                                                    | Unit         | Type    |
 |---------------------------------------------|------------------------------------------------------------------------------------------------|--------------|---------|
@@ -57,6 +59,8 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 
 # Autopilot metrics
 
+Metrics relative to the [autopilot](/consul/docs/manage/scale/autopilot) subsystem that can be used to retrieve the general health of the Consul datacenter.
+
 | Metric                               | Description                                                                                                          | Unit    | Type   |
 |--------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------|--------|
 | `consul.autopilot.failure_tolerance` | Tracks the number of voting servers that the cluster can lose while continuing to function.                          | servers | gauge  | 
@@ -65,6 +69,8 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 
 ## Cache metrics
 
+Metrics relative to the Consul cache than can be used to monitor the cache efficacy.
+
 | Metric                              | Description                                                                           | Unit               | Type    |
 |-------------------------------------|---------------------------------------------------------------------------------------|--------------------|---------|
 | `consul.cache.bypass`               | Counts how many times a request bypassed the cache because no cache-key was provided. | requests           | counter |  
@@ -72,14 +78,16 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 | `consul.cache.evict_expired`        | Counts the number of expired entries that are evicted.                                | entries            | counter |  
 | `consul.cache.fetch_error`          | Counts the number of failed fetches by the cache.                                     | failed fetches     | counter |  
 | `consul.cache.fetch_success`        | Counts the number of successful fetches by the cache.                                 | successful fetches | counter |  
-| `consul.consul.cache.bypass`        | Deprecated. Use `cache.bypass` instead.                                       | requests           | counter |  
-| `consul.consul.cache.entries_count` | Deprecated. Use `cache.entries_count` instead.                                | entries            | gauge   |
-| `consul.consul.cache.evict_expired` | Deprecated. Use `cache.evict_expired` instead.                                | entries            | counter |  
-| `consul.consul.cache.fetch_error`   | Deprecated. Use `cache.fetch_error` instead.                                  | failed fetches     | counter |  
-| `consul.consul.cache.fetch_success` | Deprecated. Use `cache.fetch_success` instead.                                | successful fetches | counter |  
+| `consul.consul.cache.bypass`        | Deprecated. Use `cache.bypass` instead.                                               | requests           | counter |  
+| `consul.consul.cache.entries_count` | Deprecated. Use `cache.entries_count` instead.                                        | entries            | gauge   |
+| `consul.consul.cache.evict_expired` | Deprecated. Use `cache.evict_expired` instead.                                        | entries            | counter |  
+| `consul.consul.cache.fetch_error`   | Deprecated. Use `cache.fetch_error` instead.                                          | failed fetches     | counter |  
+| `consul.consul.cache.fetch_success` | Deprecated. Use `cache.fetch_success` instead.                                        | successful fetches | counter |  
 
 
 ## Catalog and KV store metrics
+
+Metrics relative to the Consul [catalog](/consul/docs/concept/catalog) and [KV store](/consul/docs/automate/kv/store), containing information about the amount of requests and the performance of the queries.
 
 | Metric                                    | Description                                                                                 | Unit    | Type    |
 |-------------------------------------------|---------------------------------------------------------------------------------------------|---------|---------|
@@ -98,6 +106,8 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 
 
 ## Client agent metrics
+
+Metrics relative to the API and RPC requests for Consul clients.
 
 | Metric                                                | Description                                                                                                                        | Unit     | Type    |
 |-------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|----------|---------|
@@ -136,6 +146,8 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 
 ## Federation metrics
 
+Metrics relative to the [WAN federation](/consul/docs/east-west/wan-federation) status of the Consul datacenter.
+
 | Metric                                       | Description                                                                                    | Unit | Type    |
 |----------------------------------------------|------------------------------------------------------------------------------------------------|------|---------|
 | `consul.federation.state.apply`              | Measures the time it takes to apply federation state changes across WAN-federated datacenters. | ms   | summary |
@@ -145,6 +157,10 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 
 
 ## FSM metrics
+
+The _Finite State Machine_ (FSM) captures the behavior of the Raft index. These metrics measure the amount of time it takes to apply a given event to the FSM.
+
+Other metrics relative to the FSM performances can be found in [Raft metrics](#raft-metrics).
 
 | Metric                               | Description                                                                                | Unit | Type    |
 |--------------------------------------|--------------------------------------------------------------------------------------------|------|---------|
@@ -168,11 +184,13 @@ To distinguish the different endpoints, it includes labels for `path` and `metho
 | `consul.fsm.system_metadata`         | Measures the time it takes to apply a system metadata operation to the FSM.                | ms   | summary |
 | `consul.fsm.tombstone`               | Measures the time it takes to apply the given tombstone operation to the FSM.              | ms   | summary |
 | `consul.fsm.txn`                     | Measures the time it takes to apply the given transaction update to the FSM.               | ms   | summary |
-| `consul.consul.fsm.ca`               | Deprecated - use `fsm.ca` instead.                                                         | ms   | summary |
-| `consul.consul.fsm.intention`        | Deprecated - use `fsm.intention` instead.                                                  | ms   | summary |
+| `consul.consul.fsm.ca`               | Deprecated. Use `fsm.ca` instead.                                                          | ms   | summary |
+| `consul.consul.fsm.intention`        | Deprecated. Use `fsm.intention` instead.                                                   | ms   | summary |
 
 
 ## GRPC metrics
+
+Metrics relative to the amount of gRPC connections handled by the Consul datacenter.
 
 | Metric                                | Description                                                                                       | Unit        | Type    |
 |---------------------------------------|---------------------------------------------------------------------------------------------------|-------------|---------|
@@ -194,26 +212,30 @@ Note that if the Consul server is operating inside a container these metrics sti
 
 ### Host metrics
 
-| Metric                            | Description                                | Unit     | Type    |
-|-----------------------------------|--------------------------------------------|----------|---------|
-| `consul.host.cpu.idle`            | Idle cpu utilization. One entry per CPU.   | percentage  | gauge
-| `consul.host.cpu.iowait`          | Iowait cpu utilization. One entry per CPU. | percentage  | gauge
-| `consul.host.cpu.system`          | System cpu utilization. One entry per CPU. | percentage  | gauge
-| `consul.host.cpu.total`           | Total cpu utilization. One entry per CPU.  | percentage  | gauge
-| `consul.host.cpu.user`            | User cpu utilization. One entry per CPU.   | percentage  | gauge
-| `consul.host.disk.available`      | Available bytes on disk.                   | bytes       | gauge
-| `consul.host.disk.inodes_percent` | Percentage of disk inodes usage.           | percentage  | gauge
-| `consul.host.disk.size`           | Size of disk in bytes.                     | bytes       | gauge
-| `consul.host.disk.used`           | Disk usage in bytes.                       | bytes       | gauge
-| `consul.host.disk.used_percent`   | Percentage of disk space usage.            | percentage  | gauge
-| `consul.host.memory.available`    | Available physical memory in bytes.        | bytes       | gauge
-| `consul.host.memory.free`         | Free physical memory in bytes.             | bytes       | gauge
-| `consul.host.memory.total`        | Total physical memory in bytes.            | bytes       | gauge
-| `consul.host.memory.used`         | Used physical memory in bytes.             | bytes       | gauge
-| `consul.host.memory.used_percent` | Percentage of physical memory in use.      | percentage  | gauge
-| `consul.host.uptime`              | System uptime.                             | seconds     | gauge
+Metrics relative to the host where the Consul agent is running.
+
+| Metric                            | Description                                | Unit        | Type    |
+|-----------------------------------|--------------------------------------------|-------------|---------|
+| `consul.host.cpu.idle`            | Idle cpu utilization. One entry per CPU.   | percentage  | gauge   |
+| `consul.host.cpu.iowait`          | Iowait cpu utilization. One entry per CPU. | percentage  | gauge   |
+| `consul.host.cpu.system`          | System cpu utilization. One entry per CPU. | percentage  | gauge   |
+| `consul.host.cpu.total`           | Total cpu utilization. One entry per CPU.  | percentage  | gauge   |
+| `consul.host.cpu.user`            | User cpu utilization. One entry per CPU.   | percentage  | gauge   |
+| `consul.host.disk.available`      | Available bytes on disk.                   | bytes       | gauge   |
+| `consul.host.disk.inodes_percent` | Percentage of disk inodes usage.           | percentage  | gauge   |
+| `consul.host.disk.size`           | Size of disk in bytes.                     | bytes       | gauge   |
+| `consul.host.disk.used`           | Disk usage in bytes.                       | bytes       | gauge   |
+| `consul.host.disk.used_percent`   | Percentage of disk space usage.            | percentage  | gauge   |
+| `consul.host.memory.available`    | Available physical memory in bytes.        | bytes       | gauge   |
+| `consul.host.memory.free`         | Free physical memory in bytes.             | bytes       | gauge   |
+| `consul.host.memory.total`        | Total physical memory in bytes.            | bytes       | gauge   |
+| `consul.host.memory.used`         | Used physical memory in bytes.             | bytes       | gauge   |
+| `consul.host.memory.used_percent` | Percentage of physical memory in use.      | percentage  | gauge   |
+| `consul.host.uptime`              | System uptime.                             | seconds     | gauge   |
 
 ### Golang metrics
+
+Metrics relative to the Golang runtime that is used to run the Consul process.
 
 | Metric                              | Description                                                         | Unit       | Type    |
 |-------------------------------------|---------------------------------------------------------------------|------------|---------|
@@ -247,7 +269,7 @@ Note that if the Consul server is operating inside a container these metrics sti
 
 ### Runtime metrics
 
-Most of these metrics are duplicated from the Golang metrics.
+Most of these metrics are duplicated from the [Golang metrics](#golang-metrics).
 
 | Metric                              | Description                                                                                                                                                                  | Unit                      | Type    |
 |-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|---------|
@@ -263,6 +285,8 @@ Most of these metrics are duplicated from the Golang metrics.
 
 ### Process metrics
 
+Metrics relative to the Consul process.
+
 | Metric                             | Description                                            | Unit             | Type    |
 |------------------------------------|--------------------------------------------------------|------------------|---------|
 | `process.cpu_seconds_total`        | Total user and system CPU time spent in seconds.       | seconds          | counter |
@@ -276,15 +300,17 @@ Most of these metrics are duplicated from the Golang metrics.
 
 ## Intentions metrics
 
-The finite-state-machine captures the behavior of the Raft index. These metrics measure the amount of time it takes to apply a given event to the FSM.
+Metrics that measure the time needed to propagate intentions into Consul service mesh.
 
 | Metric                          | Description                                                                                 | Unit   | Type    |
 |---------------------------------|---------------------------------------------------------------------------------------------|--------|---------|
 | `consul.intention.apply`        | Measures the time it takes to apply service mesh intention (authorization policy) changes.  | ms     | summary |
-| `consul.consul.intention.apply` | Deprecated - please use `intention_apply`                                                   | ms     | summary |
+| `consul.consul.intention.apply` | Deprecated. Use use `intention_apply` instead.                                              | ms     | summary |
 
 
 ## Leader metrics
+
+Metrics relative to tracking server leadership and to measure the performance of data replication across federated datacenters.
 
 | Metric                                              | Description                                                                                                                                                                                                                                        | Unit       | Type    |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|---------|
@@ -309,6 +335,10 @@ The finite-state-machine captures the behavior of the Raft index. These metrics 
 
 ## Membership metrics
 
+Metrics relative to the performances of the [Serf gossip protocol](/consul/docs/concept/gossip), used to manage membership and broadcast messages to the cluster.
+
+Refer also to [Serf metrics](#serf-metrics) for more metrics relative to the gossip protocol.
+
 | Metric                               | Description                                                                                                                 | Unit                            | Type    |
 |--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|---------------------------------|---------|
 | `consul.memberlist.gossip`           | Measures the time taken for gossip messages to be broadcasted to a set of randomly selected nodes.                          | ms                              | summary |
@@ -330,22 +360,26 @@ Metrics can be appended with certain labels to further distinguish data between 
 
 ## Mesh certificate metrics
 
-| Metric                                    | Description                                                                   | Unit    | Type   |
-|-------------------------------------------|-------------------------------------------------------------------------------|---------|--------|
+Metrics that expose the expiration times of the service mesh certificates.
+
+| Metric                                  | Description                                                                   | Unit    | Type   |
+|-----------------------------------------|-------------------------------------------------------------------------------|---------|--------|
 | `consul.mesh.active_root_ca.expiry`     | Seconds until the service mesh root certificate expires. Updated every hour.    | seconds | gauge  |
 | `consul.mesh.active_signing_ca.expiry`  | Seconds until the service mesh signing certificate expires. Updated every hour. | seconds | gauge  |
 
 
 ## Peering metrics
 
-[Cluster peering](/consul/docs/east-west/cluster-peering) refers to Consul clusters that communicate through a peer connection, as opposed to a federated connection. Consul collects metrics that describe the number of services exported to a peered cluster. Peering metrics are only emitted by the leader server. These metrics are emitted every 9 seconds.
+[Cluster peering](/consul/docs/east-west/cluster-peering) refers to Consul clusters that communicate through a peer connection, as opposed to a federated connection. 
+Consul collects metrics that describe the number of services exported to a peered cluster. 
+Peering metrics are only emitted by the leader server. These metrics are emitted every 9 seconds.
 
 | Metric                                    | Description                                                                                                                                                                      | Unit     | Type    |
 |-------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------|
 | `consul.peering.exported_services`        | A gauge that tracks how many services are exported for the peering. The labels are `peer_name`, `peer_id` and, for enterprise, `partition`. We emit this metric every 9 seconds. | services | gauge   |
 | `consul.peering.healthy`                  | A gauge that tracks how if a peering is healthy (`1`) or not (`0`). The labels are `peer_name`, `peer_id` and, for enterprise, `partition`. We emit this metric every 9 seconds. | health   | gauge   |
-| `consul.consul.peering.exported_services` | Deprecated - please use `peering_exported_services`.                                                                                                                             | services | gauge   |
-| `consul.consul.peering.healthy`           | Deprecated - please use `peering_healthy`.                                                                                                                                       | health   | gauge   |
+| `consul.consul.peering.exported_services` | Deprecated. Use `peering_exported_services` instead.                                                                                                                             | services | gauge   |
+| `consul.consul.peering.healthy`           | Deprecated. Use `peering_healthy` instead.                                                                                                                                       | health   | gauge   |
 
 ### Labels
 
@@ -359,6 +393,8 @@ Consul attaches the following labels to metric values.
 
 ## Prepared queries metrics
 
+Metrics relative to the [prepared queries'](/consul/docs/manage-traffic/failover/prepared-query) performances. 
+
 | Metric                                  | Description                                                                                                      | Unit | Type    |
 |-----------------------------------------|------------------------------------------------------------------------------------------------------------------|------|---------|
 | `consul.prepared_query.apply`           | Measures the time it takes to apply a prepared query update.                                                     | ms   | summary |
@@ -368,6 +404,12 @@ Consul attaches the following labels to metric values.
 
 
 ## Raft Metrics
+
+Metrics relative to the [Raft protocol](/consul/docs/concept/consensus) that is used to maintain consensus in the Consul cluster. 
+These metrics include the ones for the Raft's LogStore that can be either Bolt DB or [WAL](/consul/docs/deploy/server/wal). 
+You will only see metrics relative to the logstore enabled on your Consul installation. 
+
+Other metrics relative to the Raft performances can be found in [FSM metrics](#fsm-metrics).
 
 | Metric                                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Unit                              | Type    |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|---------|
@@ -431,6 +473,8 @@ Consul attaches the following labels to metric values.
 
 ## RPC metrics
 
+Metrics relative to the performances of the RPC requests to the Consul servers.
+
 | Metric                              | Description                                                                                                                               | Unit        | Type    |
 |-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-------------|---------|
 | `consul.rpc.accept_conn`            | Increments when a server accepts an RPC connection.                                                                                       | connections | counter |
@@ -447,6 +491,10 @@ Consul attaches the following labels to metric values.
 
 ## Serf metrics
 
+Metrics relative to the performances of the [Serf gossip protocol](/consul/docs/concept/gossip), used to manage membership and broadcast messages to the cluster.
+
+Refer also to [Membership metrics](#membership-metrics) for more metrics relative to the gossip protocol.
+
 | Metric                                 | Description                                                                                            | Unit            | Type    |
 |----------------------------------------|--------------------------------------------------------------------------------------------------------|-----------------|---------|
 | `consul.serf.coordinate_adjustment_ms` | Measures the magnitude of network coordinate adjustments in milliseconds for failure detection tuning. | ms              | summary |
@@ -458,6 +506,8 @@ Metrics can be appended with certain labels to further distinguish data between 
 
 ## Session metrics
 
+Metrics relative to the performances of Consul [sessions](/consul/docs/automate/session).
+
 | Metric                          | Description                                               | Unit      | Type    |
 |---------------------------------|-----------------------------------------------------------|-----------|---------|
 | `consul.session.apply`          | Measures the time spent applying a session update.        | ms        | summary |
@@ -467,6 +517,8 @@ Metrics can be appended with certain labels to further distinguish data between 
 
 
 ## Consul state metrics
+
+Metrics that measure the amount of entities (kv entries, nodes, services, config entries, etc.) present in the Consul datacenter.
 
 | Metric                                    | Description                                                                                                                                                       | Unit              | Type    |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|---------|
@@ -489,6 +541,8 @@ Metrics can be appended with certain labels to further distinguish data between 
 
 ## Transaction metrics
 
+Metrics that measure the time needed to perform transactions inside the Consul cluster.
+
 | Metric             | Description                                               | Unit   | Type    |
 |--------------------|-----------------------------------------------------------|--------|---------|
 | `consul.txn.apply` | Measures the time spent applying a transaction operation. | ms     | summary |
@@ -496,6 +550,8 @@ Metrics can be appended with certain labels to further distinguish data between 
 
 
 ## xDS metrics
+
+Metrics that measure the number and performance of the Consul servers' xDS streams.
 
 | Metric                                      | Description                                                                                                                                     | Unit    | Type    |
 |---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------|
