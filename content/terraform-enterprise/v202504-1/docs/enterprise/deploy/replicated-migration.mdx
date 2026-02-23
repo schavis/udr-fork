@@ -4,7 +4,7 @@ description: >-
   Learn how to migrate your Terraform Enterprise installation from Replicated to another supported runtime environment.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-05-28T07:56:28-04:00
-last_modified: 2026-02-18T00:43:02.000Z
+last_modified: 2026-02-23T18:38:34.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -52,7 +52,9 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
 
    In both cases, we recommend backing up the environment variables of the Terraform Enterprise Docker container so that you can refer to them when configuring your target runtime.
 
-   -> **Note**: Throughout this guide, we use `terraform-enterprise` as the container name, which is the default for Replicated installations. If your container has a different name, adjust the commands accordingly. You can find your container name with: `sudo docker ps | grep terraform-enterprise`
+   Commands throughout this guide refer to `terraform-enterprise` as the container name, which is the default for Replicated installations. If your container has a different name, adjust the commands accordingly. Use the following command to find your container name:
+
+   `sudo docker ps | grep terraform-enterprise`
 
    Back up the environment variables:
    ```shell-session
@@ -75,18 +77,23 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
       ```shell-session
       $ sudo docker ps
       ```
-   1. Do a health check.
+   1. Run a health check.
       ```shell-session
       $ tfe-admin health-check
       ```
 
-      -> **Note:** If `tfe-admin health-check` fails with `sh: /root/ptfe-health-check: not found`, try running `replicated admin health-check` instead. If neither command works, refer to [tfe-admin health-check command fails](https://support.hashicorp.com/hc/en-us/articles/6053728286483-tfe-admin-health-check-command-fails-with-sh-root-ptfe-health-check-not-found) for additional troubleshooting. This issue is resolved in v202205-1 and later. **We recommend upgrading to the latest version if possible.**
+      If this fails with an `sh: /root/ptfe-health-check: not found` message, run:
+      ```shell-session
+      $ replicated admin health-check
+      ```
+
+      If neither command works, refer to [tfe-admin health-check command fails](https://support.hashicorp.com/hc/en-us/articles/6053728286483-tfe-admin-health-check-command-fails-with-sh-root-ptfe-health-check-not-found) for additional troubleshooting guidance.
 
    1. Do a `terraform plan` and a `terraform apply`.
 
 ### Prepare TLS certificates
 
--> **Note**: Have your TLS certificates ready before stopping Replicated. This ensures a smooth migration without delays.
+Creating your TLS certificates before stopping Replicated ensures a smooth migration without delays.
 
 1. Create the directory structure for Terraform Enterprise:
    ```shell-session
@@ -100,7 +107,7 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
    $ sudo docker exec terraform-enterprise tfectl app config --unredacted | jq '{cert: .tls.cert_file, key: .tls.key_file, bundle: .tls.ca_bundle_file}'
    ```
    
-   The output will show the certificate paths in the container. Depending on your setup, the file paths may differ from the following example:
+   The output shows the certificate paths in the container. Depending on your setup, the file paths may differ from the following example:
    ```json
    {
      "cert": "/etc/ssl/private/terraform-enterprise/cert.pem",
@@ -109,7 +116,7 @@ The migration paths are specific to the [operational mode](/terraform/enterprise
    }
    ```
    
-   Use the paths from the output above to copy your certificates from the container to the host:
+   Use the paths from the previous step to copy your certificates from the container to the host:
    ```shell-session
    $ sudo docker cp terraform-enterprise:/etc/ssl/private/terraform-enterprise/cert.pem /etc/terraform-enterprise/certs/
    $ sudo docker cp terraform-enterprise:/etc/ssl/private/terraform-enterprise/key.pem /etc/terraform-enterprise/certs/
@@ -137,31 +144,8 @@ If at any point you need to revert your settings, see [the rollback steps](/terr
 
 #### Step 1: Backup your data tier
 
-~> **Important**: Back up your Terraform Enterprise data tier before proceeding. **If your organization has established backup procedures, follow those instead of the commands below.**
-
-Refer to the [backup data tier guide](#back-up-data-tier) under the prerequisites section for recommended best practices and patterns.
-
-The following commands provide a basic archive approach only and are not recommended for production use. This method does not follow backup best practices and should only be used if you have no other backup procedures in place. You proceed at your own risk. Ensure you validate the backup is complete and stored in a secure, redundant location before proceeding with migration.
-
-1. Retrieve your mounted disk path:
-
-   ```shell-session
-   $ replicatedctl app-config export --template '{{ .disk_path.Value }}' | tr -d '\r'
-   ```
-
-1. We will refer to this path as the `${DISK_PATH}` going forward. Next, archive your mounted disk data:
-
-   ```shell-session
-   $ sudo tar -zcvf data.tar.gz -C ${DISK_PATH} aux postgres
-   ```
-
-1. Copy your `data.tar.gz` archive to a safe place.
-
-1. Back up the environment variables:
-
-   ```shell-session
-   $ sudo docker exec terraform-enterprise env | sudo tee env.txt > /dev/null
-   ```
+We always recommend backing up your data tier before conducting any maintenance or migration. See the backup data guide under the [prerequisites](#prerequisites) section for a detailed
+guide on how to move forward with the backup process.
 
 #### Step 2: Upgrade Terraform Enterprise
 
@@ -221,7 +205,7 @@ To make migration smoother and faster, we recommend using the same host as your 
    $ cat env.txt
    ```
 
-   Edit the compose file (use your preferred editor):
+   Edit the compose file using your preferred editor:
    ```shell-session
    $ sudo nano /etc/terraform-enterprise/docker-compose.yml
    ```
@@ -289,8 +273,19 @@ Next, you can stop Replicated and migrate your Terraform Enterprise installation
    ```shell-session
    $ replicatedctl app stop
    ```
+1. Back up your data. If you have already backed up your data proceed forward. If not, or if you want another backup for safe keeping, do the following.
+   - Retrieve your mounted disk path.
 
-   ~> **Reminder:** If you have not already backed up your data, follow the steps in [Back up your data tier](#step-1-backup-your-data-tier) before proceeding, as the migration occurs in the following steps.
+      ```shell-session
+      $ replicatedctl app-config export --template '{{ .disk_path.Value }}' | tr -d '\r'
+      ```
+
+   - Archive your mounted disk data, replacing `${DISK_PATH}` with the path from the previous command.
+
+      ```shell-session
+      $ tar -zcvf data.tar.gz -C ${DISK_PATH} aux postgres
+      ```
+   - Copy your `data.tar.gz` archive to a safe place.
 
 1. Start (and enable on start up) the Docker Compose based Terraform Enterprise.
 
@@ -321,7 +316,11 @@ Next, you can stop Replicated and migrate your Terraform Enterprise installation
 
 #### Step 7: Validate migration success
 
-Finally, test that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use those instead of doing the following steps. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
+Finally, test that your new Terraform Enterprise installation works properly.
+
+If you have an existing suite of release acceptance tests, you can use those instead of doing the following steps.
+
+We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
 
 1. Execute a plan and apply it from the CLI, testing several subsystems. Ensuring that proxies are correctly configured, certificates are properly configured, and the instance can download Terraform binaries and execute runs.
 1. Execute a plan and apply it from VCS, testing that webhooks are working and certificates are in place on both sides.
@@ -473,7 +472,11 @@ Next, you can stop Replicated and migrate your Terraform Enterprise installation
 
 #### Step 7: Validate migration success
 
-Finally, test that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, execute those instead of doing the following steps. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
+Finally, test that your new Terraform Enterprise installation works properly.
+
+If you have an existing suite of release acceptance tests, execute those instead of doing the following steps.
+
+We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
 
 1. Execute a plan and apply it from the CLI, testing several subsystems. Ensuring that proxies are correctly configured, certificates are properly configured, and the instance can download Terraform binaries and execute runs.
 1. Execute a plan and apply it from VCS, testing that webhooks are working and certificates are in place on both sides.
@@ -584,8 +587,13 @@ for instructions.
 
 #### Step 3: Validate migration success
 
-Finally, test that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use those instead of doing the following steps. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production. You should
-be able to log in to your new Terraform Enterprise installation with the credentials previously used for your Replicated installation.
+Finally, test that your new Terraform Enterprise installation works properly.
+
+If you have an existing suite of release acceptance tests, you can use those instead of doing the following steps.
+
+We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
+
+You should be able to log in to your new Terraform Enterprise installation with the credentials previously used for your Replicated installation.
 
 1. Execute a plan and apply it from the CLI, testing several subsystems. Ensuring that proxies are correctly configured, certificates are properly configured, and the instance can download Terraform binaries and execute runs.
 1. Execute a plan and apply it from VCS, testing that webhooks are working and certificates are in place on both sides.
@@ -751,7 +759,11 @@ Follow the [Podman installation guide](/terraform/enterprise/deploy/podman).
 
 #### Step 6: Validate migration success
 
-Complete the following steps to verify that your new Terraform Enterprise installation works as expected. Alternatively, you can execute your existing suite of release acceptance tests. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
+Complete the following steps to verify that your new Terraform Enterprise installation works as expected.
+
+Alternatively, you can execute your existing suite of release acceptance tests.
+
+We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production.
 
 1. Execute a plan and apply it from the CLI to test several subsystems. This step ensures that proxies are correctly configured, certificates are properly configured, and that the instance can download Terraform binaries and execute runs.
 1. Execute a plan and apply it from version control to test that webhooks are working and certificates are in place on both sides.
@@ -863,7 +875,11 @@ When Terraform Enterprise is operating in `active-active` mode, you can scale di
 
 #### Step 5: Validate migration success
 
-Verify that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use them instead of completing the following steps. We recommend testing capabilities that you use in production, as you would for a Terraform Enterprise upgrade. For example: If you are using sentinel or run tasks in production, we recommend testing a run that includes these integrations in a lower environment before deploying to production. You should be able to log in to your new Terraform Enterprise installation with the credentials previously used for your Replicated installation. 
+Verify that your new Terraform Enterprise installation works properly. If you have an existing suite of release acceptance tests, you can use them instead of completing the following steps.
+
+We recommend mimicking production workflows as closely as possible when verifying the upgrade in a test environment. For example, if you are using Sentinel or run tasks in production, we recommend creating a test run that includes these integrations in a test environment before deploying to production.
+
+You should be able to log in to your new Terraform Enterprise installation with the credentials previously used for your Replicated installation.
 
 1. Execute a plan and apply it from the CLI, testing several subsystems. Ensuring that proxies are correctly configured, certificates are properly configured, and the instance can download Terraform binaries and execute runs.
 1. Execute a plan and apply it from VCS, testing that webhooks are working and certificates are in place on both sides.
