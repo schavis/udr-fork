@@ -1,24 +1,36 @@
 ---
 layout: docs
-page_title: Turn a Kubernetes manifest into a Nomad jobspec
+page_title: Turn a Kubernetes manifest into a Nomad job specification
 description: |-
   Learn how to convert an existing Kubernetes application written in YAML
   manifests to a Nomad jobspec written in HCL.
 # START AUTO GENERATED METADATA, DO NOT EDIT
-created_at: 2026-02-17T23:31:03.000Z
-last_modified: 2026-02-17T23:31:03.000Z
+created_at: 2026-02-17T15:31:03-08:00
+last_modified: 2026-02-23T21:48:47.000Z
 # END AUTO GENERATED METADATA
 ---
 
-# Turn a Kubernetes manifest into a Nomad jobspec
+# Turn a Kubernetes manifest into a Nomad job specification
 
-Workloads for Kubernetes and Nomad are both defined in declarative specification files. Kubernetes workload specification files are known as _manifests_, and they are written in YAML. Nomad workload specification files are known as job specifications or _jobspecs_, and they are written in HCL.
+Workloads for Kubernetes and Nomad are both defined in declarative specification
+files. Kubernetes workload specification files are known as _manifests_, and
+you write them in YAML. Nomad workload specification files are known as job
+specifications or _jobspecs_, and you create them in HCL.
 
-This page uses an example application defined in Kubernetes manifests to guide you through the process of creating an equivalent Nomad jobspec.
+This page uses an example application defined in Kubernetes manifests to guide
+you through the process of creating an equivalent Nomad jobspec.
 
 ## Review an example Kubernetes application
 
-The following example application is adapted from the [Deploy a sample application on Linux guide in the AWS EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/sample-deployment.html). The application contains three `nginx` containers, each listening on port `8080`, as well as a service that listens on port `80` and forwards requests to the nginx containers. The containers run on Linux nodes with `amd64` or `arm64` architectures. The application consists of two specifications: a Deployment manifest and a Service manifest.
+We adapted the following example application from the [Deploy a sample
+application on Linux guide in the AWS EKS
+documentation](https://docs.aws.amazon.com/eks/latest/userguide/sample-deployment.html).
+
+The application contains three NGINX containers, each listening on port 8080, as
+well as a service that listens on port 80 and forwards requests to the NGINX
+containers. The containers run on Linux nodes with `amd64` or `arm64`
+architectures. The application consists of a Deployment manifest and a Service
+manifest.
 
 <CodeBlockConfig filename="sample-app.yaml" hideClipboard>
 
@@ -80,7 +92,8 @@ spec:
 
 ## How to start a Nomad jobspec
 
-To start the conversion process, create a framework for the jobspec file that includes the job, group, and task blocks.
+To start the conversion process, create a framework for the jobspec file that
+includes the job, group, and task blocks.
 
 <CodeBlockConfig filename="sample-app.nomad.acl">
 
@@ -98,9 +111,18 @@ job "eks-sample-linux-deployment" {
 
 </CodeBlockConfig>
 
-The naming scheme in these examples use the same `eks-` prefixes as the original Kubernetes manifests to highlight equivalent configuration properties. In this instance, the name of the Nomad `job` resource is the same as the Kubernetes Deployment `name`.
+The naming scheme in these examples use the same `eks-` prefixes as the original
+Kubernetes manifests to highlight equivalent configuration properties. In this
+instance, the name of the Nomad `job` resource is the same as the Kubernetes
+Deployment `name`.
 
-To deploy a set of nginx containers, configure the `group` block. The `count` attribute instructs Nomad to create three identical containers, and the `network` block enables port `8080` and makes it dynamically available to the task configuration with the name `http`. Each container uses the image and configuration defined in the `config` block, and the `driver` attribute instructs Nomad to use the Docker runtime. The task configuration also uses the `http` port defined at the group level.
+To deploy a set of NGINX containers, configure the `group` block. The `count`
+attribute instructs Nomad to create three identical containers, and the
+`network` block enables port `8080` and makes it dynamically available to the
+task configuration with the name `http`. Each container uses the image and
+configuration defined in the `config` block, and the `driver` attribute
+instructs Nomad to use the Docker runtime. The task configuration also uses the
+`http` port defined at the group level.
 
 <CodeBlockConfig filename="sample-app.nomad.acl" hideClipboard highlight="4,6-10,13-18">
 
@@ -132,11 +154,17 @@ job "eks-sample-linux-deployment" {
 
 ## Limit where the workloads run
 
-Nomad allows you to set [constraints](/nomad/docs/job-specification/constraint) and [affinities](/nomad/docs/job-specification/affinity) at the task, group, or job level, depending on your workload requirements.
+Nomad lets you set [constraints](/nomad/docs/job-specification/constraint)
+and [affinities](/nomad/docs/job-specification/affinity) at the task, group, or
+job level, depending on your workload requirements.
 
-The example Kubernetes application configures affinity to run during scheduling so that it runs on nodes with `amd64` or `arm64` architectures. The `linux` runtime is set in the container's `nodeSelector` configuration.
+The example Kubernetes application configures affinity to run during scheduling
+so that it runs on nodes with `amd64` or `arm64` architectures. The `linux`
+runtime is set in the container's `nodeSelector` configuration.
 
-In Nomad add the affinity blocks to the `job`. Each affinity is set to a weight of 50 to give each architecture an equal chance of being selected. Then set the constraint in the `task`.
+In Nomad, add the affinity blocks to the `job` definition. Each affinity is set
+to a weight of 50 to give each architecture an equal chance of being selected.
+Then set the constraint in the `task` block.
 
 <CodeBlockConfig filename="sample-app.nomad.acl" hideClipboard highlight="2-12,26-29">
 
@@ -184,9 +212,15 @@ job "eks-sample-linux-deployment" {
 
 ## Set job type
 
-Nomad supports service, system, batch, and system batch job types. This example application is a `service`. For more information on job types, refer to [Nomad job schedulers in the documentation](/nomad/docs/concepts/scheduling/schedulers).
+Nomad supports service, system, batch, and system batch job types. This example
+application is a `service`. For more information on job types, refer to [Nomad
+job schedulers in the
+documentation](/nomad/docs/concepts/scheduling/schedulers).
 
-Set the job type and then add the job metadata, including namespaces and custom labels, to the `job` block. To use the namespace, you must [configure a namespace object](/nomad/docs/other-specifications/namespace) before you run the job.
+Set the job type and then add the job metadata, including namespaces and custom
+labels, to the `job` block. To use the namespace, you must [configure a
+namespace object](/nomad/docs/other-specifications/namespace) before you run the
+job.
 
 <CodeBlockConfig filename="sample-app.nomad.acl" hideClipboard highlight="2-8">
 
@@ -238,9 +272,14 @@ job "eks-sample-linux-deployment" {
 
 </CodeBlockConfig>
 
-Finally, add the `service` block to the `group` configuration so that Nomad exposes all three containers.
+Finally, add the `service` block to the `group` configuration so that Nomad
+exposes all three containers.
 
-Nomad has built-in service discovery, so adding the service block at the group level means the service name can direct traffic to any of the three allocations defined in the group’s task block. Adding the service block at the group level also allows you to use the [Consul service mesh integration](/nomad/docs/job-specification/connect).
+Nomad has built-in service discovery, so adding the service block at the group
+level means the service name can direct traffic to any of the three allocations
+defined in the group's task block. Adding the service block at the group level
+also allows you to use the [Consul service mesh
+integration](/nomad/docs/job-specification/connect).
 
 <CodeBlockConfig filename="sample-app.nomad.acl" highlight="30-34">
 
@@ -298,11 +337,15 @@ job "eks-sample-linux-deployment" {
 
 </CodeBlockConfig>
 
-The Nomad jobspec is now complete, and you can [run the job on Nomad](/nomad/docs/job-run) with the CLI or Web UI. If you need a test environment, launch a hosted session using the [Nomad sandbox](/nomad/sandbox).
+The Nomad jobspec is now complete, and you can [run the job on
+Nomad](/nomad/docs/job-run) with the CLI or Web UI. If you need a test
+environment, launch a hosted session using HashiCorp's [Nomad
+sandbox](/nomad/sandbox).
 
 ## Example code comparisons
 
-These configuration snippets represent portions of the manifest or jobspec. They are presented side-by-side in tabs for additional clarity.
+These configuration snippets represent portions of the manifest or jobspec. They
+are presented side-by-side in tabs for additional clarity.
 
 ### Namespace
 
@@ -338,7 +381,8 @@ job "eks-sample-linux-deployment" {
 
 ### Metadata
 
-Metadata includes the name of the deployment or job as well as user defined metadata.
+Metadata includes the name of the deployment or job as well as user defined
+metadata.
 
 <Tabs>
 <Tab heading="Kubernetes" group="k8s-components">
@@ -530,7 +574,9 @@ job "eks-sample-linux-deployment" {
 
 ### Service
 
-Note that Kubernetes defines a service in a separate configuration manifest that has the `kind` set to `Service`. The Nomad jobspec contains both the service and task definition.
+Note that Kubernetes defines a service in a separate configuration manifest that
+has the `kind` set to `Service`. The Nomad jobspec contains both the service and
+task definition.
 
 <Tabs>
 <Tab heading="Kubernetes" group="k8s-components">
@@ -582,9 +628,11 @@ job "eks-sample-linux-deployment" {
 
 ## Next steps
 
-To continue learning about about Nomad jobs and intergrations, check out the following resources:
+To continue learning about about Nomad jobs and integrations, check out the
+following resources:
 
-- [Use Nomad’s Consul integration](/nomad/tutorials/integrate-consul) for more advanced service discovery
+- [Use Nomad's Consul integration](/nomad/tutorials/integrate-consul) for more advanced service discovery
 - Learn about [Vault integration](/nomad/docs/secure/vault) and how to use dynamic secrets in your Nomad jobs
 - Learn how to use [Nomad Variables](/nomad/tutorials/variables) to store and retrieve configuration data in Nomad
-- Reference the [Nomad job specification](/nomad/docs/job-specification) to learn about available blocks in the jobspec
+- Reference the [Nomad job specification](/nomad/docs/job-specification) to
+  learn about available blocks in the job specification

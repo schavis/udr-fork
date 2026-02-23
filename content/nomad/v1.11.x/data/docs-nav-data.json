@@ -11,15 +11,15 @@
     "path": "quickstart"
   },
   {
-    "title": "Kubernetes compared to Nomad",
+    "title": "Nomad for Kubernetes Users",
     "routes": [
       {
-        "title": "Overview",
+        "title": "Introduction",
         "path": "k8s-nomad"
       },
       {
         "title": "Turn manifests into jobspecs",
-        "path": "k8s-nomad"        
+        "path": "k8s-nomad/manifest-jobspec"        
       }
     ]
   },
