@@ -5,22 +5,21 @@ description: |-
   Learn how Kubernetes and Nomad compare as workload schedulers, including major architecture differences and their equivalent terms.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2026-02-17T15:17:21-08:00
-last_modified: 2026-02-23T21:48:45.000Z
+last_modified: 2026-02-23T23:41:24.000Z
 # END AUTO GENERATED METADATA
 ---
 
 # Nomad for Kubernetes practitioners
 
-This page compares Kubernetes and Nomad as workload schedulers, including how their workloads are defined and scheduled and how different components map to the other's architecture.
+This page compares Kubernetes and Nomad as workload schedulers, including how
+their workloads are defined and scheduled and how different components map to
+the other's architecture. The comparisons on this page are for Kubernetes
+developers and admins. Refer to the ["Nomad versus Kubernetes" section of the
+Nomad introduction page](/nomad/docs/what-is-nomad#nomad-versus-kubernetes) for
+a high-level overview of Kubernetes compared to Nomad.
 
-## Overview
-
-<VideoEmbed url="https://www.youtube.com/embed/ZfSuted4pcA?si=IyqGzqOAnYO06398"/>
-
-The comparisons on this page are for Kubernetes developers and admins. Refer to
-the ["Nomad versus Kubernetes" section of the
-Introduction to Nomad](/nomad/docs/what-is-nomad#nomad-versus-kubernetes) for a
-high-level overview of Kubernetes compared to Nomad.
+<VideoEmbed
+url="https://www.youtube.com/embed/ZfSuted4pcA?si=IyqGzqOAnYO06398"/>
 
 ## Cluster architectures
 
@@ -153,7 +152,7 @@ a Nomad production deployment.](/img/k8s/k8s-nomad-prod.png)
 
 A Kubernetes cluster normally has these IP networks:
 
-- Node network: The physical network that your nodes are connected to
+- Node network: The physical network that your nodes are connected to.
 - Pod network: In Kubernetes, each pod gets its own unique IP. The pod network
   is separate from the node network and many users choose to implement an
   overlay network to route traffic between pods and nodes.
@@ -177,7 +176,7 @@ cluster network can be part of an existing enterprise network.
 
 In Kubernetes, Service and kube-proxy are responsible for tracking the pods and
 routing the traffic to them. In Nomad production deployments, we recommend
-integrating [HashiCorp Consul] for this functionality.
+integrating [HashiCorp Consul](/consul/docs/intro) for this functionality.
 
 ## Workload definitions
 
