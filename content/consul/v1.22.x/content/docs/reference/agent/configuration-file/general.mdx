@@ -208,13 +208,13 @@ The page provides reference information for general parameters in a Consul agent
 
   - `max_header_bytes` This setting controls the maximum number of bytes the consul http server will read parsing the request header's keys and values, including the request line. It does not limit the size of the request body. If zero, or negative, http.DefaultMaxHeaderBytes is used, which equates to 1 Megabyte.
   
-  - `read_timeout` The maximum duration for reading the entire request, including the body. This timeout prevents slow request body attacks. A zero or negative value disables the timeout. Default: `30s`. Minimum: `1s`. Added in Consul 1.22.4.
+  - `read_timeout` The maximum duration for reading the entire request, including the body. This timeout prevents slow request body attacks. A zero or negative value disables the timeout. Default: `30s`. Minimum: `1s`. Added in Consul v1.22.4.
 
-  - `read_header_timeout` The amount of time allowed to read request headers. The connection's read deadline is reset after reading the headers. This timeout prevents Slowloris attacks on header parsing. Default: `10s`. Minimum: `1s`. Added in Consul 1.22.4.
+  - `read_header_timeout` The amount of time allowed to read request headers. The connection's read deadline is reset after reading the headers. This timeout prevents Slowloris attacks on header parsing. Default: `10s`. Minimum: `1s`. Added in Consul v1.22.4.
 
-  - `write_timeout` The maximum duration before timing out writes of the response. This timeout prevents slow response drain attacks. A zero or negative value disables the timeout. Default: `30s`. Minimum: `1s`. Added in Consul 1.22.4.
+  - `write_timeout` The maximum duration before timing out writes of the response. This timeout prevents slow response drain attacks. A zero or negative value disables the timeout. Default: `30s`. Minimum: `1s`. Added in Consul v1.22.4.
 
-  - `idle_timeout` The maximum amount of time to wait for the next request when keep-alives are enabled. This timeout prevents connection exhaustion attacks. Default: `120s`. Minimum: `10s`. Added in Consul 1.22.4.
+  - `idle_timeout` The maximum amount of time to wait for the next request when keep-alives are enabled. This timeout prevents connection exhaustion attacks. Default: `120s`. Minimum: `10s`. Added in Consul v1.22.4.
 
     <Note>
     
