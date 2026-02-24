@@ -242,7 +242,7 @@ HTTP checks expect a valid TLS certificate by default. You can disable certifica
 
 The check follows HTTP redirects configured in the network by default. Set the `disable_redirects` field to `true` to disable redirects.
 
-!> **Security warning:** Consul's HTTP checks can be configured to access local network networks.
+!> **Security warning:** Consul's HTTP checks can be configured by administrators to access local networks, potentially exposing information of internal network services accessible to Consul to administrators.
 
 ### HTTP check response codes
 
