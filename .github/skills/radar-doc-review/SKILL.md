@@ -122,6 +122,7 @@ Use the checklist for the identified doc type below. Use the slack.mdx example a
 - [ ] Admonitions/callouts use the correct syntax and are used appropriately (note, warning, tip)
 - [ ] No broken links or references to non-existent sections
 - [ ] Optimized for SEO including action oriented headings, titles, and descriptions
+- [ ] Line break after each section, paragraph, unordered list, ordered list, code blocks, headings, at the end of the document, and other elements for readability
 
 ### Step 4 — Check Style Guide Compliance
 
@@ -140,14 +141,18 @@ Using the style guide in `/docs/style-guide/`, check for compliance with the fol
 
 - Flag any terms the style guide marks as preferred, avoided, or with specific casing
 - HashiCorp product names must be capitalized correctly (e.g., "Vault", "HCP Vault Radar", "Terraform")
+- For HCP product names, use the full name on first reference, then the shortname after 
+   - "HCP Vault Radar" then "Vault Radar"
+   - "HCP Vault Dedicated" then "HCP Vault"
 - Spell out acronyms on first use, then abbreviate (e.g., "Key-Value (KV) secrets engine" then "KV" thereafter)
+- For non-HashiCorp products, use the correct capitalization and spelling per the vendor's guidelines (e.g., "Slack", not "slack" or "SLACK")
 - Do not use Latin abbreviations: write "for example" not "e.g.", "that is" not "i.e.", avoid "etc."
 
 #### Formatting
 
 - **UI elements**: Bold for UI labels (e.g., **Save**, **Settings**)
 - **Code elements**: Use code formatting for commands, values, file paths, API endpoints, and configuration keys
-- **Placeholders**: Use ALL_CAPS or angle brackets for user-supplied values (e.g., `<YOUR_TOKEN>` or `YOUR_TOKEN`)
+- **Placeholders**: Use ALL_CAPS or for user-supplied values (e.g. `YOUR_TOKEN`)
 - **Bold and italics**: Do not overuse — bold for emphasis or UI, italics sparingly
 
 #### Headings
