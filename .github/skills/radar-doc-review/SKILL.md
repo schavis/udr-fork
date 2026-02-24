@@ -29,14 +29,17 @@ Do not proceed until you have read both files.
 
 ### Step 2 — Identify the Doc Type
 
-Determine which of the four doc types the file belongs to:
+Determine which of the following doc types the file belongs to. These align with the content types defined in `/docs/content-guide/content-types.md`.
 
 | Doc Type | Primary Goal | Audience Assumption |
 |---|---|---|
-| **Tutorial / Get Started** | Guide a new user to a working outcome end-to-end | No prior knowledge assumed |
-| **How-to Guide** | Help a practitioner complete a specific task | Some prior knowledge assumed |
-| **Conceptual / Overview** | Explain what something is and why it exists | Curious, not necessarily doing a task |
-| **Reference** | Provide complete, structured, scannable facts | User knows what they're looking for |
+| **Tutorial** | Teaches users about product features through a hands-on experience with an end-to-end workflow | No prior knowledge assumed |
+| **How-to** | Walks users through completing a specific task | Some prior knowledge assumed |
+| **Concept** | Provides context and background to help readers understand a product, feature, or topic | Curious, not necessarily doing a task |
+| **Reference** | Technical details like API endpoints, CLI commands, and configuration options | User knows what they're looking for |
+| **Troubleshooting** | Helps users resolve common issues | User is encountering a problem |
+| **Landing page** | Provides an overview of a section and links to child pages | Navigating or exploring |
+| **Release notes** | Communicates new features, bug fixes, and changes | Tracking product changes |
 
 If you cannot determine the doc type from the file content or frontmatter, ask the user before continuing.
 
@@ -44,27 +47,27 @@ If you cannot determine the doc type from the file content or frontmatter, ask t
 
 Use the checklist for the identified doc type below. Use the slack.mdx example as a concrete model for what correct formatting looks like.
 
-#### Tutorial / Get Started
+#### Tutorial
 
-- [ ] Frontmatter includes: `title`, `description`, and any required metadata per the style guide
+- [ ] Frontmatter includes: `page_title`, `description`, and any required metadata per the style guide
 - [ ] Starts with a brief intro explaining what the user will accomplish and any prerequisites
 - [ ] Numbered steps throughout — no bullet points for procedural content
 - [ ] Step numbers render in the correct order. If steps under a single section reset to 1, identify the offending component that is not indented properly.
 - [ ] Each step has exactly one action; compound steps are split unless it is navigating a menu with multiple levels.
 - [ ] Ends with a "Next steps" or "What's next" section
 
-#### How-to Guide
+#### How-to
 
-- [ ] Frontmatter includes: `title`, `description`, and any required metadata
-- [ ] Title follows "How to [verb] [noun]" pattern or equivalent
+- [ ] Frontmatter includes: `page_title`, `description`, and any required metadata
+- [ ] Title follows "How to [verb] [noun]" pattern or equivalent action-oriented pattern
 - [ ] Brief intro states the goal and any prerequisites
 - [ ] Numbered steps for any procedural content
 - [ ] Does not over-explain concepts — stays task-focused
 - [ ] Optional but encouraged: troubleshooting section at the end
 
-#### Conceptual / Overview
+#### Concept
 
-- [ ] Frontmatter includes: `title`, `description`, and any required metadata
+- [ ] Frontmatter includes: `page_title`, `description`, and any required metadata
 - [ ] Opens with a clear definition or "what is X" statement
 - [ ] Uses prose paragraphs, not numbered steps
 - [ ] Explains *why* something exists or works the way it does
@@ -73,14 +76,43 @@ Use the checklist for the identified doc type below. Use the slack.mdx example a
 
 #### Reference
 
-- [ ] Frontmatter includes: `title`, `description`, and any required metadata
+- [ ] Frontmatter includes: `page_title`, `description`, and any required metadata
 - [ ] Highly structured: uses consistent heading hierarchy and tables where applicable
 - [ ] Each item/entry is complete and self-contained
 - [ ] No prose narrative — scannable by design
 - [ ] Parameters, flags, or fields include: name, type, required/optional, description, and default value (where applicable)
 - [ ] No tutorial-style steps or conceptual explanations inline
 
-#### All Doc Types (universal checks)
+#### Troubleshooting
+
+- [ ] Frontmatter includes: `page_title`, `description`, and any required metadata
+- [ ] Title clearly indicates this is troubleshooting content (e.g., "Troubleshoot [feature]")
+- [ ] Organized by symptom or error message — users should find their problem quickly
+- [ ] Each issue follows a consistent pattern: symptom/error → cause → resolution
+- [ ] Resolution steps are numbered and actionable
+- [ ] Does not mix conceptual explanations into resolution steps
+- [ ] Links to related how-to or reference docs where relevant
+
+#### Landing page
+
+- [ ] Frontmatter includes: `page_title`, `description`, and any required metadata
+- [ ] Provides a brief overview of the section or topic area
+- [ ] Links to all relevant child pages with short descriptions
+- [ ] Does not contain detailed procedural or conceptual content
+- [ ] Organized logically (e.g., by workflow order, complexity, or category)
+- [ ] Uses consistent formatting for link lists or card layouts
+
+#### Release notes
+
+- [ ] Frontmatter includes: `page_title`, `description`, and any required metadata
+- [ ] Clearly states the version or date of the release
+- [ ] Organizes changes by category (e.g., Features, Improvements, Bug fixes, Breaking changes, Deprecations)
+- [ ] Each entry is concise — one to two sentences per item
+- [ ] Breaking changes and deprecations are prominently highlighted (e.g., using `<Warning>` or `<Note>`)
+- [ ] Links to relevant docs for new features or changed behavior
+- [ ] Does not include tutorial-style instructions
+
+#### All doc types (universal checks)
 
 - [ ] Heading hierarchy is correct: H1 → H2 → H3, no skipped levels
 - [ ] Code blocks have a language identifier (` ```bash `, ` ```hcl `, ` ```json `, etc.)
@@ -93,15 +125,82 @@ Use the checklist for the identified doc type below. Use the slack.mdx example a
 
 ### Step 4 — Check Style Guide Compliance
 
-Using the style guide you read in Step 1, check for:
+Using the style guide in `/docs/style-guide/`, check for compliance with the following rules. Flag every violation found.
 
-- **Voice and tone**: Second person ("you"), active voice, present tense where possible
-- **Terminology**: Flag any terms the style guide marks as preferred, avoided, or with specific casing
-- **UI element formatting**: Bold for UI labels (e.g., **Save**), code formatting for commands, values, and file paths
-- **Capitalization**: Sentence case for headings unless the style guide specifies otherwise
-- **Sentence length**: Flag sentences over ~30 words as candidates for splitting
-- **Oxford commas** and any other punctuation rules called out in the style guide
-- **Inclusive language**: Flag any terms the style guide identifies as non-inclusive
+#### Voice, tone, and point of view
+
+- Use **second person** ("you") — never "we", "our", or "let's"
+- Use **active voice** — avoid passive constructions (e.g., "the secret is stored" → "Vault stores the secret")
+- Use **present tense** — avoid future tense ("will"). Write "the command returns" not "the command will return"
+- Use **imperative mood** for instructions — "Run the command" not "You should run the command"
+- Do not use "please" in instructions
+- Do not use "simple", "easy", "just", or other minimizing language
+
+#### Terminology and product names
+
+- Flag any terms the style guide marks as preferred, avoided, or with specific casing
+- HashiCorp product names must be capitalized correctly (e.g., "Vault", "HCP Vault Radar", "Terraform")
+- Spell out acronyms on first use, then abbreviate (e.g., "Key-Value (KV) secrets engine" then "KV" thereafter)
+- Do not use Latin abbreviations: write "for example" not "e.g.", "that is" not "i.e.", avoid "etc."
+
+#### Formatting
+
+- **UI elements**: Bold for UI labels (e.g., **Save**, **Settings**)
+- **Code elements**: Use code formatting for commands, values, file paths, API endpoints, and configuration keys
+- **Placeholders**: Use ALL_CAPS or angle brackets for user-supplied values (e.g., `<YOUR_TOKEN>` or `YOUR_TOKEN`)
+- **Bold and italics**: Do not overuse — bold for emphasis or UI, italics sparingly
+
+#### Headings
+
+- Use **sentence case** for all headings
+- Do not start headings with gerunds (-ing words)
+- Do not start headings with articles (a, an, the)
+- Keep headings under 12 words
+- Headings must be action-oriented for procedural content
+
+#### Capitalization and punctuation
+
+- Use **Oxford commas** (serial commas)
+- Use **sentence case** for headings, titles, and descriptions
+- Spell out numbers under 10; use numerals for 10 and above
+
+#### Sentence and paragraph structure
+
+- Flag sentences over **~30 words** as candidates for splitting
+- Use shorter, more common words where possible (e.g., "use" not "utilize", "start" not "initiate")
+- Avoid jargon without explanation
+
+#### Links
+
+- Use descriptive link text — never "click here" or "this page"
+- Use relative links for internal cross-references where the style guide specifies
+- Verify link text accurately describes the target
+
+#### Alerts and admonitions
+
+- Use the correct component for the context:
+  - `<Note>`: Supplementary information that is useful but not critical
+  - `<Tip>`: Helpful suggestion or best practice
+  - `<Warning>`: Information that could cause data loss, security issues, or breaking changes
+  - `<Highlight>`: Important callout for limitations or key details
+- Do not overuse admonitions — if everything is highlighted, nothing stands out
+
+#### Lists
+
+- Use **numbered lists** for sequential/procedural steps
+- Use **bulleted lists** for non-sequential items
+- Maintain **parallel structure** within a list (all items start with same part of speech)
+- Be consistent with punctuation at the end of list items
+
+#### Images
+
+- All images must have **descriptive alt text**
+- Alt text should describe the content, not just say "screenshot"
+
+#### Inclusive language
+
+- Flag any terms the style guide identifies as non-inclusive
+- Avoid gendered pronouns; use "they/them" for singular third person
 
 ### Step 5 — Compare to the Example Doc
 
