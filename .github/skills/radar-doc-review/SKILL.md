@@ -13,17 +13,21 @@ Review documentation files against the project's style guide, doc-type format re
 
 This skill is manually invoked only via `/radar-doc-review`. Do not auto-load this skill based on context.
 
+**Supported file types**: This skill reviews `.mdx` and `.md` files only. If the user provides a different file type, notify them that the skill only supports Markdown-based documentation files.
+
 ---
 
 ## Step-by-Step Review Process
 
 ### Step 1 — Read the Reference Files
 
-Before doing anything else, read these three files in full:
+Before doing anything else, read these files in full:
 
 1. **Style guide**: `/docs/style-guide` for `.md` files in all directories.
-2. **Example doc**: `/content/hcp-docs/content/docs/vault-radar/get-started/add-data-source/slack.mdx`
+2. **Example doc**: `/content/hcp-docs/content/docs/vault-radar/get-started/add-data-sources/slack.mdx`
    - This is a generally well-formatted doc. Note its frontmatter fields, heading hierarchy, tone, code block usage, admonition style, link formatting, and overall structure.
+
+**Error handling**: If either file cannot be found, stop the review and report the missing file path to the user.
 
 Do not proceed until you have read both files.
 
@@ -152,7 +156,7 @@ Using the style guide in `/docs/style-guide/`, check for compliance with the fol
 
 - **UI elements**: Bold for UI labels (e.g., **Save**, **Settings**)
 - **Code elements**: Use code formatting for commands, values, file paths, API endpoints, and configuration keys
-- **Placeholders**: Use ALL_CAPS or for user-supplied values (e.g. `YOUR_TOKEN`)
+- **Placeholders**: Use ALL_CAPS for user-supplied values (e.g. `YOUR_TOKEN`)
 - **Bold and italics**: Do not overuse — bold for emphasis or UI, italics sparingly
 
 #### Headings
