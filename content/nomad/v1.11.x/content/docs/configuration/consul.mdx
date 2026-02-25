@@ -132,6 +132,10 @@ agents.
   environment variable if set. Nomad cannot refresh this token; if the token is
   deleted, Nomad is not able to communicate with Consul.
 
+  Nomad will also look for the environment variables `CONSUL_HTTP_TOKEN_*name*`
+  where name is the consul.name parameter. This allows Nomad Enterprise users
+  to specify multiple tokens for multiple clusters via environment variables.
+
   In Nomad Enterprise, if the Consul agent running alongside Nomad is in a
   Consul Enterprise admin partition, you must create the Consul token provided
   to the Nomad client in the same partition.
