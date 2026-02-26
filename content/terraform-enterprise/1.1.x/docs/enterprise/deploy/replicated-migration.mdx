@@ -4,7 +4,7 @@ description: >-
   Learn how to migrate your Terraform Enterprise installation from Replicated to another supported runtime environment.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-10-15T15:59:29+00:00
-last_modified: 2026-02-25T03:41:50.000Z
+last_modified: 2026-02-26T03:46:17.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -52,18 +52,19 @@ We always recommend backing up your data tier before conducting maintenance or u
    - For mounted disk installations, refer to [Backup a Mounted Disk Deployment](/terraform/tutorials/recommended-patterns/pattern-backups#backup-a-mounted-disk-deployment) in the Terraform Enterprise backup tutorial for recommended patterns.
    - For external services or active active installations, refer to [Object Store](/terraform/tutorials/recommended-patterns/pattern-backups#object-store) and [Database](/terraform/tutorials/recommended-patterns/pattern-backups#database) in the Terraform Enterprise backup tutorial for recommended patterns.
 
-   In both cases, we recommend backing up the environment variables of the Terraform Enterprise Docker container so that you can refer to them when configuring your target runtime.
+In both cases, we recommend backing up the environment variables of the Terraform Enterprise Docker container so that you can refer to them when configuring your target runtime.
 
-   Commands throughout this guide refer to `terraform-enterprise` as the container name, which is the default for Replicated installations. If your container has a different name, adjust the commands accordingly. Use the following command to find your container name:
+Commands throughout this guide refer to `terraform-enterprise` as the container name, which is the default for Replicated installations. If your container has a different name, adjust the commands accordingly. Use the following command to find your container name:
 
-   ```shell-session
-   $ sudo docker ps | grep terraform-enterprise
-   ```
+```shell-session
+$ sudo docker ps | grep terraform-enterprise
+```
 
-   Back up the environment variables:
-   ```shell-session
-   $ sudo docker exec terraform-enterprise env | sudo tee env.txt > /dev/null
-   ```
+Back up the environment variables:
+
+```shell-session
+$ sudo docker exec terraform-enterprise env | sudo tee env.txt > /dev/null
+```
 
 ### Upgrade your existing Terraform Enterprise installation
 
@@ -241,7 +242,7 @@ To make migration smoother and faster, we recommend using the same host as your 
    $ which docker
    ```
 
-   Use the `sudo tee` command to create the systemd service file. In the following example, Docker is installed at `/usr/bin/docker`. Adjust the paths in the configuration if your Docker installation differs:
+1. Use the `sudo tee` command to create the systemd service file. In the following example, Docker is installed at `/usr/bin/docker`. Adjust the paths in the configuration if your Docker installation differs:
 
    ```shell-session
    $ sudo tee /etc/systemd/system/terraform-enterprise.service > /dev/null <<EOF
@@ -263,7 +264,7 @@ To make migration smoother and faster, we recommend using the same host as your 
    EOF
    ```
 
-   Update this systemd unit file if any of the following are true:
+1. Update this systemd unit file if any of the following are true:
 
    - The name or the path of the `docker-compose.yml` has changed.
    - The path to the Docker binary and the command to invoke `docker compose` is different because Docker Engine 1.13.1 is installed.
@@ -277,7 +278,7 @@ Next, you can stop Replicated and migrate your Terraform Enterprise installation
    ```shell-session
    $ replicatedctl app stop
    ```
-1. Back up your data. If you have already backed up your data, proceed forward. If not, or if you want another backup for safekeeping, do the following.
+1. Back up your data. You can skip this step if you have already created a backup. Otherwise, complete the following steps.
    - Retrieve your mounted disk path.
 
       ```shell-session
@@ -526,7 +527,7 @@ Contact your HashiCorp account representative or HashiCorp support if you have a
 
 ## External services or Active/Active to Cloud-managed Kubernetes
 
-Redis is a _required service_ for running Terraform Enterprise in Kubernetes. If your deployment is operating in [`external` mode](/terraform/enterprise/deploy/reference/configuration#external), you must deploy an external Redis server.
+Redis is required to run Terraform Enterprise in Kubernetes. If your deployment is operating in [`external` mode](/terraform/enterprise/deploy/reference/configuration#external), you must deploy an external Redis server.
 
 If you are currently operating Terraform Enterprise in `active-active` mode, then you have all required service dependencies for migrating to Kubernetes. Refer to the [prerequisites for deploying to Kubernetes](/terraform/enterprise/deploy/kubernetes#prerequisites) for additional information.
 
@@ -558,7 +559,7 @@ for instructions.
    $ replicatedctl app-config export
    ```
 
-1. Create a custom [Helm Values file](https://helm.sh/docs/chart_template_guide/values_files/) e.g., `overrides.yaml` to override the [default values](https://github.com/hashicorp/terraform-enterprise-helm/blob/main/values.yaml) in the [Terraform Enterprise Helm chart](https://github.com/hashicorp/terraform-enterprise-helm/tree/main).
+1. Create a custom [Helm Values file](https://helm.sh/docs/chart_template_guide/values_files/), for example, `overrides.yaml` to override the [default values](https://github.com/hashicorp/terraform-enterprise-helm/blob/main/values.yaml) in the [Terraform Enterprise Helm chart](https://github.com/hashicorp/terraform-enterprise-helm/tree/main).
 
 1. On the `env.secrets` and `env.variables` sections of the [overrides values file](https://github.com/hashicorp/terraform-enterprise-helm/blob/main/values.yaml), use the external services credentials from the Replicated installation for the Kubernetes installation. Specifically the following:
    1. The `TFE_OBJECT_STORAGE_TYPE` and `TFE_OBJECT_STORAGE_*` variables should specify the object storage type and the container or bucket credentials from your Replicated installation.
