@@ -53,8 +53,8 @@ Validates against **HashiCorp's Top 12 Guidelines + Critical Rules**:
 6. **"You" for Reader** [AUTO-FIX: Partial] - Second person
 7. **Linear Flow** [AUTO-FIX: Partial] - No "above"/"below"
 8. **No Unnecessary Words** [AUTO-FIX: Yes] - "to" not "in order to"
-9. **Simplest Words** [AUTO-FIX: Yes] - "lets" not "enables/allows"
-10. **No Foreign/Jargon** [AUTO-FIX: Yes] - Avoid "via", "etc."
+9. **Simplest Words** [AUTO-FIX: Yes] - "lets" not "enables"
+10. **No Latin Phrases/Foreign Words** [AUTO-FIX: Yes] - Avoid "ad-hoc", "via", "etc.", "e.g.", "i.e."
 11. **No Adjacent Elements** [MANUAL] - Space similar elements
 12. **Content Variety** [MANUAL] - Mix prose and lists
 
@@ -114,17 +114,29 @@ When this skill is invoked:
 
 3. **Read the target document(s)**
 
-4. **Check against Top 12 + Critical Rules:**
-   - Present tense violations ("will" → present)
-   - Word choice ("enables/allows" → "lets")
-   - Port/IP formatting (not in code blocks)
-   - Quotation marks around UI/product names
-   - Em dashes (should be commas/periods)
-   - Abbreviations (TF, TFE, TFC, etc.)
-   - Foreign words (via, etc.)
-   - UI element formatting
-   - Heading case and style
-   - List markers
+❌ LATIN PHRASES [CRITICAL] [AUTO-FIX]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Line 56: Latin phrase "ad-hoc" detected
+  ❌ "System administrators make ad-hoc modifications..."
+  ✅ "System administrators make improvised modifications..."
+  Alternative: "unplanned", "informal", "spontaneous"
+
+Line 78: Latin abbreviation "e.g." detected
+  ❌ "Configure resources, e.g., databases and networks"
+  ✅ "Configure resources, such as databases and networks"
+
+✅ PASSES (10 checks)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ No unofficial abbreviations
+✓ Proper use of "we"
+✓ Addresses reader as "you"
+✓ No unnecessary words
+✓ No Latin phrases or foreign words
+✓ No adjacent elements
+✓ Proper content flow
+✓ Active voice
+✓ Markdown standards
+✓ Codeblock formatting
 
 5. **Categorize findings:**
    - Auto-fixable
@@ -167,7 +179,8 @@ The quick-styleguide can automatically fix:
 
 ✅ **Present tense** - "will show" → "shows"
 ✅ **Word choice** - "enables/allows" → "lets"
-✅ **Foreign words** - "via" → "using/through", "etc." → remove
+✅ **Latin phrases** - "ad-hoc" → "improvised", "via" → "using", "etc." → "and other"
+✅ **Common Latin terms** - "e.g." → "for example", "i.e." → "specifically"
 ✅ **Unnecessary phrases** - "in order to" → "to"
 ✅ **Abbreviations** - "TF" → "Terraform", "TFC" → "HCP Terraform"
 ✅ **Port numbers** - "port 3000" → "port `3000`"
@@ -264,7 +277,71 @@ git add docs/modified.mdx
 git commit -m "docs: update documentation"
 ```
 
-## QMD Database Reference
+## Reference Files
+
+Uses the **optimized quick-reference:**
+- **`templates/styleguide-quick-reference.md`** - Optimized (570 lines)
+  - All Top 12 guidelines with priority/type tags
+  - Essential rules only, minimal examples
+  - Detection patterns and fix guidance
+  - Quick validation checklist
+  - Word replacement tables
+  - Machine-readable format
+
+## Comparison with Full Styleguide
+
+| Feature | quick-styleguide | full-styleguide-check |
+|---------|------------------|----------------------|
+| **Reference Size** | 570 lines | 3,203 lines |
+| **Speed** | Fast (15-30s) | Slower (60-90s) |
+| **Token Usage** | Standard | ~3x higher |
+| **Cost** | Standard | ~3x higher |
+| **Detail Level** | Essential rules | Comprehensive |
+| **Examples** | Minimal | Extensive |
+| **Edge Cases** | Core cases | All cases |
+| **Best For** | Daily checks | Final review |
+
+## Detection Patterns
+
+The quick-reference includes optimized patterns for:
+
+**High-priority keywords:**
+- `will` (future tense) → present tense
+- `enables you`, `allows you` → `lets you`
+- `via` → `using`/`through`
+- `etc.` → `and other {entities}`
+- `TF`, `TFC`, `TFE` → full names
+- `in order to` → `to`
+- `above`, `below` → specific references
+
+**Latin phrases to avoid (CRITICAL):**
+- `ad-hoc` → `improvised`, `unplanned`, `informal`, `spontaneous`
+- `via` → `using`, `through`, `with`
+- `etc.` → `and other {entities}`
+- `e.g.` → `for example`, `such as`
+- `i.e.` → `specifically`, `that is`
+- `ergo` → `therefore`, `as a result`
+- `vice versa` → `conversely`, `the reverse`
+- `per se` → `by itself`, `inherently`
+- `status quo` → `current state`, `existing situation`
+- `de facto` → `in practice`, `actual`
+- `quid pro quo` → `exchange`, `trade-off`
+- `bona fide` → `genuine`, `authentic`
+- `carte blanche` → `full permission`, `complete authority`
+- `in lieu of` → `instead of`, `in place of`
+- `pro forma` → `as a formality`, `routine`
+- `a priori` → `beforehand`, `in advance`
+- `post hoc` → `after the fact`, `retrospective`
+- `sine qua non` → `essential`, "required"
+- `verbatim` → `word for word`, `exactly`
+- `modus operandi` → `method`, `approach`, `way of working`
+
+**Regex patterns available for:**
+- Passive voice constructions
+- Unofficial abbreviations
+- Latin phrases and foreign loan words
+- Unnecessary phrases
+- Directional references
 
 Uses the indexed HashiCorp Style Guide:
 - **Collection:** `hashicorp-styleguide`
