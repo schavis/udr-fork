@@ -1,13 +1,12 @@
 ---
 name: quick-styleguide
-description: Fast HashiCorp style validation using optimized quick-reference. Perfect for daily checks and pre-commit workflows.
+description: Fast HashiCorp style validation using QMD database queries. Perfect for daily checks and pre-commit workflows.
 argument-hint: <file-paths> [--fix]
-disable-model-invocation: true
 ---
 
 # Quick HashiCorp Style Guide Check
 
-**Fast, cost-effective validation** using the optimized HashiCorp style guide quick-reference (570 lines). This skill performs efficient checks with all essential rules while using 82% fewer tokens than the full guide.
+**Fast, cost-effective validation** using QMD database queries for targeted rule lookups. This skill performs efficient checks on the **Top 12 Guidelines + Critical Rules** while using ~70% fewer tokens than the full comprehensive check.
 
 ## When to Use This Skill
 
@@ -17,9 +16,9 @@ Use `/quick-styleguide` for:
 - ✅ **Frequent checks** on multiple files
 - ✅ **CI/CD pipelines** requiring fast validation
 - ✅ **Cost-conscious** style checking
-- ✅ **Essential rules** without deep examples
+- ✅ **80% of issues in 20% of the time**
 
-**For comprehensive final review, use `/full-styleguide-check`.**
+**For comprehensive final review, use `/full-styleguide`.**
 
 ## Usage
 
@@ -29,7 +28,7 @@ Use `/quick-styleguide` for:
 
 ## Arguments
 
-- **file-paths**: One or more `.mdx` files to check (required)
+- **file-paths**: One or more `.md` or `.mdx` files to check (required)
   - Single file: `/quick-styleguide docs/modules.mdx`
   - Multiple files: `/quick-styleguide docs/file1.mdx docs/file2.mdx`
   - Glob pattern: `/quick-styleguide docs/**/*.mdx`
@@ -42,105 +41,125 @@ Use `/quick-styleguide` for:
 
 ## What This Skill Checks
 
-Validates against **all critical HashiCorp style guide rules** using an optimized reference:
+Validates against **HashiCorp's Top 12 Guidelines + Critical Rules**:
 
-### Top 12 Critical Guidelines [PRIORITY: CRITICAL]
+### Top 12 Critical Guidelines [PRIORITY: HIGH]
+
 1. **Active Voice** [AUTO-FIX: Partial] - Subject performs action
-2. **Present Tense** [AUTO-FIX: Yes] - Avoid "will"
-3. **Current Features** [MANUAL] - No future promises
-4. **No Abbreviations** [AUTO-FIX: Yes] - TF, TFE, TFC
-5. **"We" for HashiCorp** [MANUAL] - Not for guidance
+2. **Present Tense** [AUTO-FIX: Yes] - Avoid "will" for immediate actions
+3. **Current Features** [MANUAL] - No "new"/"currently"
+4. **No Abbreviations** [AUTO-FIX: Yes] - TF, TFE, TFC, etc.
+5. **"We" for HashiCorp** [MANUAL] - Not for reader guidance
 6. **"You" for Reader** [AUTO-FIX: Partial] - Second person
 7. **Linear Flow** [AUTO-FIX: Partial] - No "above"/"below"
 8. **No Unnecessary Words** [AUTO-FIX: Yes] - "to" not "in order to"
-9. **Simplest Words** [AUTO-FIX: Yes] - "lets" not "enables"
+9. **Simplest Words** [AUTO-FIX: Yes] - "lets" not "enables/allows"
 10. **No Foreign/Jargon** [AUTO-FIX: Yes] - Avoid "via", "etc."
 11. **No Adjacent Elements** [MANUAL] - Space similar elements
-12. **Content Variety** [MANUAL] - Mix elements
+12. **Content Variety** [MANUAL] - Mix prose and lists
 
-### All Essential Rules Covered
-- Active voice patterns
-- Alert usage guidelines
-- Content organization rules
-- Font and format standards
-- Grammar rules (serial comma, etc.)
-- Language and word choice
-- Link formatting
-- Enterprise/beta callouts
-- Point of view (you/we)
-- Screenshot guidelines
-- Tense and time
-- Title formatting
-- Markdown standards
-- UI components
-- Codeblock formatting
-- Numbers, dates, time
+### Additional Critical Checks
+
+**Grammar & Punctuation:**
+- ✅ Em dashes (should use commas/periods instead)
+- ✅ Quotation marks around UI elements (should use bold)
+- ✅ Serial commas (Oxford commas required)
+- ✅ Complete sentences in prose
+
+**Formatting:**
+- ✅ Port numbers formatted as code
+- ✅ IP addresses formatted as code
+- ✅ Sentence case headings
+- ✅ Hash-style headings (#, ##, ###)
+- ✅ Bold with ** not __
+- ✅ Hyphens for unordered lists
+
+**UI Components:**
+- ✅ UI elements in bold
+- ✅ No quotation marks around product names
+- ✅ Correct action verbs (click, press, select)
 
 ## Performance
 
 **Execution times:**
-- Single file: ~15-30 seconds (**2-3x faster**)
-- 5 files: ~2-3 minutes (**2x faster**)
-- 20 files: ~8-12 minutes (**2x faster**)
+- Single file: ~10-15 seconds (**3x faster** than full)
+- 5 files: ~1-2 minutes
+- Quick, targeted validation
 
-**Token usage:** ~82% lower than full styleguide
-**Cost:** ~70-80% lower per check
+**Token usage:** ~70% lower than full-styleguide
+**Cost:** ~60-70% lower per check
 
-This skill is **optimized for speed and cost** while maintaining comprehensive rule coverage.
+This skill is **optimized for speed and daily workflow** while catching most common issues.
 
-## Output Format
+## Instructions for Validation
 
-```
-Quick HashiCorp Style Guide Check
-==================================
+When this skill is invoked:
 
-Reference: templates/styleguide-quick-reference.md (optimized)
-Files Checked: 1
-Total Issues: 8
-Auto-fixable: 6
-Manual Review: 2
+### Phase 1: Setup (Use QMD)
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. **Query QMD for critical rules** (targeted, fast lookups):
+   ```bash
+   qmd query "present tense avoid will immediate actions" -c hashicorp-styleguide -n 3
+   qmd query "word choice lets vs enables allows" -c hashicorp-styleguide -n 2
+   qmd query "em dash punctuation rules" -c hashicorp-styleguide -n 2
+   qmd query "port number formatting code" -c hashicorp-styleguide -n 2
+   qmd query "quotation marks UI elements product names" -c hashicorp-styleguide -n 2
+   qmd query "active voice passive voice" -c hashicorp-styleguide -n 2
+   qmd query "foreign words via etc jargon" -c hashicorp-styleguide -n 2
+   ```
 
-📄 docs/example.mdx
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. **Build validation patterns** from QMD results
 
-❌ WORD CHOICE [CRITICAL] [AUTO-FIX]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Line 25: Use "lets" instead of "enables"
-  ❌ "Terraform enables you to..."
-  ✅ "Terraform lets you..."
+### Phase 2: Document Analysis
 
-❌ PRESENT TENSE [CRITICAL] [AUTO-FIX]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Line 42: Avoid "will"
-  ❌ "The output will show..."
-  ✅ "The output shows..."
+3. **Read the target document(s)**
 
-✅ PASSES (10 checks)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✓ No unofficial abbreviations
-✓ Proper use of "we"
-✓ Addresses reader as "you"
-✓ No unnecessary words
-✓ No foreign/jargon words
-✓ No adjacent elements
-✓ Proper content flow
-✓ Active voice
-✓ Markdown standards
-✓ Codeblock formatting
+4. **Check against Top 12 + Critical Rules:**
+   - Present tense violations ("will" → present)
+   - Word choice ("enables/allows" → "lets")
+   - Port/IP formatting (not in code blocks)
+   - Quotation marks around UI/product names
+   - Em dashes (should be commas/periods)
+   - Abbreviations (TF, TFE, TFC, etc.)
+   - Foreign words (via, etc.)
+   - UI element formatting
+   - Heading case and style
+   - List markers
 
-SUMMARY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Total Issues: 8
-  ├─ Auto-fixable: 6
-  └─ Manual Review: 2
+5. **Categorize findings:**
+   - Auto-fixable
+   - Manual review required
 
-⚡ Quick check completed in 18 seconds
-💰 Token usage: ~3,200 tokens (82% savings vs full)
+### Phase 3: Reporting
 
-Run with --fix to apply 6 automatic corrections.
-```
+6. **Generate compact report** with:
+   ```
+   Quick Style Check - file.mdx
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ✅ 10/12 Top Guidelines passed
+   ❌ 3 issues found
+
+   Line 70: Present tense
+     ❌ "will ask" → ✅ "asks" [AUTO-FIX]
+
+   Line 143: Port formatting
+     ❌ "port 3000" → ✅ "port `3000`" [AUTO-FIX]
+
+   Line 184: Em dash
+     ❌ "first—reading files" → ✅ "first, reading files" [AUTO-FIX]
+
+   Run with --fix to apply 3 changes.
+   ```
+
+7. **If --fix flag:** Apply auto-fixes using Edit tool
+
+### Phase 4: Summary
+
+8. **Provide quick summary:**
+   - Total issues found
+   - Auto-fixed (if --fix used)
+   - Manual review items
+   - Compliance score
 
 ## Auto-fixable Issues
 
@@ -148,18 +167,75 @@ The quick-styleguide can automatically fix:
 
 ✅ **Present tense** - "will show" → "shows"
 ✅ **Word choice** - "enables/allows" → "lets"
-✅ **Foreign words** - "via" → "using", "etc." → "and other"
+✅ **Foreign words** - "via" → "using/through", "etc." → remove
 ✅ **Unnecessary phrases** - "in order to" → "to"
-✅ **Abbreviations** - "TF" → "Terraform"
-✅ **Simple passive** - "is managed by" → "manages"
-✅ **Content flow** - "below" → "following"
+✅ **Abbreviations** - "TF" → "Terraform", "TFC" → "HCP Terraform"
+✅ **Port numbers** - "port 3000" → "port `3000`"
+✅ **IP addresses** - "127.0.0.1" → "`127.0.0.1`"
+✅ **Quotation marks** - Remove from UI/product names
+✅ **Em dashes** - Replace with commas (when appropriate)
+✅ **Content flow** - "below" → "following" (in document context)
 
 ## Manual Review Required
 
-⚠️ **Complex passive voice** - Sentence restructuring
+⚠️ **Complex passive voice** - Sentence restructuring needed
 ⚠️ **"We" in examples** - Context-dependent
-⚠️ **Adjacent elements** - Content judgment
+⚠️ **Adjacent elements** - Requires content judgment
 ⚠️ **Future features** - Editorial decision
+⚠️ **Complex em dash** - May need sentence split
+
+## Output Format
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Quick HashiCorp Style Check (QMD-Powered)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+File: docs/example.mdx
+Database: qmd://hashicorp-styleguide/styleguide.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TOP 12 GUIDELINES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Active voice - PASS
+❌ Present tense - 2 violations
+✅ Current features - PASS
+✅ No abbreviations - PASS
+✅ "We" usage - PASS
+✅ "You" for reader - PASS
+✅ Linear flow - PASS
+✅ No unnecessary words - PASS
+✅ Simplest words - PASS
+✅ No foreign/jargon - PASS
+✅ No adjacent elements - PASS
+✅ Content variety - PASS
+
+Score: 11/12 (92%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ISSUES FOUND
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ Line 70: Present Tense [AUTO-FIX]
+   "Bob will ask you" → "Bob asks you"
+
+❌ Line 143: Port Formatting [AUTO-FIX]
+   "port 3000" → "port `3000`"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total Issues: 2
+  ├─ Auto-fixable: 2
+  └─ Manual Review: 0
+
+⚡ Completed in 12 seconds
+💰 ~2,000 tokens used
+
+Run with --fix to apply 2 corrections.
+```
 
 ## Integration with Other Skills
 
@@ -171,101 +247,51 @@ The quick-styleguide can automatically fix:
 # 2. Auto-fix common issues
 /quick-styleguide docs/file.mdx --fix
 
-# 3. AGENTS.md check
-/check-style docs/file.mdx --fix
+# 3. Pre-publication comprehensive check
+/full-styleguide docs/file.mdx
 ```
 
 **Pre-commit workflow:**
 ```bash
-# Quick validation
+# Quick validation + auto-fix
 /quick-styleguide docs/modified.mdx --fix
 
-# Verify
+# Verify changes
 git diff docs/modified.mdx
 
 # Commit
 git add docs/modified.mdx
-git commit -m "Update documentation"
+git commit -m "docs: update documentation"
 ```
 
-**Complete workflow:**
-```bash
-# 1. Daily: Quick checks (fast, cheap)
-/quick-styleguide docs/file.mdx --fix
+## QMD Database Reference
 
-# 2. Pre-publication: Full check (thorough)
-/full-styleguide-check docs/file.mdx --fix
+Uses the indexed HashiCorp Style Guide:
+- **Collection:** `hashicorp-styleguide`
+- **Source:** `qmd://hashicorp-styleguide/styleguide.md`
+- **Size:** 103.5 KB (3,203+ lines, 37 chunks)
+- **Coverage:** All official HashiCorp style rules
 
-# 3. Final: Comprehensive review
-/review-doc docs/file.mdx
-```
+## Comparison: Quick vs Full
 
-## Reference Files
+| Feature | quick-styleguide | full-styleguide |
+|---------|------------------|-----------------|
+| **Scope** | Top 12 + Critical | All 18+ sections |
+| **Speed** | 10-15 seconds | 30-60 seconds |
+| **Token Usage** | ~2,000 tokens | ~5,000+ tokens |
+| **Cost** | Low | Medium |
+| **Rules Checked** | ~40 critical | 200+ comprehensive |
+| **Best For** | Daily checks | Pre-publication |
+| **Use Case** | Speed + cost | Thoroughness |
 
-Uses the **optimized quick-reference:**
-- **`templates/styleguide-quick-reference.md`** - Optimized (570 lines)
-  - All Top 12 guidelines with priority/type tags
-  - Essential rules only, minimal examples
-  - Detection patterns and fix guidance
-  - Quick validation checklist
-  - Word replacement tables
-  - Machine-readable format
+## When to Escalate to Full Check
 
-## Comparison with Full Styleguide
-
-| Feature | quick-styleguide | full-styleguide-check |
-|---------|------------------|----------------------|
-| **Reference Size** | 570 lines | 3,203 lines |
-| **Speed** | Fast (15-30s) | Slower (60-90s) |
-| **Token Usage** | Standard | ~3x higher |
-| **Cost** | Standard | ~3x higher |
-| **Detail Level** | Essential rules | Comprehensive |
-| **Examples** | Minimal | Extensive |
-| **Edge Cases** | Core cases | All cases |
-| **Best For** | Daily checks | Final review |
-
-## Detection Patterns
-
-The quick-reference includes optimized patterns for:
-
-**High-priority keywords:**
-- `will` (future tense) → present tense
-- `enables you`, `allows you` → `lets you`
-- `via` → `using`/`through`
-- `etc.` → `and other {entities}`
-- `TF`, `TFC`, `TFE` → full names
-- `in order to` → `to`
-- `above`, `below` → specific references
-
-**Regex patterns available for:**
-- Passive voice constructions
-- Unofficial abbreviations
-- Foreign loan words
-- Unnecessary phrases
-- Directional references
-
-## Best Practices
-
-**Daily usage:**
-- Run on every file before committing
-- Use `--fix` to apply automatic corrections
-- Review manual items before finalizing
-
-**Cost optimization:**
-- Use quick-styleguide for frequent checks
-- Reserve full-styleguide-check for final reviews
-- Batch multiple files in single check
-
-**Workflow integration:**
-- Add to pre-commit hooks
-- Include in CI/CD pipeline
-- Combine with other skills efficiently
-
-**When to escalate to full check:**
-- Publication-ready documents
-- Complex style questions
-- Edge cases not covered
-- Learning/training purposes
+Use `/full-styleguide` instead when:
+- 📋 **Final publication review**
+- 🔍 **Comprehensive validation** needed
+- 📚 **All 18 sections** must be checked
+- 🎓 **Learning** style guide thoroughly
+- ✍️ **Complex documents** with edge cases
 
 ## Examples
 
@@ -281,7 +307,7 @@ The quick-reference includes optimized patterns for:
 
 **Check multiple files:**
 ```bash
-/quick-styleguide docs/*.mdx
+/quick-styleguide docs/file1.mdx docs/file2.mdx docs/file3.mdx
 ```
 
 **CI/CD pipeline:**
@@ -289,15 +315,21 @@ The quick-reference includes optimized patterns for:
 /quick-styleguide $(git diff --name-only main | grep '\.mdx$')
 ```
 
+## Best Practices
+
+1. **Run quick checks frequently** - Low cost, high value
+2. **Use --fix for safe changes** - Review complex items manually
+3. **Escalate to full-styleguide** - Before publication
+4. **Batch multiple files** - More efficient
+5. **Integrate into workflow** - Pre-commit hooks, CI/CD
+
 ## Notes
 
-- **82% token savings** vs full styleguide
-- **2-3x faster** execution
-- **70-80% cost reduction** per check
-- All critical rules covered
-- Optimized for frequent use
-- Perfect for daily workflows
-- Escalate to full check when needed
-- Machine-readable detection patterns
-- Designed for automation
-- Complements full-styleguide-check
+- **QMD-powered** for fast rule lookups
+- **70% token savings** vs full-styleguide
+- **3x faster** execution
+- Catches **80% of common issues**
+- Perfect for **daily workflow**
+- Complements full-styleguide
+- Uses same indexed database
+- Targeted validation strategy
