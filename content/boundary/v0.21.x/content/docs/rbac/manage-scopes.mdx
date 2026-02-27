@@ -31,7 +31,7 @@ There are three types of scopes in Boundary, they have the following hierarchy:
   You can create multiple project scopes under an org scope.
   Project scopes contain infrastructure-related resources.
 
-You can associate some resources only with a specific level of scope.
+You can associate some resources only with a specific scope type.
 For example, you can create targets only in a project scope.
 Other resources can exist in multiple scopes.
 You can create users in either the global scope or an org scope, depending on the resources you want them to access.
@@ -51,30 +51,18 @@ Complete the following steps to create an org scope in the global scope:
 1. (Optional) Enter a name and description for the org scope.
 1. Click **Save**.
 
-The new org scope appears on the **Orgs** page.
-
 </Tab>
 <Tab heading="CLI" group="cli">
 
 1. Log in to Boundary.
 1. Enter the following command, and substitute the `name` and `description` you want to use for the org scope:
 
-```shell-session
-$ boundary scopes create -scope-id global -name <ORG_NAME> -description <ORG_DESCRIPTION>
-
-Scope information:
-  Created Time:        Tue, 24 Feb 2026 05:48:22 PDT
-  Description:         org_description
-  ID:                  o_y0fEd8iY2J
-  Name:                org_name
-  Updated Time:        Wed, 25 Feb 2026 05:48:22 PDT
-  Version:             1
-
-  Scope (parent):
-    ID:                global
-    Name:              global
-    Type:              global
-```
+  ```shell-session
+  $ boundary scopes create \
+    -scope-id global \
+    -name <ORG_NAME> \
+    -description <ORG_DESCRIPTION>
+  ```
 
 </Tab>
 <Tab heading="Terraform" group="terraform">
@@ -113,31 +101,19 @@ Complete the following steps to create a project scope in an org scope:
 1. (Optional) Enter a name and description for the project scope.
 1. Click **Save**.
 
-The new project scope appears on the **Projects** page.
-
 </Tab>
 <Tab heading="CLI" group="cli">
 
 1. Log in to Boundary.
-1. Enter the following command, and substitute the `name` and `description` you want to use for the project scope:
+1. Enter the following command and provide the `scope-id` of the org scope you want to create the project scope in.
+Substitute the `name` and `description` you want to use for the project scope:
 
-```shell-session
-$ boundary scopes create -scope-id o_0MkQUfE9jA -name <PROJECT_NAME> -description <PROJECT_DESCRIPTION>
-
-Scope information:
-  Created Time:        Tue, 29 Sep 2020 05:57:45 PDT
-  Description:         project_description
-  ID:                  p_jqCwqjSTQ4
-  Name:                project_name
-  Updated Time:        Tue, 29 Sep 2020 05:57:45 PDT
-  Version:             1
-
-  Scope (parent):
-    ID:                o_0MkQUfE9jA
-    Name:              org-name
-    Parent Scope ID:   global
-    Type:              org
-```
+  ```shell-session
+  $ boundary scopes create \
+    -scope-id <ORG_SCOPE_ID> \
+    -name <PROJECT_NAME> \
+    -description <PROJECT_DESCRIPTION>
+  ```
 
 </Tab>
 <Tab heading="Terraform" group="terraform">
@@ -167,9 +143,8 @@ resource "boundary_scope" "project" {
 ## More information
 
 - To better understand Boundary's permissions model, refer to [Permissions in Boundary](/boundary/docs/rbac).
-- For more specific information about the scopes resource, refer to the [scopes domain model](/boundary/docs/domain-model/scopes) topic.
-- To learn more about using the CLI to create or manage scopes, refer to the [`scopes`](/boundary/docs/commands/scopes) topic.
-- To learn more about using the API to create or manage scopes, refer to the [scope service](/boundary/api-docs/scope-service) topic.
+- For more specific information about the scopes resource, refer to the [Scopes](/boundary/docs/domain-model/scopes) domain model topic.
+- To learn more about creating or managing scopes, refer to the CLI [`scopes`](/boundary/docs/commands/scopes) topic or the API [Scope service](/boundary/api-docs/scope-service) topic.
 
 ## Next steps
 
