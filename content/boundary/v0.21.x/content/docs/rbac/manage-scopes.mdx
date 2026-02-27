@@ -1,0 +1,177 @@
+---
+layout: docs
+page_title: Create scopes to group resources
+description: How to use scopes to partition resources to assign ownership to users and groups.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-11-18T17:04:41-05:00
+last_modified: 2025-11-18T17:04:41-05:00
+# END AUTO GENERATED METADATA
+---
+
+# Create scopes to group resources
+
+Scopes are groupings of resources.
+You create scopes to partition resources and then assign ownership of those resources to users and groups.
+You can think of scopes as permission boundaries, modeled as containers.
+
+There are three types of scopes in Boundary, they have the following hierarchy:
+
+1. Global
+
+  There is only one global scope.
+  It is the outermost container.
+  You perform the initial administration and setup in the global scope.
+  You also use the global scope to manage any org scopes.
+1. Org
+
+  You can create multiple org scopes under the global scope.
+  Org scopes contain identity and access management-related resources and project scopes.
+1. Project
+
+  You can create multiple project scopes under an org scope.
+  Project scopes contain infrastructure-related resources.
+
+You can associate some resources only with a specific level of scope.
+For example, you can create targets only in a project scope.
+Other resources can exist in multiple scopes.
+You can create users in either the global scope or an org scope, depending on the resources you want them to access.
+
+For specific information about Boundary resources and their valid scope types, refer to the [scopes](/boundary/docs/domain-model/scopes) domain model documentation.
+
+## Create an org scope
+
+Complete the following steps to create an org scope in the global scope:
+
+<Tabs>
+<Tab heading="UI" group="ui">
+
+1. Log in to Boundary.
+1. In the navigation menu, select **Orgs**.
+1. Click **New** or **New Org**.
+1. (Optional) Enter a name and description for the org scope.
+1. Click **Save**.
+
+The new org scope appears on the **Orgs** page.
+
+</Tab>
+<Tab heading="CLI" group="cli">
+
+1. Log in to Boundary.
+1. Enter the following command, and substitute the `name` and `description` you want to use for the org scope:
+
+```shell-session
+$ boundary scopes create -scope-id global -name <ORG_NAME> -description <ORG_DESCRIPTION>
+
+Scope information:
+  Created Time:        Tue, 24 Feb 2026 05:48:22 PDT
+  Description:         org_description
+  ID:                  o_y0fEd8iY2J
+  Name:                org_name
+  Updated Time:        Wed, 25 Feb 2026 05:48:22 PDT
+  Version:             1
+
+  Scope (parent):
+    ID:                global
+    Name:              global
+    Type:              global
+```
+
+</Tab>
+<Tab heading="Terraform" group="terraform">
+
+You can create an org scope using the Terraform provider.
+
+Unlike the CLI and UI, the Terraform provider does not create administrative roles for the scope by default.
+To ensure the user who creates the scope can manage it immediately, set `auto_create_default_role` and `auto_create_admin_role` to `true`.
+
+Enter the following command, and substitute the `name` and `description` you want to use for the org scope:
+
+```hcl
+resource "boundary_scope" "org" {
+  scope_id                 = "global"
+  name                     = "org-name"
+  description              = "org-description"
+  auto_create_default_role = true
+  auto_create_admin_role   = true
+}
+```
+
+</Tab>
+</Tabs>
+
+## Create a project scope
+
+Complete the following steps to create a project scope in an org scope:
+
+<Tabs>
+<Tab heading="UI" group="ui">
+
+1. Log in to Boundary.
+1. In the navigation menu, select **Orgs**.
+1. Select the name of the org you want to add a project scope to.
+1. Click **New** or **New Project**.
+1. (Optional) Enter a name and description for the project scope.
+1. Click **Save**.
+
+The new project scope appears on the **Projects** page.
+
+</Tab>
+<Tab heading="CLI" group="cli">
+
+1. Log in to Boundary.
+1. Enter the following command, and substitute the `name` and `description` you want to use for the project scope:
+
+```shell-session
+$ boundary scopes create -scope-id o_0MkQUfE9jA -name <PROJECT_NAME> -description <PROJECT_DESCRIPTION>
+
+Scope information:
+  Created Time:        Tue, 29 Sep 2020 05:57:45 PDT
+  Description:         project_description
+  ID:                  p_jqCwqjSTQ4
+  Name:                project_name
+  Updated Time:        Tue, 29 Sep 2020 05:57:45 PDT
+  Version:             1
+
+  Scope (parent):
+    ID:                o_0MkQUfE9jA
+    Name:              org-name
+    Parent Scope ID:   global
+    Type:              org
+```
+
+</Tab>
+<Tab heading="Terraform" group="terraform">
+
+You can create a project scope using the Terraform provider.
+
+Unlike the CLI and UI, the Terraform provider does not create administrative roles for the scope by default.
+To ensure the user who creates the scope can manage it immediately, set `auto_create_default_role` and `auto_create_admin_role` to `true`.
+
+Enter the following command, and substitute the `name` and `description` you want to use for the project scope:
+
+```hcl
+resource "boundary_scope" "project" {
+  name             = "project-name"
+  description      = "project-description"
+
+  # scope_id is taken from the parent org resource
+  scope_id                 = boundary_scope.org.id
+  auto_create_default_role = true
+  auto_create_admin_role   = true
+}
+```
+
+</Tab>
+</Tabs>
+
+## More information
+
+- To better understand Boundarys permissions model, refer to [Permissions in Boundary](/boundary/docs/rbac).
+- For more specific information about the scopes resource, refer to the [scopes domain model](/boundary/docs/domain-model/scopes) topic.
+- To learn more about using the CLI to create or manage scopes, refer to the [`scopes`](/boundary/docs/commands/scopes) topic.
+- To learn more about using the API to create or manage scopes, refer to the [scope service](/boundary/api-docs/scope-service) topic.
+
+## Next steps
+
+1. After you create scopes to contain your resources, you can [Manage access with roles](/boundary/docs/rbac/manage-roles).
+1. To manage access to resources dynamically, refer to [Manage principals](/boundary/docs/rbac/users/manage-users-groups) and [Filter managed groups](/boundary/docs/rbac/users/managed-groups).
