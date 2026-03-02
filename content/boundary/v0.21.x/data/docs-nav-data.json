@@ -817,7 +817,7 @@
       },
       {
         "title": "Group resources with scopes",
-        "path": "rbac/manage-scopes"
+        "path": "rbac/create-scopes"
       },
       {
         "title": "Manage access with roles",
