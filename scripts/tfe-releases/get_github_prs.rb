@@ -68,13 +68,23 @@ class PullRequest
       # puts "retrieving pr #{pr_number}"
       pr = $github.pull_request(@repo.to_s, pr_number.to_i)
       
+      # Debug: Print PR info
+      STDERR.puts "#{@repo}: Checking PR ##{pr.number} by @#{pr.user.login}"
+      STDERR.puts "#{@repo}: PR ##{pr.number} title: #{pr.title}"
+      if pr.body && pr.body.length > 0
+        STDERR.puts "#{@repo}: PR ##{pr.number} body preview: #{pr.body[0..200]}"
+      else
+        STDERR.puts "#{@repo}: PR ##{pr.number} has no body"
+      end
+      
       # Check if this is a backport PR and find the original
       original_pr = find_original_pr(pr)
       
       if original_pr
-        STDERR.puts "#{@repo}: Using original PR ##{original_pr.number} (by @#{original_pr.user.login}) instead of backport PR ##{pr.number}"
+        STDERR.puts "#{@repo}: ✓ Using original PR ##{original_pr.number} (by @#{original_pr.user.login}) instead of backport PR ##{pr.number} (by @#{pr.user.login})"
         original_pr
       else
+        STDERR.puts "#{@repo}: Using PR ##{pr.number} as-is (not a backport)"
         pr
       end
     end
