@@ -128,7 +128,8 @@ jobs:
           git add .
 
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "No changes to commit, pushing empty branch for release-notes job"
+            git push origin HEAD
             has_changes=false
           else
             git commit -m "TFE Release ${{inputs.version}}" --no-verify
@@ -136,7 +137,7 @@ jobs:
             has_changes=true
           fi
 
-          # Check if PR already exists or create new one (only if we have changes or it's an existing branch)
+          # Check if PR already exists or create new one (only if we have changes)
           if gh pr view ${{env.docs_branch_name}} &> /dev/null; then
             echo "PR already exists, retrieving URL"
             docs_pr_url=$(gh pr view ${{env.docs_branch_name}} --json url --jq '.url')
@@ -222,7 +223,8 @@ jobs:
           git add .
 
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "No HCP TF changes to commit, pushing empty branch"
+            git push origin HEAD
             has_diff_changes=false
           else
             git commit -m "HCP TF changes for TFE release" --no-verify
@@ -230,7 +232,7 @@ jobs:
             has_diff_changes=true
           fi
 
-          # Check if PR already exists or create new one (only if we have changes or it's an existing branch)
+          # Check if PR already exists or create new one (only if we have changes)
           if gh pr view ${{env.diff_branch_name}} &> /dev/null; then
             echo "PR already exists, retrieving URL"
             diff_pr_url=$(gh pr view ${{env.diff_branch_name}} --json url --jq '.url')
