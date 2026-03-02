@@ -37,28 +37,28 @@ Vault Radar sends a single-event JSON payload for each webhook delivery.
 | Field               | Type      | Description                                                                                                                                                  |
 |---------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `version`           | `string`  | Webhook payload version, may vary between versions                                                                                                                                       |
-| `event_id`          | `string`  | Unique identifier for the event                                                                                                                               |
+| `event_id`          | `string`  | Unique identifier for the event within Radar's system of record                                                                                                                               |
 | `type`              | `string`  | High level type for the event                                                                                                                                 |
-| `sub_type`          | `string`  | Subtype for the event                                                                                                                                |
+| `sub_type`          | `string`  | Optional subtype for the event                                                                                                                                 |
 | `description`       | `string`  | Full description of the finding                                                                                                                               |
 | `created`           | `string`  | Timestamp when the event was created                                                                                                                          |
 | `last_updated`      | `string`  | Timestamp when the event was last updated                                                                                                                     |
 | `summary`           | `string`  | Short summary text for display                                                                                                                                |
-| `details`           | `string`  | Additional metadata about the finding                                                                                                                          |
+| `details`           | `string`  | Additional metadata specific to the data source type about the finding                                                                                                                          |
 | `severity`          | `string`  | Severity label for the finding                                                                                                                                |
 | `risk_category`     | `string`  | Risk category assigned by Radar                                                                                                                               |
-| `secret_activeness` | `string`  | Indicates whether the secret is active                                                                                                                        |
+| `secret_activeness` | `string`  | Indicates whether the secret is active. Either 'active' or 'inactive'                                                                                                                        |
 | `secret_id`         | `string`  | Unique identifier for the secret                                                                                                                              |
 | `is_monitored`      | `boolean` | Whether the finding is actively monitored                                                                                                                     |
 | `data_source_type`  | `string`  | Type of data source that produced the finding                                                                                                                 |
 | `data_source_name`  | `string`  | Name of the data source organization or account                                                                                                               |
-| `resource_name`     | `string`  | Name of the resource within the data source (for example, repository name)                                                                                    |
+| `resource_name`     | `string`  | Name of the resource within the data source. For example, the name of a Github repository                                                                                   |
 | `resource_uri`      | `string`  | URI of the resource within the data source                                                                                                                    |
-| `visibility`        | `string`  | Visibility of the resource (for example, public or private)                                                                                                   |
+| `visibility`        | `string`  | Visibility of the resource. Either 'public' or 'private'                                                                                                  |
 | `author`            | `string`  | Email or identifier of the author associated with the finding                                                                                                 |
 | `author_time`       | `string`  | Timestamp of the authoring action associated with the finding                                                                                                 |
-| `content_id`        | `string`  | Identifier for the content unit (for example, commit hash) associated with the finding                                                                        |
-| `content_reference` | `string`  | Reference to the content (for example, git branch or tag) associated with the finding                                                                         |
+| `content_id`        | `string`  | Identifier for the content unit associated with the finding. For example a Github commit hash associated with the finding                                                                        |
+| `content_reference` | `string`  | Reference to the content, for example a github branch or tag, associated with the finding                                                                         |
 | `in_latest_version` | `boolean` | Whether the finding appears in the latest version of the resource                                                                                             |
 | `context`           | `string`  | Contextual snippet or metadata surrounding the finding                                                                                                        |
 | `context_url`       | `string`  | Deep link to the finding in the data source provider                                                                                                          |
