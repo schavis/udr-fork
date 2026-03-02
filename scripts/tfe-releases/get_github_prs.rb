@@ -91,18 +91,34 @@ class PullRequest
   end
 
   def find_original_pr(pr)
+    # Debug: Show what we're checking
+    STDERR.puts "#{@repo}: --- Examining PR ##{pr.number} for backport patterns ---"
+    STDERR.puts "#{@repo}:     Title: #{pr.title}"
+    STDERR.puts "#{@repo}:     Author: @#{pr.user.login}"
+    
+    if pr.body && pr.body.length > 0
+      # Show first 10 lines of body to see the pattern
+      body_lines = pr.body.split("\n")[0..9]
+      STDERR.puts "#{@repo}:     Body (first 10 lines):"
+      body_lines.each { |line| STDERR.puts "#{@repo}:       | #{line}" }
+    else
+      STDERR.puts "#{@repo}:     Body: (empty)"
+    end
+    
     return nil unless pr.body
 
     # Look for auto-generated backport pattern (most common):
-    # "This PR is auto-generated from #471"
-    auto_generated_match = pr.body.match(/This PR is auto-generated from #(\d+)/i)
+    # "This PR is auto-generated from #471" or "auto-generated from #471"
+    auto_generated_match = pr.body.match(/auto-generated from #(\d+)/i)
     
     if auto_generated_match
       original_pr_number = auto_generated_match[1].to_i
-      STDERR.puts "#{@repo}: PR ##{pr.number} is auto-generated from ##{original_pr_number}"
+      STDERR.puts "#{@repo}: ✓✓✓ Found auto-generated pattern! PR ##{pr.number} is backport of ##{original_pr_number}"
       
       begin
         original_pr = $github.pull_request(@repo.to_s, original_pr_number)
+        STDERR.puts "#{@repo}: ✓✓✓ Successfully fetched original PR ##{original_pr_number} by @#{original_pr.user.login}"
+        STDERR.puts "#{@repo}: >>> REPLACING bot PR ##{pr.number} (@#{pr.user.login}) with original PR ##{original_pr_number} (@#{original_pr.user.login}) <<<"
         return original_pr
       rescue Octokit::NotFound
         STDERR.puts "#{@repo}: Warning - Original PR ##{original_pr_number} not found"
@@ -146,6 +162,8 @@ class PullRequest
       end
     end
 
+    # Not a backport
+    STDERR.puts "#{@repo}:     ⤷ No backport pattern detected - will use PR ##{pr.number} by @#{pr.user.login} as-is"
     nil
   end
 end
