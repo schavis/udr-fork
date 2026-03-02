@@ -64,8 +64,10 @@ class PullRequest
   end
 
   def get_prs_from_github(pr_numbers)
+    STDERR.puts "#{@repo}: ========== get_prs_from_github CALLED with #{pr_numbers.size} PR numbers =========="
     pr_numbers.reverse.map do |pr_number|
       # puts "retrieving pr #{pr_number}"
+      STDERR.puts "#{@repo}: >>>>>> About to fetch PR ##{pr_number} from GitHub API"
       pr = $github.pull_request(@repo.to_s, pr_number.to_i)
       
       # Debug: Print PR info
