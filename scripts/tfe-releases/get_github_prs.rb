@@ -83,8 +83,10 @@ class PullRequest
       original_pr = find_original_pr(pr)
       
       if original_pr
-        STDERR.puts "#{@repo}: ✓ Using original PR ##{original_pr.number} (by @#{original_pr.user.login}) instead of backport PR ##{pr.number} (by @#{pr.user.login})"
-        original_pr
+        STDERR.puts "#{@repo}: ✓ Linking backport PR ##{pr.number} with original PR ##{original_pr.number} (by @#{original_pr.user.login})"
+        # Add original PR metadata to the backport PR object
+        pr.define_singleton_method(:original_pr) { original_pr }
+        pr
       else
         STDERR.puts "#{@repo}: Using PR ##{pr.number} as-is (not a backport)"
         pr
