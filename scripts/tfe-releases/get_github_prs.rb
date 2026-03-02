@@ -70,7 +70,13 @@ class PullRequest
       
       # Check if this is a backport PR and find the original
       original_pr = find_original_pr(pr)
-      original_pr || pr
+      
+      if original_pr
+        STDERR.puts "#{@repo}: Using original PR ##{original_pr.number} (by @#{original_pr.user.login}) instead of backport PR ##{pr.number}"
+        original_pr
+      else
+        pr
+      end
     end
   end
 
