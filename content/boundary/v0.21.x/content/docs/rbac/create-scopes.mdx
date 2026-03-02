@@ -43,7 +43,7 @@ For specific information about Boundary resources and their valid scope types, r
 Complete the following steps to create an org scope in the global scope:
 
 <Tabs>
-<Tab heading="UI" group="ui">
+<Tab heading="Admin console" group="admin">
 
 1. Log in to Boundary.
 1. In the navigation menu, select **Orgs**.
@@ -51,11 +51,15 @@ Complete the following steps to create an org scope in the global scope:
 1. (Optional) Enter a name and description for the org scope.
 1. Click **Save**.
 
+    Boundary creates the new org scope in the global scope.
+
 </Tab>
 <Tab heading="CLI" group="cli">
 
 1. Log in to Boundary.
-1. Enter the following command, and substitute the `name` and `description` you want to use for the org scope:
+1. Use the following command to create the scope.
+
+  You can optionally provide a name and description for the scope:
 
   ```shell-session
   $ boundary scopes create \
@@ -64,15 +68,17 @@ Complete the following steps to create an org scope in the global scope:
     -description <ORG_DESCRIPTION>
   ```
 
+  Boundary creates the new org scope in the global scope.
+
 </Tab>
 <Tab heading="Terraform" group="terraform">
 
-You can create an org scope using the Terraform provider.
+Use the following command to create an org scope using the Terraform provider.
 
-Unlike the CLI and UI, the Terraform provider does not create administrative roles for the scope by default.
-To ensure the user who creates the scope can manage it immediately, set `auto_create_default_role` and `auto_create_admin_role` to `true`.
+You can optionally provide a name and description for the scope.
 
-Enter the following command, and substitute the `name` and `description` you want to use for the org scope:
+The Terraform provider does not create administrative roles for the scope by default.
+To ensure the user who creates the scope can manage it immediately, set `auto_create_default_role` and `auto_create_admin_role` to `true`:
 
 ```hcl
 resource "boundary_scope" "org" {
@@ -84,6 +90,8 @@ resource "boundary_scope" "org" {
 }
 ```
 
+Boundary creates the new org scope in the global scope.
+
 </Tab>
 </Tabs>
 
@@ -92,21 +100,25 @@ resource "boundary_scope" "org" {
 Complete the following steps to create a project scope in an org scope:
 
 <Tabs>
-<Tab heading="UI" group="ui">
+<Tab heading="Admin console" group="admin">
 
 1. Log in to Boundary.
 1. In the navigation menu, select **Orgs**.
-1. Select the name of the org you want to add a project scope to.
+1. Select the org you want to add a project scope to.
 1. Click **New** or **New Project**.
 1. (Optional) Enter a name and description for the project scope.
 1. Click **Save**.
+
+    Boundary creates the new project scope in the org scope that you specified.
 
 </Tab>
 <Tab heading="CLI" group="cli">
 
 1. Log in to Boundary.
-1. Enter the following command and provide the `scope-id` of the org scope you want to create the project scope in.
-Substitute the `name` and `description` you want to use for the project scope:
+1. Use the following command to create the scope.
+
+  You must provide the `scope-id` of the org scope you want to create the project scope in.
+  You can optionally provide a name and description for the scope:
 
   ```shell-session
   $ boundary scopes create \
@@ -115,15 +127,18 @@ Substitute the `name` and `description` you want to use for the project scope:
     -description <PROJECT_DESCRIPTION>
   ```
 
+  Boundary creates the new project scope in the org scope that you specified.
+
 </Tab>
 <Tab heading="Terraform" group="terraform">
 
-You can create a project scope using the Terraform provider.
+Use the following command to create a project scope using the Terraform provider.
 
-Unlike the CLI and UI, the Terraform provider does not create administrative roles for the scope by default.
-To ensure the user who creates the scope can manage it immediately, set `auto_create_default_role` and `auto_create_admin_role` to `true`.
+You must provide the `scope_id` of the org scope you want to create the project scope in.
+You can optionally provide a name and description for the scope.
 
-Enter the following command, and substitute the `name` and `description` you want to use for the project scope:
+The Terraform provider does not create administrative roles for the scope by default.
+To ensure the user who creates the scope can manage it immediately, set `auto_create_default_role` and `auto_create_admin_role` to `true`:
 
 ```hcl
 resource "boundary_scope" "project" {
@@ -136,6 +151,7 @@ resource "boundary_scope" "project" {
   auto_create_admin_role   = true
 }
 ```
+Boundary creates the new project scope in the org scope that you specified.
 
 </Tab>
 </Tabs>
