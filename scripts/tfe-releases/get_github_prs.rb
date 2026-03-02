@@ -66,7 +66,53 @@ class PullRequest
   def get_prs_from_github(pr_numbers)
     pr_numbers.reverse.map do |pr_number|
       # puts "retrieving pr #{pr_number}"
-      $github.pull_request(@repo.to_s, pr_number.to_i)
+      pr = $github.pull_request(@repo.to_s, pr_number.to_i)
+      
+      # Check if this is a backport PR and find the original
+      original_pr = find_original_pr(pr)
+      original_pr || pr
     end
+  end
+
+  def find_original_pr(pr)
+    return nil unless pr.body
+
+    # Look for common backport patterns in PR body:
+    # - "Backport of #1234"
+    # - "Backport: #1234"
+    # - "Cherry-pick of #1234"
+    # - "Backports #1234"
+    backport_match = pr.body.match(/(?:backport|cherry-pick)(?:\s+of)?(?:\s*:)?\s*#(\d+)/i)
+    
+    if backport_match
+      original_pr_number = backport_match[1].to_i
+      STDERR.puts "#{@repo}: PR ##{pr.number} is a backport of ##{original_pr_number}"
+      
+      begin
+        original_pr = $github.pull_request(@repo.to_s, original_pr_number)
+        return original_pr
+      rescue Octokit::NotFound
+        STDERR.puts "#{@repo}: Warning - Original PR ##{original_pr_number} not found"
+        return nil
+      end
+    end
+
+    # Also check PR title for backport patterns
+    title_match = pr.title.match(/(?:backport|cherry-pick)(?:\s+of)?(?:\s*:)?\s*#(\d+)/i)
+    
+    if title_match
+      original_pr_number = title_match[1].to_i
+      STDERR.puts "#{@repo}: PR ##{pr.number} (from title) is a backport of ##{original_pr_number}"
+      
+      begin
+        original_pr = $github.pull_request(@repo.to_s, original_pr_number)
+        return original_pr
+      rescue Octokit::NotFound
+        STDERR.puts "#{@repo}: Warning - Original PR ##{original_pr_number} not found"
+        return nil
+      end
+    end
+
+    nil
   end
 end

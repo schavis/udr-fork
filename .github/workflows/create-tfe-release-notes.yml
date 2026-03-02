@@ -55,8 +55,9 @@ jobs:
         - name: Print workflow outputs
           run: |
             echo "release_branch_name: ${{ needs.copy-docs.outputs.release_branch_name }}"
+            echo "docs_branch_pr_url: ${{ needs.copy-docs.outputs.docs_branch_pr_url }}"
+            echo "release_pr_url: ${{ needs.copy-docs.outputs.release_pr_url }}"
             echo "diff_branch_pr_url: ${{ needs.copy-docs.outputs.diff_branch_pr_url }}"
-            echo "release_branch_pr_url: ${{ needs.copy-docs.outputs.release_branch_pr_url }}"
 
         - name: Only run in hashicorp/web-unified-docs-internal
           run: |
@@ -146,8 +147,7 @@ jobs:
               - ${{ needs.copy-docs.outputs.diff_branch_pr_url }}
 
               Release Notes PR:
-              - ${{ needs.copy-docs.outputs.release_branch_pr_url }}
-
+              - ${{ env.RELEASE_NOTES_PR_URL }}
 
               ❗ This is the Release PR that will be merged into main, once the release notes and diff PR are merged into it. ❗
 
@@ -159,5 +159,5 @@ jobs:
             git config --global user.email "team-rel-eng@hashicorp.com"
             git config --global user.name "tfe-release-bot"
 
-            gh pr edit ${{ needs.copy-docs.outputs.release_branch_pr_url }} \
+            gh pr edit ${{ needs.copy-docs.outputs.release_pr_url }} \
               --body="${{env.docs_pr_body}}"
