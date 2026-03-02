@@ -158,8 +158,20 @@ jobs:
 
           # Check if PR already exists or create new one (only if we have changes)
           if gh pr view ${{env.docs_branch_name}} &> /dev/null; then
-            echo "PR already exists, retrieving URL"
-            docs_pr_url=$(gh pr view ${{env.docs_branch_name}} --json url --jq '.url')
+            pr_state=$(gh pr view ${{env.docs_branch_name}} --json state --jq '.state')
+            if [ "$pr_state" == "OPEN" ]; then
+              echo "Open PR already exists, retrieving URL"
+              docs_pr_url=$(gh pr view ${{env.docs_branch_name}} --json url --jq '.url')
+            else
+              echo "PR exists but is $pr_state, creating new PR"
+              gh pr create \
+                --body="${{env.docs_pr_body}}" \
+                --title="TFE Release Notes ${{inputs.version}}" \
+                --draft \
+                --head ${{env.docs_branch_name}} \
+                --base ${{env.release_branch_name}}
+              docs_pr_url=$(gh pr view --json url --jq '.url')
+            fi
           elif [ "$has_changes" = "true" ]; then
             echo "Creating new PR: docs-tfe-release/${{inputs.version}} → tfe-release/${{inputs.version}}"
             gh pr create \
@@ -254,8 +266,20 @@ jobs:
 
           # Check if PR already exists or create new one (only if we have changes)
           if gh pr view ${{env.diff_branch_name}} &> /dev/null; then
-            echo "PR already exists, retrieving URL"
-            diff_pr_url=$(gh pr view ${{env.diff_branch_name}} --json url --jq '.url')
+            pr_state=$(gh pr view ${{env.diff_branch_name}} --json state --jq '.state')
+            if [ "$pr_state" == "OPEN" ]; then
+              echo "Open PR already exists, retrieving URL"
+              diff_pr_url=$(gh pr view ${{env.diff_branch_name}} --json url --jq '.url')
+            else
+              echo "PR exists but is $pr_state, creating new PR"
+              gh pr create \
+                --body="${{env.diff_pr_body}}" \
+                --title="HCP TF changes for TFE release ${{inputs.version}}" \
+                --draft \
+                --head ${{env.diff_branch_name}} \
+                --base ${{env.docs_branch_name}}
+              diff_pr_url=$(gh pr view --json url --jq '.url')
+            fi
           elif [ "$has_diff_changes" = "true" ]; then
             echo "Creating new PR"
             gh pr create \
@@ -308,8 +332,20 @@ jobs:
           git checkout ${{env.release_branch_name}}
           
           if gh pr view ${{env.release_branch_name}} &> /dev/null; then
-            echo "Release PR already exists, retrieving URL"
-            release_pr_url=$(gh pr view ${{env.release_branch_name}} --json url --jq '.url')
+            pr_state=$(gh pr view ${{env.release_branch_name}} --json state --jq '.state')
+            if [ "$pr_state" == "OPEN" ]; then
+              echo "Open Release PR already exists, retrieving URL"
+              release_pr_url=$(gh pr view ${{env.release_branch_name}} --json url --jq '.url')
+            else
+              echo "Release PR exists but is $pr_state, creating new PR"
+              gh pr create \
+                --body="${{env.release_pr_body}}" \
+                --title="TFE Release ${{inputs.version}}" \
+                --draft \
+                --head ${{env.release_branch_name}} \
+                --base main
+              release_pr_url=$(gh pr view --json url --jq '.url')
+            fi
           else
             echo "Creating Release PR: tfe-release/${{inputs.version}} → main"
             gh pr create \
