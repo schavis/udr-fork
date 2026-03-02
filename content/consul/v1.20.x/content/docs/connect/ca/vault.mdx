@@ -5,7 +5,7 @@ description: >-
   You can use a Vault PKI secrets engine as the Consul service mesh's certificate authority to secure your service mesh. Learn how to configure the Vault CA as a root CA or an intermediate CA connected to an existing PKI system, and how to manage PKI paths with either Vault or Consul.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-04T10:42:51-06:00
-last_modified: 2026-03-02T10:05:45.000Z
+last_modified: 2026-03-02T18:51:30.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -131,9 +131,10 @@ The key after the slash refers to the corresponding option name in the agent con
   | **AppRole**    | `/var/run/secrets/vault`, `/run/secrets/vault`, `/var/run/secrets`, `/run/secrets` |
 
   Credential files outside these directories will be rejected. Symlinks that escape
-  these directories are also blocked. If your deployment stores credential files in
-  non-standard paths, you must relocate them to one of the listed allowed directories
-  before upgrading.
+  these directories are also blocked. Additionally, credential files are limited to a
+  maximum size of **5 MB** to prevent denial-of-service attacks. If your deployment
+  stores credential files in non-standard paths, you must relocate them to one of the
+  listed allowed directories before upgrading.
 
   </Note>
 
