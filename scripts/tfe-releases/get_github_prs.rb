@@ -77,7 +77,24 @@ class PullRequest
   def find_original_pr(pr)
     return nil unless pr.body
 
-    # Look for common backport patterns in PR body:
+    # Look for auto-generated backport pattern (most common):
+    # "This PR is auto-generated from #471"
+    auto_generated_match = pr.body.match(/This PR is auto-generated from #(\d+)/i)
+    
+    if auto_generated_match
+      original_pr_number = auto_generated_match[1].to_i
+      STDERR.puts "#{@repo}: PR ##{pr.number} is auto-generated from ##{original_pr_number}"
+      
+      begin
+        original_pr = $github.pull_request(@repo.to_s, original_pr_number)
+        return original_pr
+      rescue Octokit::NotFound
+        STDERR.puts "#{@repo}: Warning - Original PR ##{original_pr_number} not found"
+        return nil
+      end
+    end
+
+    # Look for other common backport patterns in PR body:
     # - "Backport of #1234"
     # - "Backport: #1234"
     # - "Cherry-pick of #1234"

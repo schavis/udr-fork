@@ -38,7 +38,7 @@ on:
         description: 'The URL of the release PR (tfe-release/X → main).'
         value: ${{ jobs.copy-docs.outputs.release_pr_url }}
       diff_branch_pr_url:
-        description: 'The URL of the diff branch created for the new TFE version docs.'
+        description: 'The URL of the diff branch (only for major/minor releases).'
         value: ${{ jobs.copy-docs.outputs.diff_branch_pr_url }}
 
 jobs:
@@ -196,14 +196,16 @@ jobs:
             echo "**TFE Release branch created**: ${{env.docs_branch_name}} (PR will be created after release notes are added)" >> $GITHUB_STEP_SUMMARY
           fi
 
-      # MAKE THE DIFF PR
+      # MAKE THE DIFF PR (ONLY FOR MAJOR/MINOR RELEASES)
       - name: Checkout main for new docs version DIFF PR
+        if: ${{ inputs.skip-release-notes-copy == false }}
         uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
         with:
           path: '${{github.workspace}}/new-docs-diff-pr'
-          ref: '${{steps.open-docs-pr.outputs.docs_branch_name}}'
+          ref: '${{steps.open-docs-pr.outputs.release_branch_name}}'
 
       - name: Copy files for new docs version DIFF PR
+        if: ${{ inputs.skip-release-notes-copy == false }}
         uses: ./new-docs-pr/.github/actions/copy-cloud-docs-for-tfe
         with:
           source_path: '${{github.workspace}}/new-docs-pr'
@@ -211,10 +213,11 @@ jobs:
           new_TFE_version: ${{inputs.version}}
 
       - name: Open new docs version DIFF PR
+        if: ${{ inputs.skip-release-notes-copy == false }}
         id: open-diff-pr
         working-directory: '${{github.workspace}}/new-docs-diff-pr'
         env:
-          docs_branch_name: ${{steps.open-docs-pr.outputs.docs_branch_name}}
+          release_branch_name: ${{steps.open-docs-pr.outputs.release_branch_name}}
           diff_branch_name: HCPTF-diff/${{inputs.version}}
           diff_pr_body: |
             # HCP TF changes for TFE release ${{inputs.version}}
@@ -225,8 +228,8 @@ jobs:
             Copies over `content/terraform-docs-common/docs/cloud-docs` from:
             - ${{github.server_url}}/${{github.repository}}/tree/main
 
-            Merges into the docs release branch:
-            - ${{ env.DOCS_PR_URL }}
+            Merges into the release branch:
+            - tfe-release/${{inputs.version}}
 
             ### Reviewers
             - [ ] @hashicorp/ptfe-review
@@ -238,15 +241,9 @@ jobs:
           git config --global user.name "tfe-release-bot"
 
           if [ "$(git ls-remote --heads origin ${{env.diff_branch_name}})" != "" ]; then
-            if [ "${{ inputs.skip-release-notes-copy }}" == "true" ]; then
-              echo "Patch release mode: Branch ${{env.diff_branch_name}} already exists, updating it"
-              git fetch origin ${{env.diff_branch_name}}
-              git checkout ${{env.diff_branch_name}}
-            else
-              echo "❌ branch name ${{env.diff_branch_name}} already exists, please delete it from remote/origin and try again. (i.e. git push origin --delete ${{env.diff_branch_name}})"
-              echo "❌ branch name ${{env.diff_branch_name}} already exists, please delete it from remote/origin and try again. (i.e. git push origin --delete ${{env.diff_branch_name}})" >> $GITHUB_STEP_SUMMARY
-              exit 1
-            fi
+            echo "❌ branch name ${{env.diff_branch_name}} already exists, please delete it from remote/origin and try again. (i.e. git push origin --delete ${{env.diff_branch_name}})"
+            echo "❌ branch name ${{env.diff_branch_name}} already exists, please delete it from remote/origin and try again. (i.e. git push origin --delete ${{env.diff_branch_name}})" >> $GITHUB_STEP_SUMMARY
+            exit 1
           else
             echo "Creating new branch ${{env.diff_branch_name}}"
             git checkout -b ${{env.diff_branch_name}}
@@ -255,16 +252,14 @@ jobs:
           git add .
 
           if git diff --staged --quiet; then
-            echo "No HCP TF changes to commit, pushing empty branch"
-            git push origin HEAD
-            has_diff_changes=false
+            echo "No HCP TF changes to commit"
           else
             git commit -m "HCP TF changes for TFE release" --no-verify
-            git push origin HEAD
-            has_diff_changes=true
           fi
+          
+          git push origin HEAD
 
-          # Check if PR already exists or create new one (only if we have changes)
+          # Create PR
           if gh pr view ${{env.diff_branch_name}} &> /dev/null; then
             pr_state=$(gh pr view ${{env.diff_branch_name}} --json state --jq '.state')
             if [ "$pr_state" == "OPEN" ]; then
@@ -277,28 +272,23 @@ jobs:
                 --title="HCP TF changes for TFE release ${{inputs.version}}" \
                 --draft \
                 --head ${{env.diff_branch_name}} \
-                --base ${{env.docs_branch_name}}
+                --base ${{env.release_branch_name}}
               diff_pr_url=$(gh pr view --json url --jq '.url')
             fi
-          elif [ "$has_diff_changes" = "true" ]; then
-            echo "Creating new PR"
+          else
+            echo "Creating HCP TF diff PR"
             gh pr create \
               --body="${{env.diff_pr_body}}" \
               --title="HCP TF changes for TFE release ${{inputs.version}}" \
               --draft \
               --head ${{env.diff_branch_name}} \
-              --base ${{env.docs_branch_name}}
+              --base ${{env.release_branch_name}}
             diff_pr_url=$(gh pr view --json url --jq '.url')
-          else
-            echo "No HCP TF changes to commit and no existing PR."
-            diff_pr_url=""
           fi
 
           echo "DIFF_PR_URL=${diff_pr_url}" >> $GITHUB_ENV
           echo "diff_branch_pr_url=${diff_pr_url}" >> $GITHUB_OUTPUT
-          if [ -n "${diff_pr_url}" ]; then
-            echo "**HCP TF changes for TFE release PR URL**: ${diff_pr_url}" >> $GITHUB_STEP_SUMMARY
-          fi
+          echo "**HCP TF changes for TFE release PR URL**: ${diff_pr_url}" >> $GITHUB_STEP_SUMMARY
 
       - name: Create Release PR (tfe-release → main)
         id: open-release-pr
@@ -311,8 +301,7 @@ jobs:
             This PR was created via:
             - ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
 
-            Changes since last release, diff PR:
-            - ${{ env.DIFF_PR_URL }}
+            ${{ inputs.skip-release-notes-copy == false && format('Changes since last release, diff PR:\n- {0}\n\n', env.DIFF_PR_URL) || '' }}
 
             Release Notes PR:
             - ${{ env.DOCS_PR_URL }}
