@@ -304,6 +304,43 @@ last_modified: 2025-12-10T11:48:49-05:00
     </td>
   </tr>
 
+  <tr>
+    <td style={{verticalAlign: 'middle'}}>
+    Client Agent version 0.1.4 - 0.21.x
+    <br /><br />
+    (Fixed in Client Agent version 0.21.2)
+    </td>
+    <td style={{verticalAlign: 'middle'}}>
+    Infinite loop and IP exhaustion
+    </td>
+    <td style={{verticalAlign: 'middle'}}>
+    The Client Agent relies on a loop to generate new IP addresses until it finds one that does not exist in the cache. If an upstream caller repeatedly requests new addresses, it could exhaust potential unique IP addresses.
+    <br /><br />
+    This was a known issue that is resolved in Client Agent version 0.21.2. New logic was added to better detect and manage IPv4 and IPv6 loopback ranges.
+    <br /><br />
+    <a href="/boundary/docs/deploy/self-managed/install-clients">Install the latest version of the Boundary Client Agent</a>
+    </td>
+  </tr>
+
+<tr>
+    <td style={{verticalAlign: 'middle'}}>
+    Client Agent version 0.1.4 - 0.21.x
+    <br /><br />
+    (Fixed in Client Agent version 0.21.2)
+    </td>
+    <td style={{verticalAlign: 'middle'}}>
+    Transparent sessions fail on Windows with RDP client
+    </td>
+    <td style={{verticalAlign: 'middle'}}>
+    When you used the default Windows RDP client to attempt to connect to a target using a transparent session, the connection could fail with the following error:
+    <br /><br />
+    Your computer could not connect to another console session on the remote computer because you already have a console session in progress.
+    <br /><br />
+    This was a known issue. It was caused in part due to an intermittent DNS resolution issue. The user authentication logic for sessions was also improved to no longer use the session's TCP connection port for the initial connection. This issue has been resolved in Client Agent version 0.21.2.
+    <br /><br />
+    <a href="/boundary/docs/deploy/self-managed/install-clients">Install the latest version of the Boundary Client Agent</a>
+    </td>
+  </tr>
 
   </tbody>
 </table>
