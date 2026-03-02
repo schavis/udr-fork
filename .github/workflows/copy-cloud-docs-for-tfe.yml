@@ -75,17 +75,23 @@ jobs:
           echo "Previous terraform-enterprise version: ${prev_version}"
           echo "PREV_TFE_VERSION=${prev_version}" >> $GITHUB_ENV
 
+          # Extract major.minor from version (e.g., 1.2.1 -> 1.2.x)
+          version_series=$(echo "${{ inputs.version }}" | sed -E 's/^([0-9]+\.[0-9]+)\.[0-9]+$/\1.x/')
+          echo "Version series: ${version_series}"
+          echo "VERSION_SERIES=${version_series}" >> $GITHUB_ENV
+
           if [ "${{ inputs.skip-release-notes-copy }}" == "true" ]; then
             echo "Patch release mode: Skipping directory copy, using existing version directory"
-            if [ ! -d "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${{inputs.version}}" ]; then
+            if [ ! -d "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${version_series}" ]; then
               echo "❌ Error: Version directory does not exist. For patch releases, the version directory must already exist."
+              echo "Expected directory: content/terraform-enterprise/${version_series}"
               echo "Please run this workflow with major-minor-release checked first to create the directory."
               exit 1
             fi
           else
             echo "Major/minor release mode: Creating new version directory"
-            mkdir -p "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${{inputs.version}}"
-            cp -a "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${prev_version}/." "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${{inputs.version}}"
+            mkdir -p "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${version_series}"
+            cp -a "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${prev_version}/." "${{github.workspace}}/new-docs-pr/content/terraform-enterprise/${version_series}"
           fi
 
       - name: Open new version RELEASE PR
