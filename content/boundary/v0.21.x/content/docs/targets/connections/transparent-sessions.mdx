@@ -50,12 +50,14 @@ $ ssh my.alias.name
 
 Boundary starts the session as usual, and brokers or injects any credentials you have configured.
 
-Due to a port conflict with the Windows Remote Desktop Connection app, you must configure a custom port to establish a transparent session to an RDP target.
-When users establish a transparent session to an RDP target, they must specify the custom port with the alias in the RDP client, for example:
+<Note>
 
-`my.alias.name:83389`
+On Client Agent versions prior to 0.21.2, a port conflict with the Windows Remote Desktop Connection app on Modern Windows operating systems (Windows 11+, Windows Server 2025) caused transparent sessions to fail when you used the default port (`3389`) to establish an RDP connection.
+You must configure a custom port to establish a transparent session to an RDP target.
 
 For more information, refer to [RDP targets](/boundary/docs/targets/configuration/configure-transparent-sessions#rdp-targets).
+
+</Note>
 
 ## Next steps
 
