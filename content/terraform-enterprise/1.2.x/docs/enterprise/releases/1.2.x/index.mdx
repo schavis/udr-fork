@@ -162,8 +162,8 @@ Flexible Deployment Options `terraform-enterprise` container digest: amd64/linux
 
 ## Bug Fixes
 1. Atlas configured to use Redis Sentinel without mTLS will now correctly connect to Redis when necessary. Previously Redis connections would fail due to a misconfiguration introduced in v1.1.0, but only when using Redis Sentinel without an mTLS certificate
-2. You can now configure an Load Balancer expect 200 from the `/api/v1/health/readiness` endpoint. Previously you would get a 301, unless a Host header matched the TFE_HOSTNAME.
-3. The Terraform Enterprise user interface displays extra application version information in v1.2.0. This has been fixed.
+2. You can now configure a Load Balancer to expect a 200 response code from the `/api/v1/health/readiness` endpoint. Previously, you would receive a 301 response code unless a Host header matched the TFE_HOSTNAME.
+3. The Terraform Enterprise user interface displayed extra application version information (`1.2.0-e7044f8` instead of `1.2.0`). This has been fixed.
 
 ## Security
 1. Security vulnerabilities have been addressed and resolved in this update to enhance overall system protection.
