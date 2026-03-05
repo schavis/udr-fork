@@ -64,51 +64,23 @@ class PullRequest
   end
 
   def get_prs_from_github(pr_numbers)
-    STDERR.puts "#{@repo}: ========== get_prs_from_github CALLED with #{pr_numbers.size} PR numbers =========="
     pr_numbers.reverse.map do |pr_number|
-      # puts "retrieving pr #{pr_number}"
-      STDERR.puts "#{@repo}: >>>>>> About to fetch PR ##{pr_number} from GitHub API"
       pr = $github.pull_request(@repo.to_s, pr_number.to_i)
-      
-      # Debug: Print PR info
-      STDERR.puts "#{@repo}: Checking PR ##{pr.number} by @#{pr.user.login}"
-      STDERR.puts "#{@repo}: PR ##{pr.number} title: #{pr.title}"
-      if pr.body && pr.body.length > 0
-        STDERR.puts "#{@repo}: PR ##{pr.number} body preview: #{pr.body[0..200]}"
-      else
-        STDERR.puts "#{@repo}: PR ##{pr.number} has no body"
-      end
       
       # Check if this is a backport PR and find the original
       original_pr = find_original_pr(pr)
       
       if original_pr
-        STDERR.puts "#{@repo}: ✓ Linking backport PR ##{pr.number} with original PR ##{original_pr.number} (by @#{original_pr.user.login})"
         # Add original PR metadata to the backport PR object
         pr.define_singleton_method(:original_pr) { original_pr }
         pr
       else
-        STDERR.puts "#{@repo}: Using PR ##{pr.number} as-is (not a backport)"
         pr
       end
     end
   end
 
   def find_original_pr(pr)
-    # Debug: Show what we're checking
-    STDERR.puts "#{@repo}: --- Examining PR ##{pr.number} for backport patterns ---"
-    STDERR.puts "#{@repo}:     Title: #{pr.title}"
-    STDERR.puts "#{@repo}:     Author: @#{pr.user.login}"
-    
-    if pr.body && pr.body.length > 0
-      # Show first 10 lines of body to see the pattern
-      body_lines = pr.body.split("\n")[0..9]
-      STDERR.puts "#{@repo}:     Body (first 10 lines):"
-      body_lines.each { |line| STDERR.puts "#{@repo}:       | #{line}" }
-    else
-      STDERR.puts "#{@repo}:     Body: (empty)"
-    end
-    
     return nil unless pr.body
 
     # Look for auto-generated backport pattern (most common):
@@ -117,12 +89,9 @@ class PullRequest
     
     if auto_generated_match
       original_pr_number = auto_generated_match[1].to_i
-      STDERR.puts "#{@repo}: ✓✓✓ Found auto-generated pattern! PR ##{pr.number} is backport of ##{original_pr_number}"
       
       begin
         original_pr = $github.pull_request(@repo.to_s, original_pr_number)
-        STDERR.puts "#{@repo}: ✓✓✓ Successfully fetched original PR ##{original_pr_number} by @#{original_pr.user.login}"
-        STDERR.puts "#{@repo}: >>> REPLACING bot PR ##{pr.number} (@#{pr.user.login}) with original PR ##{original_pr_number} (@#{original_pr.user.login}) <<<"
         return original_pr
       rescue Octokit::NotFound
         STDERR.puts "#{@repo}: Warning - Original PR ##{original_pr_number} not found"
@@ -139,7 +108,6 @@ class PullRequest
     
     if backport_match
       original_pr_number = backport_match[1].to_i
-      STDERR.puts "#{@repo}: PR ##{pr.number} is a backport of ##{original_pr_number}"
       
       begin
         original_pr = $github.pull_request(@repo.to_s, original_pr_number)
@@ -155,7 +123,6 @@ class PullRequest
     
     if title_match
       original_pr_number = title_match[1].to_i
-      STDERR.puts "#{@repo}: PR ##{pr.number} (from title) is a backport of ##{original_pr_number}"
       
       begin
         original_pr = $github.pull_request(@repo.to_s, original_pr_number)
@@ -166,8 +133,6 @@ class PullRequest
       end
     end
 
-    # Not a backport
-    STDERR.puts "#{@repo}:     ⤷ No backport pattern detected - will use PR ##{pr.number} by @#{pr.user.login} as-is"
     nil
   end
 end
