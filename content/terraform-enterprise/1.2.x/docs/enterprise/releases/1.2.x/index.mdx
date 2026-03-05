@@ -158,7 +158,7 @@ Last required release: [v202406-1 (776)](/terraform/enterprise/releases/2024/v20
 Flexible Deployment Options `terraform-enterprise` container digest: amd64/linux sha256:65d3d4307055a0cfdd10727c0e173b303335686ceb9591be87ea7db19762d87a, arm64/linux sha256:55893acf7a16714aa6c38b96628a0d6277ee9884cb9b07aa89dfcea477d947e3
 
 ## Improvements
-1. Updated git to 2.53.0 built with OpenSSL to support X509 Policy Constraints extension in certificates
+1. Updated Git to version 2.53.0 built with OpenSSL to support the X509 policy constraints extension in certificates
 
 ## Bug Fixes
 1. Atlas configured to use Redis Sentinel without mTLS will now correctly connect to Redis when necessary. Previously Redis connections would fail due to a misconfiguration introduced in v1.1.0, but only when using Redis Sentinel without an mTLS certificate
