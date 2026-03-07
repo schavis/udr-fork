@@ -4,7 +4,7 @@ page_title: Namespace - HTTP API
 description: The /namespace endpoints allow for managing Consul Enterprise Namespaces.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-04T10:42:51-06:00
-last_modified: 2025-11-04T10:42:51-06:00
+last_modified: 2026-03-07T00:10:20.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -71,7 +71,7 @@ The corresponding CLI command is [`consul namespace create`](/consul/commands/na
 - `Meta` `(map<string|string>: <optional>)` - Specifies arbitrary KV metadata
   to associate with the namespace.
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 ### Sample Payload
 
@@ -177,7 +177,7 @@ The corresponding CLI command is [`consul namespace read`](/consul/commands/name
 
 ### Query Parameters
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 
@@ -282,7 +282,7 @@ The corresponding CLI command is [`consul namespace update`](/consul/commands/na
 - `Meta` `(map<string|string>: <optional>)` - Specifies arbitrary KV metadata
   to associate with the namespace.
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 ### Sample Payload
 
@@ -389,7 +389,7 @@ The corresponding CLI command is [`consul namespace delete`](/consul/commands/na
 
 ### Query Parameters
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 
@@ -441,7 +441,7 @@ $ curl --request DELETE \
 This endpoint lists all the Namespaces. The output will be filtered based on the
 privileges of the ACL token used for the request.
 
-@include 'legacy/http_api_results_filtered_by_acls.mdx'
+@include '../../../global/partials/legacy/http_api_results_filtered_by_acls.mdx'
 
 | Method | Path          | Produces           |
 | ------ | ------------- | ------------------ |
@@ -464,7 +464,7 @@ The corresponding CLI command is [`consul namespace list`](/consul/commands/name
 
 ### Query Parameters
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 

@@ -5,7 +5,7 @@ description: >-
   Consul ensures a consistent state using the Raft protocol. A quorum, or a majority of server agents with one leader, agree to state changes before committing to the state log. Learn how Raft works in Consul to ensure state consistency and how that state can be read with different consistency modes to balance read latency and consistency.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-04T10:42:51-06:00
-last_modified: 2026-01-30T11:22:36-08:00
+last_modified: 2026-03-07T00:11:33.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -56,7 +56,7 @@ Raft is fault tolerant up to the point where quorum is available. For example, a
 
 When a quorum of nodes is unavailable, it is impossible to process log entries or reason about peer membership. Typically this situation requires manual intervention to re-establish a leader.
 
-@include 'tables/compare/architecture/quorum-size.mdx'
+@include '../../../global/partials/tables/compare/architecture/quorum-size.mdx'
 
 For more information, refer to [quorum size](/concept/reliability#deployment-size), which summarizes the potential cluster size options and their fault tolerance.
 

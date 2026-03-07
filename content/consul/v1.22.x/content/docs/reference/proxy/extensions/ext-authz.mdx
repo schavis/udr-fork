@@ -4,7 +4,7 @@ page_title: External authorization extension configuration reference
 description: Learn how to configure the ext-authz Envoy extension, which is a builtin Consul extension that configures Envoy proxies to request authorization from an external service.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-05T11:02:51-05:00
-last_modified: 2025-11-05T11:02:51-05:00
+last_modified: 2026-03-07T00:13:46.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -502,7 +502,7 @@ Specifies a set of rules for matching client request headers. The request to the
 
 The following table describes the matching rules you can configure in the `AllowHeaders` field:
 
-@include 'legacy/envoy_ext_rule_matcher.mdx'
+@include '../../../global/partials/legacy/envoy_ext_rule_matcher.mdx'
 
 ### `Arguments{}.Config{}.HttpService{}.AuthorizationRequest{}.HeadersToAdd[]`
 
@@ -542,7 +542,7 @@ Specifies a set of rules for matching authorization response headers. Envoy adds
 
 The following table describes the matching rules you can configure in the `AllowedUpstreamHeaders` field:
 
-@include 'legacy/envoy_ext_rule_matcher.mdx'
+@include '../../../global/partials/legacy/envoy_ext_rule_matcher.mdx'
 
 ### `Arguments{}.Config{}.HttpService{}.AuthorizationResponse{}.AllowedUpstreamHeadersToAppend[]`
 
@@ -555,7 +555,7 @@ Specifies a set of rules for matching authorization response headers. Envoy appe
 
 The following table describes the matching rules you can configure in the `AllowedUpstreamHeadersToAppend` field:
 
-@include 'legacy/envoy_ext_rule_matcher.mdx'
+@include '../../../global/partials/legacy/envoy_ext_rule_matcher.mdx'
 
 ### `Arguments{}.Config{}.HttpService{}.AuthorizationResponse{}.AllowedClientHeaders[]`
 
@@ -574,7 +574,7 @@ Specifies a set of rules for matching client response headers. Envoy adds any he
 
 The following table describes the matching rules you can configure in the `AllowedClientHeaders` field:
 
-@include 'legacy/envoy_ext_rule_matcher.mdx'
+@include '../../../global/partials/legacy/envoy_ext_rule_matcher.mdx'
 
 ### `Arguments{}.Config{}.HttpService{}.AuthorizationResponse{}.AllowedClientHeadersOnSuccess[]`
 
@@ -587,7 +587,7 @@ Specifies a set of rules for matching client response headers. Envoy adds header
 
 The following table describes the matching rules you can configure in the `AllowedClientHeadersOnSuccess` field:
 
-@include 'legacy/envoy_ext_rule_matcher.mdx'
+@include '../../../global/partials/legacy/envoy_ext_rule_matcher.mdx'
 
 ### `Arguments{}.Config{}.HttpService{}.AuthorizationResponse{}.DynamicMetadataFromHeaders[]`
 
@@ -600,7 +600,7 @@ Specifies a set of rules for matching authorization response headers. Envoy emit
 
 The following table describes the matching rules you can configure in the `DynamicMetadataFromHeaders` field:
 
-@include 'legacy/envoy_ext_rule_matcher.mdx'
+@include '../../../global/partials/legacy/envoy_ext_rule_matcher.mdx'
 
 ### `Arguments{}.Config{}.IncludePeerCertificate`
 

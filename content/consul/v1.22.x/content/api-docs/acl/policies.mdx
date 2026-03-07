@@ -4,7 +4,7 @@ page_title: ACL Policies - HTTP API
 description: The /acl/policy endpoints manage Consul's ACL policies.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-05T11:02:51-05:00
-last_modified: 2025-11-05T11:02:51-05:00
+last_modified: 2026-03-07T00:12:43.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -61,7 +61,7 @@ The corresponding CLI command is [`consul acl policy create`](/consul/commands/a
   This field takes precedence over the `ns` query parameter,
   one of several [other methods to specify the namespace](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 ### Sample Payload
 
@@ -176,7 +176,7 @@ The corresponding CLI command is [`consul acl policy read -name=<string>`](/cons
 - `ns` `(string: "")` <EnterpriseAlert inline /> - Specifies the namespace of the policy you lookup.
   You can also [specify the namespace through other methods](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 
@@ -250,7 +250,7 @@ The corresponding CLI command is [`consul acl policy update`](/consul/commands/a
   This field takes precedence over the `ns` query parameter,
   one of several [other methods to specify the namespace](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 ### Sample Payload
 
@@ -317,7 +317,7 @@ The corresponding CLI command is [`consul acl policy delete`](/consul/commands/a
 - `ns` `(string: "")` <EnterpriseAlert inline /> - Specifies the namespace of the policy you delete.
   You can also [specify the namespace through other methods](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 
@@ -358,7 +358,7 @@ The corresponding CLI command is [`consul acl policy list`](/consul/commands/acl
   The namespace may be specified as '\*' to return results for all namespaces.
   You can also [specify the namespace through other methods](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 

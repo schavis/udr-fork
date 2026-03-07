@@ -6,7 +6,7 @@ description: |-
   Consul.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-04T10:42:51-06:00
-last_modified: 2026-01-23T13:15:15-08:00
+last_modified: 2026-03-07T00:10:06.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -27,7 +27,7 @@ while there is no leader elected. The agent performs active
 [anti-entropy](/consul/docs/concept/consistency), so in most situations
 everything will be in sync within a few seconds.
 
-@include 'legacy/http_api_results_filtered_by_acls.mdx'
+@include '../../../global/partials/legacy/http_api_results_filtered_by_acls.mdx'
 
 | Method | Path              | Produces           |
 | ------ | ----------------- | ------------------ |
@@ -688,7 +688,7 @@ The `/agent/service/register` endpoint supports camel case and _snake case_ for 
   `false`. See [anti-entropy syncs](/consul/docs/concept/consistency) for
   additional information.
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 #### Connect Structure
 
@@ -775,7 +775,7 @@ The corresponding CLI command is [`consul services deregister`](/consul/commands
 - `ns` `(string: "")` <EnterpriseAlert inline /> - Specifies the namespace of the service you deregister.
   You can also [specify the namespace through other methods](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 

@@ -5,7 +5,7 @@ description: >-
   Use the OIDC auth method type to authenticate to Consul through a web browser with an OpenID Connect provider. Learn how to configure the auth method parameters using this reference page and example configuration.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-05T11:02:51-05:00
-last_modified: 2025-11-05T11:02:51-05:00
+last_modified: 2026-03-07T00:13:36.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -33,7 +33,7 @@ Both the [`jwt`](/consul/docs/secure/acl/auth-method/jwt) and the
 [`oidc`](/consul/docs/secure/acl/auth-method/oidc) auth method types allow additional
 processing of the claims data in the JWT.
 
-@include 'legacy/jwt_or_oidc.mdx'
+@include '../../../global/partials/legacy/jwt_or_oidc.mdx'
 
 ## Config parameters
 
@@ -264,4 +264,4 @@ be tricky to debug why things aren't working. Some tips for setting up OIDC:
   claims are what you expect. Since claims data is logged verbatim and may
   contain sensitive information, this option should not be used in production.
 
-@include 'legacy/jwt_claim_mapping_details.mdx'
+@include '../../../global/partials/legacy/jwt_claim_mapping_details.mdx'

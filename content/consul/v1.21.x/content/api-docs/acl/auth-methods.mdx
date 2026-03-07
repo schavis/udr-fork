@@ -4,7 +4,7 @@ page_title: ACL Auth Methods - HTTP API
 description: The /acl/auth-method endpoints manage Consul's ACL Auth Methods.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-04T10:42:51-06:00
-last_modified: 2025-11-04T10:42:51-06:00
+last_modified: 2026-03-07T00:09:52.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -111,7 +111,7 @@ The corresponding CLI command is [`consul acl auth-method create`](/consul/comma
     prefixed-${serviceaccount.name}
     ```
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 ### Sample Payload
 
@@ -184,7 +184,7 @@ The corresponding CLI command is [`consul acl auth-method read`](/consul/command
 - `ns` `(string: "")` <EnterpriseAlert inline /> - Specifies the namespace of the auth method you look up.
   You can also [specify the namespace through other methods](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 
@@ -302,7 +302,7 @@ The corresponding CLI command is [`consul acl auth-method update`](/consul/comma
     prefixed-${serviceaccount.name}    
     ```
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 ### Sample Payload
 
@@ -379,7 +379,7 @@ The corresponding CLI command is [`consul acl auth-method delete`](/consul/comma
 - `ns` `(string: "")` <EnterpriseAlert inline /> - Specifies the namespace of the auth method you delete.
   You can also [specify the namespace through other methods](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 
@@ -422,7 +422,7 @@ The corresponding CLI command is [`consul acl auth-method list`](/consul/command
 
   The namespace may be specified as '\*' and then results are returned for all namespaces.
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ## Sample Request
 

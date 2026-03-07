@@ -6,7 +6,7 @@ description: |-
   in Consul.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-05T11:02:51-05:00
-last_modified: 2025-11-05T11:02:51-05:00
+last_modified: 2026-03-07T00:12:48.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -25,7 +25,7 @@ use the [`/agent/check`](/consul/api-docs/agent/check) endpoints.
 
 This endpoint returns the checks specific to the node provided on the path.
 
-@include 'legacy/http_api_results_filtered_by_acls.mdx'
+@include '../../../global/partials/legacy/http_api_results_filtered_by_acls.mdx'
 
 | Method | Path                 | Produces           |
 | ------ | -------------------- | ------------------ |
@@ -119,7 +119,7 @@ the following selectors and filter operations being supported:
 This endpoint returns the checks associated with the service provided on the
 path.
 
-@include 'legacy/http_api_results_filtered_by_acls.mdx'
+@include '../../../global/partials/legacy/http_api_results_filtered_by_acls.mdx'
 
 | Method | Path                      | Produces           |
 | ------ | ------------------------- | ------------------ |
@@ -209,7 +209,7 @@ This endpoint returns the service instances providing the service indicated on t
 Users can also build in support for dynamic load balancing and other features by
 incorporating the use of health checks.
 
-@include 'legacy/http_api_results_filtered_by_acls.mdx'
+@include '../../../global/partials/legacy/http_api_results_filtered_by_acls.mdx'
 
 | Method | Path                       | Produces           |
 | ------ | -------------------------- | ------------------ |
@@ -424,7 +424,7 @@ This will include both proxies and native integrations. A service may
 register both mesh-capable and incapable services at the same time,
 so this endpoint may be used to filter only the mesh-capable endpoints.
 
-@include 'legacy/http_api_results_filtered_by_acls.mdx'
+@include '../../../global/partials/legacy/http_api_results_filtered_by_acls.mdx'
 
 | Method | Path                       | Produces           |
 | ------ | -------------------------- | ------------------ |
@@ -440,7 +440,7 @@ Parameters and response format are the same as
 This endpoint returns the service instances providing an [ingress
 gateway](/consul/docs/north-south/ingress-gateway) for a service in a given datacenter.
 
-@include 'legacy/http_api_results_filtered_by_acls.mdx'
+@include '../../../global/partials/legacy/http_api_results_filtered_by_acls.mdx'
 
 | Method | Path                       | Produces           |
 | ------ | -------------------------- | ------------------ |
@@ -456,7 +456,7 @@ endpoint does not support the `peer` query parameter and the [streaming backend]
 
 This endpoint returns the checks in the state provided on the path.
 
-@include 'legacy/http_api_results_filtered_by_acls.mdx'
+@include '../../../global/partials/legacy/http_api_results_filtered_by_acls.mdx'
 
 | Method | Path                   | Produces           |
 | ------ | ---------------------- | ------------------ |

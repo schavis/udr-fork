@@ -4,7 +4,7 @@ page_title: ACL Tokens - HTTP API
 description: The /acl/token endpoints manage Consul's ACL Tokens.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-04T10:42:51-06:00
-last_modified: 2025-11-04T10:42:51-06:00
+last_modified: 2026-03-07T00:09:59.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -122,7 +122,7 @@ The corresponding CLI command is [`consul acl token create`](/consul/commands/ac
   This field takes precedence over the `ns` query parameter,
   one of several [other methods to specify the namespace](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 ### Sample Payload
 
@@ -223,7 +223,7 @@ The corresponding CLI command is [`consul acl token read`](/consul/commands/acl/
 - `expanded` `(bool: false)` - If this field is set, the contents of all policies and
   roles affecting the token will also be returned.
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 
@@ -505,7 +505,7 @@ The corresponding CLI command is [`consul acl token update`](/consul/commands/ac
   This field takes precedence over the `ns` query parameter,
   one of several [other methods to specify the namespace](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 ### Sample Payload
 
@@ -601,7 +601,7 @@ The corresponding CLI command is [`consul acl token clone`](/consul/commands/acl
   This field takes precedence over the `ns` query parameter,
   one of several [other methods to specify the namespace](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-body-options-partition.mdx'
+@include '../../../global/partials/legacy/http-api-body-options-partition.mdx'
 
 ### Sample Payload
 
@@ -680,7 +680,7 @@ The corresponding CLI command is [`consul acl token delete`](/consul/commands/ac
 - `ns` `(string: "")` <EnterpriseAlert inline /> - Specifies the namespace of the token you delete.
   You can also [specify the namespace through other methods](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 
@@ -737,7 +737,7 @@ The corresponding CLI command is [`consul acl token list`](/consul/commands/acl/
   The namespace may be specified as '\*' to return results for all namespaces.
   You can also [specify the namespace through other methods](#methods-to-specify-namespace).
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 

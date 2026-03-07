@@ -6,7 +6,7 @@ description: |-
   services, checks, list members, and more.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-04T10:42:51-06:00
-last_modified: 2025-11-04T10:42:51-06:00
+last_modified: 2026-03-07T00:10:04.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -235,7 +235,7 @@ to the nature of gossip, this is eventually consistent: the results may differ
 by agent. The strongly consistent view of nodes is instead provided by
 `/v1/catalog/nodes`.
 
-@include 'legacy/http_api_results_filtered_by_acls.mdx'
+@include '../../../global/partials/legacy/http_api_results_filtered_by_acls.mdx'
 
 | Method | Path             | Produces           |
 | ------ | ---------------- | ------------------ |
@@ -265,7 +265,7 @@ The corresponding CLI command is [`consul members`](/consul/commands/members).
   network segment). When querying a server, setting this to the special string `_all`
   will show members in all segments.
 
-@include 'legacy/http-api-query-parms-partition.mdx'
+@include '../../../global/partials/legacy/http-api-query-parms-partition.mdx'
 
 ### Sample Request
 

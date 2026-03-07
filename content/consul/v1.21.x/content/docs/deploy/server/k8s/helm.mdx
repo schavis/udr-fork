@@ -5,7 +5,7 @@ description: >-
   You can use Helm to configure Consul on Kubernetes deployments. Learn how to add the official Helm chart to your repository and the parameters that enable the service mesh, CNI plugins, Consul UI, and Consul HTTP API.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-11-04T10:42:51-06:00
-last_modified: 2025-11-04T10:42:51-06:00
+last_modified: 2026-03-07T00:11:39.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -65,7 +65,7 @@ Using the Helm Chart requires Helm version 3.6+. Visit the [Helm website](https:
     kube-system       Active   18h
     ```
 
-@include 'alerts/k8s-namespace.mdx'
+@include '../../../global/partials/alerts/k8s-namespace.mdx'
 
 1. Install Consul on Kubernetes using Helm. The Helm chart does everything to set up your deployment: after installation, agents automatically form clusters, elect leaders, and run the necessary agents.
    
