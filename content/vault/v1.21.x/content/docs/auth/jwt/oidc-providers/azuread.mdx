@@ -106,7 +106,7 @@ You should set up a [Vault policy](/vault/tutorials/policies/policies) for the A
       canonical_id="vault_external_group_id"
    ```
 
-If the display name is used, Vault will not raise an error, but identity policies associated with the group will not be applied.
+If the Azure AD **objectId** is not used as the group alias name, Vault will not raise an error, but identity policies associated with the group will not be applied.
 
 
 ### Optional azure-specific configuration
