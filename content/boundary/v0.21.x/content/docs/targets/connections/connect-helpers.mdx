@@ -14,10 +14,14 @@ last_modified: 2025-11-18T17:04:41-05:00
 Boundary includes connect helpers that automatically accept host key prompts for you to help facilitate connections.
 These are written as `boundary connect <subcommand>` and are supported for the following connection types:
 
+- Cassandra
 - HTTP
 - Kubernetes
+- Mongo
+- MySQL
 - PostgreSQL
 - RDP
+- Redis
 - SSH
 
 If you want to pass additional flags to the client, you can add them to the command line separated by a double dash.
@@ -34,6 +38,14 @@ For example, besides the default style `ssh`, the SSH connect helper supports a 
 One advantage to styles is that Boundary can provide information to the client in a format that makes sense.
 For example, the `-username` flag is used to specify a username other than the currently logged-in user.
 This ensures that regardless of the `-style` you choose, the username is properly passed to the executed client, and you don't have to figure out the syntax for yourself.
+
+## Cassandra connect helper
+
+The Cassandra connect helper authorizes a session against a target and uses `cqlsh` to invoke a Cassandra client to automatically connect with the appropriate connection parameters and credentials.
+Only username/password credentials are supported.
+Only configurations using Cassandra's `PasswordAuthenticator` are supported.
+
+CHECK DOCS
 
 ## HTTP connect helper
 
@@ -105,6 +117,18 @@ The default scheme is `https`.
 The only supported style for the Kubernetes helper is `kubectl`.
 
 For more information, refer to the [`connect kube` command documenatation](/boundary/docs/commands/connect/kube).
+
+## Mongo connect helper
+
+The Mongo helper authorizes a session against a target and uses `mongosh` to invoke a MongoDB client to automatically connect with the appropriate connection parameters and credentials.
+
+CHECK DOCS
+
+## MySQL connect helper
+
+The MySQL helper authorizes a session against a target and invokes a MySQL client to automatically connect with the appropriate connection parameters and credentials.
+
+CHECK DOCS
 
 ## PostgreSQL connect helper
 
@@ -190,6 +214,11 @@ The RDP helper supports the following flag:
 The RDP helper supports the styles `mstsc` and `open`.
 
 For more information, refer to the [`connect rdp` command documenatation](/boundary/docs/commands/connect/rdp).
+
+## Redis connect helper
+
+The Redis helper authorizes a session against a target and invokes a Redis client to automatically connect with the appropriate connection parameters and credentials.
+Only username/password credentials are supported.
 
 ## SSH connect helper
 
