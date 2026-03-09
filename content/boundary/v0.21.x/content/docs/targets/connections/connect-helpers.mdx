@@ -45,7 +45,19 @@ The Cassandra connect helper authorizes a session against a target and uses `cql
 Only username/password credentials are supported.
 Only configurations using Cassandra's `PasswordAuthenticator` are supported.
 
-CHECK DOCS
+The Cassandra helper supports the following flags:
+
+- `-keyspace` `(string: "")` - The keyspace name that you want to pass through to the client.
+You can also specify the keyspace name using the **BOUNDARY_CONNECT_KEYSPACE** environment variable.
+- `-style`  `(string: "")` - How the CLI attempts to invoke a Cassandra client.
+This value also sets a suitable default for `-exec`, if you did not specify a value.
+The default and currently-understood value is `cqlsh`.
+You can also specify how the CLI attempts to invoke a Cassandra client using the **BOUNDARY_CONNECT_CASSANDRA_STYLE** environment variable.
+- `-username`  `(string: "")` - The username you want to pass through to the client.
+This value may be overridden by credentials sourced from a credential store.
+You can also specify a username using the **BOUNDARY_CONNECT_USERNAME** environment variable.
+
+For more information, refer to the [`connect cassandra` command documentation](/boundary/docs/commands/connect/cassandra).
 
 ## HTTP connect helper
 
@@ -82,7 +94,7 @@ The default scheme is `https`.
 - `style`: Specifies how the CLI attempts to invoke an HTTP client.
 The only supported style for the HTTP helper is `curl`.
 
-For more information, refer to the [`connect http` command documenatation](/boundary/docs/commands/connect/http).
+For more information, refer to the [`connect http` command documentation](/boundary/docs/commands/connect/http).
 
 ## Kubernetes connect helper
 
@@ -116,7 +128,7 @@ The default scheme is `https`.
 - `style`: Specifies how the CLI attempts to invoke a Kubernetes client.
 The only supported style for the Kubernetes helper is `kubectl`.
 
-For more information, refer to the [`connect kube` command documenatation](/boundary/docs/commands/connect/kube).
+For more information, refer to the [`connect kube` command documentation](/boundary/docs/commands/connect/kube).
 
 ## Mongo connect helper
 
@@ -180,7 +192,7 @@ The PostgreSQL helper supports the following flags:
 The only supported style for the PostgreSQL helper is `psql`.
 - `username`: Specifies the username you want to pass through to the client.
 
-For more information, refer to the [`connect postgres` command documenatation](/boundary/docs/commands/connect/postgres).
+For more information, refer to the [`connect postgres` command documentation](/boundary/docs/commands/connect/postgres).
 
 ## RDP connect helper
 
@@ -213,7 +225,7 @@ The RDP helper supports the following flag:
 - `style`: Specifies how the CLI attempts to inovke an RDP client.
 The RDP helper supports the styles `mstsc` and `open`.
 
-For more information, refer to the [`connect rdp` command documenatation](/boundary/docs/commands/connect/rdp).
+For more information, refer to the [`connect rdp` command documentation](/boundary/docs/commands/connect/rdp).
 
 ## Redis connect helper
 
@@ -254,4 +266,4 @@ If you include additional arguments, you must append them to the command and sep
 The SSH helper supports the styles `ssh` and `putty`.
 - `username`: Specifies the username you want to pass through to the client.
 
-For more information, refer to the [`connect ssh` command documenatation](/boundary/docs/commands/connect/ssh).
+For more information, refer to the [`connect ssh` command documentation](/boundary/docs/commands/connect/ssh).
