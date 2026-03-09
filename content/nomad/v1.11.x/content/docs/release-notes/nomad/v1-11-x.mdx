@@ -19,14 +19,14 @@ We are pleased to announce the following Nomad updates.
 
 **Nomad snapshot agent**
 
-Saving snapshots no longer requires a management token. We added find-grained
+Saving snapshots no longer requires a management token. We added fine-grained
 ACL capabilities to the `operator` ACL policy block for saving a snapshot and
 reading an Enterprise license. 
 
 - ACL policy specification's ["Operator rules"
   section](/nomad/docs/other-specifications/acl-policy#operator-rules).
 - If ACLs are enabled, the [`nomad operator snapshot agent`
-  command](/nomad/commands/operator/snapshot/agent) requires a token with with
+  command](/nomad/commands/operator/snapshot/agent) requires a token with
   the `operator:write` policy or both the `operator:snapshot-save` and
   `operator:license-read` capabilities.
 - If ACLs are enabled, the [`nomad operator snapshot save`
