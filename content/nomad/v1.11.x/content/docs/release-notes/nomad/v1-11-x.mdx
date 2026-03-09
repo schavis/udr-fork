@@ -34,7 +34,7 @@ reading an Enterprise license.
   `operator:write` policy or the `operator:snapshot-save` capability.
 - If ACLs are enabled, the [`nomad license get`
   command](/nomad/commands/license/get) requires a token with the
-  `operator:read`policy or `operator:license-read` capability.
+  `operator:read` policy or `operator:license-read` capability.
 
 **Keyring rotation**
 
@@ -77,7 +77,7 @@ environment variables. Nomad looks for the environment variable `CONSUL_HTTP_TOK
 the [`consul.token` configuration
 parameter](/nomad/docs/configuration/consul#token) for details.
 
-### New TLS telemetry metric
+### New TLS telemetry metrics
 
 We added the `nomad.agent.tls.cert.expiration_seconds` and
 `nomad.agent.tls.ca.expiration_seconds` metrics. Refer to Metrics reference's
