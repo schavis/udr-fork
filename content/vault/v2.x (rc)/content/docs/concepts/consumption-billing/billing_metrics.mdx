@@ -1,0 +1,46 @@
+---
+layout: docs
+page_title: Secret engine consumption metrics
+description: |-
+  Learn how Vault calculates billing metrics returned by the sys/billing/overview endpoint.
+---
+
+# Secret engine consumption metrics
+
+Vault calculates consumption metrics about secret engine use that help shape the
+monthly billing for your Vault Enterprise deployment. The two categories of
+secret engine usage metrics are highwater metrics and cumulative use metrics.
+
+## High watermark metrics
+
+Vault calculates monthly high watermark metrics by finding the maximum value
+seen for each metric during the month. Every 10 minutes, Vault compares the
+current value and the stored high watermark value for each metric, and stores
+the greater of the two values. 
+
+Vault calculates and returns the following high watermark metrics:
+
+| Metric name                               | Description                                              |
+|-------------------------------------------|----------------------------------------------------------|
+| dynamic_roles                             | The maximum number of dynamic roles created during the month.
+| static_secrets                            | The maximum number of static secrets (ie. kv secrets) created during the month.
+| auto_rotated_roles                        | The maximum number of static roles created during the month.
+| managed_keys                              | The maximum number of managed keys (ie. TOTP, KMSE keys) created during the month.
+| external_plugins                          | The maximum number of unique external plugin  during the month. A unique plugin is defined by its name and version. 
+
+
+## Cumulative metrics
+
+Vault calculates cumulative monthly metrics by incrementing the count for each
+metric every time an event occurs during the month. Vault saves the current
+metric value to permament storage every 10 minutes.
+
+Vault calculates and returns the following cumulative metrics:
+
+| Metric name                               | Description                                              |
+|-------------------------------------------|----------------------------------------------------------|
+| pki_units                                 | Sum of the normalized value of PKI ceritifcates issued during the month. A normalized unit is calculated by dividing the duration of the certificate by 730 hours.
+| ssh_units                                 | The sum of the normalized value of SSH certificates issued during the month and SSH one time passwords issued during the month. A normalized unit is calculated by dividing the duration of the certificate or password by 730 hours.
+| data_protection_calls                     | The total number of data protection calls consumed during the month.
+
+
