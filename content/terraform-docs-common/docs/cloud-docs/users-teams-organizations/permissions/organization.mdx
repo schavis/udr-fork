@@ -249,11 +249,28 @@ This permission implicitly grants access to read all workspaces and projects, wh
 
 The following permissions control access to the organization's [private registry](/terraform/cloud-docs/registry).
 
+<!-- BEGIN: TFC:only name:reg-artifact-copy -->
+
 | Permission name | Description |
 |-----------------|-------------|
 | [Manage modules](#manage-private-modules) | Publish and delete modules in the private registry |
 | [Manage providers](#manage-private-providers) | Publish and delete providers in the private registry |
 | [Manage Stack component configurations](#manage-stack-component-configurations) | Publish and delete Stack component configurations in the private registry |
+| [Assign project tags to modules and providers](#assign-project-tags-to-modules-and-providers) | Lets team members assign project tags to modules and providers in the private registry |
+| [Assign reserved keys to module and provider versions](#assign-reserved-keys-to-module-and-provider-version) | Lets team members assign reserved keys to module and provider versions in the private registry |
+
+<!-- END: TFC:only name:reg-artifact-copy -->
+
+<!-- BEGIN: TFEnterprise:only name:no-reg-artifact-copy -->
+
+| Permission name | Description |
+|-----------------|-------------|
+| [Manage modules](#manage-private-modules) | Publish and delete modules in the private registry |
+| [Manage providers](#manage-private-providers) | Publish and delete providers in the private registry |
+| [Manage Stack component configurations](#manage-stack-component-configurations) | Publish and delete Stack component configurations in the private registry |
+
+<!-- END: TFEnterprise:only name:no-reg-artifact-copy -->
+
 
 ### Manage private modules
 
@@ -269,6 +286,18 @@ Allow members to publish and delete providers in the organization's private regi
 Allow members to [publish and delete Stack component configurations](/terraform/cloud-docs/registry/publish-stack-configuration) in the organization's private registry.
 
 <!-- BEGIN: TFC:only name:public-registry -->
+
+### Assign project tags to modules and providers
+
+Enable this setting to allow team members to attach existing project tags to modules and providers in the registry. Use these tags to organize registry artifacts. Refer to [Manage projects](/terraform/cloud-docs/projects/manage) for more information.
+
+### Assign reserved keys to module and provider versions
+
+Enable this setting to allow team members to assign reserved tag keys to module and provider versions in the registry. The  **Registry environment tag** option must be enabled on the reserved tag keys to attach them to registry artifact versions. Refer to [Control access to registry artifacts](/terraform/cloud-docs/users-teams-organizations/organizations/manage-reserved-tags#control-access-to-registry-artifacts) for more information.
+
+These tags only apply to registry artifact versions, such as the specific version of a module or provider, projects, and workspaces. Refer to [Create and manage reserved tag keys](/terraform/cloud-docs/users-teams-organizations/organizations/manage-reserved-tags) for more information.
+
+Use these tags to gate access to modules and providers based on tag. Refer to [Use artifacts from the registry](/terraform/cloud-docs/registry/using#find-artifacts) for more information.
 
 ## Public registry permissions
 

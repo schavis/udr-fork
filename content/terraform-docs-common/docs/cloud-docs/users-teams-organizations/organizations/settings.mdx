@@ -208,6 +208,18 @@ HCP Terraform can perform the following types of health assessments:
 
 Refer to [Health](/terraform/cloud-docs/workspaces/health) in the workspaces documentation for instructions on how to use drift detection and continuous validation features. 
 
+<!-- BEGIN: TFC:only name:registry-settings-proj-tags -->
+
+@include 'private-beta-feature.mdx'
+
+## Registry settings
+
+Enable the **Control usage with project tags** setting to use project tags to restrict access to modules and providers in the registry. When enabled, HCP Terraform only allows workspaces to consume specific module and provider versions when the artifacts match the tags attached to the project. Refer to [Manage artifact tags](/terraform/cloud-docs/registry/manage/tags) for more information.
+
+After enabling the setting, you can specify the projects you want to restrict access to registry artifacts for in the **Projects** field.
+
+<!-- END: TFC:only name:registry-settings-proj-tags -->
+
 ## Runs
 
 The **Runs** page shows all Terraform runs with that are currently in progress, need attention, or are on hold in your organization's workspaces. Refer to the following topics for more information:
@@ -239,7 +251,7 @@ Refer to the [policy enforcement documentation](/terraform/cloud-docs/workspaces
 @include 'tfc-package-callouts/policies.mdx'
 <!-- END: TFC:only name:pnp-callout -->
 
-You can create and view sets of policies in the **Policy sets** page. You can enforce policies in a set globally or on specific [projects](/terraform/cloud-docs/projects/manage) and workspaces. Stacks do not support executing policies. 
+You can create and view sets of policies in the **Policy sets** page. You can enforce policies in a set globally or on specific [projects](/terraform/cloud-docs/projects/manage) and workspaces. Stacks do not support executing policies.
 
 You can create policy sets through the Terraform API, by connecting a VCS repository containing policies, or directly in HCP Terraform. To create policies and policy sets, you must have [permission to manage policies](/terraform/cloud-docs/users-teams-organizations/permissions#organization-permissions).
 
