@@ -45,6 +45,12 @@ The Cassandra connect helper authorizes a session against a target and uses `cql
 Only username/password credentials are supported.
 Only configurations using Cassandra's `PasswordAuthenticator` are supported.
 
+The following command executes the Cassandra client and establishes the connection through Boundary:
+
+```shell-session
+$ boundary connect cassandra -target-id ttcp_1234567890
+```
+
 The Cassandra helper supports the following flags:
 
 - `-keyspace` `(string: "")` - The keyspace name that you want to pass through to the client.
@@ -134,13 +140,54 @@ For more information, refer to the [`connect kube` command documentation](/bound
 
 The Mongo helper authorizes a session against a target and uses `mongosh` to invoke a MongoDB client to automatically connect with the appropriate connection parameters and credentials.
 
-CHECK DOCS
+The following command executes the MongoDB client and establishes the connection through Boundary:
+
+```shell-session
+$ boundary connect mongo -target-id ttcp_1234567890
+```
+
+The Mongo connect helper supports the following flags:
+
+- `-authentication-database` `(string: "")` - Specifies the authentication database for MongoDB.
+If you omit this value, `mongosh` defaults `authSource` to the `dbname`.
+If there is no specified `dbname`, it defaults to `admin`.
+You can also specify the authentication database using the **BOUNDARY_CONNECT_MOGO_AUTHENTICATION_DATABASE** environment variable.
+- `dbname` `(string: "")` - Specifies the database name to pass through to the client.
+You can also specify the database name using the **BOUNDARY_CONNECT_DBNAME** environment variable.
+- `-style` `(string: "")` - Specifies how the CLI attempts to invoke a MogoDB client.
+Currently, only `mogosh` is supported.
+You can also specify how the CLI attempts to invoke a MogoDB client using the **BOUNDARY_CONNECT_MOGO_STYLE** environment variable.
+- `-username` `(string: "")` - Specifies the username to pass through to the client.
+This value may be overridden by credentials sourced from a credential store.
+You can also specify the username using the **BOUNDARY_CONNECT_USERNAME** environment variable.
+
+For more information, refer to the [`connect mongo` command documentation](/boundary/docs/commands/connect/mongo).
 
 ## MySQL connect helper
 
 The MySQL helper authorizes a session against a target and invokes a MySQL client to automatically connect with the appropriate connection parameters and credentials.
 
-CHECK DOCS
+The following command executes the MySQL client and establishes the connection through Boundary:
+
+```shell-session
+$ boundary connect mysql -target-id ttcp_1234567890
+```
+
+The MySQL helper supports the following flags:
+
+- `-dbname` `(string: "")` - The database name you want to pass through to the client.
+You can also specify the database name using the **BOUNDARY_CONNECT_DBNAME** environment variable.
+
+- `-style`  `(string: "")` - How the CLI attempts to invoke a MySQL client.
+This value also sets a suitable default for `-exec`, if you did not specify a value.
+The default and currently-understood value is `mysql`.
+You can also specify how the CLI attempts to invoke a MySQL client using the **BOUNDARY_CONNECT_MYSQL_STYLE** environment variable.
+
+- `-username`  `(string: "")` - The username you want to pass through to the client.
+This value may be overridden by credentials sourced from a credential store.
+You can also specfiy a username using the **BOUNDARY_CONNECT_USERNAME** environment variable.
+
+For more information, refer to the [`connect mysql` command documentation](/boundary/docs/commands/connect/mysql).
 
 ## PostgreSQL connect helper
 
@@ -231,6 +278,23 @@ For more information, refer to the [`connect rdp` command documentation](/bounda
 
 The Redis helper authorizes a session against a target and invokes a Redis client to automatically connect with the appropriate connection parameters and credentials.
 Only username/password credentials are supported.
+
+The following command executes the Redis client and establishes the connection through Boundary:
+
+```shell-session
+$ boundary connect redis -target-id ttcp_1234567890
+```
+
+The Redis connect helper supports the following flags:
+
+- `-style` `(string: "")` - Specifies how the CLI attempts to invoke a Redis client.
+Currently, only `redis-cli` is supported.
+You can also specify how the CLI attempts to invoke a Redis client using the **BOUNDARY_CONNECT_REDIS_STYLE** environment variable.
+- `-username` `(string: "")` - Specifies the username to pass through to the client.
+This value may be overridden by credentials sourced from a credential store.
+You can also specify the username using the **BOUNDARY_CONNECT_USERNAME** environment variable.
+
+For more information, refer to the [`connect redis` command documentation](/boundary/docs/commands/connect/redis).
 
 ## SSH connect helper
 
