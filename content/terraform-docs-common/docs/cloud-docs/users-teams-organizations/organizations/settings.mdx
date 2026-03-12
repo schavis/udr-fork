@@ -9,7 +9,7 @@ last_modified: 2026-03-12T02:37:44.000Z
 
 # Organization settings
 
-This topic contains reference information about settings you can configure for organizations. [Organization owners][owners] can view and manage the entire list of organization settings. Refer to [Organization Permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization) for details. For information about how to create and manage organizations, refer to [Organizations overview](/terraform/cloud-docs/users-teams-organizations/organizations).
+This topic contains reference information about settings you can configure for organizations. Organization owners can view and manage the entire list of organization settings. Refer to [Organization permissions](/terraform/cloud-docs/users-teams-organizations/permissions/organization) for details. For information about how to create and manage organizations, refer to [Organizations overview](/terraform/cloud-docs/users-teams-organizations/organizations).
 
 <!-- BEGIN: TFC:only name:hcp-eu -->
 
@@ -231,7 +231,7 @@ You can toggle the **Enable cost estimation for all workspaces** option to enabl
 @include 'tfc-package-callouts/policies.mdx'
 <!-- END: TFC:only name:pnp-callout -->
 
-You can create and view policies on the **Policies** page. Policies define and enforce rules for runs in workspaces.<!-- BEGIN: TFC:only name:stacks-tfe -->Stacks do not support executing policies.<!-- END: TFC:only name:stacks-tfe --> 
+You can create and view policies on the **Policies** page. Policies define and enforce rules for runs in workspaces.<!-- BEGIN: TFC:only name:stacks-tfe --> Stacks do not support executing policies.<!-- END: TFC:only name:stacks-tfe --> 
 
 You can policies using either the [Sentinel](/terraform/cloud-docs/policy-enforcement/define-policies/custom-sentinel) or [Open Policy Agent (OPA)](/terraform/cloud-docs/policy-enforcement/opa) policy-as-code frameworks and then group them into policy sets that you can apply to workspaces in your organization. To create policies and policy sets, you must have [permission to manage policies](/terraform/cloud-docs/users-teams-organizations/permissions#organization-permissions).
 
@@ -243,7 +243,7 @@ Refer to the [policy enforcement documentation](/terraform/cloud-docs/workspaces
 @include 'tfc-package-callouts/policies.mdx'
 <!-- END: TFC:only name:pnp-callout -->
 
-YOu can create and view sets of policies in the **Policy sets** page. You can enforce policies in a set globally or on specific [projects](/terraform/cloud-docs/projects/manage) and workspaces.<!-- BEGIN: TFC:only name:stacks-tfe -->Stacks do not support executing policies.<!-- END: TFC:only name:stacks-tfe --> 
+You can create and view sets of policies in the **Policy sets** page. You can enforce policies in a set globally or on specific [projects](/terraform/cloud-docs/projects/manage) and workspaces.<!-- BEGIN: TFC:only name:stacks-tfe --> Stacks do not support executing policies.<!-- END: TFC:only name:stacks-tfe --> 
 
 You can create policy sets through the Terraform API, by connecting a VCS repository containing policies, or directly in HCP Terraform. To create policies and policy sets, you must have [permission to manage policies](/terraform/cloud-docs/users-teams-organizations/permissions#organization-permissions).
 
@@ -301,7 +301,7 @@ You can specify the following values:
 - Specify a name for a private SSH key in the **Name** field. 
 - Enter the contents of your SSH key in the **Private SSH Key** field. 
 
-Refer to [Use SSH Keys for cloning modules](/terraform/cloud-docs/workspaces/settings/ssh-keys) for more information. during workspace runs. 
+Refer to [Use SSH Keys for cloning modules](/terraform/cloud-docs/workspaces/settings/ssh-keys) for more information. 
 
 ## SSO
 
