@@ -3,8 +3,8 @@ page_title: Manage tags for artifacts hosted in the private registry
 description: Learn how to add and manage tags for modules and providers hosted in your private registry
 tfc_only: true
 # START AUTO GENERATED METADATA, DO NOT EDIT
-created_at: 2026-03-12T23:19:31.000Z
-last_modified: 2026-03-12T23:19:31.000Z
+created_at: 2026-03-12T16:19:30-07:00
+last_modified: 2026-03-13T02:40:11.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -20,7 +20,7 @@ You can assign project tags to modules and providers in the registry, which help
 
 You can also use tags to allow workspaces to consume specific artifact versions. During a run, Terraform verifies that the tags on the requested module or provider version match the parent project tags. When the tags match, the run continues successfully. Otherwise HCP Terraform cancels the run and prints a message stating that it cannot find a matching version tag.
 
-To control access to specific module or provider versions, attach a reserved tag that has been created with the **Registry environment tag** option enabled. Refer to [Control access to registry artifacts]() for more information.
+To control access to specific module or provider versions, attach a reserved tag that has been created with the **Registry environment tag** option enabled. Refer to [Control access to registry artifacts](/terraform/cloud-docs/users-teams-organizations/organizations/manage-reserved-tags#control-access-to-registry-artifacts) for more information.
 
 @include 'tfc-package-callouts/premium.mdx'
 
@@ -30,9 +30,9 @@ You must be on an IBM HCP Terraform standard plan to restrict access to artifact
 
 The following settings must be enabled for your organization to attach tags to artifacts in the registry:
 
-- [Assign project tags to modules and providers](/terraform/cloud-docs/users-teams-organizations/permissions/organization#assign-project-tags-to-modules-and-providers)
-- [Assign reserved keys to module and provider version](/terraform/cloud-docs/users-teams-organizations/permissions/organization#assign-reserved-keys-to-module-and-provider-versions)
-- [Control usage with project tags](/terraform/cloud-docs/users-teams-organizations/organizations/manage-reserved-tags#control-access-to-registry-artifacts)
+- [**Assign project tags to modules and providers**](/terraform/cloud-docs/users-teams-organizations/permissions/organization#assign-project-tags-to-modules-and-providers)
+- [**Assign reserved keys to module and provider version**](/terraform/cloud-docs/users-teams-organizations/permissions/organization#assign-reserved-keys-to-module-and-provider-versions)
+- [**Control usage with project tags**](/terraform/cloud-docs/users-teams-organizations/organizations/settings#registry-settings)
 
 You can only assign existing tags to registry artifacts. Refer to [Define project tags](/terraform/cloud-docs/projects/manage#define-project-tags) for instructions on creating project tags that you can assign to artifacts. For instructions on how to create registry environment tags, refer to [Create and manage reserved tag keys](/terraform/cloud-docs/users-teams-organizations/organizations/manage-reserved-tags). 
 
