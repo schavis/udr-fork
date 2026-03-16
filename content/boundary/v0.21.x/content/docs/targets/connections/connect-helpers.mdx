@@ -57,7 +57,7 @@ The Cassandra helper supports the following flags:
 You can also specify the keyspace name using the **BOUNDARY_CONNECT_KEYSPACE** environment variable.
 - `-style`  `(string: "")` - How the CLI attempts to invoke a Cassandra client.
 This value also sets a suitable default for `-exec`, if you did not specify a value.
-The default and currently-understood value is `cqlsh`.
+The default value is `cqlsh`.
 You can also specify how the CLI attempts to invoke a Cassandra client using the **BOUNDARY_CONNECT_CASSANDRA_STYLE** environment variable.
 - `-username`  `(string: "")` - The username you want to pass through to the client.
 This value may be overridden by credentials sourced from a credential store.
@@ -164,9 +164,9 @@ If there is no specified `dbname`, it defaults to `admin`.
 You can also specify the authentication database using the **BOUNDARY_CONNECT_MONGO_AUTHENTICATION_DATABASE** environment variable.
 - `dbname` `(string: "")` - Specifies the database name to pass through to the client.
 You can also specify the database name using the **BOUNDARY_CONNECT_DBNAME** environment variable.
-- `-style` `(string: "")` - Specifies how the CLI attempts to invoke a MogoDB client.
-Currently, only `mogosh` is supported.
-You can also specify how the CLI attempts to invoke a MogoDB client using the **BOUNDARY_CONNECT_MONGO_STYLE** environment variable.
+- `-style` `(string: "")` - Specifies how the CLI attempts to invoke a MongoDB client.
+Currently, only `mongosh` is supported.
+You can also specify how the CLI attempts to invoke a MongoDB client using the **BOUNDARY_CONNECT_MONGO_STYLE** environment variable.
 - `-username` `(string: "")` - Specifies the username to pass through to the client.
 This value may be overridden by credentials sourced from a credential store.
 You can also specify the username using the **BOUNDARY_CONNECT_USERNAME** environment variable.
@@ -195,7 +195,7 @@ You can also specify how the CLI attempts to invoke a MySQL client using the **B
 
 - `-username`  `(string: "")` - The username you want to pass through to the client.
 This value may be overridden by credentials sourced from a credential store.
-You can also specfiy a username using the **BOUNDARY_CONNECT_USERNAME** environment variable.
+You can also specify a username using the **BOUNDARY_CONNECT_USERNAME** environment variable.
 
 For more information, refer to the [`connect mysql` command documentation](/boundary/docs/commands/connect/mysql).
 
@@ -246,7 +246,7 @@ The PostgreSQL helper supports the following flags:
 
 - `dbname`: Specifies the database name you want to pass through to the client.
 You can also specify the database name using the **BOUNDARY_CONNECT_DBNAME** environment variable.
-- `style`: Specifies how the CLI attempts to inovke a PostgreSQL client.
+- `style`: Specifies how the CLI attempts to invoke a PostgreSQL client.
 The only supported style for the PostgreSQL helper is `psql`.
 You can also specify the style using the **BOUNDARY_CONNECT_POSTGRES_STYLE** environment variable.
 - `username`: Specifies the username you want to pass through to the client.
@@ -282,7 +282,7 @@ $ boundary connect rdp -target-id ttcp_eTcZMueUYv
 
 The RDP helper supports the following flag:
 
-- `style`: Specifies how the CLI attempts to inovke an RDP client.
+- `style`: Specifies how the CLI attempts to invoke an RDP client.
 The RDP helper supports the styles `mstsc` and `open`.
 On Windows clients, `mtsc` is the default style.
 The default value on Mac clients is `open`.
