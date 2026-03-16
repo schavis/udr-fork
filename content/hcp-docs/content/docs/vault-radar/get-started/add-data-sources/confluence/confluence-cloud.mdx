@@ -8,58 +8,60 @@ last_modified: 2025-09-05T13:57:53-05:00
 # END AUTO GENERATED METADATA
 ---
 
-# Set up Confluence Cloud scanning
+# Add a data source - Confluence Cloud
 
-There are two ways to set up scanning for Confluence Cloud -
-- Import a single Confluence Cloud organization as a data source.
-- Import many Confluence Cloud organizations together using a data source host.
+Vault Radar allows you to connect to any organization on Confluence Cloud.
 
-To import a single Confluence Cloud organization as a data source, click **Settings**, then click **Data Sources**.
-![Import single Confluence Cloud organization as a data source](/img/docs/vault-radar/confluence-saas/confluence_saas_data_source.png)
+## Add Confluence Cloud
 
-To import many Confluence Cloud organizations together as a data source host, click **Settings**, then click **Data Source Hosts**.
-![Import many Confluence Cloud organizations as a data source host](/img/docs/vault-radar/confluence-saas/confluence_saas_data_source_host.png)
+### Prerequisites
 
-Additionally, for either option, you can choose to scan with **HCP Vault Radar Scan** or with the **Vault Radar Agent Scan**.
-
-# Connect to Confluence Cloud
-
-For either the data source or data source host option, scanning can be set up using **HCP Vault Radar Scan**
-or using **Vault Radar Agent Scan**.
-
-## Prerequisites
-
+- Organization name
 - Token creator email address
 - [API token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
 
-## Scan with HCP Vault Radar Scan
+## Create a connection with Confluence Cloud
 
-1. Select **HCP Vault Radar Scan**, then select **Confluence Cloud**.
+### Scan with HCP Cloud
 
-  ![Add confluence SaaS data source with HCP](/img/docs/vault-radar/confluence-saas/confluence_saas_data_source_hcp.png)
+1. Click **Settings**, then click **Data Sources**.
 
-1. If there is an **Enter your Confluence organization name** text field due to selecting the data source import workflow,
-skip it for now to fill out in the [data source workflow](#import-a-data-source).
+1. Select **HCP Cloud Scan** and click **Continue**.
+
+1. Click the **Confluence Cloud** button.
+
+  ![Add confluence SaaS datasource](/img/docs/vault-radar/confluence-saas/confluence_saas_1.png)
+
+1. Enter the Organization name in the **Enter your Confluence organization name** text field.
 
 1. Enter the email address of the Confluence user that created the API token in
    the **Enter your Confluence token creator email** text field.
 
 1. Enter the API token in the **Enter your Confluence API token** text field.
 
-1. Then continue with the steps to [import a data source](#import-a-data-source) or []import a data source host](#import-a-data-source-host).
+1. Click **Next**.
 
-## Scan with Vault Radar Agent Scan
+  ![Add confluence SaaS datasource](/img/docs/vault-radar/confluence-saas/confluence_saas_2.png)
 
-1. Make sure that the agent pool has been set up, refer to the [agent pool documentation](/hcp/docs/vault-radar/agent/deploy) for more information.
+1. Select either the **All active spaces** or **Select spaces to monitor** radio
+   button.
 
-@include 'vault-radar/add-group-to-resource.mdx'
+     Option 1 ![Add Confluence SaaS all](/img/docs/vault-radar/confluence-saas/confluence_saas_3.png)
+     Option 2 ![Add Confluence SaaS selected](/img/docs/vault-radar/confluence-saas/confluence_saas_4.png)
 
-1. Select **Vault Radar Agent Scan**, then select **Confluence Cloud**.
+1. Click **Finish**. Your Confluence Cloud spaces will now begin scanning.
 
-  ![Add confluence SaaS data source with agent](/img/docs/vault-radar/confluence-saas/confluence_saas_data_source_agent.png)
+### Scan with agent
 
-1. If there is an **Enter your Confluence organization name** text field due to selecting the data source import workflow,
-skip it for now to fill out in the [data source workflow](#import-a-data-source)
+1. Click **Settings**, then click **Data Sources**. 
+
+1. Select **Vault Radar Agent Scan**.
+
+1. Click the **Confluence Cloud** button.
+
+  ![Add confluence SaaS datasource](/img/docs/vault-radar/confluence-saas/confluence_saas_1.png)
+
+1. Enter the organization name in the **Enter your Confluence organization name** text field.
 
 1. Create an environment variable for the API token in the agent environment. This should be in the format `token_creator_email:api_token`.
 
@@ -80,13 +82,10 @@ skip it for now to fill out in the [data source workflow](#import-a-data-source)
    ```plaintext
    env://CONFLUENCE_TOKEN
    ```
+   
+1. Click **Next**.
 
-# Import a data source
-
-1. After having set up the connection details via **HCP Vault Radar Scan** or **Vault Radar Agent Scan**, enter the
-Confluence Cloud organization name in the **Enter your Confluence organization name** text field.
-
-1. Click **Next**
+  ![Add confluence SaaS datasource](/img/docs/vault-radar/confluence-saas/confluence_saas_2.png)
 
 1. Select either the **All active spaces** or **Select spaces to monitor** radio
    button.
@@ -96,11 +95,7 @@ Confluence Cloud organization name in the **Enter your Confluence organization n
 
 1. Click **Finish**. Your Confluence Cloud spaces will now begin scanning.
 
-# Import a data source host
-
-1. Pass
-
-# Related documentation
+### Related documentation
 
 Refer to the [Confluence Cloud webhooks
 documentation](/hcp/docs/vault-radar/get-started/add-data-sources/confluence/confluence-webhooks)
