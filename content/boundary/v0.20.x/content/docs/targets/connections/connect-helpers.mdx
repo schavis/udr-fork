@@ -91,18 +91,18 @@ $ boundary connect http -target-id ttcp_VlpkajEuuf -path '/v1/forecast?latitude=
 
 The HTTP helper supports the following flags:
 
-- `host`: Specifies the host value to use, and overrides the endpoint address from the session information.
+- `-host`: Specifies the host value to use, and overrides the endpoint address from the session information.
 Boundary passes the specified hostname to the client for use in the Host header and TLS SNI value.
 You can also specify the host using the **BOUNDARY_CONNECT_HTTP_HOST** environment variable.
-- `method`: Specifies the method to use.
+- `-method`: Specifies the method to use.
 If you do not set this value, the helper uses the client's default method.
 You can also specify the method using the **BOUNDARY_CONNECT_HTTP_METHOD** environment variable.
-- `path`: Specifies a path that Boundary appends to the generated URL.
+- `-path`: Specifies a path that Boundary appends to the generated URL.
 You can also specify the path using the **BOUNDARY_CONNECT_HTTP_PATH** environment variable.
-- `scheme`: Specifies the scheme to use.
+- `-scheme`: Specifies the scheme to use.
 The default scheme is `https`.
 You can also specify the scheme using the **BOUNDARY_CONNECT_HTTP_SCHEME** environment variable.
-- `style`: Specifies how the CLI attempts to invoke an HTTP client.
+- `-style`: Specifies how the CLI attempts to invoke an HTTP client.
 The only supported style for the HTTP helper is `curl`.
 You can also specify the style using the **BOUNDARY_CONNECT_HTTP_STYLE** environment variable.
 
@@ -134,12 +134,12 @@ $ boundary connect kube -target-id ttcp_Yq0QCUMSe2 -- top node
 
 The Kubernetes helper supports the following flags:
 
-- `host`: Specifies the host value to use, and overrides the endpoint address from the session information.
+- `-host`: Specifies the host value to use, and overrides the endpoint address from the session information.
 You can also specify the host using the **BOUNDARY_CONNECT_KUBE_HOST** environment variable.
-- `scheme`: Specifies the scheme to use.
+- `-scheme`: Specifies the scheme to use.
 The default scheme is `https`.
 You can also specify the scheme using the **BOUNDARY_CONNECT_KUBE_SCHEME** environment variable.
-- `style`: Specifies how the CLI attempts to invoke a Kubernetes client.
+- `-style`: Specifies how the CLI attempts to invoke a Kubernetes client.
 The only supported style for the Kubernetes helper is `kubectl`.
 You can also specify the style using the **BOUNDARY_CONNECT_KUBE_STYLE** environment variable.
 
@@ -161,7 +161,7 @@ The Mongo helper supports the following flags:
 If you omit this value, `mongosh` defaults `authSource` to the `dbname`.
 If there is no specified `dbname`, it defaults to `admin`.
 You can also specify the authentication database using the **BOUNDARY_CONNECT_MONGO_AUTHENTICATION_DATABASE** environment variable.
-- `dbname` `(string: "")` - Specifies the database name to pass through to the client.
+- `-dbname` `(string: "")` - Specifies the database name to pass through to the client.
 You can also specify the database name using the **BOUNDARY_CONNECT_DBNAME** environment variable.
 - `-style` `(string: "")` - Specifies how the CLI attempts to invoke a MongoDB client.
 Currently, only `mongosh` is supported.
@@ -243,12 +243,12 @@ $ boundary connect postgres -target-id ttcp_eTcZMueUYv -dbname postgres
 
 The PostgreSQL helper supports the following flags:
 
-- `dbname`: Specifies the database name you want to pass through to the client.
+- `-dbname`: Specifies the database name you want to pass through to the client.
 You can also specify the database name using the **BOUNDARY_CONNECT_DBNAME** environment variable.
-- `style`: Specifies how the CLI attempts to inovke a PostgreSQL client.
+- `-style`: Specifies how the CLI attempts to invoke a PostgreSQL client.
 The only supported style for the PostgreSQL helper is `psql`.
 You can also specify the style using the **BOUNDARY_CONNECT_POSTGRES_STYLE** environment variable.
-- `username`: Specifies the username you want to pass through to the client.
+- `-username`: Specifies the username you want to pass through to the client.
 You can also specify the username using the **BOUNDARY_CONNECT_USERNAME** environment variable.
 
 For more information, refer to the [`connect postgres` command documentation](/boundary/docs/commands/connect/postgres).
@@ -281,7 +281,7 @@ $ boundary connect rdp -target-id ttcp_eTcZMueUYv
 
 The RDP helper supports the following flag:
 
-- `style`: Specifies how the CLI attempts to invoke an RDP client.
+- `-style`: Specifies how the CLI attempts to invoke an RDP client.
 The RDP helper supports the styles `mstsc` and `open`.
 On Windows clients, `mtsc` is the default style.
 The default value on Mac clients is `open`.
@@ -338,14 +338,14 @@ $ boundary connect ssh -target-id ttcp_1234567890
 
 The SSH helper supports the following flags:
 
-- `remote-command`: Specifies a command you want to run on the remote host.
+- `-remote-command`: Specifies a command you want to run on the remote host.
 You can specify a complete command line, or you may include additional arguments.
 If you include additional arguments, you must append them to the command and separate them using spaces.
-- `style`: Specifies how the CLI attempts to invoke an SSH client.
+- `-style`: Specifies how the CLI attempts to invoke an SSH client.
 The SSH helper supports the styles `ssh` and `putty`.
 The default style is `ssh`.
 You can also specify the style using the **BOUNDARY_CONNECT_SSH_STYLE** environment variable.
-- `username`: Specifies the username you want to pass through to the client.
+- `-username`: Specifies the username you want to pass through to the client.
 You can also specify the username using the **BOUNDARY_CONNECT_USERNAME** environment variable.
 
 For more information, refer to the [`connect ssh` command documentation](/boundary/docs/commands/connect/ssh).
