@@ -106,11 +106,13 @@ You should set up a [Vault policy](/vault/tutorials/policies/policies) for the A
       canonical_id="vault_external_group_id"
    ```
 
-<note>
+<Note title="Always use Azure object ID as group alias">
 
-If the Azure AD **objectId** is not used as the group alias name, Vault will not raise an error, but identity policies associated with the group will not be applied.
+You must use the Azure AD objectId as the group alias name for Vault to 
+correctly apply identity policies associated with the group. Vault does not log errors
+if you misconfigure the group alias.
 
-</note>
+</Note>
 
 ### Optional azure-specific configuration
 
