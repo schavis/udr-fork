@@ -8,60 +8,96 @@ last_modified: 2025-09-05T13:57:53-05:00
 # END AUTO GENERATED METADATA
 ---
 
-# Add a data source - GitLab
+# Set up GitLab scanning
 
-Vault Radar allows you to connect to any top-level group on [GitLab
-Cloud](#add-gitlab-cloud) and [GitLab Self-Managed](#add-gitlab-self-serve).
+Vault Radar allows you to connect to any top-level groups on GitLab Cloud and GitLab Self-Managed
 
-## Add GitLab Cloud
+There are two ways to set up scanning for GitLab -
 
-### Prerequisites
+- Import a single GitLab top-level group as a data source.
 
-- The group name
+- Import many GitLab top-level groups together using a data source host.
+
+To import a single GitLab top-level group as a data source, click **Settings**, then click **Data Sources**.
+![Import single GitLab top-level group as a data source](/img/docs/vault-radar/add-data-source.png)
+
+To import many GitLab top-level groups together as a data source host, click **Settings**, then click **Data Source Hosts**.
+![Import many GitLab top-level groups as a data source](/img/docs/vault-radar/add-data-source-host.png)
+
+Additionally, for either option, you can choose to scan with [**HCP Vault Radar Scan**](#scan-with-hcp-vault-radar-scan) or
+with the [**Vault Radar Agent Scan**](#scan-with-vault-radar-agent-scan).
+
+# Connect to GitLab
+
+For either the data source or data source host option, scanning can be set up using **HCP Vault Radar Scan** or using **Vault Radar Agent Scan**.
+
+## Prerequisites
+
 - Personal Access Token (with the right set of scopes)
 
-## Create a connection with GitLab Cloud
+![GitLab personal access token scopes](/img/docs/vault-radar/gitlab/gitlab-pat-scopes.png)
 
-1. Select **Settings/Data Sources**.
+## Scan with HCP Vault Radar Scan
 
-1. Click on the **GitLab Cloud** button.
+1. Select **HCP Vault Radar Scan**, then select either **GitLab Cloud** or **GitLab Self-Managed**.
 
-1. Enter the group name in the **Group name** text field.
+1. Depending on your previous selections, **Enter your GitLab domain name** or **Enter your GitLab group path** text field may appear.
 
-1. Enter the personal access token in the **Personal Access Token** text field.
+![GitLab Self-Managed scanned by HCP Vault Radar Scan using data source workflow](/img/docs/vault-radar/gitlab/gitlab-self-managed-hcp-data-source.png)
 
-  ![Configure GitLab](/img/docs/vault-radar/gitlab-pat-scopes.png)
+1. If you previously selected **GitLab Self-Managed**, enter the domain URL in the **Enter your GitLab domain name** text field.
+    - This will be the domain name of your instance, i.e. `gitlab.acme.com`
+
+1. If you previously selected **Data Sources**, enter the top-level group path in the **Enter your GitLab group path** text field.
+
+1. Enter the personal access token in the **Enter your GitLab personal access token** text field.
 
 1. Click **Next**.
 
-## Add GitLab self-managed
+## Scan with Vault Radar Agent Scan
 
-### Prerequisites
+1. Select **HCP Vault Radar Scan**, then select either **GitLab Cloud** or **GitLab Self-Managed**.
 
-- Domain name
-- Group name
-- Personal Access Token (with the right set of scopes)
+1. Depending on your previous selections, **Enter your GitLab domain name** or **Enter your GitLab group path** text field may appear.
 
-## Create a connection with GitLab self-managed
+![GitLab Self-Managed scanned by Vault Radar Agent Scan using data source workflow](/img/docs/vault-radar/gitlab/gitlab-self-managed-agent-data-source.png)
 
-1. Select **Settings/Data Sources**.
+1. If you previously selected **GitLab Self-Managed**, enter the domain URL in the **Enter your GitLab domain name** text field.
+    - This will be the domain name of your instance, i.e. `gitlab.acme.com`
 
-1. Click on the **GitLab Self-Managed** button.
+1. If you previously selected **Data Sources**, enter the top-level group path in the **Enter your GitLab group path** text field.
 
-1. Enter the domain name in the **Domain name** text field.
+1. Create an environment variable for the API token in the agent environment.
 
-1. Enter the group name in the **Group name** text field.
+   **Example:**
 
-1. Enter the personal access token in the **Personal Access Token** text field.
+   <CodeBlockConfig hideClipboard>
 
-  ![Configure GitLab](/img/docs/vault-radar/gitlab-pat-scopes.png)
+   ```shell-session
+   $ export GITLAB_TOKEN=mytoken
+   ```
+
+   </CodeBlockConfig>
+
+1. Enter the name of the environment variable in the **Environment Path** text field with the `env://` prefix.
+
+    **Example:**
+
+    ```plaintext
+    env://GITLAB_TOKEN
+    ```
 
 1. Click **Next**.
 
-## Add repositories to Vault Radar
+# Finish importing the data source
 
-Once you establish a connection, select which repositories you
-want to install by selecting a group or all.
+1. Choose which repositories to monitor by selecting either the **All active repositories** or **Select repositories to monitor**
+
+    Option 1 ![Add GitLab all active](/img/docs/vault-radar/gitlab/gitlab-monitor-all-active-resources.png)
+
+    Option 2 ![Add GitLab custom select](/img/docs/vault-radar/gitlab/gitlab-monitor-custom-select-resources.png)
+
+1. Click **Finish**
 
 <Note>
 
@@ -70,6 +106,38 @@ then 5000 repositories, Vault Radar will select the 5000 repositories with the
 most recent activity.
 
 </Note>
+
+# Finish importing the data source host
+
+1. Choose which data sources to monitor by selecting either the **All data sources** or **Select data sources**
+
+    Option 1 ![Add GitLab all](/img/docs/vault-radar/gitlab/gitlab-monitor-all-active-data-sources.png)
+
+    Option 2 ![Add GitLab custom select](/img/docs/vault-radar/gitlab/gitlab-monitor-custom-select-data-sources.png)
+
+1. Click **Finish**
+
+# Update data source
+
+1. Navigate to **Settings**, and then **Data Sources**, and click the three dots to the right
+
+![Update monitored resources](/img/docs/vault-radar/gitlab/gitlab-update-data-source.png)
+
+1. To update the monitored repositories, click **Edit monitored resources**.
+
+1. If you imported the **Data Source** directly, to update the token, click **Edit data source details**.
+
+1. If these data sources were discovered by importing the **Data Source Host**, to update the token, [update the data source host instead](#update-data-source-host)
+
+# Update data source host
+
+1. Navigate to **Settings**, and then **Data Source Hosts**, and click the three dots to the right
+
+![Update monitored data sources](/img/docs/vault-radar/gitlab/gitlab-update-data-source-host.png)
+
+1. To update the monitored data sources, click **Edit data sources**
+
+1. To update the token, click **Edit data source host details**
 
 ## Assign a group to a resource
 
