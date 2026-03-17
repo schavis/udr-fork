@@ -26,7 +26,7 @@ To control access to specific module or provider versions, attach a reserved tag
 
 ## Requirements
 
-You must be on an IBM HCP Terraform standard plan to restrict access to artifact versions. Refer to the [pricing page](https://www.hashicorp.com/en/pricing?tab=terraform) for more information.
+You must be on an IBM HCP Terraform premium plan to restrict access to artifact versions. Refer to the [pricing page](https://www.hashicorp.com/en/pricing?tab=terraform) for more information.
 
 The following settings must be enabled for your organization to attach tags to artifacts in the registry:
 
@@ -46,6 +46,7 @@ You can only assign existing tags to registry artifacts. Refer to [Define projec
 
 HCP Terraform attaches the selected tags to the artifact so that only projects that have the same tags can consume them. 
 
+<!-- Not in the beta, expose for GA 
 ## Attach project tags to registry artifacts in bulk
 
 1. Log into HCP Terraform and navigate to your organization.
@@ -56,6 +57,7 @@ HCP Terraform attaches the selected tags to the artifact so that only projects t
 1. Click **Assign tags**.
 
 HCP Terraform attaches the selected tags to the artifact so that only projects that have the same tags can consume them. 
+-->
 
 ## Attach registry environment tags to artifact versions
 
@@ -70,4 +72,6 @@ When you create reserved tags for the organization, you can enable the **Registr
 
 HCP Terraform attaches the selected environment tags to the artifact version. As a result, only projects that have the same tags can consume that version of the artifact. 
 
+<!-- not in the beta, expose for GA
 The tags are also available in the **Filters** section in the registry so that you can more easily browse for suitable artifacts to use for your workspaces. Refer to [Use artifacts from the HCP Terraform private registry](/terraform/cloud-docs/registry/using#find-artifacts) for more information.  
+-->
