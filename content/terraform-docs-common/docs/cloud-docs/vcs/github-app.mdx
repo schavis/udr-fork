@@ -21,7 +21,7 @@ last_modified: 2026-03-16T23:04:18.000Z
 
 # Set up the GitHub.com (GitHub App) VCS provider
 
-These instructions are for using repositories from GitHub.com with HCP Terraform workspaces or Stacks and private registry modules, without requiring an organization owner to configure an OAuth connection.
+These instructions describe how to use repositories on GitHub.com with workspaces or Stacks and private registry modules without requiring an organization owner to configure an OAuth connection.
 
 This method uses a preconfigured GitHub App, and only works with GitHub.com. There are separate instructions for connecting to [GitHub.com via OAuth](/terraform/cloud-docs/vcs/github), connecting to [GitHub Enterprise](/terraform/cloud-docs/vcs/github-enterprise), and connecting to [other supported VCS providers.](/terraform/cloud-docs/vcs)
 
@@ -54,7 +54,7 @@ Individual HCP Terraform users can access GitHub repositories where both of the 
 - The user has at least read access to that repository on GitHub.
 - The repository's owner has installed the Terraform Cloud app and allowed it to access that repository.
 
-This means that different HCP Terraform users within the same organization can see different sets of repositories available for their workspaces or Stacks.
+This means that different HCP Terraform or Terraform Enterprise users within the same organization can see different sets of repositories available for their workspaces or Stacks.
 
 ### Authorizing
 
@@ -114,7 +114,7 @@ Open your GitHub personal settings or organization settings, then go to the **Ap
 
 In the app's settings you can change which repositories HCP Terraform has access to, or uninstall it entirely.
 
-If you disallow access to a repository that is currently connected to any HCP Terraform workspaces or Stacks, those workspaces or Stacks are unable to retrieve configuration versions until you change their VCS settings and connect them to an allowed repository.
+If you disallow access to a repository that is currently connected to any workspaces or Stacks, those workspaces or Stacks are unable to retrieve configuration versions until you change their VCS settings and connect them to an allowed repository.
 
 ## Feature Limitations
 

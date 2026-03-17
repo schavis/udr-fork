@@ -43,9 +43,9 @@ You can connect to the following providers. To build custom integrations with ot
 
 ## How HCP Terraform uses VCS access
 
-Most workspace and Stacks in HCP Terraform are associated with a VCS repository, which provides configuration for creating infrastructure. To find out which repos are available, access their contents, and create webhooks, HCP Terraform needs access to your VCS provider.
+Most workspace and Stacks are associated with a VCS repository, which provides configuration for creating infrastructure. To find out which repos are available, access their contents, and create webhooks, HCP Terraform or Terraform Enterprise needs access to your VCS provider.
 
-Although HCP Terraform's API lets you create workspaces and Stacks and push configurations to them without a VCS connection, the primary workflow expects every workspace and Stack to be backed by a repository.
+Although the API lets you create workspaces and Stacks and push configurations to them without a VCS connection, the primary workflow expects every workspace and Stack to be backed by a repository.
 
 To use configurations from VCS, HCP Terraform needs to do several things:
 

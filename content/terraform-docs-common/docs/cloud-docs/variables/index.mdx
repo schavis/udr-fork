@@ -100,7 +100,7 @@ Refer to [**Manage variable sets**](/terraform/cloud-docs/variables/managing-var
 
 > **Hands On:** The [Manage Multiple Variable Sets in HCP Terraform](/terraform/tutorials/cloud/cloud-multiple-variable-sets) tutorial shows how to manage multiple variable sets and demonstrates variable precedence.
 
-There may be cases when a workspace contains conflicting variables of the same type with the same key. HCP Terraform marks overwritten variables in the UI. Stacks directly reference individual variable sets using the `store` block, so they do not need to heed the following precedence rules.
+There may be cases when a workspace contains conflicting variables of the same type with the same key. The platform marks overwritten variables in the UI. Stacks directly reference individual variable sets using the `store` block, so they do not need to heed the following precedence rules.
 
 HCP Terraform prioritizes and overwrites conflicting variables in workspaces according to the following precedence:
 
