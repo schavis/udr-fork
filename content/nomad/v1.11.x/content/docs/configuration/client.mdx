@@ -70,7 +70,7 @@ client {
   default route is used. The scheduler chooses from these fingerprinted IP
   addresses when allocating ports for tasks. This value supports [go-sockaddr/template
   format][go-sockaddr/template]. Nomad adds the fingerprinted interface to a
-  "default"[host_network](#host_network).
+  "default" [host_network](#host_network).
 
   If no non-local IP addresses are found, Nomad could fingerprint link-local IPv6
   addresses depending on the client's
