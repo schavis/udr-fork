@@ -18,7 +18,7 @@ This topic describes how to add and manage tags for modules and providers hosted
 
 You can assign project tags to modules and providers in the registry, which helps you consistently use metadata across entities in your system. Use tags to indicate ownership, describe intended environments, and apply other meaningful labels. 
 
-You can also use tags to allow workspaces to consume specific artifact versions. During a run, Terraform verifies that the tags on the requested module or provider version match the parent project tags. When the tags match, the run continues successfully. Otherwise HCP Terraform cancels the run and prints a message stating that it cannot find a matching version tag.
+You can also configure HCP Terraform to control registry artifact usage based on tags. When this functionality is enabled, Terraform verifies that the tags on the requested module or provider version match the parent project tags at runtime. When the tags match, the run continues successfully. Otherwise HCP Terraform cancels the run and prints a message stating that it cannot find a matching version tag.
 
 To control access to specific module or provider versions, attach a reserved tag that has been created with the **Registry environment tag** option enabled. Refer to [Control access to registry artifacts](/terraform/cloud-docs/users-teams-organizations/organizations/manage-reserved-tags#control-access-to-registry-artifacts) for more information.
 
@@ -38,7 +38,7 @@ You can only assign existing tags to registry artifacts. Refer to [Define projec
 
 ## Attach project tags to a single registry artifact
 
-1. Log into HCP Terraform and navigate to your organization.
+1. Sign in to [HCP Terraform](https://app.terraform.io/) and navigate to your organization.
 1. Click on **Registry** in the sidebar, then click either **Modules** or **Providers** .
 1. Click on the artifact, then click **Manage tags**. 
 1. On the **Manage tags** page, browse for tags that you want to attach to the artifact. You can click on the link in either the **Projects** or **Workspaces** column view the projects and workspaces that have the tag. 
@@ -63,7 +63,7 @@ HCP Terraform attaches the selected tags to the artifact so that only projects t
 
 When you create reserved tags for the organization, you can enable the **Registry environment tag** option, which lets you assign the tag to module and provider versions in the registry. Refer to [Control access to registry artifacts](/terraform/cloud-docs/users-teams-organizations/organizations/manage-reserved-tags#control-access-to-registry-artifacts) for more information.
  
-1. Log into HCP Terraform and navigate to your organization.
+1. Sign in to [HCP Terraform](https://app.terraform.io/) and navigate to your organization.
 1. Click on **Registry** in the sidebar, then click either **Modules** or **Providers**.
 1. Click on the artifact to open its detail page.
 1. In the **Tags** section, click the link to assign an environment to the artifact version.
