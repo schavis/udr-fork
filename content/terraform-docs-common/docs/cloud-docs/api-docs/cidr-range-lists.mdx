@@ -597,9 +597,9 @@ This endpoint associates agent pools with an IP allowlist, restricting which IP 
 | ------- | ------------------------- | -------------------------------------------------------------- |
 | [204][] | No Content                | Success                                                        |
 | [404][] | [JSON API error object][] | IP allowlist not found or user not authorized                  |
-| [422][] | [JSON API error object][] | Malformed request body (missing attributes, wrong types, etc.) |
+| [422][] | [JSON API error object][] | Malformed request body, such as missing attributes or unsupported types |
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -610,7 +610,7 @@ curl \
   https://app.terraform.io/api/v2/cidr-range-lists/crl-xKw8dxQPqVQRZmCe/relationships/agent-pools
 ```
 
-## Remove Agent Pools from an IP Allowlist
+## Remove agent pools from an IP allowlist
 
 `DELETE /cidr-range-lists/:id/relationships/agent-pools`
 
@@ -625,7 +625,7 @@ This endpoint removes the association between agent pools and an IP allowlist.
 | [204][] | No Content                | Success                                       |
 | [404][] | [JSON API error object][] | IP allowlist not found or user not authorized |
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
