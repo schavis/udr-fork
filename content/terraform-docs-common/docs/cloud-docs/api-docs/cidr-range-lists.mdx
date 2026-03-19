@@ -41,19 +41,24 @@ last_modified: 2025-11-19T09:33:54-08:00
 
 # IP allowlist API reference
 
-The IP allowlist API allows you to manage IP allowlists (CIDR range lists) and their associated IP address ranges (CIDR ranges) for your organization. IP allowlists restrict access to HCP Terraform resources based on source IP addresses.
+The IP allowlist API contains the following resources:
 
-## Enforcement Scopes
+- `/cidr-range-lists`: Call this resource to create and manage IP allowlists 
+- `/cidr-ranges`: Call this resource create and manage CIDR ranges and add them to IP allowlists 
 
-IP allowlists support three enforcement scopes that determine where the allowlist applies:
+Use these resources to build IP allowlists that restrict access to HCP Terraform resources based on IP addresses.
 
-- **`organization`**: Applies to all resources in the organization, except for agent pools. Only one organization-scoped IP allowlist is allowed per organization.
-- **`all_agent_pools`**: Applies to all agent pools in the organization. Multiple all-agent-pools-scoped IP allowlists can exist.
-- **`selected_agent_pools`**: Applies only to specifically assigned agent pools. This is the default scope. Multiple selected-agent-pools-scoped IP allowlists can exist.
+## Enforcement scopes
+
+Resources in the IP allowlist API support the `enforcement-scope` attribute, which determines where IP allowlists apply. You can specify one of the following values for the `enforcement-scope`:
+
+- **`organization`**: Applies to all resources in the organization except for agent pools. You can set `enforcement-scope` to `organization` for only one IP allowlist per organization.
+- **`all_agent_pools`**: Applies to all agent pools in the organization. You can set `enforcement-scope` to `all-agent-pools` for multiple IP allowlists per organization.
+- **`selected_agent_pools`**: Applies only to specifically assigned agent pools. This is the default scope. You can set `enforcement-scope` to `selected-agent-pools` for multiple IP allowlists per organization.
 
 When you change an IP allowlist's enforcement scope to `organization` or `all_agent_pools`, HCP Terraform automatically removes any existing agent pool assignments.
 
-## List IP Allowlists
+## List IP allowlists
 
 `GET /organizations/:organization_name/cidr-range-lists`
 
@@ -66,17 +71,17 @@ When you change an IP allowlist's enforcement scope to `organization` or `all_ag
 | [200][] | Array of [JSON API document][]s (`type: "cidr-range-lists"`) | Success                                                       |
 | [404][] | [JSON API error object][]                                 | Organization not found or user not authorized                 |
 
-### Query Parameters
+### Query parameters
 
 This endpoint supports pagination [with standard URL query parameters](/terraform/cloud-docs/api-docs#query-parameters). Remember to percent-encode `[` as `%5B` and `]` as `%5D` if your tooling doesn't automatically encode URLs.
 
 | Parameter                               | Description                                                                                                                                                                                                                                                         |
 |-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `page[number]`                          | **Optional.** If omitted, the endpoint will return the first page.                                                                                                                                                                                                  |
-| `page[size]`                            | **Optional.** If omitted, the endpoint will return 10 CIDR range lists per page.                                                                                                                                                                                            |
+| `page[number]`                          | **Optional.** If omitted, the endpoint returns the first page.                                                                                                                                                                                                  |
+| `page[size]`                            | **Optional.** If omitted, the endpoint returns 10 CIDR range lists per page.                                                                                                                                                                                            |
 | `q`                                     | **Optional.** A search query string. This query searches CIDR range lists by name. This search is case-insensitive.                                                                      |
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -85,7 +90,7 @@ curl \
   https://app.terraform.io/api/v2/organizations/my-organization/cidr-range-lists
 ```
 
-### Sample Response
+### Sample response
 
 ```json
 {
@@ -115,7 +120,7 @@ curl \
 }
 ```
 
-## Create an IP Allowlist
+## Create an IP allowlist
 
 `POST /organizations/:organization_name/cidr-range-lists`
 
@@ -127,11 +132,11 @@ curl \
 | ------- | ----------------------------------------------------- | -------------------------------------------------------------- |
 | [201][] | [JSON API document][] (`type: "cidr-range-lists"`)    | Success                                                        |
 | [404][] | [JSON API error object][]                             | Organization not found or user not authorized                  |
-| [422][] | [JSON API error object][]                             | Malformed request body (missing attributes, wrong types, etc.) |
+| [422][] | [JSON API error object][]                             | Malformed request body, such as missing attributes or unsupported types |
 
-### Request Body
+### Request body
 
-This POST endpoint requires a JSON object with the following properties as a request payload.
+This `POST` endpoint requires a JSON object with the following properties as a request payload.
 
 Properties without a default value are required.
 
@@ -140,9 +145,9 @@ Properties without a default value are required.
 | `data.type`                       | string |                          | Must be `"cidr-range-lists"`.         |
 | `data.attributes.name`            | string |                          | The name of the IP allowlist.         |
 | `data.attributes.description`     | string | none                     | A description of the IP allowlist.    |
-| `data.attributes.enforcement-scope` | string | `"selected_agent_pools"` | The scope of enforcement for this IP allowlist. Must be one of `"organization"`, `"all_agent_pools"`, or `"selected_agent_pools"`. Only one organization-scoped IP allowlist is allowed per organization. |
+| `data.attributes.enforcement-scope` | string | `"selected_agent_pools"` | The scope of enforcement for this IP allowlist. Must be one of the following values: <ul><li>`"organization"`</li><li>`"all_agent_pools"`</li><li>`"selected_agent_pools"`</li></ul> Only one `"organization"` is allowed per organization. |
 
-### Sample Payload
+### Sample payload
 
 ```json
 {
@@ -157,7 +162,7 @@ Properties without a default value are required.
 }
 ```
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -168,7 +173,7 @@ curl \
   https://app.terraform.io/api/v2/organizations/my-organization/cidr-range-lists
 ```
 
-### Sample Response
+### Sample response
 
 ```json
 {
@@ -191,7 +196,7 @@ curl \
 }
 ```
 
-## Show an IP Allowlist
+## Show an IP allowlist
 
 `GET /cidr-range-lists/:id`
 
@@ -204,7 +209,7 @@ curl \
 | [200][] | [JSON API document][] (`type: "cidr-range-lists"`) | Success                                       |
 | [404][] | [JSON API error object][]                          | IP allowlist not found or user not authorized |
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -213,7 +218,7 @@ curl \
   https://app.terraform.io/api/v2/cidr-range-lists/crl-xKw8dxQPqVQRZmCe
 ```
 
-### Sample Response
+### Sample response
 
 ```json
 {
@@ -242,7 +247,7 @@ curl \
 }
 ```
 
-## Update an IP Allowlist
+## Update an IP allowlist
 
 `PATCH /cidr-range-lists/:id`
 
@@ -256,18 +261,18 @@ curl \
 | [404][] | [JSON API error object][]                          | IP allowlist not found or user not authorized                  |
 | [422][] | [JSON API error object][]                          | Malformed request body (missing attributes, wrong types, etc.) |
 
-### Request Body
+### Request body
 
-This PATCH endpoint requires a JSON object with the following properties as a request payload.
+This `PATCH` endpoint requires a JSON object with the following properties as a request payload.
 
 | Key path                            | Type   | Default          | Description                                                                      |
 | ----------------------------------- | ------ | ---------------- | -------------------------------------------------------------------------------- |
 | `data.type`                         | string |                  | Must be `"cidr-range-lists"`.                                                    |
 | `data.attributes.name`              | string | (previous value) | The name of the IP allowlist. If omitted, the existing name is preserved.        |
 | `data.attributes.description`       | string | (previous value) | A description of the IP allowlist. If omitted, the existing description is preserved. |
-| `data.attributes.enforcement-scope` | string | (previous value) | The scope of enforcement for this IP allowlist. Must be one of `"organization"`, `"all_agent_pools"`, or `"selected_agent_pools"`. Only one organization-scoped IP allowlist is allowed per organization. When changing to `"organization"` or `"all_agent_pools"`, any agent pool assignments will be removed. |
+| `data.attributes.enforcement-scope` | string | (previous value) | The scope of enforcement for this IP allowlist. Must be one of the following values: <ul><li>`"organization"`</li><li>`"all_agent_pools"`</li><li>`"selected_agent_pools"`</li></ul> Only one `"organization"` is allowed per organization. When changing to `"organization"` or `"all_agent_pools"`, any agent pool assignments are removed. |
 
-### Sample Payload
+### Sample payload
 
 ```json
 {
@@ -282,7 +287,7 @@ This PATCH endpoint requires a JSON object with the following properties as a re
 }
 ```
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -293,7 +298,7 @@ curl \
   https://app.terraform.io/api/v2/cidr-range-lists/crl-xKw8dxQPqVQRZmCe
 ```
 
-### Sample Response
+### Sample response
 
 ```json
 {
@@ -322,7 +327,7 @@ curl \
 }
 ```
 
-## Delete an IP Allowlist
+## Delete an IP allowlist
 
 `DELETE /cidr-range-lists/:id`
 
@@ -335,7 +340,7 @@ curl \
 | [204][] | No Content                | Success                                       |
 | [404][] | [JSON API error object][] | IP allowlist not found or user not authorized |
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -345,7 +350,7 @@ curl \
   https://app.terraform.io/api/v2/cidr-range-lists/crl-xKw8dxQPqVQRZmCe
 ```
 
-## List CIDR Ranges for an IP Allowlist
+## List CIDR ranges for an IP allowlist
 
 `GET /cidr-range-lists/:id/relationships/cidr-ranges`
 
@@ -358,7 +363,7 @@ curl \
 | [200][] | Array of [JSON API document][]s (`type: "cidr-ranges"`) | Success                                       |
 | [404][] | [JSON API error object][]                             | IP allowlist not found or user not authorized |
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -367,7 +372,7 @@ curl \
   https://app.terraform.io/api/v2/cidr-range-lists/crl-xKw8dxQPqVQRZmCe/relationships/cidr-ranges
 ```
 
-### Sample Response
+### Sample response
 
 ```json
 {
@@ -386,7 +391,7 @@ curl \
 }
 ```
 
-## Add CIDR Ranges to an IP Allowlist
+## Add CIDR ranges to an IP allowlist
 
 `POST /cidr-range-lists/:id/relationships/cidr-ranges`
 
@@ -398,11 +403,11 @@ curl \
 | ------- | ------------------------------------------------- | -------------------------------------------------------------- |
 | [201][] | [JSON API document][] (`type: "cidr-ranges"`)     | Success                                                        |
 | [404][] | [JSON API error object][]                         | IP allowlist not found or user not authorized                  |
-| [422][] | [JSON API error object][]                         | Malformed request body (missing attributes, wrong types, etc.) |
+| [422][] | [JSON API error object][]                         | Malformed request body, such as missing attributes or unsupported types |
 
-### Request Body
+### Request body
 
-This POST endpoint requires a JSON object with the following properties as a request payload.
+This `POST` endpoint requires a JSON object with the following properties as a request payload.
 
 Properties without a default value are required.
 
@@ -411,7 +416,7 @@ Properties without a default value are required.
 | `data.type`                    | string |         | Must be `"cidr-ranges"`.                                       |
 | `data.attributes.cidr-block`   | string |         | The CIDR block (e.g., "192.168.1.0/24" or "10.0.0.0/8").       |
 
-### Sample Payload
+### Sample payload
 
 ```json
 {
@@ -424,7 +429,7 @@ Properties without a default value are required.
 }
 ```
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -435,7 +440,7 @@ curl \
   https://app.terraform.io/api/v2/cidr-range-lists/crl-xKw8dxQPqVQRZmCe/relationships/cidr-ranges
 ```
 
-### Sample Response
+### Sample response
 
 ```json
 {
@@ -452,7 +457,7 @@ curl \
 }
 ```
 
-## Show a CIDR Range
+## Show a CIDR range
 
 `GET /cidr-ranges/:id`
 
@@ -465,7 +470,7 @@ curl \
 | [200][] | [JSON API document][] (`type: "cidr-ranges"`) | Success                                    |
 | [404][] | [JSON API error object][]                     | CIDR range not found or user not authorized |
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -474,7 +479,7 @@ curl \
   https://app.terraform.io/api/v2/cidr-ranges/cidr-6huHpM7asDp7TaiP
 ```
 
-### Sample Response
+### Sample response
 
 ```json
 {
@@ -491,7 +496,7 @@ curl \
 }
 ```
 
-## Update a CIDR Range
+## Update a CIDR range
 
 `PATCH /cidr-ranges/:id`
 
@@ -503,18 +508,18 @@ curl \
 | ------- | --------------------------------------------- | -------------------------------------------------------------- |
 | [200][] | [JSON API document][] (`type: "cidr-ranges"`) | Success                                                        |
 | [404][] | [JSON API error object][]                     | CIDR range not found or user not authorized                    |
-| [422][] | [JSON API error object][]                     | Malformed request body (missing attributes, wrong types, etc.) |
+| [422][] | [JSON API error object][]                     | Malformed request body, such as missing attributes or unsupported types |
 
-### Request Body
+### Request body
 
-This PATCH endpoint requires a JSON object with the following properties as a request payload.
+This `PATCH` endpoint requires a JSON object with the following properties as a request payload.
 
 | Key path                     | Type   | Default          | Description                                                                 |
 | ---------------------------- | ------ | ---------------- | --------------------------------------------------------------------------- |
 | `data.type`                  | string |                  | Must be `"cidr-ranges"`.                                                    |
 | `data.attributes.cidr-block` | string | (previous value) | The CIDR block. If omitted, the existing CIDR block is preserved.           |
 
-### Sample Payload
+### Sample payload
 
 ```json
 {
@@ -527,7 +532,7 @@ This PATCH endpoint requires a JSON object with the following properties as a re
 }
 ```
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -538,7 +543,7 @@ curl \
   https://app.terraform.io/api/v2/cidr-ranges/cidr-6huHpM7asDp7TaiP
 ```
 
-### Sample Response
+### Sample response
 
 ```json
 {
@@ -555,7 +560,7 @@ curl \
 }
 ```
 
-## Delete a CIDR Range
+## Delete a CIDR range
 
 `DELETE /cidr-ranges/:id`
 
@@ -568,7 +573,7 @@ curl \
 | [204][] | No Content                | Success                                    |
 | [404][] | [JSON API error object][] | CIDR range not found or user not authorized |
 
-### Sample Request
+### Sample request
 
 ```shell
 curl \
@@ -578,7 +583,7 @@ curl \
   https://app.terraform.io/api/v2/cidr-ranges/cidr-6huHpM7asDp7TaiP
 ```
 
-## Add Agent Pools to an IP Allowlist
+## Add agent pools to an IP allowlist
 
 `POST /cidr-range-lists/:id/relationships/agent-pools`
 
