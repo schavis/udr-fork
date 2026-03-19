@@ -4,7 +4,7 @@ description: >-
   Organizations are groups of projects and workspaces that let teams collaborate. Learn how to create and manage HCP Terraform organizations.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-05-27T14:28:51-04:00
-last_modified: 2026-03-16T23:04:12.000Z
+last_modified: 2026-03-19T15:33:14.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -239,26 +239,7 @@ To learn how to view Stack deployment runs, refer to [Review deployment runs](/t
 
 ## Set data retention policies
 
-#### API Tokens
-
-Organization owners can set up a special [Organization API Token](/terraform/cloud-docs/users-teams-organizations/api-tokens) that is not associated with a specific user or team.
-
-##### Maximum Time to Live
-
-Enable the **Set maximum token time to live** option to set the maximum amount of time a token is valid before it expires. When you enable this option, HCP Terraform lets you set a custom maximum TTL for each of the following token types:
-
-- Organization tokens
-- Team tokens
-- User tokens
-- Audit tokens
-
-When you enable this option, HCP Terraform automatically rejects any existing token that exceeds your configured TTL.
-
-#### Authentication
-
-<!-- BEGIN: TFC:only name:hcp-eu -->
-
-<Note>
+Choose one of the following options on the organization's **General Settings** page to set the data retention policy:
 
 - **Admin default policy** 
 - **Do not auto-delete**
@@ -276,7 +257,7 @@ The organization policy is the default policy applied to all workspaces, but mem
 
 ## Trial expired organizations
 
-HCP Terraform paid features are available as a free trial. When a free trial has expired, the organization displays a banner reading **TRIAL EXPIRED — Upgrade Required**.
+HCP Terraform paid features are available as a free trial. When a free trial has expired, the organization displays a banner reading **TRIAL EXPIRED — Upgrade Required**.
 
 Organizations with expired trials return to the feature set of a free organization, but they retain any data created as part of paid features. Specifically, HCP Terraform disables the following features:
 
