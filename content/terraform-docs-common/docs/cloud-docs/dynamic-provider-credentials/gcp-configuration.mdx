@@ -62,10 +62,12 @@ The following is optional, but may be desired:
 * **Provider ID**: The ID for the provider. This defaults to the name as mentioned above, but can be set to another value.
 
 ### Add Permissions to the Workload Identity Principal
-You must next grant permissions to the workload identity principal that will be assumed during a Terraform run. You may choose to configure a service account, or grant access to the workload identity pool principal directly.
 
-#### Optional: Create a Service Account and Grant External Permissions
-Google documentation for setting this up can be found here: [Creating a service account for the external workload](https://docs.cloud.google.com/iam/docs/service-accounts-create#creating).
+Next, grant permissions to the workload identity principal that will be assumed during a Terraform run. You may choose to configure a service account, or grant access to the workload identity pool principal directly.
+
+#### Create an Optional Service Account and Grant External Permissions
+
+While HCP Terraform can authenticate as a workload pool principal directly, you can choose to use a service account instead. Refer to Google's [Creating a service account for the external workload](https://docs.cloud.google.com/iam/docs/service-accounts-create#creating) documentation for more information.
 
 The following information should be specified:
 * **Service account name**: Name for the service account, such as `tfc-service-account`. The name is also used as the pool ID. You can't change the pool ID later.
@@ -74,15 +76,15 @@ The following is optional, but may be desired:
 * **Service account ID**: The ID for the service account. This defaults to the name as mentioned above, but can be set to another value.
 * **Description**: Text that describes the purpose of the service account.
 
-Once the service account has been created, you will need to grant access to the service account for the identity pool created above. Google documentation for setting this up can be found here: [Allow the external workload to impersonate the service account](https://cloud.google.com/iam/docs/workload-identity-federation-with-other-providers#allow_the_external_workload_to_impersonate_the_service_account).
+After you create the service account, grant access to the service account for the identity pool created above. Refer to Google's [Allow the external workload to impersonate the service account](https://cloud.google.com/iam/docs/workload-identity-federation-with-other-providers#allow_the_external_workload_to_impersonate_the_service_account) for more information.
 
 #### Grant IAM Permissions
-Next you will need to grant the necessary IAM permissions to either the service account or the workload identity principal itself.
-The role that is granted will vary depending on your specific needs and project setup. This should in general be the most minimal set of permissions needed to properly modify your Terraform infrastructure.
+Next grant the necessary IAM permissions to either the service account or the workload identity principal.
+The role that is granted will vary depending on your specific needs and project setup. We recommend granting the most minimal set of permissions needed to properly modify your Terraform infrastructure.
 
-If you are using a service account, it can be assigned roles during the service account setup wizard, or from Service Account settings.
+If you are using a service account, you can assign roles during the service account setup wizard, or from Service Account settings.
 
-Otherwise, you can grant permissions to the workload identity principal directly. On the IAM permissions page, grant access to a role for a [workload identity pool principal](https://docs.cloud.google.com/iam/docs/workload-identity-federation#principal-types) matching you configured pool and provider.
+Otherwise, you can grant permissions to the workload identity principal directly. On the IAM permissions page, grant access to a role for a [workload identity pool principal](https://docs.cloud.google.com/iam/docs/workload-identity-federation#principal-types) matching your configured pool and provider.
 
 It can be helpful to define [custom attributes](https://docs.cloud.google.com/iam/docs/workload-identity-federation#mapping) in your Workload Identity Provider based on claims found in the [HCP Terraform identity token](/terraform/cloud-docs/workspaces/dynamic-provider-credentials/workload-identity-tokens) and use these in your IAM conditions to ensure that only the intended workspaces and runs can access your GCP resources.
 
@@ -99,7 +101,7 @@ You’ll need to set some environment variables in your HCP Terraform workspace 
 | Variable                                                                                            | Value                                                                                                                                                                           | Notes                                                                                                                                                                                                                             |
 |-----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TFC_GCP_PROVIDER_AUTH`<br />`TFC_GCP_PROVIDER_AUTH[_TAG]`<br />_(Default variable not supported)_  | `true`                                                                                                                                                                          | Requires **v1.7.0** or later if self-managing agents. Must be present and set to `true`, or HCP Terraform will not attempt to use dynamic credentials to authenticate to GCP.                                                     |
-| `TFC_GCP_PRINCIPAL_TYPE`<br />`TFC_GCP_PRINCIPAL_TYPE[_TAG]`<br />`TFC_DEFAULT_GCP_PRINCIPAL_TYPE`  | Specifies whether the terraform GCP provider should authenticate as a service account or workload identity pool principal. Must be one of `service_account` or `workload_pool`. | Requires **v1.28.3** or later if self-managing agents, defaults to `service_account`.  If set to `service_account`, the [service account environment variables](#service-account-specific-environment-variables) must also be set.|
+| `TFC_GCP_PRINCIPAL_TYPE`<br />`TFC_GCP_PRINCIPAL_TYPE[_TAG]`<br />`TFC_DEFAULT_GCP_PRINCIPAL_TYPE`  | Specifies whether the Terraform GCP provider should authenticate as a service account or workload identity pool principal. Must be one of `service_account` or `workload_pool`. | Requires **v1.28.3** or later if self-managing agents, defaults to `service_account`.  If set to `service_account`, the [service account environment variables](#service-account-specific-environment-variables) must also be set.|
 
 
 
