@@ -1,0 +1,34 @@
+### vault.secrets-sync.reconciliation.correction ((#vault-secrets-sync-reconciliation-correction))
+
+Metric type | Value  | Description                                                                                   
+----------- | ------ | ----------------------------------------------------------------------------------------------
+counter     | number | Total number of secrets that required correction (sync or unsync) during reconciliation.
+
+Correction metrics include a `destination_type` label to indicate the type of sync destination.
+
+### vault.secrets-sync.reconciliation.retry ((#vault-secrets-sync-reconciliation-retry))
+
+Metric type | Value  | Description                                                                      
+----------- | ------ | --------------------------------------------------------------------------------
+counter     | number | Total number of reconciliation retry attempts made for previously failed secrets
+
+Retry metrics include a `destination_type` label to indicate the type of sync destination.
+
+### vault.secrets-sync.reconciliation.retry.success ((#vault-secrets-sync-reconciliation-retry-success))
+
+Metric type | Value  | Description                                                                                         
+----------- | ------ | ----------------------------------------------------------------------------------------------------
+counter     | number | Total number of secrets successfully synced or unsynced during a reconciliation retry attempt
+
+Retry success metrics include a `destination_type` label to indicate the type of sync destination.
+
+### vault.secrets-sync.reconciliation.retry.failure ((#vault-secrets-sync-reconciliation-retry-failure))
+
+Metric type | Value  | Description                                                              
+----------- | ------ | ------------------------------------------------------------------------
+counter     | number | Total number of failed reconciliation retry attempts by failure category
+
+Retry failure metrics include the following labels:
+
+- `destination_type` - the type of sync destination.
+- `cause` - the category of failure: `internal` for Vault-side errors, or `external` for client-side and remote service errors.
