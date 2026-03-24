@@ -115,6 +115,7 @@ This endpoint configures the LDAP auth method.
 - `rotation_url` `(string: "")` – <EnterpriseAlert product="vault" inline /> The LDAP
   server to connect to for password rotation if it is different from `url` parameter.
   Examples: `ldap://ldap.myorg.com`, `ldaps://ldap.myorg.com:636`.
+- `schema` `(string: "openldap")` - The LDAP schema to use when storing entry passwords. Valid schemas include `openldap` and `ad`.
 
 @include 'rotationfields.mdx'
 
