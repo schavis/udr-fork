@@ -1,6 +1,6 @@
 ---
 mode: ask
-model: gpt-4.0
+model: gpt-5.3-codex
 description: Reviews a documentation file for correct format, style guide compliance, and content quality. Attach the file you want reviewed using #file.
 ---
 
