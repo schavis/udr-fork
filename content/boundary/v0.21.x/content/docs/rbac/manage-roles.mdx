@@ -3,6 +3,10 @@ layout: docs
 page_title: Manage access with roles
 description: >-
   Use roles to manage permissions assigned to users and groups. Create roles and assign principals and grants to them. Add grant scopes and configure inheritance.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-11-18T17:04:41-05:00
+last_modified: 2025-11-18T17:04:41-05:00
+# END AUTO GENERATED METADATA
 ---
 
 # Manage access with roles
@@ -414,6 +418,10 @@ resource "boundary_role" "listonly" {
 
 ## More information
 
-1. Refer to [Assignable permissions](/boundary/docs/rbac/assignable-permissions) for more information about the permissions you can assign to Boundary principals.
-1. Refer to [Permission grant formats](/boundary/docs/rbac/permission-grant-formats) for more information about grant strings and example formats.
-1. Refer to the [Resource tables](/boundary/docs/rbac/resource-table) for a cheat sheet to help you manage your permissions.
+- To better understand Boundary's permissions model, refer to [Permissions in Boundary](/boundary/docs/rbac).
+- For more specific information about the roles resource, refer to the [Roles](/boundary/docs/domain-model/roles) domain model topic.
+- To learn more about creating or managing roles, refer to the CLI [`roles`](/boundary/docs/commands/roles) topic or the API [Role service](/boundary/api-docs/role-service) topic.
+
+## Next steps
+
+To manage access to resources dynamically, refer to [Manage principals](/boundary/docs/rbac/users/manage-users-groups) and [Filter managed groups](/boundary/docs/rbac/users/managed-groups).
