@@ -18,7 +18,7 @@ This topic describes how to add and manage tags for modules and providers hosted
 
 You can assign project tags to modules and providers in the registry, which helps you consistently use metadata across entities in your system. Use tags to indicate ownership, describe intended environments, and apply other meaningful labels. 
 
-You can also configure HCP Terraform to control registry artifact usage based on tags. When this functionality is enabled, Terraform verifies that the tags on the requested module or provider version match the parent project tags at runtime. When the tags match, the run continues successfully. Otherwise HCP Terraform cancels the run and prints a message stating that it cannot find a matching version tag.
+You can also configure HCP Terraform to control registry artifact usage based on tags. When this functionality is enabled, Terraform verifies that the tags on the requested module or provider match the parent project tags at runtime. When the tags match, the run continues successfully. Otherwise HCP Terraform cancels the run and prints a message stating that it cannot find a matching tag.
 
 To control access to specific module or provider versions, attach a reserved tag that has been created with the **Registry environment tag** option enabled. Refer to [Control access to registry artifacts](/terraform/cloud-docs/users-teams-organizations/organizations/manage-reserved-tags#control-access-to-registry-artifacts) for more information.
 
