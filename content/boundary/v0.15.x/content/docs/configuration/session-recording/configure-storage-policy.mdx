@@ -172,10 +172,6 @@ $ curl --header "Content-Type: application/json" \
 In this example, recordings stored within the global scope must be retained for 7 years (2557 days), and will be automatically deleted 100 days later (at 2657 days). Scopes beneath `global` will not be able to override this retention policy, but are able to override the deletion policy.
 
 <Warning>
-  Passing Vault new root credentials overwrites any preexisting root credentials.
-</Warning>
-
-<Warning>
 
   Boundary does not support an undo action. Storage policies are meant to enforce compliance to a specific law or regulation. Updating the storage policy of a session recording can have immediate and possibly unexpected results such as the immediate deletion of session recordings. 
 
