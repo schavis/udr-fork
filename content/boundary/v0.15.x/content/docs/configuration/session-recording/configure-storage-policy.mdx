@@ -4,8 +4,8 @@ page_title: Configure storage bucket policies
 description: |-
   How to configure storage bucket lifecycle policies for session recording in Boundary
 # START AUTO GENERATED METADATA, DO NOT EDIT
-created_at: 2023-01-01T00:00:00.000Z
-last_modified: 2023-01-01T00:00:00.000Z
+created_at: 2025-10-29T10:56:20-04:00
+last_modified: 2026-03-25T17:45:50.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -170,6 +170,10 @@ $ curl --header "Content-Type: application/json" \
 </Tabs>
 
 In this example, recordings stored within the global scope must be retained for 7 years (2557 days), and will be automatically deleted 100 days later (at 2657 days). Scopes beneath `global` will not be able to override this retention policy, but are able to override the deletion policy.
+
+<Warning>
+  Passing Vault new root credentials overwrites any preexisting root credentials.
+</Warning>
 
 <Warning>
 
