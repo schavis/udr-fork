@@ -1,158 +1,215 @@
 ---
-page_title: Add a data source - Azure DevOps
+page_title: Scan Azure DevOps for secrets
 description: >-
-  Add Azure DevOps as a data source for Vault Radar.
+  Add Azure DevOps as a data source in HCP Vault Radar to scan your Azure DevOps projects for sensitive data and secrets.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-09-05T13:57:53-05:00
 last_modified: 2025-09-05T13:57:53-05:00
 # END AUTO GENERATED METADATA
 ---
 
-# Set up Azure DevOps scanning
+# Scan Azure DevOps for secrets
 
-Vault Radar allows you to connect to any project on Azure DevOps Cloud and Azure DevOps Server.
-
-There are two ways to set up scanning for Azure DevOps -
-
-- Import a single Azure DevOps project as a data source.
-
-- Import many Azure DevOps projects as a data source host.
-
-To import a single Azure DevOps project as a data source, click **Settings**, then click **Data Sources**.
-![Import single Azure DevOps project as a data source](/img/docs/vault-radar/add-data-source.png)
-
-To import many Azure DevOps projects together as a data source host, click **Settings**, then click **Data Source Hosts**.
-![Import many Azure DevOps projects as a data source](/img/docs/vault-radar/add-data-source-host.png)
-
-Additionally, for either option, you can choose to scan with [**HCP Vault Radar Scan**](#scan-with-hcp-vault-radar-scan) or
-with the [**Vault Radar Agent Scan**](#scan-with-vault-radar-agent-scan).
-
-# Connect to Azure DevOps
-
-For either the data source or data source host option, scanning can be set up using **HCP Vault Radar Scan** or using **Vault Radar Agent Scan**.
+Connect Azure DevOps as a data source to HCP Vault Radar to scan your Azure DevOps projects
+for sensitive data and secrets. HCP Vault Radar supports scanning Azure DevOps
+Server and Azure DevOps Cloud.
 
 ## Prerequisites
 
-- User email
-- [Personal access token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows) with the right set of scopes
-    - Code > Read
-    - Entitlements > Read
-    - Graph > Read
-    - Identity > Read
-    - Member Entitlement Management > Read
-    - Notifications > Read, Write, Manage
-    - Project and Team > Read
-    - Service Connections > Read
-    - User Profile > Read
-    - Work Items > Read, Write
+- HCP IAM user with the HCP owner, or admin role
+- [Vault Radar agent](/hcp/docs/vault-radar/agent/deploy) deployed and running (agent scan only)
+- Access to an Azure DevOps organization or project
+- A [personal access token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows)
+  with access scoped to **All accessible organizations** with the following scopes:
 
-If only a single project is being imported via **Data Sources**, toggle the scope to have access to the organization or project collection that the project belongs to.
+  ```plaintext
+  Code > Read
+  Entitlements > Read
+  Graph > Read
+  Identity > Read
+  Member Entitlement Management > Read
+  Notifications > Read, Write, Manage
+  Project and Team > Read
+  Service Connections > Read
+  User Profile > Read
+  Work Items > Read, Write
+  ```
 
-If many projects are being imported via **Data Source Hosts**, toggle the access scope to have access to all accessible organizations or all accessible project collections.
+## Add an Azure DevOps data source
 
-![Azure DevOps token access scope](/img/docs/vault-radar/azure-devops/azure-devops-access-scopes.png)
+<Note title="Scan up to 5000 repositories">
 
-## Scan with HCP Vault Radar Scan
+HCP Vault Radar allows you to scan up to 5000 repositories per connection. If
+you have more than 5000 repositories, Vault Radar will select the 5000
+repositories with the most recent activity.
 
-1. Select **HCP Vault Radar Scan**, then select either **Azure DevOps Cloud** or **Azure DevOps Server**.
+</Note>
 
-1. Depending on your previous selections, different input text fields may appear.
+<Tabs>
+<Tab heading="Azure DevOps Cloud">
 
-1. If you previously selected **Azure DevOps Server**, enter the domain URL in the **Enter your Azure DevOps domain name** text field.
-    - This will be the domain name of your instance, i.e. `azure-devops.acme.com`
+Add Azure DevOps Cloud as a data source to scan your Azure DevOps projects for secrets.
 
-1. If you previously selected **Data Sources** -
-    - Enter project name in the **Enter your Azure DevOps project name** text field.
+<Tabs>
+<Tab heading="HCP Vault Radar cloud scan">
 
-    - For **Azure DevOps Server**, enter the Azure DevOps project collection in the **Enter your Azure DevOps project collection name** text field, and
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
 
-![Azure DevOps Server scanned by HCP Vault Radar Scan using data source workflow](/img/docs/vault-radar/azure-devops/azure-devops-server-hcp-data-source.png)
+1. Click **Vault Radar**.
 
-    - For **Azure DevOps Cloud**, enter the Azure DevOps organization in the **Enter your Azure DevOps organization name** text field.
+1. Click **Settings**.
 
-![Azure DevOps Cloud scanned by HCP Vault Radar Scan using data source workflow](/img/docs/vault-radar/azure-devops/azure-devops-cloud-hcp-data-source.png)
+1. Click **Data Source Hosts**.
 
-1. Enter the personal access token in the **Enter your Azure DevOps personal access token** text field.
+1. Click **Add data source host**.
+
+1. Select **HCP Vault Radar Scan**.
+
+1. Select **Azure DevOps Cloud**.
+
+1. Enter the personal access token in the **Enter your Azure DevOps personal
+   access token** field.
 
 1. Click **Next**.
 
-## Scan with Vault Radar Agent Scan
+1. Select either **All data sources** or **Select data sources**.
 
-1. Make sure that the agent pool has been set up, refer to the [agent pool documentation](/hcp/docs/vault-radar/agent/deploy) for more information.
+1. Click **Finish**
 
-1. Select **HCP Vault Radar Scan**, then select either **Azure DevOps Cloud** or **Azure DevOps Server**.
+</Tab>
+<Tab heading="HCP Vault Radar agent scan">
 
-1. Depending on your previous selections, different input text fields may appear.
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
 
-1. If you previously selected **Azure DevOps Server**, enter the domain URL in the **Enter your Azure DevOps domain name** text field.
-    - This will be the domain name of your instance, i.e. `azure-devops.acme.com`
+1. Click **Vault Radar**.
 
-1. If you previously selected **Data Sources** -
-    - Enter project name in the **Enter your Azure DevOps project name** text field.
+1. Click **Settings**.
 
-    - For **Azure DevOps Server**, enter the Azure DevOps project collection in the **Enter your Azure DevOps project collection name** text field, and
+1. Click **Data Source Hosts**.
 
-![Azure DevOps Server scanned by Vault Radar Agent Scan using data source workflow](/img/docs/vault-radar/azure-devops/azure-devops-server-agent-data-source.png)
+1. Click **Add data source host**.
 
-    - For **Azure DevOps Cloud**, enter the Azure DevOps organization in the **Enter your Azure DevOps organization name** text field.
+1. Select **Vault Radar Agent Scan*.
 
-![Azure DevOps Cloud scanned by Vault Radar Agent Scan using data source workflow](/img/docs/vault-radar/azure-devops/azure-devops-cloud-agent-data-source.png)
+1. Select **Azure DevOps Cloud**.
 
-1. Create an environment variable for the API token in the agent environment. This should be in the format `token_creator_email:api_token`.
-
+1. Enter the path to the environment variable with the personal access token in
+   the **Enter environment path to your Azure DevOps personal access token**
+   field.
+   
    **Example:**
 
    <CodeBlockConfig hideClipboard>
 
-   ```shell-session
-   $ export AZURE_DEVOPS_TOKEN=myemail@example.com:mytoken
+   ```plaintext
+   env://AZURE_DEVOPS_TOKEN
    ```
 
    </CodeBlockConfig>
 
-1. Enter the name of the environment variable in the **Enter environment path to your Azure DevOps personal access token** text field with the `env://` prefix.
+1. Click **Next**.
 
-    **Example:**
+1. Select either **All data sources** or **Select data sources**.
 
-    ```plaintext
-    env://AZURE_DEVOPS_TOKEN
-    ```
+1. Click **Finish**
+
+</Tab>
+</Tabs>
+
+</Tab>
+<Tab heading="Azure DevOps Server">
+
+Add Azure DevOps Server as a data source to scan your Azure DevOps projects for secrets.
+
+<Tabs>
+<Tab heading="HCP Vault Radar cloud scan">
+
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
+
+1. Click **Vault Radar**.
+
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **HCP Vault Radar Scan**.
+
+1. Select **Azure DevOps Server**.
+
+1. Enter the following information:
+   
+   - **Enter your Azure DevOps domain name:** Fully qualified domain name of
+     your Azure DevOps Server.
+   - **Enter your Azure DevOps token:** Access token from your Azure DevOps
+     Server.
 
 1. Click **Next**.
 
-# Finish data source import
-
-1. Choose which repositories to monitor by selecting either the **All active repositories** or **Select repositories to monitor**
-
-    Monitor active repositories up to limit ![Add Azure DevOps all active](/img/docs/vault-radar/azure-devops/azure-devops-monitor-all-active-resources.png)
-
-    Monitor selected repositories ![Add Azure DevOps custom select](/img/docs/vault-radar/azure-devops/azure-devops-monitor-custom-select-resources.png)
+1. Select either **All data sources** or **Select data sources**.
 
 1. Click **Finish**
 
-<Note>
+</Tab>
+<Tab heading="HCP Vault Radar agent scan">
 
-Vault Radar has a limit of 5000 repositories per connection. If you have more
-than 5000 repositories, Vault Radar will select the 5000 repositories with the
-most recent activity.
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
 
-</Note>
+1. Click **Vault Radar**.
 
-# Finish data source host import
+1. Click **Settings**.
 
-1. Choose which data sources to monitor by selecting either the **All data sources** or **Select data sources**
+1. Click **Data Source Hosts**.
 
-    Monitor all data sources up to limit ![Add Azure DevOps all](/img/docs/vault-radar/azure-devops/azure-devops-monitor-all-active-data-sources.png)
+1. Click **Add data source host**.
 
-    Monitor selected data sources ![Add Azure DevOps custom select](/img/docs/vault-radar/azure-devops/azure-devops-monitor-custom-select-data-sources.png)
+1. Select **Vault Radar Agent Scan*.
+
+1. Select **Azure DevOps Server**.
+
+1. Enter the following information:
+   
+   - **Enter your Azure DevOps domain name:** Fully qualified domain name of
+     your Azure DevOps Server.
+   - **Enter environment path to your Azure DevOps token:** Access token from your Azure DevOps
+     Server.
+   
+   **Example:**
+
+   <CodeBlockConfig hideClipboard>
+
+   ```plaintext
+   env://AZURE_DEVOPS_TOKEN
+   ```
+
+   </CodeBlockConfig>
+
+1. Click **Next**.
+
+1. Select either **All data sources** or **Select data sources**.
 
 1. Click **Finish**
 
-# Update data source
+</Tab>
+</Tabs>
 
-1. Navigate to **Settings**, and then **Data Sources**, and click the three dots to the right
+</Tab>
+</Tabs>
 
-   ![Update monitored resources](/img/docs/vault-radar/azure-devops/azure-devops-update-data-source.png)
+## Assign a group to a resource
+
+@include 'vault-radar/add-group-to-resource.mdx'
+
+## Update data source
+
+1. Navigate to **Settings**, and click **Data Sources**.
+
+1. Click the ellipsis to the right of the data source.
 
 1. To update the monitored repositories, click **Edit monitored resources**.
 
@@ -160,16 +217,14 @@ most recent activity.
 
 1. If these data sources were discovered by importing the **Data Source Host**, to update the token, [update the data source host instead](#update-data-source-host)
 
-# Update data source host
+## Update data source host
 
-1. Navigate to **Settings**, and then **Data Source Hosts**, and click the three dots to the right
-
-   ![Update monitored data sources](/img/docs/vault-radar/azure-devops/azure-devops-update-data-source-host.png)
+1. Navigate to **Settings**, and then **Data Source Hosts**, and click the three dots to the right.
 
 1. To update the monitored data sources, click **Edit data sources**
 
 1. To update the token, click **Edit data source host details**
 
-## Assign a group to a resource
+## Tutorials
 
-@include 'vault-radar/add-group-to-resource.mdx'
+@include 'vault-radar/radar-quickstart-tutorials.mdx'
