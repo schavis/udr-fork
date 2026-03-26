@@ -2,40 +2,38 @@
 layout: api
 page_title: /sys/billing/overview - HTTP API
 description: >-
-    The `/sys/billing/overview` endpoint returns a monthly overview of billing data.
+  The `/sys/billing/overview` endpoint returns a monthly overview of usage data.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2026-03-10T14:47:25-07:00
+last_modified: 2026-03-26T19:03:32.000Z
+# END AUTO GENERATED METADATA
 ---
-
 
 # `/sys/billing/overview`
 
 @include 'alerts/restricted-root.mdx'
 
-The `/sys/billing/overview` endpoint returns a monthly overview of consumption data relevant to consumption-based licensing for the current and previous months. Vault updates current-month metrics every 10 minutes. Refer to the `updated_at` field in monthly response data to determine when Vault last updated the billing metrics for each month.
+The `/sys/billing/overview` endpoint returns a monthly overview of usage data relevant to usage-based licensing for the current and previous months.
 
-| Method | Path                        |
-| :----- | :-------------------------- |
-| `GET`  | `/sys/billing/overview`     |
+Vault updates current-month metrics every 10 minutes. Refer to the `updated_at` field in monthly response data to determine when Vault last updated the billing metrics for each month.
+
+| Method | Path                    |
+| :----- | :---------------------- |
+| `GET`  | `/sys/billing/overview` |
 
 ### Request parameters
 
-- `refresh_data` `(boolean: false)` - When set to `true, Vault recalculates and
-  all billing metrics and stores the new metrics. Leave `refresh_data` unset or
-  explicitly set to `false` to return data as of when it was last calculated.
-  Be aware that recalculating metrics consumes server resources and may cause
-  performance issues if done too frequently.
-
+- `refresh_data` `(boolean: false)` - When set to `true`, Vault recalculates all billing metrics and stores the new metrics. Leave `refresh_data` unset, or set to `false`, to return data as of when it was last calculated. Recalculating metrics consumes server resources and may cause performance issues if done too frequently.
 
 ### Sample request
 
 ```shell-session
-$ curl                                        \
-    --header "X-Vault-Token: ${VAULT_TOKEN}"  \
-    ${VAULT_ADDR}/v1/sys/billing/overview?refresh_data=false
+$ curl --header "X-Vault-Token: ${VAULT_TOKEN}" "${VAULT_ADDR}/v1/sys/billing/overview?refresh_data=false"
 ```
 
-
-
 ### Sample response
+
+<CodeBlockConfig hideClipboard>
 
 ```json
 {
@@ -145,3 +143,5 @@ $ curl                                        \
   ]
 }
 ```
+
+</CodeBlockConfig>

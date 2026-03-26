@@ -461,8 +461,21 @@
         "path": "system/auth"
       },
       {
-        "title": "<code>/sys/billing/certificates</code>",
-        "path": "system/billing/certificates"
+        "title": "<code>/sys/billing</code>",
+        "routes": [
+          {
+            "title": "Overview",
+            "path": "system/billing"
+          },
+          {
+            "title": "<code>/sys/billing/overview</code>",
+            "path": "system/billing/overview"
+          },
+          {
+            "title": "<code>/sys/billing/certificates</code>",
+            "path": "system/billing/certificates"
+          }
+        ]
       },
       {
         "title": "<code>/sys/capabilities</code>",
