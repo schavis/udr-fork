@@ -2,11 +2,12 @@
 layout: docs
 page_title: Anonymous product usage reporting
 description: >-
-  Learn about the anonymized data HashiCorp collects automatically for product
-  usage reporting and how to enable or disable data collection.
+  Learn about the anonymized data HashiCorp collects automatically for product usage reporting and how to enable or disable data collection.
+
+
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2026-01-27T17:15:25-08:00
-last_modified: 2026-02-18T02:24:55.000Z
+last_modified: 2026-03-26T19:06:45.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -14,35 +15,28 @@ last_modified: 2026-02-18T02:24:55.000Z
 
 @include 'alerts/enterprise-only.mdx'
 
-HashiCorp collects usage data about how Vault clusters are being used. Product usage
-data is not used for billing or and is numerical only, and no sensitive information of
-any nature is being collected. The data is collected as part of
-the [license utilization reporting](/vault/docs/enterprise/license/utilization-reporting)
-process and managed in a compliant manner. If automated reporting is enabled, this
-data will be collected automatically.
-If automated reporting is disabled, then this will be collected as part of the manual reports.
+To help guide product development efforts, HashiCorp collects usage data about how Vault clusters and features are used. Except for the metadata listed in [usage metadata](#usage-metadata-list), product usage metrics are numeric only. See [usage metrics list](#usage-metrics-list) below for a description of each of product usage metric.
+
+Product usage data is collected as part of the [license utilization reporting](/vault/docs/license/utilization) process and managed in a compliant manner.
 
 ## Opt out
 
-While none of the collected usage metrics are sensitive in any way, if you are still concerned
-about these usage metrics being reported, then you can opt-out of them being collected.
+You have two options to opt out of product usage reporting:
 
-If you are considering opting out because you’re worried about the data, we
-strongly recommend that you review the [usage metrics list](#usage-metrics-list)
-before opting out. If you have concerns with any of the automatically-reported
-data please bring them to your account manager.
-
-You have two options to opt out of product usage collection:
-
-- HCL configuration (recommended)
+- HCL configuration **(recommended)**
 - Environment variable (requires restart)
 
+Be sure to apply the same configuration or environment variable to all nodes on a Vault cluster: upon leadership change, the new leader node's settings will take effect.
 
-#### HCL configuration
+If your HCL configuration file and environment variable differ, the environment variable setting will take precedence.
 
-Opting out in your product's configuration file doesn't require a system
-restart, and is the method we recommend. Add the following block to your server
-configuration file (e.g. `vault-config.hcl`).
+If you opt out of product usage reporting, Vault's [license utilization reporting payloads](/vault/docs/license/utilization/metrics#sample-payload) will continue to include the names and **default values** of product usage metrics. For example, even if your cluster has 100 namespaces, the `vault.namespaces.count` metric will still report 0.
+
+Opting out of product usage reporting does not affect snapshots taken before the opt-out settings took effect.
+
+### HCL configuration
+
+Add the following to your Vault's HCL configuration file. If Vault is already running, you must trigger a configuration reload by sending a `SIGHUP` signal to the Vault process.
 
 ```hcl
 reporting {
@@ -50,252 +44,234 @@ reporting {
 }
 ```
 
-<Warning>
-
-  When you have a cluster, each node must have the reporting stanza in its
-  configuration to be consistent. In the event of leadership change, nodes will
-  use its server configuration to determine whether or not to opt-out the
-  product usage collection. Inconsistent configuration between nodes will change the
-  reporting status upon active unseal.
-
-</Warning>
-
-
-You will find the following entry in the server log:
+Vault will log the following message in its server logs:
 
 <CodeBlockConfig hideClipboard>
 
-  ```text
-  [DEBUG] activity: there is no reporting agent configured, skipping counts reporting
-  ```
-
-</CodeBlockConfig>
-
-#### Environment variable
-
-If you need to, you can also opt out using an environment variable, which will
-provide a startup message confirming that you have product usage data collection.
-This option requires a system restart.
-
-<Note>
-
-  If the reporting stanza exists in the configuration file, the
-  `OPTOUT_PRODUCT_USAGE_REPORTING` value overrides the configuration.
-
-</Note>
-
-Set the following environment variable.
-
-```shell-session
-$ export OPTOUT_PRODUCT_USAGE_REPORTING=true
+```log
+[DEBUG] activity: there is no reporting agent configured, skipping counts reporting
 ```
 
-Now, restart your [Vault servers](/vault/docs/commands/server) from the shell
-where you set the environment variable.
+</CodeBlockConfig>
 
-You will find the following entries in the server log.
+### Environment variable
+
+Set the following environment variable for the Vault process. If Vault is already running, you will have to restart the process before the environment variable takes effect.
+
+```
+OPTOUT_PRODUCT_USAGE_REPORTING=true
+```
+
+Vault will log the following messages in its server logs:
 
 <CodeBlockConfig hideClipboard>
 
-  ```text
-  [INFO] core: product usage reporting disabled via environment variable: env=OPTOUT_PRODUCT_USAGE_REPORTING
-  [DEBUG] product usage reporting is disabled; usage metrics data will not be collected
-  ```
+```log
+[INFO] core: product usage reporting disabled via environment variable: env=OPTOUT_PRODUCT_USAGE_REPORTING
+[DEBUG] product usage reporting is disabled; usage metrics data will not be collected
+```
 
 </CodeBlockConfig>
-
-If your configuration file and environment variable differ, the environment
-variable setting will take precedence.
 
 ## Usage metrics list
 
-HashiCorp collects the following product usage metrics as part of the `metrics` part of the
-[JSON payload that it collects for licence utilization](/vault/docs/enterprise/license/utilization-reporting#example-payloads).
-All of these metrics are numerical, and contain no sensitive values or additional metadata:
+HashiCorp collects the following product usage metrics. All of these metrics are numerical, and contain no sensitive values or additional metadata.
 
-| Metric Name                                                         | Description                                                                                                      |
-|---------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `vault.namespaces.count`                                            | Total number of namespaces.                                                                                      |
-| `vault.leases.count`                                                | Total number of leases within Vault.                                                                             |
-| `vault.quotas.ratelimit.count`                                      | Total number of rate limit quotas within Vault, considering any group_by modes.                                  |
-| `vault.quotas.ratelimit.ip.count`                                   | Total number of rate limit quotas using "ip" group_by mode within Vault.                                         |
-| `vault.quotas.ratelimit.none.count`                                 | Total number of rate limit quotas using "none" group_by mode within Vault.                                       |
-| `vault.quotas.ratelimit.entity_then_ip.count`                       | Total number of rate limit quotas using "entity_then_ip" group_by mode within Vault.                             |
-| `vault.quotas.ratelimit.entity_then_ip_with_secondary_rate.count`   | Total number of rate limit quotas using "entity_then_ip" group_by mode with secondary rate within Vault.         |
-| `vault.quotas.ratelimit.entity_then_none.count`                     | Total number of rate limit quotas using "entity_then_none" group_by mode within Vault.                           |
-| `vault.quotas.ratelimit.entity_then_none_with_secondary_rate.count` | Total number of rate limit quotas using "entity_then_none" group_by mode with secondary rate within Vault.       |
-| `vault.quotas.leasecount.count`                                     | Total number of lease count quotas within Vault.                                                                 |
-| `vault.kv.version1.secrets.count`                                   | Total number of KVv1 secrets within Vault.                                                                       |
-| `vault.kv.version2.secrets.count`                                   | Total number of KVv2 secrets within Vault.                                                                       |
-| `vault.kv.version1.secrets.namespace.max`                           | The highest number of KVv1 secrets in a namespace in Vault, e.g. `1000`.                                         |
-| `vault.kv.version2.secrets.namespace.max`                           | The highest number of KVv2 secrets in a namespace in Vault, e.g. `1000`.                                         |
-| `vault.kv.version1.secrets.namespace.min`                           | The lowest number of KVv1 secrets in a namespace in Vault, e.g. `2`.                                             |
-| `vault.kv.version2.secrets.namespace.min`                           | The highest number of KVv2 secrets in a namespace in Vault, e.g. `1000`.                                         |
-| `vault.kv.version1.secrets.namespace.mean`                          | The mean number of KVv1 secrets in namespaces in Vault, e.g. `52.8`.                                             |
-| `vault.kv.version2.secrets.namespace.mean`                          | The mean number of KVv2 secrets in namespaces in Vault, e.g. `52.8`.                                             |
-| `vault.auth.method.approle.count`                                   | The total number of Approle auth mounts in Vault.                                                                |
-| `vault.auth.method.alicloud.count`                                  | The total number of Alicloud auth mounts in Vault.                                                               |
-| `vault.auth.method.aws.count`                                       | The total number of AWS auth mounts in Vault.                                                                    |
-| `vault.auth.method.appid.count`                                     | The total number of App ID auth mounts in Vault.                                                                 |
-| `vault.auth.method.azure.count`                                     | The total number of Azure auth mounts in Vault.                                                                  |
-| `vault.auth.method.cloudfoundry.count`                              | The total number of Cloud Foundry auth mounts in Vault.                                                          |
-| `vault.auth.method.github.count`                                    | The total number of GitHub auth mounts in Vault.                                                                 |
-| `vault.auth.method.gcp.count`                                       | The total number of GCP auth mounts in Vault.                                                                    |
-| `vault.auth.method.jwt.count`                                       | The total number of JWT auth mounts in Vault.                                                                    |
-| `vault.auth.method.kerberos.count`                                  | The total number of Kerberos auth mounts in Vault.                                                               |
-| `vault.auth.method.kubernetes.count`                                | The total number of Kubernetes auth mounts in Vault.                                                             |
-| `vault.auth.method.ldap.count`                                      | The total number of LDAP auth mounts in Vault.                                                                   |
-| `vault.auth.method.oci.count`                                       | The total number of OCI auth mounts in Vault.                                                                    |
-| `vault.auth.method.okta.count`                                      | The total number of Okta auth mounts in Vault.                                                                   |
-| `vault.auth.method.pcf.count`                                       | The total number of PCF auth mounts in Vault.                                                                    |
-| `vault.auth.method.radius.count`                                    | The total number of Radius auth mounts in Vault.                                                                 |
-| `vault.auth.method.saml.count`                                      | The total number of SAML auth mounts in Vault.                                                                   |
-| `vault.auth.method.spiffe.count`                                    | The total number of SPIFFE auth mounts in Vault.                                                                 |
-| `vault.auth.method.cert.count`                                      | The total number of Cert auth mounts in Vault.                                                                   |
-| `vault.auth.method.oidc.count`                                      | The total number of OIDC auth mounts in Vault.                                                                   |
-| `vault.auth.method.token.count`                                     | The total number of Token auth mounts in Vault.                                                                  |
-| `vault.auth.method.userpass.count`                                  | The total number of Userpass auth mounts in Vault.                                                               |
-| `vault.auth.method.plugin.count`                                    | The total number of custom plugin auth mounts in Vault.                                                          |
-| `vault.db.cassandra.plugin.count`                                   | The total number of Cassandra database plugin connections in Vault.                                              |
-| `vault.db.couchbase.plugin.count`                                   | The total number of Couchbase database plugin connections in Vault.                                              |
-| `vault.db.elasticsearch.plugin.count`                               | The total number of Elasticsearch database plugin connections in Vault.                                          |
-| `vault.db.hana.plugin.count`                                        | The total number of Hana database plugin connections in Vault.                                                   |
-| `vault.db.influxdb.plugin.count`                                    | The total number of InfluxDB database plugin connections in Vault.                                               |
-| `vault.db.mongodb.plugin.count`                                     | The total number of MongoDB database plugin connections in Vault.                                                |
-| `vault.db.mongodbatlas.plugin.count`                                | The total number of MongoDB Atlas database plugin connections in Vault.                                          |
-| `vault.db.mssql.plugin.count`                                       | The total number of MSSQL database plugin connections in Vault.                                                  |
-| `vault.db.mysql.plugin.count`                                       | The total number of MySQL database plugin connections in Vault.                                                  |
-| `vault.db.postgres.plugin.count`                                    | The total number of Postgres databse plugin connections in Vault.                                                |
-| `vault.db.redshift.plugin.count`                                    | The total number of Redshift database plugin connections in Vault.                                               |
-| `vault.db.redis.plugin.count`                                       | The total number of Redis database plugin connections in Vault.                                                  |
-| `vault.db.rediselasticache.plugin.count`                            | The total number of Redis Elasticache database plugin connections in Vault.                                      |
-| `vault.db.snowflake.plugin.count`                                   | The total number of Snowflake database plugin connections in Vault.                                              |
-| `vault.db.unknown.plugin.count`                                     | The total number of custom or unknown database plugin connections in Vault.                                      |
-| `vault.secret.engine.activedirectory.count`                         | The total number of Active Directory secret engines in Vault.                                                    |
-| `vault.secret.engine.alicloud.count`                                | The total number of Alicloud secret engines in Vault.                                                            |
-| `vault.secret.engine.aws.count`                                     | The total number of AWS secret engines in Vault.                                                                 |
-| `vault.secret.engine.aws.dynamic.role.count`                        | The total number of AWS dynamic roles in Vault.                                                            |
-| `vault.secret.engine.aws.static.role.count`                         | The total number of AWS static roles in Vault.
-| `vault.secret.engine.azure.count`                                   | The total number of Azure secret engines in Vault.                                                               |
-| `vault.secret.engine.azure.dynamic.role.count`                      | The total number of Azure dynamic roles in Vault.                                                          |
-| `vault.secret.engine.consul.count`                                  | The total number of Consul secret engines in Vault.                                                              |
-| `vault.secret.engine.gcp.count`                                     | The total number of GCP secret engines in Vault.                                                                 |
-| `vault.secret.engine.gcp.impersonated.account.count`                | The total number of GCP impersonated accounts in Vault.                                                    |
-| `vault.secret.engine.gcp.roleset.count`                             | The total number of GCP rolesets in Vault.                                                                 |
-| `vault.secret.engine.gcp.static.role.count`                         | The total number of GCP static roles in Vault.
-| `vault.secret.engine.gcpkms.count`                                  | The total number of GCPKMS secret engines in Vault.                                                              |
-| `vault.secret.engine.kubernetes.count`                              | The total number of Kubernetes secret engines in Vault.                                                          |
-| `vault.secret.engine.cassandra.count`                               | The total number of Cassandra secret engines in Vault.                                                           |
-| `vault.secret.engine.keymgmt.count`                                 | The total number of Keymgmt secret engines in Vault.                                                             |
-| `vault.secret.engine.kv.count`                                      | The total number of KV secret engines in Vault.                                                                  |
-| `vault.secret.engine.kmip.count`                                    | The total number of KMIP secret engines in Vault.                                                                |
-| `vault.secret.engine.mongodb.count`                                 | The total number of MongoDB secret engines in Vault.                                                             |
-| `vault.secret.engine.mongodbatlas.count`                            | The total number of MongoDBAtlas secret engines in Vault.                                                        |
-| `vault.secret.engine.mssql.count`                                   | The total number of MSSql secret engines in Vault.                                                               |
-| `vault.secret.engine.mysql.count`                                   | The total number of MySQL secret engines in Vault.                                                               |
-| `vault.secret.engine.postgresql.count`                              | The total number of Postgresql secret engines in Vault.                                                          |
-| `vault.secret.engine.nomad.count`                                   | The total number of Nomad secret engines in Vault.                                                               |
-| `vault.secret.engine.ldap.count`                                    | The total number of LDAP secret engines in Vault.                                                                |
-| `vault.secret.engine.openldap.count`                                | The total number of OpenLDAP secret engines in Vault.                                                            |
-| `vault.secret.engine.pki.count`                                     | The total number of PKI secret engines in Vault.                                                                 |
-| `vault.secret.engine.pki-external-ca.count`                         | The total number of PKI External CA secret engines in Vault.                                                     |
-| `vault.secret.engine.rabbitmq.count`                                | The total number of RabbitMQ secret engines in Vault.                                                            |
-| `vault.secret.engine.spiffe.count`                                  | The total number of SPIFFE secret engines in Vault.                                                              |
-| `vault.secret.engine.ssh.count`                                     | The total number of SSH secret engines in Vault.                                                                 |
-| `vault.secret.engine.terraform.count`                               | The total number of Terraform secret engines in Vault.                                                           |
-| `vault.secret.engine.totp.count`                                    | The total number of TOTP secret engines in Vault.                                                                |
-| `vault.secret.engine.transform.count`                               | The total number of Transform secret engines in Vault.                                                           |
-| `vault.secret.engine.transit.count`                                 | The total number of Transit secret engines in Vault.                                                             |
-| `vault.secret.engine.database.count`                                | The total number of Database secret engines in Vault.                                                            |
-| `vault.secret.engine.plugin.count`                                  | The total number of custom plugin secret engines in Vault.                                                       |
-| `vault.secretsync.sources.count`                                    | The total number of secret sources configured for secret sync.                                                   |
-| `vault.secretsync.destinations.count`                               | The total number of secret destinations configured for secret sync.                                              |
-| `vault.secretsync.destinations.aws-sm.count`                        | The total number of AWS-SM secret destinations configured for secret sync.                                       |
-| `vault.secretsync.destinations.azure-kv.count`                      | The total number of Azure-KV secret destinations configured for secret sync.                                     |
-| `vault.secretsync.destinations.gcp-sm.count`                        | The total number of secret sync destinations to GCP-SM configured.                                               |
-| `vault.secretsync.destinations.gh.count`                            | The total number of GH secret destinations configured for secret sync.                                           |
-| `vault.secretsync.destinations.vault.count`                         | The total number of Vault secret destinations configured for secret sync.                                        |
-| `vault.secretsync.destinations.vercel-project.count`                | The total number of Vercel Project secret destinations configured for secret sync.                               |
-| `vault.secretsync.destinations.terraform.count`                     | The total number of Terraform secret destinations configured for secret sync.                                    |
-| `vault.secretsync.destinations.gitlab.count`                        | The total number of GitLab secret destinations configured for secret sync.                                       |
-| `vault.secretsync.destinations.inmem.count`                         | The total number of InMem secret destinations configured for secret sync.                                        |
-| `vault.secretsync.destinations.wif.count`                           | The total number of secret destinations configured for secret sync using Workload Identity Federation(WIF).      |
-| `vault.secretsync.destinations.aws-sm.wif.count`                    | The total number of AWS-SM secret destinations configured for secret sync using Workload Identity Federation(WIF). |
-| `vault.secretsync.destinations.azure-kv.wif.count`                  | The total number of Azure-KV secret destinations configured for secret sync using Workload Identity Federation(WIF). |
-| `vault.secretsync.destinations.gcp-sm.wif.count`                    | The total number of GCP-SM secret destinations configured for secret sync using Workload Identity Federation(WIF). |
-| `vault.secretsync.destinations.inmem.wif.count`                     | The total number of InMem secret destinations configured for secret sync using Workload Identity Federation(WIF). |
-| `vault.secretsync.destinations.static.count`                        | The total number of secret destinations configured for secret sync using static credentials.                     |
-| `vault.secretsync.destinations.aws-sm.static.count`                 | The total number of AWS-SM secret destinations configured for secret sync using static credentials.              |
-| `vault.secretsync.destinations.azure-kv.static.count`               | The total number of Azure-KV secret destinations configured for secret sync using static credentials.            |
-| `vault.secretsync.destinations.gcp-sm.static.count`                 | The total number of GCP-SM secret destinations configured for secret sync using static credentials.              |
-| `vault.secretsync.destinations.inmem.static.count`                  | The total number of InMem secret destinations configured for secret sync using static credentials.               |
-| `vault.scim.config.clients.count`                                   | The total number of distinct SCIM clients configured.                                                            |
-| `vault.scim.config.clients.with_mount_accessor.count`               | The total number of SCIM clients with a mount accessor configured.                                               |
-| `vault.scim.resources.entities_managed.count`                       | The total number of identity entities under SCIM management.                                                     |
-| `vault.scim.resources.groups_managed.count`                         | The total number of identity groups under SCIM management.                                                       |
-| `vault.pki.roles.count`                                             | The total roles in all PKI mounts across all namespaces.                                                         |
-| `vault.pki.issuers.count`                                           | The total issuers from all PKI mounts across all namespaces.                                                     |
-| `vault.identity.case_sensitive_mode`                                | Whether or not the cluster is using case-sensitive identity name matching caused by historical duplicates.       |
-| `vault.identity.force_deduplication_activated`                      | Whether or not the cluster has had the force_identity_deduplication activation flag activated.                   |
-| `vault.ui.enabled`                                                  | Whether or not the UI is enabled for the cluster.                                                                |
-| `vault.ui.custom_banners.authenticated`                             | How many authenticated custom banners have been enabled across all namespaces.                                   |
-| `vault.ui.custom_banners.unauthenticated`                           | How many unauthenticated custom banners have been enabled across all namespaces.                                 |
-| `vault.storage.max_entry_size`                                      | The value of `max_entry_size` parameter for the storage stanza in the config.                                    |
-| `vault.storage.max_mount_and_namespace_table_entry_size`            | The value of `max_mount_and_namespace_table_entry_size` parameter for the storage stanza in the config.          |
-| `vault.operator.import.kv.version2.secrets.source.vault.count`      | The total number of secrets imported from Vault using operator import command.                                   |
-| `vault.operator.import.kv.version2.secrets.source.aws.count`        | The total number of secrets imported from AWS using operator import command.                                     |
-| `vault.operator.import.kv.version2.secrets.source.gcp.count`        | The otal number of secrets imported from GCP using operator import command.                                      |
-| `vault.operator.import.kv.version2.secrets.source.azure.count`      | The total number of secrets imported from Azure using operator import command.                                   |
-| `vault.operator.import.kv.version2.secrets.count`                   | The total number of secrets imported from using operator import command.                                         |
-| `vault.telemetry.stanzas.count`                                     | The count of telemetry stanzas configured in this cluster.                                                       |
-| `vault.telemetry.filters.count`                                     | The count of metric prefix filters specified in the telemetry stanza in config file.                             |
-| `vault.replication.secret.non_local_mounts`                         | The number of replicated secret mounts on Enterprise clusters.                                                   |
-| `vault.replication.secret.local_mounts`                             | The number of local secret mounts on Enterprise clusters.                                                        |
-| `vault.replication.auth.local_mounts`                               | The number of local auth mounts on Enterprise clusters.                                                          |
-| `vault.replication.auth.non_local_mounts`                           | The number of replicated auth mounts on Enterprise clusters.                                                     |
-| `vault.replication.num_nodes`                                       | The number of nodes in a HA cluster.                                                                             |
-| `vault.adaptive_overload_protection_enabled`                        | Whether or not Adaptive Overload Protection is enabled for the cluster.                                          |
-| `vault.policies.egp.count`                                          | The total number of Enterprise Governance Policies (EGP) across all namespaces in Vault.                         |
-| `vault.policies.rgp.count`                                          | The total number of Replication Governance Policies (RGP) across all namespaces in Vault.                        |
-| `vault.policies.acl.count`                                          | The total number of Access Control List (ACL) policies across all namespaces in Vault.                           |
-| `vault.policies.acl.control_group.count`                            | The total number of control groups in this cluster.                                                              |
-| `vault.policies.acl.recover.count`                                  | The total number of Access Control List (ACL) policies with a recover capability across all namesapces in Vault. |
-| `vault.autopilot_upgrade_enabled`                                   | Whether or not Autopilot Upgrade is enabled for the cluster.                                                     |
-| `vault.audit.device.file.count`                                     | The total number of audit devices of type file configured for this cluster.                                      |
-| `vault.audit.device.syslog.count`                                   | The total total number of audit devices of type syslog configured for this cluster.                              |
-| `vault.audit.device.socket.udp.count`                               | The total total number of audit devices of type UDP socket configured for this cluster.                          |
-| `vault.audit.device.socket.tcp.count`                               | The total total number of audit devices of type TCP socket configured for this cluster.                          |
-| `vault.audit.device.socket.unix.count`                              | The total total number of audit devices of type UNIX socket configured for this cluster.                         |
-| `vault.audit.exclusion.stanza.count`                                | The total number of audit exclusion stanzas in the HCL configuration for this cluster.                           |
-| `vault.loadedsnapshots.manual.count`                                | The total number of manual (local) snapshots loaded for recovery.                                                |
-| `vault.loadedsnapshots.cloud.google-gcs.count`                      | The total number of Google GCS snapshots loaded for recovery.                                                    |
-| `vault.loadedsnapshots.cloud.aws-s3.count`                          | The total number of AWS S3 snapshots loaded for recovery.                                                        |
-| `vault.loadedsnapshots.cloud.azure-blob.count`                      | The total number of Azure Blob snapshots loaded for recovery.                                                    |
-| `vault.autosnapshots.local.count`                                   | The total number of automated snapshot configurations with storage type local.                                   |
-| `vault.autosnapshots.google-gcs.count`                              | The total of automated snapshot configurations with storage type Google GCS.                                     |
-| `vault.autosnapshots.aws-s3.count`                                  | The total number of automated snapshot configurations with storage type AWS S3.                                  |
-| `vault.autosnapshots.azure-blob.count`                              | The total number of automated snapshot configurations with storage type Azure Blob.                              |
-| `vault.pki.cert.stored.count.current_month`                         | The number of certificates stored in built-in PKI backends in the current month.                                 |
-| `vault.pki.cert.stored.count.previous_month`                        | The number of certificates stored in built-in PKI backends in the previous month.                                |
-| `vault.pki-external-ca.acme_accounts.count`                         | The total number of ACME accounts across all PKI External CA secret engines in Vault.                            |
-| `vault.secret.engine.keymgmt.kms.key.count`                         | The total number of KMS keys across all namespaces from keymgmt secret engine.                                   |
-| `vault.secret.engine.keymgmt.awskms.provider.kms.key.count`         | The total number of KMS keys across all namespaces from keymgmt secret engine mapped with AWS provider.          |
-| `vault.secret.engine.keymgmt.gcpckms.provider.kms.key.count`        | The total number of KMS keys across all namespaces from keymgmt secret engine mapped with GCP provider.          |
-| `vault.secret.engine.keymgmt.azurekeyvault.provider.kms.key.count`  | The total number of KMS keys across all namespaces from keymgmt secret engine mapped with Azure provider.        |
-| `vault.secret.engine.keymgmt.awskms.provider.kms.count`             | The total number of AWS KMS providers across all namespaces from keymgmt secret engine.                          |
-| `vault.secret.engine.keymgmt.gcpckms.provider.kms.count`            | The total number of GCP KMS providers across all namespaces from keymgmt secret engine.                          |
-| `vault.secret.engine.keymgmt.azurekeyvault.provider.kms.count`      | The total number of Azure KMS providers across all namespaces from keymgmt secret engine.                        |
-| `vault.secret.engine.keymgmt.kms.multi.region.key.count`            | The total number of multi-region KMS key across all namespaces from keymgmt secret engine.                       |
-| `vault.secret.engine.keymgmt.kms.multi.region.key.secondary.region.count` | The total number of secondary region of multi-region KMS key across all namespaces from keymgmt secret engine. |
+| Metric Name | Description |
+| --- | --- |
+| `adaptive_overload_protection_enabled` | Whether Adaptive Overload Protection is enabled on Enterprise clusters. |
+| `audit.device.file.count` | The total number of audit devices of type file configured for this cluster. |
+| `audit.device.socket.tcp.count` | The total number of audit devices of type TCP socket configured for this cluster. |
+| `audit.device.socket.udp.count` | The total number of audit devices of type UDP socket configured for this cluster. |
+| `audit.device.socket.unix.count` | The total number of audit devices of type UNIX socket configured for this cluster. |
+| `audit.device.syslog.count` | The total number of audit devices of type syslog configured for this cluster. |
+| `audit.exclusion.stanza.count` | The total number of audit exclusion stanzas in the HCL configuration for this cluster. |
+| `auth.method.alicloud.count` | Number of auth mounts of type Alicloud across all namespaces. |
+| `auth.method.appid.count` | Number of auth mounts of type AppId across all namespaces. Note that this auth method is deprecated. |
+| `auth.method.approle.count` | Number of auth mounts of type Approle across all namespaces. |
+| `auth.method.aws.count` | Number of auth mounts of type AWS across all namespaces. |
+| `auth.method.azure.count` | Number of auth mounts of type Azure across all namespaces. |
+| `auth.method.cert.count` | Number of auth mounts of type Cert across all namespaces. |
+| `auth.method.cloudfoundry.count` | Number of auth mounts of type CloudFoundry across all namespaces. |
+| `auth.method.gcp.count` | Number of auth mounts of type GCP across all namespaces. |
+| `auth.method.github.count` | Number of auth mounts of type GitHub across all namespaces. |
+| `auth.method.jwt.count` | Number of auth mounts of type JWT across all namespaces. |
+| `auth.method.kerberos.count` | Number of auth mounts of type Kerberos across all namespaces. |
+| `auth.method.kubernetes.count` | Number of auth mounts of type Kubernetes across all namespaces. |
+| `auth.method.ldap.count` | Number of auth mounts of type LDAP across all namespaces. |
+| `auth.method.oci.count` | Number of auth mounts of type OCI across all namespaces. |
+| `auth.method.oidc.count` | Number of auth mounts of type OIDC across all namespaces. |
+| `auth.method.okta.count` | Number of auth mounts of type Okta across all namespaces. |
+| `auth.method.pcf.count` | Number of auth mounts of type PCF across all namespaces. Note that this auth method is deprecated. |
+| `auth.method.plugin.count` | Number of auth mounts with unrecognized types (custom plugins) across all namespaces. |
+| `auth.method.radius.count` | Number of auth mounts of type Radius across all namespaces. |
+| `auth.method.saml.count` | Number of auth mounts of type SAML across all namespaces. |
+| `auth.method.spiffe.count` | Number of auth mounts of type Spiffe across all namespaces. |
+| `auth.method.token.count` | Number of auth mounts of type Token across all namespaces. |
+| `auth.method.userpass.count` | Number of auth mounts of type Userpass across all namespaces. |
+| `autopilot_upgrade_enabled` | Whether the autopilot upgrade is enabled on this Vault cluster. |
+| `autosnapshots.aws-s3.count` | The count of automatic snapshots created using AWS S3 as the target. |
+| `autosnapshots.azure-blob.count` | The count of automatic snapshots created using Azure Blob Storage as the target. |
+| `autosnapshots.google-gcs.count` | The count of automatic snapshots created using Google GCS as the target. |
+| `autosnapshots.local.count` | The count of automatic snapshots created using local storage as the target. |
+| `db.cassandra.plugin.count` | Number of database plugins of type Cassandra across all namespaces. |
+| `db.couchbase.plugin.count` | Number of database plugins of type Couchbase across all namespaces. |
+| `db.elasticsearch.plugin.count` | Number of database plugins of type Elasticsearch across all namespaces. |
+| `db.hana.plugin.count` | Number of database plugins of type Hana across all namespaces. |
+| `db.influxdb.plugin.count` | Number of database plugins of type InfluxDB across all namespaces. |
+| `db.mongodb.plugin.count` | Number of database plugins of type MongoDB across all namespaces. |
+| `db.mongodbatlas.plugin.count` | Number of database plugins of type MongoDB Atlas across all namespaces. |
+| `db.mssql.plugin.count` | Number of database plugins of type MSSQL across all namespaces. |
+| `db.mysql.plugin.count` | Number of database plugins of type MySQL across all namespaces. |
+| `db.postgres.plugin.count` | Number of database plugins of type Postgres across all namespaces. |
+| `db.redis.plugin.count` | Number of database plugins of type Redis across all namespaces. |
+| `db.rediselasticache.plugin.count` | Number of database plugins of type Redis Elasticache across all namespaces. |
+| `db.redshift.plugin.count` | Number of database plugins of type Redshift across all namespaces. |
+| `db.snowflake.plugin.count` | Number of database plugins of type Snowflake across all namespaces. |
+| `db.unknown.plugin.count` | Number of unrecognized db plugins across all namespaces. |
+| `identity.case_sensitive_mode` | Whether or not the cluster is using case-sensitive identity name matching caused by historical duplicates. |
+| `identity.force_deduplication_activated` | Whether or not the cluster has had the force_identity_deduplication activation flag activated. |
+| `kv.version1.secrets.count` | Total number of version 1 KV secrets. |
+| `kv.version1.secrets.namespace.max` | Maximum number of version 1 KV secrets in a single namespace. |
+| `kv.version1.secrets.namespace.mean` | Mean number of version 1 KV secrets across namespaces. |
+| `kv.version1.secrets.namespace.min` | Minimum number of version 1 KV secrets in a single namespace. |
+| `kv.version2.secrets.count` | Total number of version 2 KV secrets. |
+| `kv.version2.secrets.namespace.max` | Maximum number of version 2 KV secrets in a single namespace. |
+| `kv.version2.secrets.namespace.mean` | Mean number of version 2 KV secrets across namespaces. |
+| `kv.version2.secrets.namespace.min` | Minimum number of version 2 KV secrets in a single namespace. |
+| `leases.count` | Total number of leases. |
+| `loadedsnapshots.cloud.aws-s3.count` | The count of loaded snapshots created using AWS S3 as the source. |
+| `loadedsnapshots.cloud.azure-blob.count` | The count of loaded snapshots created using Azure Blob as the source. |
+| `loadedsnapshots.cloud.google-gcs.count` | The count of loaded snapshots created using Google GCS as the source. |
+| `loadedsnapshots.manual.count` | The count of loaded snapshots created using a local snapshot as the source. |
+| `mfa.login.duo.count` | The count of MFA configurations using the Duo method enforced during login. |
+| `mfa.login.okta.count` | The count of MFA configurations using the Okta method enforced during login. |
+| `mfa.login.pingid.count` | The count of MFA configurations using the PingID method enforced during login. |
+| `mfa.login.totp.count` | The count of MFA configurations using the TOTP method enforced during login. |
+| `mfa.stepup.duo.count` | The count of MFA configurations using the Duo method enforced as step-up authentication. |
+| `mfa.stepup.okta.count` | The count of MFA configurations using the Okta method enforced as step-up authentication. |
+| `mfa.stepup.pingid.count` | The count of MFA configurations using the PingID method enforced as step-up authentication. |
+| `mfa.stepup.totp.count` | The count of MFA configurations using the TOTP method enforced as step-up authentication. |
+| `namespaces.count` | Total number of namespaces. |
+| `operator.import.kv.version2.secrets.count` | Total number of secrets imported from using operator import command. |
+| `operator.import.kv.version2.secrets.source.aws.count` | Total number of secrets imported from AWS using operator import command. |
+| `operator.import.kv.version2.secrets.source.azure.count` | Total number of secrets imported from Azure using operator import command. |
+| `operator.import.kv.version2.secrets.source.count` | Total number of secrets imported from Vault using operator import command. |
+| `operator.import.kv.version2.secrets.source.gcp.count` | Total number of secrets imported from GCP using operator import command. |
+| `pki-external-ca.acme_accounts.count` | Total number of PKI External CA ACME accounts across all namespaces and mounts. |
+| `pki.cert.stored.count.current_month` | The count of certificates stored in built-in PKI backends for the current month. |
+| `pki.cert.stored.count.previous_month` | The count of certificates stored in built-in PKI backends for the previous month. |
+| `pki.issuers.count` | Total number of PKI issuers across all namespaces and mounts. |
+| `pki.roles.count` | Total number of PKI roles across all namespaces and mounts. |
+| `policies.acl.control_group.count` | The total number of control groups in this cluster. |
+| `policies.acl.count` | Number of ACL policies across all namespaces. |
+| `policies.acl.recover.count` | The total number ACL policies with the 'recover' capability across all namespaces. |
+| `policies.egp.count` | Number of EGP policies across all namespaces. |
+| `policies.rgp.count` | Number of RGP policies across all namespaces. |
+| `quotas.leasecount.count` | Total number of lease count quotas. |
+| `quotas.ratelimit.count` | Total number of rate limit quotas, considering any group_by modes. |
+| `quotas.ratelimit.entity_then_ip_with_secondary_rate.count` | Total number of rate limit quotas using both "entity_then_ip" group_by mode and "secondary_rate". |
+| `quotas.ratelimit.entity_then_ip.count` | Total number of rate limit quotas using "entity_then_ip" group_by mode. |
+| `quotas.ratelimit.entity_then_none_with_secondary_rate.count` | Total number of rate limit quotas using both "entity_then_none" group_by mode and "secondary_rate". |
+| `quotas.ratelimit.entity_then_none.count` | Total number of rate limit quotas using "entity_then_none" group_by mode. |
+| `quotas.ratelimit.ip.count` | Total number of rate limit quotas using "ip" group_by mode. |
+| `quotas.ratelimit.none.count` | Total number of rate limit quotas using "none" group_by mode. |
+| `replication.auth.local_mounts` | The number of local auth mounts across for this cluster. |
+| `replication.auth.non_local_mounts` | The number of replicated auth mounts across all clusters. |
+| `replication.num_nodes` | The number of nodes in a HA cluster. |
+| `replication.secret.local_mounts` | The number of local secret mounts across for this cluster. |
+| `replication.secret.non_local_mounts` | The number of replicated secret mounts across all clusters. |
+| `scim.config.clients.count` | Total number of distinct SCIM clients configured. |
+| `scim.config.clients.with_mount_accessor.count` | Total number of SCIM clients with a mount accessor configured. |
+| `scim.resources.entities_managed.count` | Total count of identity entities under SCIM management. |
+| `scim.resources.groups_managed.count` | Total count of identity groups under SCIM management. |
+| `secret.engine.activedirectory.count` | Number of secret engine mounts of type Active Directory across all namespaces. Note that this secret engine is deprecated. |
+| `secret.engine.alicloud.count` | Number of secret engine mounts of type Alicloud across all namespaces. |
+| `secret.engine.aws.count` | Number of secret engine mounts of type AWS across all namespaces. |
+| `secret.engine.aws.dynamic.role.count` | Number of AWS secret engine dynamic roles across all namespaces. |
+| `secret.engine.aws.static.role.count` | Number of AWS secret engine static roles across all namespaces. |
+| `secret.engine.azure.count` | Number of secret engine mounts of type Azure across all namespaces. |
+| `secret.engine.azure.dynamic.role.count` | Number of Azure secret engine dynamic roles across all namespaces. |
+| `secret.engine.cassandra.count` | Number of secret engine mounts of type Cassandra across all namespaces. Note that this secret engine is deprecated. |
+| `secret.engine.consul.count` | Number of secret engine mounts of type Consul across all namespaces. |
+| `secret.engine.database.count` | Number of secret engine mounts of type Database across all namespaces. Includes all databases of all types. |
+| `secret.engine.database.dynamic.role.count` | Number of database secret engine dynamic roles across all namespaces. |
+| `secret.engine.database.static.role.count` | Number of database secret engine static roles across all namespaces. |
+| `secret.engine.gcp.count` | Number of secret engine mounts of type GCP across all namespaces. |
+| `secret.engine.gcp.impersonated.account.count` | Number of GCP secret engine impersonated accounts across all namespaces. |
+| `secret.engine.gcp.roleset.count` | Number of GCP secret engine role sets across all namespaces. |
+| `secret.engine.gcp.static.role.count` | Number of GCP secret engine static roles across all namespaces. |
+| `secret.engine.gcpkms.count` | Number of secret engine mounts of type GCPKMS across all namespaces. |
+| `secret.engine.keymgmt.awskms.provider.kms.count` | Number of AWS KMS providers across all namespaces in secret engine mounts of type Keymgmt. |
+| `secret.engine.keymgmt.awskms.provider.kms.key.count` | Number of KMS keys across all namespaces in secret engine mounts of type Keymgmt mapped to the AWS KMS provider. |
+| `secret.engine.keymgmt.azurekeyprovider.kms.count` | Number of Azure KMS providers across all namespaces in secret engine mounts of type Keymgmt. |
+| `secret.engine.keymgmt.azurekeyprovider.kms.key.count` | Number of KMS keys across all namespaces in secret engine mounts of type Keymgmt mapped to the Azure Key Vault provider. |
+| `secret.engine.keymgmt.count` | Number of secret engine mounts of type Keymgmt across all namespaces. |
+| `secret.engine.keymgmt.gcpckms.provider.kms.count` | Number of GCP KMS providers across all namespaces in secret engine mounts of type Keymgmt. |
+| `secret.engine.keymgmt.gcpckms.provider.kms.key.count` | Number of KMS keys across all namespaces in secret engine mounts of type Keymgmt mapped to the GCP Cloud KMS provider. |
+| `secret.engine.keymgmt.kms.key.count` | Number of KMS keys across all namespaces in secret engine mounts of type Keymgmt. |
+| `secret.engine.keymgmt.kms.multi.region.key.count` | Number of multi region key across all namespaces in secret engine mounts of type Keymgmt. |
+| `secret.engine.keymgmt.kms.multi.region.key.secondary.region.count` | Number of secondary region of multi region key across all namespaces in secret engine mounts of type Keymgmt. |
+| `secret.engine.kmip.count` | Number of secret engine mounts of type KMIP across all namespaces. |
+| `secret.engine.kubernetes.count` | Number of secret engine mounts of type Kubernetes across all namespaces. |
+| `secret.engine.kv.count` | Number of secret engine mounts of type KV across all namespaces. |
+| `secret.engine.ldap.count` | Number of secret engine mounts of type LDAP across all namespaces. |
+| `secret.engine.ldap.dynamic.role.count` | Number of LDAP secret engine dynamic roles across all namespaces. |
+| `secret.engine.ldap.static.role.count` | Number of LDAP secret engine static roles, across all namespaces. |
+| `secret.engine.mongodb.count` | Number of secret engine mounts of type MongoDB across all namespaces. Note that this secret engine is deprecated. |
+| `secret.engine.mongodbatlas.count` | Number of secret engine mounts of type MongoDBAtlas across all namespaces. |
+| `secret.engine.mssql.count` | Number of secret engine mounts of type MSSql across all namespaces. Note that this secret engine is deprecated. |
+| `secret.engine.mysql.count` | Number of secret engine mounts of type MySQL across all namespaces. Note that this secret engine is deprecated. |
+| `secret.engine.nomad.count` | Number of secret engine mounts of type Nomad across all namespaces. |
+| `secret.engine.openldap.count` | Number of secret engine mounts of type OpenLDAP across all namespaces. |
+| `secret.engine.openldap.dynamic.role.count` | Number of OpenLDAP secret engine dynamic roles across all namespaces. |
+| `secret.engine.openldap.static.role.count` | Number of OpenLDAP secret engine static roles across all namespaces. |
+| `secret.engine.pki-external-ca.count` | Number of secret engine mounts of type PKI External CA across all namespaces. |
+| `secret.engine.pki.count` | Number of secret engine mounts of type PKI across all namespaces. |
+| `secret.engine.plugin.count` | Number of secret engines with unrecognized types (custom plugins) across all namespaces. |
+| `secret.engine.postgresql.count` | Number of secret engine mounts of type Postgresql across all namespaces. Note that this secret engine is deprecated. |
+| `secret.engine.rabbitmq.count` | Number of secret engine mounts of type RabbitMQ across all namespaces. |
+| `secret.engine.spiffe.count` | Number of secret engine mounts of type Spiffe across all namespaces. |
+| `secret.engine.ssh.count` | Number of secret engine mounts of type SSH across all namespaces. |
+| `secret.engine.terraform.count` | Number of secret engine mounts of type Terraform across all namespaces. |
+| `secret.engine.totp.count` | Number of secret engine mounts of type TOTP across all namespaces. |
+| `secret.engine.transform.count` | Number of secret engine mounts of type Transform across all namespaces. |
+| `secret.engine.transit.count` | Number of secret engine mounts of type Transit across all namespaces. |
+| `secretsync.destinations.aws-sm.count` | Total number of secret sync destinations to AWS-SM configured. |
+| `secretsync.destinations.aws-sm.static.count` | Total number of secret sync destinations configured using static credentials for AWS. |
+| `secretsync.destinations.aws-sm.wif.count` | Total number of secret sync destinations configured using WIF for AWS. |
+| `secretsync.destinations.azure-kv.count` | Total number of secret sync destinations to Azure KV configured. |
+| `secretsync.destinations.azure-kv.static.count` | Total number of secret sync destinations configured using static credentials for Azure. |
+| `secretsync.destinations.azure-kv.wif.count` | Total number of secret sync destinations configured using WIF for Azure. |
+| `secretsync.destinations.count` | Total number of secret sync destinations configured. |
+| `secretsync.destinations.count` | Total number of secret sync destinations to Vault configured. |
+| `secretsync.destinations.gcp-sm.count` | Total number of secret sync destinations to GCP-SM configured. |
+| `secretsync.destinations.gcp-sm.static.count` | Total number of secret sync destinations configured using static credentials for GCP. |
+| `secretsync.destinations.gcp-sm.wif.count` | Total number of secret sync destinations configured using WIF for GCP. |
+| `secretsync.destinations.gh.count` | Total number of secret sync destinations to GitHub configured. |
+| `secretsync.destinations.gitlab.count` | Total number of secret sync destinations to GitLab configured. |
+| `secretsync.destinations.inmem.count` | Total number of secret sync destinations to InMem configured. |
+| `secretsync.destinations.inmem.static.count` | Total number of secret sync destinations configured using static credentials for InMem. |
+| `secretsync.destinations.inmem.wif.count` | Total number of secret sync destinations configured using WIF for InMem. |
+| `secretsync.destinations.static.count` | Total number of secret sync destinations configured using static credentials. |
+| `secretsync.destinations.terraform.count` | Total number of secret sync destinations to Terraform configured. |
+| `secretsync.destinations.vercel-project.count` | Total number of secret sync destinations to Vercel Project configured. |
+| `secretsync.destinations.wif.count` | Total number of secret sync destinations configured using WIF. |
+| `secretsync.sources.count` | Total number of secret sync sources configured. |
+| `storage.max_entry_size` | User configured maximum size of entries on Enterprise Raft clusters. |
+| `storage.max_mount_and_namespace_table_entry_size` | User configured maximum mount and namespace entries on Enterprise Raft clusters. |
+| `telemetry.filters.count` | The count of metric prefix filters specified in the telemetry stanza in config file. |
+| `telemetry.stanzas.count` | The count of telemetry stanzas configured in this cluster. |
+| `ui.custom_banners.authenticated` | The number of authenticated custom banners across all namespaces. |
+| `ui.custom_banners.unauthenticated` | The number of unauthenticated custom banners across all namespaces. |
+| `ui.enabled` | Whether the UI is enabled on this Vault cluster. |
 
 ## Usage metadata list
 
-HashiCorp collects the following product usage metadata as part of the `metadata` part of the
-[JSON payload that it collects for licence utilization](/vault/docs/enterprise/license/utilization-reporting#example-payloads):
+HashiCorp collects the following product data in the [`metadata`](/vault/docs/license/utilization/metrics/#metadata) section of each snapshot:
 
-| Metadata Name         | Description                                                                 |
-|-----------------------|-----------------------------------------------------------------------------|
-| `replication_status`  | Replication status of this cluster, e.g. `perf-disabled,dr-disabled`        |
-| `storage_type`        | Storage backend type, e.g. `raft` or `consul`                               |
-| `operating_system`    | Operating system this cluster is running on.                                |
-| `development_cluster` | Whether the cluster is operating as a development (non-production) cluster. |
+| Metadata Name | Description |
+| --- | --- |
+| `replication_status` | Replication status of this cluster, e.g. `perf-disabled,dr-disabled` |
+| `storage_type` | Storage backend type, e.g. `raft` or `consul` |
+| `operating_system` | Operating system this cluster is running on. |
