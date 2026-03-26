@@ -456,6 +456,11 @@
     "destination": "/vault/docs/license",
     "permanent": true
   },
+  {
+    "source": "/vault/docs/license/utilization/auto-reporting",
+    "destination": "/vault/docs/license/utilization",
+    "permanent": true
+  },
 
   // Troubleshooting docs
   {

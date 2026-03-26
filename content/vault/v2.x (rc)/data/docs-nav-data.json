@@ -372,21 +372,25 @@
         "path": "license/change-license"
       },
       {
-        "title": "Anonymized usage reporting",
-        "path": "license/product-usage-reporting"
-      },
-      {
-        "title": "Utilization reporting",
+        "title": "License utilization reporting",
         "routes": [
           {
-            "title": "Automatic ",
-            "path": "license/utilization/auto-reporting"
+            "title": "Overview",
+            "path": "license/utilization"
           },
           {
-            "title": "Manual",
+            "title": "Metrics",
+            "path": "license/utilization/metrics"
+          },
+          {
+            "title": "Manual reporting",
             "path": "license/utilization/manual-reporting"
           }
         ]
+      },
+      {
+        "title": "Product usage reporting",
+        "path": "license/product-usage-reporting"
       }
     ]
   },
