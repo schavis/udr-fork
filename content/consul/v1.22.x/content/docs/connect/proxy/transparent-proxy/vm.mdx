@@ -4,8 +4,8 @@ page_title:  Enable transparent proxy mode on VMs
 description: >-
   Learn how to enable transparent proxy mode, which enables Consul on Virtual Machines to direct inbound and outbound traffic through the service mesh and increase application security without configuring individual upstream services.
 # START AUTO GENERATED METADATA, DO NOT EDIT
-created_at: 2026-03-25T17:45:53.000Z
-last_modified: 2026-03-25T17:45:53.000Z
+created_at: 2026-03-25T18:45:49+01:00
+last_modified: 2026-03-26T11:09:55.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -151,15 +151,15 @@ After you test the process manually, we recommend that you configure your nodes 
 
 Two methods to automate the transparent proxy configuration process are:
 
-- [Setup up a systemd unit file](#systemd-unit-file)
-- [Use Terraform](#terraform)
-
-### Systemd unit file
+- Setup up a systemd unit file
+- Use Terraform
 
 If you use systemd to start Consul service mesh's sidecar proxy, you can add two scripts to the unit file to:
 
 - Enable traffic redirection before you start the proxy
 - Clean up iptables rules after you stop the proxy
+
+You can add the scripts to the systemd unit file using the `ExecStartPre` and `ExecStopPost` parameters:
 
 <CodeBlockConfig highlight="14,16">
 
@@ -189,10 +189,6 @@ WantedBy=multi-user.target
 ```
 
 </CodeBlockConfig>
-
-The next section contains links to examples for these two scripts.
-
-### Terraform
 
 You can use Terraform to deploy Consul client nodes with services installed and configured to operate in the Consul service mesh.
 
