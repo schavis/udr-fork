@@ -17,11 +17,11 @@ This topic describes how to use transparent proxy mode in your service mesh. Tra
 
 Your network must meet the following environment and software requirements to use transparent proxy.
 
-* A running Consul 1.11.1+ datacenter with at least two Linux client nodes.
-* A dedicated user to run Consul. Consul uses the user ID to exclude Consul-related traffic from transparent proxy. In this page we use the `consul` Linux user.
-* [DNS forwarding](/consul/docs/manage/dns/forwarding) enabled on the Consul client nodes.
-* Envoy installed on the Consul client nodes. Check [Envoy proxy configuration reference](/consul/docs/reference/proxy/envoy#envoy-and-consul-client-agent) for information over supported versions.
-* A dedicated user to run Envoy. Consul uses the user ID to exclude proxy-related traffic from transparent proxy. In this page we use the `envoy` Linux user.
+- A Consul datacenter with v1.11.1+ installed, running with at least two Linux client nodes.
+- [DNS forwarding](/consul/docs/manage/dns/forwarding) enabled on the Consul client nodes.
+- Envoy installed on the Consul client nodes. For more information about the Envoy versions your Consul installation supports, refer to the [Envoy proxy configuration reference](/consul/docs/reference/proxy/envoy#envoy-and-consul-client-agent).
+- A dedicated user to run Consul. Consul uses the user ID to exclude Consul-related traffic from transparent proxy. These instructions use the `consul` Linux user.
+- A dedicated user to run Envoy. Consul uses the user ID to exclude proxy-related traffic from transparent proxy. These instructions use the `envoy` Linux user.
 
 ## Manual configuration
 
@@ -33,7 +33,7 @@ To manually configure Consul service mesh to use transparent proxies follow thes
 
 ### Register the service
 
-Configure a service to use transparent proxy mode.
+Configure a service to use transparent proxy mode in the [`connect` block of a service definition](/consul/docs/reference/service#connect).
 
 <CodeBlockConfig highlight="3-9">
 
@@ -54,14 +54,13 @@ Configure a service to use transparent proxy mode.
 ```
 </CodeBlockConfig>
 
-Register the service in Consul, refer to [Register services and health checks](/consul/docs/register/service/vm) for more information.
+Then, [register the service in Consul](/consul/docs/register/service/vm).
 
-Consul assigns a virtual IP in the `240.0.0.0/4` range to a service with transparent proxy enabled. 
-This allows downstream services to connect to upstream services using a unique IP assigned by the service mesh. 
+For services with transparent proxy enabled, Consul assigns a virtual IP in the `240.0.0.0/4` range, allowing downstream services to connect to upstream services using a unique IP assigned by the service mesh. 
 
 ### Redirect traffic to proxies
 
-Use the consul [`connect redirect-traffic`](/consul/commands/connect/redirect-traffic) command to enable transparent proxy on the VM for the named service.
+Use the [`consul connect redirect-traffic` command](/consul/commands/connect/redirect-traffic) to enable transparent proxy on the VM for the named service.
 
 The command includes the user ID for `consul` and `envoy` in order for transparent proxy to exclude traffic from Consul and Envoy from redirection.
 
@@ -88,7 +87,7 @@ $ consul connect redirect-traffic \
    -exclude-inbound-port=22
 ```
 
-If you have a mesh configuration entry defined with [`TransparentProxy.MeshDestinationsOnly=true`](/consul/docs/reference/config-entry/mesh#mesh-destinations-only), this setting will deny all inbound and outbound requests to the VM once you redirect traffic. Make sure you install the application and its dependencies before redirecting traffic since transparent proxy will deny requests to download packages by default.
+If you have a [mesh configuration entry defined with `TransparentProxy.MeshDestinationsOnly=true`](/consul/docs/reference/config-entry/mesh#mesh-destinations-only), the transparent proxy will deny all inbound and outbound requests to the VM after you redirect traffic. Because the transparent proxy denies requests to download packages, make sure you install your application and its dependencies before redirecting traffic.
 
 ### Connect services
 
@@ -111,7 +110,7 @@ Sources = [
 ]
 ```
 
-Verify you can resolve the `api` service from the `web` service client node. 
+To verify that your service is correctly configured, resolve the `api` service from the `web` service client node using Consul DNS.
 
 Consul DNS resolves the in-mesh virtual IP of an upstream service using a DNS hostname in the format of `${service_name}.virtual.consul`
 
@@ -146,11 +145,11 @@ Connection: close
 
 ## Automatic configuration
 
-The process for enabling transparent proxy is standard and requires the same steps for all services.
+The process to enable transparent proxy on VMs is standard for all services.
 
-After testing the process manually it is recommended you configure your nodes to automatically setup the sidecar proxy when you start the service.
+After you test the process manually, we recommend that you configure your nodes to automatically setup the sidecar proxy when you start the service.
 
-Possible ways to automate the transparent proxy configuration are:
+Two methods to automate the transparent proxy configuration process are:
 
 - [Setup up a systemd unit file](#systemd-unit-file)
 - [Use Terraform](#terraform)
@@ -195,7 +194,7 @@ The next section contains links to examples for these two scripts.
 
 ### Terraform
 
-You can use Terraform to deploy Consul client nodes with services installed and configured to be part of Consul service mesh.
+You can use Terraform to deploy Consul client nodes with services installed and configured to operate in the Consul service mesh.
 
 Use the [Terraform module for Consul transparent proxy](https://github.com/hashicorp/terraform-template-consul-tproxy) as a template to create you own deployment.
 
