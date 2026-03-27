@@ -10,116 +10,30 @@ last_modified: 2025-09-05T13:57:53-05:00
 
 # Scan GitHub for secrets
 
-HCP Vault Radar allows you to connect to any organizations on GitHub Cloud and GitHub Enterprise Server.
+Connect GitHub as a data source to HCP Vault Radar to scan your GitHub repositories
+for sensitive data and secrets. Vault Radar supports scanning GitHub
+Cloud and GitHub Enterprise Server.
 
-There are two ways to set up scanning for GitHub -
-
-- Import a single GitHub organization as a data source.
-
-- Import many GitHub organizations together using a data source host.
-
-To import a single GitHub organization as a data source, click **Settings**, then click **Data Sources**.
-![Import single GitHub organization as a data source](/img/docs/vault-radar/add-data-source.png)
-
-To import many GitHub organizations together as a data source host, click **Settings**, then click **Data Source Hosts**.
-![Import many GitHub organizations as a data source](/img/docs/vault-radar/add-data-source-host.png)
-
-Additionally, for either option, you can choose to scan with [**HCP Vault Radar Scan**](#scan-with-hcp-vault-radar-scan) or
-with the [**Vault Radar Agent Scan**](#scan-with-vault-radar-agent-scan).
-
-# Connect to GitHub
-
-For either the data source or data source host option, scanning can be set up using **HCP Vault Radar Scan** or using **Vault Radar Agent Scan**.
+@include 'vault-radar/radar-quickstart-tutorials.mdx'
 
 ## Prerequisites
 
-- Personal Access Token (with the right set of scopes)
+- HCP IAM user with the HCP owner, or admin role
+- [Vault Radar agent](/hcp/docs/vault-radar/agent/deploy) deployed and running (agent scan only)
+- GitHub [personal access token with the following permission scopes](https://github.com/settings/tokens/new?scopes=repo,read:org,admin:repo_hook,admin:org_hook,read:user):
 
-![GitHub personal access token scopes](/img/docs/vault-radar/github/github-pat-scopes.png)
+  ```plaintext
+  repo > all
+  admin:org > read:org
+  admin:repo_hook > all
+  admin:org_hook > all
+  user > read:user
+  ```
 
-## Scan with HCP Vault Radar Scan
+## Add a GitHub data source
 
-1. Select **HCP Vault Radar Scan**, then select either **GitHub Cloud** or **GitHub Enterprise Server**.
-
-1. Depending on your previous selections, **Enter your GitHub domain name** or **Enter your GitHub organization** text field may appear.
-
-![GitHub Enterprise Server scanned by HCP Vault Radar Scan using data source workflow](/img/docs/vault-radar/github/github-enterprise-server-hcp-data-source.png)
-
-1. If you previously selected **GitHub Enterprise Server**, enter the domain URL in the **Enter your GitHub domain name** text field.
-    - This will be the domain name of your instance, i.e. `github.acme.com`
-
-1. If you previously selected **Data Sources**, enter the organization in the **Enter your GitHub organization** text field.
-    - When navigating to the organization GitHub, the name of the organization should show up
-
-    - For GitHub Cloud, this should be the organization in the URL `https://github.com/ORGANIZATION`
-
-    ![GitHub Cloud organization](/img/docs/vault-radar/github/github-cloud-organization.png)
-
-    - For GitHub Enterprise Server, this should be the organization in the URL `https://github.acme.com/ORGANIZATION`
-
-    ![GitHub Enterprise Server organization](/img/docs/vault-radar/github/github-enterprise-server-organization.png)
-
-1. Enter the personal access token in the **Enter your GitHub personal access token** text field.
-
-1. Click **Next**.
-
-## Scan with Vault Radar Agent Scan
-
-1. Make sure that the agent pool has been set up, refer to the [agent pool documentation](/hcp/docs/vault-radar/agent/deploy) for more information.
-
-1. Select **Vault Radar Agent Scan**, then select either **GitHub Cloud** or **GitHub Enterprise Server**.
-
-1. Depending on your previous selections, **Enter your GitHub domain name** or **Enter your GitHub organization** text field may appear.
-
-![GitHub Enterprise Server scanned by Vault Radar Agent Scan using data source workflow](/img/docs/vault-radar/github/github-enterprise-server-agent-data-source.png)
-
-1. If you previously selected **GitHub Enterprise Server**, enter the domain URL in the **Enter your GitHub domain name** text field.
-
-    - This will be the domain name of your instance, i.e. `github.acme.com`
-
-1. If you previously selected **Data Sources**, enter the organization in the **Enter your GitHub organization** text field.
-
-    - When navigating to the organization GitHub, the name of the organization should show up
-
-    - For GitHub Cloud, this should be the organization in the URL `https://github.com/ORGANIZATION`
-
-    ![GitHub Cloud organization](/img/docs/vault-radar/github/github-cloud-organization.png)
-
-    - For GitHub Enterprise Server, this should be the organization in the URL `https://github.acme.com/ORGANIZATION`
-
-    ![GitHub Enterprise Server organization](/img/docs/vault-radar/github/github-enterprise-server-organization.png)
-
-1. Create an environment variable for the API token in the agent environment.
-
-   **Example:**
-
-   <CodeBlockConfig hideClipboard>
-
-   ```shell-session
-   $ export GITHUB_TOKEN=mytoken
-   ```
-
-   </CodeBlockConfig>
-
-1. Enter the name of the environment variable in the **Enter environment path to your GitHub personal access token** text field with the `env://` prefix.
-
-    **Example:**
-
-    ```plaintext
-    env://GITHUB_TOKEN
-    ```
-
-1. Click **Next**.
-
-# Finish data source import
-
-1. Choose which repositories to monitor by selecting either the **All active repositories** or **Select repositories to monitor**
-
-    Monitor active repositories up to limit ![Add GitHub all active](/img/docs/vault-radar/monitor-all-active-resources.png)
-
-    Monitor selected repositories ![Add GitHub custom select](/img/docs/vault-radar/monitor-custom-select-resources.png)
-
-1. Click **Finish**
+You can add and scan GitHub Cloud or GitHub Enterprise Server using the **HCP
+Vault Radar cloud scan** or **HCP Vault Radar agent scan**.
 
 <Note>
 
@@ -129,38 +43,174 @@ most recent activity.
 
 </Note>
 
-# Finish data source host import
+<Tabs>
+<Tab heading="GitHub Cloud">
 
-1. Choose which data sources to monitor by selecting either the **All data sources** or **Select data sources**
+Add GitHub Cloud as a data source to scan your GitHub organization's repositories for secrets.
 
-    Monitor all data sources up to limit ![Add GitHub all](/img/docs/vault-radar/monitor-all-active-data-sources.png)
+<Tabs>
+<Tab heading="HCP Vault Radar cloud scan">
 
-    Monitor selected data sources ![Add GitHub custom select](/img/docs/vault-radar/monitor-custom-select-data-sources.png)
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
+
+1. Click **Vault Radar**.
+
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **HCP Vault Radar Scan**.
+
+1. Select **GitHub Cloud**.
+
+1. Enter the personal access token in the **Enter your GitHub personal
+   access token** field.
+
+1. Click **Next**.
+
+1. Select either **All data sources** or **Select data sources**.
 
 1. Click **Finish**
 
-# Update data source
+</Tab>
+<Tab heading="HCP Vault Radar agent scan">
 
-1. Navigate to **Settings**, and then **Data Sources**, and click the three dots to the right
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
 
-   ![Update monitored resources](/img/docs/vault-radar/github/github-update-data-source.png)
+1. Click **Vault Radar**.
 
-1. To update the monitored repositories, click **Edit monitored resources**.
+1. Click **Settings**.
 
-1. If you imported the **Data Source** directly, to update the token, click **Edit data source details**.
+1. Click **Data Source Hosts**.
 
-1. If these data sources were discovered by importing the **Data Source Host**, to update the token, [update the data source host instead](#update-data-source-host)
+1. Click **Add data source host**.
 
-# Update data source host
+1. Select **Vault Radar Agent Scan*.
 
-1. Navigate to **Settings**, and then **Data Source Hosts**, and click the three dots to the right
+1. Select **GitHub Cloud**.
 
-   ![Update monitored data sources](/img/docs/vault-radar/github/github-update-data-source-host.png)
+1. Enter the path to the environment variable with the personal access token in
+   the **Enter environment path to your GitHub personal access token**
+   field.
+   
+   **Example:**
+
+   <CodeBlockConfig hideClipboard>
+
+   ```plaintext
+   env://GITHUB_TOKEN
+   ```
+
+   </CodeBlockConfig>
+
+1. Click **Next**.
+
+1. Select either **All data sources** or **Select data sources**.
+
+1. Click **Finish**.
+
+</Tab>
+</Tabs>
+
+</Tab>
+<Tab heading="GitHub Enterprise Server">
+
+Add GitHub Enterprise Server as a data source to scan your GitHub organization's repositories for secrets.
+
+<Tabs>
+<Tab heading="HCP Vault Radar cloud scan">
+
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
+
+1. Click **Vault Radar**.
+
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **HCP Vault Radar Scan**.
+
+1. Select **GitHub Enterprise Server**.
+
+1. Enter the following information:
+   
+   - **Enter your GitHub domain name:** Fully qualified domain name of
+     your GitHub Enterprise Server.
+   - **Enter your GitHub personal access token:** Access token from your GitHub Enterprise
+     Server.
+
+1. Click **Next**.
+
+1. Select either **All data sources** or **Select data sources**.
+
+1. Click **Finish**
+
+</Tab>
+<Tab heading="HCP Vault Radar agent scan">
+
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
+
+1. Click **Vault Radar**.
+
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **Vault Radar Agent Scan*.
+
+1. Select **GitHub Enterprise Server**.
+
+1. Enter the following information:
+   
+   - **Enter your GitHub domain name:** Fully qualified domain name of
+     your GitHub Enterprise Server.
+   - **Enter environment path to your GitHub personal access token:** Access token from your GitHub Enterprise
+     Server.
+   
+   **Example:**
+
+   <CodeBlockConfig hideClipboard>
+
+   ```plaintext
+   env://GITHUB_TOKEN
+   ```
+
+   </CodeBlockConfig>
+
+1. Click **Next**.
+
+1. Select either **All data sources** or **Select data sources**.
+
+1. Click **Finish**.
+
+</Tab>
+</Tabs>
+
+</Tab>
+</Tabs>
+
+## Assign a group to a resource
+
+@include 'vault-radar/add-group-to-resource.mdx'
+
+## Update data source host
+
+1. Navigate to **Settings**, and then **Data Source Hosts**, and click the three dots to the right.
 
 1. To update the monitored data sources, click **Edit data sources**
 
 1. To update the token, click **Edit data source host details**
 
-## Assign a group to a resource
+## Tutorials
 
-@include 'vault-radar/add-group-to-resource.mdx'
+@include 'vault-radar/vault-radar-tutorial-list.mdx'

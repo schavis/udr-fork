@@ -20,7 +20,8 @@ Server and Azure DevOps Cloud.
 - [Vault Radar agent](/hcp/docs/vault-radar/agent/deploy) deployed and running (agent scan only)
 - Access to an Azure DevOps organization and project
 - A [personal access token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows)
-  with access scoped to **All accessible organizations** with the following scopes:
+  with access scoped to **All accessible organizations** with the following
+  permission scopes:
 
   ```plaintext
   Code > Read
@@ -37,6 +38,9 @@ Server and Azure DevOps Cloud.
 
 ## Add an Azure DevOps data source
 
+You can add and scan Azure DevOps Cloud or Azure DevOps Server using the **HCP
+Vault Radar cloud scan** or **HCP Vault Radar agent scan**.
+
 <Note title="Scan up to 5000 repositories">
 
 Vault Radar allows you to scan up to 5000 repositories per connection. If
@@ -51,7 +55,7 @@ repositories with the most recent activity.
 Add Azure DevOps Cloud as a data source to scan your Azure DevOps projects for secrets.
 
 <Tabs>
-<Tab heading="HCP Vault Radar cloud scan">
+<Tab heading="v">
 
 1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
    HCP IAM user that has the HCP owner or admin role.
@@ -113,7 +117,7 @@ Add Azure DevOps Cloud as a data source to scan your Azure DevOps projects for s
 
 1. Select either **All data sources** or **Select data sources**.
 
-1. Click **Finish**
+1. Click **Finish**.
 
 </Tab>
 </Tabs>
@@ -152,7 +156,7 @@ Add Azure DevOps Server as a data source to scan your Azure DevOps projects for 
 
 1. Select either **All data sources** or **Select data sources**.
 
-1. Click **Finish**
+1. Click **Finish**.
 
 </Tab>
 <Tab heading="HCP Vault Radar agent scan">
@@ -193,7 +197,7 @@ Add Azure DevOps Server as a data source to scan your Azure DevOps projects for 
 
 1. Select either **All data sources** or **Select data sources**.
 
-1. Click **Finish**
+1. Click **Finish**.
 
 </Tab>
 </Tabs>
@@ -204,18 +208,6 @@ Add Azure DevOps Server as a data source to scan your Azure DevOps projects for 
 ## Assign a group to a resource
 
 @include 'vault-radar/add-group-to-resource.mdx'
-
-## Update data source
-
-1. Navigate to **Settings**, and click **Data Sources**.
-
-1. Click the ellipsis to the right of the data source.
-
-1. To update the monitored repositories, click **Edit monitored resources**.
-
-1. If you imported the **Data Source** directly, to update the token, click **Edit data source details**.
-
-1. If these data sources were discovered by importing the **Data Source Host**, to update the token, [update the data source host instead](#update-data-source-host)
 
 ## Update data source host
 
