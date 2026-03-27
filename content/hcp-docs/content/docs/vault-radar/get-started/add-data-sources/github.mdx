@@ -22,6 +22,8 @@ Cloud and GitHub Enterprise Server.
 - [Vault Radar agent](/hcp/docs/vault-radar/agent/deploy) deployed and running (agent scan only)
 - GitHub [personal access token with the following permission scopes](https://github.com/settings/tokens/new?scopes=repo,read:org,admin:repo_hook,admin:org_hook,read:user):
 
+  <CodeBlockConfig hideClipboard>
+
   ```plaintext
   repo > all
   admin:org > read:org
@@ -29,6 +31,8 @@ Cloud and GitHub Enterprise Server.
   admin:org_hook > all
   user > read:user
   ```
+
+  </CodeBlockConfig>
 
 ## Add a GitHub data source
 
@@ -166,7 +170,7 @@ Add GitHub Enterprise Server as a data source to scan your GitHub organization's
 
 1. Click **Add data source host**.
 
-1. Select **Vault Radar Agent Scan*.
+1. Select **Vault Radar Agent Scan**.
 
 1. Select **GitHub Enterprise Server**.
 

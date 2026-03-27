@@ -10,106 +10,103 @@ last_modified: 2025-11-01T06:22:09+05:30
 
 # Scan Bitbucket for secrets
 
-Vault Radar allows you to connect to any workspaces on Bitbucket Cloud and any projects on Bitbucket Server.
+Connect Bitbucket as a data source to HCP Vault Radar to scan your Bitbucket
+workspaces and projects for sensitive data and secrets. Vault Radar supports
+scanning Bitbucket Cloud and Bitbucket Server.
 
-There are two ways to set up scanning for Bitbucket -
+@include 'vault-radar/radar-quickstart-tutorials.mdx'
 
-- Import a single Bitbucket workspace or project as a data source.
+<Note>
 
-- Import many Bitbucket workspaces or projects together using a data source host.
+Vault Radar has a limit of 5000 repositories per connection. If you have more
+than 5000 repositories, Vault Radar will select the 5000 repositories with the
+most recent activity.
 
-To import a single Bitbucket workspace or project as a data source, click **Settings**, then click **Data Sources**.
-![Import single Bitbucket workspace or project as a data source](/img/docs/vault-radar/add-data-source.png)
-
-To import many Bitbucket workspaces or projects together as a data source host, click **Settings**, then click **Data Source Hosts**.
-![Import many Bitbucket workspaces or projects as a data source](/img/docs/vault-radar/add-data-source-host.png)
-
-Additionally, for either option, you can choose to scan with [**HCP Vault Radar Scan**](#scan-with-hcp-vault-radar-scan)
-or with the [**Vault Radar Agent Scan**](#scan-with-vault-radar-agent-scan).
-
-# Connect to Bitbucket
-
-For either the data source or data source host option, scanning can be set up using **HCP Vault Radar Scan** or using **Vault Radar Agent Scan**.
+</Note>
 
 ## Prerequisites
 
-Depending on whether you are connecting to Bitbucket Cloud or Bitbucket Server, there are different ways of generating
-credentials to access the workspaces or projects.
+- HCP IAM user with the HCP owner, or admin role
+- [Vault Radar agent](/hcp/docs/vault-radar/agent/deploy) deployed and running (agent scan only)
+- For BitBucket Cloud: [workspace
+  ID](https://support.atlassian.com/bitbucket-cloud/docs/what-is-a-workspace/),
+  token creator email address, and [API token with the following
+  scopes](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/):
 
-### Bitbucket Cloud credentials
+  <CodeBlockConfig hideClipboard>
 
-- Workspace ID
-    - Navigate to your Bitbucket Cloud workspace, and the workspace ID should show up in the URL
-        - For example, in `https://bitbucket.org/my-workspace/workspace/overview`, the workspace ID is `my-workspace`
-        - You can also find this by clicking the gear icon in the upper right corner
-          "Settings" (take the "Workspace ID", not the "Workspace name")
+  ```plaintext
+  read:account
+  read:me
+  read:project:bitbucket
+  read:pullrequest:bitbucket
+  read:repository:bitbucket
+  read:user:bitbucket
+  read:webhook:bitbucket
+  read:workspace:bitbucket
+  write:pullrequest:bitbucket
+  write:webhook:bitbucket
+  ```
 
-        ![Bitbucket Cloud Workspace Settings](/img/docs/vault-radar/bitbucket/bitbucket-cloud-workspace-settings.png)
+  </CodeBlockConfig>
 
-- Token creator email address
+- For Bitbucket Server: project key, account name, and HTTP access token with
+  project and repository admin permissions.
 
-- [API token with the right set of scopes](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)
-    - read:account
-    - read:me
-    - read:project:bitbucket
-    - read:pullrequest:bitbucket
-    - read:repository:bitbucket
-    - read:user:bitbucket
-    - read:webhook:bitbucket
-    - read:workspace:bitbucket
-    - write:pullrequest:bitbucket
-    - write:webhook:bitbucket
+## Add a BitBucket data source
 
-### Bitbucket Server credentials
+You can add and scan BitBucket Cloud or BitBucket Server using the **HCP
+Vault Radar cloud scan** or **HCP Vault Radar agent scan**.
 
-- Project key
-- Bitbucket account name
-- HTTP access token (with the right set of permissions)
+<Note>
 
-![Configure Bitbucket Server](/img/docs/vault-radar/bitbucket/bitbucket-server-http-access-token.png)
+Vault Radar has a limit of 5000 repositories per connection. If you have more
+than 5000 repositories, Vault Radar will select the 5000 repositories with the
+most recent activity.
 
-## Scan with HCP Vault Radar Scan
+</Note>
 
-1. Select **HCP Vault Radar Scan**, then select either **Bitbucket Cloud** or **Bitbucket Server**.
+<Tabs>
+<Tab heading="BitBucket Cloud">
 
-1. Depending on your previous selections, different input text fields may appear.
+Add BitBucket Cloud as a data source to scan your BitBucket organization's repositories for secrets.
 
-### Bitbucket Cloud input
+<Tabs>
+<Tab heading="HCP Vault Radar cloud scan">
 
-![Bitbucket Cloud scanned by HCP Vault Radar Scan using data source workflow](/img/docs/vault-radar/bitbucket/bitbucket-cloud-hcp-data-source.png)
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
 
-1. If you previously selected **Data Sources**, enter the workspace ID in the **Workspace ID** text field.
+1. Click **Vault Radar**.
 
-1. Enter the email address of the Bitbucket Cloud user that created the API token in the **Enter your Bitbucket token creator email** text field.
+1. Click **Settings**.
 
-1. Enter the API token value in the **Enter your Bitbucket API token** text field.
+1. Click **Data Source Hosts**.
 
-### Bitbucket Server input
+1. Click **Add data source host**.
 
-1. Enter the domain URL in the **Enter your Bitbucket domain name** text field.
-    - This will be the domain name of your instance, i.e. `bitbucket.acme.com`
+1. Select **HCP Vault Radar Scan**.
 
-    ![Bitbucket Server scanned by HCP Vault Radar Scan using data source workflow](/img/docs/vault-radar/bitbucket/bitbucket-server-hcp-data-source.png)
+1. Select **BitBucket Cloud**.
 
-1. If you previously selected **Data Sources**, enter your project key in the **Enter your Bitbucket project key** text field.
+1. Enter the email address of the BitBucket Cloud user that created the API
+   token in the **Enter your BitBucket token creator email** text field.
 
-1. Enter the Bitbucket account name in the **Enter your Bitbucket account** text field.
+1. Enter the API token in the **Enter your BitBucket API token** field.
 
-1. Enter the HTTP access token in the **Enter your Bitbucket HTTP access token** text field.
+1. Click **Next**.
 
-## Scan with Vault Radar Agent Scan
+1. Select either **All data sources** or **Select data sources**.
 
-1. Make sure that the agent pool has been set up, refer to the [agent pool documentation](/hcp/docs/vault-radar/agent/deploy) for more information.
+1. Click **Finish**
 
-1. Select **Vault Radar Agent Scan**, then select either **Bitbucket Cloud** or **Bitbucket Server**.
+</Tab>
+<Tab heading="HCP Vault Radar agent scan">
 
-1. Depending on your previous selections, different input text fields may appear.
-
-### Bitbucket Cloud input
-
-![Bitbucket Cloud scanned by Vault Radar Agent Scan using data source workflow](/img/docs/vault-radar/bitbucket/bitbucket-cloud-agent-data-source.png)
-
-1. Create an environment variable for the API token in the agent environment. This should be in the format `token_creator_email:api_token`.
+1. Before you configure HCP Vault Radar, export an environment variable on your
+   agent in the format of `BITBUCKET_TOKEN=myemail@example.com:mytoken` where
+   `myemail@example.com` is the email address of the BitBucket Cloud user that
+   created the API token and `mytoken` is the API token value.
 
    **Example:**
 
@@ -121,96 +118,150 @@ credentials to access the workspaces or projects.
 
    </CodeBlockConfig>
 
-1. Enter the name of the environment variable in the **Enter environment path to your Bitbucket API token** text field with the `env://` prefix.
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
 
-    **Example:**
+1. Click **Vault Radar**.
 
-    ```plaintext
-    env://BITBUCKET_TOKEN
-    ```
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **Vault Radar Agent Scan**.
+
+1. Select **BitBucket Cloud**.
+
+1. Enter the path to the environment variable with the API token in
+   the **Enter environment path to your BitBucket API token**
+   field.
+   
+   **Example:**
+
+   <CodeBlockConfig hideClipboard>
+
+   ```plaintext
+   env://BITBUCKET_TOKEN
+   ```
+
+   </CodeBlockConfig>
 
 1. Click **Next**.
 
-### Bitbucket Server input
+1. Select either **All data sources** or **Select data sources**.
 
-![Bitbucket Server scanned by Vault Radar Agent Scan using data source workflow](/img/docs/vault-radar/bitbucket/bitbucket-server-agent-data-source.png)
+1. Click **Finish**.
 
-1. Create an environment variable for the API token in the agent environment. This should be in the format `account_name:http_access_token`.
+</Tab>
+</Tabs>
+
+</Tab>
+<Tab heading="BitBucket Server">
+
+Add BitBucket Server as a data source to scan your BitBucket organization's repositories for secrets.
+
+<Tabs>
+<Tab heading="HCP Vault Radar cloud scan">
+
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
+
+1. Click **Vault Radar**.
+
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **HCP Vault Radar Scan**.
+
+1. Select **BitBucket Server**.
+
+1. Enter the following information:
+   
+   - **Enter your BitBucket domain name:** Fully qualified domain name of
+     your BitBucket Server.
+   - **Enter your BitBucket account:** Account name of the BitBucket Server user
+     that created the HTTP access token.
+   - **Enter your BitBucket HTTP access token:** Access token from your BitBucket Server.
+
+1. Click **Next**.
+
+1. Select either **All data sources** or **Select data sources**.
+
+1. Click **Finish**
+
+</Tab>
+<Tab heading="HCP Vault Radar agent scan">
+
+1. Before you configure HCP Vault Radar, export an environment variable on your
+   agent in the format of `BITBUCKET_TOKEN=myemail@example.com:mytoken` where
+   `myemail@example.com` is the email address of the BitBucket Cloud user that
+   created the API token and `mytoken` is the API token value.
 
    **Example:**
 
    <CodeBlockConfig hideClipboard>
 
    ```shell-session
-   $ export BITBUCKET_TOKEN=acmeuser:mytoken
+   $ export BITBUCKET_TOKEN=myemail@example.com:mytoken
    ```
 
    </CodeBlockConfig>
 
-1. Enter the name of the environment variable in the **Enter environment path to your Bitbucket HTTP access token** text field with the `env://` prefix.
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
 
-    **Example:**
+1. Click **Vault Radar**.
 
-    ```plaintext
-    env://BITBUCKET_TOKEN
-    ```
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **Vault Radar Agent Scan**.
+
+1. Select **BitBucket Server**.
+
+1. Enter the following information:
+   
+   - **Enter your BitBucket domain name:** Fully qualified domain name of
+     your BitBucket Server.
+   - **Enter environment path to your BitBucket HTTP access token:** Access token from your BitBucket Server.
+   
+   **Example:**
+
+   <CodeBlockConfig hideClipboard>
+
+   ```plaintext
+   env://BITBUCKET_TOKEN
+   ```
+
+   </CodeBlockConfig>
 
 1. Click **Next**.
 
-# Finish data source import
+1. Select either **All data sources** or **Select data sources**.
 
-1. Choose which repositories to monitor by selecting either the **All active repositories** or **Select repositories to monitor**
+1. Click **Finish**.
 
-    Monitor active repositories up to limit ![Add Bitbucket all active](/img/docs/vault-radar/monitor-all-active-resources.png)
+</Tab>
+</Tabs>
 
-    Monitor selected repositories ![Add Bitbucket custom select](/img/docs/vault-radar/monitor-custom-select-resources.png)
-
-1. Click **Finish**
-
-<Note>
-
-Vault Radar has a limit of 5000 repositories per connection. If you have more
-than 5000 repositories, Vault Radar will select the 5000 repositories with the
-most recent activity.
-
-</Note>
-
-# Finish data source host import
-
-1. Choose which data sources to monitor by selecting either the **All data sources** or **Select data sources**
-
-    Monitor all data sources up to limit ![Add Bitbucket all](/img/docs/vault-radar/monitor-all-active-data-sources.png)
-
-    Monitor selected data sources ![Add Bitbucket custom select](/img/docs/vault-radar/monitor-custom-select-data-sources.png)
-
-1. Click **Finish**
-
-# Update data source
-
-1. Navigate to **Settings**, and then **Data Sources**, and click the three dots to the right
-
-   ![Update monitored resources](/img/docs/vault-radar/bitbucket/bitbucket-update-data-source.png)
-
-1. To update the monitored repositories, click **Edit monitored resources**.
-
-1. If you imported the **Data Source** directly, to update the token, click **Edit data source details**.
-
-1. If these data sources were discovered by importing the **Data Source Host**, to update the token, [update the data source host instead](#update-data-source-host)
-
-# Update data source host
-
-1. Navigate to **Settings**, and then **Data Source Hosts**, and click the three dots to the right
-
-   ![Update monitored data sources](/img/docs/vault-radar/bitbucket/bitbucket-update-data-source-host.png)
-
-1. To update the monitored data sources, click **Edit data sources**
-
-1. To update the token, click **Edit data source host details**
+</Tab>
+</Tabs>
 
 ## Assign a group to a resource
 
 @include 'vault-radar/add-group-to-resource.mdx'
 
+## Update data source host
+
+@include 'vault-radar/update-data-source-hosts.mdx'
+
 ## Tutorials
 
-@include 'vault-radar/radar-quickstart-tutorials.mdx'
+@include 'vault-radar/vault-radar-tutorial-list.mdx'
