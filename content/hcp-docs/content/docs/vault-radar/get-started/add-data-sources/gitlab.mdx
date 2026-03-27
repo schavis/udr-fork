@@ -10,96 +10,28 @@ last_modified: 2025-09-05T13:57:53-05:00
 
 # Scan GitLab for secrets
 
-Vault Radar allows you to connect to any top-level groups on GitLab Cloud and GitLab Self-Managed
+Connect GitLab as a data source to HCP Vault Radar to scan your GitLab
+repositories for sensitive data and secrets. Vault Radar supports scanning GitLab
+Cloud and GitLab Self-Managed instances.
 
-There are two ways to set up scanning for GitLab -
-
-- Import a single GitLab top-level group as a data source.
-
-- Import many GitLab top-level groups together using a data source host.
-
-To import a single GitLab top-level group as a data source, click **Settings**, then click **Data Sources**.
-![Import single GitLab top-level group as a data source](/img/docs/vault-radar/add-data-source.png)
-
-To import many GitLab top-level groups together as a data source host, click **Settings**, then click **Data Source Hosts**.
-![Import many GitLab top-level groups as a data source](/img/docs/vault-radar/add-data-source-host.png)
-
-Additionally, for either option, you can choose to scan with [**HCP Vault Radar Scan**](#scan-with-hcp-vault-radar-scan) or
-with the [**Vault Radar Agent Scan**](#scan-with-vault-radar-agent-scan).
-
-# Connect to GitLab
-
-For either the data source or data source host option, scanning can be set up using **HCP Vault Radar Scan** or using **Vault Radar Agent Scan**.
+@include 'vault-radar/radar-quickstart-tutorials.mdx'
 
 ## Prerequisites
 
-- [Personal Access Token (with the right set of scopes)](https://docs.gitlab.com/user/profile/personal_access_tokens/#create-a-personal-access-token)
+- HCP IAM user with the HCP owner, or admin role
+- [Vault Radar agent](/hcp/docs/vault-radar/agent/deploy) deployed and running (for agent scan)
+- GitLab [personal access token with the required permission
+  scopes](https://docs.gitlab.com/user/profile/personal_access_tokens/#create-a-personal-access-token):
 
-![GitLab personal access token scopes](/img/docs/vault-radar/gitlab/gitlab-pat-scopes.png)
+  ```plaintext
+  api
+  read_api
+  ```
 
-## Scan with HCP Vault Radar Scan
+## Add a GitLab data source
 
-1. Select **HCP Vault Radar Scan**, then select either **GitLab Cloud** or **GitLab Self-Managed**.
-
-1. Depending on your previous selections, **Enter your GitLab domain name** or **Enter your GitLab group path** text field may appear.
-
-![GitLab Self-Managed scanned by HCP Vault Radar Scan using data source workflow](/img/docs/vault-radar/gitlab/gitlab-self-managed-hcp-data-source.png)
-
-1. If you previously selected **GitLab Self-Managed**, enter the domain URL in the **Enter your GitLab domain name** text field.
-    - This will be the domain name of your instance, i.e. `gitlab.acme.com`
-
-1. If you previously selected **Data Sources**, enter the top-level group path in the **Enter your GitLab group path** text field.
-
-1. Enter the personal access token in the **Enter your GitLab personal access token** text field.
-
-1. Click **Next**.
-
-## Scan with Vault Radar Agent Scan
-
-1. Make sure that the agent pool has been set up, refer to the [agent pool documentation](/hcp/docs/vault-radar/agent/deploy) for more information.
-
-1. Select **HCP Vault Radar Scan**, then select either **GitLab Cloud** or **GitLab Self-Managed**.
-
-1. Depending on your previous selections, **Enter your GitLab domain name** or **Enter your GitLab group path** text field may appear.
-
-![GitLab Self-Managed scanned by Vault Radar Agent Scan using data source workflow](/img/docs/vault-radar/gitlab/gitlab-self-managed-agent-data-source.png)
-
-1. If you previously selected **GitLab Self-Managed**, enter the domain URL in the **Enter your GitLab domain name** text field.
-    - This will be the domain name of your instance, i.e. `gitlab.acme.com`
-
-1. If you previously selected **Data Sources**, enter the top-level group path in the **Enter your GitLab group path** text field.
-
-1. Create an environment variable for the API token in the agent environment.
-
-   **Example:**
-
-   <CodeBlockConfig hideClipboard>
-
-   ```shell-session
-   $ export GITLAB_TOKEN=mytoken
-   ```
-
-   </CodeBlockConfig>
-
-1. Enter the name of the environment variable in the **Enter environment path to your GitLab personal access token** text field with the `env://` prefix.
-
-    **Example:**
-
-    ```plaintext
-    env://GITLAB_TOKEN
-    ```
-
-1. Click **Next**.
-
-# Finish data source import
-
-1. Choose which repositories to monitor by selecting either the **All active repositories** or **Select repositories to monitor**
-
-    Monitor active repositories up to limit ![Add GitLab all active](/img/docs/vault-radar/monitor-all-active-resources.png)
-
-    Monitor selected repositories ![Add GitLab custom select](/img/docs/vault-radar/monitor-custom-select-resources.png)
-
-1. Click **Finish**
+You can add and scan GitLab Cloud or GitLab Self-Managed instance using the
+**HCP Vault Radar cloud scan** or **HCP Vault Radar agent scan**.
 
 <Note>
 
@@ -109,38 +41,171 @@ most recent activity.
 
 </Note>
 
-# Finish data source host import
+<Tabs>
+<Tab heading="GitLab Cloud">
 
-1. Choose which data sources to monitor by selecting either the **All data sources** or **Select data sources**
+Add GitLab Cloud as a data source to scan your GitLab group's repositories for
+secrets.
 
-    Monitor all data sources up to limit ![Add GitLab all](/img/docs/vault-radar/monitor-all-active-data-sources.png)
+<Tabs>
+<Tab heading="HCP Vault Radar cloud scan">
 
-    Monitor selected data sources ![Add GitLab custom select](/img/docs/vault-radar/monitor-custom-select-data-sources.png)
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
 
-1. Click **Finish**
+1. Click **Vault Radar**.
 
-# Update data source
+1. Click **Settings**.
 
-1. Navigate to **Settings**, and then **Data Sources**, and click the three dots to the right
+1. Click **Data Source Hosts**.
 
-   ![Update monitored resources](/img/docs/vault-radar/gitlab/gitlab-update-data-source.png)
+1. Click **Add data source host**.
 
-1. To update the monitored repositories, click **Edit monitored resources**.
+1. Select **HCP Vault Radar Scan**.
 
-1. If you imported the **Data Source** directly, to update the token, click **Edit data source details**.
+1. Select **GitLab Cloud**.
 
-1. If these data sources were discovered by importing the **Data Source Host**, to update the token, [update the data source host instead](#update-data-source-host)
+1. Enter the personal access token in the **Enter your GitLab personal access
+    token** field.
 
-# Update data source host
+1. Click **Next**.
 
-1. Navigate to **Settings**, and then **Data Source Hosts**, and click the three dots to the right
+1. Select either **All data sources** or **Select data sources**.
 
-   ![Update monitored data sources](/img/docs/vault-radar/gitlab/gitlab-update-data-source-host.png)
+1. Click **Finish**.
 
-1. To update the monitored data sources, click **Edit data sources**
+</Tab>
+<Tab heading="HCP Vault Radar agent scan">
 
-1. To update the token, click **Edit data source host details**
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
+
+1. Click **Vault Radar**.
+
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **Vault Radar Agent Scan**.
+
+1. Select **GitLab Cloud**.
+
+1. Enter the path to the environment variable with the personal access token in
+    the **Enter environment path to your GitLab personal access token** field.
+
+    **Example:**
+
+    <CodeBlockConfig hideClipboard>
+
+    ```plaintext
+    env://GITLAB_TOKEN
+    ```
+
+    </CodeBlockConfig>
+
+1. Click **Next**.
+
+1. Select either **All data sources** or **Select data sources**.
+
+1. Click **Finish**.
+
+</Tab>
+</Tabs>
+
+</Tab>
+<Tab heading="GitLab Self-Managed instance">
+
+Add GitLab Self-Managed instance as a data source to scan your GitLab group's
+repositories for secrets.
+
+<Tabs>
+<Tab heading="HCP Vault Radar cloud scan">
+
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
+
+1. Click **Vault Radar**.
+
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **HCP Vault Radar Scan**.
+
+1. Select **GitLab Self-Managed instance**.
+
+1. Enter the following information:
+
+    - **Enter your GitLab domain name:** Fully qualified domain name of your
+      GitLab Self-Managed instance.
+    - **Enter your GitLab personal access token:** Access token from your GitLab
+      Self-Managed instance.
+
+1. Click **Next**.
+
+1. Select either **All data sources** or **Select data sources**.
+
+1. Click **Finish**.
+
+</Tab>
+<Tab heading="HCP Vault Radar agent scan">
+
+1. Log into the [HCP Portal](https://portal.cloud.hashicorp.com/sign-in) with an
+   HCP IAM user that has the HCP owner or admin role.
+
+1. Click **Vault Radar**.
+
+1. Click **Settings**.
+
+1. Click **Data Source Hosts**.
+
+1. Click **Add data source host**.
+
+1. Select **Vault Radar Agent Scan**.
+
+1. Select **GitLab Self-Managed instance**.
+
+1. Enter the following information:
+
+    - **Enter your GitLab domain name:** Fully qualified domain name of your
+      GitLab Self-Managed instance.
+    - **Enter environment path to your GitLab personal access token:** Access
+      token from your GitLab Self-Managed instance.
+
+    **Example:**
+
+    <CodeBlockConfig hideClipboard>
+
+    ```plaintext
+    env://GITLAB_TOKEN
+    ```
+
+    </CodeBlockConfig>
+
+1. Click **Next**.
+
+1. Select either **All data sources** or **Select data sources**.
+
+1. Click **Finish**.
+
+</Tab>
+</Tabs>
+
+</Tab>
+</Tabs>
 
 ## Assign a group to a resource
 
 @include 'vault-radar/add-group-to-resource.mdx'
+
+## Update data source host
+
+@include 'vault-radar/update-data-source-hosts.mdx'
+
+## Tutorials
+
+@include 'vault-radar/vault-radar-tutorial-list.mdx'
