@@ -3,8 +3,8 @@ layout: docs
 page_title: License utilization metrics
 description: Learn about the data HashiCorp collects to measure Vault Enterprise license utilization.
 # START AUTO GENERATED METADATA, DO NOT EDIT
-created_at: 2026-03-26T19:04:15.000Z
-last_modified: 2026-03-26T19:04:15.000Z
+created_at: 2026-03-26T16:19:39-04:00
+last_modified: 2026-03-27T16:39:58.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -67,6 +67,92 @@ Each `snapshot_record` includes the following fields:
     - `license_start_time` - The start time of the license key
     - `license_expiration_time` - The expiration time of the license key
     - `license_termination_time` - The termination time of the license key, if applicable
+
+## License utilization metrics
+
+### Client count metrics
+
+| Metric | Description |
+| --- | --- |
+| `clientcount.current_month_estimate.type.entity` | Estimated total entity client count for the current billing period to date. |
+| `clientcount.previous_month_complete.type.entity` | Exact total entity client count for the entire billing period until the end of last month. |
+| `clientcount.current_month_estimate.type.nonentity` | Estimated total nonentity client count for the current billing period to date. |
+| `clientcount.previous_month_complete.type.nonentity` | Exact total nonentity client count for the entire billing period until the end of last month. |
+| `clientcount.current_month_estimate.type.secret_sync` | Estimated secret sync count for the current billing period to date. |
+| `clientcount.previous_month_complete.type.secret_sync` | Exact total secret sync count for the entire billing period until the end of last month. |
+| `clientcount.current_month_estimate.type.acme_client` | Estimated ACME client count for the current billing period to date. |
+| `clientcount.previous_month_complete.type.acme_client` | Exact total ACME client count for the entire billing period until the end of last month. |
+
+### Usage-based metrics
+
+| Metric | Description |
+| --- | --- |
+| `alicloud_dynamic_max_role_count.current_month_estimate` | High watermark count of Alicloud dynamic roles in the current month. |
+| `alicloud_dynamic_max_role_count.previous_month_complete` | High watermark count of Alicloud dynamic roles in the previous month. |
+| `aws_dynamic_max_role_count.current_month_estimate` | High watermark count of AWS dynamic roles in the current month. |
+| `aws_dynamic_max_role_count.previous_month_complete` | High watermark count of AWS dynamic roles in the previous month. |
+| `aws_static_max_role_count.current_month_estimate` | High watermark count of AWS static roles in the current month. |
+| `aws_static_max_role_count.previous_month_complete` | High watermark count of AWS static roles in the previous month. |
+| `azure_dynamic_max_role_count.current_month_estimate` | High watermark count of Azure dynamic roles in the current month. |
+| `azure_dynamic_max_role_count.previous_month_complete` | High watermark count of Azure dynamic roles in the previous month. |
+| `azure_static_max_role_count.current_month_estimate` | High watermark count of Azure static roles in the current month. |
+| `azure_static_max_role_count.previous_month_complete` | High watermark count of Azure static roles in the previous month. |
+| `billing.ssh.normalized_certificates.current_month_estimate` | Estimated number of certificates issued by built-in SSH backends in the current month. |
+| `billing.ssh.normalized_certificates.previous_month_complete` | Number of certificates issued by built-in SSH backends in the previous month. |
+| `billing.ssh.otp.current_month_estimate` | Estimated number of OTPs issued by built-in SSH backends in the current month. |
+| `billing.ssh.otp.previous_month_complete` | Number of OTPs issued by built-in SSH backends in the previous month. |
+| `consul_max_role_count.current_month_estimate` | High watermark count of Consul roles in the current month. |
+| `consul_max_role_count.previous_month_complete` | High watermark count of Consul roles in the previous month. |
+| `database_dynamic_max_role_count.current_month_estimate` | High watermark count of Database dynamic roles in the current month. |
+| `database_dynamic_max_role_count.previous_month_complete` | High watermark count of Database dynamic roles in the previous month. |
+| `database_static_max_role_count.current_month_estimate` | High watermark count of Database static roles in the current month. |
+| `database_static_max_role_count.previous_month_complete` | High watermark count of Database static roles in the previous month. |
+| `gcp_impersonated_max_account_count.current_month_estimate` | High watermark count of GCP Impersonated Account Counts in the current month. |
+| `gcp_impersonated_max_account_count.previous_month_complete` | High watermark count of GCP Impersonated Account Counts in the previous month. |
+| `gcp_roleset_max_count.current_month_estimate` | High watermark count of GCP rolesets in the current month. |
+| `gcp_roleset_max_count.previous_month_complete` | High watermark count of GCP rolesets in the previous month. |
+| `gcp_static_max_account_count.current_month_estimate` | High watermark count of GCP static accounts in the current month. |
+| `gcp_static_max_account_count.previous_month_complete` | High watermark count of GCP static accounts in the previous month. |
+| `kmip_enabled.current_month_estimate` | Indicates if KMIP was enabled in the current month. |
+| `kmip_enabled.previous_month_complete` | Indicates if KMIP was enabled in the previous month. |
+| `kmse_max_count.current_month_estimate` | High watermark count of KMSE keys in the current month. |
+| `kmse_max_count.previous_month_complete` | High watermark count of KMSE keys in the previous month. |
+| `kubernetes_dynamic_max_role_count.current_month_estimate` | High watermark count of Kubernetes dynamic roles in the current month. |
+| `kubernetes_dynamic_max_role_count.previous_month_complete` | High watermark count of Kubernetes dynamic roles in the previous month. |
+| `kv_max_count.current_month_estimate` | High watermark count of KV secrets in the current month. |
+| `kv_max_count.previous_month_complete` | High watermark count of KV secrets in the previous month. |
+| `ldap_dynamic_max_role_count.current_month_estimate` | High watermark count of LDAP dynamic roles in the current month. |
+| `ldap_dynamic_max_role_count.previous_month_complete` | High watermark count of LDAP dynamic roles in the previous month. |
+| `ldap_static_max_role_count.current_month_estimate` | High watermark count of LDAP static roles in the current month. |
+| `ldap_static_max_role_count.previous_month_complete` | High watermark count of LDAP static roles in the previous month. |
+| `mongodb_atlas_max_role_count.current_month_estimate` | High watermark count of MongoDB Atlas roles in the current month. |
+| `mongodb_atlas_max_role_count.previous_month_complete` | High watermark count of MongoDB Atlas roles in the previous month. |
+| `nomad_max_role_count.current_month_estimate` | High watermark count of Nomad roles in the current month. |
+| `nomad_max_role_count.previous_month_complete` | High watermark count of Nomad roles in the previous month. |
+| `normalized_certs_issued.current_month_estimate` | The duration-adjusted count of certificates issued by built-in PKI backends for the current month. |
+| `normalized_certs_issued.previous_month_complete` | The duration-adjusted count of certificates issued by built-in PKI backends for the previous month. |
+| `openldap_dynamic_max_role_count.current_month_estimate` | High watermark count of OpenLDAP dynamic roles in the current month. |
+| `openldap_static_max_role_count.current_month_estimate` | High watermark count of OpenLDAP static roles in the current month. |
+| `openldap_static_max_role_count.previous_month_complete` | High watermark count of OpenLDAP static roles in the previous month. |
+| `rabbitmq_max_role_count.current_month_estimate` | High watermark count of RabbitMQ roles in the current month. |
+| `rabbitmq_max_role_count.previous_month_complete` | High watermark count of RabbitMQ roles in the previous month. |
+| `terraformcloud_max_role_count.current_month_estimate` | High watermark count of Terraform Cloud roles in the current month. |
+| `terraformcloud_max_role_count.previous_month_complete` | High watermark count of Terraform Cloud roles in the previous month. |
+| `third_party_plugin_count.current_month_estimate` | High watermark count of third-party plugins in the current month. |
+| `third_party_plugin_count.previous_month_complete` | High watermark count of third-party plugins in the previous month. |
+| `totp_max_count.current_month_estimate` | High watermark count of TOTP keys in the current month. |
+| `totp_max_count.previous_month_complete` | High watermark count of TOTP keys in the previous month. |
+| `transform_operation_count.current_month_estimate` | Number of Transform data protection API calls in the current month. |
+| `transform_operation_count.previous_month_complete` | Number of Transform data protection API calls in the previous month. |
+| `transit_operation_count.current_month_estimate` | Number of Transit data protection API calls in the current month. |
+| `transit_operation_count.previous_month_complete` | Number of Transit data protection API calls in the previous month. |
+
+### PKI certificate metrics
+
+| Metric | Description |
+| --- | --- |
+| `certcount.current_month_estimate` | Estimated number of certificates issued by built-in PKI backends in the current month. |
+| `certcount.previous_month_complete` | Number of certificates issued by built-in PKI backends in the previous month. |
 
 ## Sample payload
 
