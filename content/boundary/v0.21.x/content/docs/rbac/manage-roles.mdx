@@ -409,7 +409,7 @@ resource "boundary_role" "listonly" {
   principal_ids   = [boundary_user.foo.id,boundary_group.bar.id]
   grant_strings   = ["ids=*;type=*;actions=no-op,list"]
   scope_id        = boundary_scope.org.id
-  grant_scope_ids = ["this",boundary_scope.project.id,"children"]
+  grant_scope_ids = ["this","children"]
 }
 ```
 
