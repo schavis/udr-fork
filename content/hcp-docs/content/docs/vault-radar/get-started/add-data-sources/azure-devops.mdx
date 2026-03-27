@@ -11,14 +11,14 @@ last_modified: 2025-09-05T13:57:53-05:00
 # Scan Azure DevOps for secrets
 
 Connect Azure DevOps as a data source to HCP Vault Radar to scan your Azure DevOps projects
-for sensitive data and secrets. HCP Vault Radar supports scanning Azure DevOps
+for sensitive data and secrets. Vault Radar supports scanning Azure DevOps
 Server and Azure DevOps Cloud.
 
 ## Prerequisites
 
 - HCP IAM user with the HCP owner, or admin role
 - [Vault Radar agent](/hcp/docs/vault-radar/agent/deploy) deployed and running (agent scan only)
-- Access to an Azure DevOps organization or project
+- Access to an Azure DevOps organization and project
 - A [personal access token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows)
   with access scoped to **All accessible organizations** with the following scopes:
 
@@ -39,7 +39,7 @@ Server and Azure DevOps Cloud.
 
 <Note title="Scan up to 5000 repositories">
 
-HCP Vault Radar allows you to scan up to 5000 repositories per connection. If
+Vault Radar allows you to scan up to 5000 repositories per connection. If
 you have more than 5000 repositories, Vault Radar will select the 5000
 repositories with the most recent activity.
 
