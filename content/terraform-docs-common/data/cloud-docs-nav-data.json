@@ -96,6 +96,10 @@
         "path": "users-teams-organizations/api-tokens"
       },
       {
+        "title": "IP allowlists",
+        "path": "users-teams-organizations/ip-allowlists"
+      },
+      {
         "title": "Single sign on",
         "routes": [
           {
@@ -797,6 +801,7 @@
         ]
       },
   { "title": "Invoices", "path": "api-docs/invoices" },
+  { "title": "IP allowlists", "path": "api-docs/cidr-range-lists" },
   { "title": "IP ranges", "path": "api-docs/ip-ranges" },
   { "title": "No-code provisioning", "path": "api-docs/no-code-provisioning"},
       {
