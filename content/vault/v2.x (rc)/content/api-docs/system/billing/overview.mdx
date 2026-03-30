@@ -5,7 +5,7 @@ description: >-
   The `/sys/billing/overview` endpoint returns a monthly overview of usage data.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2026-03-10T14:47:25-07:00
-last_modified: 2026-03-26T19:03:32.000Z
+last_modified: 2026-03-30T15:49:34.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -28,7 +28,8 @@ Vault updates current-month metrics every 10 minutes. Refer to the `updated_at` 
 ### Sample request
 
 ```shell-session
-$ curl --header "X-Vault-Token: ${VAULT_TOKEN}" "${VAULT_ADDR}/v1/sys/billing/overview?refresh_data=false"
+$ curl --header "X-Vault-Token: ${VAULT_TOKEN}" \
+    "${VAULT_ADDR}/v1/sys/billing/overview?refresh_data=false"
 ```
 
 ### Sample response
