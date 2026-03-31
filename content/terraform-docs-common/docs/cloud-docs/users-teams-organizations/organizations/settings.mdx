@@ -3,7 +3,7 @@ page_title: Organization settings reference
 description: Learn about the settings you can configure for organizations in HCP Terraform
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2026-03-11T19:37:43-07:00
-last_modified: 2026-03-19T15:33:15.000Z
+last_modified: 2026-03-31T02:01:03.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -210,14 +210,15 @@ Refer to [Health](/terraform/cloud-docs/workspaces/health) in the workspaces doc
 
 <!-- BEGIN: TFC:only name:registry-settings-proj-tags -->
 
-@include 'private-beta-feature.mdx'
+<!-- Controlling registry artifact usage is in private beta 
+Uncomment when this functionality is available as public beta or GA 
 
 ## Registry settings
 
 Enable the **Control usage with project tags** setting to use project tags to restrict access to modules and providers in the registry. When enabled, HCP Terraform only allows workspaces to consume specific modules, providers, and module and provider versions when the artifacts match the tags attached to the project. Refer to [Manage artifact tags](/terraform/cloud-docs/registry/manage/tags) for more information.
 
 After enabling the setting, you can specify the projects you want to restrict access to registry artifacts for in the **Projects** field.
-
+-->
 <!-- END: TFC:only name:registry-settings-proj-tags -->
 
 ## Runs

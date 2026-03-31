@@ -4,7 +4,7 @@ description: Learn how to add and manage tags for modules and providers hosted i
 tfc_only: true
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2026-03-12T16:19:30-07:00
-last_modified: 2026-03-13T02:40:11.000Z
+last_modified: 2026-03-31T02:01:01.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -18,15 +18,23 @@ This topic describes how to add and manage tags for modules and providers hosted
 
 You can assign project tags to modules and providers in the registry, which helps you consistently use metadata across entities in your system. Use tags to indicate project association, describe intended environments, and apply other meaningful labels.
 
-@include 'private-beta-feature.mdx'
+<!-- 
+Controlling registry artifact usage is in private beta 
+Uncomment when this functionality is available as public beta or GA
 
 You can also configure HCP Terraform to control registry artifact usage based on tags. When this functionality is enabled, Terraform verifies that the tags on the requested module or provider match the parent project tags at runtime. When the tags match, the run continues successfully. Otherwise HCP Terraform cancels the run and prints a message stating that it cannot find a matching tag.
 
 To control access to specific module or provider versions, attach a reserved tag that has been created with the **Registry environment tag** option enabled. Refer to [Control access to registry artifacts](/terraform/cloud-docs/users-teams-organizations/organizations/manage-reserved-tags#control-access-to-registry-artifacts) for more information.
-
+-->
 ## Requirements
 
-You must be on an IBM HCP Terraform standard plan to restrict access to artifact versions. Refer to the [pricing page](https://www.hashicorp.com/en/pricing?tab=terraform) for more information.
+<!-- Controlling registry artifact usage is in private beta 
+Uncomment when this functionality is available as public beta or GA
+
+You must be on an IBM HCP Terraform premium plan to restrict access to artifact versions. Refer to the [pricing page](https://www.hashicorp.com/en/pricing?tab=terraform) for more information.
+
+-->
+You must be on an IBM HCP Terraform standard plan to add environment tags to individual artifact versions. Refer to the [pricing page](https://www.hashicorp.com/en/pricing?tab=terraform) for more information.
 
 The following settings must be enabled for your organization to attach tags to artifacts in the registry:
 
