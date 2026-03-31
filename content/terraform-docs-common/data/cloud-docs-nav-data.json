@@ -165,6 +165,7 @@
           "title": "Manage projects",
           "path": "projects/manage"
         },
+    { "title": "Notifications", "path": "projects/notifications" },
     { "title": "Best practices", "path": "projects/best-practices" }
     ]
   },

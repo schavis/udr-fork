@@ -1,0 +1,79 @@
+---
+page_title: Project notifications in HCP Terraform
+description: >-
+  Configure project notifications in HCP Terraform to send webhooks and email alerts for run and workspace events across every workspace in a project.
+---
+
+# Project notifications
+
+HCP Terraform sends webhooks and emails to notify external systems about workspace run events. You can configure notifications for an entire project instead of setting them up for individual workspaces. Project notifications apply to every workspace in the project. This lets you create standard alerts, such as a PagerDuty webhook for production errors, without configuring each new workspace.
+
+Project notification configurations require project admin access. Refer to [Project permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project#project-admin) for details.
+
+-> **API:** Refer to [Project notification configurations API reference](/terraform/cloud-docs/api-docs/project-notification-configurations).
+
+## How project notifications work
+
+Project notifications work alongside workspace notifications.
+
+### Apply to all workspaces
+
+Project notifications trigger for all current workspaces in the project. They also trigger for any workspaces that you create in the project or move into it later.
+
+### Combine with workspace notifications
+
+Project notifications do not modify or remove workspace notifications. For example, if a workspace has a Slack webhook and the project has a PagerDuty webhook, the same run event triggers both notifications.
+
+### Cannot be disabled from workspaces
+
+Workspace administrators cannot turn off project notifications from workspace settings. You must modify or delete them at the project level.
+
+## Requirements
+
+You must have project admin permissions to create and manage project notifications.
+
+During the private beta, email destinations must belong to registered HCP Terraform users in your organization.
+
+## Create a project notification
+
+A notification configuration requires a destination, a payload type, and the events that should generate a notification.
+
+1. Sign in to [HCP Terraform](https://app.terraform.io/) or Terraform Enterprise and open the project you want to configure.
+1. Click **Settings**, then **Notifications**.
+1. Click **Create a notification**.
+1. Choose a destination type.
+1. Enter a display name for the notification.
+1. Configure the destination:
+
+- For webhook destinations, including Slack and Microsoft Teams, enter the destination URL. The URL must accept HTTP or HTTPS `POST` requests.
+- For email destinations, choose recipients from the drop-down menu.
+- For generic webhooks, you can optionally enter a token. HCP Terraform uses this secret string to sign webhooks so you can verify their source.
+
+1. Select which workspace events trigger the notification. You can choose all events, no events, or **Only certain events** to enable specific workspace event types, such as when checks fail.
+1. Select which run events trigger the notification. You can choose all events, no events, or **Only certain events** to enable specific run event types, such as when a run completes or errors.
+1. Click **Create notification configuration**.
+
+After you create the notification, the confirmation screen lets you perform the following actions:
+
+- Send a test notification.
+- Disable the notification by toggling the **Enabled** slider. Refer to [Enable and verify notifications](#enable-and-verify-notifications) for details.
+- Delete the notification.
+- Edit the notification.
+
+## Enable and verify notifications
+
+To enable or disable a notification, open the notification page and toggle the **Enabled** or **Disabled** slider.
+
+Before HCP Terraform enables a generic or Slack webhook, it sends a test message to the URL. The destination must return a `2xx` HTTP status code. If the test fails, HCP Terraform displays an error and leaves the notification disabled. You must fix the connection before you can enable the notification.
+
+## Notification payloads
+
+Project notifications use the same payload formats as workspace notifications. Refer to [Workspace notifications](/terraform/cloud-docs/workspaces/settings/notifications#notification-payloads) for payload details and examples.
+
+For generic notifications, the complete payload schema is documented in the [project notification configurations API reference](/terraform/cloud-docs/api-docs/project-notification-configurations#notification-payload).
+
+## Notification authenticity
+
+Slack notifications use Slack's own protocols for verifying HCP Terraform webhook requests.
+
+Generic notifications can include a signature for verifying the request. If a project notification configuration includes a secret token, HCP Terraform includes an `X-TFE-Notification-Signature` header containing an HMAC signature computed from that token using the SHA-512 digest algorithm. The receiving service is responsible for validating the signature. Refer to [Notification authenticity](/terraform/cloud-docs/api-docs/project-notification-configurations#notification-authenticity) for details and an example.
