@@ -766,7 +766,11 @@
   { "title": "No-code provisioning", "path": "api-docs/no-code-provisioning"},
       {
         "title": "Notification configurations",
-        "path": "api-docs/notification-configurations"
+        "routes": [
+          { "title": "Workspace", "path": "api-docs/notification-configurations" },
+          { "title": "Project", "path": "api-docs/project-notification-configurations" },
+          { "title": "Team", "path": "api-docs/team-notification-configurations" }
+        ]
       },
   { "title": "OAuth clients", "path": "api-docs/oauth-clients" },
   { "title": "OAuth tokens", "path": "api-docs/oauth-tokens" },
