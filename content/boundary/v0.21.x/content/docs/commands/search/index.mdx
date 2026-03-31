@@ -96,7 +96,6 @@ Refer to the [Filtering and listing resources documentation](/boundary/docs/filt
 - `-query=<string>` (optional) - If set, specifies the [MQL](https://github.com/hashicorp/mql/blob/main/GRAMMAR.md) query you want to use to search for the indexed fields on the resource you specified.
 If you do not provide a `-query` value, the search lists all resources of the specified type that have been cached.
 The available fields that can be used in the search query for each resource include:
-
   - targets: id, name, description, type, address, scope_id
   - sessions: id, type, endpoint, status, scope_id, target_id, user_id
 
@@ -115,7 +114,7 @@ You can configure the following:
   - `asc` - Sorts in ascending order.
   - `desc` - Sorts in descending order.
 
-  You must use the `sort-by` flag to specify a sort direction.
+  The `sort-by` flag is required to specify a sort direction.
   By default, Boundary sorts search results in ascending order.
 
 @include 'cmd-option-note.mdx'
