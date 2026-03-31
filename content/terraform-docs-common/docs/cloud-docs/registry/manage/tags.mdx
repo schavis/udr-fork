@@ -4,7 +4,7 @@ description: Learn how to add and manage tags for modules and providers hosted i
 tfc_only: true
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2026-03-12T16:19:30-07:00
-last_modified: 2026-03-31T02:25:38.000Z
+last_modified: 2026-03-31T03:03:01.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -51,8 +51,9 @@ The following settings must be enabled for your organization to attach tags to a
 1. On the **Manage tags** page, browse for tags that you want to attach to the artifact. You can click on the link in either the **Projects** or **Workspaces** column view the projects and workspaces that have the tag. 
 1. Select the tags you want to attach to the artifact, the click **Submit**.
 
+<!-- Not in the public beta, expose for GA or for public beta 
 HCP Terraform attaches the selected tags to the artifact so that only projects that have the same tags can consume them. 
-
+-->
 <!-- Not in the beta, expose for GA 
 ## Attach project tags to registry artifacts in bulk
 
@@ -80,7 +81,10 @@ Refer to [Control access to registry artifacts](/terraform/cloud-docs/users-team
 1. When prompted, choose the artifact version to assign the tags to from the drop-down.
 1. Choose one or more environment tags, then click **Assign**.
 
-HCP Terraform attaches the selected environment tags to the artifact version. As a result, only projects that have the same tags can consume that version of the artifact. 
+HCP Terraform attaches the selected environment tags to the artifact version. 
+<!-- Not in the public beta, expose for GA or for public beta 
+As a result, only projects that have the same tags can consume that version of the artifact. 
+-->
 
 <!-- not in the beta, expose for GA
 The tags are also available in the **Filters** section in the registry so that you can more easily browse for suitable artifacts to use for your workspaces. Refer to [Use artifacts from the HCP Terraform private registry](/terraform/cloud-docs/registry/using#find-artifacts) for more information.  
