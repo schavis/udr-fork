@@ -6,8 +6,8 @@ description: >-
 
 
 # START AUTO GENERATED METADATA, DO NOT EDIT
-created_at: 2026-03-26T19:04:03.000Z
-last_modified: 2026-03-26T19:04:03.000Z
+created_at: 2026-03-26T16:19:39-04:00
+last_modified: 2026-04-01T00:04:20.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -19,7 +19,7 @@ License utilization reporting allows you to track and share license utilization 
 
 Vault supports two reporting methods:
 
-- **Automated reporting (recommended)**: Vault sends data automatically to HashiCorp through an outbound HTTPS API call roughly every 24 hours.
+- **Automated reporting (recommended)**: Vault sends data automatically to HashiCorp using an outbound HTTPS API call about every 24 hours.
 - [**Manual reporting**](/vault/docs/license/utilization/manual-reporting): You retrieve the license utilization data from Vault and upload it to HashiCorp.
 
 Your Vault Enterprise license agreement may require you to report license utilization data at a set cadence. You must meet the requirements for automated reporting or maintain an alternative process to manually report data at the agreed cadence.
@@ -28,14 +28,12 @@ Your Vault Enterprise license agreement may require you to report license utiliz
 
 Automated reporting is the default behavior for supported versions of Vault Enterprise.
 
-To ensure successful delivery, your network must allow outbound HTTPS traffic on port 443 to `reporting.hashicorp.services` and/or the following IP addresses:
+To ensure successful delivery, your network must allow outbound HTTPS traffic on port 443 to `reporting.hashicorp.services` or the following IP addresses:
 
 - 100.20.70.12
 - 35.166.5.222
-- 23.95.85.111
-- 44.215.244.1
 
-You can verify network connectivity by running the following command on a Vault node or another system that is subject to the same network protections as a Vault node. Because the test request does not have a valid license utilization payload, the reporting service will return an HTTP response status code of 400 Bad Request.
+You can verify network connectivity by running the following command on a Vault node or another system that is subject to the same network protections as a Vault node. Because the test request does not have a valid license utilization payload, the reporting service returns an HTTP status code of 400 Bad Request.
 
 ```shell-session
 $ curl -X POST -d "{}" "https://reporting.hashicorp.services/v3/"
@@ -44,7 +42,7 @@ Bad Request
 
 ### Confirming through server logs
 
-Automatic license utilization reporting will start sending data within roughly 24 hours. Check the server logs for records that the data sent successfully. You will find log entries similar to the following:
+Automatic license utilization reporting starts sending data in about 24 hours. Check the server logs for records that confirm successful delivery. The logs include entries similar to the following:
 
 <CodeBlockConfig hideClipboard>
 
@@ -64,7 +62,7 @@ Automatic license utilization reporting will start sending data within roughly 2
 
 </CodeBlockConfig>
 
-If the automated reporting process fails, logs will show an error. In this case, reconfigure your network to allow egress and check back in 24 hours.
+If the automated reporting process fails, logs show an error. In this case, reconfigure your network to allow egress and check again in 24 hours.
 
 <CodeBlockConfig hideClipboard>
 
@@ -82,7 +80,7 @@ If the automated reporting process fails, logs will show an error. In this case,
 
 ## Configuration options
 
-Reporting behavior is managed within the [`reporting`](/vault/docs/configuration/reporting) stanza of your Vault configuration file. Configuration options include:
+Vault manages reporting behavior in the [`reporting`](/vault/docs/configuration/reporting) stanza of your configuration file. Configuration options include:
 
 - Opting out of automated license utilization reporting
 - Changing Vault's retention period for daily snapshots
@@ -103,9 +101,9 @@ reporting {
 
 To avoid inconsistent reporting behaviors, you must apply the same setting on all nodes in a Vault cluster, and on all nodes in other Vault clusters connected through performance replication or disaster replication:
 
-- If nodes within a Vault cluster have different settings, upon a cluster leadership election, the cluster will use the setting on the new leader node.
-- While disaster recovery secondary clusters do not report license utilization data, in the event of a disaster failover, the cluster will use the setting on its leader node.
-- Performance replication (PR) secondary clusters will inherit the `development_cluster` setting from the PR primary cluster. However, if a PR secondary cluster is promoted, its own configuration setting will then take effect, and all other clusters that become PR secondaries to the new PR primary will inherit that setting.
+- If nodes within a Vault cluster have different settings, after a cluster leadership election, the cluster uses the setting on the new leader node.
+- While disaster recovery secondary clusters do not report license utilization data, after a disaster failover, the cluster uses the setting on its leader node.
+- Performance replication (PR) secondary clusters inherit the `development_cluster` setting from the PR primary cluster. However, when a PR secondary cluster is promoted, its own configuration setting takes effect, and all other clusters that become PR secondaries to the new PR primary inherit that setting.
 
 If the `development_cluster` setting in a performance replication secondary cluster's configuration differs from the value inherited from the primary cluster, the secondary cluster logs the following error to warn about the discrepancy:
 

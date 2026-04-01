@@ -4,7 +4,7 @@ page_title: License utilization metrics
 description: Learn about the data HashiCorp collects to measure Vault Enterprise license utilization.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2026-03-26T16:19:39-04:00
-last_modified: 2026-03-27T17:11:25.000Z
+last_modified: 2026-04-01T00:04:22.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -14,13 +14,13 @@ last_modified: 2026-03-27T17:11:25.000Z
 
 Vault Enterprise license utilization reporting shares the minimum data required to validate license utilization as defined in Vault Enterprise license agreements. This data consists of computed metrics and never contains personally identifiable information (PII) or sensitive secrets.
 
-As of Vault 2.0+, the reports include:
+In Vault 2.0 and later, reports include:
 
 - **Vault clients.** The number of unique Vault clients.
-- **Vault usage.** Single usage metric for each secrets engine, plus number of enabled custom plugins and status of KMIP.
-- **PKI certificates.** The number of certificates issued by Vault’s built-in PKI secrets engine.
+- **Vault usage.** A single usage metric for each secrets engine, plus the number of enabled custom plugins and KMIP status.
+- **PKI certificates.** The number of certificates issued by Vault's built-in PKI secrets engine.
 
-Not all metrics are relevant to all contracts. For example, if a Vault cluster is entitled by Vault clients, only the Vault clients metrics apply to that cluster's license utilization.
+Not all metrics are relevant to all contracts. For example, when a Vault cluster is entitled by Vault clients, only Vault client metrics apply to that cluster's license utilization.
 
 ## Data schema
 
@@ -31,8 +31,8 @@ Vault's license utilization reporting payload includes the following fields:
 - `id` - Random identifier for the payload
 - `mode` - Marked as `manual` when Vault generates the payload at the user's request, otherwise omitted
 - `version` - The version of this payload schema
-- `timestamp`- The date and time for this contribution
-- `snapshots_records` - An array of snapshot records. See [snapshot payload](#snapshot-payload) for the contents of each snapshot record.
+- `timestamp` - The date and time for this contribution
+- `snapshot_records` - An array of snapshot records. See [snapshot payload](#snapshot-payload) for the contents of each snapshot record.
 
 ### Snapshot payload
 
@@ -48,7 +48,7 @@ Each `snapshot_record` includes the following fields:
   - `customer` - The customer ID associated with the license
 - `decoded_snapshot` - The decoded contents of the snapshot, which is a structure containing the following fields:
   - `snapshot_version` - The version of the snapshot package that produced the reporting snapshot
-  - `id` - A unique identifier for this particular snapshot
+  - `id` - A unique identifier for this snapshot
   - `process_id` - An identifier for the system that produced this snapshot
   - `timestamp` - The date and time for this snapshot
   - `schema_version` - The version of the schema associated with this snapshot
@@ -63,8 +63,8 @@ Each `snapshot_record` includes the following fields:
     - `billing_start` - The billing start date associated with the reporting cluster or the license start date if you do not have a billing date configured (automatically rolls over every year)
     - `cluster_id` - The cluster UUID as shown by `vault status` on the reporting cluster
     - `development_cluster` - Whether or not the cluster operates as a development (non-production) cluster
-    - `add_ons` - For IBM Passport Advantage Online license keys, the add-ons associated with the entitlement. For HashiCorp license keys, this field will always be empty.
-    - `edition` - For IBM Passport Advantage Online license keys, the edition associated with the entitlement. For HashiCorp license keys, this field will always be empty.
+    - `add_ons` - For IBM Passport Advantage Online license keys, the add-ons associated with the entitlement. For HashiCorp license keys, this field is empty.
+    - `edition` - For IBM Passport Advantage Online license keys, the edition associated with the entitlement. For HashiCorp license keys, this field is empty.
     - `issuer` - The issuer of the license key
     - `license_start_time` - The start time of the license key
     - `license_expiration_time` - The expiration time of the license key

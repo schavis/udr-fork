@@ -7,7 +7,7 @@ description: >-
 
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2026-01-27T17:15:25-08:00
-last_modified: 2026-03-26T19:04:14.000Z
+last_modified: 2026-04-01T00:10:17.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -21,18 +21,18 @@ Review the terms of your license agreement to confirm whether you may opt out of
 
 ## Opt out
 
-There are two ways of opting out of Vault's automated license utilization reporting:
+There are two ways to opt out of Vault's automated license utilization reporting:
 
 - HCL configuration **(recommended)**
 - Environment variable (requires restart)
 
-Be sure to apply the same configuration or environment variable to all nodes on a Vault cluster: upon leadership change, the new leader node's settings will take effect.
+Apply the same configuration or environment variable to all nodes in a Vault cluster. After leadership changes, the new leader node settings take effect.
 
-If your HCL configuration file and environment variable differ, the environment variable setting will take precedence.
+If your HCL configuration file and environment variable differ, the environment variable setting takes precedence.
 
 ### HCL configuration
 
-Add the following to your Vault's HCL configuration file. If Vault is already running, you must trigger a configuration reload by sending a `SIGHUP` signal to the Vault process.
+Add the following to your Vault HCL configuration file. When Vault is already running, trigger a configuration reload by sending a `SIGHUP` signal to the Vault process.
 
 ```hcl
 reporting {
@@ -42,7 +42,7 @@ reporting {
 }
 ```
 
-Vault will log the following message in its server logs:
+Vault logs the following message in its server logs:
 
 <CodeBlockConfig hideClipboard>
 
@@ -54,13 +54,13 @@ Vault will log the following message in its server logs:
 
 ### Environment variable
 
-Set the following environment variable for the Vault process. If Vault is already running, you will have to restart the process before the environment variable takes effect.
+Set the following environment variable for the Vault process. When Vault is already running, restart the process before the environment variable takes effect.
 
 ```
 OPTOUT_LICENSE_REPORTING=true
 ```
 
-Vault will log the following message in its server logs:
+Vault logs the following message in its server logs:
 
 <CodeBlockConfig hideClipboard>
 
@@ -87,17 +87,19 @@ path "sys/utilization" {
 
 Both the CLI command and API endpoint support the following parameters:
 
-- `today_only` - When set, the endpoint will return only snapshots from the last 24 hours.
+- `today_only` - When set, the endpoint returns only snapshots from the last 24 hours.
 - `message` - Optional message to include in Vault's server logs.
 
-In addition, the CLI command supports an `-output` parameter to specify where to write the license utilization bundle. By default, the CLI will use a timestamped filename, `vault-utilization-[timestamp].json`.
+In addition, the CLI command supports an `-output` parameter to specify where to write the license utilization bundle. By default, the CLI uses a timestamped filename, `vault-utilization-[timestamp].json`.
 
 <Tabs>
 
 <Tab heading="CLI">
 
 ```shell-session
-$ vault operator utilization -today-only -output="vault-utilization.json"
+$ vault operator utilization \
+    -today-only \
+    -output="vault-utilization.json"
 Success! License utilization reporting bundle written to: vault-utilization.json
 ```
 
@@ -107,8 +109,8 @@ Success! License utilization reporting bundle written to: vault-utilization.json
 
 ```shell-session
 $ curl -X PUT -H "X-Vault-Token: $VAULT_TOKEN" \
-	-d '{"today_only": true}' \
-	"${VAULT_ADDR}/v1/sys/utilization" \
+    -d '{"today_only": true}' \
+    "${VAULT_ADDR}/v1/sys/utilization" \
   | jq -r '.data.utilization_bundle' \
   | base64 -d -i - -o "vault-utilization.json"
 ```
@@ -119,7 +121,7 @@ $ curl -X PUT -H "X-Vault-Token: $VAULT_TOKEN" \
 
 ### Send the reporting payload to HashiCorp
 
-You can send the license utilization reporting payload to HashiCorp either through a web browser, or directly to the API:
+You can send the license utilization reporting payload to HashiCorp using a web browser or directly to the API:
 
 <Tabs>
 
@@ -127,8 +129,8 @@ You can send the license utilization reporting payload to HashiCorp either throu
 
 1. Go to https://portal.cloud.hashicorp.com/license-utilization/reports/create
 1. Click on **Choose files** or drop your file(s) into the container.
-   - If the upload succeeded, the HCP user interface will change the file status to **Uploaded** in green.
-   - If the upload failed, the file status will say **Failed** in red, and will include error information.
+    - When the upload succeeds, the HCP user interface changes the file status to **Uploaded** in green.
+    - When the upload fails, the file status is **Failed** in red and includes error information.
 
 If the upload fails, check that you haven't modified the file signature. If the error persists, please contact Support.
 
@@ -138,17 +140,21 @@ If the upload fails, check that you haven't modified the file signature. If the 
 
 Upload the license utilization bundle directly to HashiCorp's reporting API.
 
-If the upload is successful, HashiCorp's reporting API will return an HTTP 202 Accepted response status code.
+When the upload is successful, HashiCorp's reporting API returns an HTTP 202 Accepted response status code.
 
 ```shell-session
-$ curl -X POST -d @vault-utilization.json -w "%{http_code}\n" "https://reporting.hashicorp.services/v3/"
+$ curl -X POST -w "%{http_code}\n" \
+    -d @vault-utilization.json \
+    "https://reporting.hashicorp.services/v3/"
 {}202
 ```
 
-If the upload fails, the reporting API will return an error message and status code. For example, using a payload with a tampered signature:
+When the upload fails, the reporting API returns an error message and 4XX or 5XX status code. For example, using a payload with a tampered signature:
 
 ```shell-session
-$ curl -X POST -d @vault-utilization-tampered.json -w "%{http_code}\n" "https://reporting.hashicorp.services/v3/"
+$ curl -X POST -w "%{http_code}\n" \
+    -d @vault-utilization-tampered.json \
+    "https://reporting.hashicorp.services/v3/"
 {"message": "error processing v3 bundle"}
 500
 ```
