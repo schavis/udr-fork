@@ -48,6 +48,8 @@ $ boundary connect rdp [options] [args]
 
 This command performs a target authorization or consumes an existing authorization token, and launches a proxied RDP connection.
 
+<!-- Note: This page duplicates cmd-connect-command-options.mdx inline to add RDP-specific context immediately after the -inactive-timeout parameter -->
+
 - `-authz-token` `(string: "")` - The authorization string returned from the Boundary controller via an `authorize-session` action against a target.
 This option is only required if you don't set a `-target-id`.
 If you set the value to `-`, the command attempts to read in the authorization string from standard input.
