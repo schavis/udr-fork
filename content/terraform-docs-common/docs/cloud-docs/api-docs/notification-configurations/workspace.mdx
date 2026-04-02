@@ -38,13 +38,28 @@ description: >-
 
 # Workspace notification configurations API reference
 
-HCP Terraform can send workspace notifications for run state transitions and workspace events. You can specify a destination URL, request type, and what events will trigger the notification. Each workspace can have up to 20 notification configurations, and they apply to all runs for that workspace.
+Use the workspace notifications API endpoints to send send messages to external applications when a run state transition or workspace event occurs. You can specify a destination URL, request type, and what events will trigger the notification. Each workspace can have up to 20 notification configurations, and they apply to all runs for that workspace.
 
-For project notification configurations, refer to [Project notification configurations API reference](/terraform/cloud-docs/api-docs/project-notification-configurations). For team notification configurations, refer to [Team notification configurations API reference](/terraform/cloud-docs/api-docs/team-notification-configurations).
+## Overview
 
-Interacting with notification configurations requires admin access to the relevant workspace. ([More about permissions](/terraform/cloud-docs/users-teams-organizations/permissions).)
+The following table lists the available API endpoints for managing workspace notification configurations:
 
--> **Note:** [Speculative plans](/terraform/cloud-docs/workspaces/run/modes-and-options#plan-only-speculative-plan) and workspaces configured with `Local` [execution mode](/terraform/cloud-docs/workspaces/settings#execution-mode) do not support notifications.
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `POST` | `/workspaces/:workspace_id/notification-configurations` | [Create a new notification configuration for a workspace](#create-a-notification-configuration) |
+| `GET` | `/workspaces/:workspace_id/notification-configurations` | [List all notification configurations for a workspace](#list-notification-configurations) |
+| `GET` | `/notification-configurations/:notification-configuration-id` | [Retrieve details of a specific notification configuration](#show-a-notification-configuration) |
+| `PATCH` | `/notification-configurations/:notification-configuration-id` | [Update an existing notification configuration](#update-a-notification-configuration) |
+| `POST` | `/notification-configurations/:notification-configuration-id/actions/verify` | [Send a verification request to test a notification configuration](#verify-a-notification-configuration) |
+| `DELETE` | `/notification-configurations/:notification-configuration-id` | [Delete a notification configuration](#delete-a-notification-configuration) |
+
+
+For project notification configurations, refer to [Project notification configurations API reference](/terraform/cloud-docs/api-docs/notification-configurations/project). 
+For team notification configurations, refer to [Team notification configurations API reference](/terraform/cloud-docs/api-docs/notification-configurations/team).
+
+Interacting with notification configurations requires admin access to the relevant workspace. Refer to [Permissions overview](/terraform/cloud-docs/users-teams-organizations/permissions) for more information.
+
+[Speculative plans](/terraform/cloud-docs/workspaces/run/modes-and-options#plan-only-speculative-plan) and workspaces configured with `Local` [execution mode](/terraform/cloud-docs/workspaces/settings#execution-mode) do not support notifications.
 
 [permissions-citation]: #intentionally-unused---keep-for-maintainers
 

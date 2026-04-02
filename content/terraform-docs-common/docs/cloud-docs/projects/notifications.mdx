@@ -10,7 +10,7 @@ HCP Terraform sends webhooks and emails to notify external systems about workspa
 
 Project notification configurations require project admin access. Refer to [Project permissions](/terraform/cloud-docs/users-teams-organizations/permissions/project#project-admin) for details.
 
--> **API:** Refer to [Project notification configurations API reference](/terraform/cloud-docs/api-docs/project-notification-configurations).
+-> **API:** Refer to [Project notification configurations API reference](/terraform/cloud-docs/api-docs/notification-configurations/project).
 
 ## How project notifications work
 
@@ -70,10 +70,10 @@ Before HCP Terraform enables a generic or Slack webhook, it sends a test message
 
 Project notifications use the same payload formats as workspace notifications. Refer to [Workspace notifications](/terraform/cloud-docs/workspaces/settings/notifications#notification-payloads) for payload details and examples.
 
-For generic notifications, the complete payload schema is documented in the [project notification configurations API reference](/terraform/cloud-docs/api-docs/project-notification-configurations#notification-payload).
+For generic notifications, the complete payload schema is documented in the [project notification configurations API reference](/terraform/cloud-docs/api-docs/notification-configurations/project#notification-payload).
 
 ## Notification authenticity
 
 Slack notifications use Slack's own protocols for verifying HCP Terraform webhook requests.
 
-Generic notifications can include a signature for verifying the request. If a project notification configuration includes a secret token, HCP Terraform includes an `X-TFE-Notification-Signature` header containing an HMAC signature computed from that token using the SHA-512 digest algorithm. The receiving service is responsible for validating the signature. Refer to [Notification authenticity](/terraform/cloud-docs/api-docs/project-notification-configurations#notification-authenticity) for details and an example.
+Generic notifications can include a signature for verifying the request. If a project notification configuration includes a secret token, HCP Terraform includes an `X-TFE-Notification-Signature` header containing an HMAC signature computed from that token using the SHA-512 digest algorithm. The receiving service is responsible for validating the signature. Refer to [Notification authenticity](/terraform/cloud-docs/api-docs/notification-configurations/project#notification-authenticity) for details and an example.
