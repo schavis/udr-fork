@@ -84,7 +84,7 @@ of the subcommand in the sidebar or one of the links below:
    You can also specify the path using the **BOUNDARY_CLIENT_CERT** environment variable.
 -  `-client-key` `(string: "")` - The path on the local disk to a single PEM-encoded private key that matches the client certificate you referenced with `-client-cert`.
   You can also specify the path using the **BOUNDARY_CLIENT_KEY** environment variable.
-- `inactive-timeout=<duration>` - The amount of time in seconds that can pass between connections before Boundary closes any unused sessions.
+- `-inactive-timeout=<duration>` - The amount of time in seconds that can pass between connections before Boundary closes any unused sessions.
 You can increase this value if the proxy closes during long-running processes.
 Use `-1` to disable the timeout altogether.
 -  `-listen-addr` `(string: "")` - If set, the CLI attempts to bind its listening address to the given value, which must be an IP address.
