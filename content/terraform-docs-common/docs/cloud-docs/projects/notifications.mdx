@@ -1,7 +1,7 @@
 ---
 page_title: Project notifications in HCP Terraform
 description: >-
-  Configure project notifications in HCP Terraform to send webhooks and email alerts for run and workspace events across every workspace in a project.
+  Configure project notifications in HCP Terraform to send webhooks and email alerts for run and workspace events across every workspace in a project, with optional workspace exclusions.
 ---
 
 # Project notifications
@@ -18,7 +18,11 @@ Project notifications work alongside workspace notifications.
 
 ### Apply to all workspaces
 
-Project notifications trigger for all current workspaces in the project. They also trigger for any workspaces that you create in the project or move into it later.
+Project notifications trigger for all current workspaces in the project unless you exclude them from a notification configuration. They also trigger for any workspaces that you create in the project or move into it later, unless you add those workspaces to the exclusion list.
+
+### Exclude specific workspaces
+
+You can exclude specific workspaces from a project notification configuration. Excluded workspaces do not send notifications for that configuration, while all other workspaces in the project continue to use it. Use exclusions when you want to keep project-level notifications for critical workspaces but omit low-priority development or test workspaces.
 
 ### Combine with workspace notifications
 
@@ -26,7 +30,7 @@ Project notifications do not modify or remove workspace notifications. For examp
 
 ### Cannot be disabled from workspaces
 
-Workspace administrators cannot turn off project notifications from workspace settings. You must modify or delete them at the project level.
+Workspace administrators cannot turn off project notifications from workspace settings. You must modify, exclude workspaces from, or remove them from the project.
 
 ## Requirements
 
@@ -36,7 +40,7 @@ During the private beta, email destinations must belong to registered HCP Terraf
 
 ## Create a project notification
 
-A notification configuration requires a destination, a payload type, and the events that should generate a notification.
+A notification configuration requires a destination, a payload type, the events that should generate a notification, and optional workspace exclusions.
 
 1. Sign in to [HCP Terraform](https://app.terraform.io/) or Terraform Enterprise and open the project you want to configure.
 1. Click **Settings**, then **Notifications**.
@@ -51,6 +55,7 @@ A notification configuration requires a destination, a payload type, and the eve
 
 1. Select which workspace events trigger the notification. You can choose all events, no events, or **Only certain events** to enable specific workspace event types, such as when checks fail.
 1. Select which run events trigger the notification. You can choose all events, no events, or **Only certain events** to enable specific run event types, such as when a run completes or errors.
+1. Optional: Exclude workspaces that should not use this notification configuration. Search for workspaces in the project and add them to the exclusion list.
 1. Click **Create notification configuration**.
 
 After you create the notification, the confirmation screen lets you perform the following actions:
