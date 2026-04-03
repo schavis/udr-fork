@@ -2447,6 +2447,10 @@
         ]
       },
       {
+        "title": "OS",
+        "path": "secrets/os"
+      },
+      {
         "title": "PKI (Certificates)",
         "routes": [
           {
