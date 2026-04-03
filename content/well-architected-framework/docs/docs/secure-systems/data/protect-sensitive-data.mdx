@@ -13,13 +13,13 @@ Sensitive data is data that could cause harm if unauthorized people access it. E
 
 Sensitive data most commonly falls into the confidential or restricted data [classification categories](/well-architected-framework/secure-systems/data/classify-data).
 
-## Why protecting sensitive data matters
+## Why protect sensitive data
 
-**Defend against data exposure across the lifecycle:** Sensitive data moves through multiple stages — creation, storage, use, archival, and deletion. A vulnerability at any stage can expose personally identifiable information, financial records, or confidential business data. Without protections at each stage, a single gap can compromise the entire dataset.
+**Defend against data exposure across the lifecycle:** Sensitive data moves through multiple stages: creation, storage, use, archival, and deletion. A vulnerability at any stage can expose personally identifiable information, financial records, or confidential business data. Without protections at each stage, a single gap can compromise the entire dataset.
 
 **Detect and remediate leaked secrets before attackers exploit them:** Secrets such as API keys, database credentials, and encryption keys can end up in version control, documentation, or project management tools. Once exposed, attackers can use leaked credentials to access systems and exfiltrate data. Proactive scanning identifies exposed secrets so teams can rotate or revoke them before damage occurs.
 
-**Encrypt data consistently across transit and storage:** Protecting data only in transit or only at rest leaves gaps that attackers can exploit. A defense-in-depth approach requires encrypting data at every stage — between services using mTLS and within storage using encryption keys managed separately from the data.
+**Encrypt data consistently across transit and storage:** Protecting data only in transit or only at rest leaves gaps that attackers can exploit. A defense-in-depth approach requires encrypting data at every stage.
 
 Common phases of a data lifecycle management framework include:
 
@@ -51,9 +51,6 @@ HashiCorp Consul encrypts traffic using mutual transport layer security (mTLS) b
 
 ## HashiCorp resources
 
-- Learn how to [classify your data](/well-architected-framework/secure-systems/data/classify-data) before applying protection controls
-- Protect [data at rest](/well-architected-framework/secure-systems/data/protect-data-at-rest) using Vault encryption and key management
-- Protect [data in transit](/well-architected-framework/secure-systems/data/protect-data-in-transit) using TLS, Vault Transit, and Consul mTLS
 - Learn to [encrypt data in transit with Vault](/vault/tutorials/encryption-as-a-service/eaas-transit)
 - Learn to [transform sensitive data with Vault](/vault/tutorials/encryption-as-a-service/transform) using format-preserving encryption
 - Scan [a repository for secrets with HCP Vault Radar](/hcp/tutorials/get-started-hcp-vault-radar/vault-radar-secret-scanning)
