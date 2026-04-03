@@ -21,7 +21,7 @@ CTOs, architects, staff engineers. Need: strategic value, Why section with opera
 Content indicators: business impact statements, challenge descriptions with consequences, strategic decision criteria, approach comparisons, risk/benefit analysis.
 
 ### Implementer (50-60% of content)
-DevOps, platform engineers, SREs, developers. Need: actionable implementation guidance, code examples with realistic workflows, 5-8+ HashiCorp resource links, step-by-step guidance, integration patterns, troubleshooting.
+DevOps, platform engineers, SREs, developers. Need: actionable implementation guidance, code examples with realistic workflows, relevant HashiCorp resource links, step-by-step guidance, integration patterns, troubleshooting.
 
 Content indicators: code examples with summaries, tutorial/documentation links, how-to instructions, configuration examples, CLI commands, technical specs.
 
@@ -29,7 +29,7 @@ Content indicators: code examples with summaries, tutorial/documentation links, 
 
 1. **Content distribution**: % of content per persona, section-by-section breakdown, balance between strategic/tactical
 2. **Decision-maker coverage**: Why section (3-4 challenges with business impact), strategic guidance, business value, comparison content
-3. **Implementer coverage**: Complete realistic code examples, 5-8+ resource links, step-by-step or clear next steps, integration patterns
+3. **Implementer coverage**: Complete realistic code examples, relevant resource links, step-by-step or clear next steps, integration patterns
 4. **Balance analysis**: Overall distribution, skewed sections, gaps where one persona is underserved, transition quality
 5. **Transition quality**: Strategic → tactical flow, explicit connections between sections
 

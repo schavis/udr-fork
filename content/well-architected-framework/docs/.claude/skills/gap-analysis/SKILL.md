@@ -31,7 +31,7 @@ Decision-makers: business value, ROI/impact, comparison to alternatives, complia
 Implementers: code examples, actionable steps, tool prerequisites, configuration examples, command syntax.
 
 ### 5. Resource and reference gaps
-Related WAF docs not linked, missing tutorials, external resources for third-party tools, next steps/learning path. Target: 5-8+ HashiCorp resource links.
+Related WAF docs not linked, missing tutorials, external resources for third-party tools, next steps/learning path. Include links that genuinely help users implement the topic — don't pad, don't omit useful resources.
 
 ### 6. Missing sections
 Common missing: Prerequisites, Verification/testing, Production readiness, Troubleshooting, Best practices, Security considerations, Performance implications, Limitations.

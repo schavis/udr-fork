@@ -263,7 +263,7 @@ The `check-resources` skill is the complete source of truth for resources sectio
 - Add context in the sentence, not after a dash: `...for resource syntax` not `- for resource syntax`
 - Keep documentation and tutorial links as separate bullets
 - Use plain text with colon for subheadings, not `##` headings: `Packer for containers:` not `### Packer for containers`
-- Target 5-8+ links; use grouped subheadings when covering multiple tools or 8+ links
+- Include links that genuinely help users implement the topic — don't pad the list, but don't omit useful resources; use grouped subheadings when covering multiple tools
 - **Consider video tutorial links** when relevant (complex visual workflows, tool introductions, conference talks)
 
 ---
@@ -326,11 +326,11 @@ Use existing documents as benchmarks for depth:
 ### Document Length Guidelines
 - **Target word count**: 700-1,200 words
 - **Content is more important than word count** - If a topic needs 1,500 words to properly serve both personas, use 1,500 words
-- **Quality indicators**: Clear "Why" section, actionable implementation guidance, 5-8 HashiCorp resource links, code examples when they add value
+- **Quality indicators**: Clear "Why" section, actionable implementation guidance, relevant HashiCorp resource links, code examples when they add value
 - **Red flags**: Documents under 400 words likely lack depth; implementation guides without actionable guidance or examples may leave implementers unable to get started
 
 ### Complete Documents Should Include
-- **Sections**: Intro (2-3 paragraphs), Why (3-4 challenges), Implementation guidance, Resources (5-8+ links)
+- **Sections**: Intro (2-3 paragraphs), Why (3-4 challenges), Implementation guidance, Resources (relevant links for implementers)
 - **Code examples (when valuable)**: 1-2 detailed, realistic examples that show complete workflows (input → processing → output) for implementation guides and technical how-tos
 - **Both personas served**: Strategic value for decision-makers, actionable guidance for implementers
 

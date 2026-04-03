@@ -25,7 +25,7 @@ Check each area and report issues with line numbers:
 5. **Link descriptions** - No "learn more"/"click here", action verbs outside brackets
 6. **Content structure** - Clear topic sentences, explicit relationship statements between sections
 7. **Keyword density** - Primary keyword 3-5 times, secondary keywords naturally distributed
-8. **Internal linking** - 8+ cross-references, keyword-rich anchor text, related content connected
+8. **Internal linking** - Relevant cross-references, keyword-rich anchor text, related content connected
 9. **Image alt text** - Descriptive, 10-125 chars, no "image of", includes relevant keywords
 10. **Code block languages** - Every ` ``` ` block has language tag (`hcl`, `bash`, `json`, etc.)
 11. **Contextual completeness** - Each section understandable alone, acronyms defined per section, no bare "it"/"this"
