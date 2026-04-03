@@ -10,11 +10,11 @@ description: >-
 
 @include 'alerts/enterprise-and-hcp.mdx'
 
-Vault includes a rotation manager to enforce automated, schedule or
+Vault includes a rotation manager to enforce automated, scheduled or
 period-based rotations for onboarded credentials. You can define how the
 rotation manager handles execution failures and retry logic by configuring
-rotation policies. These policies specify limits for backoff attempts and
-requeue cycles before a rotation is marked as orphaned. Rotation policies do
+rotation policies. Rotation policies specify limits for backoff attempts and
+requeue cycles before Vault marks a rotation as orphaned. Rotation policies do
 not affect Vault access [policies](/vault/docs/concepts/policies).
 
 Vault currently supports policy rotation for the following workflows:
@@ -82,7 +82,7 @@ vault write sys/policies/rotation/custom-ldap-policy \
     max_retries_per_cycle=5
 ```
 
-Once the policy has been created, you can assign rotation policies when
+Once Vault stores the policy, you can assign rotation policies when
 configuring a new credential. For example, to associate the rotation policy
 `custom-ldap-policy` with a new LDAP role named `alice`:
 
