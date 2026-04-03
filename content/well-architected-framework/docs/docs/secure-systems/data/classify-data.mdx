@@ -9,44 +9,98 @@ last_modified: 2026-01-29T10:31:53-06:00
 
 # Classify data
 
-Data classification is a foundational security practice that organizes data into sensitivity levels based on the potential impact of unauthorized access. Organizations should classify all data based on sensitivity to ensure appropriate security controls and access restrictions.
+Data classification is a foundational security practice that organizes data into
+sensitivity levels based on the potential impact of unauthorized access.
+Organizations should classify all data, both physical and digital, based on
+sensitivity to ensure appropriate security controls and access restrictions.
 
 A basic data classification scheme includes the following levels:
 
-- **Public:** Information that is freely available and can be shared with anyone. Public data includes website content, contact information, marketing material, press releases, and product information such as public SOC-2 reports.
+- **Public:** Information that is freely available that you can share with
+  anyone. Public data includes website content, contact information, marketing
+  material, press releases, and product information such as public SOC-2
+  reports.
 
-- **Internal:** Information that can be shared internally with all employees such as internal policies, benefit information, general project plans, and product information not meant for public disclosure.
+- **Internal:** Information you can share internally with all employees
+  such as internal policies, benefit information, general project plans, and
+  product information not meant for public disclosure.
 
-- **Confidential:** Information that is restricted and could cause damage to the organization if disclosed. Confidential data includes detailed network information, financial information, customer lists, detailed SOC-2 runbooks, and business plans not yet finalized.
+- **Confidential:** Information that you should share with specific
+  individuals based on need, and can cause damage to the organization if disclosed.
+  Confidential data includes detailed network information, financial
+  information, customer lists, detailed SOC-2 runbooks, and business plans not
+  yet finalized.
 
-- **Restricted:** Information that can cause severe damage to the organization, employees, or customers if compromised. Restricted information includes system credentials, API keys, pending patent applications, merger and acquisition plans, credit card information, and patient data.
+- **Restricted:** Information that can cause severe damage to the organization,
+  employees, or customers if compromised. Restricted information includes system
+  credentials, API keys, pending patent applications, merger and acquisition
+  plans, personally identifiable information (PII), payment card information
+  (PCI), and patient data.
 
-## Why data classification matters
+## Why classify data
 
 Data classification addresses the following security and compliance challenges:
 
-**Maintain regulatory compliance:** Organizations operating in healthcare, financial services, or other regulated industries face penalties and legal consequences without proper data classification. Compliance frameworks such as HIPAA, SOX, PCI-DSS, ISO, and NIST require documented data classification schemes to demonstrate security controls.
+**Maintain regulatory compliance:** Organizations operating in healthcare,
+financial services, or other regulated industries face penalties and legal
+consequences without proper data classification. Compliance frameworks such as
+HIPAA, SOX, PCI-DSS, ISO, and NIST require documented data classification
+schemes to demonstrate security controls.
 
-**Reduce data breach exposure:** Unclassified data increases the risk of unauthorized access because security teams cannot prioritize protection efforts. Data breaches involving sensitive information result in financial losses, reputational damage, and customer trust erosion.
+**Reduce data breach exposure:** Unclassified data increases the risk of
+unauthorized access because security teams cannot prioritize protection efforts.
+Data breaches involving sensitive information result in financial losses,
+reputational damage, and customer trust erosion.
 
-**Prioritize security controls:** Without classification, security teams apply uniform controls to all data, wasting resources on low-value data while under-protecting sensitive information. Classification lets security teams apply risk-based controls that focus resources where they matter most.
+**Prioritize security controls:** Without classification, security teams apply
+uniform controls to all data, wasting resources on low-value data while
+under-protecting sensitive information. Classification lets security teams apply
+risk-based controls that focus resources where they matter most.
 
-**Close audit and compliance gaps:** Organizations cannot demonstrate compliance or respond to audit requests without documented data classification. Classification provides the foundation for access controls, encryption policies, and audit trails that regulators require.
+**Close audit and compliance gaps:** Organizations cannot demonstrate compliance
+or respond to audit requests without documented data classification.
+Classification provides the foundation for access controls, encryption policies,
+and audit trails that regulators require.
 
 ## How to implement data classification
 
-Implementing data classification requires defining classification levels, applying them to existing data, and integrating classification with security tools and workflows. The following workflow describes the end-to-end process:
+Implementing data classification requires defining classification levels,
+applying them to existing data, and integrating classification with security
+tools and workflows. The following workflow describes the end-to-end process:
 
-1. **Discover:** Use HCP Vault Radar to scan repositories, collaboration tools, and cloud storage for unclassified sensitive data across your organization.
-1. **Classify:** Define classification levels and apply labels to data at creation time. Assign classifications to discovered data based on documented criteria.
-1. **Enforce:** Configure Vault ACL policies, Boundary targets, and Consul service intentions that restrict access based on classification level.
-1. **Audit:** Use Vault audit logging and compliance reports to verify that classification policies are applied and access attempts are recorded.
+1. **Define:** Create a data classification scheme with levels that match your
+   organization's risk tolerance and regulatory requirements. Document clear
+   criteria for each level, including types of data, potential impact, required
+   controls, and access restrictions.
+
+1. **Discover:** Inventory data stores, repositories, and collaboration tools to
+   identify where sensitive data resides. Use automated discovery tools to scan
+   for unclassified data across your organization. Implement manual reviews for
+   physical data such as printed documents.
+
+1. **Classify:** Apply classification levels and labels to data at creation
+   time. Implement automated processes where possible to ensure all data
+   includes classification metadata.
+
+1. **Enforce:** Configure policies and controls, in conjunction with centralized
+   identity and access management (IAM) systems, that restrict access to data
+   based on classification levels.
+
+1. **Audit:** Enable and review audit logs, and generate compliance reports to
+   verify users and systems are accessing data appropriately, and systems
+   enforce access controls.
 
 ### Define your classification scheme
 
-Start by defining classification levels that match your organization's risk tolerance and regulatory requirements. The four-level scheme of public, internal, confidential, and restricted works for most organizations, but you may need additional levels or different names based on industry requirements.
+Start by defining classification levels that match your organization's risk
+tolerance and regulatory requirements. The four-level scheme of public,
+internal, confidential, and restricted works for most organizations. You may
+need additional levels or different names based on industry or regulatory
+requirements such as **top secret** for government contracts, or **protected
+health information** for healthcare organizations.
 
 Document clear criteria for each classification level, including the following:
+
 - Types of data that belong in each category
 - Potential impact if data is compromised
 - Required security controls for each level
@@ -54,7 +108,12 @@ Document clear criteria for each classification level, including the following:
 
 ### Apply classification to data
 
-Apply classification labels to data at creation time and review existing data to assign appropriate classifications. Begin by inventorying your data stores, repositories, and collaboration tools to identify where sensitive data resides. Use automated discovery tools such as HashiCorp Cloud Platform (HCP) Vault Radar to scan for unclassified secrets and sensitive data patterns across your organization.
+Apply classification labels to data at creation time and review existing data to
+assign appropriate classifications. Begin by inventorying your data stores,
+repositories, and collaboration tools to identify where sensitive data resides.
+Use automated discovery tools such as HashiCorp Cloud Platform (HCP) Vault Radar
+to scan for unclassified secrets and sensitive data patterns across your
+organization.
 
 Classification should meet the following criteria:
 - **Documented:** Record classification decisions and criteria
@@ -62,51 +121,85 @@ Classification should meet the following criteria:
 - **Reviewed:** Periodically review classifications as data sensitivity changes, such as after product launches, completed mergers, or changes to regulatory requirements
 - **Automated:** Use tools to detect and classify sensitive data patterns
 
-## Enforce classification with Vault
+## Classifiy and manage access to Vault data
 
-Vault stores restricted data securely such as credentials and API keys, and manages access using access control list (ACL) policies that map to classification levels. You can create separate Vault paths for each classification level and apply policies that restrict access based on user roles and data sensitivity.
+Vault allows you to store restricted data securely such as credentials and API
+keys. You can manage access to the restricted data using access control list
+(ACL) policies that map to your classification levels. 
 
-For example, create Vault policies that enforce classification-based access:
+One example of managing access is to create separate Vault paths for each
+classification level and apply policies that restrict access based on user roles
+and data sensitivity.
+
+In this example, the Vault policies enforce access to data based on the path.
+Each policy grants the appropriate capabilities, following the principle of
+least privilege for the classification level. You can assign these policies to
+each entity that requires access, ensuring that only authorized users can access
+sensitive data.
+
+**Example policy for restricted data:**
 
 ```hcl
 # Restricted data access policy - senior engineers only
 path "secret/restricted/*" {
   capabilities = ["read", "list"]
 }
+```
 
+**Example policy for confidential data:**
+
+```hcl
 # Confidential data access policy - team members
 path "secret/confidential/*" {
   capabilities = ["read", "list"]
 }
+```
 
+**Example policy for internal data:**
+
+```hcl
 # Internal data access policy - all employees
 path "secret/internal/*" {
   capabilities = ["read", "list"]
 }
 ```
 
-Assign the restricted policy only to senior engineers, the confidential policy to team members, and the internal policy to all employees. Apply these policies to Vault tokens or identity groups. Vault's audit logging records all access attempts, providing the audit trail that compliance frameworks require.
+Assign the restricted policy only to senior engineers, the confidential policy
+to team members, and the internal policy to all employees. Apply these policies
+to Vault tokens or identity groups. Vault's audit logging records all access
+attempts, providing the audit trail that compliance frameworks require.
 
-Vault also encrypts application data using the transit secrets engine, an encryption-as-a-service feature that handles cryptographic operations without storing the data. Use the transit secrets engine to protect confidential and restricted data throughout its lifecycle.
+## Control data access with Boundary
 
-You can enforce classification policies programmatically using [Sentinel](/vault/docs/enterprise/sentinel), a policy-as-code framework available in Vault Enterprise.
+Boundary manages access to systems using grants. Each authorized user connects to
+systems you have granted access to. Like Vault, you can create separate grants
+for each classification level and assign them to users based on their clearance
+level. You can also integrate Boundary with Vault to use dynamic, short-lived
+credentials for accessing systems without using static, long-lived credentials.
 
-## Control infrastructure access with Boundary
-
-Boundary manages access to internal systems by ensuring only authorized users connect to systems that process classified data. When you integrate Vault with Boundary, Vault dynamically generates and inserts credentials into the authentication process (requires HCP or Enterprise). Dynamic credentials eliminate the need to share long-lived credentials for accessing systems with classified data.
-
-Configure Boundary targets and roles that map to data classification levels, ensuring users only access infrastructure appropriate for their clearance level. For systems that process restricted or confidential data, enable session recording (requires HCP Plus or Enterprise) so that Boundary records and stores every session in an external storage bucket — providing the audit trail that compliance frameworks require.
+For systems that process restricted or confidential data, enable session
+recording (requires HCP Plus or Enterprise) so that Boundary records and stores
+every session in an external storage bucket — providing the audit trail that
+compliance frameworks require.
 
 - Configure [Vault credential injection](/boundary/docs/vault) for dynamic, short-lived credentials
 - Set up [session recording](/boundary/docs/concepts/auditing) for compliance auditing of access to sensitive systems
 
-## Segment networks by classification with Consul
+## Segment networks to restrict data access with Consul
 
-Consul service mesh can enforce data classification at the network level. Tag services with their data classification level and use service intentions to restrict which services communicate with each other. Restricting network access based on classification levels prevents lower-clearance services from reaching systems that process restricted or confidential data.
+Consul service mesh can enforce access data at the network level. Tag
+services based on the type of data they handle with service intentions to
+restrict which services communicate with each other. Restricting network access
+based on classification levels prevents lower-clearance services from reaching
+systems that process restricted or confidential data.
 
-Consul requires ACLs with a default deny policy for service intentions to work as a security control. Without a default deny policy, services communicate freely unless explicitly denied, which makes intention-based classification enforcement ineffective.
+Consul requires ACLs with a default deny policy for service intentions to work
+as a security control. Without a default deny policy, services communicate
+freely unless explicitly denied, which makes intention-based classification
+enforcement ineffective.
 
-The following example creates an intention that allows only a payments service to reach a restricted database and denies all other services:
+The following example creates an intention that allows only a payments service
+to reach a restricted database and denies all other services:
 
 ```hcl
 Kind = "service-intentions"
@@ -124,14 +217,17 @@ Sources = [
 ]
 ```
 
-Apply this pattern to any system that processes restricted or confidential data to isolate it from lower-clearance services.
+Apply this pattern to any system that processes restricted or confidential data
+to isolate it from lower-clearance services.
 
 - Configure [service intentions](/consul/docs/reference/config-entry/service-intentions) for service-to-service access control
 - Review [Consul security best practices](/consul/docs/secure-mesh/best-practice) for ACL and mesh configuration
 
-## Tag resources with Terraform
+## Tag resources with Terraform to manage classification
 
-Tag cloud resources with their classification level in Terraform so that security tools, cost management systems, and audit tooling can identify sensitive infrastructure.
+Tag cloud resources with their classification level in Terraform so that
+security tools, cost management systems, and audit tooling can identify
+sensitive infrastructure.
 
 ```hcl
 resource "aws_s3_bucket" "app_data" {
@@ -145,13 +241,30 @@ resource "aws_s3_bucket" "app_data" {
 }
 ```
 
-The `data_classification` tag makes sensitivity levels visible across your cloud console, cost dashboards, and security tooling. Use a [Sentinel policy](/terraform/tutorials/policy/sentinel-policy) in HCP Terraform to enforce that all resources include a valid classification tag before plans apply.
+The `data_classification` tag represents sensitivity levels visible across your cloud
+console, cost dashboards, and security tooling. Use a [Sentinel
+policy](/terraform/tutorials/policy/sentinel-policy) in HCP Terraform to enforce
+that all resources include a valid classification tag before plans apply.
 
-## Discover unclassified data with Vault Radar
+## Discover restricted data with HCP Vault Radar
 
-HCP Vault Radar scans connected data sources such as code repositories, collaboration tools, and cloud storage to identify secrets and sensitive data across your organization. Use Vault Radar to discover unclassified sensitive data and ensure proper classification. Vault Radar also integrates with pull request workflows to scan for secrets before code merges, preventing sensitive data from entering version control.
+HCP Vault Radar scans connected data sources such as code repositories,
+collaboration tools, and cloud storage to identify secrets and restricted and
+confidential data across your organization. Use Vault Radar to discover restricted
+data and triage remediation before it becomes a risk. Vault Radar also
+integrates with pull request, CI/CD pipelines, and local developer workflows to
+scan for secrets before code merges, preventing sensitive data from entering
+version control.
 
-When Vault Radar identifies unclassified sensitive data, take the following remediation steps: rotate the exposed credential immediately, store the new secret in Vault at the appropriate classification path, and remove the original value from the source. For secrets found in version control, treat the commit history as compromised and rotate regardless of whether the secret appears active.
+When Vault Radar identifies restricted data, take the following remediation
+steps: 
+
+- **Rotate the exposed credential immediately**
+- **Store the new secret in Vault** at the appropriate classification path
+- **Remove the original value from the source**
+
+For secrets found in version control, treat the commit history as compromised
+and rotate regardless of whether the secret appears active.
 
 - Follow the [remediate secrets](/hcp/docs/vault-radar/remediate-secrets) workflow for step-by-step remediation guidance
 - Get started with [Vault Radar secret scanning](/hcp/tutorials/get-started-hcp-vault-radar/vault-radar-secret-scanning)
