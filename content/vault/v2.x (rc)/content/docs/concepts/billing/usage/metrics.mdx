@@ -1,0 +1,115 @@
+---
+layout: docs
+page_title: Usage-based billing metrics
+description: |-
+  Learn how Vault counts usage for clusters on usage-based billing.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2026-04-06T17:57:55.000Z
+last_modified: 2026-04-06T17:57:55.000Z
+# END AUTO GENERATED METADATA
+---
+
+# Usage-based billing metrics
+
+Vault supports a usage-based licensing option. Under this licensing option, each Vault [secrets engine](/vault/docs/secrets) has an associated licensing metric:
+
+- **Secrets.** Number of static secrets, auto-rotated secrets roles, and dynamic secrets roles that a secrets engine manages.
+- **Keys.** Number of cryptographic keys that a secrets engine manages.
+- **Credential units.** Number of cryptographically signed credentials (such as certificates and tokens) that the secrets engine issues, adjusted by duration.
+- **Data protection operations.** Number of data elements that the secrets engine protects.
+
+Vault counts all licensing metrics monthly and resets all counters at midnight on the first day of each month.
+
+Refer to [Metrics by secret engine](#metrics-by-secret-engine) for a full list of official HashiCorp Vault secrets engine plugins and their respective licensing metrics.
+
+## Secrets and keys
+
+Vault calculates the **high-water mark** number of secrets and keys in each month. Every 10 minutes, Vault counts the current number of secrets (or secrets roles) or keys in each secrets engine and compares it to the stored high-water mark for that engine. If the current number is greater than the previously stored number, Vault updates the high-water mark.
+
+Vault tracks high-water mark counts of secrets and keys independently by secret engine and by secret or key type. For example:
+
+- If you have two `kv` mounts, each with 10 secrets, and later delete 5 secrets from the first and add 5 secrets to the second, the overall high-water mark count is unchanged because the cluster still has 20 KV static secrets.
+- If you have an `ldap` mount with 10 "static" roles (that is, auto-rotated secrets) and later delete 5 of those roles and create 5 "dynamic" roles, you have high-water marks of 10 LDAP static roles and 5 LDAP dynamic roles because the secret type is different.
+- If you have an `azure` mount with 10 dynamic roles and later delete that mount and add an `aws` mount with 10 dynamic roles, you have high-water marks of 10 Azure dynamic roles and 10 AWS dynamic roles because the secrets engines are different.
+
+## Credential units
+
+Vault adds the total number of duration-adjusted credentials issued. A credential unit is a cryptographically signed credential that is valid for 730 hours (one month). Vault rounds credential units to four decimal places, with a minimum of 0.0001 units per credential. For example:
+
+- **Web server.** You request a server TLS certificate for a web server. The certificate is valid for 730 hours. Vault counts `1.000` credential units when it issues the certificate.
+- **AI agent.** An AI agent requests a client TLS certificate to act on behalf of a user. The certificate is valid for 5 minutes. Vault counts `(5 / 60) / 730 = 0.0001` credential units when it issues the certificate.
+- **CI pipeline.** A CI pipeline requests an OIDC ID token that is valid for 1 minute. Even though `(1 / 60) / 730 < 0.0001`, Vault counts `0.0001` credential units when it issues the token because that is the minimum number of units per credential.
+- **Certificate authority.** You sign a certificate signing request for another certificate authority. The CA's certificate is valid for 5 years. Vault counts `(730 * 12 * 5) / 730 = 60.0000` credential units when it signs the CA's certificate.
+
+Vault records the number of credential units in its storage every 10 minutes.
+
+## Data protection operations
+
+Vault counts the total number of data elements processed by API calls classified as data protection calls. This excludes management API calls, such as key creation or deletion. The following are data protection calls:
+
+- **Transit secrets engine.** `encrypt`, `decrypt`, `rewrap`, `datakey`, `hmac`, `sign`, `verify`, `cmac`
+- **Transform secrets engine.** `encode`, `decode`, `validate`, `tokenized`, `tokens`
+- **Google Cloud KMS secrets engine.** `encrypt`, `decrypt`, `reencrypt`, `sign`, `verify`
+
+For API endpoints that support batch operation, Vault counts each data element in the batch individually.
+
+Vault records the number of data protection operations in its storage every 10 minutes.
+
+## Custom plugins
+
+Every 10 minutes, Vault counts the high-water mark number of non-builtin [secrets plugins](/vault/docs/plugins) enabled on a cluster during each month. Vault counts a plugin only if:
+
+1. There is at least one secrets engine mount on the cluster using that plugin, and
+1. That plugin does not have a HashiCorp-signed manifest denoting that plugin as an official HashiCorp plugin.
+
+For usage-based billing, Vault does **not** count authentication or database plugins (however, Vault counts [database roles](#secrets-and-keys)). If you are using two versions of a plugin, Vault counts each version separately.
+
+## Cluster replication
+
+Each Vault cluster tracks its own usage metrics. You must query each Vault cluster to obtain total usage numbers for your Vault deployment.
+
+Performance replication (PR) secondary clusters **exclude** replicated secrets from their counts. This ensures that a replicated secret is counted only once across the replicated estate (on the PR primary cluster).
+
+<small>&#9989; Cluster counts and reports &emsp; &#10060; Cluster does not count or report</small>
+
+| Metric | PR primary | PR secondary |
+| --- | :-: | :-: |
+| Secrets and keys (replicated) | &#9989; | &#10060; |
+| Secrets and keys ([local-only](/vault/tutorials/enterprise/performance-replication#replicated-vs-local-backend-mounts)) | &#9989; | &#9989; |
+| Credential units | &#9989; | &#9989; |
+| Data protection operations | &#9989; | &#9989; |
+
+For example:
+
+- You have two Vault clusters, A and B, connected through performance replication (PR). Cluster A is the PR primary, and cluster B is the PR secondary.
+- Cluster A has two static secrets (KV) mounts, of which one is local-only. Cluster B has the replicated KV mount from cluster A, plus a local-only KV mount.
+- Each KV mount has one secret.
+- Since cluster A is the PR primary, it reports both replicated and local-only secrets. Cluster A reports two secrets.
+- Since cluster B is a PR secondary, it reports only local-only secrets. Cluster B reports one secret.
+
+## Metrics by secret engine
+
+| Secrets engine   | Metric                                                    |
+| ---------------- | --------------------------------------------------------- |
+| AliCloud         | [Secrets](#secrets-and-keys) (roles)                      |
+| AWS              | [Secrets](#secrets-and-keys) (roles)                      |
+| Azure            | [Secrets](#secrets-and-keys) (roles)                      |
+| Consul           | [Secrets](#secrets-and-keys) (roles)                      |
+| Databases        | [Secrets](#secrets-and-keys) (roles)                      |
+| Google Cloud     | [Secrets](#secrets-and-keys) (roles)                      |
+| Google Cloud KMS | [Data protection operations](#data-protection-operations) |
+| Identity (JWTs)  | [Credential units](#credential-units)                     |
+| Identity (OIDC)  | [Credential units](#credential-units)                     |
+| KV               | [Secrets](#secrets-and-keys)                              |
+| KMSE             | [Keys](#secrets-and-keys)                                 |
+| Kubernetes       | [Secrets](#secrets-and-keys) (roles)                      |
+| LDAP             | [Secrets](#secrets-and-keys) (roles)                      |
+| MongoDB Atlas    | [Secrets](#secrets-and-keys) (roles)                      |
+| Nomad            | [Secrets](#secrets-and-keys) (roles)                      |
+| PKI              | [Credential units](#credential-units)                     |
+| RabbitMQ         | [Secrets](#secrets-and-keys) (roles)                      |
+| SSH              | [Credential units](#credential-units)                     |
+| Terraform        | [Secrets](#secrets-and-keys) (roles)                      |
+| TOTP             | [Keys](#secrets-and-keys)                                 |
+| Transform        | [Data protection operations](#data-protection-operations) |
+| Transit          | [Data protection operations](#data-protection-operations) |
