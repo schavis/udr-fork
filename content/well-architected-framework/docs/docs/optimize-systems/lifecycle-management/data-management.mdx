@@ -3,7 +3,7 @@ page_title: Automate cloud storage lifecycle policies
 description: Automate data lifecycle policies with Terraform to reduce storage costs, meet compliance requirements, and manage data retention across AWS, GCP, and Azure.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-09-10T10:35:54-05:00
-last_modified: 2026-04-06T16:06:39.000Z
+last_modified: 2026-04-06T16:35:28.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -15,11 +15,11 @@ Data lifecycle management policies help organizations automatically manage cloud
 
 Automating cloud storage lifecycle policies addresses the following operational challenges:
 
-**Reduce uncontrolled storage costs:** Without lifecycle policies, storage costs grow unchecked as teams create data but never clean it up. Objects accumulate across hot storage tiers long after they are accessed, driving up costs unnecessarily. Automated rules move data to lower-cost tiers like Glacier or cold storage, and delete data that has passed its retention period, all without manual intervention.
+**Reduce uncontrolled storage costs:** Without lifecycle policies, storage costs grow unchecked as teams create data but never clean it up. Objects accumulate across hot storage tiers long after they are accessed, driving up costs unnecessarily. Automated rules move data to lower-cost tiers like Glacier or cold storage, and delete data that has passed its retention period.
 
 **Ensure regulatory compliance:** Organizations face legal and regulatory requirements for data retention that vary by industry and jurisdiction. Manually tracking retention schedules is error-prone and difficult to audit. Automated lifecycle policies apply consistent, codified retention rules to every resource, making compliance audits straightforward and reducing the risk of violations.
 
-**Minimize security exposure:** Sensitive data that persists beyond its retention period increases your attack surface. A breach that exposes data from three years ago can be just as damaging as one that exposes current data. Automated deletion policies ensure that data is removed on schedule, reducing the volume of sensitive information available to attackers at any given time.
+**Minimize security exposure:** Sensitive data that persists beyond its retention period increases your attack surface. A breach that exposes data from three years ago can be just as damaging as one that exposes current data. Automated deletion policies ensure that data is removed on schedule, reducing the volume of sensitive information exposed in the event of a breach.
 
 ## Automate policy management with infrastructure as code
 
@@ -50,7 +50,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
 
 The data lifecycle policy moves any S3 object larger than 1 byte to Glacier Instant Retrieval (GLACIER_IR) after 365 days. Glacier Instant Retrieval costs significantly less than standard S3 storage while still providing millisecond retrieval times, making it suitable for infrequently accessed data that must remain available. The `object_size_greater_than` filter excludes zero-byte placeholder objects that do not benefit from tiering.
 
-Terraform can also tag resources with appropriate retention metadata. These tags can include creation dates, data classifications, and retention periods.
+Terraform can also tag resources with appropriate retention metadata, including creation dates, data classifications, and retention periods.
 
 For example, you can use the [`tag` block](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration#specifying-a-filter-based-on-an-object-tag) with AWS S3 to automatically apply tags to all resources created by Terraform. The S3 lifecycle rule specifies a filter based on a tag key and value. The rule then applies only to a subset of objects with the specific tag.
 
@@ -78,9 +78,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
 }
 ```
 
-The lifecycle rule uses a tag-based filter to target only objects tagged `Name: Staging`, moving them to standard Glacier storage after 30 days. Tag-based rules let you apply different retention schedules to different data classifications within the same bucket. For example, applying shorter retention to staging data while keeping production objects on a longer schedule.
+The lifecycle rule uses a tag-based filter to target only objects tagged `Name: Staging`, moving them to standard Glacier storage after 30 days. Tag-based rules let you apply different retention schedules to different data classifications within the same bucket. For example, shorter retention for staging data and longer schedules for production objects.
 
-Other cloud providers, such as [Google Cloud Platform](https://registry.terraform.io/providers/hashicorp/google/5.0.0/docs/resources/storage_bucket.html#example-usage---life-cycle-settings-for-storage-bucket-objects) and [Microsoft Azure](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_management_policy), offer similar lifecycle management features for their storage services. You can use Terraform to manage lifecycle policies across multiple cloud providers, ensuring consistent data management practices regardless of where your data resides.
+Other cloud providers, such as [Google Cloud Platform](https://registry.terraform.io/providers/hashicorp/google/5.0.0/docs/resources/storage_bucket.html#example-usage---life-cycle-settings-for-storage-bucket-objects) and [Microsoft Azure](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_management_policy), offer similar lifecycle management features for their storage services. Terraform manages lifecycle policies consistently across all three providers, applying the same retention and tiering rules no matter where your data lives.
 
 ## HashiCorp resources
 
@@ -102,7 +102,7 @@ Other cloud providers, such as [Google Cloud Platform](https://registry.terrafor
 
 In this section of [Lifecycle management](/well-architected-framework/optimize-systems/lifecycle-management), you learned about implementing data management policies, including why you should use lifecycle policies and how to automate policy management with infrastructure as code.
 
-To continue building out your lifecycle management practices, refer to the following resources:
+To continue building your lifecycle management practices, see the following resources:
 
 - [Automate infrastructure provisioning](/well-architected-framework/define-and-automate-processes/process-automation)
 - [Tag cloud resources](/well-architected-framework/optimize-systems/lifecycle-management/tag-cloud-resources)
