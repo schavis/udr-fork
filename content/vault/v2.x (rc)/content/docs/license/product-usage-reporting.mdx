@@ -7,7 +7,7 @@ description: >-
 
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2026-01-27T17:15:25-08:00
-last_modified: 2026-03-26T19:06:45.000Z
+last_modified: 2026-04-06T17:19:26.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -15,9 +15,9 @@ last_modified: 2026-03-26T19:06:45.000Z
 
 @include 'alerts/enterprise-only.mdx'
 
-To help guide product development efforts, HashiCorp collects usage data about how Vault clusters and features are used. Except for the metadata listed in [usage metadata](#usage-metadata-list), product usage metrics are numeric only. See [usage metrics list](#usage-metrics-list) below for a description of each of product usage metric.
+To help guide product development efforts, HashiCorp collects usage data about how Vault clusters and features are used. Except for the metadata listed in [Usage metadata list](#usage-metadata-list), product usage metrics are numeric only. Refer to [Usage metrics list](#usage-metrics-list) for a description of each product usage metric.
 
-Product usage data is collected as part of the [license utilization reporting](/vault/docs/license/utilization) process and managed in a compliant manner.
+Vault collects product usage data as part of the [license utilization reporting](/vault/docs/license/utilization) process and manages it in a compliant manner.
 
 ## Opt out
 
@@ -26,17 +26,17 @@ You have two options to opt out of product usage reporting:
 - HCL configuration **(recommended)**
 - Environment variable (requires restart)
 
-Be sure to apply the same configuration or environment variable to all nodes on a Vault cluster: upon leadership change, the new leader node's settings will take effect.
+Be sure to apply the same configuration or environment variable to all nodes on a Vault cluster. When leadership changes, the new leader node's settings take effect.
 
-If your HCL configuration file and environment variable differ, the environment variable setting will take precedence.
+If your HCL configuration file and environment variable differ, the environment variable setting takes precedence.
 
-If you opt out of product usage reporting, Vault's [license utilization reporting payloads](/vault/docs/license/utilization/metrics#sample-payload) will continue to include the names and **default values** of product usage metrics. For example, even if your cluster has 100 namespaces, the `vault.namespaces.count` metric will still report 0.
+If you opt out of product usage reporting, Vault's [license utilization reporting payloads](/vault/docs/license/utilization/metrics#sample-payload) continue to include the names and **default values** of product usage metrics. For example, even if your cluster has 100 namespaces, the `vault.namespaces.count` metric reports 0.
 
 Opting out of product usage reporting does not affect snapshots taken before the opt-out settings took effect.
 
 ### HCL configuration
 
-Add the following to your Vault's HCL configuration file. If Vault is already running, you must trigger a configuration reload by sending a `SIGHUP` signal to the Vault process.
+Add the following to your Vault HCL configuration file. If Vault is already running, trigger a configuration reload by sending a `SIGHUP` signal to the Vault process.
 
 ```hcl
 reporting {
@@ -44,7 +44,7 @@ reporting {
 }
 ```
 
-Vault will log the following message in its server logs:
+Vault logs the following message in its server logs:
 
 <CodeBlockConfig hideClipboard>
 
@@ -56,13 +56,13 @@ Vault will log the following message in its server logs:
 
 ### Environment variable
 
-Set the following environment variable for the Vault process. If Vault is already running, you will have to restart the process before the environment variable takes effect.
+Set the following environment variable for the Vault process. If Vault is already running, restart the process before the environment variable takes effect.
 
 ```
 OPTOUT_PRODUCT_USAGE_REPORTING=true
 ```
 
-Vault will log the following messages in its server logs:
+Vault logs the following messages in its server logs:
 
 <CodeBlockConfig hideClipboard>
 
