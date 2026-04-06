@@ -3,7 +3,7 @@ page_title: Decommission infrastructure resources
 description: Learn how to decommission infrastructure components while maintaining system integrity and avoiding disruptions through proper planning and automation.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-09-10T10:35:54-05:00
-last_modified: 2026-04-06T18:22:56.000Z
+last_modified: 2026-04-06T19:03:33.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -21,7 +21,7 @@ Decommissioning infrastructure resources addresses the following operational cha
 
 **Prevent configuration drift:** Running unnecessary resources introduces complexity that makes your infrastructure harder to manage and understand. Every additional resource is something that can drift from its intended state, fail silently, or create unexpected dependencies. Keeping your infrastructure footprint small improves visibility and simplifies audits and compliance reviews.
 
-To successfully decommission resources, you need to create a well-defined plan that includes dependency analysis, stakeholder communication, and a gradual removal process. Depending on how your infrastructure implementation is done, either manually or automatically, you may need to adjust your decommissioning approach.
+To successfully decommission resources, you need to create a well-defined plan that includes dependency analysis, stakeholder communication, and a gradual removal process. Depending on whether you implement your infrastructure manually or with automation tools, you may need to adjust your decommissioning approach.
 
 ## Find resources to decommission
 
@@ -55,7 +55,7 @@ You need to install Graphviz on your system to use the `terraform graph` command
 
 Document how you will notify stakeholders about the decommissioning process, including timelines and potential impacts.
 
-Start by identifying all stakeholders who might be affected by the decommissioning, including development teams, operations staff, end users, and business owners. Create a notification timeline that gives teams enough time to prepare. Your communications should explain what resources you are removing, when the decommissioning will occur, and what actions stakeholders need to take.
+Start by identifying all stakeholders who might be affected by the decommissioning, including development teams, operations staff, end users, and business owners. Create a notification timeline that gives teams enough time to prepare. Your communications should explain what resources you are removing, when the decommissioning occurs, and what actions stakeholders need to take.
 
 ## Back up data before decommissioning
 
@@ -107,7 +107,7 @@ The snapshot preserves the volume's data in AWS at a fraction of the storage cos
 
 Implement a phased approach to removing resources instead of doing it all at once. Start by redirecting traffic away from the resource, and monitor user traffic to ensure you don't negatively impact users.
 
-You can use `terraform plan` to preview the changes that will occur when you remove resources from your configuration. The plan command helps you understand the impact of your changes before applying them.
+You can use `terraform plan` to preview the changes that occur when you remove resources from your configuration. The plan command helps you understand the impact of your changes before applying them.
 
 You can also set safeguards so you only decommission resources when you are ready. You can use Terraform's `lifecycle` block with `prevent_destroy = true` to prevent accidental deletion of critical resources. The [lifecycle](/terraform/language/meta-arguments/lifecycle) setting ensures that you won't destroy resources unless you explicitly remove the `prevent_destroy` attribute.
 
@@ -124,7 +124,7 @@ resource "aws_instance" "example" {
 
 With `prevent_destroy = true`, Terraform returns an error if any plan would destroy this instance, even if you run `terraform destroy`. To decommission the resource intentionally, remove the `lifecycle` block and re-apply before running destroy.
 
-Use Consul's service discovery and health checking to redirect traffic away from services before you remove them, so dependent services aren't affected.
+Use Consul's service discovery and health checking to redirect traffic away from services before you remove them, so you don't affect dependent services.
 
 If you are using orchestration tools like Nomad or Kubernetes, you can use their built-in capabilities to drain workloads before decommissioning nodes gracefully. Nomad provides node drain functionality through the `nomad node drain` command, which prevents scheduling new allocations on a node while safely migrating existing jobs to other available nodes. The Kubernetes `kubectl drain` command safely removes pods from nodes while respecting Pod Disruption Budgets. Pod Disruption Budgets ensure a minimum number of application replicas remain available throughout the process. 
 
@@ -153,9 +153,9 @@ After decommissioning, complete the following steps:
 
 ## Next steps
 
-In this section of [Lifecycle management](/well-architected-framework/optimize-systems/lifecycle-management), you learned about decommissioning resources, including why you should plan decommissioning and how to safely execute the process.
+In this section of Lifecycle management, you learned about decommissioning resources, including why you should plan decommissioning and how to safely execute the process.
 
-To continue building your lifecycle management practices, see the following resources:
+To continue building your lifecycle management practices, refer to the following resources:
 
-- [Automate cloud storage lifecycle policies](/well-architected-framework/optimize-systems/lifecycle-management/data-management)
-- [Tag cloud resources](/well-architected-framework/optimize-systems/lifecycle-management/tag-cloud-resources)
+- Read the [Automate cloud storage lifecycle policies](/well-architected-framework/optimize-systems/lifecycle-management/data-management) guide
+- Read the [Tag cloud resources](/well-architected-framework/optimize-systems/lifecycle-management/tag-cloud-resources) guide

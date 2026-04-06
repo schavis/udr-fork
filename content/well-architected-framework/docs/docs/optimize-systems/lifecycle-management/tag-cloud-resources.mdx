@@ -3,7 +3,7 @@ page_title: Create and implement a cloud resource tagging strategy
 description: Implement a cloud resource tagging strategy with Terraform. Automate tags for AWS, Azure, and GCP, enforce compliance policies, and track cost allocation with infrastructure as code.
 # START AUTO GENERATED METADATA, DO NOT EDIT
 created_at: 2025-10-29T15:17:11-05:00
-last_modified: 2026-04-06T18:22:56.000Z
+last_modified: 2026-04-06T19:03:34.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -52,7 +52,7 @@ resource "aws_instance" "web_server" {
 
 The tags attach to every AWS EC2 instance that Terraform creates from this resource block. Tags like `Environment` and `CostCenter` let you filter resources in the AWS console, build cost allocation reports, and scope automation policies to specific groups of instances.
 
-The AWS and GCP Terraform providers let you add default tags to all resources they create. Default tags enforce a consistent tagging strategy across all resources Terraform manages. Every resource gets the minimum required tags, but you can override them per resource. The Azure provider does not offer equivalent default tags; use [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects#modify) to enforce tag inheritance for Azure resources.
+The AWS and Google Cloud Platform (GCP) Terraform providers let you add default tags to all resources they create. Default tags enforce a consistent tagging strategy across all resources Terraform manages. Every resource gets the minimum required tags, but you can override them per resource. The Azure provider does not offer equivalent default tags; use [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects#modify) to enforce tag inheritance for Azure resources.
 
 The following is an example using default tags:
 
@@ -95,7 +95,7 @@ variable "environment" {
 }
 ```
 
-This validation block runs before Terraform creates any resources. If the `environment` variable does not match one of the allowed values, Terraform returns the `error_message` and stops the plan — preventing a misconfigured resource from being deployed.
+This validation block runs before Terraform creates any resources. If the `environment` variable does not match one of the allowed values, Terraform returns the `error_message` and stops the plan, preventing a misconfigured resource from being deployed.
 
 The following tag passes the validation:
 
@@ -159,18 +159,18 @@ You can write similar policies with OPA and HCP Terraform.
 - Read about the [Terraform validation block](/terraform/language/values/variables#validation) for enforcing allowed values on input variables.
 - Write a [Sentinel policy for a Terraform deployment](/terraform/tutorials/policy/sentinel-policy) to ensure that the EC2 instance has a `Name` tag.
 - Learn how to [define Open Policy Agent policies for HCP Terraform](/terraform/enterprise/policy-enforcement/define-policies/opa)
-- [HCP Terraform policy enforcement overview](/terraform/enterprise/policy-enforcement)
+- Read the [HCP Terraform policy enforcement overview](/terraform/enterprise/policy-enforcement)
 - Get started with [Sentinel](/sentinel/tutorials/get-started) by exploring the tutorials.
 
 ### External resources
 
-- Use [OPA to write policies](https://www.openpolicyagent.org/docs/terraform) ensuring all resources have tags before you create them.
+- Use [OPA](https://www.openpolicyagent.org/docs/terraform) to write policies that ensure all resources have tags before you create them.
 
 ## Next steps
 
-In this section of [Lifecycle management](/well-architected-framework/optimize-systems/lifecycle-management), you learned how to tag resources using infrastructure as code and enforce tagging policies.
+In this section of Lifecycle management, you learned how to tag resources using infrastructure as code and enforce tagging policies.
 
-To continue building your lifecycle management practices, see the following resources:
+To continue building your lifecycle management practices, refer to the following resources:
 
-- [Implement data management policies](/well-architected-framework/optimize-systems/lifecycle-management/data-management)
-- [Decommission resources](/well-architected-framework/optimize-systems/lifecycle-management/decommission-infrastructure)
+- Read the [Implement data management policies](/well-architected-framework/optimize-systems/lifecycle-management/data-management) guide
+- Read the [Decommission resources](/well-architected-framework/optimize-systems/lifecycle-management/decommission-infrastructure) guide
