@@ -103,7 +103,7 @@ The following tag passes the validation:
 environment = "prod"
 ```
 
-A value of `prod` satisfies the `contains` condition, so Terraform proceeds with the plan.
+A value of `prod` satisfies the validation block's condition, so Terraform proceeds with the plan.
 
 The following tag fails the validation due to not meeting the condition of being `dev`, `staging`, or `prod`:
 
