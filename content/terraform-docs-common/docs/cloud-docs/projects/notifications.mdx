@@ -17,8 +17,8 @@ Project notifications work alongside workspace notifications and exhibit the fol
 
 - Project notifications trigger for all current workspaces in the project unless you exclude them from a notification configuration. They also trigger for any workspaces that you create in the project or move into it later, unless you add those workspaces to the exclusion list.
 - Project notifications do not modify or remove workspace notifications. For example, if a workspace has a Slack webhook and the project has a PagerDuty webhook, the same run event triggers both notifications.
-- Workspace administrators cannot turn off project notifications from workspace settings. You must modify, exclude workspaces from, or remove them from the project.
-- You can exclude specific workspaces from a project notification configuration. Excluded workspaces do not send notifications for that configuration, while all other workspaces in the project continue to use it. Use exclusions when you want to keep project-level notifications for critical workspaces but omit low-priority development or test workspaces.
+- Workspace administrators cannot turn off project notifications from workspace settings. You must either modify or exclude workspaces from project. Alternatively, you can move the workspace to another project.
+- You can exclude specific workspaces from a project notification configuration. Workspaces that have been exluded do send notifications for that configuration. Use exclusions when you want to keep project-level notifications for critical workspaces but omit low-priority development or test workspaces.
 
 ## Requirements
 
