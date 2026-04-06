@@ -154,4 +154,3 @@ jobs:
 
             gh pr edit ${{ needs.sync-docs.outputs.release_branch_pr_url }} \
               --body="${{env.docs_pr_body}}"
-              
