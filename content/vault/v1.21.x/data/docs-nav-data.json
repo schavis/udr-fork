@@ -725,6 +725,15 @@
         "path": "deploy/run-as-service"
       },
       {
+        "title": "Run on IBM zCX",
+        "badge": {
+          "text": "ENT",
+          "type": "filled",
+          "color": "neutral"
+        },
+        "path": "deploy/run-as-zcx-cluster"
+      },
+      {
         "title": "Run on AWS",
         "routes": [
           {
@@ -2090,7 +2099,17 @@
           },
           {
             "title": "Oracle",
-            "path": "secrets/databases/oracle"
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "secrets/databases/oracle"
+              },
+              {
+                "title": "Release notes",
+                "path": "secrets/databases/oracle/release-notes"
+              }
+
+            ]
           },
           {
             "title": "PostgreSQL",
@@ -2428,6 +2447,10 @@
           {
             "title": "Rotation Primitives",
             "path": "secrets/pki/rotation-primitives"
+          },
+          {
+            "title": "Automatic Certificate Management Environment (ACME)",
+            "path": "secrets/pki/acme"
           },
           {
             "title": "Certificate Issuance External Policy Service (CIEPS)",
@@ -3172,7 +3195,20 @@
       },
       {
         "title": "3rd party key management",
-        "path": "enterprise/managed-keys"
+        "routes": [
+          {
+            "title": "3rd party key management in Vault",
+             "path": "enterprise/managed-keys"
+          },
+          {
+            "title": "Transit secret engine with PKCS11 HSM",
+            "path": "enterprise/managed-keys/transit-secret-engine"
+          },
+          {
+            "title": "SSH Secret Engine with PKCS11 HSM",
+            "path": "enterprise/managed-keys/ssh-secret-engine"
+          }
+        ]
       },
       {
         "title": "Multi-factor authN",

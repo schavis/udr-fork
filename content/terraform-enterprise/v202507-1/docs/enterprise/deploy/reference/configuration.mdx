@@ -2,6 +2,10 @@
 page_title: Terraform Enterprise configuration reference
 description: >-
   Learn about the configuration options for deploying Terraform Enterprise.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-07-03T17:17:22Z
+last_modified: 2025-11-26T16:53:01+01:00
+# END AUTO GENERATED METADATA
 ---
 
 # Terraform Enterprise configuration reference
@@ -192,21 +196,6 @@ Client ID of a user-assigned Managed Service Identity. Leave blank to use the
 system-assigned Managed Service Identity. Defaults to `""`.
 
 ## Database cluster setting
-
-### `TFE_DATABASE_RECONNECT_ENABLED`
-
-
-<Note title="This option is deprecated">
-
-We will remove this option in the May 2025 release. Use `TFE_DATABASE_MONITOR_ENABLED` instead.
-
-</Note>
-
-Enables Terraform Enterprise to reconnect to the database when the database connection is interrupted.
-
-This setting is not applicable for Replicated.
-
-Default is `false`.
 
 ### `TFE_DATABASE_MONITOR_ENABLED`
 

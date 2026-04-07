@@ -1,11 +1,15 @@
 ---
 page_title: variable block reference for Terraform Stacks
 description: Use the `variable` block to declare input variables for your component configuration, making your Stack dynamic and reusable.
+# START AUTO GENERATED METADATA, DO NOT EDIT
+created_at: 2025-11-19T13:27:46Z
+last_modified: 2025-12-03T16:22:47-08:00
+# END AUTO GENERATED METADATA
 ---
 
 # `variable` block reference for component configurations
 
-Use the `variable` block to declare input variables for your component configuration, making your components dynamic and reusable.
+Use the `variable` block to declare input variables for your component configuration, making your components dynamic and reusable. Refer to [Define configuration](/terraform/language/stacks/component/config) for more information.
 
 If you are declaring a `variable` block in a traditional Terraform configuration file, ending in `.tf`, refer to the Terraform configuration [`variable` block reference](/terraform/language/block/variable) instead.
 
@@ -59,7 +63,7 @@ The `variable` block supports the following arguments:
 | `description` | A description of the variable's purpose and the value it expects. | String | Optional |
 | `sensitive` | Specifies if Terraform hides this value in UI and logs. | Boolean | Optional |
 | `nullable` | Specifies if the value of a variable can be `null`. | Boolean | Optional |
-| `ephemeral` | Specifies whether Terraform excludes this value from plans and state. | Boolean | Boolean | Optional |
+| `ephemeral` | Specifies whether Terraform excludes this value from plans and state. | Boolean | Optional |
 
 ### `type`
 

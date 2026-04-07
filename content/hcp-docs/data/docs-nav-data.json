@@ -594,7 +594,7 @@
         "path": "vault/aws-privatelink"
       },
       {
-        "title": "Configure private DNS forwarding<sup>Beta</sup>",
+        "title": "Configure private DNS forwarding",
         "path": "vault/private-dns"
       },
       {
@@ -606,12 +606,29 @@
         "path": "vault/perf-replication"
       },
       {
-        "title": "Secrets inventory reporting<sup>Beta</sup>",
-        "path": "vault/secrets-inventory"
+        "title": "Inventory reporting<sup>Beta</sup>",
+        "routes": [
+          {
+            "title": "Overview",
+            "path": "vault/reporting"
+          },
+          {
+            "title": "Secrets inventory reporting",
+            "path": "vault/reporting/secrets-inventory-reporting"
+          },
+          {
+            "title": "Certificates inventory reporting",
+            "path": "vault/reporting/certificates-inventory-reporting"
+          }
+        ]
       },
       {
         "title": "Additional resources",
         "routes": [
+          {
+            "title": "Supported Vault plugins",
+            "href": "https://developer.hashicorp.com/vault/integrations?flags=hcp-ready%2Cbuiltin"
+          },
           {
             "title": "Vault documentation",
             "href": "https://developer.hashicorp.com/vault/docs"
@@ -651,8 +668,25 @@
             "path": "vault-radar/get-started/product-tiers"
           },
           {
+            "title": "Set up audit log streaming",
+            "routes": [
+              {
+                "title": "Overview",
+                "path": "vault-radar/get-started/set-up-audit-log-streaming"
+              },
+              {
+                "title": "Example audit events",
+                "path": "vault-radar/get-started/set-up-audit-log-streaming/audit-events"
+              }
+            ]
+          },
+          {
             "title": "Add a data source",
             "routes": [
+              {
+                "title": "AWS S3 <sup>Beta</sup>",
+                "path": "vault-radar/get-started/add-data-sources/aws-s3-scanning"
+              },
               {
                 "title": "Azure DevOps",
                 "path": "vault-radar/get-started/add-data-sources/azure-devops"
@@ -686,7 +720,7 @@
                 "title": "GitLab",
                 "path": "vault-radar/get-started/add-data-sources/gitlab"
               },
-                            {
+              {
                 "title": "Jira",
                 "routes": [
                   {
@@ -698,12 +732,20 @@
                     "path": "vault-radar/get-started/add-data-sources/jira/jira-data-center"
                   }
                 ]
+              },
+              {
+                "title": "Slack",
+                "path": "vault-radar/get-started/add-data-sources/slack/"
               }
             ]
           },
           {
             "title": "Set up alerting",
             "routes": [
+              {
+                "title": "Overview",
+                "path": "vault-radar/get-started/set-up-alerting"
+              },
               {
                 "title": "Microsoft Teams",
                 "path": "vault-radar/get-started/set-up-alerting/microsoft-teams"
@@ -737,6 +779,19 @@
               {
                 "title": "Splunk",
                 "path": "vault-radar/get-started/set-up-alerting/splunk"
+              },
+              {
+                "title": "Webhooks",
+                "routes": [
+                  {
+                    "title": "Set up",
+                    "path": "vault-radar/get-started/set-up-alerting/webhooks/set-up"
+                  },
+                  {
+                    "title": "Validate payloads",
+                    "path": "vault-radar/get-started/set-up-alerting/webhooks/payloads"
+                  }
+                ]
               }
             ]
           },
@@ -780,7 +835,7 @@
             "path": "vault-radar/agent/correlate-vault"
           },
           {
-            "title": "Integrate AWS Secrets Manager <sup>Beta</sup>",
+            "title": "Integrate AWS Secrets Manager",
             "path": "vault-radar/agent/correlate-aws-secrets-manager"
           }
         ]
@@ -791,6 +846,10 @@
           {
             "title": "Risk Severity",
             "path": "vault-radar/manage/severity"
+          },
+           {
+            "title": "Event workflow and statuses",
+            "path": "vault-radar/manage/event-workflow"
           },
           {
             "title": "Select event rules",
@@ -993,7 +1052,7 @@
                 "path": "vault-radar/cli/scan/repo"
               },
               {
-                "title": "slack <sup>Beta</sup>",
+                "title": "slack",
                 "path": "vault-radar/cli/scan/slack"
               },
               {
@@ -1034,7 +1093,7 @@
         ]
       },
       {
-        "title": "Scan for inline secrets <sup>Beta</sup>",
+        "title": "Scan for inline secrets",
         "routes": [
           {
             "title": "Overview",
@@ -1073,6 +1132,23 @@
           {
             "title": "Changelog",
             "path": "vault-radar/mcp-server/changelog"
+          }
+        ]
+      },
+      {
+        "title": "API",
+        "routes": [
+          {
+            "title": "Authenticate",
+            "path": "vault-radar/api/authenticate"
+          },
+          {
+            "title": "Events",
+            "path": "vault-radar/api/events"
+          },
+          {
+            "title": "Resources",
+            "path": "vault-radar/api/resources"
           }
         ]
       },
@@ -1356,7 +1432,7 @@
             "path": "packer/store/push-metadata"
           },
           {
-            "title": "Store software bill of materials",
+            "title": "Store and scan software bill of materials",
             "path": "packer/store/sbom"
           },
           {
