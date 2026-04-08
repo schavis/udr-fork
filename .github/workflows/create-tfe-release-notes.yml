@@ -82,13 +82,13 @@ jobs:
             echo "RELEASE_NOTES_PR_URL=$RELEASE_NOTES_PR_URL" >> $GITHUB_ENV
 
         - name: Create PR URL
-          if: ${{ env.DEV == 'false' }}
+          if: ${{ !inputs['dev-mode'] }}
           run: |
             echo "[TFE release notes PR for ${{ env.VERSION }}](${{ env.RELEASE_NOTES_PR_URL }})" >> $GITHUB_STEP_SUMMARY
 
         - name: Slack notification
           id: slack
-          if: ${{ env.DEV == 'false' }} && ${{ env.NOTIFY == 'true' }}
+          if: ${{ !inputs['dev-mode'] && inputs.notify }}
           env:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_TFE_WEBHOOK_URL }}
             SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
