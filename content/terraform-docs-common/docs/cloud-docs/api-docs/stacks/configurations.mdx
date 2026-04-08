@@ -64,9 +64,9 @@ The scope of the API includes the following endpoints:
 
 This endpoint creates a new Stack configuration for the specified Stack. It can create several kinds of configurations, controlled by the `source` query parameter:
 
-- `manual` (default) - Creates an empty Stack configuration. You will have to retrieve the `upload-url` after creation (see the upload-url endpoint documentation below) and upload a configuration archive to enable the Stack to prepare and plan the configuration. If the Stack is connected to a VCS repo, this mode can only be used if the `speculative` attribute is also set to `true`.
-- `fetch` - Fetches new Stack configuration content from the connected VCS repository. This mode is not valid for stacks that are not connected to a VCS repo.
-- `reuse` - Creates a new configuration that reuses the content from the latest Stack configuration, without requiring another upload or fetch. This can be useful to fix drift, apply changed values from variable set stores, or destroy the stack infrastructure (when combined with the `destroy-all` attribute). This mode is not valid for stacks that don't have a latest configuration, or whose latest configuration is still being prepared.
+- `manual` (default) - Creates an empty Stack configuration. You will have to retrieve the `upload-url` after creation (see the upload-url endpoint documentation below) and upload a configuration archive to enable the Stack to prepare and plan the configuration. If the Stack is connected to a VCS repository, this mode can only be used if the `speculative` attribute is also set to `true`.
+- `fetch` - Fetches new Stack configuration content from the connected VCS repository. This mode is not valid for stacks that are not connected to a VCS repository.
+- `reuse` - Creates a new configuration that reuses the content from the latest Stack configuration, without requiring another upload or fetch. This can be useful to fix drift, apply changed values from variable set stores, or destroy the Stack infrastructure (when combined with the `destroy-all` attribute). This mode is not valid for stacks that don't have a latest configuration, or whose latest configuration is still being prepared.
 
 `POST /stacks/:stack_id/stack-configurations?source=:source`
 
