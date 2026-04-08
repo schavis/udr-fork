@@ -38,7 +38,7 @@ env:
 
 jobs:
     sync-docs:
-      uses: ./.github/workflows/sync-docs-for-tfe.yml
+      uses: hashicorp/web-unified-docs-internal/.github/workflows/sync-docs-for-tfe.yml@main
       with:
         version: ${{ inputs.version }}
       secrets: inherit
