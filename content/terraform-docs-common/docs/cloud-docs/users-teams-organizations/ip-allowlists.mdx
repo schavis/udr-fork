@@ -12,6 +12,8 @@ IP allowlists, also called CIDR range lists, let you restrict access to HCP Terr
 
 IP allowlists define sets of IP address ranges in CIDR notation that are permitted to access specific HCP Terraform resources. When you configure an IP allowlist, HCP Terraform checks the source IP address of incoming requests and only allows access if the IP address matches one of the ranges in the allowlist.
 
+<EnterpriseAlert>For this feature to function correctly in on-premise environments, any intermediate infrastructure — such as load balancers, reverse proxies, or Web Application Firewalls (WAFs) — must be configured to preserve the original client IP address. Ensure your network equipment is set to pass the originating IP through the X-Forwarded-For HTTP header so the application can accurately validate incoming traffic against your allowlists.</EnterpriseAlert>
+
 ## Create an IP allowlist
 
 To create an IP allowlist:
