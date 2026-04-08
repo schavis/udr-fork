@@ -7,7 +7,7 @@ directory name must match the official file name. For example, to register
 `vault-plugin-database-oracle_0.11.0+ent_linux_amd64.zip`, you must extract it
 to the plugin directory as `vault-plugin-database-oracle_0.11.0+ent_linux_amd64/`.
 
-**Note:** The recommended way to register a plugin is using a .zip file. 
+**Note:** The recommended way to register official plugins is by using a .zip file. 
 
 **Note:** Plugins should be registered with a version. Registering un-versioned plugins will be deprecated in the future.
 
@@ -17,6 +17,6 @@ Integration | License    | Source | Path structure
 Official    | Enterprise | `.zip` | `<plugin_directory>/<extracted-folder-name>/`
 Official    | Community  | `.zip` | `<plugin_directory>/<extracted-folder-name>/`
 Community   | N/A        | `.zip` | Not supported
-Official    | Enterprise | binary _(legacy)_ | Not supported
-Official     | Community  | binary _(legacy)_ | `<plugin_directory>/<binary-name>`
-Community   | N/A        | binary _(legacy)_  | `<plugin_directory>/<binary-name>`
+Official    | Enterprise | binary | Not supported
+Official     | Community  | binary | `<plugin_directory>/<binary-name>`
+Community   | N/A        | binary  | `<plugin_directory>/<binary-name>`
