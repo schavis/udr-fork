@@ -116,7 +116,9 @@ Properties without a default value are required.
       },
       "name": "basic-stack",
       "description": "Example Stack for documentation",
-      "speculative-enabled": false
+      "speculative-enabled": false,
+      "working-directory": "envs",
+      "trigger-patterns": ["/envs/**/*"]
     },
     "relationships": {
       "project": {
@@ -545,7 +547,9 @@ Properties without a default value are required.
       "name": "pet-nulls-stack-local",
       "description": "testing patch",
       "speculative-enabled": false,
-      "debugging-mode": false
+      "debugging-mode": false,
+      "working-directory": "envs",
+      "trigger-patterns": ["/envs/**/*"]
     }
   }
 }
