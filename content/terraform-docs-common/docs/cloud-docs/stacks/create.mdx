@@ -51,12 +51,12 @@ Stacks live alongside workspaces in a project. To create a new Stack in HCP Terr
 1. Enter a new **Stack Name**.
     * The name must be unique within the project and can include letters, numbers, dashes (`-`), and underscores (`_`). We recommend using 90 characters or less for the name of your Stack.
 1. You can optionally add a description for your Stack.
-1. There are a number of **Advanced options** that alow you to control the behavior of the stack
+1. Use **Advanced options** to control the behavior of your Stack:
     * Stack working directory
     * Version control settings:
       * Stacks automatically trigger new runs when you push a configuration change to a linked repository. To stop HCP Terraform from automatically fetching configuration changes, toggle **VCS Trigger Enabled**.
       * You can also configure Stacks to work from either a branch or tag-based workflow.
-      * With a branch-based workflow, you can configure **Trigger patterns** to control which file changes trigger new operations.
+      * With a branch-based workflow, you can configure **Trigger patterns** to control which file changes trigger new runs.
       * You can enable or disable **Automatic speculative plans** to have your Stack create plan-only runs for pull requests to your linked VCS repository.
 1. By default, HCP Terraform fetches your Stack's configuration after creating your Stack. To fetch your Stack configuration manually, uncheck **Fetch configuration after HCP Terraform creates stack**.
 1. Click **Create Stack**.
