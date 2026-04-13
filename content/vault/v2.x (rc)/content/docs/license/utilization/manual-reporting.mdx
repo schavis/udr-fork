@@ -15,13 +15,15 @@ last_modified: 2026-04-01T00:10:17.000Z
 
 @include 'alerts/enterprise-only.mdx'
 
-Manual license utilization reporting allows you to export, review, and send license utilization data to HashiCorp without relying on Vault's automated reporting functionality. Manual license utilization reporting is intended primarily for air-gapped environments or organizations that require manual review of license utilization data before submission.
+Manual license utilization reporting allows you to export, review, and send license utilization data to IBM without relying on automated reporting functionality.
+
+Manual license utilization reporting is intended primarily for air-gapped environments or organizations that require manual review of license utilization data before submission.
 
 Review the terms of your license agreement to confirm whether you may opt out of automated reporting and, if so, at what cadence you must otherwise report license utilization data.
 
 ## Opt out
 
-There are two ways to opt out of Vault's automated license utilization reporting:
+There are two ways to opt out of automated license utilization reporting:
 
 - HCL configuration **(recommended)**
 - Environment variable (requires restart)
@@ -32,7 +34,7 @@ If your HCL configuration file and environment variable differ, the environment 
 
 ### HCL configuration
 
-Add the following to your Vault HCL configuration file. When Vault is already running, trigger a configuration reload by sending a `SIGHUP` signal to the Vault process.
+Add the following to your Vault HCL configuration file. You can push the change to a currently running Vault instance by sending a `SIGHUP` signal to the Vault process.
 
 ```hcl
 reporting {
@@ -54,7 +56,7 @@ Vault logs the following message in its server logs:
 
 ### Environment variable
 
-Set the following environment variable for the Vault process. When Vault is already running, restart the process before the environment variable takes effect.
+Set the following environment variable for the Vault process. You must restart the Vault process for the change to take effect.
 
 ```
 OPTOUT_LICENSE_REPORTING=true
@@ -77,7 +79,9 @@ Vault logs the following message in its server logs:
 
 You must first retrieve a license utilization payload from Vault.
 
-You can retrieve a license utilization payload by running the Vault CLI's [`operator utilization`](/vault/docs/commands/operator/utilization) command or by querying Vault's `sys/utilization` API endpoint. In either case, you must be authenticated to Vault and have `update` permission to the `sys/utilization` path:
+You can retrieve a license utilization payload by running the [`operator utilization`](/vault/docs/commands/operator/utilization) CLI command or by querying the `sys/utilization` API endpoint.
+
+In either case, you must authenticate to Vault and have `update` permission to the `sys/utilization` path:
 
 ```hcl
 path "sys/utilization" {
@@ -88,7 +92,7 @@ path "sys/utilization" {
 Both the CLI command and API endpoint support the following parameters:
 
 - `today_only` - When set, the endpoint returns only snapshots from the last 24 hours.
-- `message` - Optional message to include in Vault's server logs.
+- `message` - Optional message to include in the server logs.
 
 In addition, the CLI command supports an `-output` parameter to specify where to write the license utilization bundle. By default, the CLI uses a timestamped filename, `vault-utilization-[timestamp].json`.
 
@@ -119,9 +123,9 @@ $ curl -X PUT -H "X-Vault-Token: $VAULT_TOKEN" \
 
 </Tabs>
 
-### Send the reporting payload to HashiCorp
+### Send the reporting payload to IBM
 
-You can send the license utilization reporting payload to HashiCorp using a web browser or directly to the API:
+You can send the license utilization reporting payload using a web browser or directly to the API:
 
 <Tabs>
 
@@ -138,9 +142,7 @@ If the upload fails, check that you haven't modified the file signature. If the 
 
 <Tab heading="API">
 
-Upload the license utilization bundle directly to HashiCorp's reporting API.
-
-When the upload is successful, HashiCorp's reporting API returns an HTTP 202 Accepted response status code.
+Upload the license utilization bundle directly to the reporting endpoint. On success, the reporting endpoint returns an HTTP `202 Accepted` response:
 
 ```shell-session
 $ curl -X POST -w "%{http_code}\n" \
@@ -149,7 +151,7 @@ $ curl -X POST -w "%{http_code}\n" \
 {}202
 ```
 
-When the upload fails, the reporting API returns an error message and 4XX or 5XX status code. For example, using a payload with a tampered signature:
+When the upload fails, the reporting endpoint returns an error message and 4XX or 5XX status code. For example, using a payload with a tampered signature:
 
 ```shell-session
 $ curl -X POST -w "%{http_code}\n" \
