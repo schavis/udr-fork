@@ -2,7 +2,7 @@
 layout: docs
 page_title: Anonymous product usage reporting
 description: >-
-  Learn about the anonymized data HashiCorp collects automatically for product usage reporting and how to enable or disable data collection.
+  Learn about the anonymized data collected automatically for product usage reporting and how to enable or disable data collection.
 
 
 # START AUTO GENERATED METADATA, DO NOT EDIT
@@ -15,7 +15,7 @@ last_modified: 2026-04-06T17:19:26.000Z
 
 @include 'alerts/enterprise-only.mdx'
 
-To help guide product development efforts, HashiCorp collects usage data about how Vault clusters and features are used. Except for the metadata listed in [Usage metadata list](#usage-metadata-list), product usage metrics are numeric only. Refer to [Usage metrics list](#usage-metrics-list) for a description of each product usage metric.
+To help guide product development efforts, IBM collects usage data about how you use Vault clusters and features. Except for the metadata listed in the [Usage metadata list](#usage-metadata-list), Vault only reports numeric data for product usage metrics. Refer to the [Usage metrics list](#usage-metrics-list) for a description of each product usage metric reported by Vault.
 
 Vault collects product usage data as part of the [license utilization reporting](/vault/docs/license/utilization) process and manages it in a compliant manner.
 
@@ -26,17 +26,17 @@ You have two options to opt out of product usage reporting:
 - HCL configuration **(recommended)**
 - Environment variable (requires restart)
 
-Be sure to apply the same configuration or environment variable to all nodes on a Vault cluster. When leadership changes, the new leader node's settings take effect.
+Be sure to apply the same configuration or environment variable to all nodes on a Vault cluster. When leadership changes, settings on the new leader node replace the settings from the previous leader.
 
 If your HCL configuration file and environment variable differ, the environment variable setting takes precedence.
 
-If you opt out of product usage reporting, Vault's [license utilization reporting payloads](/vault/docs/license/utilization/metrics#sample-payload) continue to include the names and **default values** of product usage metrics. For example, even if your cluster has 100 namespaces, the `vault.namespaces.count` metric reports 0.
+If you opt out of product usage reporting, the [license utilization reporting payloads](/vault/docs/license/utilization/metrics#sample-payload) continue to include the names and **default values** of product usage metrics. For example, even if your cluster has 100 namespaces, the `vault.namespaces.count` metric reports 0.
 
 Opting out of product usage reporting does not affect snapshots taken before the opt-out settings took effect.
 
 ### HCL configuration
 
-Add the following to your Vault HCL configuration file. If Vault is already running, trigger a configuration reload by sending a `SIGHUP` signal to the Vault process.
+Add the following to your Vault HCL configuration file to opt out of usage reporting. You can trigger a configuration reload on a running instance of Vault by sending a `SIGHUP` signal to the Vault process.
 
 ```hcl
 reporting {
@@ -56,10 +56,10 @@ Vault logs the following message in its server logs:
 
 ### Environment variable
 
-Set the following environment variable for the Vault process. If Vault is already running, restart the process before the environment variable takes effect.
+Set the following environment variable for the Vault process. You must restart the Vault process for the environment variable to take effect.
 
-```
-OPTOUT_PRODUCT_USAGE_REPORTING=true
+```shell-session
+$ export OPTOUT_PRODUCT_USAGE_REPORTING=true
 ```
 
 Vault logs the following messages in its server logs:
@@ -75,7 +75,7 @@ Vault logs the following messages in its server logs:
 
 ## Usage metrics list
 
-HashiCorp collects the following product usage metrics. All of these metrics are numerical, and contain no sensitive values or additional metadata.
+IBM collects the following product usage metrics as numerical data. Vault does not collect sensitive values or additional metadata.
 
 | Metric Name | Description |
 | --- | --- |
@@ -268,7 +268,7 @@ HashiCorp collects the following product usage metrics. All of these metrics are
 
 ## Usage metadata list
 
-HashiCorp collects the following product data in the [`metadata`](/vault/docs/license/utilization/metrics/#metadata) section of each snapshot:
+IBM collects the following product data in the [`metadata`](/vault/docs/license/utilization/metrics/#metadata) section of each snapshot:
 
 | Metadata Name | Description |
 | --- | --- |
