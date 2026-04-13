@@ -37,7 +37,7 @@ type ThingListResourceModel struct {
 	ResourceGroupName types.String `tfsdk:"resource_group_name"`
 }
 
-func (r *ThingListResource) ListResourceConfigSchema(_ context.Context, _ list.ListResourceConfigSchemaRequest, resp *list.ListResourceConfigSchemaResponse) {
+func (r *ThingListResource) ListResourceConfigSchema(_ context.Context, _ list.ListResourceSchemaRequest, resp *list.ListResourceSchemaResponse) {
 	resp.Schema = listschema.Schema{
 		Attributes: map[string]listschema.Attribute{
 			"resource_group_name": listschema.StringAttribute{
