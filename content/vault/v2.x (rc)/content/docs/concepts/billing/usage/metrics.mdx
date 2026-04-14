@@ -11,7 +11,7 @@ last_modified: 2026-04-06T17:57:55.000Z
 
 # Usage-based billing metrics
 
-Vault supports a usage-based licensing option. Under this licensing option, each Vault [secrets engine](/vault/docs/secrets) has an associated licensing metric:
+Vault supports a usage-based licensing option. With usage-based licensing, each Vault [secrets engine](/vault/docs/secrets) has an associated licensing metric:
 
 - **Secrets.** Number of static secrets, auto-rotated secrets roles, and dynamic secrets roles that a secrets engine manages.
 - **Keys.** Number of cryptographic keys that a secrets engine manages.
@@ -20,7 +20,7 @@ Vault supports a usage-based licensing option. Under this licensing option, each
 
 Vault counts all licensing metrics monthly and resets all counters at midnight on the first day of each month.
 
-Refer to [Metrics by secret engine](#metrics-by-secret-engine) for a full list of official HashiCorp Vault secrets engine plugins and their respective licensing metrics.
+Refer to [Metrics by secret engine](#metrics-by-secret-engine) for a full list of official Vault secrets engine plugins and their respective licensing metrics.
 
 ## Secrets and keys
 
@@ -28,49 +28,71 @@ Vault calculates the **high-water mark** number of secrets and keys in each mont
 
 Vault tracks high-water mark counts of secrets and keys independently by secret engine and by secret or key type. For example:
 
-- If you have two `kv` mounts, each with 10 secrets, and later delete 5 secrets from the first and add 5 secrets to the second, the overall high-water mark count is unchanged because the cluster still has 20 KV static secrets.
-- If you have an `ldap` mount with 10 "static" roles (that is, auto-rotated secrets) and later delete 5 of those roles and create 5 "dynamic" roles, you have high-water marks of 10 LDAP static roles and 5 LDAP dynamic roles because the secret type is different.
-- If you have an `azure` mount with 10 dynamic roles and later delete that mount and add an `aws` mount with 10 dynamic roles, you have high-water marks of 10 Azure dynamic roles and 10 AWS dynamic roles because the secrets engines are different.
+- Assume you have two `kv` mounts with 10 secrets each. Later, you delete 5 secrets from the first and add 5 secrets to the second. The overall high-water mark count remains unchanged because the cluster still has 20 KV static secrets total.
+- Assume you have an `ldap` mount with 10 auto-rotated secrets ("static" roles). Later, you delete 5 of the roles and create 5 new "dynamic" roles. The high-water mark becomes 10 LDAP static roles and 5 LDAP dynamic roles because the secret type is different.
+- Assume you have an `azure` mount with 10 dynamic roles. Later, you delete that mount and add an `aws` mount with 10 dynamic roles. The high-water mark becomes 10 Azure dynamic roles and 10 AWS dynamic roles because the secrets engines are different.
 
 ## Credential units
 
-Vault adds the total number of duration-adjusted credentials issued. A credential unit is a cryptographically signed credential that is valid for 730 hours (one month). Vault rounds credential units to four decimal places, with a minimum of 0.0001 units per credential. For example:
+Vault uses the total number of duration-adjusted credentials issued. Vault assigns one credential unit for every 730 hours (one month) a credential remains valid, rounded to four decimal places and with a minimum of 0.0001 units per credential.
 
-- **Web server.** You request a server TLS certificate for a web server. The certificate is valid for 730 hours. Vault counts `1.000` credential units when it issues the certificate.
-- **AI agent.** An AI agent requests a client TLS certificate to act on behalf of a user. The certificate is valid for 5 minutes. Vault counts `(5 / 60) / 730 = 0.0001` credential units when it issues the certificate.
-- **CI pipeline.** A CI pipeline requests an OIDC ID token that is valid for 1 minute. Even though `(1 / 60) / 730 < 0.0001`, Vault counts `0.0001` credential units when it issues the token because that is the minimum number of units per credential.
-- **Certificate authority.** You sign a certificate signing request for another certificate authority. The CA's certificate is valid for 5 years. Vault counts `(730 * 12 * 5) / 730 = 60.0000` credential units when it signs the CA's certificate.
+For example:
 
-Vault records the number of credential units in its storage every 10 minutes.
+- **Web server**. You request a server TLS certificate for a web server with a TTL of 730 hours:
+
+  `730 hours ÷ 730 = 1.000`
+
+  Vault counts `1.000` credential units when it issues the certificate.
+
+- **AI agent**. An AI agent requests a client TLS certificate to act on behalf of a user, with a TTL of 5 minutes:
+
+  `(5 / 60) hours ÷ 730 = 0.00011415525`
+
+  Vault counts `0.0001` credential units when it issues the certificate.
+
+- **CI pipeline**. A CI pipeline requests an OIDC ID token with a TTL of 1 minute:
+
+  `(1 / 60) hours ÷ 730 = 0.00002283105`
+
+  Vault counts `0.0001` credential units when it issues the token because of the minimum units per credential requirement.
+
+- **Certificate authority**. You sign a certificate signing request for another certificate authority, with a TTL of 5 years:
+
+  `(5 * 8760) hours ÷ 730 = 60.0000`
+
+  Vault counts `60.0000` credential units when it signs the certificate for the CA.
+
+Vault records the number of credential units in permanent storage every 10 minutes.
 
 ## Data protection operations
 
-Vault counts the total number of data elements processed by API calls classified as data protection calls. This excludes management API calls, such as key creation or deletion. The following are data protection calls:
+Vault counts the total number of data elements processed by API calls classified as data protection calls. The count excludes management API calls such as key creation or deletion. Vault considers calls to the following endpoints to be data protection calls:
 
-- **Transit secrets engine.** `encrypt`, `decrypt`, `rewrap`, `datakey`, `hmac`, `sign`, `verify`, `cmac`
-- **Transform secrets engine.** `encode`, `decode`, `validate`, `tokenized`, `tokens`
-- **Google Cloud KMS secrets engine.** `encrypt`, `decrypt`, `reencrypt`, `sign`, `verify`
+| Secrets engine | Data protection endpoints |
+| --- | --- |
+| Transit | `encrypt`, `decrypt`, `rewrap`, `datakey`, `hmac`, `sign`, `verify`, `cmac` |
+| Transform | `encode`, `decode`, `validate`, `tokenized`, `tokens` |
+| Google Cloud KMS | `encrypt`, `decrypt`, `reencrypt`, `sign`, `verify` |
 
 For API endpoints that support batch operation, Vault counts each data element in the batch individually.
 
-Vault records the number of data protection operations in its storage every 10 minutes.
+Vault records the number of data protection operations in its permanent storage every 10 minutes.
 
-## Custom plugins
+## External plugins
 
-Every 10 minutes, Vault counts the high-water mark number of non-builtin [secrets plugins](/vault/docs/plugins) enabled on a cluster during each month. Vault counts a plugin only if:
+Every 10 minutes, Vault counts the high-water mark number of [external plugins](/vault/docs/plugins#built-in-vs-external-plugins) enabled on a cluster during each month. Vault does **not** count an external plugin if:
 
-1. There is at least one secrets engine mount on the cluster using that plugin, and
-1. That plugin does not have a HashiCorp-signed manifest denoting that plugin as an official HashiCorp plugin.
+1. The plugin has a signed manifest denoting it as an [official](/vault/integrations?tiers=official) Vault plugin,
+1. The plugin does not have any secrets engine mounts (not in use), or
+1. The plugin is an authentication or database plugin.
 
-For usage-based billing, Vault does **not** count authentication or database plugins (however, Vault counts [database roles](#secrets-and-keys)). If you are using two versions of a plugin, Vault counts each version separately.
+If you use two versions of a plugin, Vault counts each version separately.
 
 ## Cluster replication
 
 Each Vault cluster tracks its own usage metrics. You must query each Vault cluster to obtain total usage numbers for your Vault deployment.
 
-Performance replication (PR) secondary clusters **exclude** replicated secrets from their counts. This ensures that a replicated secret is counted only once across the replicated estate (on the PR primary cluster).
-
-<small>&#9989; Cluster counts and reports &emsp; &#10060; Cluster does not count or report</small>
+Performance replication (PR) secondary clusters **exclude** replicated secrets from their counts. Excluding replicated secrets ensures that Vault only counts the secret once across the replicated estate and only on the PR primary cluster.
 
 | Metric | PR primary | PR secondary |
 | --- | :-: | :-: |
@@ -79,13 +101,15 @@ Performance replication (PR) secondary clusters **exclude** replicated secrets f
 | Credential units | &#9989; | &#9989; |
 | Data protection operations | &#9989; | &#9989; |
 
-For example:
+<small>&#9989; Cluster counts and reports &emsp; &#10060; Cluster does not count or report</small>
 
-- You have two Vault clusters, A and B, connected through performance replication (PR). Cluster A is the PR primary, and cluster B is the PR secondary.
-- Cluster A has two static secrets (KV) mounts, of which one is local-only. Cluster B has the replicated KV mount from cluster A, plus a local-only KV mount.
-- Each KV mount has one secret.
-- Since cluster A is the PR primary, it reports both replicated and local-only secrets. Cluster A reports two secrets.
-- Since cluster B is a PR secondary, it reports only local-only secrets. Cluster B reports one secret.
+For example, assume you have two Vault clusters, A and B, connected through performance replication (PR), and both clusters have two `kv` mounts with 1 secret in each mount:
+
+- `kv` - replicated across both clusters.
+- `kv-local-a` - local to cluster A (local-only).
+- `kv-local-b` - local to cluster B (local-only).
+
+If cluster A is the PR primary, it reports 2 secrets: the replicated secret in `kv` and the secret in `kv-local-a`. Since cluster B is a PR secondary, it only reports the local secret in `kv-local-b`.
 
 ## Metrics by secret engine
 
