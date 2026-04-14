@@ -458,7 +458,7 @@
   },
   {
     "source": "/vault/docs/license/utilization/auto-reporting",
-    "destination": "/vault/docs/license/utilization",
+    "destination": "/vault/docs/license/utilization/automated-reporting",
     "permanent": true
   },
 
@@ -705,7 +705,7 @@
   // GUI page: Billing -> Metrics
   {
     "source": "/vault/gui/billing-metrics",
-    "destination": "/vault/docs/concepts/client-count",
+    "destination": "/vault/docs/restricted/concepts/billing/usage/metrics",
     "permanent": true
   },
 
