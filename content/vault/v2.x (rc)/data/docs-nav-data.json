@@ -179,33 +179,38 @@
         "path": "concepts/resource-quotas"
       },
       {
-        "title": "Billing Start Date",
-        "path": "concepts/billing-start-date"
-      },
-      {
-        "title": "Client count",
+        "title": "Billing",
         "routes": [
           {
-            "title": "Clients and entities",
-            "path": "concepts/client-count"
+            "title": "Client count",
+            "routes": [
+              {
+                "title": "Clients and entities",
+                "path": "concepts/billing/clients"
+              },
+              {
+                "title": "Client count calculation",
+                "path": "concepts/billing/clients/counting"
+              },
+              {
+                "title": "Client usage",
+                "path": "concepts/billing/clients/client-usage"
+              },
+              {
+                "title": "FAQ",
+                "path": "concepts/billing/clients/faq"
+              }
+            ]
           },
           {
-            "title": "Client count calculation",
-            "path": "concepts/client-count/counting"
+            "title": "PKI certificate counts",
+            "path": "concepts/billing/certificate-counts"
           },
           {
-            "title": "Client usage",
-            "path": "concepts/client-count/client-usage"
-          },
-          {
-            "title": "FAQ",
-            "path": "concepts/client-count/faq"
+            "title": "Start date",
+            "path": "concepts/billing/start-date"
           }
         ]
-      },
-      {
-        "title": "PKI certificate counts",
-        "path": "concepts/certificate-counts"
       },
       {
         "title": "Transform",
@@ -372,21 +377,29 @@
         "path": "license/change-license"
       },
       {
-        "title": "Anonymized usage reporting",
-        "path": "license/product-usage-reporting"
-      },
-      {
-        "title": "Utilization reporting",
+        "title": "License utilization reporting",
         "routes": [
           {
-            "title": "Automatic ",
-            "path": "license/utilization/auto-reporting"
+            "title": "Overview",
+            "path": "license/utilization"
           },
           {
-            "title": "Manual",
+            "title": "Metrics",
+            "path": "license/utilization/metrics"
+          },
+          {
+            "title": "Automated reporting",
+            "path": "license/utilization/automated-reporting"
+          },
+          {
+            "title": "Manual reporting",
             "path": "license/utilization/manual-reporting"
           }
         ]
+      },
+      {
+        "title": "Product usage reporting",
+        "path": "license/product-usage-reporting"
       }
     ]
   },

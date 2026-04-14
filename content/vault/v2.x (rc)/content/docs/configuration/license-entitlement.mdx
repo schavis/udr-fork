@@ -5,8 +5,8 @@ description: >-
   Configure the reporting stanza to customize the reporting behavior for tuning
   and licensing in Vault.
 # START AUTO GENERATED METADATA, DO NOT EDIT
-created_at: 2026-01-27T17:15:25-08:00
-last_modified: 2026-02-18T02:23:53.000Z
+created_at: 2026-03-26T14:49:17-07:00
+last_modified: 2026-03-31T18:14:41.000Z
 # END AUTO GENERATED METADATA
 ---
 
@@ -32,6 +32,8 @@ license.
 If the configured parameters match multiple entitlements in the license, Vault
 uses the entitlement with the termination date farthest in the future.
 
+<CodeBlockConfig hideClipboard>
+
 ```hcl
 # IBM Vault Self-Managed Essentials (D1015ZX)
 license_entitlement {
@@ -53,7 +55,20 @@ license_entitlement {
   edition = "premium"
   add_ons = "pki-only"
 }
+
+# IBM Vault Self Managed Platform Standard Install (D15FQZX)
+license_entitlement {
+  edition = "platform-standard"
+}
+
+# IBM Vault Self Managed Platform Standard including KMIP Install (D155LZX)
+license_entitlement {
+  edition = "platform-standard"
+  add_ons = "kmip"
+}
 ```
+
+</CodeBlockConfig>
 
 <Note>
 
