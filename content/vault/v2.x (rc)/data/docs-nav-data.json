@@ -383,6 +383,10 @@
             "path": "license/utilization/metrics"
           },
           {
+            "title": "Automated reporting",
+            "path": "license/utilization/automated-reporting"
+          },
+          {
             "title": "Manual reporting",
             "path": "license/utilization/manual-reporting"
           }
