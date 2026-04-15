@@ -320,7 +320,7 @@ when 'store'
   tokens[ENV['VAULT_ADDR']] = STDIN.read
 when 'erase'
   # Delete the token entry if it exists
-  tokens.delete!(ENV['VAULT_ADDR'])
+  tokens.delete(ENV['VAULT_ADDR'])
 end
 
 
