@@ -1,4 +1,4 @@
-### LDAP secrets self-managed static roles feature is not enabled on the `openldap` built-in alias
+### LDAP secrets self-managed static roles feature is not enabled on the `openldap` built-in type alias
 
 <!-- BEGIN: Vault:=v2.x -->
 
@@ -10,8 +10,8 @@
 
 #### Issue
 
-Self-managed static roles feature is not enabled on the `openldap` built-in alias for the LDAP Secrets plugin.
-Trying to use the feature with the `openldap` plugin results in the following error:
+Self-managed static roles feature is not enabled when using the `openldap` built-in TYPE alias for the LDAP Secrets plugin.
+Trying to use the feature with the `openldap` type results in the following error:
 
 ```
 * 1 error occurred:
@@ -20,7 +20,7 @@ Trying to use the feature with the `openldap` plugin results in the following er
 
 #### Workaround
 
-Use the `ldap` plugin to enable the new self-managed mounts. Enterprise license checking enables the feature on `ldap`:
+Use the `ldap` plugin type to enable the new self-managed mounts. Enterprise license checking enables the feature on the mount:
 
 ```
 vault secrets enable -path=<PATH> ldap
