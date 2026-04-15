@@ -1,0 +1,31 @@
+### LDAP secrets self-managed static roles feature is not enabled on the `openldap` built-in alias
+
+<!-- BEGIN: Vault:=v2.x -->
+
+| Change      | Status   | Vault edition | Affected version | Fixed version
+| ----------- | -------- | ------------- | ---------------- | -------------
+| Known issue | Closed   | Enterprise    | 2.0.0            | 2.0.1
+
+<!-- END: Vault:=v2.x -->
+
+#### Issue
+
+Self-managed static roles feature is not enabled on the `openldap` built-in alias for the LDAP Secrets plugin.
+Trying to use the feature with the `openldap` plugin results in the following error:
+
+```
+* 1 error occurred:
+        * self-managed static roles feature requires a valid Vault Enterprise license
+```
+
+#### Workaround
+
+Use the `ldap` plugin to enable the new self-managed mounts. Enterprise license checking enables the feature on `ldap`:
+
+```
+vault secrets enable -path=<PATH> ldap
+
+vault write <PATH>/config \
+    ...
+    self_managed=true
+```
